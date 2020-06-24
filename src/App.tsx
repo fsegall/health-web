@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Signin from './pages/Signin';
+import GlobalStyles from './styles/global';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => (
+  <>
+    <Signin />
+    {/* <form className="App">
+      <input
+        style={{
+          padding: 10,
+          backgroundColor: '#d9d9d9',
+          width: 400,
+          margin: 20,
+          color: '#f2f2f2',
+          fontWeight: 'bold',
+          borderRadius: 10,
+          border: 0,
+        }}
+        value="ok"
+      />
+      <button
+        style={{
+          padding: 10,
+          backgroundColor: '#5c5cd6',
+          width: 80,
+          border: 0,
+          color: '#fff',
+          fontWeight: 'bold',
+          borderRadius: 10,
+        }}
+      >
+        Submit
+      </button>
+    </form> */}
+    <GlobalStyles />
+  </>
+);
 
 export default App;
