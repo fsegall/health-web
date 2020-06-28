@@ -48,6 +48,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
         ref={InputRef}
         {...rest}
       />
+      {error && <span className="error">{error}</span>}
     </Container>
   );
 };
