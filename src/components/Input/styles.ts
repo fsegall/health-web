@@ -13,7 +13,7 @@ export const Container = styled.div`
     margin-top: 8px;
   }
   input {
-    color: #f4ede8;
+    color: #59748c;
     flex: 1;
     background: transparent;
     border: 0;
