@@ -1,6 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
-export const Container = styled.div`
+
+interface ContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   background: #fff;
   border-radius: 10px;
   border: 1px solid #fff;
@@ -12,6 +18,12 @@ export const Container = styled.div`
   & + div {
     margin-top: 8px;
   }
+  ${(props) =>
+    props.isFocused
+      ? css`
+          border: 1px solid #59748c;
+        `
+      : ''}
   input {
     color: #59748c;
     flex: 1;
