@@ -5,8 +5,8 @@ import GlobalStyles from './styles/global';
 
 const App: React.FC = () => (
   <>
-    <Signup />
-    {/* <Signin /> */}
+    {/* <Signup /> */}
+    <Signin />
     {/* <form className="App">
       <input
         style={{
