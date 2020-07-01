@@ -2,7 +2,8 @@ import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 import { Container, Content, Background } from './styles';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import logo from '../../assets/logo.png';
@@ -17,32 +18,44 @@ interface SignInFormData {
 
 const Signin: React.FC = () => {
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('Email obrigatório')
-          .email('Digite um e-mail válido'),
-        password: Yup.string().required('Senha obrigatória'),
-      });
+  const handleSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('Email obrigatório')
+            .email('Digite um e-mail válido'),
+          password: Yup.string().required('Senha obrigatória'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-      signIn({
-        email: data.email,
-        password: data.password,
-      });
-    } catch (error) {
-      const errors = getValidationErrors(error);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-      formRef.current?.setErrors(errors);
-    }
-    console.log(data);
-  }, []);
+          formRef.current?.setErrors(errors);
+        }
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description:
+            'Ocorreu um erro ao fazer login, cheque as suas credenciais',
+        });
+      }
+      console.log(data);
+    },
+    [signIn, addToast],
+  );
   return (
     <Container>
       <Content>
