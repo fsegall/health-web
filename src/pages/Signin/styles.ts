@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 import notebook from '../../assets/andrew-neel-cckf4TsHAuw-unsplash.jpg';
 export const Container = styled.div`
@@ -6,13 +6,35 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `;
+
+export const Background = styled.div`
+  background: url(${notebook}) no-repeat center;
+  background-size: cover;
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-
   align-items: center;
   width: 100%;
+`;
 
+const topToBottom = keyframes`
+  from {
+    opacity:0;
+    transform: translateY(-50px)
+  } to {
+    opacity:1;
+    transform: translateY(0px)
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  animation: ${topToBottom} 1s;
+  align-items: center;
+  width: 100%;
   img {
     height: 300px;
     width: 300px;
@@ -60,8 +82,4 @@ export const Content = styled.div`
       color: ${shade(0.2, '#59748c')};
     }
   }
-`;
-export const Background = styled.div`
-  background: url(${notebook}) no-repeat center;
-  background-size: cover;
 `;
