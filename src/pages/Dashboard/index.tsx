@@ -1,11 +1,10 @@
 import React from 'react';
-
+import { Header } from './styles';
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Header>Dashboard</Header>
     </div>
   );
 };
-
 export default Dashboard;
