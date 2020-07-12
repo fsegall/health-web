@@ -105,7 +105,7 @@ export const CounterButton = styled.button`
   margin: 10px 5px;
   border: 0;
   color: #fff;
-  padding: 8px;
+  padding: 4px;
   font-weight: 700;
   transition: background-color 0.2s;
 
