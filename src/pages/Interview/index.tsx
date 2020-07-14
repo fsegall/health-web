@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import Select from 'react-select';
+import React, { useState, useRef, useCallback } from 'react';
+import Select from '../../components/Select';
+import CheckboxInput from '../../components/Checkbox';
+import { FormHandles } from '@unform/core';
 import {
   StyledForm,
   Container,
@@ -13,7 +15,6 @@ import {
 } from './styles';
 import {
   FiUser,
-  FiPhone,
   FiUsers,
   FiDollarSign,
   FiMail,
@@ -29,6 +30,7 @@ import ICreatePersonDTO from './dtos/ICreatePersonDTO';
 import ICreateFamilyMemberDTO from './dtos/ICreateFamilyMemberDTO';
 import ICreateHouseholdDTO from './dtos/ICreateHouseholdDTO';
 import ICreateAddressDTO from './dtos/ICreateAddressDTO';
+import { PersonValidation } from './validation/schemas/PersonValidation';
 
 import {
   genderOptions,
@@ -43,31 +45,104 @@ import {
   typeOfResidenceOptions,
   brazilStatesOptions,
 } from './questions/SelectorOptions/options';
+import api from '../../services/api';
 
-interface InterviewFormData {
-  persons: {
-    personInterviewed: ICreatePersonDTO;
-    familyMembers: ICreateFamilyMemberDTO[];
-  };
-  household: ICreateHouseholdDTO;
-  address: ICreateAddressDTO;
+interface PersonFormData {
+  persons: ICreatePersonDTO;
+}
+
+interface IUser {
+  [key: string]: string;
+}
+
+interface CheckboxOption {
+  id: string;
+  value: string;
+  label: string;
 }
 
 const Dashboard: React.FC = () => {
-  /* const handleFormSubmit = useCallback(async (data: InterviewFormData) => {}, [
-  input,
-]); */
+  const interviewer_id: IUser = JSON.parse(
+    localStorage.getItem('@Safety:user') || '',
+  );
 
+  const token = localStorage.getItem('@Safety:token') || '';
+
+  const handlePersonSubmit = useCallback(async (data: PersonFormData) => {
+    console.log(interviewer_id?.id);
+    try {
+      const validatedData = await PersonValidation.validate(data, {
+        abortEarly: false,
+      });
+      const person = {
+        interviewer_id: interviewer_id.id,
+        ...validatedData,
+      };
+      console.log('person', person);
+      console.log('token', token);
+      const response = await api.post('/person', person, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const handleHouseholdSubmit = useCallback(async (data: PersonFormData) => {
+    console.log(interviewer_id?.id);
+    try {
+      const validatedData = await PersonValidation.validate(data, {
+        abortEarly: false,
+      });
+      const person = {
+        interviewer_id: interviewer_id.id,
+        ...validatedData,
+      };
+      console.log('person', person);
+      const response = await api.post('/person', person, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const checkboxUrbanOptions: CheckboxOption[] = [
+    { id: 'urbano', value: 'urbano', label: 'Urbano' },
+  ];
+
+  const checkboxRuralOptions: CheckboxOption[] = [
+    { id: 'rural', value: 'rural', label: 'Rural' },
+  ];
+
+  const checkboxMainPersonOptions: CheckboxOption[] = [
+    { id: 'household_main_person', value: 'true', label: '' },
+  ];
+
+  const checkboxBathroomOptions: CheckboxOption[] = [
+    { id: 'bathroom_inside_house', value: 'true', label: '' },
+  ];
+
+  const checkboxGarbageOptions: CheckboxOption[] = [
+    { id: 'garbage_service', value: 'true', label: '' },
+  ];
+
+  const PersonFormRef = useRef<FormHandles>(null);
   const [family, setFamily] = useState(3);
   const [mainPerson, setMainPerson] = useState(false);
   const [urban, setUrban] = useState(false);
+  const [person_id, setPerson_id] = useState('');
+  const [household_id, setHousehold_id] = useState('');
 
-  function handleIcrement(e: any): void {
+  function handleIcrement(): void {
     if (family === 12) return;
     setFamily(family + 3);
   }
 
-  function handleDecrement(e: any): void {
+  function handleDecrement(): void {
     if (family === 0) return;
     setFamily(family - 3);
   }
@@ -78,7 +153,7 @@ const Dashboard: React.FC = () => {
         Safety <span>|</span> Interview
       </Header>
       <SectionTitle>Pessoa</SectionTitle>
-      <StyledForm onSubmit={() => {}}>
+      <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit}>
         <Section>
           <Input icon={FiUser} placeholder="Nome Completo" name="name" />
 
@@ -86,31 +161,40 @@ const Dashboard: React.FC = () => {
 
           <Label>Gênero</Label>
 
-          <Select options={genderOptions} />
+          <Select name="gender" options={genderOptions} />
           <Label>Raça ou cor</Label>
-          <Select options={raceOptions} />
+          <Select name="race_color" options={raceOptions} />
         </Section>
 
         <Section>
           <Label>Religião</Label>
-          <Select options={religionOptions} />
+          <Select name="religion" options={religionOptions} />
 
           <Label>Estado Civil</Label>
-          <Select options={maritalOptions} />
+          <Select name="marital_status" options={maritalOptions} />
           <Label>
             <span>Sabe ler e escrever?</span>
-            <input name="literacy" type="checkbox" />
+            <CheckboxInput
+              name="literacy"
+              options={[
+                {
+                  id: 'literacy',
+                  value: 'true',
+                  label: 'literacy',
+                },
+              ]}
+            />
           </Label>
         </Section>
 
         <Section>
           <Label>Escolaridade</Label>
-          <Select options={educationOptions} />
+          <Select name="education" options={educationOptions} />
           <Label>Situação de emprego</Label>
-          <Select options={workOptions} />
+          <Select name="work_status" options={workOptions} />
           <Label>Situação de saúde</Label>
-          <Select options={healthOptions} />
-          <Button>Submit</Button>
+          <Select name="health_conditions" options={healthOptions} />
+          <Button type="submit">Submit</Button>
         </Section>
       </StyledForm>
       <SectionTitle>
@@ -320,17 +404,20 @@ const Dashboard: React.FC = () => {
           <Label>
             <span>Localização do domicílio</span>
             <Label>
-              <span>Urbano</span>
-              <input
+              <CheckboxInput
                 name="urbano"
-                type="radio"
-                value="urbano"
-                id="urbano"
+                options={checkboxUrbanOptions}
                 checked={urban}
                 onChange={() => setUrban(!urban)}
               />
+              <CheckboxInput
+                name="rural"
+                options={checkboxRuralOptions}
+                checked={!urban}
+                onChange={() => setUrban(!urban)}
+              />
             </Label>
-            <Label>
+            {/*             <Label>
               <span>Rural</span>
               <input
                 name="rural"
@@ -340,25 +427,29 @@ const Dashboard: React.FC = () => {
                 checked={!urban}
                 onChange={() => setUrban(!urban)}
               />
-            </Label>
+            </Label> */}
           </Label>
           <Label>
             <span>É a pessoa de referência da casa (chefe da casa)?</span>
-            <input
-              name="literacy"
-              type="checkbox"
+            <CheckboxInput
+              name="household_main_person"
+              options={checkboxMainPersonOptions}
               onChange={() => setMainPerson(!mainPerson)}
             />
           </Label>
           <Label>Se não é, qual é a relação com a pessoa de referência?</Label>
-          <Select options={mainPersonOptions} isDisabled={mainPerson} />
+          <Select
+            name="household_main_person"
+            options={mainPersonOptions}
+            isDisabled={mainPerson}
+          />
         </Section>
 
         <Section>
           <Label>Tipo de residência</Label>
-          <Select options={typeOfResidenceOptions} />
+          <Select name="type_of_residence" options={typeOfResidenceOptions} />
           <Label>Tem acesso à água potável?</Label>
-          <Select options={drinkingWaterOptions} />
+          <Select name="drinking_water" options={drinkingWaterOptions} />
           <Label></Label>
           <Input
             placeholder="Número de pessoas no domicílio"
@@ -386,15 +477,19 @@ const Dashboard: React.FC = () => {
           />
           <Label>
             <span>Tem banheiro dentro de casa?</span>
-            <input
+            <CheckboxInput
               name="bathroom_inside_house"
-              type="checkbox"
+              options={checkboxBathroomOptions}
               onChange={() => {}}
             />
           </Label>
           <Label>
             <span>Tem serviço de coleta de lixo?</span>
-            <input name="garbage_service" type="checkbox" onChange={() => {}} />
+            <CheckboxInput
+              name="garbage_service"
+              options={checkboxGarbageOptions}
+              onChange={() => {}}
+            />
           </Label>
           <Button>Submit</Button>
         </Section>
@@ -404,7 +499,7 @@ const Dashboard: React.FC = () => {
         <section>
           <Input name="post_code" placeholder="Código Postal" icon={FiMail} />
           <Label>Estado da Federação</Label>
-          <Select options={brazilStatesOptions} id="state" name="state" />
+          <Select name="state" options={brazilStatesOptions} id="state" />
         </section>
         <section>
           <Input name="city" placeholder="Cidade" icon={FiMap} />
