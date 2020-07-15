@@ -24,6 +24,7 @@ import {
   FiHome,
   FiPhoneCall,
 } from 'react-icons/fi';
+import { useAuth } from '../../hooks/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ICreatePersonDTO from './dtos/ICreatePersonDTO';
@@ -61,21 +62,16 @@ interface CheckboxOption {
   label: string;
 }
 
-const Dashboard: React.FC = () => {
-  const interviewer_id: IUser = JSON.parse(
-    localStorage.getItem('@Safety:user') || '',
-  );
-
-  const token = localStorage.getItem('@Safety:token') || '';
+const Interview: React.FC = () => {
+  const { user, token } = useAuth();
 
   const handlePersonSubmit = useCallback(async (data: PersonFormData) => {
-    console.log(interviewer_id?.id);
     try {
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
       });
       const person = {
-        interviewer_id: interviewer_id.id,
+        interviewer_id: user.id,
         ...validatedData,
       };
       console.log('person', person);
@@ -84,14 +80,15 @@ const Dashboard: React.FC = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      setPerson_id(response.data.id);
+
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   }, []);
 
-  const handleHouseholdSubmit = useCallback(async (data: PersonFormData) => {
-    console.log(interviewer_id?.id);
+  /*   const handleHouseholdSubmit = useCallback(async (data: PersonFormData) => {
     try {
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
@@ -108,7 +105,7 @@ const Dashboard: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, []); */
 
   const checkboxUrbanOptions: CheckboxOption[] = [
     { id: 'urbano', value: 'urbano', label: 'Urbano' },
@@ -529,4 +526,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Interview;

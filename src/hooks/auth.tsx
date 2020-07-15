@@ -3,7 +3,7 @@ import api from '../services/api';
 
 interface AuthState {
   token: string;
-  user: object;
+  user: { [key: string]: string };
 }
 
 interface SignInCredentials {
@@ -12,7 +12,8 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: { [key: string]: string };
+  token: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -44,7 +45,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, token: data.token, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
