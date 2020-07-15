@@ -27,14 +27,17 @@ export const StyledForm = styled(Form)`
 
 export const StyledFamilyForm = styled(Form)`
   display: grid;
+  justify-items: center;
   grid-gap: 20px;
   padding: 0 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   padding: 20px;
   border-top: 1px solid #dedede;
+
   section {
-    border-left: 1px solid #ff9000;
-    padding-left: 5px;
+    border-top: 1px solid #ff9000;
+    padding: 5px;
+    max-width: 360px;
   }
   @media screen and (max-width: 600px) {
     section: {

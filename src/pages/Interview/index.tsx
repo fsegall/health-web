@@ -34,6 +34,7 @@ import ICreateAddressDTO from './dtos/ICreateAddressDTO';
 import { PersonValidation } from './validation/schemas/PersonValidation';
 import { HouseholdValidation } from './validation/schemas/HouseholdValidation';
 import { AddressValidation } from './validation/schemas/AddressValidation';
+import { FamilyMemberValidation } from './validation/schemas/FamilyMemberValidation';
 
 import {
   genderOptions,
@@ -55,10 +56,6 @@ import {
 } from './questions/SelectorOptions/options';
 import api from '../../services/api';
 
-interface PersonFormData {
-  persons: ICreatePersonDTO;
-}
-
 interface IUser {
   [key: string]: string;
 }
@@ -78,7 +75,15 @@ const Interview: React.FC = () => {
   const [household_id, setHousehold_id] = useState('');
   const { user, token } = useAuth();
 
-  const handlePersonSubmit = useCallback(async (data: PersonFormData) => {
+  const [counter, setCounter] = useState(1);
+
+  let listitems: number[] = [];
+
+  for (let i = 1; i <= counter; i++) {
+    listitems.push(i);
+  }
+
+  const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
@@ -131,6 +136,35 @@ const Interview: React.FC = () => {
     [],
   );
 
+  const handleFamilySubmit = useCallback(
+    async (data: ICreateFamilyMemberDTO) => {
+      try {
+        const validatedData = await FamilyMemberValidation.validate(data, {
+          abortEarly: false,
+        });
+
+        const person_id = localStorage.getItem('@Safety:person_id');
+
+        const familyMember = {
+          person_id,
+          ...validatedData,
+        };
+
+        console.log('familyMember', familyMember);
+
+        console.log('token', token);
+        const response = await api.post('/familymember', familyMember, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [],
+  );
+
   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {
     try {
       const validatedData = await AddressValidation.validate(data, {
@@ -156,13 +190,13 @@ const Interview: React.FC = () => {
   }, []);
 
   function handleIcrement(): void {
-    if (family === 12) return;
-    setFamily(family + 3);
+    if (counter === 12) return;
+    setCounter(counter + 1);
   }
 
   function handleDecrement(): void {
-    if (family === 0) return;
-    setFamily(family - 3);
+    if (counter === 0) return;
+    setCounter(counter - 1);
   }
 
   return (
@@ -214,196 +248,26 @@ const Interview: React.FC = () => {
         </Counters>
       </SectionTitle>
 
-      <StyledFamilyForm onSubmit={() => {}}>
-        {family >= 3 && (
-          <>
-            <section>
+      <StyledFamilyForm onSubmit={handleFamilySubmit}>
+        {listitems.map((item) => {
+          return (
+            <section key={`item${item}`}>
               <Label>
-                <strong>Pessoa 1:</strong>
+                <strong>{`Pessoa ${item}:`}</strong>
               </Label>
               <Input
                 icon={FiUsers}
                 placeholder="Idade do familiar"
-                name="pessoa_1"
+                name="age"
                 type="number"
               />
               <Label>Gênero</Label>
 
-              <Select name="pessoa_1" options={genderOptions} />
+              <Select name="gender" options={genderOptions} />
+              {item === listitems.length && <Button>Submit</Button>}
             </section>
-
-            <section>
-              <Label>
-                <strong>Pessoa 2:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_2"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_2" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 3:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_3"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_3" options={genderOptions} />
-              {family === 3 && <Button>Submit</Button>}
-            </section>
-          </>
-        )}
-        {family >= 6 && (
-          <>
-            <section>
-              <Label>
-                <strong>Pessoa 4:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_4"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_4" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 5:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_5"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_5" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 6:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_6"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_6" options={genderOptions} />
-              {family > 3 && family < 7 && <Button>Submit</Button>}
-            </section>{' '}
-          </>
-        )}
-        {family >= 7 && (
-          <>
-            <section>
-              <Label>
-                <strong>Pessoa 7:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_7"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_7" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 8:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_8"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_8" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 9:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_9"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_9" options={genderOptions} />
-              {family > 3 && family < 10 && <Button>Submit</Button>}
-            </section>{' '}
-          </>
-        )}
-        {family >= 10 && (
-          <>
-            <section>
-              <Label>
-                <strong>Pessoa 10:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_10"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_10" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 11:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_11"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_11" options={genderOptions} />
-            </section>
-            <section>
-              <Label>
-                <strong>Pessoa 12:</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="pessoa_12"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="pessoa_12" options={genderOptions} />
-              {family > 9 && <Button>Submit</Button>}
-            </section>
-          </>
-        )}
+          );
+        })}
       </StyledFamilyForm>
 
       <SectionTitle>Residência</SectionTitle>
