@@ -99,7 +99,7 @@ export const healthOptions = [
   { value: 'sem-sintomas', label: 'Sem sintomas' },
 ];
 
-export const mainPersonOptions = [
+export const relationMainPersonOptions = [
   { value: 'mae', label: 'Mãe da pessoa de referência' },
   { value: 'pai', label: 'Pai da pessoa de referência' },
   {
@@ -147,6 +147,31 @@ export const drinkingWaterOptions = [
     label: 'Não tem fornecimento',
   },
   { value: 'ns-nr', label: 'NS/NR' },
+];
+
+export const locationOptions = [
+  { value: 'urbano', label: 'Urbano' },
+  { value: 'rural', label: 'Rural' },
+];
+
+export const mainPersonOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+];
+
+export const BathroomOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+];
+
+export const GarbageOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+];
+
+export const LiteracyOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
 ];
 
 export const brazilStatesOptions = [

@@ -1,22 +1,30 @@
 import * as Yup from 'yup';
 
 export const HouseholdValidation = Yup.object().shape({
-  race_color: Yup.string().required(
-    'Você precisa escolher um dos campos de raça',
+  household_main_person: Yup.boolean(),
+  relationship_to_main_person: Yup.string(),
+  location_of_residence: Yup.string().required(
+    'Você precisa escolher um dos campos de localização de residência',
   ),
-  religion: Yup.string().required(
-    'Você precisa escolher um dos campos de religião',
+  type_of_residence: Yup.string().required(
+    'Você precisa escolher um dos campos de tipo de residência',
   ),
-  marital_status: Yup.string().required(
-    'Você precisa escolher um dos campos de estado civil',
+  number_of_rooms: Yup.number().required(
+    'Você precisa informar o número de cômodos da residência',
   ),
-  literacy: Yup.boolean().required(
-    'Você precisa escolher um dos campos de alfabetização',
+  number_of_people_household: Yup.number().required(
+    'Você precisa informar o número de pessoas que moram na residência',
   ),
-  education: Yup.string().required(
-    'Você precisa escolher um dos campos de educação',
+  family_income: Yup.number().required(
+    'Você precisa informar a renda familiar',
   ),
-  work_status: Yup.string().required(
-    'Você precisa escolher um dos campos de situação de trabalho',
+  drinking_water: Yup.string().required(
+    'Você precisa escolher um dos campos de abastecimento de água potável',
+  ),
+  bathroom_inside_house: Yup.boolean().required(
+    'Você precisa escolher um dos campos de abastecimento de água potável',
+  ),
+  garbage_service: Yup.boolean().required(
+    'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
 });
