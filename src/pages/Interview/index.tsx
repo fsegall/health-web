@@ -12,6 +12,7 @@ import {
   Section,
   CounterButton,
   Label,
+  ResponsiveMenu,
 } from './styles';
 import {
   FiUser,
@@ -23,10 +24,12 @@ import {
   FiCornerDownLeft,
   FiHome,
   FiPhoneCall,
+  FiMenu,
 } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import ScrollSpy from '../../components/ScrollSpy';
 import ICreatePersonDTO from './dtos/ICreatePersonDTO';
 import ICreateFamilyMemberDTO from './dtos/ICreateFamilyMemberDTO';
 import ICreateHouseholdDTO from './dtos/ICreateHouseholdDTO';
@@ -68,6 +71,7 @@ interface CheckboxOption {
 
 const Interview: React.FC = () => {
   const PersonFormRef = useRef<FormHandles>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [family, setFamily] = useState(3);
   const [mainPerson, setMainPerson] = useState(false);
   const [urban, setUrban] = useState(false);
@@ -204,7 +208,13 @@ const Interview: React.FC = () => {
       <Header>
         Safety <span>|</span> Interview
       </Header>
-      <SectionTitle>Pessoa</SectionTitle>
+      <ResponsiveMenu>
+        <FiMenu size={30} onClick={() => setMenuOpen(!menuOpen)} />
+        <div>
+          <ScrollSpy open={menuOpen} />
+        </div>
+      </ResponsiveMenu>
+      <SectionTitle id="person">Pessoa</SectionTitle>
       <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit}>
         <Section>
           <Input icon={FiUser} placeholder="Nome Completo" name="name" />
@@ -240,7 +250,7 @@ const Interview: React.FC = () => {
           <Button type="submit">Submit</Button>
         </Section>
       </StyledForm>
-      <SectionTitle>
+      <SectionTitle id="family">
         Membros da Família{' '}
         <Counters>
           <CounterButton onClick={handleIcrement}>+</CounterButton>
@@ -270,7 +280,7 @@ const Interview: React.FC = () => {
         })}
       </StyledFamilyForm>
 
-      <SectionTitle>Residência</SectionTitle>
+      <SectionTitle id="household">Residência</SectionTitle>
 
       <StyledForm onSubmit={handleHouseholdSubmit}>
         <Section>
@@ -342,7 +352,7 @@ const Interview: React.FC = () => {
           <Button>Submit</Button>
         </Section>
       </StyledForm>
-      <SectionTitle>Endereço</SectionTitle>
+      <SectionTitle id="address">Endereço</SectionTitle>
       <StyledForm onSubmit={handleAddressSubmit}>
         <section>
           <Input name="post_code" placeholder="Código Postal" icon={FiMail} />

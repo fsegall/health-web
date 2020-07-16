@@ -116,3 +116,17 @@ export const CounterButton = styled.button`
     background: ${shade(0.2, '#59748c')};
   }
 `;
+
+export const ResponsiveMenu = styled.div`
+  display: none;
+  z-index: 999;
+  @media (max-width: 1026px) {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+    color: #8d8d8d;
+    position: fixed;
+    right: 0;
+    top: 10;
+  }
+`;
