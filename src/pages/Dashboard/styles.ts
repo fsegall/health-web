@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div``;
 
@@ -16,6 +17,13 @@ export const HeaderContent = styled.div`
   margin: o auto;
   display: flex;
   align-items: center;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
   > img {
     height: 120px;
   }
@@ -53,5 +61,14 @@ export const Profile = styled.div`
     strong {
       color: #59748c;
     }
+  }
+`;
+
+export const ListTitle = styled.h2`
+  padding: 30px 0;
+  color: #59748c;
+  margin-left: 20px;
+  span {
+    color: #ff9000;
   }
 `;

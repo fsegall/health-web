@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ICreatePersonDTO from '../Interview/dtos/ICreatePersonDTO';
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
-import { Container, Header, HeaderContent, Profile } from './styles';
+import { Container, Header, HeaderContent, Profile, ListTitle } from './styles';
 import Card from '../../components/Card';
 import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
@@ -32,7 +33,9 @@ const Dashboard: React.FC = () => {
             />
             <div>
               <span>Bem-vindo</span>
-              <strong>Felipe</strong>
+              <Link to="/profile">
+                <strong>Felipe</strong>
+              </Link>
             </div>
           </Profile>
 
@@ -42,7 +45,7 @@ const Dashboard: React.FC = () => {
         </HeaderContent>
       </Header>
       <div>
-        <h2>Entrevistados</h2>
+        <ListTitle>Entrevistados</ListTitle>
         <ul>
           {persons.map((person) => {
             console.log(person);
