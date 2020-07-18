@@ -34,7 +34,7 @@ const Dashboard: React.FC = () => {
             <div>
               <span>Bem-vindo</span>
               <Link to="/profile">
-                <strong>Felipe</strong>
+                <strong>{user.name}</strong>
               </Link>
             </div>
           </Profile>

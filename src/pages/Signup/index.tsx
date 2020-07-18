@@ -70,7 +70,7 @@ const Signup: React.FC = () => {
           return;
         }
         addToast({
-          type: 'info',
+          type: 'error',
           title: 'Erro no cadastro',
           description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
         });

@@ -19,7 +19,7 @@ export const CardContainer = styled.div`
   margin: auto;
   margin: 10px;
   color: #2a2a2a;
-  border-left: 1px solid #ff9000;
+  border-left: 4px solid #ff9000;
   span {
     font-weight: bold;
   }

@@ -73,6 +73,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
                   house?.household_main_person ? 'é ' : 'não é '
                 } a figura de referência da casa`}</span>
               </div>
+              <div>Hello World!</div>
             </li>
             <li></li>
           </HouseList>
