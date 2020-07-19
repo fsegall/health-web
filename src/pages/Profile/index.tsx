@@ -37,8 +37,8 @@ interface IRequest {
   email: string;
   organization_name: string;
   telephone_number: string;
-  old_password: string;
-  password: string;
+  old_password?: string;
+  password?: string;
 }
 
 const Profile: React.FC = () => {
@@ -104,14 +104,23 @@ const Profile: React.FC = () => {
           abortEarly: false,
         });
 
+        const {
+          name,
+          organization_name,
+          email,
+          telephone_number,
+          old_password,
+          password,
+          password_confirmation,
+        } = data;
+
         const requestBody: IRequest = {
           user_id: user.id,
-          name: data.name,
-          email: data.email,
-          organization_name: data.organization_name,
-          telephone_number: data.telephone_number,
-          old_password: data.old_password,
-          password: data.password,
+          name,
+          email,
+          organization_name,
+          telephone_number,
+          ...(old_password ? { old_password, password } : {}),
         };
 
         const response = await api.put('/users', requestBody, {
