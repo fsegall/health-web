@@ -58,6 +58,22 @@ export const Container = styled.div`
 export const Header = styled.h1`
   padding: 30px 0;
   color: #59748c;
+  display: flex;
+  justify-content: space-around;
+
+  a {
+    text-decoration: none;
+    color: #59748c;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
+
   span {
     color: #ff9000;
   }

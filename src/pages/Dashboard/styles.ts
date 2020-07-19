@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
-
+import { Link } from 'react-router-dom';
 export const Container = styled.div``;
 
 export const Header = styled.header`
@@ -14,16 +14,19 @@ export const Header = styled.header`
 export const HeaderContent = styled.div`
   max-width: 1120px;
   max-height: 80px;
-  margin: o auto;
+  margin: 0 auto;
   display: flex;
   align-items: center;
 
   a {
     text-decoration: none;
+    color: #59748c;
+    font-weight: bold;
     &:hover {
       opacity: 0.8;
     }
   }
+
   > img {
     height: 120px;
   }
@@ -71,4 +74,8 @@ export const ListTitle = styled.h2`
   span {
     color: #ff9000;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  margin-left: auto;
 `;

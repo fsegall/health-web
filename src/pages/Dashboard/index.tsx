@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import ICreatePersonDTO from '../Interview/dtos/ICreatePersonDTO';
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
-import { Container, Header, HeaderContent, Profile, ListTitle } from './styles';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  ListTitle,
+  StyledLink,
+} from './styles';
 import Card from '../../components/Card';
 import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
@@ -38,6 +45,8 @@ const Dashboard: React.FC = () => {
               </Link>
             </div>
           </Profile>
+
+          <StyledLink to="/interview">Faça uma entrevista</StyledLink>
 
           <button type="button" onClick={signOut}>
             <FiPower />

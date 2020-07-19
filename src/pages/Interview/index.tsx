@@ -26,6 +26,7 @@ import {
   FiPhoneCall,
   FiMenu,
 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -206,8 +207,12 @@ const Interview: React.FC = () => {
   return (
     <Container>
       <Header>
-        Safety <span>|</span> Interview
+        <div>
+          Safety <span>|</span> Interview
+        </div>
+        <Link to="/dashboard">Dashboard</Link>
       </Header>
+
       <ResponsiveMenu>
         <FiMenu size={30} onClick={() => setMenuOpen(!menuOpen)} />
         <div>
