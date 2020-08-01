@@ -59,7 +59,7 @@ export const Header = styled.h1`
     display: flex;
     justify-self: flex-start;
     align-self: center;
-    color: #ff9000;
+    color: #fff;
     margin-left: 20px;
   }
 
