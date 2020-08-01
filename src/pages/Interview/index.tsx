@@ -6,15 +6,13 @@ import {
   Container,
   Header,
   SectionTitle,
-  Counters,
-  StyledFamilyForm,
+
   Section,
-  CounterButton,
+
   Label,
   ResponsiveMenu,
 } from './styles';
 import {
-  FiUsers,
   FiDollarSign,
   FiMail,
   FiMap,
@@ -37,9 +35,12 @@ import ICreateAddressDTO from './dtos/ICreateAddressDTO';
 import { HouseholdValidation } from './validation/schemas/HouseholdValidation';
 import { AddressValidation } from './validation/schemas/AddressValidation';
 import { FamilyMemberValidation } from './validation/schemas/FamilyMemberValidation';
+
+
 import PersonForm from './Forms/PersonForm'
+import FamilyMemberForm from './Forms/FamilyMemberForm'
+
 import {
-  genderOptions,
   drinkingWaterOptions,
   mainPersonOptions,
   typeOfResidenceOptions,
@@ -54,20 +55,10 @@ import api from '../../services/api';
 const Interview: React.FC = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [family, setFamily] = useState(3);
+
   const [mainPerson, setMainPerson] = useState(false);
-  const [urban, setUrban] = useState(false);
 
-  const [household_id, setHousehold_id] = useState('');
-  const { user, token } = useAuth();
-
-  const [counter, setCounter] = useState(1);
-
-  let listitems: number[] = [];
-
-  for (let i = 1; i <= counter; i++) {
-    listitems.push(i);
-  }
+  const { token } = useAuth();
 
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
@@ -90,35 +81,6 @@ const Interview: React.FC = () => {
         });
 
         localStorage.setItem('@Safety:household_id', response.data.id);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [],
-  );
-
-  const handleFamilySubmit = useCallback(
-    async (data: ICreateFamilyMemberDTO) => {
-      try {
-        const validatedData = await FamilyMemberValidation.validate(data, {
-          abortEarly: false,
-        });
-
-        const person_id = localStorage.getItem('@Safety:person_id');
-
-        const familyMember = {
-          person_id,
-          ...validatedData,
-        };
-
-        console.log('familyMember', familyMember);
-
-        console.log('token', token);
-        const response = await api.post('/familymember', familyMember, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -151,15 +113,6 @@ const Interview: React.FC = () => {
     }
   }, []);
 
-  function handleIcrement(): void {
-    if (counter === 12) return;
-    setCounter(counter + 1);
-  }
-
-  function handleDecrement(): void {
-    if (counter === 0) return;
-    setCounter(counter - 1);
-  }
 
   return (
     <Container>
@@ -180,34 +133,9 @@ const Interview: React.FC = () => {
       <PersonForm />
 
       <SectionTitle id="family">
-        Membros da Família{' '}
-        <Counters>
-          <CounterButton onClick={handleIcrement}>+</CounterButton>
-          <CounterButton onClick={handleDecrement}>-</CounterButton>
-        </Counters>
+        Membros da Família
       </SectionTitle>
-
-      <StyledFamilyForm onSubmit={handleFamilySubmit}>
-        {listitems.map((item) => {
-          return (
-            <section key={`item${item}`}>
-              <Label>
-                <strong>{`Pessoa ${item}:`}</strong>
-              </Label>
-              <Input
-                icon={FiUsers}
-                placeholder="Idade do familiar"
-                name="age"
-                type="number"
-              />
-              <Label>Gênero</Label>
-
-              <Select name="gender" options={genderOptions} />
-              {item === listitems.length && <Button>Submit</Button>}
-            </section>
-          );
-        })}
-      </StyledFamilyForm>
+      <FamilyMemberForm />
 
       <SectionTitle id="household">Residência</SectionTitle>
 

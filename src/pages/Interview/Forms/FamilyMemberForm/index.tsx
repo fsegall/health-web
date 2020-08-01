@@ -3,6 +3,8 @@ import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
   StyledFamilyForm,
+  Counters,
+  CounterButton,
   Label
 } from './styles';
 import {
@@ -13,16 +15,8 @@ import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import ICreateFamilyMemberDTO from '../../dtos/ICreateFamilyMemberDTO';
 import { FamilyMemberValidation } from '../../validation/schemas/FamilyMemberValidation';
-
 import {
   genderOptions,
-  raceOptions,
-  maritalOptions,
-  educationOptions,
-  healthOptions,
-  religionOptions,
-  workOptions,
-  LiteracyOptions,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -44,38 +38,75 @@ const FamilyMemberForm: React.FC = (props) => {
 
   const FamilyMemberFormRef = useRef<FormHandles>(null);
 
-  /*   const handleFamilySubmit = useCallback(
-      async (data: ICreateFamilyMemberDTO) => {
-        try {
-          const validatedData = await FamilyMemberValidation.validate(data, {
-            abortEarly: false,
-          });
+  function handleIcrement(): void {
+    if (counter === 12) return;
+    setCounter(counter + 1);
+  }
 
-          const person_id = localStorage.getItem('@Safety:person_id');
+  function handleDecrement(): void {
+    if (counter === 0) return;
+    setCounter(counter - 1);
+  }
 
-          const familyMember = {
-            person_id,
-            ...validatedData,
-          };
+  const handleFamilySubmit = useCallback(
+    async (data: ICreateFamilyMemberDTO) => {
+      try {
+        const validatedData = await FamilyMemberValidation.validate(data, {
+          abortEarly: false,
+        });
 
-          console.log('familyMember', familyMember);
+        const person_id = localStorage.getItem('@Safety:person_id');
 
-          console.log('token', token);
-          const response = await api.post('/familymember', familyMember, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+        const familyMember = {
+          person_id,
+          ...validatedData,
+        };
 
-          console.log(response);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      [],
-    ); */
+        console.log('familyMember', familyMember);
+
+        console.log('token', token);
+        const response = await api.post('/familymember', familyMember, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [],
+  );
 
 
-  return <div>ok</div>
+  return (
+    <>
+      <Counters>
+        <CounterButton onClick={handleIcrement}>+</CounterButton>
+        <CounterButton onClick={handleDecrement}>-</CounterButton>
+      </Counters>
+      <StyledFamilyForm ref={FamilyMemberFormRef} onSubmit={handleFamilySubmit}>
+        {listitems.map((item) => {
+          return (
+            <section key={`item${item}`}>
+              <Label>
+                <strong>{`Pessoa ${item}:`}</strong>
+              </Label>
+              <Input
+                icon={FiUsers}
+                placeholder="Idade do familiar"
+                name="age"
+                type="number"
+              />
+              <Label>Gênero</Label>
 
+              <Select name="gender" options={genderOptions} />
+              {item === listitems.length && <Button>Submit</Button>}
+            </section>
+          );
+        })}
+      </StyledFamilyForm>
+    </>
+  );
 
 }
 

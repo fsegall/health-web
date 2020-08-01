@@ -111,28 +111,6 @@ export const SelectorContainer = styled.section`
   margin-bottom: 20px;
 `;
 
-export const Counters = styled.div`
-  display: flex;
-  justify-self: flex-start;
-  margin-left: 20px;
-`;
-
-export const CounterButton = styled.button`
-  background: #59748c;
-  width: 25px;
-  border-radius: 10px;
-  margin: 10px 5px;
-  border: 0;
-  color: #fff;
-  padding: 4px;
-  font-weight: 700;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: ${shade(0.2, '#59748c')};
-  }
-`;
-
 export const ResponsiveMenu = styled.div`
   display: none;
   z-index: 999;

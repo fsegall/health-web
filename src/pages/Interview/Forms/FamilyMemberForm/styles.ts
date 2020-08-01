@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Form } from '@unform/web';
+import { shade } from 'polished';
 
 export const StyledFamilyForm = styled(Form)`
   display: grid;
@@ -41,6 +42,27 @@ export const Label = styled.label`
 
   span {
     margin-right: 10px;
+  }
+`;
+
+export const Counters = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const CounterButton = styled.button`
+  background: #59748c;
+  width: 25px;
+  border-radius: 10px;
+  margin: 10px 5px;
+  border: 0;
+  color: #fff;
+  padding: 4px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#59748c')};
   }
 `;
 
