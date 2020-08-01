@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import Select from '../../../../components/Select';
+import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
   StyledFamilyForm,
@@ -18,15 +19,18 @@ import { FamilyMemberValidation } from '../../validation/schemas/FamilyMemberVal
 import {
   genderOptions,
 } from '../../questions/SelectorOptions/options';
-
+import getValidationErrors from '../../../../utils/getValidationErrors';
+import { useToast } from '../../../../hooks/toast';
 import api from '../../../../services/api';
 
 
 const FamilyMemberForm: React.FC = (props) => {
 
-  const [family, setFamily] = useState(3);
+  const { addToast } = useToast();
 
   const [counter, setCounter] = useState(1);
+
+  const [submitted, setSubmitted] = useState(false);
 
   let listitems: number[] = [];
 
@@ -34,23 +38,54 @@ const FamilyMemberForm: React.FC = (props) => {
     listitems.push(i);
   }
 
-  const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const FamilyMemberFormRef = useRef<FormHandles>(null);
 
-  function handleIcrement(): void {
-    if (counter === 12) return;
-    setCounter(counter + 1);
+  async function submitCurrentForm(): Promise<void> {
+
+    await FamilyMemberFormRef.current?.submitForm();
+
+    console.log(await FamilyMemberFormRef.current?.getErrors())
+
+    if (!await FamilyMemberFormRef.current?.getErrors()) {
+      setSubmitted(true)
+      console.log(submitted)
+    }
   }
 
-  function handleDecrement(): void {
-    if (counter === 0) return;
-    setCounter(counter - 1);
+  async function handleIcrement(): Promise<void> {
+
+    if (counter === 12) return;
+
+    const formData = FamilyMemberFormRef.current?.getData() as { age: string; gender: string; };
+    if (formData?.age === '' || formData?.gender === '') {
+      console.log('submit some data')
+      addToast({
+        type: 'error',
+        title: 'Você precisa preencher os campos idade e gênero',
+        description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
+      });
+      return;
+    }
+
+    if (submitted) {
+      setCounter(counter + 1);
+      return;
+    }
+
+    await submitCurrentForm();
+
+    if (Object.keys(FamilyMemberFormRef.current?.getErrors() || {}).length === 0) {
+      setCounter(counter + 1);
+
+    }
   }
 
   const handleFamilySubmit = useCallback(
-    async (data: ICreateFamilyMemberDTO) => {
+    async (data: ICreateFamilyMemberDTO): Promise<void> => {
       try {
+        FamilyMemberFormRef.current?.setErrors({});
         const validatedData = await FamilyMemberValidation.validate(data, {
           abortEarly: false,
         });
@@ -64,25 +99,41 @@ const FamilyMemberForm: React.FC = (props) => {
 
         console.log('familyMember', familyMember);
 
-        console.log('token', token);
         const response = await api.post('/familymember', familyMember, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         console.log(response);
+
+        setSubmitted(true);
+
+        addToast({
+          type: 'success',
+          title: 'Membro da família adicionado com sucesso',
+          description: 'Você já pode adicionar outra membro da família',
+        });
+
       } catch (error) {
-        console.log(error);
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          FamilyMemberFormRef.current?.setErrors(errors);
+
+          addToast({
+            type: 'error',
+            title: 'Erro ao adicionar um membro da família',
+            description: 'Ocorreu um erro ao adicionar um membro da família, tente novamente',
+          });
+        }
       }
     },
-    [],
+    [submitted, addToast],
   );
-
 
   return (
     <>
       <Counters>
         <CounterButton onClick={handleIcrement}>+</CounterButton>
-        <CounterButton onClick={handleDecrement}>-</CounterButton>
       </Counters>
       <StyledFamilyForm ref={FamilyMemberFormRef} onSubmit={handleFamilySubmit}>
         {listitems.map((item) => {
@@ -101,6 +152,7 @@ const FamilyMemberForm: React.FC = (props) => {
 
               <Select name="gender" options={genderOptions} />
               {item === listitems.length && <Button>Submit</Button>}
+
             </section>
           );
         })}
