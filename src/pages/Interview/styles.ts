@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Form } from '@unform/web';
-import { shade } from 'polished';
+
 export const StyledForm = styled(Form)`
   display: grid;
   grid-gap: 20px;
