@@ -127,7 +127,7 @@ const FamilyMemberForm: React.FC = (props) => {
         }
       }
     },
-    [submitted, addToast],
+    [submitted, setSubmitted, addToast],
   );
 
   return (

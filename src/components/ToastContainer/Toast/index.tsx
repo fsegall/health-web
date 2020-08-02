@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FiAlertCircle,
   FiCheckCircle,
@@ -21,6 +21,13 @@ const icons = {
 
 const Toast: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
+  const [scrollPosition, setScrollPosition] = useState<number>((): number => {
+    return window.pageYOffset;
+  });
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
   useEffect(() => {
     const timer = setTimeout(() => {
       removeToast(message.id);
@@ -29,8 +36,16 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
       clearTimeout(timer);
     };
   }, [removeToast, message.id]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <Container
+    <Container scrollPosition={scrollPosition}
       type={message.type}
       hasdescription={Number(!!message.description)}
       style={style}
