@@ -83,7 +83,7 @@ const HouseholdForm: React.FC = (props) => {
         }
       }
     },
-    [],
+    [addToast, token],
   );
 
   return (
