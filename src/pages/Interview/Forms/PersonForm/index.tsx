@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -14,6 +15,8 @@ import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import ICreatePersonDTO from '../../dtos/ICreatePersonDTO';
 import { PersonValidation } from '../../validation/schemas/PersonValidation';
+import { useToast } from '../../../../hooks/toast';
+import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import {
   genderOptions,
@@ -33,13 +36,17 @@ const PersonForm: React.FC = (props) => {
 
   const { user, token } = useAuth();
 
+  const { addToast } = useToast();
+
   const PersonFormRef = useRef<FormHandles>(null);
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
+      PersonFormRef.current?.setErrors({});
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
       });
+
       const person = {
         interviewer_id: user.id,
         ...validatedData,
@@ -54,8 +61,23 @@ const PersonForm: React.FC = (props) => {
       localStorage.setItem('@Safety:person_id', response.data.id);
 
       console.log(response);
+      addToast({
+        type: 'success',
+        title: 'Uma pessoa foi adicionada com sucesso',
+        description: 'Você já pode adicionar um membro da família',
+      });
     } catch (error) {
-      console.log(error);
+      if (error instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(error);
+
+        PersonFormRef.current?.setErrors(errors);
+
+        addToast({
+          type: 'error',
+          title: 'Erro ao adicionar uma pessoa',
+          description: 'Todos os campos devem estar selecionados',
+        });
+      }
     }
   }, []);
 

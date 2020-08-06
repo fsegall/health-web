@@ -46,8 +46,6 @@ const FamilyMemberForm: React.FC = (props) => {
 
     await FamilyMemberFormRef.current?.submitForm();
 
-    console.log(await FamilyMemberFormRef.current?.getErrors())
-
     if (!await FamilyMemberFormRef.current?.getErrors()) {
       setSubmitted(true)
       console.log(submitted)
@@ -78,7 +76,6 @@ const FamilyMemberForm: React.FC = (props) => {
 
     if (Object.keys(FamilyMemberFormRef.current?.getErrors() || {}).length === 0) {
       setCounter(counter + 1);
-
     }
   }
 

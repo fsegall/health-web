@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -13,7 +14,9 @@ import { useAuth } from '../../../../hooks/auth';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import ICreateHouseholdDTO from '../../dtos/ICreateHouseholdDTO';
+import { useToast } from '../../../../hooks/toast';
 import { HouseholdValidation } from '../../validation/schemas/HouseholdValidation';
+import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import {
   drinkingWaterOptions,
@@ -32,13 +35,16 @@ const HouseholdForm: React.FC = (props) => {
 
   const { token } = useAuth();
 
+  const { addToast } = useToast();
+
   const [mainPerson, setMainPerson] = useState(false);
 
-  const HouseholdRef = useRef<FormHandles>(null);
+  const HouseholdFormRef = useRef<FormHandles>(null);
 
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
       try {
+        HouseholdFormRef.current?.setErrors({});
         const validatedData = await HouseholdValidation.validate(data, {
           abortEarly: false,
         });
@@ -58,15 +64,30 @@ const HouseholdForm: React.FC = (props) => {
 
         localStorage.setItem('@Safety:household_id', response.data.id);
         console.log(response);
+        addToast({
+          type: 'success',
+          title: 'Uma residência foi adicionada com sucesso',
+          description: 'Você já pode adicionar um endereço',
+        });
       } catch (error) {
-        console.log(error);
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+
+          HouseholdFormRef.current?.setErrors(errors);
+
+          addToast({
+            type: 'error',
+            title: 'Erro ao adicionar uma residência',
+            description: 'Todos os campos devem estar selecionados',
+          });
+        }
       }
     },
     [],
   );
 
   return (
-    <StyledForm ref={HouseholdRef} onSubmit={handleHouseholdSubmit}>
+    <StyledForm ref={HouseholdFormRef} onSubmit={handleHouseholdSubmit}>
       <Section>
         <Label>
           <span>Localização do domicílio</span>

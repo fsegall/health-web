@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -21,14 +22,15 @@ import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import ICreateAddressDTO from '../../dtos/ICreateAddressDTO';
 import { AddressValidation } from '../../validation/schemas/AddressValidation';
-
+import getValidationErrors from '../../../../utils/getValidationErrors';
+import { useToast } from '../../../../hooks/toast';
 
 import api from '../../../../services/api';
 
 
 const AddressForm: React.FC = (props) => {
 
-
+  const { addToast } = useToast();
 
   const { token } = useAuth();
 
@@ -37,6 +39,7 @@ const AddressForm: React.FC = (props) => {
 
   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {
     try {
+      AddressFormRef.current?.setErrors({});
       const validatedData = await AddressValidation.validate(data, {
         abortEarly: false,
       });
@@ -54,8 +57,23 @@ const AddressForm: React.FC = (props) => {
       });
 
       console.log(response);
+      addToast({
+        type: 'success',
+        title: 'Endereço adicionado com sucesso',
+        description: 'O formulário de pesquisa foi preenchido.',
+      });
     } catch (error) {
-      console.log(error);
+      if (error instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(error);
+
+        AddressFormRef.current?.setErrors(errors);
+
+        addToast({
+          type: 'error',
+          title: 'Erro ao adicionar endereço',
+          description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
+        });
+      }
     }
   }, []);
 
