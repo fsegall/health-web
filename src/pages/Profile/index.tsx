@@ -155,7 +155,7 @@ const Profile: React.FC = () => {
       }
       console.log(data);
     },
-    [addToast, history],
+    [addToast, history, updateUser, user, token],
   );
   return (
     <>

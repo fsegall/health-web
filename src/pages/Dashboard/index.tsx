@@ -27,7 +27,7 @@ const Dashboard: React.FC = () => {
       setPersons(persons.data);
     }
     fetchPersons();
-  }, []);
+  }, [token]);
   return (
     <Container>
       <Header>

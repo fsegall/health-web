@@ -79,7 +79,7 @@ const PersonForm: React.FC = (props) => {
         });
       }
     }
-  }, []);
+  }, [addToast, user, token]);
 
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
