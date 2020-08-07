@@ -168,7 +168,7 @@ const Profile: React.FC = () => {
         <Form ref={formRef} onSubmit={handleSubmit}>
           <AvatarInput>
             <img
-              src={`http://localhost:3333/files/${user.avatar}`}
+              src={user.avatar_url}
               alt="Safety logo"
             />
             <label htmlFor="avatar">

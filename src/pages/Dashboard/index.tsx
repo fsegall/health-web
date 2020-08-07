@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
           <img src={logo} alt="Safety" />
           <Profile>
             <img
-              src={`http://localhost:3333/files/${user.avatar}`}
+              src={user.avatar_url}
               alt={user.name}
             />
             <div>
