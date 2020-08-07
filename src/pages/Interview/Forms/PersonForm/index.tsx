@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';

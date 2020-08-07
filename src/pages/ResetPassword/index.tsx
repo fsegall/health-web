@@ -3,7 +3,6 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import { Container, Content, AnimationContainer, Background } from './styles';
 import { FiLock } from 'react-icons/fi';
@@ -19,7 +18,7 @@ interface ResetPasswordFormData {
 }
 
 const ResetPassword: React.FC = () => {
-  const { signIn } = useAuth();
+
   const { addToast } = useToast();
   const history = useHistory();
 
@@ -53,11 +52,6 @@ const ResetPassword: React.FC = () => {
           password_confirmation,
           token,
         });
-        /*         await signIn({
-          email: data.email,
-          password: data.password,
-        });
-        history.push('/dashboard'); */
         history.push('/');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {

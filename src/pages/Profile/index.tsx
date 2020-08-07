@@ -20,7 +20,7 @@ import {
   FiChevronLeft,
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { loadingIndicatorCSS } from 'react-select/src/components/indicators';
+
 
 interface ProfileFormData {
   name: string;
