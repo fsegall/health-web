@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
           <div>
             <span>Situação de saúde:</span> {person.health_conditions}
             <div>
-              <a href="#" onClick={() => fetchHousehold(person.id)}>Residência</a>
+              <button onClick={() => fetchHousehold(person.id)}>Residência</button>
             </div>
           </div>
         </CardContent>
