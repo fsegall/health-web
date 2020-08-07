@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -75,7 +75,7 @@ const AddressForm: React.FC = (props) => {
         });
       }
     }
-  }, []);
+  }, [addToast, token]);
 
   return (
     <StyledForm ref={AddressFormRef} onSubmit={handleAddressSubmit}>

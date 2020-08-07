@@ -66,7 +66,7 @@ const Profile: React.FC = () => {
           });
         });
     },
-    [addToast, updateUser],
+    [addToast, updateUser, token],
   );
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -111,7 +111,6 @@ const Profile: React.FC = () => {
           telephone_number,
           old_password,
           password,
-          password_confirmation,
         } = data;
 
         const requestBody: IRequest = {

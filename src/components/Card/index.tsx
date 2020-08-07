@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   CardContainer,
@@ -7,10 +7,8 @@ import {
   HouseList,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
-import { healthOptions } from '../../pages/Interview/questions/SelectorOptions/options';
 import api from '../../services/api';
 import ICreateHousehold from '../../pages/Interview/dtos/ICreateHouseholdDTO';
-import { HouseholdValidation } from '../../pages/Interview/validation/schemas/HouseholdValidation';
 interface CardProps {
   person: {
     name: string;
@@ -53,7 +51,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
           <div>
             <span>Situação de saúde:</span> {person.health_conditions}
             <div>
-              <a onClick={() => fetchHousehold(person.id)}>Residência</a>
+              <a href="#" onClick={() => fetchHousehold(person.id)}>Residência</a>
             </div>
           </div>
         </CardContent>
@@ -71,7 +69,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
               <div>
                 <span>{`A pessoa ${
                   house?.household_main_person ? 'é ' : 'não é '
-                } a figura de referência da casa`}</span>
+                  } a figura de referência da casa`}</span>
               </div>
             </li>
             <li></li>
