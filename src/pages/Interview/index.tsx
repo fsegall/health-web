@@ -41,15 +41,15 @@ const Interview: React.FC = () => {
 
       <PersonForm />
 
+      <SectionTitle id="household">Residência</SectionTitle>
+
+      <HouseholdForm />
+
       <SectionTitle id="family">
         Membros da Família
       </SectionTitle>
 
       <FamilyMemberForm />
-
-      <SectionTitle id="household">Residência</SectionTitle>
-
-      <HouseholdForm />
 
       <SectionTitle id="address">Endereço</SectionTitle>
 
