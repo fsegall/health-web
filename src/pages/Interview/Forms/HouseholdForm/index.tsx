@@ -1,4 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
+import {
+  OptionTypeBase
+} from 'react-select';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -30,14 +33,13 @@ import {
 
 import api from '../../../../services/api';
 
-
 const HouseholdForm: React.FC = (props) => {
 
   const { token } = useAuth();
 
   const { addToast } = useToast();
 
-  const [mainPerson, setMainPerson] = useState(false);
+  const [mainPerson, setMainPerson] = useState<OptionTypeBase | undefined | null>({});
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
@@ -98,14 +100,14 @@ const HouseholdForm: React.FC = (props) => {
           <Select
             name="household_main_person"
             options={mainPersonOptions}
-            onChange={() => setMainPerson(!mainPerson)}
+            onChange={selectedOption => setMainPerson(selectedOption)}
           />
         </Label>
         <Label>Se não é, qual é a relação com a pessoa de referência?</Label>
         <Select
           name="relationship_to_main_person"
           options={relationMainPersonOptions}
-          isDisabled={mainPerson}
+          isDisabled={mainPerson?.value === 'true' ? true : false}
         />
       </Section>
 
