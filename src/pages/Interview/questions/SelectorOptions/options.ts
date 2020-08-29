@@ -1,15 +1,495 @@
-export const genderOptions = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' },
+// First module
+
+//06
+export const locationOptions = [
+  { value: 'urbano', label: 'Urbano' },
+  { value: 'rural', label: 'Rural' },
 ];
 
+//07
+export const interviewTypeOptions = [
+  { value: 'face-a-face', label: 'Face a face' },
+  { value: 'por-telefone', label: 'Por telefone' },
+];
+
+//08
+export const typeOfResidenceOptions = [
+  {
+    value: 'casa',
+    label: 'Casa',
+  },
+  { value: 'apartamento', label: 'Apartamento' },
+  { value: 'precaria', label: ' Cômodos, barraco, cortiço etc...' }, // improvisado ?
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//09
+export const homelessOptions = [
+  {
+    value: 'sim-fixa',
+    label: 'Com permanência fixa na cidade',
+  },
+  { value: 'sim-em-transito', label: 'Em permanente trânsito para vários locais' },
+  { value: 'nao', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//10
+export const traditionalPeoplesOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//11
+export const whichTraditionalPeoplesOptions = [
+  { value: 'indigenas', label: 'Povos indígenas' },
+  { value: 'quilombolas', label: 'Comunidades quilombolas' },
+  { value: 'matriz-africana', label: 'Povos e comunidades de terreiro/povos e comunidades de matriz africana' },
+  { value: 'ciganos', label: 'Povos ciganos' },
+  { value: 'pescadores', label: 'Pescadores artesanais' },
+  { value: 'extrativistas', label: 'Extrativistas' },
+  { value: 'outros', label: 'Outros' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+
+// Second module
+//15
+export const genderOptions = [
+  { value: 'masculino', label: 'Masculino' },
+  { value: 'feminino', label: 'Feminino' },
+  { value: 'outro', label: 'Outro' },
+];
+
+//16
+export const mainPersonOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//17
+export const referencePersonGenderOptions = [
+  { value: 'masculino', label: 'Masculino' },
+  { value: 'feminino', label: 'Feminino' },
+  { value: 'outro', label: 'Outro' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//18
 export const raceOptions = [
   { value: 'branca', label: 'Branca' },
   { value: 'preta', label: 'Preta' },
   { value: 'parda', label: 'Parda' },
   { value: 'oriental', label: 'Oriental' },
   { value: 'indigena', label: 'Indígena' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//19
+export const LiteracyOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//20
+export const educationOptions = [
+  {
+    value: 'fundamental-incompleto',
+    label: 'Ensino fundamental (1º grau) incompleto',
+  },
+  {
+    value: 'fundamental-completo',
+    label: 'Ensino fundamental (1º grau) completo',
+  },
+  { value: 'medio-incompleto', label: 'Ensino médio (2º grau) incompleto' },
+  { value: 'medio-completo', label: 'Ensino médio (2º grau) completo' },
+  { value: 'supletivo-primeiro-grau', label: 'Supletivo 1º grau' },
+  { value: 'supletivo-segundo-grau', label: 'Supletivo 2º grau' },
+  { value: 'superior-incompleto', label: 'Superior incompleto' },
+  { value: 'superior-completo', label: 'Superior completo' },
+  { value: 'nao-frequentou-escola', label: 'Não frequentou escola' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+// 21 change to checkbox for multiple answers (2 maximum)
+export const workOptions = [
+  { value: 'desempregado(a)', label: 'Atualmente está desempregado' },
+  { value: 'empregado(a)', label: 'Empregado(a) com jornada de trabalho normal' },
+  { value: 'empregado(a)-salario-parcial', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' },
+  { value: 'empregado(a)-de-ferias', label: 'Empregado(a), mas afastado por estar de férias' },
+  {
+    value: 'afastado-covid-salario-parcial',
+    label:
+      'Empregado em afastamento pelo contexto da COVID-19 - com salário PARCIAL',
+  },
+  {
+    value: 'afastado-covid-salario-total',
+    label:
+      'Empregado em afastamento pelo contexto da COVID-19 - com salário TOTAL',
+  },
+  {
+    value: 'afastado-covid-sem-salario',
+    label:
+      'Empregado em afastamento pelo contexto da COVID-19 – SEM salário',
+  },
+  { value: 'aposentado', label: 'Aposentado' },
+  {
+    value: 'pensionista',
+    label: 'Pensionista (viuvez - problema de saúde, pensão alimentícia, etc.)',
+  },
+  {
+    value: 'autonomo-formal',
+    label: 'Trabalho por conta própria – Autônomo (formal)',
+  },
+  {
+    value: 'autonomo-informal',
+    label: 'Trabalho por conta própria, bico, ambulante, informal.',
+  },
+  {
+    value: 'rendimentos',
+    label: 'Recebe rendimento de outras fontes (aluguel e outras)',
+  },
+  { value: 'empregador', label: 'Empregador' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//22
+export const workAfterPandemicOptions = [
+  { value: 'perda-de-emprego', label: 'Perda de emprego de algum membro da casa' },
+  { value: 'reducao-da-renda', label: 'Redução da renda domiciliar (dos moradores da casa)' },
+  { value: 'ajuda-financeira-parente-amigo', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' },
+  { value: 'endividamento', label: 'Endividamento de moradores' },
+  { value: 'corte-gastos-essenciais', label: 'Corte de gastos em despesas essenciais' },
+  { value: 'corte-gastos-nao-essenciais', label: 'Corte de gastos em despesas não essenciais' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//23
+export const covidDiagnoseOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//25 query data
+
+//26
+export const peopleInvitedToHouseholdOptions = [
+  { value: 'nenhuma-pessoa-acolhidas', label: 'Essas pessoas não foram acolhidas pois todos já moravam na minha casa' },
+  { value: 'acolhidas-uma-ou-duas-pessoas', label: 'Foram acolhidas de 1 a 2 pessoas' },
+  { value: 'acolhidas-tres-ou-mais-pessoas', label: 'Foram acolhidas 3 ou mais pessoas' },
+];
+
+//27 income checkbox for NS/NR
+
+//30
+export const buildingMaterialOptions = [
+  { value: 'alvenaria-com-revestimento', label: 'Alvenaria Com Revestimento/Taipa Com Revestimento ' },
+  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria Sem Revestimento ' },
+  { value: 'taipa-sem-revestimento', label: 'Taipa Sem Revestimento' },
+  { value: 'madeira-para-construção', label: 'Madeira Apropriada Para Construção' },
+  { value: 'madeira-aproveitada', label: 'Madeira Aproveitada' },
+  { value: 'outro-material', label: 'Outro Material' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//31
+export const drinkingWaterOptions = [
+  { value: 'sim', label: 'Sim' },
+  {
+    value: 'sim-mas-falha',
+    label: 'Sim, mas o fornecimento falha semanalmente',
+  },
+  {
+    value: 'nao',
+    label: 'Não tem fornecimento',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//32
+export const sewageOptions = [
+  { value: 'rede', label: 'Rede Geral, Rede Pluvial Ou Fossa Ligada À Rede' },
+  {
+    value: 'fossa-sem-rede',
+    label: 'Fossa Não Ligada À Rede',
+  },
+  {
+    value: 'vala',
+    label: 'Vala',
+  },
+  {
+    value: 'rio-lago-mar',
+    label: 'Rio, Lago Ou Mar ',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+// module 3
+
+//33
+export const worriedWithFoodSupplyOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//34
+export const LackOfFoodOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//35
+export const cannotAffordFoodOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//36
+export const poorFoodChoiceOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//37
+export const adultMealsOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//38
+export const adultFoodPrivationOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//39
+export const adultHungerOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//40
+export const adultOneMealOrNoneOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+// module 4
+
+//41
+export const governmentProgramOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'tentou', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//42
+export const governmentFamilyProgramOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'tentou', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//43
+export const governmentBPCProgramOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'tentou', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//44
+export const pensionOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//45
+export const governmentReclusaoProgramOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//46
+export const governmentPNAEProgramOptions = [
+  { value: 'sim-escola', label: 'Sim, na própria escola ' },
+  { value: 'sim-cesta', label: 'Sim, recebendo como cesta de alimentos' },
+  { value: 'nao', label: 'Não ' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//47
+export const CestaOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+
+//48
+export const subsidizedRestaurantsOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//49
+export const governmentCovidProgramOptions = [
+  { value: 'recebeu', label: 'Solicitou o auxílio e recebeu ' },
+  { value: 'nao-recebeu', label: 'Solicitou o auxílio e não recebeu' },
+  { value: 'nao-solicitou', label: 'Não solicitou o auxílio emergencial' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//50 checkbox
+
+//51
+export const recievedCharityOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//52
+export const typeOfrecievedCharityOptions = [
+  { value: 'alimentos', label: 'Ajuda em Alimentos' },
+  { value: 'dinheiro', label: 'Ajuda em Dinheiro' },
+  { value: 'cuidados-deficiente', label: 'cuidado com pessoa que é dependente na família (criança, idoso; deficiente)' },
+  { value: 'outros', label: 'Outro tipo de ajuda' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//53
+export const embarassementOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//54
+export const homeGrownFoodOptions = [
+  { value: 'sim-familia', label: 'Sim, apenas para o consumo da família ' },
+  { value: 'sim-consumo-venda', label: 'SIM, para consumo e venda' },
+  { value: 'sim-venda', label: 'SIM, apenas para venda' },
+  { value: 'nao', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//55
+export const FoodSellingOptions = [
+  { value: 'sim', label: 'Sim' },
+  { value: 'nao', label: 'Não' },
+  { value: 'nao-produz', label: 'Não produzo alimentos para comercialização' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//56
+export const FoodNotSoldOptions = [
+  { value: 'sim', label: 'Sim' },
+  { value: 'nao', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//57
+export const howFoodIsObtainedOptions = [
+  { value: 'compra-fisica', label: 'Por meio de compra física (indo ao mercado, mercearia etc.)' },
+  { value: 'telefone-aplicativos', label: 'Por meio de compra por telefone ou pedidos por aplicativos on-line' },
+  { value: 'doacoes-governo', label: 'Por meio de doação de instituição do governo' },
+  { value: 'doacoes-ongs', label: 'Por meio de doação de organizações sociais' },
+  { value: 'doacoes-conhecidos', label: 'Por meio de doação de familiares, amigos e/ou vizinhos.' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//58
+export const FoodPriceOptions = [
+  { value: 'sim-aumento', label: 'Sim, observei um aumento no preço dos alimentos.' },
+  { value: 'sim-diminuicao', label: 'Sim, observamos uma diminuição no preço dos alimentos.' },
+  { value: 'nao', label: 'Não, os alimentos mantiveram os mesmos preços.' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//59
+export const FoodProfileOptions = [
+  { value: 'sim-mais-alimentos', label: 'Sim, a diminuição do preço possibilitou adquirir mais alimentos' },
+  { value: 'sim-menos-alimentos', label: 'Sim, o aumento do preço fez diminuir a quantidade de alimentos adquiridos' },
+  { value: 'sim-outros-alimentos', label: 'Sim, o aumento do preço me fez mudar os itens adquiridos' },
+  { value: 'nao', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//60
+export const FoodStoreOptions = [
+  { value: 'hiper-supermercados', label: 'Hipermercados e grandes redes de supermercados (Ex. Carrefour®, Extra®, Pão de Açúcar®)' },
+  { value: 'supermercados-locais', label: 'Supermercados locais' },
+  { value: 'mercados-mercearias', label: 'Mercados, mercearias do bairro, armazém, padaria' },
+  { value: 'sacolao-hortifruti', label: 'Sacolão, hortifruti, frutaria' },
+  { value: 'feira', label: 'Feira' },
+  { value: 'direto-produtores', label: 'Compra direta com produtores' },
+  { value: 'acougue-peixaria', label: 'Açougue, peixaria' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//61
+
+export const FoodExpenditureOptions = [
+  { value: 'nao-mudaram', label: 'Não, continuam as mesmas' },
+  { value: 'aumentaram-um-pouco', label: 'Sim, aumentaram um pouco' },
+  { value: 'aumentaram-muito', label: 'Sim, aumentaram muito' },
+  { value: 'reduziram-um-pouco', label: 'Sim, reduziram um pouco' },
+  { value: 'reduziram-muito', label: 'Sim, reduziram muito' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+/* 61. VOCÊ PODERIA DIZER SE ONTEM VOCÊ COMEU ALGUM DOS ALIMENTOS ABAIXO ONTEM (DESDE QUE ACORDOU ATÉ QUANDO FOI DORMIR):
+Alface, acelga ou repolho.                                                            		Sim (  )   Não (  )
+Couve, brócolis, almeirão, agrião ou espinafre        	   	        	Sim (  )   Não (  )
+Abóbora, cenoura, batata-doce ou quiabo/caruru        	           		Sim (  )   Não (  )
+Mamão, manga, melão amarelo, caqui ou pequi        			Sim (  )   Não (  )
+Tomate, pepino, abobrinha, berinjela, chuchu ou beterraba       		Sim (  ) 	Não (  )
+Laranja, banana, maçã ou abacaxi                     	                        		Sim (  )   Não (  )
+Arroz, macarrão, polenta, cuscuz ou milho verde                    	   	Sim (  )   Não (  )
+Feijão, ervilha, lentilha ou grão de bico                                       		Sim (  )   Não (  )
+Batata comum, mandioca, cará ou inhame                                 		Sim (  )   Não (  )
+Carne de boi, porco, frango ou peixe         	                                 	Sim (  )   Não (  )
+Ovo frito, cozido ou mexido                                                              		Sim (  )   Não (  )
+Leite                                                                                                  		Sim (  )   Não (  )
+Amendoim, castanha de caju ou castanha do Brasil/ Pará    	 	Sim (  )   Não (  )
+
+    62. VOCÊ PODERIA DIZER SE ONTEM VOCÊ COMEU ALGUM DOS ALIMENTOS OU PRODUTOS INDUSTRIALIZADOS ABAIXO (CONSIDERE PARA RESPONDER ESSA PERGUNTA O PERÍODO DESDE QUE ACORDOU ATÉ QUANDO FOI DORMIR):
+Refrigerante           	                                                                              	Sim (  )   Não (  )
+Suco de fruta em caixa, caixinha, lata (como Del Valle® ou Tropicana®)   	Sim (  )   Não (  )
+Refresco em pó (como Tang® ou Ki suco®)                                	        	Sim (  )   Não (  )
+Bebida achocolatada (como Toddynho® ou Toddy®)      	                    	Sim (  )   Não (  )
+Iogurte com sabor                  	                                                              	Sim (  )   Não (  )
+Salgadinho de pacote (ou chips) ou biscoito/ bolacha salgado  	        	Sim (  )   Não (  )
+Biscoito/ bolacha doce, biscoito recheado ou bolinho de pacote           	Sim (  )   Não (  )
+Chocolate, sorvete, gelatina, ou outra sobremesa industrializada         	Sim (  )   Não ( )
+Salsicha, linguiça, mortadela ou presunto                                               	Sim (  )   Não (  )
+Pão de forma, de cachorro quente ou de hambúrguer             	          	Sim (  )   Não (  )
+Maionese, ketchup ou mostarda                           	       	                   	Sim (  )   Não (  )
+Margarina                                                                                                 		Sim (  )   Não (  )
+Macarrão instantâneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado.             	                               		Sim (  )   Não (  ) */
+
+//64
+export const researchStatusOptions = [
+  { value: 'completo', label: 'Completo' },
+  { value: 'com-pendencias', label: 'Com pendência, a ser ajustada' },
 ];
 
 export const religionOptions = [
@@ -26,65 +506,6 @@ export const maritalOptions = [
   { value: 'solteiro-a', label: 'Solteiro(a)' },
   { value: 'separado', label: 'Separado(a)' },
   { value: 'viuvo-viuva', label: 'Viúvo ou Viúva' },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-export const educationOptions = [
-  {
-    value: 'fundamental-incompleto',
-    label: 'Ensino fundamental (1º grau) incompleto',
-  },
-  {
-    value: 'fundamental-completo',
-    label: 'Ensino fundamental (1º grau) completo',
-  },
-  { value: 'medio-incompleto', label: 'Ensino médio (2º grau) incompleto' },
-  { value: 'medio-completo', label: 'Ensino médio (2º grau) completo' },
-  { value: 'supletivo-1', label: 'Supletivo 1º grau' },
-  { value: 'supletivo-2', label: 'Supletivo 2º grau' },
-  { value: 'superior-incompleto', label: 'Superior incompleto' },
-  { value: 'superior-completo', label: 'Superior completo' },
-  { value: 'nao-frequentou-escola', label: 'Não frequentou escola' },
-];
-
-export const workOptions = [
-  { value: 'trabalhando', label: 'Atualmente está trabalhando' },
-  { value: 'desempregado', label: 'Atualmente está desempregado' },
-  { value: 'ferias', label: 'Emprego em afastamento por férias' },
-  {
-    value: 'afastado-covid-remuneracao-parcial',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 - com remuneração PARCIAL',
-  },
-  {
-    value: 'afastado-covid-remuneracao-total',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 - com remuneração TOTAL',
-  },
-  {
-    value: 'afastado-covid-sem-remuneracao',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 – SEM remuneração',
-  },
-  { value: 'empregado', label: 'Empregado e continua trabalhando normalmente' },
-  { value: 'aposentado', label: 'Aposentado' },
-  {
-    value: 'pensionista',
-    label: 'Pensionista (viuvez- problema de saúde-pensão alimentícia, outras)',
-  },
-
-  {
-    value: 'autonomo-formal',
-    label: 'Trabalho por conta própria – Autônomo (formal)',
-  },
-  {
-    value: 'autonomo informal',
-    label: 'Trabalho por conta própria- Precário - Bico - informal',
-  },
-  {
-    value: 'rendimentos',
-    label: 'Recebe rendimento de várias fontes (aluguel e outras)',
-  },
-  { value: 'empregador', label: 'Empregador' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -118,58 +539,12 @@ export const relationMainPersonOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-export const typeOfResidenceOptions = [
-  { value: 'permanente', label: 'Casa ou apartamento' },
-  { value: 'improvisado', label: ' Barraco, cortiço etc...' },
-  {
-    value: 'casa',
-    label: 'Casa',
-  },
-  { value: 'apartamento', label: 'Apartamento' },
-  { value: 'comodo', label: 'Cômodo' },
-  { value: 'area-rural', label: 'Area rural' },
-  {
-    value: 'outro',
-    label: 'Avó da pessoa de referência',
-  },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-
-export const drinkingWaterOptions = [
-  { value: 'canalisada', label: 'Sim, canalisada dentro de casa' },
-  { value: 'externa-domicilio', label: 'Sim, exerna ao domicílio' },
-  {
-    value: 'falha-fornecimento',
-    label: 'Sim, mas o fornecimento falha semanalmente',
-  },
-  {
-    value: 'nao',
-    label: 'Não tem fornecimento',
-  },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-
-export const locationOptions = [
-  { value: 'urbano', label: 'Urbano' },
-  { value: 'rural', label: 'Rural' },
-];
-
-export const mainPersonOptions = [
-  { value: 'true', label: 'Sim' },
-  { value: 'false', label: 'Não' },
-];
-
 export const BathroomOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
 ];
 
 export const GarbageOptions = [
-  { value: 'true', label: 'Sim' },
-  { value: 'false', label: 'Não' },
-];
-
-export const LiteracyOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
 ];
