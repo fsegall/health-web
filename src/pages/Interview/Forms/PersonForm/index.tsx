@@ -21,10 +21,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import {
   genderOptions,
   raceOptions,
-  maritalOptions,
   educationOptions,
-  healthOptions,
-  religionOptions,
+  traditionalPeoplesOptions,
   workOptions,
   LiteracyOptions,
 } from '../../questions/SelectorOptions/options';
@@ -97,10 +95,7 @@ const PersonForm: React.FC = (props) => {
 
       < Section >
         <Label>Religião </Label>
-        < Select name="religion" options={religionOptions} />
-
-        <Label>Estado Civil </Label>
-        < Select name="marital_status" options={maritalOptions} />
+        < Select name="religion" options={raceOptions} />
         <Label>
           <span>Sabe ler e escrever ? </span>
           < Select name="literacy" options={LiteracyOptions} />
@@ -113,7 +108,7 @@ const PersonForm: React.FC = (props) => {
         <Label>Situação de emprego </Label>
         < Select name="work_status" options={workOptions} />
         <Label>Situação de saúde </Label>
-        < Select name="health_conditions" options={healthOptions} />
+        < Select name="health_conditions" options={raceOptions} />
         <Button type="submit" > Submit </Button>
       </Section>
     </StyledForm>

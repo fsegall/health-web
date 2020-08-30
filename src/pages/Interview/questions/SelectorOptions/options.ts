@@ -1,18 +1,18 @@
 // First module
 
-//06
+//06 Household
 export const locationOptions = [
   { value: 'urbano', label: 'Urbano' },
   { value: 'rural', label: 'Rural' },
 ];
 
-//07
+//07 Project
 export const interviewTypeOptions = [
   { value: 'face-a-face', label: 'Face a face' },
   { value: 'por-telefone', label: 'Por telefone' },
 ];
 
-//08
+//08 Household
 export const typeOfResidenceOptions = [
   {
     value: 'casa',
@@ -23,7 +23,7 @@ export const typeOfResidenceOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//09
+//09 Household
 export const homelessOptions = [
   {
     value: 'sim-fixa',
@@ -34,14 +34,14 @@ export const homelessOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//10
+//10 Household
 export const traditionalPeoplesOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//11
+//11 Household
 export const whichTraditionalPeoplesOptions = [
   { value: 'indigenas', label: 'Povos indígenas' },
   { value: 'quilombolas', label: 'Comunidades quilombolas' },
@@ -55,21 +55,21 @@ export const whichTraditionalPeoplesOptions = [
 
 
 // Second module
-//15
+//15 Person
 export const genderOptions = [
   { value: 'masculino', label: 'Masculino' },
   { value: 'feminino', label: 'Feminino' },
   { value: 'outro', label: 'Outro' },
 ];
 
-//16
+//16 Person
 export const mainPersonOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//17
+//17 Person
 export const referencePersonGenderOptions = [
   { value: 'masculino', label: 'Masculino' },
   { value: 'feminino', label: 'Feminino' },
@@ -77,7 +77,7 @@ export const referencePersonGenderOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//18
+//18 Person
 export const raceOptions = [
   { value: 'branca', label: 'Branca' },
   { value: 'preta', label: 'Preta' },
@@ -87,14 +87,14 @@ export const raceOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//19
+//19 Person
 export const LiteracyOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//20
+//20 Person
 export const educationOptions = [
   {
     value: 'fundamental-incompleto',
@@ -114,7 +114,7 @@ export const educationOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// 21 change to checkbox for multiple answers (2 maximum)
+// 21 change to checkbox for multiple answers (2 maximum) - Person
 export const workOptions = [
   { value: 'desempregado(a)', label: 'Atualmente está desempregado' },
   { value: 'empregado(a)', label: 'Empregado(a) com jornada de trabalho normal' },
@@ -156,7 +156,7 @@ export const workOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//22
+//22 Person
 export const workAfterPandemicOptions = [
   { value: 'perda-de-emprego', label: 'Perda de emprego de algum membro da casa' },
   { value: 'reducao-da-renda', label: 'Redução da renda domiciliar (dos moradores da casa)' },
@@ -167,7 +167,7 @@ export const workAfterPandemicOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//23
+//23 Person
 export const covidDiagnoseOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -176,7 +176,7 @@ export const covidDiagnoseOptions = [
 
 //25 query data
 
-//26
+//26 Household
 export const peopleInvitedToHouseholdOptions = [
   { value: 'nenhuma-pessoa-acolhidas', label: 'Essas pessoas não foram acolhidas pois todos já moravam na minha casa' },
   { value: 'acolhidas-uma-ou-duas-pessoas', label: 'Foram acolhidas de 1 a 2 pessoas' },
@@ -185,7 +185,7 @@ export const peopleInvitedToHouseholdOptions = [
 
 //27 income checkbox for NS/NR
 
-//30
+//30 Household
 export const buildingMaterialOptions = [
   { value: 'alvenaria-com-revestimento', label: 'Alvenaria Com Revestimento/Taipa Com Revestimento ' },
   { value: 'alvenaria-sem-revestimento', label: 'Alvenaria Sem Revestimento ' },
@@ -196,7 +196,7 @@ export const buildingMaterialOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//31
+//31 Household
 export const drinkingWaterOptions = [
   { value: 'sim', label: 'Sim' },
   {
@@ -210,7 +210,7 @@ export const drinkingWaterOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//32
+//32 Household
 export const sewageOptions = [
   { value: 'rede', label: 'Rede Geral, Rede Pluvial Ou Fossa Ligada À Rede' },
   {
@@ -230,35 +230,37 @@ export const sewageOptions = [
 
 // module 3
 
-//33
+//33 Hosuehold
 export const worriedWithFoodSupplyOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//34
+//34 Household
 export const LackOfFoodOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//35
+//35 Household
 export const cannotAffordFoodOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//36
+//36 Household
 export const poorFoodChoiceOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//37
+
+
+//37 Household
 export const adultMealsOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -272,14 +274,14 @@ export const adultFoodPrivationOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//39
+//39 Household
 export const adultHungerOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//40
+//40 Household
 export const adultOneMealOrNoneOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -288,7 +290,7 @@ export const adultOneMealOrNoneOptions = [
 
 // module 4
 
-//41
+//41 Household
 export const governmentProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -296,7 +298,7 @@ export const governmentProgramOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//42
+//42 Household
 export const governmentFamilyProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -304,7 +306,7 @@ export const governmentFamilyProgramOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//43
+//43 Household
 export const governmentBPCProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -312,21 +314,21 @@ export const governmentBPCProgramOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//44
+//44 Household
 export const pensionOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//45
+//45 Household
 export const governmentReclusaoProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//46
+//46 Household
 export const governmentPNAEProgramOptions = [
   { value: 'sim-escola', label: 'Sim, na própria escola ' },
   { value: 'sim-cesta', label: 'Sim, recebendo como cesta de alimentos' },
@@ -334,7 +336,7 @@ export const governmentPNAEProgramOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//47
+//47 Household
 export const CestaOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -342,14 +344,14 @@ export const CestaOptions = [
 ];
 
 
-//48
+//48 Household
 export const subsidizedRestaurantsOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//49
+//49 Household
 export const governmentCovidProgramOptions = [
   { value: 'recebeu', label: 'Solicitou o auxílio e recebeu ' },
   { value: 'nao-recebeu', label: 'Solicitou o auxílio e não recebeu' },
@@ -359,14 +361,14 @@ export const governmentCovidProgramOptions = [
 
 //50 checkbox
 
-//51
+//51 Household
 export const recievedCharityOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//52
+//52 Household
 export const typeOfrecievedCharityOptions = [
   { value: 'alimentos', label: 'Ajuda em Alimentos' },
   { value: 'dinheiro', label: 'Ajuda em Dinheiro' },
@@ -375,14 +377,14 @@ export const typeOfrecievedCharityOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//53
+//53 Household
 export const embarassementOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//54
+//54 Household
 export const homeGrownFoodOptions = [
   { value: 'sim-familia', label: 'Sim, apenas para o consumo da família ' },
   { value: 'sim-consumo-venda', label: 'SIM, para consumo e venda' },
@@ -391,7 +393,7 @@ export const homeGrownFoodOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//55
+//55 Household
 export const FoodSellingOptions = [
   { value: 'sim', label: 'Sim' },
   { value: 'nao', label: 'Não' },
@@ -399,14 +401,14 @@ export const FoodSellingOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//56
+//56 Household
 export const FoodNotSoldOptions = [
   { value: 'sim', label: 'Sim' },
   { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//57
+//57 Household
 export const howFoodIsObtainedOptions = [
   { value: 'compra-fisica', label: 'Por meio de compra física (indo ao mercado, mercearia etc.)' },
   { value: 'telefone-aplicativos', label: 'Por meio de compra por telefone ou pedidos por aplicativos on-line' },
@@ -416,7 +418,7 @@ export const howFoodIsObtainedOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//58
+//58 Household
 export const FoodPriceOptions = [
   { value: 'sim-aumento', label: 'Sim, observei um aumento no preço dos alimentos.' },
   { value: 'sim-diminuicao', label: 'Sim, observamos uma diminuição no preço dos alimentos.' },
@@ -424,7 +426,7 @@ export const FoodPriceOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//59
+//59 Household
 export const FoodProfileOptions = [
   { value: 'sim-mais-alimentos', label: 'Sim, a diminuição do preço possibilitou adquirir mais alimentos' },
   { value: 'sim-menos-alimentos', label: 'Sim, o aumento do preço fez diminuir a quantidade de alimentos adquiridos' },
@@ -433,7 +435,7 @@ export const FoodProfileOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//60
+//60 Household
 export const FoodStoreOptions = [
   { value: 'hiper-supermercados', label: 'Hipermercados e grandes redes de supermercados (Ex. Carrefour®, Extra®, Pão de Açúcar®)' },
   { value: 'supermercados-locais', label: 'Supermercados locais' },
@@ -445,8 +447,7 @@ export const FoodStoreOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//61
-
+//61 Household
 export const FoodExpenditureOptions = [
   { value: 'nao-mudaram', label: 'Não, continuam as mesmas' },
   { value: 'aumentaram-um-pouco', label: 'Sim, aumentaram um pouco' },
@@ -486,69 +487,13 @@ Maionese, ketchup ou mostarda                           	       	               
 Margarina                                                                                                 		Sim (  )   Não (  )
 Macarrão instantâneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado.             	                               		Sim (  )   Não (  ) */
 
-//64
+//64 Project
 export const researchStatusOptions = [
   { value: 'completo', label: 'Completo' },
   { value: 'com-pendencias', label: 'Com pendência, a ser ajustada' },
 ];
 
-export const religionOptions = [
-  { value: 'católico', label: 'Católico' },
-  { value: 'protestante', label: 'Protestante(Não Neo Petencostal)' },
-  { value: 'evangelico', label: 'Evangélico Neo Petencostal' },
-  { value: 'matriz-africana', label: 'De Matriz Africana' },
-  { value: 'espirita', label: 'Espírita' },
-  { value: 'outra', label: 'Outra' },
-];
-
-export const maritalOptions = [
-  { value: 'casado-a', label: 'Casado(a)' },
-  { value: 'solteiro-a', label: 'Solteiro(a)' },
-  { value: 'separado', label: 'Separado(a)' },
-  { value: 'viuvo-viuva', label: 'Viúvo ou Viúva' },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-
-export const healthOptions = [
-  { value: 'covid', label: 'Tem diagnóstico de Covid-19' },
-  { value: 'coabita', label: 'Coabita com pessoa diagnosticada com Covid-19' },
-  {
-    value: 'sintomatico',
-    label:
-      'Tem sintomas de síndrome gripal (febre, coriza, dor de garganta, falta de ar), mas sem diagnóstico',
-  },
-  { value: 'sem-sintomas', label: 'Sem sintomas' },
-];
-
-export const relationMainPersonOptions = [
-  { value: 'mae', label: 'Mãe da pessoa de referência' },
-  { value: 'pai', label: 'Pai da pessoa de referência' },
-  {
-    value: 'esposo',
-    label: 'Esposo da pessoa de referência',
-  },
-  { value: 'genro', label: 'Genro da pessoa de referência' },
-  { value: 'nora', label: 'Nora da pessoa de referência' },
-  { value: 'Avô', label: 'Avô da pessoa de referência' },
-  {
-    value: 'Avó',
-    label: 'Avó da pessoa de referência',
-  },
-  { value: 'outro-parente', label: 'Outro grau de parentesco' },
-  { value: 'outro-nao-parente', label: 'Outro sem grau de parentesco' },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-
-export const BathroomOptions = [
-  { value: 'true', label: 'Sim' },
-  { value: 'false', label: 'Não' },
-];
-
-export const GarbageOptions = [
-  { value: 'true', label: 'Sim' },
-  { value: 'false', label: 'Não' },
-];
-
+// Address
 export const brazilStatesOptions = [
   { value: 'AC', label: 'Acre' },
   { value: 'AL', label: 'Alagoas' },
@@ -578,4 +523,10 @@ export const brazilStatesOptions = [
   { value: 'SE', label: 'Sergipe' },
   { value: 'TO', label: 'Tocantins' },
   { value: 'ET', label: 'Estrangeiro' },
+];
+
+export const yesOrNoOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
 ];
