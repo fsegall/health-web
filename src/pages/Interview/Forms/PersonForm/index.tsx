@@ -1,5 +1,8 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
+import {
+  OptionTypeBase
+} from 'react-select';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -25,6 +28,10 @@ import {
   traditionalPeoplesOptions,
   workOptions,
   LiteracyOptions,
+  yesOrNoOptions,
+  workAfterPandemicOptions,
+  referencePersonGenderOptions,
+  mainPersonOptions
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -37,6 +44,8 @@ const PersonForm: React.FC = (props) => {
   const { addToast } = useToast();
 
   const PersonFormRef = useRef<FormHandles>(null);
+
+  const [mainPerson, setMainPerson] = useState<OptionTypeBase | undefined | null>({});
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
@@ -87,13 +96,28 @@ const PersonForm: React.FC = (props) => {
         <Input name="date_of_birth" type="date" />
 
         <Label>Gênero </Label>
-
         < Select name="gender" options={genderOptions} />
-        <Label>Raça ou cor </Label>
-        < Select name="race_color" options={raceOptions} />
+
+
       </Section>
 
       < Section >
+        <Label>Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
+        < Select
+          name="gender"
+          options={yesOrNoOptions}
+          onChange={selectedOption => setMainPerson(selectedOption)}
+        />
+
+        <Label>Qual o sexo da pessoa de referência?</Label>
+        < Select
+          name="reference-person-gender"
+          options={referencePersonGenderOptions}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>Raça ou cor </Label>
+        < Select name="race_color" options={raceOptions} />
         <Label>Religião </Label>
         < Select name="religion" options={raceOptions} />
         <Label>
@@ -105,10 +129,12 @@ const PersonForm: React.FC = (props) => {
       < Section >
         <Label>Escolaridade </Label>
         < Select name="education" options={educationOptions} />
-        <Label>Situação de emprego </Label>
+        <Label>Situação de emprego</Label>
         < Select name="work_status" options={workOptions} />
-        <Label>Situação de saúde </Label>
-        < Select name="health_conditions" options={raceOptions} />
+        <Label>Em relação ao trabalho e a renda das pessoas da sua casa, a pandemia do coronavírus ou COVID-19 levou a:</Label>
+        < Select name="work_status" options={workAfterPandemicOptions} />
+        <Label>Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
+        < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </Section>
     </StyledForm>

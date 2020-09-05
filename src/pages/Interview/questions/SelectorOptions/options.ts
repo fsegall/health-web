@@ -174,7 +174,8 @@ export const covidDiagnoseOptions = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//25 query data
+//25
+
 
 //26 Household
 export const peopleInvitedToHouseholdOptions = [
@@ -529,4 +530,9 @@ export const yesOrNoOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
+];
+
+export const yesOrNoPlainOptions = [
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
 ];
