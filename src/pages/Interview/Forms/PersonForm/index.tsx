@@ -7,7 +7,7 @@ import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
-  Section,
+  CheckBoxContainer,
   Label
 } from './styles';
 import {
@@ -33,6 +33,7 @@ import {
   referencePersonGenderOptions,
   mainPersonOptions
 } from '../../questions/SelectorOptions/options';
+import CheckBoxInput from '../../../../components/Checkbox';
 
 import api from '../../../../services/api';
 
@@ -90,7 +91,7 @@ const PersonForm: React.FC = (props) => {
 
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
-      <Section>
+      <section>
         <Input icon={FiUser} placeholder="Nome Completo" name="name" />
 
         <Input name="date_of_birth" type="date" />
@@ -99,9 +100,9 @@ const PersonForm: React.FC = (props) => {
         < Select name="gender" options={genderOptions} />
 
 
-      </Section>
+      </section>
 
-      < Section >
+      < section >
         <Label>Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
         < Select
           name="gender"
@@ -124,19 +125,119 @@ const PersonForm: React.FC = (props) => {
           <span>Sabe ler e escrever ? </span>
           < Select name="literacy" options={LiteracyOptions} />
         </Label>
-      </Section>
+      </section>
 
-      < Section >
+      < section >
         <Label>Escolaridade </Label>
         < Select name="education" options={educationOptions} />
+
+
         <Label>Situação de emprego</Label>
         < Select name="work_status" options={workOptions} />
+
+        <CheckBoxContainer>
+
+          <CheckBoxInput
+            name="unemployed"
+            options={[{ id: 'desempregado(a)', value: 'desempregado(a)', label: 'Atualmente está desempregado' }]}
+          />
+
+          <CheckBoxInput
+            name="employed_normal_salary"
+            options={[{ id: 'empregado(a)_salario_normal', value: 'empregado(a)', label: 'Empregado(a) com jornada de trabalho normal' }]}
+          />
+
+          <CheckBoxInput
+            name="employed_salary_reduced"
+            options={[{ id: 'empregado(a)_salario_parcial', value: 'empregado(a)-salario-parcial', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' }]}
+          />
+
+          <CheckBoxInput
+            name="employed_vacations"
+            options={[{ id: 'empregado(a)_ferias', value: 'empregado(a)-de-ferias', label: 'Empregado(a), mas afastado por estar de férias' }]}
+          />
+
+          <CheckBoxInput
+            name="employed_on_leave_salary_reduced"
+            options={[{
+              id: 'empregado(a)_afastado_parcial', value: 'afastado-covid-salario-parcial',
+              label:
+                'Empregado em afastamento pelo contexto da COVID-19 - com salário PARCIAL'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="employed_on_leave_normal_salary"
+            options={[{
+              id: 'empregado(a)_afastado_total', value: 'afastado-covid-salario-total',
+              label:
+                'Empregado em afastamento pelo contexto da COVID-19 - com salário TOTAL'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="employed_on_leave_no_salary"
+            options={[{
+              id: 'empregado(a)_afastado_sem_salario', value: 'afastado-covid-sem-salario',
+              label:
+                'Empregado em afastamento pelo contexto da COVID-19 – SEM salário'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="retired"
+            options={[{
+              id: 'retired', value: 'aposentado', label: 'Aposentado'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="pension"
+            options={[{
+              id: 'pensionista', value: 'pensionista',
+              label: 'Pensionista (viuvez - problema de saúde, pensão alimentícia, etc.)'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="self_employed_legally"
+            options={[{
+              id: 'autonomo-formal', value: 'autonomo-formal',
+              label: 'Trabalho por conta própria – Autônomo (formal)'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="odd_jobs"
+            options={[{
+              id: 'autonomo-informal', value: 'autonomo-informal',
+              label: 'Trabalho por conta própria, bico, ambulante, informal.'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="revenue"
+            options={[{
+              id: 'rendimentos', value: 'rendimentos',
+              label: 'Recebe rendimento de outras fontes (aluguel e outras)'
+            }]}
+          />
+
+          <CheckBoxInput
+            name="employer"
+            options={[{
+              id: 'empregador', value: 'empregador', label: 'Empregador'
+            }]}
+          />
+
+        </CheckBoxContainer>
+
         <Label>Em relação ao trabalho e a renda das pessoas da sua casa, a pandemia do coronavírus ou COVID-19 levou a:</Label>
         < Select name="work_status" options={workAfterPandemicOptions} />
         <Label>Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
-      </Section>
+      </section>
     </StyledForm>
   );
 

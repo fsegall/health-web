@@ -43,3 +43,15 @@ export const Label = styled.label`
 `;
 
 export const Section = styled.section``;
+
+export const CheckBoxContainer = styled.div`
+  text-align: left;
+  input {
+    margin-right: 10px;
+  }
+  label {
+    color: #59748c;
+    display: block;
+    padding: 10px;
+  }
+`;
