@@ -386,11 +386,9 @@ export const embarassementOptions = [
 ];
 
 //54 Household
-export const homeGrownFoodOptions = [
-  { value: 'sim-familia', label: 'Sim, apenas para o consumo da família ' },
-  { value: 'sim-consumo-venda', label: 'SIM, para consumo e venda' },
-  { value: 'sim-venda', label: 'SIM, apenas para venda' },
-  { value: 'nao', label: 'Não' },
+export const homeGrownSellingFoodOptions = [
+  { value: 'consumo-venda', label: 'Consumo e venda' },
+  { value: 'venda', label: 'Apenas para venda' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -398,7 +396,6 @@ export const homeGrownFoodOptions = [
 export const FoodSellingOptions = [
   { value: 'sim', label: 'Sim' },
   { value: 'nao', label: 'Não' },
-  { value: 'nao-produz', label: 'Não produzo alimentos para comercialização' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 

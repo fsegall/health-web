@@ -45,7 +45,7 @@ import {
   governmentCovidProgramOptions,
   typeOfrecievedCharityOptions,
   embarassementOptions,
-  homeGrownFoodOptions,
+  homeGrownSellingFoodOptions,
   FoodSellingOptions,
   howFoodIsObtainedOptions,
   FoodPriceOptions,
@@ -80,6 +80,9 @@ const HouseholdForm: React.FC = (props) => {
   const [produce, setProduce] = useState<OptionTypeBase | undefined | null>({});
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
+
+  // All checkboxes
+  const [alface, setAlface] = useState(false);
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
@@ -233,11 +236,13 @@ const HouseholdForm: React.FC = (props) => {
         <CheckBoxContainer>
           <CheckBoxInput
             name="alface_acelga_repolho"
+
             options={[{
               id: 'alface, acelga ou repolho',
               value: 'true',
               label: 'Alface, acelga ou repolho',
             }]}
+
           />
 
           <CheckBoxInput
@@ -599,8 +604,27 @@ const HouseholdForm: React.FC = (props) => {
 
         <Select
           name="home_grown"
-          options={homeGrownFoodOptions}
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Na sua casa você produz algum desses alimentos <b>para venda</b>?
+        </Label>
+
+        <Select
+          name="food_for_market"
+          options={yesOrNoOptions}
           onChange={selectedOptions => setProduce(selectedOptions)}
+        />
+
+        <Label>
+          Na sua casa como você divide <b>o alimento que produz para venda</b>?
+        </Label>
+
+        <Select
+          name="market_profile"
+          options={homeGrownSellingFoodOptions}
+          isDisabled={produce?.value === 'true' ? false : true}
         />
 
         <Label>
@@ -610,7 +634,7 @@ const HouseholdForm: React.FC = (props) => {
         <Select
           name="home_grown"
           options={FoodSellingOptions}
-          isDisabled={produce?.value === 'sim-consumo-venda' || produce?.value === 'sim-venda' ? false : true}
+          isDisabled={produce?.value === 'true' ? false : true}
         />
 
         <Label>
@@ -620,7 +644,7 @@ const HouseholdForm: React.FC = (props) => {
         <Select
           name="home_grown"
           options={yesOrNoOptions}
-          isDisabled={produce?.value === 'sim-consumo-venda' || produce?.value === 'sim-venda' ? false : true}
+          isDisabled={produce?.value === 'true' ? false : true}
         />
 
       </Section>
