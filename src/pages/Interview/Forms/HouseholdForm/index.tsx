@@ -135,7 +135,7 @@ const HouseholdForm: React.FC = (props) => {
     <StyledForm ref={HouseholdFormRef} onSubmit={handleHouseholdSubmit}>
       <Section>
         <Label>
-          <span>Localização do domicílio</span>
+          <span>Localização do domicílio Testing Deploy</span>
           <Select name="location_of_residence" options={locationOptions} />
         </Label>
         <Label>A pessoa entrevistada é moradora em situação de rua?</Label>
