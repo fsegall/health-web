@@ -85,7 +85,7 @@ const PersonForm: React.FC = (props) => {
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
       <section>
         <Input icon={FiUser} placeholder="Nome Completo" name="name" />
-
+        <Label>Data de Nascimento</Label>
         <Input name="date_of_birth" type="date" />
 
         <Label>Gênero </Label>
