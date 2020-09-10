@@ -1,8 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
-import {
-  OptionTypeBase
-} from 'react-select';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -25,7 +22,6 @@ import {
   genderOptions,
   raceOptions,
   educationOptions,
-  workOptions,
   LiteracyOptions,
   yesOrNoOptions,
   workAfterPandemicOptions,

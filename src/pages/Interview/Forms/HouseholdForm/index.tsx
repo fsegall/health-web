@@ -13,7 +13,6 @@ import {
 } from './styles';
 import {
   FiDollarSign,
-  FiUsers
 } from 'react-icons/fi';
 import { useAuth } from '../../../../hooks/auth';
 import Input from '../../../../components/Input';
@@ -25,7 +24,6 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import {
   drinkingWaterOptions,
-  mainPersonOptions,
   typeOfResidenceOptions,
   locationOptions,
   traditionalPeoplesOptions,
@@ -37,14 +35,10 @@ import {
   worriedWithFoodSupplyOptions,
   LackOfFoodOptions,
   cannotAffordFoodOptions,
-  poorFoodChoiceOptions,
   yesOrNoOptions,
-  yesOrNoPlainOptions,
   governmentProgramOptions,
   governmentPNAEProgramOptions,
-  governmentCovidProgramOptions,
   typeOfrecievedCharityOptions,
-  embarassementOptions,
   homeGrownSellingFoodOptions,
   FoodSellingOptions,
   howFoodIsObtainedOptions,
@@ -52,15 +46,12 @@ import {
   FoodStoreOptions,
   FoodProfileOptions,
   FoodExpenditureOptions,
-  researchStatusOptions,
-  interviewTypeOptions,
   referencePersonGenderOptions
 
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
 import CheckBoxInput from '../../../../components/Checkbox';
-import RadioInput from '../../../../components/RadioInput';
 
 const HouseholdForm: React.FC = (props) => {
 
