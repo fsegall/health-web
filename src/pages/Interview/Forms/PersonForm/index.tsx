@@ -25,13 +25,11 @@ import {
   genderOptions,
   raceOptions,
   educationOptions,
-  traditionalPeoplesOptions,
   workOptions,
   LiteracyOptions,
   yesOrNoOptions,
   workAfterPandemicOptions,
-  referencePersonGenderOptions,
-  mainPersonOptions
+
 } from '../../questions/SelectorOptions/options';
 import CheckBoxInput from '../../../../components/Checkbox';
 
@@ -45,8 +43,6 @@ const PersonForm: React.FC = (props) => {
   const { addToast } = useToast();
 
   const PersonFormRef = useRef<FormHandles>(null);
-
-  const [mainPerson, setMainPerson] = useState<OptionTypeBase | undefined | null>({});
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
@@ -103,24 +99,9 @@ const PersonForm: React.FC = (props) => {
       </section>
 
       < section >
-        <Label>Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
-        < Select
-          name="gender"
-          options={yesOrNoOptions}
-          onChange={selectedOption => setMainPerson(selectedOption)}
-        />
-
-        <Label>Qual o sexo da pessoa de referência?</Label>
-        < Select
-          name="reference-person-gender"
-          options={referencePersonGenderOptions}
-          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
-        />
 
         <Label>Raça ou cor </Label>
         < Select name="race_color" options={raceOptions} />
-        <Label>Religião </Label>
-        < Select name="religion" options={raceOptions} />
         <Label>
           <span>Sabe ler e escrever ? </span>
           < Select name="literacy" options={LiteracyOptions} />
@@ -133,34 +114,33 @@ const PersonForm: React.FC = (props) => {
 
 
         <Label>Situação de emprego</Label>
-        < Select name="work_status" options={workOptions} />
 
         <CheckBoxContainer>
 
           <CheckBoxInput
             name="unemployed"
-            options={[{ id: 'desempregado(a)', value: 'desempregado(a)', label: 'Atualmente está desempregado' }]}
+            options={[{ id: 'desempregado(a)', value: 'true', label: 'Atualmente está desempregado' }]}
           />
 
           <CheckBoxInput
             name="employed_normal_salary"
-            options={[{ id: 'empregado(a)_salario_normal', value: 'empregado(a)', label: 'Empregado(a) com jornada de trabalho normal' }]}
+            options={[{ id: 'empregado(a)_salario_normal', value: 'true', label: 'Empregado(a) com jornada de trabalho normal' }]}
           />
 
           <CheckBoxInput
             name="employed_salary_reduced"
-            options={[{ id: 'empregado(a)_salario_parcial', value: 'empregado(a)-salario-parcial', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' }]}
+            options={[{ id: 'empregado(a)_salario_parcial', value: 'true', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' }]}
           />
 
           <CheckBoxInput
             name="employed_vacations"
-            options={[{ id: 'empregado(a)_ferias', value: 'empregado(a)-de-ferias', label: 'Empregado(a), mas afastado por estar de férias' }]}
+            options={[{ id: 'empregado(a)_ferias', value: 'true', label: 'Empregado(a), mas afastado por estar de férias' }]}
           />
 
           <CheckBoxInput
             name="employed_on_leave_salary_reduced"
             options={[{
-              id: 'empregado(a)_afastado_parcial', value: 'afastado-covid-salario-parcial',
+              id: 'empregado(a)_afastado_parcial', value: 'true',
               label:
                 'Empregado em afastamento pelo contexto da COVID-19 - com salário PARCIAL'
             }]}
@@ -169,7 +149,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="employed_on_leave_normal_salary"
             options={[{
-              id: 'empregado(a)_afastado_total', value: 'afastado-covid-salario-total',
+              id: 'empregado(a)_afastado_total', value: 'true',
               label:
                 'Empregado em afastamento pelo contexto da COVID-19 - com salário TOTAL'
             }]}
@@ -178,7 +158,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="employed_on_leave_no_salary"
             options={[{
-              id: 'empregado(a)_afastado_sem_salario', value: 'afastado-covid-sem-salario',
+              id: 'empregado(a)_afastado_sem_salario', value: 'true',
               label:
                 'Empregado em afastamento pelo contexto da COVID-19 – SEM salário'
             }]}
@@ -187,14 +167,14 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="retired"
             options={[{
-              id: 'retired', value: 'aposentado', label: 'Aposentado'
+              id: 'retired', value: 'true', label: 'Aposentado'
             }]}
           />
 
           <CheckBoxInput
             name="pension"
             options={[{
-              id: 'pensionista', value: 'pensionista',
+              id: 'pensionista', value: 'true',
               label: 'Pensionista (viuvez - problema de saúde, pensão alimentícia, etc.)'
             }]}
           />
@@ -202,7 +182,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="self_employed_legally"
             options={[{
-              id: 'autonomo-formal', value: 'autonomo-formal',
+              id: 'autonomo-formal', value: 'true',
               label: 'Trabalho por conta própria – Autônomo (formal)'
             }]}
           />
@@ -210,7 +190,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="odd_jobs"
             options={[{
-              id: 'autonomo-informal', value: 'autonomo-informal',
+              id: 'autonomo-informal', value: 'true',
               label: 'Trabalho por conta própria, bico, ambulante, informal.'
             }]}
           />
@@ -218,7 +198,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="revenue"
             options={[{
-              id: 'rendimentos', value: 'rendimentos',
+              id: 'rendimentos', value: 'true',
               label: 'Recebe rendimento de outras fontes (aluguel e outras)'
             }]}
           />
@@ -226,7 +206,7 @@ const PersonForm: React.FC = (props) => {
           <CheckBoxInput
             name="employer"
             options={[{
-              id: 'empregador', value: 'empregador', label: 'Empregador'
+              id: 'empregador', value: 'true', label: 'Empregador'
             }]}
           />
 

@@ -53,7 +53,8 @@ import {
   FoodProfileOptions,
   FoodExpenditureOptions,
   researchStatusOptions,
-  interviewTypeOptions
+  interviewTypeOptions,
+  referencePersonGenderOptions
 
 } from '../../questions/SelectorOptions/options';
 
@@ -66,6 +67,8 @@ const HouseholdForm: React.FC = (props) => {
   const { token } = useAuth();
 
   const { addToast } = useToast();
+
+  const [mainPerson, setMainPerson] = useState<OptionTypeBase | undefined | null>({});
 
   const [traditional, setTraditional] = useState<OptionTypeBase | undefined | null>({});
 
@@ -80,9 +83,6 @@ const HouseholdForm: React.FC = (props) => {
   const [produce, setProduce] = useState<OptionTypeBase | undefined | null>({});
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
-
-  // All checkboxes
-  const [alface, setAlface] = useState(false);
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
@@ -148,17 +148,24 @@ const HouseholdForm: React.FC = (props) => {
         />
         <Label>Qual comunidade tradicional ou povos?</Label>
         < Select
-          name="traditional_peoples"
+          name="which_traditional_peoples"
           options={whichTraditionalPeoplesOptions}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
-        <Label>
-          <span>É a pessoa de referência da casa (chefe da casa)?</span>
-          <Select
-            name="household_main_person"
-            options={mainPersonOptions}
-          />
-        </Label>
+        <Label>Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
+        < Select
+          name="gender"
+          options={yesOrNoOptions}
+          onChange={selectedOption => setMainPerson(selectedOption)}
+        />
+
+        <Label>Qual o sexo da pessoa de referência?</Label>
+        < Select
+          name="reference-person-gender"
+          options={referencePersonGenderOptions}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
         <Label>Tipo de residência</Label>
         <Select name="type_of_residence" options={typeOfResidenceOptions} />
         <Label>Qual o número de cômodos na casa incluindo banheiros?</Label>
@@ -188,7 +195,7 @@ const HouseholdForm: React.FC = (props) => {
             name="one_person_household"
             options={[{
               id: 'one_person_household',
-              value: 'one_person_household',
+              value: 'true',
               label: 'Eu moro sozinho',
             }]}
             onChange={() => setMorePeople(!morePeople)}
@@ -201,25 +208,25 @@ const HouseholdForm: React.FC = (props) => {
               <Label>Quantos moradores com até 5 anos</Label>
               <Input
                 placeholder="Menos de 5 anos"
-                name="5_anos_ou_menos"
+                name="five_years_old_or_more"
                 type="number"
               />
               <Label>Quantos moradores entre 6 e 18 anos</Label>
               <Input
                 placeholder="Entre 6 e 18 anos"
-                name="entre_6_e_18"
+                name="between_6_and_18"
                 type="number"
               />
               <Label>Quantos moradores entre 19 e 59 anos</Label>
               <Input
                 placeholder="Entre 19 e 59 anos"
-                name="entre_19_e_59"
+                name="between_19_and_59"
                 type="number"
               />
               <Label>Quantos moradores 60 anos ou mais</Label>
               <Input
                 placeholder="Com 60 anos ou mais"
-                name="60_anos_ou_mais"
+                name="sixty_years_old_or_more"
                 type="number"
               />
             </>
@@ -228,7 +235,7 @@ const HouseholdForm: React.FC = (props) => {
           Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
         </Label>
         <Select
-          name="pessoas_acolhidas"
+          name="people_invited"
           options={peopleInvitedToHouseholdOptions}
           onChange={() => { }}
         />
@@ -255,7 +262,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="abobora_cenoura_batata-doce_quiabo_caruru"
+            name="abobora_cenoura_batata_doce_quiabo_caruru"
             options={[{
               id: 'abobora, cenoura, batata-doce ou quiabo/caruru',
               value: 'true',
@@ -282,7 +289,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="laranja_banana_maca_abacaxi "
+            name="laranja_banana_maca_abacaxi"
             options={[{
               id: 'laranja, banana, maçã ou abacaxi ',
               value: 'true',
@@ -291,7 +298,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="arroz_macarrao_polenta_cuscuz_milho-verde"
+            name="arroz_macarrao_polenta_cuscuz_milho_verde"
             options={[{
               id: 'arroz, macarrao, polenta, cuscuz ou milho verde',
               value: 'true',
@@ -300,7 +307,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="feijao_ervilha_lentilha_grao-de-bico"
+            name="feijao_ervilha_lentilha_grao_de_bico"
             options={[{
               id: 'feijao, ervilha, lentilha ou grao de bico',
               value: 'true',
@@ -309,7 +316,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="batata-comum_mandioca_cara_inhame"
+            name="batata_comum_mandioca_cara_inhame"
             options={[{
               id: 'batata comum, mandioca, cara ou inhame',
               value: 'true',
@@ -318,7 +325,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="carne-de-boi_porco_frango_peixe"
+            name="carne_de_boi_porco_frango_peixe"
             options={[{
               id: 'carne-de-boi_porco_frango_peixe',
               value: 'true',
@@ -327,7 +334,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="ovo-frito_cozido_mexido"
+            name="ovo_frito_cozido_mexido"
             options={[{
               id: 'ovo frito, cozido ou mexido',
               value: 'true',
@@ -336,7 +343,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Leite"
+            name="leite"
             options={[{
               id: 'leite   ',
               value: 'true',
@@ -345,9 +352,9 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Leite"
+            name="amendoim_castanha_de_caju_ou_castanha_do_brasil_para"
             options={[{
-              id: '',
+              id: 'Amendoim, castanha de caju ou castanha do Brasil/ Para',
               value: 'true',
               label: 'Amendoim, castanha de caju ou castanha do Brasil/ Pará',
             }]}
@@ -357,7 +364,7 @@ const HouseholdForm: React.FC = (props) => {
         <Label><strong>Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</strong></Label>
         <CheckBoxContainer>
           <CheckBoxInput
-            name="refrigerante"
+            name="soft_drink"
             options={[{
               id: 'refrigerante',
               value: 'true',
@@ -366,7 +373,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="suco-de-fruta-em-caixa_caixinha_lata-(como_Del_Valle_ou_Tropicana)"
+            name=" juice_can_or_box"
             options={[{
               id: 'suco de fruta em caixa, caixinha, lata (como Del Valle ou Tropicana)',
               value: 'true',
@@ -375,7 +382,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Refresco-em-po-(como-Tang-ou-Ki-suco)"
+            name="juice_powder"
             options={[{
               id: 'Refresco em po (como Tang ou Ki suco)',
               value: 'true',
@@ -384,7 +391,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Bebida-achocolatada-(como-Toddynho-ou-Toddy)"
+            name="chocolate_beverage"
             options={[{
               id: 'bebida achocolatada (como Toddynho ou Toddy)',
               value: 'true',
@@ -393,7 +400,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="iogurte-com-sabor"
+            name="flavored_yogurt"
             options={[{
               id: 'iogurte com sabor',
               value: 'true',
@@ -402,7 +409,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="salgadinho-de-pacote-(ou-chips)_biscoito/bolacha-salgado "
+            name="salty_snacks"
             options={[{
               id: 'Salgadinho de pacote (ou chips) ou biscoito/bolacha salgado ',
               value: 'true',
@@ -411,7 +418,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="biscoito/bolacha-doce_biscoito-recheado_bolinho-de-pacote"
+            name="cookies"
             options={[{
               id: 'biscoito/bolacha doce, biscoito recheado ou bolinho de pacote',
               value: 'true',
@@ -420,7 +427,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="chocolate_sorvete_gelatina_outra-sobremesa-industrializada"
+            name="industrialized_dessert"
             options={[{
               id: 'chocolate, sorvete, gelatina, ou outra sobremesa industrializada',
               value: 'true',
@@ -429,7 +436,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="salsicha_linguica_mortadela_presunto"
+            name="sausages"
             options={[{
               id: 'salsicha, linguiça, mortadela ou presunto',
               value: 'true',
@@ -438,7 +445,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Pao-de-forma_pao-de-cachorro-quente_pao-de-hamburguer "
+            name="hot_dog_or_burguer_bread"
             options={[{
               id: 'Pao de forma, de cachorro quente ou de hamburguer',
               value: 'true',
@@ -447,7 +454,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="maionese_ketchup_mostarda"
+            name="mayonnaise_ketchup_mustard"
             options={[{
               id: 'maionese, ketchup ou mostarda',
               value: 'true',
@@ -456,7 +463,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="margarina"
+            name="margarine"
             options={[{
               id: 'margarina',
               value: 'true',
@@ -465,7 +472,7 @@ const HouseholdForm: React.FC = (props) => {
           />
 
           <CheckBoxInput
-            name="Macarrao-instantaneo-(como-miojo_cup-noodles)_sopa-de-pacote_lasanha-congelada_outro-prato-pronto-comprado-congelado"
+            name="instant_noodles_or_soup_or_frozen_food"
             options={[{
               id: 'Macarrao instantaneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado',
               value: 'true',
@@ -481,7 +488,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa está cadastrado no <b>cadastro único do governo</b>?
         </Label>
         <Select
-          name="cadastro_unico"
+          name="government_assistance_program_cadastro_unico"
           options={governmentProgramOptions}
         />
 
@@ -489,7 +496,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa participa do programa <b>bolsa família</b>?
         </Label>
         <Select
-          name="bolsa_familia"
+          name="government_assistance_program_bolsa_familia"
           options={governmentProgramOptions}
         />
 
@@ -497,7 +504,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebe ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
-          name="bpc"
+          name="government_assistance_program_bolsa_familia_bpc"
           options={governmentProgramOptions}
         />
 
@@ -505,7 +512,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebe <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
-          name="pensao"
+          name="pension"
           options={yesOrNoOptions}
         />
 
@@ -513,7 +520,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebe <b>auxílio reclusão</b>?
         </Label>
         <Select
-          name="reclusao"
+          name="prison_cash_assistance"
           options={yesOrNoOptions}
         />
 
@@ -521,7 +528,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebe <b>auxílio referente à alimentação escolar ou PNAE</b>?
         </Label>
         <Select
-          name="pnae"
+          name="government_assistance_program_bolsa_familia_pnae"
           options={governmentPNAEProgramOptions}
         />
 
@@ -529,7 +536,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
-          name="cesta"
+          name="food_basket_assistance"
           options={yesOrNoOptions}
         />
 
@@ -537,7 +544,7 @@ const HouseholdForm: React.FC = (props) => {
           Você ou alguém da sua casa recebeu <b>frequenta restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
-          name="restaurantes_populares"
+          name="low_income_restaurants"
           options={yesOrNoOptions}
         />
 
@@ -546,7 +553,7 @@ const HouseholdForm: React.FC = (props) => {
         </Label>
 
         <Select
-          name="auxilio_covid"
+          name="covid_cash_assistance"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             console.log(selectedOption)
@@ -561,7 +568,7 @@ const HouseholdForm: React.FC = (props) => {
                 <Input
                   icon={FiDollarSign}
                   placeholder="Número de vezes"
-                  name="auxilio_vezes"
+                  name="covid_cash_assistance_number_of_times"
                   type="number"
                 />
               </>
@@ -574,7 +581,7 @@ const HouseholdForm: React.FC = (props) => {
         </Label>
 
         <Select
-          name="ajuda_instituicao"
+          name="charity"
           options={yesOrNoOptions}
           onChange={selectedOption => setAjuda(selectedOption)}
         />
@@ -584,7 +591,7 @@ const HouseholdForm: React.FC = (props) => {
         </Label>
 
         <Select
-          name="tipo_ajuda"
+          name="type_of_charity"
           options={typeOfrecievedCharityOptions}
           isDisabled={ajuda?.value === 'true' ? false : true}
         />
@@ -632,7 +639,7 @@ const HouseholdForm: React.FC = (props) => {
         </Label>
 
         <Select
-          name="home_grown"
+          name="difficulty_selling_food"
           options={FoodSellingOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -642,7 +649,7 @@ const HouseholdForm: React.FC = (props) => {
         </Label>
 
         <Select
-          name="home_grown"
+          name="could_not_sell_food"
           options={yesOrNoOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -658,7 +665,7 @@ const HouseholdForm: React.FC = (props) => {
           <CheckBoxInput
             name="income"
             options={[{
-              id: 'income',
+              id: 'income_unkown',
               value: 'income',
               label: 'Não sei informar',
             }]}
@@ -740,7 +747,7 @@ const HouseholdForm: React.FC = (props) => {
           Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que custuma comprar?
         </Label>
         <Select
-          name="food_price"
+          name="food_price_change"
           options={FoodPriceOptions}
           onChange={selectedOption => setBuyingProfile(selectedOption)}
         />
@@ -755,10 +762,10 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que mais você ou alguém da sua casa maisfrequentou para fazer as compras?
+          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que mais você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
-          name="food_price"
+          name="food_store_type"
           options={FoodStoreOptions}
         />
 
@@ -766,11 +773,11 @@ const HouseholdForm: React.FC = (props) => {
           Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
-          name="food_price"
+          name="food_expenditure"
           options={FoodExpenditureOptions}
         />
 
-        <Label>
+        {/*         <Label>
           Ao final da aplicação, você considera o questionário:
         </Label>
         <Select
@@ -784,7 +791,9 @@ const HouseholdForm: React.FC = (props) => {
         <Select
           name="research_type"
           options={interviewTypeOptions}
-        />
+        /> */}
+
+
         <Button>Submit</Button>
       </Section>
     </StyledForm >

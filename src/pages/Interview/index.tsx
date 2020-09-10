@@ -45,11 +45,11 @@ const Interview: React.FC = () => {
 
       <HouseholdForm />
 
-      <SectionTitle id="family">
+      {/*       <SectionTitle id="family">
         Membros da Família
       </SectionTitle>
 
-      <FamilyMemberForm />
+      <FamilyMemberForm /> */}
 
       <SectionTitle id="address">Endereço</SectionTitle>
 

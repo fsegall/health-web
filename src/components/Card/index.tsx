@@ -14,7 +14,7 @@ interface CardProps {
     name: string;
     gender: string;
     date_of_birth: Date;
-    health_conditions: string;
+    covid_diagnose: string;
     id?: string | undefined;
   };
 }
@@ -49,7 +49,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
             </ul>
           </div>
           <div>
-            <span>Situação de saúde:</span> {person.health_conditions}
+            <span>Situação de saúde:</span> {person.covid_diagnose}
             <div>
               <button onClick={() => fetchHousehold(person.id)}>Residência</button>
             </div>
