@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef/* , useCallback */ } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -7,33 +7,26 @@ import {
   Label,
   CheckBoxContainer
 } from './styles';
-import {
-  FiMail,
-  FiMap,
-  FiSquare,
-  FiCornerDownLeft,
-  FiHome,
-  FiPhoneCall,
-} from 'react-icons/fi';
+
 import {
   interviewTypeOptions,
 } from '../../questions/SelectorOptions/options';
 import { useAuth } from '../../../../hooks/auth';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
-import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
+/* import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
 import { InterviewValidation } from '../../validation/schemas/InterviewValidation';
-import getValidationErrors from '../../../../utils/getValidationErrors';
+import getValidationErrors from '../../../../utils/getValidationErrors'; */
 import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
-import api from '../../../../services/api';
+/* import api from '../../../../services/api'; */
 
 
 const InterviewForm: React.FC = (props) => {
 
-  const { addToast } = useToast();
+  /*   const { addToast } = useToast();
 
-  const { token } = useAuth();
+    const { token } = useAuth(); */
 
   const InterviewFormRef = useRef<FormHandles>(null);
 

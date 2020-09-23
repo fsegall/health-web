@@ -1,5 +1,5 @@
-import React, { useRef, useCallback } from 'react';
-import * as Yup from 'yup';
+import React, { useRef/* , useCallback */ } from 'react';
+/* import * as Yup from 'yup'; */
 import { FormHandles } from '@unform/core';
 import { Link } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
@@ -18,20 +18,20 @@ import {
 import { useAuth } from '../../hooks/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO';
+/* import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO'; */
 /* import { ProjectValidation } from '../../validation/schemas/ProjectValidation'; */
-import getValidationErrors from '../../utils/getValidationErrors';
+/* import getValidationErrors from '../../utils/getValidationErrors'; */
 import { useToast } from '../../hooks/toast';
 import logo from '../../assets/logo_transparent.png';
 
-import api from '../../services/api';
+/* import api from '../../services/api'; */
 
 
 const ProjectForm: React.FC = (props) => {
 
-  const { addToast } = useToast();
+  /* const { addToast } = useToast(); */
 
-  const { signOut, user, token } = useAuth();
+  const { signOut, user/* , token */ } = useAuth();
 
   const ProjectFormRef = useRef<FormHandles>(null);
 
