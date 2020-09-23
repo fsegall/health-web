@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
           <Profile>
             <img
               src={user.avatar_url}
-              alt={user.name}
+            /* alt={user.name} */
             />
             <div>
               <span>Bem-vindo</span>
@@ -47,6 +47,8 @@ const Dashboard: React.FC = () => {
           </Profile>
 
           <StyledLink to="/interview">Faça uma entrevista</StyledLink>
+
+          <StyledLink to="/project">Adicione um projeto</StyledLink>
 
           <button type="button" onClick={signOut}>
             <FiPower />

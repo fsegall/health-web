@@ -11,7 +11,8 @@ import {
 import { Link } from 'react-router-dom';
 
 import ScrollSpy from '../../components/ScrollSpy';
-
+/* import ProjectForm from './Forms/ProjectForm'; */
+import InterviewForm from './Forms/InterviewForm';
 import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
 import HouseholdForm from './Forms/HouseholdForm';
@@ -54,6 +55,10 @@ const Interview: React.FC = () => {
       <SectionTitle id="address">Endereço</SectionTitle>
 
       <AddressForm />
+
+      <SectionTitle id="interview">Entrevista</SectionTitle>
+
+      <InterviewForm />
 
     </Container>
   );
