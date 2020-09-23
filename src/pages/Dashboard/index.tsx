@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
           <Profile>
             <img
               src={user.avatar_url}
-            /* alt={user.name} */
+              alt={user.name}
             />
             <div>
               <span>Bem-vindo</span>

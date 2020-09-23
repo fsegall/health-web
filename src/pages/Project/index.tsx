@@ -21,7 +21,7 @@ import Button from '../../components/Button';
 /* import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO'; */
 /* import { ProjectValidation } from '../../validation/schemas/ProjectValidation'; */
 /* import getValidationErrors from '../../utils/getValidationErrors'; */
-import { useToast } from '../../hooks/toast';
+/* import { useToast } from '../../hooks/toast'; */
 import logo from '../../assets/logo_transparent.png';
 
 /* import api from '../../services/api'; */
@@ -84,7 +84,7 @@ const ProjectForm: React.FC = (props) => {
           <Profile>
             <img
               src={user.avatar_url}
-            /* alt={user.name} */
+              alt={user.name}
             />
             <div>
 
