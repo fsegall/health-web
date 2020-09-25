@@ -58,8 +58,8 @@ const ProjectForm: React.FC = (props) => {
       console.log(response);
       addToast({
         type: 'success',
-        title: 'Endereço adicionado com sucesso',
-        description: 'O formulário de pesquisa foi preenchido.',
+        title: 'Projeto adicionado com sucesso',
+        description: 'Você agora pode criar entrevistas para esse projeto',
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -69,8 +69,8 @@ const ProjectForm: React.FC = (props) => {
 
         addToast({
           type: 'error',
-          title: 'Erro ao adicionar endereço',
-          description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
+          title: 'Erro ao adicionar projeto',
+          description: 'Ocorreu um erro ao adicionar o projeto, tente novamente',
         });
       }
     }
