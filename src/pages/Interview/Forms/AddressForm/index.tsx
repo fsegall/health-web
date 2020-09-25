@@ -52,11 +52,13 @@ const AddressForm: React.FC = (props) => {
       console.log('address', address);
 
       console.log('token', token);
-      const response = await api.post('/address', address, {
+      const response = await api.post('/addresses', address, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       console.log(response);
+
+      localStorage.setItem('@Safety:address_id', response.data.id);
       addToast({
         type: 'success',
         title: 'Endereço adicionado com sucesso',

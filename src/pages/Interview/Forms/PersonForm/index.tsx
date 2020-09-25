@@ -24,6 +24,7 @@ import {
   educationOptions,
   LiteracyOptions,
   yesOrNoOptions,
+  workOptions,
   workAfterPandemicOptions,
 
 } from '../../questions/SelectorOptions/options';
@@ -54,7 +55,7 @@ const PersonForm: React.FC = (props) => {
       console.log('person', person);
 
       console.log('token', token);
-      const response = await api.post('/person', person, {
+      const response = await api.post('/persons', person, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -108,108 +109,11 @@ const PersonForm: React.FC = (props) => {
         <Label>Escolaridade </Label>
         < Select name="education" options={educationOptions} />
 
+        <Label>
+          <span>Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
+          < Select name="work_status" options={workOptions} />
+        </Label>
 
-        <Label>Situação de emprego</Label>
-
-        <CheckBoxContainer>
-
-          <CheckBoxInput
-            name="unemployed"
-            options={[{ id: 'desempregado(a)', value: 'true', label: 'Atualmente está desempregado' }]}
-          />
-
-          <CheckBoxInput
-            name="employed_normal_salary"
-            options={[{ id: 'empregado(a)_salario_normal', value: 'true', label: 'Empregado(a) com jornada de trabalho normal' }]}
-          />
-
-          <CheckBoxInput
-            name="employed_salary_reduced"
-            options={[{ id: 'empregado(a)_salario_parcial', value: 'true', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' }]}
-          />
-
-          <CheckBoxInput
-            name="employed_vacations"
-            options={[{ id: 'empregado(a)_ferias', value: 'true', label: 'Empregado(a), mas afastado por estar de férias' }]}
-          />
-
-          <CheckBoxInput
-            name="employed_on_leave_salary_reduced"
-            options={[{
-              id: 'empregado(a)_afastado_parcial', value: 'true',
-              label:
-                'Empregado em afastamento pelo contexto da COVID-19 - com salário PARCIAL'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="employed_on_leave_normal_salary"
-            options={[{
-              id: 'empregado(a)_afastado_total', value: 'true',
-              label:
-                'Empregado em afastamento pelo contexto da COVID-19 - com salário TOTAL'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="employed_on_leave_no_salary"
-            options={[{
-              id: 'empregado(a)_afastado_sem_salario', value: 'true',
-              label:
-                'Empregado em afastamento pelo contexto da COVID-19 – SEM salário'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="retired"
-            options={[{
-              id: 'retired', value: 'true', label: 'Aposentado'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="pension"
-            options={[{
-              id: 'pensionista', value: 'true',
-              label: 'Pensionista (viuvez - problema de saúde, pensão alimentícia, etc.)'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="self_employed_legally"
-            options={[{
-              id: 'autonomo-formal', value: 'true',
-              label: 'Trabalho por conta própria – Autônomo (formal)'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="odd_jobs"
-            options={[{
-              id: 'autonomo-informal', value: 'true',
-              label: 'Trabalho por conta própria, bico, ambulante, informal.'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="revenue"
-            options={[{
-              id: 'rendimentos', value: 'true',
-              label: 'Recebe rendimento de outras fontes (aluguel e outras)'
-            }]}
-          />
-
-          <CheckBoxInput
-            name="employer"
-            options={[{
-              id: 'empregador', value: 'true', label: 'Empregador'
-            }]}
-          />
-
-        </CheckBoxContainer>
-
-        <Label>Em relação ao trabalho e a renda das pessoas da sua casa, a pandemia do coronavírus ou COVID-19 levou a:</Label>
-        < Select name="work_status" options={workAfterPandemicOptions} />
         <Label>Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>

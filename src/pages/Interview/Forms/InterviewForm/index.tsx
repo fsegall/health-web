@@ -1,5 +1,5 @@
-import React, { useRef/* , useCallback */ } from 'react';
-/* import * as Yup from 'yup'; */
+import React, { useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
@@ -11,68 +11,83 @@ import {
 import {
   interviewTypeOptions,
 } from '../../questions/SelectorOptions/options';
-/* import { useAuth } from '../../../../hooks/auth'; */
+import { useAuth } from '../../../../hooks/auth';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
-/* import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
+import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
 import { InterviewValidation } from '../../validation/schemas/InterviewValidation';
-import getValidationErrors from '../../../../utils/getValidationErrors'; */
-/* import { useToast } from '../../../../hooks/toast'; */
+import getValidationErrors from '../../../../utils/getValidationErrors';
+import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
-/* import api from '../../../../services/api'; */
+import api from '../../../../services/api';
 
 
 const InterviewForm: React.FC = (props) => {
 
-  /*   const { addToast } = useToast();
+  const { addToast } = useToast();
 
-    const { token } = useAuth(); */
+  const { token } = useAuth();
 
   const InterviewFormRef = useRef<FormHandles>(null);
 
 
-  /*   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {
-      try {
-        AddressFormRef.current?.setErrors({});
-        const validatedData = await AddressValidation.validate(data, {
-          abortEarly: false,
-        });
+  const handleInterviewSubmit = useCallback(async (data: ICreateInterviewDTO) => {
+    try {
+      InterviewFormRef.current?.setErrors({});
+      console.log('comments', data)
+      const validatedData = await InterviewValidation.validate(data, {
+        abortEarly: false,
+      });
 
-        const household_id = localStorage.getItem('@Safety:household_id');
-        const address = {
-          household_id,
-          ...validatedData,
-        };
-        console.log('address', address);
+      const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
 
-        console.log('token', token);
-        const response = await api.post('/address', address, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+      const household_id = await localStorage.getItem('@Safety:household_id');
 
-        console.log(response);
+      const person_id = await localStorage.getItem('@Safety:person_id');
+
+      const address_id = await localStorage.getItem('@Safety:address_id');
+      console.log(interviewer_id,
+        household_id,
+        person_id,
+        address_id)
+      const interview = {
+        interviewer_id,
+        household_id,
+        person_id,
+        address_id,
+        ...validatedData,
+      };
+
+      console.log('interview', interview);
+
+      console.log('token', token);
+      const response = await api.post('/interviews', interview, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(response);
+      addToast({
+        type: 'success',
+        title: 'A entrevista foi adicionada com sucesso',
+        description: 'O formulário de pesquisa foi preenchido.',
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(error);
+
+        InterviewFormRef.current?.setErrors(errors);
+
         addToast({
-          type: 'success',
-          title: 'Endereço adicionado com sucesso',
-          description: 'O formulário de pesquisa foi preenchido.',
+          type: 'error',
+          title: 'Erro ao adicionar entrevista',
+          description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
         });
-      } catch (error) {
-        if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error);
-
-          AddressFormRef.current?.setErrors(errors);
-
-          addToast({
-            type: 'error',
-            title: 'Erro ao adicionar endereço',
-            description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
-          });
-        }
       }
-    }, [addToast, token]);
-   */
+    }
+  }, [addToast, token]);
+
   return (
-    <StyledForm ref={InterviewFormRef} onSubmit={() => { }}>
+    <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
       <section>
         <Label>Nome do Projeto</Label>
         <Input name="project_name" placeholder="Nome do Projeto" defaultValue="PENSAN" />
@@ -90,7 +105,7 @@ const InterviewForm: React.FC = (props) => {
         <Select name="interview_type" options={interviewTypeOptions} />
       </section>
       <section>
-        <textarea name="comments" placeholder="Comentários sobre a entrevista" rows={10} style={{ width: 300, padding: 10 }}></textarea>
+        <Input name="comments" placeholder="Comentários sobre a entrevista" />
         <Button>Submit</Button>
       </section>
 

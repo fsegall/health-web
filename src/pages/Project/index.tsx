@@ -1,5 +1,5 @@
-import React, { useRef/* , useCallback */ } from 'react';
-/* import * as Yup from 'yup'; */
+import React, { useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Link } from 'react-router-dom';
 import { FiPower } from 'react-icons/fi';
@@ -18,63 +18,63 @@ import {
 import { useAuth } from '../../hooks/auth';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-/* import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO'; */
-/* import { ProjectValidation } from '../../validation/schemas/ProjectValidation'; */
-/* import getValidationErrors from '../../utils/getValidationErrors'; */
-/* import { useToast } from '../../hooks/toast'; */
+import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO';
+import { ProjectValidation } from '../Interview/validation/schemas/ProjectValidation';
+import getValidationErrors from '../../utils/getValidationErrors';
+import { useToast } from '../../hooks/toast';
 import logo from '../../assets/logo_transparent.png';
 
-/* import api from '../../services/api'; */
+import api from '../../services/api';
 
 
 const ProjectForm: React.FC = (props) => {
 
-  /* const { addToast } = useToast(); */
+  const { addToast } = useToast();
 
-  const { signOut, user/* , token */ } = useAuth();
+  const { signOut, user, token } = useAuth();
 
   const ProjectFormRef = useRef<FormHandles>(null);
 
+  const handleProjectSubmit = useCallback(async (data: ICreateProjectDTO) => {
+    try {
+      ProjectFormRef.current?.setErrors({});
+      const validatedData = await ProjectValidation.validate(data, {
+        abortEarly: false,
+      });
 
-  /*   const handleProjectSubmit = useCallback(async (data: ICreateProjectDTO) => {
-      try {
-        ProjectFormRef.current?.setErrors({});
-        const validatedData = await ProjectValidation.validate(data, {
-          abortEarly: false,
-        });
+      const user_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
 
-        const household_id = localStorage.getItem('@Safety:household_id');
-        const Project = {
-          household_id,
-          ...validatedData,
-        };
-        console.log('Project', Project);
+      const project = {
+        user_id,
+        ...validatedData,
+      };
+      console.log('Project', project);
 
-        console.log('token', token);
-        const response = await api.post('/Project', Project, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+      console.log('token', token);
+      const response = await api.post('/projects', project, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-        console.log(response);
+      console.log(response);
+      addToast({
+        type: 'success',
+        title: 'Endereço adicionado com sucesso',
+        description: 'O formulário de pesquisa foi preenchido.',
+      });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(error);
+
+        ProjectFormRef.current?.setErrors(errors);
+
         addToast({
-          type: 'success',
-          title: 'Endereço adicionado com sucesso',
-          description: 'O formulário de pesquisa foi preenchido.',
+          type: 'error',
+          title: 'Erro ao adicionar endereço',
+          description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
         });
-      } catch (error) {
-        if (error instanceof Yup.ValidationError) {
-          const errors = getValidationErrors(error);
-
-          ProjectFormRef.current?.setErrors(errors);
-
-          addToast({
-            type: 'error',
-            title: 'Erro ao adicionar endereço',
-            description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
-          });
-        }
       }
-    }, [addToast, token]); */
+    }
+  }, [addToast, token]);
 
   return (
     <Container>
@@ -102,7 +102,7 @@ const ProjectForm: React.FC = (props) => {
         </HeaderContent>
       </Header>
       <Title>Adicione um projeto de pesquisa</Title>
-      <StyledForm ref={ProjectFormRef} onSubmit={() => { }/* handleProjectSubmit */}>
+      <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>
 
         <section>
           <Label>Nome do Projeto</Label>

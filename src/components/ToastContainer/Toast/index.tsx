@@ -45,7 +45,7 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
     };
   }, []);
   return (
-    <Container scrollPosition={scrollPosition}
+    <Container scrollposition={scrollPosition}
       type={message.type}
       hasdescription={Number(!!message.description)}
       style={style}

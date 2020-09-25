@@ -116,9 +116,14 @@ export const HouseholdValidation = Yup.object().shape({
   market_profile: Yup.string(),
   difficulty_selling_food: Yup.string(),
   could_not_sell_food: Yup.string(),
-  income_unkown: Yup.boolean(),
+  income_unknown: Yup.boolean(),
   family_income: Yup.number(),
-
+  job_loss: Yup.boolean(),
+  salary_reduction: Yup.boolean(),
+  financial_support: Yup.boolean(),
+  debt: Yup.boolean(),
+  cut_costs: Yup.boolean(),
+  cut_non_essential_costs: Yup.boolean(),
   worried_food_supply: Yup.string().required(
     'Você precisa escolher um dos campos de PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM',
   ),

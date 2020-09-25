@@ -116,49 +116,20 @@ export const educationOptions = [
 
 // 21 change to checkbox for multiple answers (2 maximum) - Person
 export const workOptions = [
-  { value: 'desempregado(a)', label: 'Atualmente está desempregado' },
-  { value: 'empregado(a)', label: 'Empregado(a) com jornada de trabalho normal' },
-  { value: 'empregado(a)-salario-parcial', label: 'Empregado(a) com redução de carga horária, mas COM salário PARCIAL ' },
-  { value: 'empregado(a)-de-ferias', label: 'Empregado(a), mas afastado por estar de férias' },
+  { value: 'empregado(a)-sem-reducao', label: 'Empregado/Trabalhando como autônomo sem redução de carga horária' },
+  { value: 'empregado(a)-com-reducao', label: 'Empregado/Trabalhando como autônomo com redução de carga horária' },
+
+  { value: 'aposentado-pensionista', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras)' },
   {
-    value: 'afastado-covid-salario-parcial',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 - com salário PARCIAL',
+    value: 'desempregado(a)',
+    label: 'Desempregado(a) /Sem trabalho (autônomo/a)',
   },
-  {
-    value: 'afastado-covid-salario-total',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 - com salário TOTAL',
-  },
-  {
-    value: 'afastado-covid-sem-salario',
-    label:
-      'Empregado em afastamento pelo contexto da COVID-19 – SEM salário',
-  },
-  { value: 'aposentado', label: 'Aposentado' },
-  {
-    value: 'pensionista',
-    label: 'Pensionista (viuvez - problema de saúde, pensão alimentícia, etc.)',
-  },
-  {
-    value: 'autonomo-formal',
-    label: 'Trabalho por conta própria – Autônomo (formal)',
-  },
-  {
-    value: 'autonomo-informal',
-    label: 'Trabalho por conta própria, bico, ambulante, informal.',
-  },
-  {
-    value: 'rendimentos',
-    label: 'Recebe rendimento de outras fontes (aluguel e outras)',
-  },
-  { value: 'empregador', label: 'Empregador' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
 //22 Person
 export const workAfterPandemicOptions = [
-  { value: 'perda-de-emprego', label: 'Perda de emprego de algum membro da casa' },
+  { value: 'perda-de-emprego', label: 'Perda de emprego/trabalho de algum membro da casa' },
   { value: 'reducao-da-renda', label: 'Redução da renda domiciliar (dos moradores da casa)' },
   { value: 'ajuda-financeira-parente-amigo', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' },
   { value: 'endividamento', label: 'Endividamento de moradores' },
