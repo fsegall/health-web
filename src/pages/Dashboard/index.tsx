@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   const [persons, setPersons] = useState<ICreatePersonDTO[]>([]);
   useEffect(() => {
     async function fetchPersons() {
-      const persons = await api.get('/person', {
+      const persons = await api.get('/persons', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
