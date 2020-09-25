@@ -4,7 +4,6 @@ import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
-  CheckBoxContainer,
   Label
 } from './styles';
 import {
@@ -25,10 +24,9 @@ import {
   LiteracyOptions,
   yesOrNoOptions,
   workOptions,
-  workAfterPandemicOptions,
 
 } from '../../questions/SelectorOptions/options';
-import CheckBoxInput from '../../../../components/Checkbox';
+
 
 import api from '../../../../services/api';
 
