@@ -11,7 +11,5 @@ export default function getValidationErrors(err: ValidationError): Errors {
     validationErrors[error.path] = error.message;
   });
 
-  console.log('validationErrors', validationErrors);
-
   return validationErrors;
 }

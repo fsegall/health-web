@@ -80,11 +80,9 @@ const HouseholdForm: React.FC = (props) => {
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
-      console.log(data);
 
-      const parsedData = parseHouseholdData(data)
+      const parsedData = parseHouseholdData(data);
 
-      console.log(parsedData)
 
       try {
         HouseholdFormRef.current?.setErrors({});
@@ -100,14 +98,12 @@ const HouseholdForm: React.FC = (props) => {
           ...validatedData,
         };
 
-        console.log('household', household);
 
         const response = await api.post('/households', household, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         localStorage.setItem('@Safety:household_id', response.data.id);
-        console.log(response);
 
         addToast({
           type: 'success',
@@ -394,7 +390,6 @@ const HouseholdForm: React.FC = (props) => {
           name="covid_cash_assistance"
           options={yesOrNoOptions}
           onChange={selectedOption => {
-            console.log(selectedOption)
             setAuxilio(selectedOption)
           }}
         />

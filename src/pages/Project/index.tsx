@@ -45,14 +45,14 @@ const ProjectForm: React.FC = (props) => {
         user_id,
         ...validatedData,
       };
-      console.log('Project', project);
 
-      console.log('token', token);
+
+
       const response = await api.post('/projects', project, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(response);
+
       addToast({
         type: 'success',
         title: 'Projeto adicionado com sucesso',

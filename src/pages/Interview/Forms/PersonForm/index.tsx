@@ -50,16 +50,16 @@ const PersonForm: React.FC = (props) => {
         interviewer_id: user.id,
         ...validatedData,
       };
-      console.log('person', person);
 
-      console.log('token', token);
+
+
       const response = await api.post('/persons', person, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       localStorage.setItem('@Safety:person_id', response.data.id);
 
-      console.log(response);
+
       addToast({
         type: 'success',
         title: 'Uma pessoa foi adicionada com sucesso',

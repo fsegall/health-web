@@ -48,7 +48,6 @@ const FamilyMemberForm: React.FC = (props) => {
 
     if (!await FamilyMemberFormRef.current?.getErrors()) {
       setSubmitted(true)
-      console.log(submitted)
     }
   }
 
@@ -58,7 +57,6 @@ const FamilyMemberForm: React.FC = (props) => {
 
     const formData = FamilyMemberFormRef.current?.getData() as { age: string; gender: string; };
     if (formData?.age === '' || formData?.gender === '') {
-      console.log('submit some data')
       addToast({
         type: 'error',
         title: 'Você precisa preencher os campos idade e gênero',
@@ -94,13 +92,9 @@ const FamilyMemberForm: React.FC = (props) => {
           ...validatedData,
         };
 
-        console.log('familyMember', familyMember);
-
         const response = await api.post('/familymember', familyMember, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        console.log(response);
 
         setSubmitted(true);
 

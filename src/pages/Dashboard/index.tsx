@@ -59,7 +59,6 @@ const Dashboard: React.FC = () => {
         <ListTitle>Entrevistados</ListTitle>
         <ul>
           {persons.map((person) => {
-            console.log(person);
             return <Card key={person.id} person={person} />;
           })}
         </ul>

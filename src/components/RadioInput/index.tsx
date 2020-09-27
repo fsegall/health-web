@@ -22,7 +22,6 @@ const RadioInput: React.FC<Props> = ({ name, options, ...rest }) => {
       name: fieldName,
       ref: inputRefs.current,
       getValue: (refs: HTMLInputElement[]) => {
-        console.log(refs)
         return refs.find(ref => ref?.checked)?.value || 'false';
       },
       setValue: (refs: HTMLInputElement[], id: string) => {

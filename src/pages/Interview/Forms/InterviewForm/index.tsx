@@ -34,12 +34,12 @@ const InterviewForm: React.FC = (props) => {
 
 
   const handleInterviewSubmit = useCallback(async (data: ICreateInterviewDTO) => {
-    console.log('is_complete', data)
+
     const parsedData = {
       ...data,
       is_complete: validateCheckbox(data.is_complete),
     }
-    console.log('is_complete', parsedData)
+
     try {
       InterviewFormRef.current?.setErrors({});
 
@@ -54,10 +54,7 @@ const InterviewForm: React.FC = (props) => {
       const person_id = await localStorage.getItem('@Safety:person_id');
 
       const address_id = await localStorage.getItem('@Safety:address_id');
-      console.log(interviewer_id,
-        household_id,
-        person_id,
-        address_id)
+
       const interview = {
         interviewer_id,
         household_id,
@@ -66,14 +63,11 @@ const InterviewForm: React.FC = (props) => {
         ...validatedData,
       };
 
-      console.log('interview', interview);
 
-      console.log('token', token);
       const response = await api.post('/interviews', interview, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(response);
       addToast({
         type: 'success',
         title: 'A entrevista foi adicionada com sucesso',

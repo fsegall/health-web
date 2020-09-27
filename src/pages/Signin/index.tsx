@@ -56,7 +56,7 @@ const Signin: React.FC = () => {
             'Ocorreu um erro ao fazer login, cheque as suas credenciais',
         });
       }
-      console.log(data);
+
     },
     [signIn, addToast, history],
   );

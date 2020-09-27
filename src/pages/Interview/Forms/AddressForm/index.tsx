@@ -49,14 +49,14 @@ const AddressForm: React.FC = (props) => {
         household_id,
         ...validatedData,
       };
-      console.log('address', address);
 
-      console.log('token', token);
+
+
       const response = await api.post('/addresses', address, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(response);
+
 
       localStorage.setItem('@Safety:address_id', response.data.id);
       addToast({

@@ -66,7 +66,7 @@ const ResetPassword: React.FC = () => {
           description: 'Ocorreu um erro ao resetar a senha, tente novamente',
         });
       }
-      console.log(data);
+
     },
     [addToast, history],
   );

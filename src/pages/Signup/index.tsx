@@ -53,7 +53,7 @@ const Signup: React.FC = () => {
 
         const response = await api.post('/users', data);
 
-        console.log(response.data);
+
 
         history.push('/');
 
@@ -75,7 +75,6 @@ const Signup: React.FC = () => {
           description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
         });
       }
-      console.log(data);
     },
     [addToast, history],
   );

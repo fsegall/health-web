@@ -29,7 +29,6 @@ const Card: React.FC<CardProps> = ({ person }) => {
       },
     });
     if (house) {
-      console.log('Casa', house.data);
       setHouse((state) => ({ ...house.data }));
     }
   }

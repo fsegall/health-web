@@ -70,7 +70,7 @@ const Profile: React.FC = () => {
   );
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
-      console.log('submit');
+
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
@@ -130,7 +130,7 @@ const Profile: React.FC = () => {
 
         updateUser(response.data);
 
-        console.log(response.data);
+
 
         history.push('/');
 
@@ -152,7 +152,7 @@ const Profile: React.FC = () => {
           description: 'Ocorreu um erro ao atualizar o perfil, tente novamente',
         });
       }
-      console.log(data);
+
     },
     [addToast, history, updateUser, user, token],
   );
