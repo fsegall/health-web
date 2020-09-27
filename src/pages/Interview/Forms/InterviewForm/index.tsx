@@ -64,7 +64,7 @@ const InterviewForm: React.FC = (props) => {
       };
 
 
-      const response = await api.post('/interviews', interview, {
+      await api.post('/interviews', interview, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

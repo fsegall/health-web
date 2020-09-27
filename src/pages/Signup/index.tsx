@@ -51,9 +51,7 @@ const Signup: React.FC = () => {
           abortEarly: false,
         });
 
-        const response = await api.post('/users', data);
-
-
+        await api.post('/users', data);
 
         history.push('/');
 

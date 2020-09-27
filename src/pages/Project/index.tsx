@@ -19,7 +19,6 @@ import ICreateProjectDTO from '../Interview/dtos/ICreateProjectDTO';
 import { ProjectValidation } from '../Interview/validation/schemas/ProjectValidation';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
-import logo from '../../assets/logo_transparent.png';
 
 import api from '../../services/api';
 
@@ -28,7 +27,7 @@ const ProjectForm: React.FC = (props) => {
 
   const { addToast } = useToast();
 
-  const { signOut, user, token } = useAuth();
+  const { token } = useAuth();
 
   const ProjectFormRef = useRef<FormHandles>(null);
 
@@ -46,9 +45,7 @@ const ProjectForm: React.FC = (props) => {
         ...validatedData,
       };
 
-
-
-      const response = await api.post('/projects', project, {
+      await api.post('/projects', project, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
