@@ -52,6 +52,7 @@ import {
 
 import api from '../../../../services/api';
 import RadioInput from '../../../../components/RadioInput';
+import CheckboxInput from '../../../../components/Checkbox';
 
 const HouseholdForm: React.FC = (props) => {
 
@@ -82,8 +83,6 @@ const HouseholdForm: React.FC = (props) => {
 
       console.log(data);
 
-      console.log('isNaN', Number.isNaN(data.number_of_people_household), data.number_of_people_household);
-
       const parsedData = {
         ...data,
         five_years_old_or_more: data.five_years_old_or_more || 0,
@@ -94,8 +93,7 @@ const HouseholdForm: React.FC = (props) => {
         income_unknown: data.income_unknown || 0,
         family_income: data.family_income || 0,
         covid_cash_assistance_number_of_times: data.covid_cash_assistance_number_of_times || 0,
-        number_of_rooms: Number.isNaN(data.number_of_rooms) === false ? 0 : data.number_of_rooms,
-        number_of_people_household: Number.isNaN(data.number_of_people_household) === false ? 0 : data.number_of_people_household,
+        one_person_household: Array.isArray(data.one_person_household) && data.one_person_household.length === 0 ? false : data.one_person_household,
       }
 
       console.log(parsedData)
@@ -122,6 +120,7 @@ const HouseholdForm: React.FC = (props) => {
 
         localStorage.setItem('@Safety:household_id', response.data.id);
         console.log(response);
+
         addToast({
           type: 'success',
           title: 'Uma residência foi adicionada com sucesso',
@@ -185,10 +184,10 @@ const HouseholdForm: React.FC = (props) => {
         <Input
           placeholder="Número de cômodos"
           type="number"
-          min="0"
+          min="1"
           max="6"
           name="number_of_rooms"
-
+          defaultValue="1"
         />
         <Label>Qual o material de construção das paredes externas da casa?</Label>
         <Select name="construction_material" options={buildingMaterialOptions} />
@@ -200,13 +199,13 @@ const HouseholdForm: React.FC = (props) => {
         <Input
           placeholder="Número de pessoas"
           type="number"
-          min="0"
+          min="1"
           max="12"
           name="number_of_people_household"
-
+          defaultValue="1"
         />
         <CheckBoxContainer>
-          <RadioInput
+          <CheckboxInput
             name="one_person_household"
             options={[{
               id: 'one_person_household',
@@ -214,6 +213,7 @@ const HouseholdForm: React.FC = (props) => {
               label: 'Eu moro sozinho',
             }]}
             onChange={() => setMorePeople(!morePeople)}
+            defaultValue="false"
           />
         </CheckBoxContainer>
         {morePeople ?
@@ -224,6 +224,8 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Menos de 5 anos"
                 name="five_years_old_or_more"
+                min="1"
+                max="6"
                 type="number"
 
               />
@@ -231,6 +233,8 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Entre 6 e 18 anos"
                 name="between_6_and_18"
+                min="1"
+                max="6"
                 type="number"
 
               />
@@ -238,6 +242,8 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Entre 19 e 59 anos"
                 name="between_19_and_59"
+                min="1"
+                max="6"
                 type="number"
 
               />
@@ -245,8 +251,9 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Com 60 anos ou mais"
                 name="sixty_years_old_or_more"
+                min="1"
+                max="6"
                 type="number"
-
               />
               <Label>
                 Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
@@ -281,6 +288,7 @@ const HouseholdForm: React.FC = (props) => {
           placeholder="Renda familiar"
           name="family_income"
           type="number"
+          min="1"
 
         /> : null}
         <CheckBoxContainer>
@@ -413,7 +421,7 @@ const HouseholdForm: React.FC = (props) => {
                   placeholder="Número de vezes"
                   name="covid_cash_assistance_number_of_times"
                   type="number"
-
+                  min="1"
                 />
               </>
             ) :

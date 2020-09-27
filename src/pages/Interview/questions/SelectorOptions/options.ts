@@ -170,13 +170,13 @@ export const buildingMaterialOptions = [
 
 //31 Household
 export const drinkingWaterOptions = [
-  { value: 'sim', label: 'Sim' },
+  { value: 'true', label: 'Sim' },
   {
     value: 'sim-mas-falha',
     label: 'Sim, mas o fornecimento falha semanalmente',
   },
   {
-    value: 'nao',
+    value: 'false',
     label: 'Não tem fornecimento',
   },
   { value: 'ns-nr', label: 'NS/NR' },
@@ -365,15 +365,15 @@ export const homeGrownSellingFoodOptions = [
 
 //55 Household
 export const FoodSellingOptions = [
-  { value: 'sim', label: 'Sim' },
-  { value: 'nao', label: 'Não' },
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
 //56 Household
 export const FoodNotSoldOptions = [
-  { value: 'sim', label: 'Sim' },
-  { value: 'nao', label: 'Não' },
+  { value: 'true', label: 'Sim' },
+  { value: 'false', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -425,36 +425,6 @@ export const FoodExpenditureOptions = [
   { value: 'reduziram-muito', label: 'Sim, reduziram muito' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
-
-/* 61. VOCÊ PODERIA DIZER SE ONTEM VOCÊ COMEU ALGUM DOS ALIMENTOS ABAIXO ONTEM (DESDE QUE ACORDOU ATÉ QUANDO FOI DORMIR):
-Alface, acelga ou repolho.                                                            		Sim (  )   Não (  )
-Couve, brócolis, almeirão, agrião ou espinafre        	   	        	Sim (  )   Não (  )
-Abóbora, cenoura, batata-doce ou quiabo/caruru        	           		Sim (  )   Não (  )
-Mamão, manga, melão amarelo, caqui ou pequi        			Sim (  )   Não (  )
-Tomate, pepino, abobrinha, berinjela, chuchu ou beterraba       		Sim (  ) 	Não (  )
-Laranja, banana, maçã ou abacaxi                     	                        		Sim (  )   Não (  )
-Arroz, macarrão, polenta, cuscuz ou milho verde                    	   	Sim (  )   Não (  )
-Feijão, ervilha, lentilha ou grão de bico                                       		Sim (  )   Não (  )
-Batata comum, mandioca, cará ou inhame                                 		Sim (  )   Não (  )
-Carne de boi, porco, frango ou peixe         	                                 	Sim (  )   Não (  )
-Ovo frito, cozido ou mexido                                                              		Sim (  )   Não (  )
-Leite                                                                                                  		Sim (  )   Não (  )
-Amendoim, castanha de caju ou castanha do Brasil/ Pará    	 	Sim (  )   Não (  )
-
-    62. VOCÊ PODERIA DIZER SE ONTEM VOCÊ COMEU ALGUM DOS ALIMENTOS OU PRODUTOS INDUSTRIALIZADOS ABAIXO (CONSIDERE PARA RESPONDER ESSA PERGUNTA O PERÍODO DESDE QUE ACORDOU ATÉ QUANDO FOI DORMIR):
-Refrigerante           	                                                                              	Sim (  )   Não (  )
-Suco de fruta em caixa, caixinha, lata (como Del Valle® ou Tropicana®)   	Sim (  )   Não (  )
-Refresco em pó (como Tang® ou Ki suco®)                                	        	Sim (  )   Não (  )
-Bebida achocolatada (como Toddynho® ou Toddy®)      	                    	Sim (  )   Não (  )
-Iogurte com sabor                  	                                                              	Sim (  )   Não (  )
-Salgadinho de pacote (ou chips) ou biscoito/ bolacha salgado  	        	Sim (  )   Não (  )
-Biscoito/ bolacha doce, biscoito recheado ou bolinho de pacote           	Sim (  )   Não (  )
-Chocolate, sorvete, gelatina, ou outra sobremesa industrializada         	Sim (  )   Não ( )
-Salsicha, linguiça, mortadela ou presunto                                               	Sim (  )   Não (  )
-Pão de forma, de cachorro quente ou de hambúrguer             	          	Sim (  )   Não (  )
-Maionese, ketchup ou mostarda                           	       	                   	Sim (  )   Não (  )
-Margarina                                                                                                 		Sim (  )   Não (  )
-Macarrão instantâneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado.             	                               		Sim (  )   Não (  ) */
 
 //64 Project
 export const researchStatusOptions = [
