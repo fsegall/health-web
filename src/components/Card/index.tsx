@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
   const [house, setHouse] = useState<ICreateHousehold | null>(null);
 
   async function fetchHousehold(id: string | undefined): Promise<void> {
-    const house = await api.get<ICreateHousehold>(`/person/${id}/household`, {
+    const house = await api.get<ICreateHousehold>(`/persons/${id}/household`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,8 +67,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
             </li>
             <li>
               <div>
-                <span>{`A pessoa ${
-                  house?.household_main_person ? 'é ' : 'não é '
+                <span>{`A pessoa ${house?.household_main_person ? 'é ' : 'não é '
                   } a figura de referência da casa`}</span>
               </div>
             </li>

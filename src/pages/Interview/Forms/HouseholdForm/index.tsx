@@ -258,8 +258,351 @@ const HouseholdForm: React.FC = (props) => {
               />
             </>
           ) : null}
+      </Section >
 
-        <Label><strong>Você comeu algum dos alimentos listados abaixo ontem?</strong></Label>
+      <Section>
+        <Label>
+          Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
+        </Label>
+        <CheckBoxContainer>
+          <RadioInput
+
+            name="income_unknown"
+            options={[{
+              id: 'income_unknown',
+              value: 'true',
+              label: 'Não sei informar',
+            }]}
+            onChange={() => setIncome(!income)}
+          />
+        </CheckBoxContainer>
+        {income ? <Input
+          icon={FiDollarSign}
+          placeholder="Renda familiar"
+          name="family_income"
+          type="number"
+
+        /> : null}
+        <CheckBoxContainer>
+          <Label>
+            <span>Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
+          </Label>
+
+          <RadioInput
+
+            name="job_loss"
+            options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
+          />
+
+          <RadioInput
+
+            name="salary_reduction"
+            options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
+          />
+
+          <RadioInput
+
+            name="financial_support"
+            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
+          />
+
+          <RadioInput
+
+            name="debt"
+            options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
+          />
+
+          <RadioInput
+
+            name="cut_costs"
+            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
+          />
+
+          <RadioInput
+
+            name="cut_non_essential_costs"
+            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
+          />
+
+        </CheckBoxContainer>
+        <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
+
+        <Label>
+          Você ou alguém da sua casa está cadastrado no <b>cadastro único do governo</b>?
+        </Label>
+        <Select
+          name="government_assistance_program_cadastro_unico"
+          options={governmentProgramOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa participa do programa <b>bolsa família</b>?
+        </Label>
+        <Select
+          name="government_assistance_program_bolsa_familia"
+          options={governmentProgramOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebe ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+        </Label>
+        <Select
+          name="government_assistance_program_bpc"
+          options={governmentProgramOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebe <b>pensão por morte do(a) cônjuge</b>?
+        </Label>
+        <Select
+          name="pension"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebe <b>auxílio reclusão</b>?
+        </Label>
+        <Select
+          name="prison_cash_assistance"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebe <b>auxílio referente à alimentação escolar ou PNAE</b>?
+        </Label>
+        <Select
+          name="government_assistance_program_pnae"
+          options={governmentPNAEProgramOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+        </Label>
+        <Select
+          name="food_basket_assistance"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa recebeu <b>frequenta restaurantes populares</b> para fazer refeições?
+        </Label>
+        <Select
+          name="low_income_restaurants"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+        </Label>
+
+        <Select
+          name="covid_cash_assistance"
+          options={yesOrNoOptions}
+          onChange={selectedOption => {
+            console.log(selectedOption)
+            setAuxilio(selectedOption)
+          }}
+        />
+        {
+          auxilio?.value === 'true' || auxilio === {} ?
+            (
+              <>
+                <Label>Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+                <Input
+                  icon={FiDollarSign}
+                  placeholder="Número de vezes"
+                  name="covid_cash_assistance_number_of_times"
+                  type="number"
+
+                />
+              </>
+            ) :
+            null
+        }
+
+        <Label>
+          Você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+        </Label>
+
+        <Select
+          name="charity"
+          options={yesOrNoOptions}
+          onChange={selectedOption => setAjuda(selectedOption)}
+        />
+
+        <Label>
+          Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
+        </Label>
+
+        <Select
+          name="type_of_charity"
+          options={typeOfrecievedCharityOptions}
+          isDisabled={ajuda?.value === 'true' ? false : true}
+        />
+
+        <Label>
+          Você ou alguém da sua casa teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
+        </Label>
+
+        <Select
+          name="embarassement"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+        </Label>
+
+        <Select
+          name="home_grown"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          Na sua casa você produz algum desses alimentos <b>para venda</b>?
+        </Label>
+
+        <Select
+          name="food_for_market"
+          options={yesOrNoOptions}
+          onChange={selectedOptions => setProduce(selectedOptions)}
+        />
+
+        <Label>
+          Na sua casa como você divide <b>o alimento que produz para venda</b>?
+        </Label>
+
+        <Select
+          name="market_profile"
+          options={homeGrownSellingFoodOptions}
+          isDisabled={produce?.value === 'true' ? false : true}
+        />
+
+        <Label>
+          Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
+        </Label>
+
+        <Select
+          name="difficulty_selling_food"
+          options={FoodSellingOptions}
+          isDisabled={produce?.value === 'true' ? false : true}
+        />
+
+        <Label>
+          Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
+        </Label>
+
+        <Select
+          name="could_not_sell_food"
+          options={yesOrNoOptions}
+          isDisabled={produce?.value === 'true' ? false : true}
+        />
+
+      </Section>
+
+      <Section>
+        <Label><strong>Escala de Segurança Alimentar</strong></Label>
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
+        </Label>
+        <Select
+          name="worried_food_supply"
+          options={worriedWithFoodSupplyOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
+        </Label>
+        <Select
+          name="lack_food_supply"
+          options={LackOfFoodOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
+        </Label>
+        <Select
+          name="afford_healthy_food"
+          options={cannotAffordFoodOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
+        </Label>
+        <Select
+          name="poor_food_choice"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adult_meals"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adult_food_privation"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adult_hunger"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adult_one_meal_or_none"
+          options={yesOrNoOptions}
+        />
+        <Label><strong></strong></Label>
+        <Label>
+          Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
+        </Label>
+        <Select
+          name="how_food_is_obtained"
+          options={howFoodIsObtainedOptions}
+        />
+        <Label>
+          Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que custuma comprar?
+        </Label>
+        <Select
+          name="food_price_change"
+          options={FoodPriceOptions}
+          onChange={selectedOption => setBuyingProfile(selectedOption)}
+        />
+
+        <Label>
+          A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
+        </Label>
+        <Select
+          name="food_profile_change"
+          options={FoodProfileOptions}
+          isDisabled={buyingProfile?.value === 'nao' || buyingProfile?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>
+          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que mais você ou alguém da sua casa mais frequentou para fazer as compras?
+        </Label>
+        <Select
+          name="food_store_type"
+          options={FoodStoreOptions}
+        />
+
+        <Label>
+          Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
+        </Label>
+        <Select
+          name="food_expenditure"
+          options={FoodExpenditureOptions}
+        />
+
+        <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
+
+        <Label>Você comeu algum dos alimentos listados abaixo ontem?</Label>
         <CheckBoxContainer>
           <RadioInput
 
@@ -394,7 +737,7 @@ const HouseholdForm: React.FC = (props) => {
           />
         </CheckBoxContainer>
 
-        <Label><strong>Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</strong></Label>
+        <Label>Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</Label>
         <CheckBoxContainer>
           <RadioInput
 
@@ -526,363 +869,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
         </CheckBoxContainer>
-      </Section >
 
-      <Section>
-
-        <Label>
-          Você ou alguém da sua casa está cadastrado no <b>cadastro único do governo</b>?
-        </Label>
-        <Select
-          name="government_assistance_program_cadastro_unico"
-          options={governmentProgramOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa participa do programa <b>bolsa família</b>?
-        </Label>
-        <Select
-          name="government_assistance_program_bolsa_familia"
-          options={governmentProgramOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebe ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
-        </Label>
-        <Select
-          name="government_assistance_program_bpc"
-          options={governmentProgramOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebe <b>pensão por morte do(a) cônjuge</b>?
-        </Label>
-        <Select
-          name="pension"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebe <b>auxílio reclusão</b>?
-        </Label>
-        <Select
-          name="prison_cash_assistance"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebe <b>auxílio referente à alimentação escolar ou PNAE</b>?
-        </Label>
-        <Select
-          name="government_assistance_program_pnae"
-          options={governmentPNAEProgramOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
-        </Label>
-        <Select
-          name="food_basket_assistance"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa recebeu <b>frequenta restaurantes populares</b> para fazer refeições?
-        </Label>
-        <Select
-          name="low_income_restaurants"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
-        </Label>
-
-        <Select
-          name="covid_cash_assistance"
-          options={yesOrNoOptions}
-          onChange={selectedOption => {
-            console.log(selectedOption)
-            setAuxilio(selectedOption)
-          }}
-        />
-        {
-          auxilio?.value === 'true' || auxilio === {} ?
-            (
-              <>
-                <Label>Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
-                <Input
-                  icon={FiDollarSign}
-                  placeholder="Número de vezes"
-                  name="covid_cash_assistance_number_of_times"
-                  type="number"
-
-                />
-              </>
-            ) :
-            null
-        }
-
-        <Label>
-          Você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
-        </Label>
-
-        <Select
-          name="charity"
-          options={yesOrNoOptions}
-          onChange={selectedOption => setAjuda(selectedOption)}
-        />
-
-        <Label>
-          Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
-        </Label>
-
-        <Select
-          name="type_of_charity"
-          options={typeOfrecievedCharityOptions}
-          isDisabled={ajuda?.value === 'true' ? false : true}
-        />
-
-        <Label>
-          Caso você ou alguém da sua casa teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
-        </Label>
-
-        <Select
-          name="embarassement"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
-        </Label>
-
-        <Select
-          name="home_grown"
-          options={yesOrNoOptions}
-        />
-
-        <Label>
-          Na sua casa você produz algum desses alimentos <b>para venda</b>?
-        </Label>
-
-        <Select
-          name="food_for_market"
-          options={yesOrNoOptions}
-          onChange={selectedOptions => setProduce(selectedOptions)}
-        />
-
-        <Label>
-          Na sua casa como você divide <b>o alimento que produz para venda</b>?
-        </Label>
-
-        <Select
-          name="market_profile"
-          options={homeGrownSellingFoodOptions}
-          isDisabled={produce?.value === 'true' ? false : true}
-        />
-
-        <Label>
-          Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
-        </Label>
-
-        <Select
-          name="difficulty_selling_food"
-          options={FoodSellingOptions}
-          isDisabled={produce?.value === 'true' ? false : true}
-        />
-
-        <Label>
-          Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
-        </Label>
-
-        <Select
-          name="could_not_sell_food"
-          options={yesOrNoOptions}
-          isDisabled={produce?.value === 'true' ? false : true}
-        />
-
-      </Section>
-
-      <Section>
-
-        <Label>
-          Nos últimos 30 dias qual foi a renda familiar?
-        </Label>
-        <CheckBoxContainer>
-          <RadioInput
-
-            name="income_unknown"
-            options={[{
-              id: 'income_unknown',
-              value: 'true',
-              label: 'Não sei informar',
-            }]}
-            onChange={() => setIncome(!income)}
-          />
-        </CheckBoxContainer>
-        {income ? <Input
-          icon={FiDollarSign}
-          placeholder="Renda familiar"
-          name="family_income"
-          type="number"
-
-        /> : null}
-        <CheckBoxContainer>
-          <Label>
-            <span>Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
-          </Label>
-
-          <RadioInput
-
-            name="job_loss"
-            options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
-          />
-
-          <RadioInput
-
-            name="salary_reduction"
-            options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
-          />
-
-          <RadioInput
-
-            name="financial_support"
-            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
-          />
-
-          <RadioInput
-
-            name="debt"
-            options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
-          />
-
-          <RadioInput
-
-            name="cut_costs"
-            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
-          />
-
-          <RadioInput
-
-            name="cut_non_essential_costs"
-            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
-          />
-
-        </CheckBoxContainer>
-        <Label><strong>Escala de Segurança Alimentar</strong></Label>
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
-        </Label>
-        <Select
-          name="worried_food_supply"
-          options={worriedWithFoodSupplyOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
-        </Label>
-        <Select
-          name="lack_food_supply"
-          options={LackOfFoodOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
-        </Label>
-        <Select
-          name="afford_healthy_food"
-          options={cannotAffordFoodOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
-        </Label>
-        <Select
-          name="poor_food_choice"
-          options={yesOrNoOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
-        </Label>
-        <Select
-          name="adult_meals"
-          options={yesOrNoOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
-        </Label>
-        <Select
-          name="adult_food_privation"
-          options={yesOrNoOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
-        </Label>
-        <Select
-          name="adult_hunger"
-          options={yesOrNoOptions}
-        />
-        <Label>
-          NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
-        </Label>
-        <Select
-          name="adult_one_meal_or_none"
-          options={yesOrNoOptions}
-        />
-        <Label><strong></strong></Label>
-        <Label>
-          Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
-        </Label>
-        <Select
-          name="how_food_is_obtained"
-          options={howFoodIsObtainedOptions}
-        />
-        <Label>
-          Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que custuma comprar?
-        </Label>
-        <Select
-          name="food_price_change"
-          options={FoodPriceOptions}
-          onChange={selectedOption => setBuyingProfile(selectedOption)}
-        />
-
-        <Label>
-          A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
-        </Label>
-        <Select
-          name="food_profile_change"
-          options={FoodProfileOptions}
-          isDisabled={buyingProfile?.value === 'nao' || buyingProfile?.value === 'ns-nr' ? true : false}
-        />
-
-        <Label>
-          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que mais você ou alguém da sua casa mais frequentou para fazer as compras?
-        </Label>
-        <Select
-          name="food_store_type"
-          options={FoodStoreOptions}
-        />
-
-        <Label>
-          Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
-        </Label>
-        <Select
-          name="food_expenditure"
-          options={FoodExpenditureOptions}
-        />
-
-        {/*         <Label>
-          Ao final da aplicação, você considera o questionário:
-        </Label>
-        <Select
-          name="research_status"
-          options={researchStatusOptions}
-        />
-
-        <Label>
-          Qual modalidade de entrevista foi utilizada?
-        </Label>
-        <Select
-          name="research_type"
-          options={interviewTypeOptions}
-        /> */}
 
 
         <Button>Submit</Button>
