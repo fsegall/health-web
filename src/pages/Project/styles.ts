@@ -51,12 +51,25 @@ export const Label = styled.label`
   }
 `;
 
-export const Header = styled.header`
+export const Header = styled.h1`
   padding: 30px 0;
   text-align: center;
-  color: #fff;
-  padding: 32px 0;
+  color: #59748c;
+  padding: 30px 0;
+
   background: #999;
+
+  svg {
+    display: flex;
+    justify-self: flex-start;
+    align-self: center;
+    color: #fff;
+    margin-left: 20px;
+  }
+
+  span {
+    color: #ff9000;
+  }
 `;
 
 export const HeaderContent = styled.div`
@@ -89,30 +102,6 @@ export const HeaderContent = styled.div`
     width: 20px;
     height: 20px;
     margin-right: 20px;
-  }
-`;
-
-export const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 80px;
-  img {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
-    line-height: 24px;
-    span {
-      color: #fff;
-    }
-    strong {
-      color: #59748c;
-    }
   }
 `;
 

@@ -57,3 +57,7 @@ export const CheckBoxContainer = styled.div`
 
 
 export const Section = styled.section``;
+
+export const Divider = styled.div`
+  padding: 20px;
+`;

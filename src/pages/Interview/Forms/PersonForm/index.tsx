@@ -63,7 +63,7 @@ const PersonForm: React.FC = (props) => {
       addToast({
         type: 'success',
         title: 'Uma pessoa foi adicionada com sucesso',
-        description: 'Você já pode adicionar um membro da família',
+        description: 'Você já pode adicionar uma residência',
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

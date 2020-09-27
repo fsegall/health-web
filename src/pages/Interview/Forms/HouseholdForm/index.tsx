@@ -51,9 +51,8 @@ import {
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
-import RadioInput from '../../../../components/RadioInput';
 import CheckboxInput from '../../../../components/Checkbox';
-
+import { parseHouseholdData } from './utils';
 const HouseholdForm: React.FC = (props) => {
 
   const { token } = useAuth();
@@ -83,18 +82,7 @@ const HouseholdForm: React.FC = (props) => {
 
       console.log(data);
 
-      const parsedData = {
-        ...data,
-        five_years_old_or_more: data.five_years_old_or_more || 0,
-        between_6_and_18: data.between_6_and_18 || 0,
-        between_19_and_59: data.between_19_and_59 || 0,
-        sixty_years_old_or_more: data.sixty_years_old_or_more || 0,
-        people_invited: data.people_invited || 'ns-nr',
-        income_unknown: data.income_unknown || 0,
-        family_income: data.family_income || 0,
-        covid_cash_assistance_number_of_times: data.covid_cash_assistance_number_of_times || 0,
-        one_person_household: Array.isArray(data.one_person_household) && data.one_person_household.length === 0 ? false : data.one_person_household,
-      }
+      const parsedData = parseHouseholdData(data)
 
       console.log(parsedData)
 
@@ -173,7 +161,7 @@ const HouseholdForm: React.FC = (props) => {
 
         <Label>Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="reference-person-gender"
+          name="reference_person_gender"
           options={referencePersonGenderOptions}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
@@ -213,7 +201,6 @@ const HouseholdForm: React.FC = (props) => {
               label: 'Eu moro sozinho',
             }]}
             onChange={() => setMorePeople(!morePeople)}
-            defaultValue="false"
           />
         </CheckBoxContainer>
         {morePeople ?
@@ -272,7 +259,7 @@ const HouseholdForm: React.FC = (props) => {
           Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
         </Label>
         <CheckBoxContainer>
-          <RadioInput
+          <CheckboxInput
 
             name="income_unknown"
             options={[{
@@ -296,37 +283,37 @@ const HouseholdForm: React.FC = (props) => {
             <span>Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
           </Label>
 
-          <RadioInput
+          <CheckboxInput
 
             name="job_loss"
             options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="salary_reduction"
             options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="financial_support"
             options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="debt"
             options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="cut_costs"
             options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="cut_non_essential_costs"
             options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
@@ -612,7 +599,7 @@ const HouseholdForm: React.FC = (props) => {
 
         <Label>Você comeu algum dos alimentos listados abaixo ontem?</Label>
         <CheckBoxContainer>
-          <RadioInput
+          <CheckboxInput
 
             name="alface_acelga_repolho"
 
@@ -624,7 +611,7 @@ const HouseholdForm: React.FC = (props) => {
 
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="couve_brocolis_almeirao_agriao_espinafre"
             options={[{
@@ -634,7 +621,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="abobora_cenoura_batata_doce_quiabo_caruru"
             options={[{
@@ -644,9 +631,9 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
-            name="mamao_manga_melao-amarelo_caqui_pequi"
+            name="mamao_manga_melaoamarelo_caqui_pequi"
             options={[{
               id: 'mamao, manga, melao amarelo, caqui ou pequi',
               value: 'true',
@@ -654,7 +641,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="tomate_pepino_abobrinha_berinjela_chuchu_beterraba"
             options={[{
@@ -664,7 +651,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="laranja_banana_maca_abacaxi"
             options={[{
@@ -674,7 +661,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="arroz_macarrao_polenta_cuscuz_milho_verde"
             options={[{
@@ -684,7 +671,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="feijao_ervilha_lentilha_grao_de_bico"
             options={[{
@@ -694,7 +681,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="batata_comum_mandioca_cara_inhame"
             options={[{
@@ -704,7 +691,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="carne_de_boi_porco_frango_peixe"
             options={[{
@@ -714,7 +701,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="ovo_frito_cozido_mexido"
             options={[{
@@ -724,7 +711,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="leite"
             options={[{
@@ -734,7 +721,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="amendoim_castanha_de_caju_ou_castanha_do_brasil_para"
             options={[{
@@ -747,7 +734,7 @@ const HouseholdForm: React.FC = (props) => {
 
         <Label>Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</Label>
         <CheckBoxContainer>
-          <RadioInput
+          <CheckboxInput
 
             name="soft_drink"
             options={[{
@@ -757,7 +744,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="juice_can_or_box"
             options={[{
@@ -767,7 +754,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="juice_powder"
             options={[{
@@ -777,7 +764,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="chocolate_beverage"
             options={[{
@@ -787,7 +774,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="flavored_yogurt"
             options={[{
@@ -797,7 +784,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="salty_snacks"
             options={[{
@@ -807,7 +794,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="cookies"
             options={[{
@@ -817,7 +804,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="industrialized_dessert"
             options={[{
@@ -827,7 +814,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="sausages"
             options={[{
@@ -837,7 +824,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="hot_dog_or_burguer_bread"
             options={[{
@@ -847,7 +834,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="mayonnaise_ketchup_mustard"
             options={[{
@@ -857,7 +844,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="margarine"
             options={[{
@@ -867,7 +854,7 @@ const HouseholdForm: React.FC = (props) => {
             }]}
           />
 
-          <RadioInput
+          <CheckboxInput
 
             name="instant_noodles_or_soup_or_frozen_food"
             options={[{

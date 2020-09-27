@@ -2,16 +2,13 @@ import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Link } from 'react-router-dom';
-import { FiPower } from 'react-icons/fi';
+import { FiChevronLeft } from 'react-icons/fi';
 import {
   StyledForm,
   Label,
   Container,
   Header,
-  HeaderContent,
-  Profile,
   Title,
-  StyledLink,
 } from './styles';
 import {
 } from 'react-icons/fi';
@@ -79,27 +76,10 @@ const ProjectForm: React.FC = (props) => {
   return (
     <Container>
       <Header>
-        <HeaderContent>
-          <img src={logo} alt="Safety" />
-          <Profile>
-            <img
-              src={user.avatar_url}
-              alt={user.name}
-            />
-            <div>
-
-              <Link to="/profile">
-                <strong>{user.name}</strong>
-              </Link>
-            </div>
-          </Profile>
-
-          <StyledLink to="/dashboard">Dashboard</StyledLink>
-
-          <button type="button" onClick={signOut}>
-            <FiPower />
-          </button>
-        </HeaderContent>
+        <Link to="/dashboard">
+          <FiChevronLeft />
+        </Link>
+        Safety <span>|</span> Projeto
       </Header>
       <Title>Adicione um projeto de pesquisa</Title>
       <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>
@@ -107,6 +87,10 @@ const ProjectForm: React.FC = (props) => {
         <section>
           <Label>Nome do Projeto</Label>
           <Input name="name" placeholder="Nome do Projeto" />
+        </section>
+        <section>
+          <Label>Número do Projeto</Label>
+          <Input name="project_number" placeholder="Número do Projeto" type="number" />
         </section>
         <section>
           <Label>Nome das Organizações reponsáveis</Label>

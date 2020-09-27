@@ -62,7 +62,7 @@ const AddressForm: React.FC = (props) => {
       addToast({
         type: 'success',
         title: 'Endereço adicionado com sucesso',
-        description: 'O formulário de pesquisa foi preenchido.',
+        description: 'Você já pode preencher o formulário seguinte para concluir a entrevista.',
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

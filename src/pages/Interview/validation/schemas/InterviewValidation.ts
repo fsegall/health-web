@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 export const InterviewValidation = Yup.object().shape({
 
   project_name: Yup.string().required('Você precisa informar um nome de projeto'),
+  project_number: Yup.number().required('Você precisa informar um número de projeto'),
   is_complete: Yup.boolean().required(
     'Você precisa informar se a entrevista está completa',
   ),

@@ -5,7 +5,8 @@ import { FormHandles } from '@unform/core';
 import {
   StyledForm,
   Label,
-  CheckBoxContainer
+  CheckBoxContainer,
+  Divider
 } from './styles';
 
 import {
@@ -20,6 +21,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
 import api from '../../../../services/api';
+import { validateCheckbox } from '../HouseholdForm/utils';
 
 
 const InterviewForm: React.FC = (props) => {
@@ -32,10 +34,16 @@ const InterviewForm: React.FC = (props) => {
 
 
   const handleInterviewSubmit = useCallback(async (data: ICreateInterviewDTO) => {
+    console.log('is_complete', data)
+    const parsedData = {
+      ...data,
+      is_complete: validateCheckbox(data.is_complete),
+    }
+    console.log('is_complete', parsedData)
     try {
       InterviewFormRef.current?.setErrors({});
-      console.log('comments', data)
-      const validatedData = await InterviewValidation.validate(data, {
+
+      const validatedData = await InterviewValidation.validate(parsedData, {
         abortEarly: false,
       });
 
@@ -91,8 +99,12 @@ const InterviewForm: React.FC = (props) => {
       <section>
         <Label>Nome do Projeto</Label>
         <Input name="project_name" placeholder="Nome do Projeto" defaultValue="PENSAN" />
-        <Label>A entrevista foi concluída:</Label>
+        <Label>Número do Projeto</Label>
+        <Input name="project_number" placeholder="Número do Projeto" type="number" />
 
+      </section>
+      <section>
+        <Label>A entrevista foi concluída:</Label>
         <CheckBoxContainer>
 
           <CheckBoxInput
@@ -103,8 +115,7 @@ const InterviewForm: React.FC = (props) => {
 
         <Label>Qual a modalidade de entrevista?</Label>
         <Select name="interview_type" options={interviewTypeOptions} />
-      </section>
-      <section>
+        <Divider />
         <Input name="comments" placeholder="Comentários sobre a entrevista" />
         <Button>Submit</Button>
       </section>
