@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React/* , { useState }  */ from 'react';
 import {
   Container,
   CardContainer,
   CardHeader,
   CardContent,
 } from './styles';
-import { useAuth } from '../../hooks/auth';
-import api from '../../services/api';
-import ICreateHousehold from '../../pages/Interview/dtos/ICreateHouseholdDTO';
+/* import { useAuth } from '../../hooks/auth'; */
+/* import api from '../../services/api';
+import ICreateHousehold from '../../pages/Interview/dtos/ICreateHouseholdDTO'; */
 interface CardProps {
   person: {
     name: string;
@@ -18,7 +18,7 @@ interface CardProps {
   };
 }
 const Card: React.FC<CardProps> = ({ person }) => {
-  const { token } = useAuth();
+  /* const { token } = useAuth(); */
   /* const [house, setHouse] = useState<ICreateHousehold | null>(null); */
 
   /*   async function fetchHousehold(id: string | undefined): Promise<void> {
