@@ -76,6 +76,12 @@ export const ListTitle = styled.h2`
   }
 `;
 
+export const StyledList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr ));
+  justify-content: space-around;
+`;
+
 export const StyledLink = styled(Link)`
   margin-left: auto;
 `;

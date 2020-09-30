@@ -10,6 +10,7 @@ import {
   Profile,
   ListTitle,
   StyledLink,
+  StyledList
 } from './styles';
 import Card from '../../components/Card';
 import logo from '../../assets/logo_transparent.png';
@@ -57,11 +58,11 @@ const Dashboard: React.FC = () => {
       </Header>
       <div>
         <ListTitle>Entrevistados</ListTitle>
-        <ul>
+        <StyledList>
           {persons.map((person) => {
             return <Card key={person.id} person={person} />;
           })}
-        </ul>
+        </StyledList>
       </div>
     </Container>
   );

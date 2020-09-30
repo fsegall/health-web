@@ -55,7 +55,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
           </div>
         </CardContent>
       </CardContainer>
-      <div>
+      {/*       <div>
         {house && (
           <HouseList>
             <li>
@@ -73,7 +73,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
             <li></li>
           </HouseList>
         )}
-      </div>
+      </div> */}
     </Container>
   );
 };
