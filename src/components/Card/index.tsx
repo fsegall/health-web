@@ -21,16 +21,16 @@ const Card: React.FC<CardProps> = ({ person }) => {
   const { token } = useAuth();
   /* const [house, setHouse] = useState<ICreateHousehold | null>(null); */
 
-  async function fetchHousehold(id: string | undefined): Promise<void> {
-    const house = await api.get<ICreateHousehold>(`/persons/${id}/household`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (house) {
-      setHouse((state) => ({ ...house.data }));
-    }
-  }
+  /*   async function fetchHousehold(id: string | undefined): Promise<void> {
+      const house = await api.get<ICreateHousehold>(`/persons/${id}/household`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (house) {
+        setHouse((state) => ({ ...house.data }));
+      }
+    } */
   return (
     <Container>
       <CardContainer>
