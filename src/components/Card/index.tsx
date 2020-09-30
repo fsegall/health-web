@@ -4,7 +4,6 @@ import {
   CardContainer,
   CardHeader,
   CardContent,
-  HouseList,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
@@ -20,7 +19,7 @@ interface CardProps {
 }
 const Card: React.FC<CardProps> = ({ person }) => {
   const { token } = useAuth();
-  const [house, setHouse] = useState<ICreateHousehold | null>(null);
+  /* const [house, setHouse] = useState<ICreateHousehold | null>(null); */
 
   async function fetchHousehold(id: string | undefined): Promise<void> {
     const house = await api.get<ICreateHousehold>(`/persons/${id}/household`, {
