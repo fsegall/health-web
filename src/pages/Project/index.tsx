@@ -73,10 +73,12 @@ const ProjectForm: React.FC = (props) => {
   return (
     <Container>
       <Header>
-        <Link to="/dashboard">
-          <FiChevronLeft />
-        </Link>
-        Safety <span>|</span> Projeto
+        <div>
+          <Link to="/dashboard">
+            <FiChevronLeft size={30} />
+          </Link>
+        </div>
+        <h1>Safety <span style={{ marginLeft: 10, marginRight: 10 }}>|</span> Projeto</h1>
       </Header>
       <Title>Adicione um projeto de pesquisa</Title>
       <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>
