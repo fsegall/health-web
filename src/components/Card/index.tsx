@@ -49,7 +49,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
           <div>
             <span>Situação de saúde:</span> {person.covid_diagnose}
             <div>
-              <button onClick={() => fetchHousehold(person.id)}>Residência</button>
+              <button onClick={() => { } /* fetchHousehold(person.id) */}>Residência</button>
             </div>
           </div>
         </CardContent>
