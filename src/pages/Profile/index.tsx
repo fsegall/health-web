@@ -159,10 +159,12 @@ const Profile: React.FC = () => {
   return (
     <>
       <Header>
-        <Link to="/dashboard">
-          <FiChevronLeft />
-        </Link>
-        Safety <span>|</span> Profile
+        <div>
+          <Link to="/dashboard">
+            <FiChevronLeft size={30} />
+          </Link>
+        </div>
+        <h1>Safety <span>|</span> Profile</h1>
       </Header>
       <Grid>
         <Form ref={formRef} onSubmit={handleSubmit}>
