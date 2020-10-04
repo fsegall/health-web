@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const AddressValidation = Yup.object().shape({
   state: Yup.string().required('Você precisa informar o estado'),
   city: Yup.string().required('Você precisa informar a cidade'),
-  post_code: Yup.string().required('Você precisa digitar o código postal'),
+  post_code: Yup.string(),
   street_or_location: Yup.string().required(
     'Você precisa informar a rua ou localização',
   ),

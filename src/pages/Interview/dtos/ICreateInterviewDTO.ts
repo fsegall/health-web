@@ -6,6 +6,7 @@ export default interface ICreateInterviewDTO {
   household_id: string;
   address_id: string;
   is_complete?: boolean;
+  is_complete_with_errors?: boolean;
   interview_type: string;
   comments?: string;
 }

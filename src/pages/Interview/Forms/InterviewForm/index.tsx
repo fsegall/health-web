@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -30,6 +30,8 @@ const InterviewForm: React.FC = (props) => {
 
   const { token } = useAuth();
 
+  const [complete, setComplete] = useState(false);
+
   const InterviewFormRef = useRef<FormHandles>(null);
 
 
@@ -39,6 +41,8 @@ const InterviewForm: React.FC = (props) => {
       ...data,
       is_complete: validateCheckbox(data.is_complete),
     }
+
+
 
     try {
       InterviewFormRef.current?.setErrors({});
@@ -92,7 +96,7 @@ const InterviewForm: React.FC = (props) => {
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
       <section>
         <Label>Nome do Projeto</Label>
-        <Input name="project_name" placeholder="Nome do Projeto" defaultValue="PENSAN" />
+        <Input name="project_name" placeholder="Nome do Projeto" defaultValue="PENSSAN" />
         <Label>Número do Projeto</Label>
         <Input name="project_number" placeholder="Número do Projeto" type="number" />
 
@@ -103,8 +107,17 @@ const InterviewForm: React.FC = (props) => {
 
           <CheckBoxInput
             name="is_complete"
-            options={[{ id: 'completo', value: 'true', label: 'Completa e sem erros' }]}
+            options={[{ id: 'completa', value: 'true', label: 'Completa e sem erros' }]}
+            onChange={() => setComplete(!complete)}
+            checked={!complete}
           />
+          <CheckBoxInput
+            name="is_complete_with_errors"
+            options={[{ id: 'completa_com_erros', value: 'true', label: 'Completa com erros' }]}
+            onChange={() => setComplete(!complete)}
+            checked={complete}
+          />
+
         </CheckBoxContainer>
 
         <Label>Qual a modalidade de entrevista?</Label>

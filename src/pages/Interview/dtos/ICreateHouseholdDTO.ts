@@ -83,7 +83,7 @@ export default interface ICreateHouseholdDTO {
 
   home_grown: string;
 
-  food_for_market: string;
+  food_for_market?: string;
 
   market_profile?: string;
 
@@ -106,6 +106,8 @@ export default interface ICreateHouseholdDTO {
   cut_costs?: boolean;
 
   cut_non_essential_costs?: boolean;
+
+  ns_nr_work_salary?: boolean;
 
   worried_food_supply: string;
 

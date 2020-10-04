@@ -103,6 +103,8 @@ const HouseholdForm: React.FC = (props) => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+
+
         localStorage.setItem('@Safety:household_id', response.data.id);
 
         addToast({
@@ -169,7 +171,7 @@ const HouseholdForm: React.FC = (props) => {
           placeholder="Número de cômodos"
           type="number"
           min="1"
-          max="6"
+          max="12"
           name="number_of_rooms"
           defaultValue="1"
         />
@@ -207,7 +209,7 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Menos de 5 anos"
                 name="five_years_old_or_more"
-                min="1"
+                min="0"
                 max="6"
                 type="number"
 
@@ -216,7 +218,7 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Entre 6 e 18 anos"
                 name="between_6_and_18"
-                min="1"
+                min="0"
                 max="6"
                 type="number"
 
@@ -225,7 +227,7 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Entre 19 e 59 anos"
                 name="between_19_and_59"
-                min="1"
+                min="0"
                 max="6"
                 type="number"
 
@@ -234,7 +236,7 @@ const HouseholdForm: React.FC = (props) => {
               <Input
                 placeholder="Com 60 anos ou mais"
                 name="sixty_years_old_or_more"
-                min="1"
+                min="0"
                 max="6"
                 type="number"
               />
@@ -315,11 +317,16 @@ const HouseholdForm: React.FC = (props) => {
             options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
           />
 
+          <CheckboxInput
+            name="ns_nr_work_salary"
+            options={[{ id: 'ns_nr', value: 'true', label: 'Não sabe ou não quis responder' }]}
+          />
+
         </CheckBoxContainer>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          Você ou alguém da sua casa está cadastrado no <b>cadastro único do governo</b>?
+          Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
         </Label>
         <Select
           name="government_assistance_program_cadastro_unico"
@@ -327,7 +334,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa participa do programa <b>bolsa família</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
         </Label>
         <Select
           name="government_assistance_program_bolsa_familia"
@@ -335,7 +342,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebe ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
           name="government_assistance_program_bpc"
@@ -343,7 +350,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebe <b>pensão por morte do(a) cônjuge</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
           name="pension"
@@ -351,7 +358,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebe <b>auxílio reclusão</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
           name="prison_cash_assistance"
@@ -359,7 +366,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebe <b>auxílio referente à alimentação escolar ou PNAE</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente à alimentação escolar ou PNAE</b>?
         </Label>
         <Select
           name="government_assistance_program_pnae"
@@ -367,7 +374,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
           name="food_basket_assistance"
@@ -375,7 +382,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa recebeu <b>frequenta restaurantes populares</b> para fazer refeições?
+          Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
           name="low_income_restaurants"
@@ -383,7 +390,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+          Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
         </Label>
 
         <Select
@@ -399,7 +406,6 @@ const HouseholdForm: React.FC = (props) => {
               <>
                 <Label>Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
                 <Input
-                  icon={FiDollarSign}
                   placeholder="Número de vezes"
                   name="covid_cash_assistance_number_of_times"
                   type="number"
@@ -411,7 +417,7 @@ const HouseholdForm: React.FC = (props) => {
         }
 
         <Label>
-          Você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+          Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
         </Label>
 
         <Select
@@ -431,7 +437,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Você ou alguém da sua casa teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
+          Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
         </Label>
 
         <Select
@@ -446,6 +452,7 @@ const HouseholdForm: React.FC = (props) => {
         <Select
           name="home_grown"
           options={yesOrNoOptions}
+          onChange={selectedOptions => setProduce(selectedOptions)}
         />
 
         <Label>
@@ -455,7 +462,7 @@ const HouseholdForm: React.FC = (props) => {
         <Select
           name="food_for_market"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setProduce(selectedOptions)}
+          isDisabled={produce?.value === 'true' ? false : true}
         />
 
         <Label>
@@ -557,7 +564,7 @@ const HouseholdForm: React.FC = (props) => {
           options={howFoodIsObtainedOptions}
         />
         <Label>
-          Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que custuma comprar?
+          Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
           name="food_price_change"
@@ -575,7 +582,7 @@ const HouseholdForm: React.FC = (props) => {
         />
 
         <Label>
-          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que mais você ou alguém da sua casa mais frequentou para fazer as compras?
+          Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
           name="food_store_type"

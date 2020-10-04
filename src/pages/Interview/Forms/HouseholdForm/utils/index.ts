@@ -29,6 +29,7 @@ export const parseHouseholdData = (data: ICreateHouseholdDTO) => {
     cut_costs: validateCheckbox(data.cut_costs),
 
     cut_non_essential_costs: validateCheckbox(data.cut_non_essential_costs),
+    ns_nr_work_salary: validateCheckbox(data.ns_nr_work_salary),
 
     alface_acelga_repolho: validateCheckbox(data.alface_acelga_repolho),
 

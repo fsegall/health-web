@@ -110,9 +110,7 @@ export const HouseholdValidation = Yup.object().shape({
   home_grown: Yup.string().required(
     'Você precisa escolher um dos campos de produção de alimentos',
   ),
-  food_for_market: Yup.string().required(
-    'Você precisa escolher um dos campos de produção de alimentos',
-  ),
+  food_for_market: Yup.string(),
   market_profile: Yup.string(),
   difficulty_selling_food: Yup.string(),
   could_not_sell_food: Yup.string(),
@@ -124,6 +122,7 @@ export const HouseholdValidation = Yup.object().shape({
   debt: Yup.boolean(),
   cut_costs: Yup.boolean(),
   cut_non_essential_costs: Yup.boolean(),
+  ns_nr_work_salary: Yup.boolean(),
   worried_food_supply: Yup.string().required(
     'Você precisa escolher um dos campos de PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM',
   ),
