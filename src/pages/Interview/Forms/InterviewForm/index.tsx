@@ -13,6 +13,7 @@ import {
   interviewTypeOptions,
 } from '../../questions/SelectorOptions/options';
 import { useAuth } from '../../../../hooks/auth';
+import { useHistory } from 'react-router-dom';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
@@ -27,6 +28,8 @@ import { validateCheckbox } from '../HouseholdForm/utils';
 const InterviewForm: React.FC = (props) => {
 
   const { addToast } = useToast();
+
+  const { history } = useHistory();
 
   const { token } = useAuth();
 
@@ -77,6 +80,8 @@ const InterviewForm: React.FC = (props) => {
         title: 'A entrevista foi adicionada com sucesso',
         description: 'O formulário de pesquisa foi preenchido.',
       });
+
+      history.push('/dashboard');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
