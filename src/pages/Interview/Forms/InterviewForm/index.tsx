@@ -29,7 +29,7 @@ const InterviewForm: React.FC = (props) => {
 
   const { addToast } = useToast();
 
-  const { history } = useHistory();
+  const history = useHistory();
 
   const { token } = useAuth();
 
