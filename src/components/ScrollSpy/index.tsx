@@ -14,6 +14,7 @@ const ScrollSpy: React.FC<ScrollProps> = ({ open }) => {
       {/* <AnchorLink href="#family">Família</AnchorLink> */}
       <AnchorLink href="#household">Residência</AnchorLink>
       <AnchorLink href="#address">Endereço</AnchorLink>
+      <AnchorLink href="#interview">Entrevista</AnchorLink>
     </MenuSpy>
   );
 };
