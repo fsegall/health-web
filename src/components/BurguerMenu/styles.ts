@@ -49,7 +49,7 @@ export const SlideLinkContainer = styled.div<MenuProps>`
     /* Animate still not working */
     /* transform: ${({ open }) => open ? 'translateY(0)' : 'translateY(100%)'}; */
 
-    transition: transform 2s ease-in-out;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 
     ${props => props.open ? css`@media (max-width: 768px) {
     z-index: 0; /* we're gonna avoid using -1 here, since it could position our navbar below other content on the page as well! */
@@ -73,10 +73,14 @@ export const SlideLinkContainer = styled.div<MenuProps>`
     margin: 0;
     padding-left: 7vw;
     padding-right: 7vw;
-
     background: #59748c;
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0%);
     }` : css`@media (max-width: 768px) {
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-100%);
     }`}
 `;
 
