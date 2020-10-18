@@ -48,6 +48,8 @@ export const CardHeader = styled.div`
 export const CardContent = styled.div`
   display: flex;
   align-items: center;
+  color: #59748c;
+
   div {
     margin-bottom: 20px;
     ul {
