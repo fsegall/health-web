@@ -73,6 +73,17 @@ const Household: React.FC = () => {
             </li>
             <li>
 
+              <span>{`Número de cômodos da residência: ${household?.number_of_rooms}`}</span>
+
+            </li>
+
+            <li>
+
+              <span>{`A renda da família é de aproximadamente: R$ ${household?.family_income}`}</span>
+
+            </li>
+            <li>
+
               <span>{`A pessoa ${household?.household_main_person ? 'é ' : 'não é '
                 } a figura de referência da casa`}</span>
 
