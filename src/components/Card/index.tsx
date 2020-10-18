@@ -1,5 +1,5 @@
 import React/* , { useState }  */ from 'react';
-import { format } from 'date-fns'
+/* import { parseISO, format } from 'date-fns' */
 import {
   Container,
   CardContainer,
@@ -19,6 +19,7 @@ interface CardProps {
   };
 }
 const Card: React.FC<CardProps> = ({ person }) => {
+  console.log(person.date_of_birth, typeof person.date_of_birth);
   /* const { token } = useAuth(); */
   /* const [house, setHouse] = useState<ICreateHousehold | null>(null); */
 
@@ -43,7 +44,7 @@ const Card: React.FC<CardProps> = ({ person }) => {
                 <span>Gênero:</span> {person.gender}
               </li>
               <li>
-                <span>Data de nascimento:</span> {format(person.date_of_birth, 'dd/MM/yyyy')} 
+                <span>Data de nascimento: {person.date_of_birth} </span>
               </li>
             </ul>
           </div>
