@@ -22,6 +22,7 @@ export const HouseList = styled.ul`
   li {
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
+    margin-right: 20px;
     span {margin-left: 10px;}
     }
 `;
