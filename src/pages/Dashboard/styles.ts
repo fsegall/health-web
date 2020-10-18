@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 export const Container = styled.div``;
+
+export const BigScreenLinkContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 export const Header = styled.header`
   padding: 30px 0;
@@ -8,9 +15,13 @@ export const Header = styled.header`
   color: #fff;
   padding: 32px 0;
   background: #999;
+  button {
+    z-index: 3;
+  }
 `;
 
 export const HeaderContent = styled.div`
+  z-index: 1;
   max-width: 1120px;
   max-height: 80px;
   margin: 0 auto;
@@ -26,13 +37,31 @@ export const HeaderContent = styled.div`
     }
   }
 
+  @media (max-width: 768px) {
+    a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+    &:hover {
+      opacity: 0.3;
+    }
+  }
+  }
+
   > img {
+    z-index: 2;
     height: 120px;
   }
-  button {
+
+  > button {
+    z-index: 2;
     margin-left: auto;
     background: transparent;
     border: 0;
+    @media (max-width: 768px) {
+    display: none;
+  }
   }
 
   svg {
@@ -44,6 +73,12 @@ export const HeaderContent = styled.div`
 `;
 
 export const Profile = styled.div`
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+
   display: flex;
   align-items: center;
   margin-left: 80px;
@@ -83,5 +118,5 @@ export const StyledList = styled.ul`
 `;
 
 export const StyledLink = styled(Link)`
-  margin-left: auto;
+  margin-left: 20px;
 `;

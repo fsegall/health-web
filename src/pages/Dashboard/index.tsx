@@ -9,9 +9,11 @@ import {
   HeaderContent,
   Profile,
   ListTitle,
+  BigScreenLinkContainer,
   StyledLink,
   StyledList
 } from './styles';
+import BurguerMenu from '../../components/BurguerMenu';
 import Card from '../../components/Card';
 import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
@@ -47,9 +49,12 @@ const Dashboard: React.FC = () => {
             </div>
           </Profile>
 
-          <StyledLink to="/interview">Faça uma entrevista</StyledLink>
+          <BigScreenLinkContainer>
+            <StyledLink to="/interview">Faça uma entrevista</StyledLink>
+            <StyledLink to="/project">Adicione um projeto</StyledLink>
+          </BigScreenLinkContainer>
 
-          <StyledLink to="/project">Adicione um projeto</StyledLink>
+          <BurguerMenu />
 
           <button type="button" onClick={signOut}>
             <FiPower />
