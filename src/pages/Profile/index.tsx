@@ -224,7 +224,7 @@ const Profile: React.FC = () => {
             type="password"
             placeholder="Confirmação da senha"
           />
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Atualizar</Button>
         </Form>
       </Grid>
     </>
