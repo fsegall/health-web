@@ -31,6 +31,18 @@ export const CardHeader = styled.div`
   color: #59748c;
   font-weight: bold;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    color: #59748c;
+    padding: 20px;
+    text-decoration: none;
+
+    &:hover {
+      color: ${darken(0.2, '#59748c')};
+    }
+  }
 `;
 
 export const CardContent = styled.div`
@@ -56,10 +68,4 @@ export const CardContent = styled.div`
   }
 `;
 
-export const HouseList = styled.ul`
-  color: #59748c;
-  line-height: 30px;
 
-  font-weight: bold;
-  font-size: 18px;
-`;

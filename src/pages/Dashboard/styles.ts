@@ -118,5 +118,5 @@ export const StyledList = styled.ul`
 `;
 
 export const StyledLink = styled(Link)`
-  margin-left: 20px;
+  margin-left: 40px;
 `;

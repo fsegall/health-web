@@ -1,42 +1,41 @@
-import React/* , { useState }  */ from 'react';
-/* import { parseISO, format } from 'date-fns' */
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { parseISO, format } from 'date-fns';
 import {
   Container,
   CardContainer,
   CardHeader,
   CardContent,
 } from './styles';
-/* import { useAuth } from '../../hooks/auth'; */
-/* import api from '../../services/api';
-import ICreateHousehold from '../../pages/Interview/dtos/ICreateHouseholdDTO'; */
+
 interface CardProps {
   person: {
     name: string;
     gender: string;
-    date_of_birth: Date;
+    date_of_birth: string;
     covid_diagnose: string;
     id?: string | undefined;
   };
 }
 const Card: React.FC<CardProps> = ({ person }) => {
-  console.log(person.date_of_birth, typeof person.date_of_birth);
-  /* const { token } = useAuth(); */
-  /* const [house, setHouse] = useState<ICreateHousehold | null>(null); */
 
-  /*   async function fetchHousehold(id: string | undefined): Promise<void> {
-      const house = await api.get<ICreateHousehold>(`/persons/${id}/household`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (house) {
-        setHouse((state) => ({ ...house.data }));
-      }
-    } */
+  console.log(format(parseISO(person.date_of_birth), 'dd/MM/yyyy'));
+
   return (
     <Container>
       <CardContainer>
-        <CardHeader>{person.name}</CardHeader>
+        <CardHeader>
+          <div>{person.name}</div>
+          <div>
+            <Link to={{
+              pathname: '/household',
+              state: person
+            }}>
+              Residência
+              </Link>
+          </div>
+        </CardHeader>
+
         <CardContent>
           <div>
             <ul>
@@ -44,37 +43,16 @@ const Card: React.FC<CardProps> = ({ person }) => {
                 <span>Gênero:</span> {person.gender}
               </li>
               <li>
-                <span>Data de nascimento: {person.date_of_birth} </span>
+                <span>Data de nascimento: </span>{format(parseISO(person.date_of_birth), 'dd/MM/yyyy')}
+              </li>
+              <li>
+                <span>Diagnosticado(a) com COVID: </span> {person.covid_diagnose === 'true' ? 'Sim' : 'Não'}
               </li>
             </ul>
           </div>
-          <div>
-            <span>Diagnosticado(a) com COVID: {person.covid_diagnose ? 'Sim' : "Não"}</span> 
-            <div>
-              <button onClick={() => { } /* fetchHousehold(person.id) */}>Residência</button>
-            </div>
-          </div>
+
         </CardContent>
       </CardContainer>
-      {/*       <div>
-        {house && (
-          <HouseList>
-            <li>
-              <div>
-                <span>Região de Localização da Casa: </span>
-                {house?.location_of_residence}
-              </div>
-            </li>
-            <li>
-              <div>
-                <span>{`A pessoa ${house?.household_main_person ? 'é ' : 'não é '
-                  } a figura de referência da casa`}</span>
-              </div>
-            </li>
-            <li></li>
-          </HouseList>
-        )}
-      </div> */}
     </Container>
   );
 };
