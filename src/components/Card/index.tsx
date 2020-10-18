@@ -1,4 +1,5 @@
 import React/* , { useState }  */ from 'react';
+import { format } from 'date-fns'
 import {
   Container,
   CardContainer,
@@ -42,12 +43,12 @@ const Card: React.FC<CardProps> = ({ person }) => {
                 <span>Gênero:</span> {person.gender}
               </li>
               <li>
-                <span>Data de nascimento:</span> {person.date_of_birth}
+                <span>Data de nascimento:</span> {format(person.date_of_birth, 'dd/MM/yyyy')} 
               </li>
             </ul>
           </div>
           <div>
-            <span>Situação de saúde:</span> {person.covid_diagnose}
+            <span>Diagnosticado(a) com COVID: {person.covid_diagnose ? 'Sim' : "Não"}</span> 
             <div>
               <button onClick={() => { } /* fetchHousehold(person.id) */}>Residência</button>
             </div>
