@@ -52,7 +52,7 @@ const Household: React.FC = () => {
             <FiChevronLeft size={30} />
           </Link>
         </div>
-        <h1>Safety <span>|</span> Residência do entrevistado</h1>
+        <h1>Safety <span>|</span> Residência</h1>
       </Header>
       { household ?
         (<HouseList>
