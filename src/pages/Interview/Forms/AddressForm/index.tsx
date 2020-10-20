@@ -83,7 +83,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
         });
       }
     }
-  }, [addToast, token]);
+  }, [addToast, token, dispatch]);
 
   return (
     <StyledForm ref={AddressFormRef} onSubmit={handleAddressSubmit}>

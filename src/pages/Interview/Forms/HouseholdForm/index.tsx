@@ -133,7 +133,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         }
       }
     },
-    [addToast, token],
+    [addToast, token, dispatch],
   );
 
   return (

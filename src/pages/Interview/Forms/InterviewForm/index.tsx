@@ -104,7 +104,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
         });
       }
     }
-  }, [addToast, token, history]);
+  }, [addToast, token, history, dispatch]);
 
   return (
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
