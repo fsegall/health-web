@@ -24,8 +24,11 @@ import CheckBoxInput from '../../../../components/Checkbox';
 import api from '../../../../services/api';
 import { validateCheckbox } from '../HouseholdForm/utils';
 
+interface InterviewFormProps {
+  dispatch: Function;
+}
 
-const InterviewForm: React.FC = (props) => {
+const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
 
   const { addToast } = useToast();
 
@@ -80,6 +83,12 @@ const InterviewForm: React.FC = (props) => {
         title: 'A entrevista foi adicionada com sucesso',
         description: 'O formulário de pesquisa foi preenchido.',
       });
+
+      localStorage.removeItem('@Safety:person_id');
+      localStorage.removeItem('@Safety:household_id');
+      localStorage.removeItem('@Safety:address_id');
+
+      dispatch({ type: "INTERVIEW" });
 
       history.push('/dashboard');
     } catch (error) {

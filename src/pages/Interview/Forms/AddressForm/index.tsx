@@ -27,8 +27,11 @@ import { useToast } from '../../../../hooks/toast';
 
 import api from '../../../../services/api';
 
+interface AddressFormProps {
+  dispatch: Function;
+}
 
-const AddressForm: React.FC = (props) => {
+const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
 
   const { addToast } = useToast();
 
@@ -59,6 +62,9 @@ const AddressForm: React.FC = (props) => {
 
 
       localStorage.setItem('@Safety:address_id', response.data.id);
+
+      dispatch({ type: 'ADDRESS' });
+
       addToast({
         type: 'success',
         title: 'Endereço adicionado com sucesso',

@@ -53,7 +53,12 @@ import {
 import api from '../../../../services/api';
 import CheckboxInput from '../../../../components/Checkbox';
 import { parseHouseholdData } from './utils';
-const HouseholdForm: React.FC = (props) => {
+
+interface HouseholdFormProps {
+  dispatch: Function;
+}
+
+const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
   const { token } = useAuth();
 
@@ -106,6 +111,8 @@ const HouseholdForm: React.FC = (props) => {
 
 
         localStorage.setItem('@Safety:household_id', response.data.id);
+
+        dispatch({ type: 'HOUSEHOLD' });
 
         addToast({
           type: 'success',

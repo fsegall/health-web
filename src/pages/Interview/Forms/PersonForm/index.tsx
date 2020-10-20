@@ -30,8 +30,11 @@ import {
 
 import api from '../../../../services/api';
 
+interface PersonFormProps {
+  dispatch: Function;
+}
 
-const PersonForm: React.FC = (props) => {
+const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
   const { user, token } = useAuth();
 
@@ -59,6 +62,7 @@ const PersonForm: React.FC = (props) => {
 
       localStorage.setItem('@Safety:person_id', response.data.id);
 
+      dispatch({ type: 'PERSON' })
 
       addToast({
         type: 'success',

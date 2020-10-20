@@ -4,6 +4,16 @@ export const Container = styled.div`
   text-align: center;
 `;
 
+export const SubmittedContainer = styled.div`
+  text-align: left;
+  color: #59748c;
+  opacity: 0.6;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 20px;
+`;
+
 export const Header = styled.h1`
   padding: 30px 0;
   color: #59748c;
