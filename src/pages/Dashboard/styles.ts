@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { shade } from 'polished';
 
 export const Container = styled.div``;
 
@@ -109,6 +110,8 @@ export const ListTitle = styled.h2`
   span {
     color: #ff9000;
   }
+  display: inline-flex;
+
 `;
 
 export const StyledList = styled.ul`
@@ -120,3 +123,20 @@ export const StyledList = styled.ul`
 export const StyledLink = styled(Link)`
   margin-left: 40px;
 `;
+
+export const FilterButton = styled.button`
+  padding: 5px 10px;
+  margin-top: 4px;
+  margin-right: 4px;
+  background: #59748c;
+  border-radius: 4px;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  &:hover {
+    background: ${shade(0.2, '#59748c')};
+  }
+  float: right;
+`;
+

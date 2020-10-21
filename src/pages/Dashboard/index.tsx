@@ -11,7 +11,8 @@ import {
   ListTitle,
   BigScreenLinkContainer,
   StyledLink,
-  StyledList
+  StyledList,
+  FilterButton
 } from './styles';
 import BurguerMenu from '../../components/BurguerMenu';
 import Card from '../../components/Card';
@@ -20,6 +21,11 @@ import api from '../../services/api';
 const Dashboard: React.FC = () => {
   const { signOut, user, token } = useAuth();
   const [persons, setPersons] = useState<ICreatePersonDTO[]>([]);
+
+  const [filteredByUser, setFilteredByUser] = useState(false);
+
+  const personsFilterByInterviewer = persons.filter(person => person.interviewer_id === user.id);
+
   useEffect(() => {
     async function fetchPersons() {
       const persons = await api.get('/persons', {
@@ -63,8 +69,11 @@ const Dashboard: React.FC = () => {
       </Header>
       <div>
         <ListTitle>Entrevistados</ListTitle>
+        <FilterButton type="button" onClick={() => setFilteredByUser(!filteredByUser)}>{!filteredByUser ? 'Meus Entrevistados' : 'Todos'}</FilterButton>
         <StyledList>
-          {persons.map((person) => {
+          {!filteredByUser ? persons.map((person) => {
+            return <Card key={person.id} person={person} />;
+          }) : personsFilterByInterviewer.map((person) => {
             return <Card key={person.id} person={person} />;
           })}
         </StyledList>
