@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import {
   Container,
   Header,
   SectionTitle,
   ResponsiveMenu,
   SubmittedContainer,
+  ResetButton
 } from './styles';
 import {
   FiMenu,
@@ -92,6 +93,18 @@ const Interview: React.FC = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+
+
+  const resetForms = useCallback(
+    () => {
+      localStorage.removeItem('@Safety:person_id');
+      localStorage.removeItem('@Safety:household_id');
+      localStorage.removeItem('@Safety:address_id');
+      window.location.reload();
+    },
+    [],
+  )
+
   useEffect(() => {
 
     const person_id = localStorage.getItem('@Safety:person_id');
@@ -127,6 +140,8 @@ const Interview: React.FC = () => {
           <ScrollSpy open={menuOpen} />
         </div>
       </ResponsiveMenu>
+
+      <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
 
       {formState.formsSubmitted.person.show ? (<> <SectionTitle id="person">Pessoa</SectionTitle>
 

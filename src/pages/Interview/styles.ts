@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { shade } from 'polished';
 export const Container = styled.div`
   text-align: center;
 `;
@@ -59,4 +59,18 @@ export const ResponsiveMenu = styled.div`
     right: 0;
     top: 10;
   }
+`;
+
+export const ResetButton = styled.button`
+  padding: 5px 10px;
+  background: #59748c;
+  border-radius: 10px;
+  border: 0;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  &:hover {
+    background: ${shade(0.2, '#59748c')};
+  }
+
 `;
