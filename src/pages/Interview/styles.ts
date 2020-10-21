@@ -64,7 +64,7 @@ export const ResponsiveMenu = styled.div`
 export const ResetButton = styled.button`
   padding: 5px 10px;
   background: #59748c;
-  border-radius: 10px;
+  border-radius: 4px;
   border: 0;
   color: #fff;
   font-weight: bold;
