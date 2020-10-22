@@ -58,6 +58,7 @@ const Dashboard: React.FC = () => {
           <BigScreenLinkContainer>
             <StyledLink to="/interview">Faça uma entrevista</StyledLink>
             <StyledLink to="/project">Adicione um projeto</StyledLink>
+            <StyledLink to="/interviewers">Pesquisadores</StyledLink>
           </BigScreenLinkContainer>
 
           <BurguerMenu />

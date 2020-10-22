@@ -8,46 +8,50 @@ import {
   CardContent,
 } from './styles';
 
-interface CardProps {
+interface CardPersonProps {
   person: {
     name: string;
-    gender: string;
-    date_of_birth: string;
-    covid_diagnose: string;
+    organization_name?: string;
+    gender?: string;
+    date_of_birth?: string;
+    covid_diagnose?: string;
     id?: string | undefined;
   };
 }
-const Card: React.FC<CardProps> = ({ person }) => {
 
-  console.log(format(parseISO(person.date_of_birth), 'dd/MM/yyyy'));
+const Card: React.FC<CardPersonProps> = ({ person }) => {
 
   return (
     <Container>
       <CardContainer>
         <CardHeader>
           <div>{person.name}</div>
-          <div>
-            <Link to={{
-              pathname: '/household',
-              state: person
-            }}>
-              Residência
+          {!person.organization_name ?
+            (<div>
+              <Link to={{
+                pathname: '/household',
+                state: person
+              }}>
+                Residência
               </Link>
-          </div>
+            </div>) : null
+          }
         </CardHeader>
 
         <CardContent>
           <div>
             <ul>
-              <li>
+              {!person.organization_name ? (<><li>
                 <span>Gênero:</span> {person.gender}
               </li>
-              <li>
-                <span>Data de nascimento: </span>{format(parseISO(person.date_of_birth), 'dd/MM/yyyy')}
-              </li>
-              <li>
-                <span>Diagnosticado(a) com COVID: </span> {person.covid_diagnose === 'true' ? 'Sim' : 'Não'}
-              </li>
+                <li>
+                  <span>Data de nascimento: </span>{format(parseISO(person.date_of_birth || ''), 'dd/MM/yyyy')}
+                </li>
+                <li>
+                  <span>Diagnosticado(a) com COVID: </span> {person.covid_diagnose === 'true' ? 'Sim' : 'Não'}
+                </li></>) :
+                <li><span>Nome da organização/instituição: </span>{person.organization_name}</li>
+              }
             </ul>
           </div>
 

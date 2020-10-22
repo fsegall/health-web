@@ -3,12 +3,12 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 import SignIn from '../pages/Signin';
 import SignUp from '../pages/Signup';
-
 import Dashboard from '../pages/Dashboard';
 import Interview from '../pages/Interview';
 import Profile from '../pages/Profile';
 import Project from '../pages/Project';
 import Household from '../pages/Household';
+import Interviewers from '../pages/Interviewers';
 import ForgotPasword from '../pages/ForgotPassword';
 import ResetPasword from '../pages/ResetPassword';
 const Routes: React.FC = () => {
@@ -22,6 +22,7 @@ const Routes: React.FC = () => {
       <Route path="/interview" isPrivate component={Interview} />
       <Route path="/project" isPrivate component={Project} />
       <Route path="/household" isPrivate component={Household} />
+      <Route path="/interviewers" isPrivate component={Interviewers} />
       <Route path="/profile" isPrivate component={Profile} />
     </Switch>
   );
