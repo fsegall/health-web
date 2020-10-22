@@ -6,6 +6,7 @@ import {
   CardContainer,
   CardHeader,
   CardContent,
+  Avatar
 } from './styles';
 
 interface CardPersonProps {
@@ -16,6 +17,7 @@ interface CardPersonProps {
     date_of_birth?: string;
     covid_diagnose?: string;
     id?: string | undefined;
+    avatar_url?: string;
   };
 }
 
@@ -24,8 +26,11 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
   return (
     <Container>
       <CardContainer>
-        <CardHeader>
+
+        <CardHeader hasAvatar={!!person.avatar_url}>
+          {person.avatar_url ? <Avatar src={person.avatar_url} /> : null}
           <div>{person.name}</div>
+
           {!person.organization_name ?
             (<div>
               <Link to={{
