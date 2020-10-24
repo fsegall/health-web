@@ -18,7 +18,9 @@ import BurguerMenu from '../../components/BurguerMenu';
 import Card from '../../components/Card';
 import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
+import Spinner from '../../components/Spinner';
 const Dashboard: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const { signOut, user, token } = useAuth();
   const [persons, setPersons] = useState<ICreatePersonDTO[]>([]);
 
@@ -27,15 +29,17 @@ const Dashboard: React.FC = () => {
   const personsFilterByInterviewer = persons.filter(person => person.interviewer_id === user.id);
 
   useEffect(() => {
+    setIsLoading(true);
     async function fetchPersons() {
       const persons = await api.get('/persons', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      setIsLoading(false);
       setPersons(persons.data);
     }
-    fetchPersons();
+    setTimeout(fetchPersons, 2000);
   }, [token]);
   return (
     <Container>
@@ -71,13 +75,13 @@ const Dashboard: React.FC = () => {
       <div>
         <ListTitle>Entrevistados</ListTitle>
         <FilterButton type="button" onClick={() => setFilteredByUser(!filteredByUser)}>{!filteredByUser ? 'Meus Entrevistados' : 'Todos'}</FilterButton>
-        <StyledList>
-          {!filteredByUser ? persons.map((person) => {
+        {<StyledList>
+          {isLoading ? <Spinner /> : !filteredByUser ? persons.map((person) => {
             return <Card key={person.id} person={person} />;
           }) : personsFilterByInterviewer.map((person) => {
             return <Card key={person.id} person={person} />;
           })}
-        </StyledList>
+        </StyledList>}
       </div>
     </Container>
   );

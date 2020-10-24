@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ICreatePersonDTO from '../Interview/dtos/ICreatePersonDTO';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 import {
@@ -11,24 +10,39 @@ import {
 } from './styles';
 import Card from '../../components/Card';
 import api from '../../services/api';
+import Spinner from '../../components/Spinner';
+
+interface Interviewer {
+  id: string;
+  name: string;
+  organization_name?: string;
+}
 
 const Interviewers: React.FC = () => {
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const { token } = useAuth();
 
-  const [persons, setPersons] = useState<ICreatePersonDTO[]>([]);
+  const [users, setUsers] = useState<Interviewer[]>([]);
 
   useEffect(() => {
-    async function fetchPersons() {
-      const persons = await api.get('/users', {
+
+    setIsLoading(true);
+
+    async function fetchUsers() {
+
+      const users = await api.get('/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setPersons(persons.data);
+      setIsLoading(false);
+      setUsers(users.data);
     }
-    fetchPersons();
-  }, [token]);
+    setTimeout(fetchUsers, 2000);
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -41,11 +55,12 @@ const Interviewers: React.FC = () => {
       </Header>
       <div>
         <ListTitle>Entrevistadores</ListTitle>
-        <StyledList>
-          {persons.map((person) => {
-            return <Card key={person.id} person={person} />;
+        {isLoading ? <Spinner /> : <StyledList>
+          {users.map((user) => {
+            console.log(user);
+            return <Card key={user.id} person={user} />;
           })}
-        </StyledList>
+        </StyledList>}
       </div>
     </Container>
   );
