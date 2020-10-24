@@ -41,7 +41,7 @@ const Interviewers: React.FC = () => {
       setUsers(users.data);
     }
     setTimeout(fetchUsers, 2000);
-  }, []);
+  }, [token]);
 
   return (
     <Container>
