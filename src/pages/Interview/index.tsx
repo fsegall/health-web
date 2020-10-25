@@ -142,31 +142,33 @@ const Interview: React.FC = () => {
       </ResponsiveMenu>
 
       <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
+      <SectionTitle id="person">Pessoa</SectionTitle>
+      {formState.formsSubmitted.person.show ? (
 
-      {formState.formsSubmitted.person.show ? (<> <SectionTitle id="person">Pessoa</SectionTitle>
+        <PersonForm dispatch={dispatch} />) : null}
+      {formState.formsSubmitted.person.id !== '' ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
 
-        <PersonForm dispatch={dispatch} /> </>) : null}
-      {formState.formsSubmitted.person.id ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
+      <SectionTitle id="household">Residência</SectionTitle>
+      {formState.formsSubmitted.household.show ? (
 
-      {formState.formsSubmitted.household.show ? (<> <SectionTitle id="household">Residência</SectionTitle>
-
-        <HouseholdForm dispatch={dispatch} />  </>) : null}
-      {formState.formsSubmitted.household.id ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
+        <HouseholdForm dispatch={dispatch} />) : null}
+      {formState.formsSubmitted.household.id !== '' ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
 
       {/*       <SectionTitle id="family">
         Membros da Família
       </SectionTitle>
 
       <FamilyMemberForm /> */}
+      <SectionTitle id="address">Endereço</SectionTitle>
+      {formState.formsSubmitted.address.show ? (
 
-      {formState.formsSubmitted.address.show ? (<> <SectionTitle id="address">Endereço</SectionTitle>
+        <AddressForm dispatch={dispatch} />) : null}
+      {formState.formsSubmitted.address.id !== '' ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
 
-        <AddressForm dispatch={dispatch} />  </>) : null}
-      {formState.formsSubmitted.address.id ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
+      <SectionTitle id="interview">Entrevista</SectionTitle>
+      {formState.formsSubmitted.interview.show ? (
 
-      {formState.formsSubmitted.interview.show ? (<> <SectionTitle id="interview">Entrevista</SectionTitle>
-
-        <InterviewForm dispatch={dispatch} />  </>) : null}
+        <InterviewForm dispatch={dispatch} />) : null}
 
     </Container>
   );
