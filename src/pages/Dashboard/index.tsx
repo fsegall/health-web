@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
       setIsLoading(false);
       setPersons(persons.data);
     }
-    setTimeout(fetchPersons, 2000);
+    setTimeout(fetchPersons, 1000);
   }, [token]);
   return (
     <Container>

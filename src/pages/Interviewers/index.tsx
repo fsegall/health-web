@@ -40,7 +40,7 @@ const Interviewers: React.FC = () => {
       setIsLoading(false);
       setUsers(users.data);
     }
-    setTimeout(fetchUsers, 2000);
+    setTimeout(fetchUsers, 1000);
   }, [token]);
 
   return (
