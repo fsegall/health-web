@@ -76,6 +76,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
   const [ajuda, setAjuda] = useState<OptionTypeBase | undefined | null>({});
 
+  const [homegrown, setHomegrown] = useState<OptionTypeBase | undefined | null>({});
+
   const [produce, setProduce] = useState<OptionTypeBase | undefined | null>({});
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
@@ -459,7 +461,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         <Select
           name="home_grown"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setProduce(selectedOptions)}
+          onChange={selectedOptions => setHomegrown(selectedOptions)}
         />
 
         <Label>
@@ -469,7 +471,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         <Select
           name="food_for_market"
           options={yesOrNoOptions}
-          isDisabled={produce?.value === 'true' ? false : true}
+          onChange={selectedOptions => setProduce(selectedOptions)}
+          isDisabled={homegrown?.value === 'true' ? false : true}
         />
 
         <Label>
