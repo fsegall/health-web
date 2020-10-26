@@ -124,7 +124,7 @@ export const Profile = styled.div`
 `;
 
 export const ListTitle = styled.h2`
-  padding: 30px 0;
+  padding: 8px 0;
   color: #59748c;
   margin-left: 20px;
   span {
