@@ -108,7 +108,7 @@ display: flex;
 justify-content: space-around;
 align-items: center;
 @media (min-width: 768px) {
-  padding: 0 20px;
+  padding: 0 25px;
   }
 
 `;
