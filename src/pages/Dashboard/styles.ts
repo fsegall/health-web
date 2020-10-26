@@ -107,6 +107,10 @@ export const SubHeader = styled.div`
 display: flex;
 justify-content: space-around;
 align-items: center;
+@media (min-width: 768px) {
+  padding: 0 20px;
+  }
+
 `;
 
 export const ListTitle = styled.h2`
@@ -139,6 +143,10 @@ export const FilterButton = styled.button`
   &:hover {
     background: ${shade(0.2, '#59748c')};
   }
+  @media (min-width: 768px) {
+    margin-left: auto;
+  }
+
 
 `;
 
