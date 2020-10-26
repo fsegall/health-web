@@ -9,6 +9,7 @@ import {
   HeaderContent,
   Profile,
   ListTitle,
+  SubHeader,
   BigScreenLinkContainer,
   StyledLink,
   StyledList,
@@ -72,17 +73,19 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
-      <div>
+
+      <SubHeader>
         <ListTitle>Entrevistados</ListTitle>
         <FilterButton type="button" onClick={() => setFilteredByUser(!filteredByUser)}>{!filteredByUser ? 'Meus Entrevistados' : 'Todos'}</FilterButton>
-        {<StyledList>
-          {isLoading ? <Spinner /> : !filteredByUser ? persons.map((person) => {
-            return <Card key={person.id} person={person} />;
-          }) : personsFilterByInterviewer.map((person) => {
-            return <Card key={person.id} person={person} />;
-          })}
-        </StyledList>}
-      </div>
+      </SubHeader>
+      {<StyledList>
+        {isLoading ? <Spinner /> : !filteredByUser ? persons.map((person) => {
+          return <Card key={person.id} person={person} />;
+        }) : personsFilterByInterviewer.map((person) => {
+          return <Card key={person.id} person={person} />;
+        })}
+      </StyledList>}
+
     </Container>
   );
 };

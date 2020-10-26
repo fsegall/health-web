@@ -103,14 +103,18 @@ export const Profile = styled.div`
   }
 `;
 
+export const SubHeader = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
+`;
+
 export const ListTitle = styled.h2`
-  padding: 30px 0;
+  padding: 8px 0;
   color: #59748c;
-  margin-left: 20px;
   span {
     color: #ff9000;
   }
-  display: inline-flex;
 
 `;
 
@@ -126,8 +130,6 @@ export const StyledLink = styled(Link)`
 
 export const FilterButton = styled.button`
   padding: 5px 10px;
-  margin-top: 4px;
-  margin-right: 4px;
   background: #59748c;
   border-radius: 4px;
   border: 0;
@@ -137,6 +139,6 @@ export const FilterButton = styled.button`
   &:hover {
     background: ${shade(0.2, '#59748c')};
   }
-  float: right;
+
 `;
 
