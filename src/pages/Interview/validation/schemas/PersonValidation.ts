@@ -20,6 +20,7 @@ export const PersonValidation = Yup.object().shape({
   work_status: Yup.string().required(
     'Você precisa escolher um dos campos de situação de trabalho',
   ),
+  work_shift_reduction: Yup.string(),
   covid_diagnose: Yup.string().required(
     'Você precisa escolher um dos campos de estado de saúde',
   ),

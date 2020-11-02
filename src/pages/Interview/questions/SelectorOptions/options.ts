@@ -19,7 +19,12 @@ export const typeOfResidenceOptions = [
     label: 'Casa',
   },
   { value: 'apartamento', label: 'Apartamento' },
-  { value: 'precaria', label: ' Cômodos, barraco, cortiço etc...' }, // improvisado ?
+  {
+    value: 'casa-de-vila',
+    label: 'Casa de vila ou condomínio',
+  },
+  { value: 'oca-maloca', label: 'Oca ou  maloca' },
+  { value: 'precaria', label: ' Cômodos, barraco, cortiço ou cabeça de porco' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -115,14 +120,26 @@ export const educationOptions = [
 ];
 
 // 21 change to checkbox for multiple answers (2 maximum) - Person
-export const workOptions = [
-  { value: 'empregado(a)-sem-reducao', label: 'Empregado/Trabalhando como autônomo sem redução de carga horária' },
-  { value: 'empregado(a)-com-reducao', label: 'Empregado/Trabalhando como autônomo com redução de carga horária' },
+
+export const atWorkOptions = [
+  { value: 'empregado(a)-sem-reducao', label: 'Empregado ou Trabalhando como autônomo sem redução de carga horária' },
+  { value: 'empregado(a)-com-reducao', label: 'Empregado ou Trabalhando como autônomo com redução de carga horária' },
+]
+
+export const work_status = [
+  {
+    value: 'trabalho_formal',
+    label: 'Empregado(a) com trabalho formal',
+  },
+  {
+    value: 'trabalho_informal',
+    label: 'Trabalhando (autônomo/a)',
+  },
 
   { value: 'aposentado-pensionista', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras)' },
   {
     value: 'desempregado(a)',
-    label: 'Desempregado(a) /Sem trabalho (autônomo/a)',
+    label: 'Desempregado(a) / Sem trabalho (autônomo/a)',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];

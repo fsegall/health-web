@@ -1,6 +1,9 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
+import {
+  OptionTypeBase
+} from 'react-select';
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
@@ -23,8 +26,7 @@ import {
   educationOptions,
   LiteracyOptions,
   yesOrNoOptions,
-  workOptions,
-
+  work_status
 } from '../../questions/SelectorOptions/options';
 
 
@@ -41,6 +43,8 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
   const { addToast } = useToast();
 
   const PersonFormRef = useRef<FormHandles>(null);
+
+  const [workType, setWorkType] = useState<OptionTypeBase | undefined | null>({});
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
@@ -113,7 +117,20 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
         <Label>
           <span>Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
-          < Select name="work_status" options={workOptions} />
+          < Select
+            name="work_status"
+            options={work_status}
+            onChange={selectedOptions => setWorkType(selectedOptions)}
+          />
+        </Label>
+
+        <Label>
+          <span>Caso esteja trabalhando ou empregado, você teve redução de carga horária?</span>
+          < Select
+            name="work_shift_reduction"
+            options={yesOrNoOptions}
+            isDisabled={(workType?.value === 'trabalho_formal' || workType?.value === 'trabalho_informal') ? false : true}
+          />
         </Label>
 
         <Label>Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
