@@ -128,18 +128,34 @@ export const atWorkOptions = [
 
 export const work_status = [
   {
-    value: 'trabalho_formal',
+    value: 'funcionario_publico_estatutario',
+    label: 'Funcionário publico estatutário',
+  },
+  {
+    value: 'empregado_trabalho_formal',
     label: 'Empregado(a) com trabalho formal',
   },
   {
-    value: 'trabalho_informal',
+    value: 'empregado_trabalho_formal_e_informal',
+    label: 'Empregado(a) com trabalho formal e informal',
+  },
+  {
+    value: 'autonomo_trabalho_formal',
+    label: 'Autônomo(a) com trabalho formal',
+  },
+  {
+    value: 'autonomo_trabalho_informal',
     label: 'Trabalhando (autônomo/a)',
   },
-
   { value: 'aposentado-pensionista', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras)' },
+  { value: 'aposentado-pensionista_com_trabalho_informal', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras) que também realiza trabalho informal' },
   {
-    value: 'desempregado(a)',
-    label: 'Desempregado(a) / Sem trabalho (autônomo/a)',
+    value: 'desempregado_procurando_emprego',
+    label: 'Desempregado(a) procurando emprego',
+  },
+  {
+    value: 'desempregado_sem_procura_de_emprego',
+    label: 'Desempregado(a) sem procura de emprego (pelo IBGE são os desalentados)'
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
