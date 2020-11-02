@@ -145,7 +145,7 @@ export const work_status = [
   },
   {
     value: 'autonomo_trabalho_informal',
-    label: 'Trabalhando (autônomo/a)',
+    label: 'Autônomo(a) com trabalhando informal',
   },
   { value: 'aposentado-pensionista', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras)' },
   { value: 'aposentado-pensionista_com_trabalho_informal', label: 'Aposentado/ Pensionista (viuvez/problema de saúde/ pensão alimentícia/ outras) que também realiza trabalho informal' },
@@ -155,7 +155,7 @@ export const work_status = [
   },
   {
     value: 'desempregado_sem_procura_de_emprego',
-    label: 'Desempregado(a) sem procura de emprego (pelo IBGE são os desalentados)'
+    label: 'Desempregado(a) sem procura de emprego'
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
