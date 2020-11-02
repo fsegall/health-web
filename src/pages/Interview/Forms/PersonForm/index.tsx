@@ -129,7 +129,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
           < Select
             name="work_shift_reduction"
             options={yesOrNoOptions}
-            isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista') ? true : false}
+            isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
           />
         </Label>
 
