@@ -153,9 +153,7 @@ export const HouseholdValidation = Yup.object().shape({
   food_price_change: Yup.string().required(
     'Você precisa escolher um dos campos observou alguma alteração nos preços dos alimentos',
   ),
-  food_profile_change: Yup.string().required(
-    'Você precisa escolher um dos campos do seu perfil de compra dos alimentos',
-  ),
+  food_profile_change: Yup.string(),
   food_store_type: Yup.string().required(
     'Você precisa escolher um dos campos de qual foi o tipo de estabelecimento mais frequentado para compra de alimentos',
   ),
