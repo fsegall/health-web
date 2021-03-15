@@ -91,11 +91,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
       <section>
+        <Label>P1 - Nome</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="name" />
-        <Label>P1 - Data de Nascimento</Label>
+        <Label>P2 - Data de Nascimento</Label>
         <Input name="date_of_birth" type="date" />
 
-        <Label>P2 - Gênero </Label>
+        <Label>P3 - Gênero </Label>
         < Select name="gender" options={genderOptions} />
 
 
@@ -103,20 +104,20 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
       < section >
 
-        <Label>P3 - Raça ou cor </Label>
+        <Label>P4 - Raça ou cor </Label>
         < Select name="race_color" options={raceOptions} />
         <Label>
-          <span>P4 - Sabe ler e escrever ? </span>
+          <span>P5 - Sabe ler e escrever ? </span>
           < Select name="literacy" options={LiteracyOptions} />
         </Label>
       </section>
 
       < section >
-        <Label>P5 - Escolaridade </Label>
+        <Label>P6 - Escolaridade </Label>
         < Select name="education" options={educationOptions} />
 
         <Label>
-          <span>P6 - Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
+          <span>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
           < Select
             name="work_status"
             options={work_status}
@@ -125,7 +126,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
         </Label>
 
         <Label>
-          <span>P7 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</span>
+          <span>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</span>
           < Select
             name="work_shift_reduction"
             options={yesOrNoOptions}
@@ -133,7 +134,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
           />
         </Label>
 
-        <Label>P8 - Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
+        <Label>P9 - Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>
