@@ -36,14 +36,11 @@ const Household: React.FC = () => {
   useEffect(() => {
     setIsLoading(true);
     async function fetchHousehold() {
-      console.log('inside useEffect', location.state)
       const response = await api.get(`/persons/${location.state.id}/household`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      console.log(response.data)
       setIsLoading(false);
       setHousehold(response.data);
     }
@@ -76,7 +73,7 @@ const Household: React.FC = () => {
                 <span>{`Tipo de residência: ${household?.type_of_residence}`}</span>
 
               </li>
-              <li>
+              {/*               <li>
 
                 <span>{`Número de cômodos da residência: ${household?.number_of_rooms}`}</span>
 
@@ -98,7 +95,7 @@ const Household: React.FC = () => {
                 <span>{`A pessoa  ${household?.government_assistance_program_bolsa_familia ? 'recebeu ' : 'não recebeu '
                   } assitência do bolsa família`}</span>
 
-              </li>
+              </li> */}
 
             </HouseList >
           </HouseholdContainer>) : <DefaultContent>Esta pessoa ainda não tem uma residência associada a ela na pesquisa</DefaultContent>}
