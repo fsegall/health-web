@@ -142,13 +142,13 @@ const Interview: React.FC = () => {
       </ResponsiveMenu>
 
       <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
-      <SectionTitle id="person">Pessoa</SectionTitle>
+      <SectionTitle id="person">Dados Pessoais</SectionTitle>
       {formState.formsSubmitted.person.show ? (
 
         <PersonForm dispatch={dispatch} />) : null}
       {formState.formsSubmitted.person.id !== '' ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
 
-      <SectionTitle id="household">Residência</SectionTitle>
+      <SectionTitle id="household">Domicílio</SectionTitle>
       {formState.formsSubmitted.household.show ? (
 
         <HouseholdForm dispatch={dispatch} />) : null}
