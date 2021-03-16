@@ -10,9 +10,9 @@ interface ScrollProps {
 const ScrollSpy: React.FC<ScrollProps> = ({ open }) => {
   return (
     <MenuSpy open={open}>
-      <AnchorLink href="#person">Pessoa</AnchorLink>
+      <AnchorLink href="#person">Dados Pessoais</AnchorLink>
       {/* <AnchorLink href="#family">Família</AnchorLink> */}
-      <AnchorLink href="#household">Residência</AnchorLink>
+      <AnchorLink href="#household">Domicílio</AnchorLink>
       <AnchorLink href="#address">Endereço</AnchorLink>
       <AnchorLink href="#interview">Entrevista</AnchorLink>
     </MenuSpy>
