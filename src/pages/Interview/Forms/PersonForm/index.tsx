@@ -91,12 +91,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
       <section>
-        <Label>P1 - Nome</Label>
+        <Label>P1 - Qual o seu nome completo?</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="name" />
-        <Label>P2 - Data de Nascimento</Label>
-        <Input name="date_of_birth" type="date" />
+        <Label>P2 - Qual a sua idade?</Label>
+        <Input name="age" type="number" min="18" max="110" />
 
-        <Label>P3 - Gênero </Label>
+        <Label>P3 - Qual o seu sexo?</Label>
         < Select name="gender" options={genderOptions} />
 
 
@@ -104,16 +104,16 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
       < section >
 
-        <Label>P4 - Raça ou cor </Label>
+        <Label>P4 - Como você define sua raça ou cor?</Label>
         < Select name="race_color" options={raceOptions} />
         <Label>
-          <span>P5 - Sabe ler e escrever ? </span>
+          <span>P5 - Você sabe ler e escrever? </span>
           < Select name="literacy" options={LiteracyOptions} />
         </Label>
       </section>
 
       < section >
-        <Label>P6 - Escolaridade </Label>
+        <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
         < Select name="education" options={educationOptions} />
 
         <Label>

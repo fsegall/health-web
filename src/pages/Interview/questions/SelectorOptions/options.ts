@@ -89,6 +89,7 @@ export const raceOptions = [
   { value: 'parda', label: 'Parda' },
   { value: 'oriental', label: 'Oriental' },
   { value: 'indigena', label: 'Indígena' },
+  { value: 'outra', label: 'Outra' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 

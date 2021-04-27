@@ -2,8 +2,8 @@ import * as Yup from 'yup';
 
 export const PersonValidation = Yup.object().shape({
   name: Yup.string().required('Você precisa digitar um nome'),
-  date_of_birth: Yup.date().required(
-    'Você precisa digitar uma data de nascimento',
+  age: Yup.number().required(
+    'Você precisa digitar uma idade',
   ),
   gender: Yup.string().required(
     'Você precisa escolher um dos campos de gênero',
