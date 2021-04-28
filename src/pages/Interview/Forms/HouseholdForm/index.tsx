@@ -21,7 +21,6 @@ import ICreateHouseholdDTO from '../../dtos/ICreateHouseholdDTO';
 import { useToast } from '../../../../hooks/toast';
 import { HouseholdValidation } from '../../validation/schemas/HouseholdValidation';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
 import {
   drinkingWaterOptions,
   typeOfResidenceOptions,
@@ -46,8 +45,14 @@ import {
   FoodStoreOptions,
   FoodProfileOptions,
   FoodExpenditureOptions,
-  referencePersonGenderOptions
-
+  mainPersonGenderOptions,
+  genderOptions,
+  raceOptions,
+  educationOptions,
+  LiteracyOptions,
+  main_person_work_status,
+  main_person_work_occupation,
+  main_person_work_situation
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -166,11 +171,53 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
 
+        <Label>DX1 - Qual a idade da pessoa de referência?</Label>
+        <Input
+          placeholder="Idade"
+          type="number"
+          min="18"
+          max="110"
+          name="main_person_age"
+        />
+
         <Label>D6 - Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="reference_person_gender"
-          options={referencePersonGenderOptions}
+          name="main_person_gender"
+          options={mainPersonGenderOptions}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>DX2 - Como você define a raça ou cor da pessoa de referência?</Label>
+        < Select name="race_color" options={raceOptions} />
+
+        <Label>DX3 - A pessoa de referência sabe ler e escrever?</Label>
+        < Select name="literacy" options={LiteracyOptions} />
+
+        <Label>DX4 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
+        < Select name="education" options={educationOptions} />
+
+        <Label>DX5 - Qual a situação de trabalho da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_status"
+          options={main_person_work_status}
+        />
+
+        <Label>DX6 - Qual a ocupação da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_occupation"
+          options={main_person_work_occupation}
+        />
+
+        <Label>DX7 - Qual a ocupação da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_occupation"
+          options={main_person_work_occupation}
+        />
+
+        <Label>DX8 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_situation"
+          options={main_person_work_situation}
         />
 
         <Label>D7 - Tipo de residência</Label>

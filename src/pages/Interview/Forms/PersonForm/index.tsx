@@ -98,43 +98,31 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
         <Label>P3 - Qual o seu sexo?</Label>
         < Select name="gender" options={genderOptions} />
-
-
       </section>
 
       < section >
-
         <Label>P4 - Como você define sua raça ou cor?</Label>
         < Select name="race_color" options={raceOptions} />
-        <Label>
-          <span>P5 - Você sabe ler e escrever? </span>
-          < Select name="literacy" options={LiteracyOptions} />
-        </Label>
+        <Label>P5 - Você sabe ler e escrever?</Label>
+        < Select name="literacy" options={LiteracyOptions} />
       </section>
 
       < section >
         <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
         < Select name="education" options={educationOptions} />
-
-        <Label>
-          <span>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
-          < Select
-            name="work_status"
-            options={work_status}
-            onChange={selectedOptions => setWorkType(selectedOptions)}
-          />
-        </Label>
-
-        <Label>
-          <span>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</span>
-          < Select
-            name="work_shift_reduction"
-            options={yesOrNoOptions}
-            isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
-          />
-        </Label>
-
-        <Label>P9 - Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
+        <Label>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho?</Label>
+        < Select
+          name="work_status"
+          options={work_status}
+          onChange={selectedOptions => setWorkType(selectedOptions)}
+        />
+        <Label>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</Label>
+        < Select
+          name="work_shift_reduction"
+          options={yesOrNoOptions}
+          isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
+        />
+        <Label>P9 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>

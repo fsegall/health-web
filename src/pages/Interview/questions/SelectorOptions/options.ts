@@ -75,7 +75,7 @@ export const mainPersonOptions = [
 ];
 
 //17 Person
-export const referencePersonGenderOptions = [
+export const mainPersonGenderOptions = [
   { value: 'masculino', label: 'Masculino' },
   { value: 'feminino', label: 'Feminino' },
   { value: 'outro', label: 'Outro' },
@@ -127,11 +127,99 @@ export const atWorkOptions = [
   { value: 'empregado(a)-com-reducao', label: 'Empregado ou Trabalhando como autônomo com redução de carga horária' },
 ]
 
-export const work_status = [
+export const main_person_work_status = [
   {
-    value: 'funcionario_publico_estatutario',
-    label: 'Funcionário publico estatutário',
+    value: 'desempregado em 2021',
+    label: 'Desempregado em 2021',
   },
+  {
+    value: 'desempregado desde 2020',
+    label: 'Desempregado desde 2020',
+  },
+  {
+    value: 'desempregado desde antes de 2020',
+    label: 'Desempregado desde antes de 2020',
+  },
+  {
+    value: 'aposentado',
+    label: 'Aposenatado(a)',
+  },
+  {
+    value: 'estudante',
+    label: 'Estudante',
+  },
+  {
+    value: 'dona de casa',
+    label: 'Dona de casa',
+  },
+];
+
+export const main_person_work_occupation = [
+  {
+    value: 'agricultor(a) familiar ou produtor(a) rural',
+    label: 'Agricultor(a) familiar ou produtor(a) rural',
+  },
+  {
+    value: 'trabalhador(a) rural temporário (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário (diarista, safrista etc.)',
+  },
+  {
+    value: 'trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
+    label: 'Trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
+  },
+  {
+    value: 'funcionário(a) público',
+    label: 'Funcionário(a) público',
+  },
+  {
+    value: 'trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
+    label: 'Trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
+  },
+  {
+    value: 'estagiário(a) (remunerado)',
+    label: 'Estagiário(a) (remunerado)',
+  },
+  {
+    value: 'autônomo(a) regular/empreendedor(a) individual (paga INSS)',
+    label: 'Autônomo(a) regular/empreendedor(a) individual (paga INSS)',
+  },
+  {
+    value: 'profissional liberal (nível superior)',
+    label: 'Profissional liberal (nível superior)',
+  },
+  {
+    value: 'trabalhador(a) informal, bico, free lancer, outros',
+    label: 'Trabalhador(a) informal, bico, free lancer, outros',
+  },
+  {
+    value: 'empresário(a)  ',
+    label: 'Empresário(a)',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+export const main_person_work_situation = [
+  {
+    value: 'trabalha em casa',
+    label: 'Trabalha em casa',
+  },
+  {
+    value: 'frequenta normalmente o local de trabalho',
+    label: 'Frequenta normalmente o local de trabalho',
+  },
+  {
+    value: 'trabalha em casa e também frequenta o local de trabalho',
+    label: 'Trabalha em casa e também frequenta o local de trabalho',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+
+export const work_status = [
+  /*   {
+      value: 'funcionario_publico_estatutario',
+      label: 'Funcionário publico estatutário',
+    }, */
   {
     value: 'empregado_trabalho_formal',
     label: 'Empregado(a) com trabalho formal',
