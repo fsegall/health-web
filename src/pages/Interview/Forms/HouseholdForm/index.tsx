@@ -52,7 +52,8 @@ import {
   LiteracyOptions,
   main_person_work_status,
   main_person_work_occupation,
-  main_person_work_situation
+  main_person_work_situation,
+  covidLossOptions
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -208,16 +209,35 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           options={main_person_work_occupation}
         />
 
-        <Label>DX7 - Qual a ocupação da pessoa de referência?</Label>
-        < Select
-          name="main_person_work_occupation"
-          options={main_person_work_occupation}
-        />
-
-        <Label>DX8 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
+        <Label>DX7 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_situation"
           options={main_person_work_situation}
+        />
+
+        <Label>DX8 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
+Coronavírus (Covid-19)</Label>
+        < Select
+          name="covid_2020_household"
+          options={yesOrNoOptions}
+        />
+
+        <Label>DX9 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
+        < Select
+          name="covid_loss"
+          options={covidLossOptions}
+        />
+
+        <Label>DX10 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
+        < Select
+          name="covid_2021_household"
+          options={yesOrNoOptions}
+        />
+
+        <Label>DX11 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        < Select
+          name="covid_loss"
+          options={covidLossOptions}
         />
 
         <Label>D7 - Tipo de residência</Label>

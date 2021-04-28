@@ -214,6 +214,39 @@ export const main_person_work_situation = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+export const covidLossOptions = [
+  {
+    value: 'não',
+    label: 'Não',
+  },
+  {
+    value: 'sim, a pessoa de referência - adulto homem',
+    label: 'Sim, a pessoa de referência - adulto homem',
+  },
+  {
+    value: 'sim, a pessoa de referência - adulto mulher',
+    label: 'Sim, a pessoa de referência - adulto mulher',
+  },
+  {
+    value: 'sim, outro adulto homem',
+    label: 'Sim, a outro adulto homem',
+  },
+  {
+    value: 'sim, outro adulto mulher',
+    label: 'Sim, a outro adulto mulher',
+  },
+  {
+    value: 'sim, criança / adolescente (jovem menor de 20 anos)',
+    label: 'Sim, criança / adolescente (jovem menor de 20 anos)',
+  },
+  {
+    value: 'sim, mas por outra doença',
+    label: 'Sim, mas por outra doença',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+
+];
+
 
 export const work_status = [
   /*   {
