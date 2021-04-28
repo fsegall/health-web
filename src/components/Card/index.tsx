@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { parseISO, format } from 'date-fns';
 import {
   Container,
   CardContainer,
@@ -14,7 +13,7 @@ interface CardPersonProps {
     name: string;
     organization_name?: string;
     gender?: string;
-    date_of_birth?: string;
+    age?: number;
     covid_diagnose?: string;
     id?: string | undefined;
     avatar_url?: string;
@@ -50,7 +49,7 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
                 <span>Gênero:</span> {person.gender}
               </li>
                 <li>
-                  <span>Data de nascimento: </span>{format(parseISO(person.date_of_birth || ''), 'dd/MM/yyyy')}
+                  <span>Idade: </span>{person.age || ''}
                 </li>
                 <li>
                   <span>Diagnosticado(a) com COVID: </span> {person.covid_diagnose === 'true' ? 'Sim' : 'Não'}
