@@ -53,7 +53,8 @@ import {
   main_person_work_status,
   main_person_work_occupation,
   main_person_work_situation,
-  covidLossOptions
+  covidLossOptions,
+  peopleIncomeRangeOptions
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -255,6 +256,15 @@ Coronavírus (Covid-19)</Label>
         <Select name="construction_material" options={buildingMaterialOptions} />
         <Label>D10 - Tem acesso à água potável na sua casa?</Label>
         <Select name="drinking_water" options={drinkingWaterOptions} />
+
+
+        <Label>D - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
+        <Select name="water_rural_animals" options={yesOrNoOptions} />
+
+        <Label>D - Este domicílio tem água suficiente para produção de alimentos?</Label>
+        <Select name="water_rural_produce" options={yesOrNoOptions} />
+
+
         <Label>D11 - Como é feita a coleta de esgoto na casa?</Label>
         <Select name="sewage" options={sewageOptions} />
         <Label>D12 - Número de pessoas no domicílio</Label>
@@ -281,9 +291,10 @@ Coronavírus (Covid-19)</Label>
 
           (
             <>
+              <Label>Número de pessoas por faixa de idade:</Label>
               <Label>D14 - Quantos moradores com até 5 anos</Label>
               <Input
-                placeholder="Menos de 5 anos"
+                placeholder="Menos de 5 anos - Digitar número"
                 name="five_years_old_or_more"
                 min="0"
                 max="6"
@@ -292,7 +303,7 @@ Coronavírus (Covid-19)</Label>
               />
               <Label>D15 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
-                placeholder="Entre 6 e 18 anos"
+                placeholder="Entre 6 e 18 anos - Digitar número"
                 name="between_6_and_18"
                 min="0"
                 max="6"
@@ -301,7 +312,7 @@ Coronavírus (Covid-19)</Label>
               />
               <Label>D16 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
-                placeholder="Entre 19 e 59 anos"
+                placeholder="Entre 19 e 59 anos - Digitar número"
                 name="between_19_and_59"
                 min="0"
                 max="6"
@@ -310,7 +321,7 @@ Coronavírus (Covid-19)</Label>
               />
               <Label>D17 - Quantos moradores 60 anos ou mais</Label>
               <Input
-                placeholder="Com 60 anos ou mais"
+                placeholder="Com 60 anos ou mais - Digitar número"
                 name="sixty_years_old_or_more"
                 min="0"
                 max="6"
@@ -322,7 +333,6 @@ Coronavírus (Covid-19)</Label>
               <Select
                 name="people_invited"
                 options={peopleInvitedToHouseholdOptions}
-                onChange={() => { }}
               />
             </>
           ) : null}
@@ -344,14 +354,29 @@ Coronavírus (Covid-19)</Label>
             onChange={() => setIncome(!income)}
           />
         </CheckBoxContainer>
-        {income ? <Input
-          icon={FiDollarSign}
-          placeholder="D21 - Renda familiar"
-          name="family_income"
-          type="number"
-          min="1"
 
-        /> : null}
+        {income ?
+
+          <Input
+            icon={FiDollarSign}
+            placeholder="D21 - Renda familiar"
+            name="family_income"
+            type="number"
+            min="1"
+
+          />
+
+          : null}
+
+        <Label>
+          D - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
+      </Label>
+        <Select
+          name="people_income_range"
+          options={peopleIncomeRangeOptions}
+        />
+
+
         <CheckBoxContainer>
           <Label>
             <span>D22 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
@@ -402,6 +427,22 @@ Coronavírus (Covid-19)</Label>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
+          D - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
+        </Label>
+        <Select
+          name="matriculado_na_educacao_basica_publica"
+          options={yesOrNoOptions}
+        />
+
+        <Label>
+          D28 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
+        </Label>
+        <Select
+          name="government_assistance_program_pnae"
+          options={governmentPNAEProgramOptions}
+        />
+
+        <Label>
           D23 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
         </Label>
         <Select
@@ -439,14 +480,6 @@ Coronavírus (Covid-19)</Label>
         <Select
           name="prison_cash_assistance"
           options={yesOrNoOptions}
-        />
-
-        <Label>
-          D28 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente à alimentação escolar ou PNAE</b>?
-        </Label>
-        <Select
-          name="government_assistance_program_pnae"
-          options={governmentPNAEProgramOptions}
         />
 
         <Label>
@@ -676,117 +709,57 @@ Coronavírus (Covid-19)</Label>
 
         <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
 
-        <Label>D55 - Você comeu algum dos alimentos listados abaixo ontem?</Label>
+        <Label>D55 -Ontem você comeu:</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="alface_acelga_repolho"
+            name="feijao"
 
             options={[{
-              id: 'alface, acelga ou repolho',
+              id: 'Feijão',
               value: 'true',
-              label: 'Alface, acelga ou repolho',
+              label: 'Feijão',
             }]}
 
           />
 
           <CheckboxInput
 
-            name="couve_brocolis_almeirao_agriao_espinafre"
+            name="arroz"
             options={[{
-              id: 'couve, brocolis, almeirao, agriao ou espinafre',
+              id: 'Arroz',
               value: 'true',
-              label: 'Couve, brócolis, almeirão, agrião ou espinafre',
+              label: 'Arroz',
             }]}
           />
 
           <CheckboxInput
 
-            name="abobora_cenoura_batata_doce_quiabo_caruru"
+            name="carnes"
             options={[{
-              id: 'abobora, cenoura, batata-doce ou quiabo/caruru',
+              id: 'Carnes (de boi, peixe, frango ou porco)',
               value: 'true',
-              label: 'Abóbora, cenoura, batata-doce ou quiabo/caruru',
+              label: 'Carnes (de boi, peixe, frango ou porco)',
             }]}
           />
 
           <CheckboxInput
 
-            name="mamao_manga_melaoamarelo_caqui_pequi"
+            name="verduras_legumes"
             options={[{
-              id: 'mamao, manga, melao amarelo, caqui ou pequi',
+              id: 'Verduras e/ou legumes',
               value: 'true',
-              label: 'Mamão, manga, melão amarelo, caqui ou pequi',
+              label: 'Verduras e/ou legumes (não considerar batata, mandioca, aipim, macaxeira, cará e inhame)',
             }]}
           />
 
           <CheckboxInput
 
-            name="tomate_pepino_abobrinha_berinjela_chuchu_beterraba"
+            name="frutas_frescas"
             options={[{
-              id: 'tomate, pepino, abobrinha, berinjela, chuchu ou beterraba',
+              id: 'Frutas frescas',
               value: 'true',
-              label: 'Tomate, pepino, abobrinha, berinjela, chuchu ou beterraba',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="laranja_banana_maca_abacaxi"
-            options={[{
-              id: 'laranja, banana, maçã ou abacaxi ',
-              value: 'true',
-              label: 'Laranja, banana, maçã ou abacaxi',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="arroz_macarrao_polenta_cuscuz_milho_verde"
-            options={[{
-              id: 'arroz, macarrao, polenta, cuscuz ou milho verde',
-              value: 'true',
-              label: 'Arroz, macarrão, polenta, cuscuz ou milho verde ',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="feijao_ervilha_lentilha_grao_de_bico"
-            options={[{
-              id: 'feijao, ervilha, lentilha ou grao de bico',
-              value: 'true',
-              label: 'Feijão, ervilha, lentilha ou grão de bico',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="batata_comum_mandioca_cara_inhame"
-            options={[{
-              id: 'batata comum, mandioca, cara ou inhame',
-              value: 'true',
-              label: 'Batata comum, mandioca, cará ou inhame',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="carne_de_boi_porco_frango_peixe"
-            options={[{
-              id: 'carne-de-boi_porco_frango_peixe',
-              value: 'true',
-              label: 'Carne de boi, porco, frango ou peixe',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="ovo_frito_cozido_mexido"
-            options={[{
-              id: 'ovo frito, cozido ou mexido',
-              value: 'true',
-              label: 'Ovo frito, cozido ou mexido',
+              label: 'Frutas frescas (não considerar suco de frutas)',
             }]}
           />
 
@@ -794,7 +767,7 @@ Coronavírus (Covid-19)</Label>
 
             name="leite"
             options={[{
-              id: 'leite   ',
+              id: 'Leite',
               value: 'true',
               label: 'Leite',
             }]}
@@ -802,149 +775,46 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="amendoim_castanha_de_caju_ou_castanha_do_brasil_para"
+            name="hambúrguer_embutidos"
             options={[{
-              id: 'Amendoim, castanha de caju ou castanha do Brasil/ Para',
+              id: 'Hambúrguer e/ou embutidos',
               value: 'true',
-              label: 'Amendoim, castanha de caju ou castanha do Brasil/ Pará',
+              label: 'Hambúrguer e/ou embutidos (presunto, mortadela, salame, linguiça, salsicha)',
             }]}
           />
+
+          <CheckboxInput
+
+            name="bebidas_adocadas"
+            options={[{
+              id: 'Bebidas adoçadas',
+              value: 'true',
+              label: 'Bebidas adoçadas (refrigerante, suco de caixinha, suco em pó, água de coco de caixinha, xaropes de guaraná/groselha, suco de fruta com adição de açúcar)',
+            }]}
+          />
+
+          <CheckboxInput
+
+            name="macarrao-instantaneo_salgadinhos-de-pacote_biscoitos-salgados"
+            options={[{
+              id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
+              value: 'true',
+              label: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
+            }]}
+          />
+
+          <CheckboxInput
+
+            name="biscoito-recheado_doces_guloseimas"
+            options={[{
+              id: 'Biscoito recheado, doces ou guloseimas',
+              value: 'true',
+              label: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramelo, gelatina)',
+            }]}
+          />
+
+
         </CheckBoxContainer>
-
-        <Label>D56 - Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</Label>
-        <CheckBoxContainer>
-          <CheckboxInput
-
-            name="soft_drink"
-            options={[{
-              id: 'refrigerante',
-              value: 'true',
-              label: 'Refrigerante',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="juice_can_or_box"
-            options={[{
-              id: 'suco de fruta em caixa, caixinha, lata (como Del Valle ou Tropicana)',
-              value: 'true',
-              label: 'Suco de fruta em caixa, caixinha, lata (como Del Valle® ou Tropicana®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="juice_powder"
-            options={[{
-              id: 'Refresco em po (como Tang ou Ki suco)',
-              value: 'true',
-              label: 'Refresco em pó (como Tang® ou Ki suco®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="chocolate_beverage"
-            options={[{
-              id: 'bebida achocolatada (como Toddynho ou Toddy)',
-              value: 'true',
-              label: 'Bebida achocolatada (como Toddynho® ou Toddy®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="flavored_yogurt"
-            options={[{
-              id: 'iogurte com sabor',
-              value: 'true',
-              label: 'Iogurte com sabor',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="salty_snacks"
-            options={[{
-              id: 'Salgadinho de pacote (ou chips) ou biscoito/bolacha salgado ',
-              value: 'true',
-              label: 'Salgadinho de pacote (ou chips) ou biscoito/bolacha salgado ',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="cookies"
-            options={[{
-              id: 'biscoito/bolacha doce, biscoito recheado ou bolinho de pacote',
-              value: 'true',
-              label: 'Biscoito/bolacha doce, biscoito recheado ou bolinho de pacote',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="industrialized_dessert"
-            options={[{
-              id: 'chocolate, sorvete, gelatina, ou outra sobremesa industrializada',
-              value: 'true',
-              label: 'Chocolate, sorvete, gelatina, ou outra sobremesa industrializada',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="sausages"
-            options={[{
-              id: 'salsicha, linguiça, mortadela ou presunto',
-              value: 'true',
-              label: 'Salsicha, linguiça, mortadela ou presunto',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="hot_dog_or_burguer_bread"
-            options={[{
-              id: 'Pao de forma, de cachorro quente ou de hamburguer',
-              value: 'true',
-              label: 'Pão de forma, de cachorro quente ou de hambúrguer',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="mayonnaise_ketchup_mustard"
-            options={[{
-              id: 'maionese, ketchup ou mostarda',
-              value: 'true',
-              label: 'Maionese, ketchup ou mostarda',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="margarine"
-            options={[{
-              id: 'margarina',
-              value: 'true',
-              label: 'Margarina',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="instant_noodles_or_soup_or_frozen_food"
-            options={[{
-              id: 'Macarrao instantaneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado',
-              value: 'true',
-              label: 'Macarrão instantâneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado',
-            }]}
-          />
-        </CheckBoxContainer>
-
-
 
         <Button>Submit</Button>
       </Section>

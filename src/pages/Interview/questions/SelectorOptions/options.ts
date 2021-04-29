@@ -311,28 +311,38 @@ export const peopleInvitedToHouseholdOptions = [
 ];
 
 //27 income checkbox for NS/NR
+export const peopleIncomeRangeOptions = [
+  { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
+  { value: 'de R$ 275,00 a R$550, (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
+  { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
+  { value: 'mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)', label: 'Mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)' },
+  { value: 'mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)' },
+  { value: 'mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)', label: 'Mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)' },
+  { value: 'mais de 11.000,00(mais de 10 SM)', label: 'Mais de 11.000,00 (mais de 10 SM)' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
 
 //30 Household
 export const buildingMaterialOptions = [
-  { value: 'alvenaria-com-revestimento', label: 'Alvenaria Com Revestimento/Taipa Com Revestimento ' },
-  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria Sem Revestimento ' },
-  { value: 'taipa-sem-revestimento', label: 'Taipa Sem Revestimento' },
-  { value: 'madeira-para-construção', label: 'Madeira Apropriada Para Construção' },
-  { value: 'madeira-aproveitada', label: 'Madeira Aproveitada' },
-  { value: 'outro-material', label: 'Outro Material' },
+  { value: 'alvenaria-com-revestimento', label: 'Alvenaria com revestimento/Taipa com revestimento ' },
+  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria sem revestimento ' },
+  { value: 'taipa-sem-revestimento', label: 'Taipa sem revestimento' },
+  { value: 'madeira-para-construção', label: 'Madeira apropriada para construção' },
+  { value: 'madeira-aproveitada', label: 'Madeira aproveitada' },
+  { value: 'outro-material', label: 'Outro material' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
 //31 Household
 export const drinkingWaterOptions = [
-  { value: 'true', label: 'Sim' },
+  { value: 'sim', label: 'Sim' },
   {
     value: 'sim-mas-falha',
     label: 'Sim, mas o fornecimento falha semanalmente',
   },
   {
-    value: 'false',
-    label: 'Não tem fornecimento',
+    value: 'não',
+    label: 'Não',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
@@ -421,7 +431,8 @@ export const adultOneMealOrNoneOptions = [
 export const governmentProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
-  { value: 'tentou', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'já era cadastrado e se manteve', label: 'Já era cadastrado e se manteve' },
+  { value: 'tentou cadastrar, mas não conseguiu', label: 'Tentou cadastrar, mas não conseguiu ' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -457,9 +468,11 @@ export const governmentReclusaoProgramOptions = [
 
 //46 Household
 export const governmentPNAEProgramOptions = [
-  { value: 'sim-escola', label: 'Sim, na própria escola ' },
-  { value: 'sim-cesta', label: 'Sim, recebendo como cesta de alimentos' },
-  { value: 'nao', label: 'Não ' },
+  { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
+  { value: 'sim, recebi como cesta de alimentos (na própria escola ou em casa)', label: 'Sim, recebi como cesta de alimentos (na própria escola ou em casa)' },
+  { value: 'sim, como cesta de alimentos, mas a família não foi buscar', label: 'Sim, como cesta de alimentos, mas a família não foi buscar' },
+  { value: 'sim, recebi em dinheiro	ou Cartão Alimentação', label: 'Sim, recebi em dinheiro	ou Cartão Alimentação' },
+  { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -497,10 +510,10 @@ export const recievedCharityOptions = [
 
 //52 Household
 export const typeOfrecievedCharityOptions = [
-  { value: 'alimentos', label: 'Ajuda em Alimentos' },
-  { value: 'dinheiro', label: 'Ajuda em Dinheiro' },
-  { value: 'cuidados-deficiente', label: 'cuidado com pessoa que é dependente na família (criança, idoso; deficiente)' },
-  { value: 'outros', label: 'Outro tipo de ajuda' },
+  { value: 'ajuda em Alimentos', label: 'Ajuda em Alimentos' },
+  { value: 'ajuda em Dinheiro', label: 'Ajuda em Dinheiro' },
+  { value: 'cuidado com pessoa que é dependente na família (criança, idoso; deficiente) ', label: 'Cuidado com pessoa que é dependente na família (criança, idoso; deficiente) ' },
+  { value: 'outros', label: 'Outro  tipo de ajuda' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -513,8 +526,8 @@ export const embarassementOptions = [
 
 //54 Household
 export const homeGrownSellingFoodOptions = [
-  { value: 'consumo-venda', label: 'Consumo e venda' },
-  { value: 'venda', label: 'Apenas para venda' },
+  { value: 'consumo-venda', label: 'Parte da produção é para consumo e outra parte é para venda' },
+  { value: 'venda', label: 'Só produzo para venda' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
