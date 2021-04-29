@@ -173,7 +173,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
 
-        <Label>DX1 - Qual a idade da pessoa de referência?</Label>
+        <Label>D6 - Qual a idade da pessoa de referência?</Label>
         <Input
           placeholder="Idade"
           type="number"
@@ -182,68 +182,68 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           name="main_person_age"
         />
 
-        <Label>D6 - Qual o sexo da pessoa de referência?</Label>
+        <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
           name="main_person_gender"
           options={mainPersonGenderOptions}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>DX2 - Como você define a raça ou cor da pessoa de referência?</Label>
+        <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
         < Select name="race_color" options={raceOptions} />
 
-        <Label>DX3 - A pessoa de referência sabe ler e escrever?</Label>
+        <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
         < Select name="literacy" options={LiteracyOptions} />
 
-        <Label>DX4 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
+        <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
         < Select name="education" options={educationOptions} />
 
-        <Label>DX5 - Qual a situação de trabalho da pessoa de referência?</Label>
+        <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_status"
           options={main_person_work_status}
         />
 
-        <Label>DX6 - Qual a ocupação da pessoa de referência?</Label>
+        <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
         < Select
           name="main_person_work_occupation"
           options={main_person_work_occupation}
         />
 
-        <Label>DX7 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
+        <Label>D13 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_situation"
           options={main_person_work_situation}
         />
 
-        <Label>DX8 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
+        <Label>D14 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
 Coronavírus (Covid-19)</Label>
         < Select
           name="covid_2020_household"
           options={yesOrNoOptions}
         />
 
-        <Label>DX9 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
+        <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
         < Select
           name="covid_loss"
           options={covidLossOptions}
         />
 
-        <Label>DX10 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
+        <Label>D16 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
         < Select
           name="covid_2021_household"
           options={yesOrNoOptions}
         />
 
-        <Label>DX11 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        <Label>D17 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
           name="covid_loss"
           options={covidLossOptions}
         />
 
-        <Label>D7 - Tipo de residência</Label>
+        <Label>D18 - Tipo de residência</Label>
         <Select name="type_of_residence" options={typeOfResidenceOptions} />
-        <Label>D8 - Qual o número de cômodos na casa incluindo banheiros?</Label>
+        <Label>D19 - Qual o número de cômodos na casa incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
@@ -252,22 +252,22 @@ Coronavírus (Covid-19)</Label>
           name="number_of_rooms"
           defaultValue="1"
         />
-        <Label>D9 - Qual o material de construção das paredes externas da casa?</Label>
+        <Label>D20 - Qual o material de construção das paredes externas da casa?</Label>
         <Select name="construction_material" options={buildingMaterialOptions} />
-        <Label>D10 - Tem acesso à água potável na sua casa?</Label>
+        <Label>D21 - Tem acesso à água potável na sua casa?</Label>
         <Select name="drinking_water" options={drinkingWaterOptions} />
 
 
-        <Label>D - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
+        <Label>D22 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
         <Select name="water_rural_animals" options={yesOrNoOptions} />
 
-        <Label>D - Este domicílio tem água suficiente para produção de alimentos?</Label>
+        <Label>D23 - Este domicílio tem água suficiente para produção de alimentos?</Label>
         <Select name="water_rural_produce" options={yesOrNoOptions} />
 
 
-        <Label>D11 - Como é feita a coleta de esgoto na casa?</Label>
+        <Label>D24 - Como é feita a coleta de esgoto na casa?</Label>
         <Select name="sewage" options={sewageOptions} />
-        <Label>D12 - Número de pessoas no domicílio</Label>
+        <Label>D25 - Número de pessoas no domicílio</Label>
         <Input
           placeholder="Número de pessoas"
           type="number"
@@ -282,7 +282,7 @@ Coronavírus (Covid-19)</Label>
             options={[{
               id: 'one_person_household',
               value: 'true',
-              label: 'D13 - Eu moro sozinho',
+              label: 'D26 - Eu moro sozinho',
             }]}
             onChange={() => setMorePeople(!morePeople)}
           />
@@ -292,7 +292,7 @@ Coronavírus (Covid-19)</Label>
           (
             <>
               <Label>Número de pessoas por faixa de idade:</Label>
-              <Label>D14 - Quantos moradores com até 5 anos</Label>
+              <Label>D27 - Quantos moradores com até 5 anos</Label>
               <Input
                 placeholder="Menos de 5 anos - Digitar número"
                 name="five_years_old_or_more"
@@ -301,7 +301,7 @@ Coronavírus (Covid-19)</Label>
                 type="number"
 
               />
-              <Label>D15 - Quantos moradores entre 6 e 18 anos</Label>
+              <Label>D28 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
                 placeholder="Entre 6 e 18 anos - Digitar número"
                 name="between_6_and_18"
@@ -310,7 +310,7 @@ Coronavírus (Covid-19)</Label>
                 type="number"
 
               />
-              <Label>D16 - Quantos moradores entre 19 e 59 anos</Label>
+              <Label>D29 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
                 placeholder="Entre 19 e 59 anos - Digitar número"
                 name="between_19_and_59"
@@ -319,7 +319,7 @@ Coronavírus (Covid-19)</Label>
                 type="number"
 
               />
-              <Label>D17 - Quantos moradores 60 anos ou mais</Label>
+              <Label>D30 - Quantos moradores 60 anos ou mais</Label>
               <Input
                 placeholder="Com 60 anos ou mais - Digitar número"
                 name="sixty_years_old_or_more"
@@ -328,7 +328,7 @@ Coronavírus (Covid-19)</Label>
                 type="number"
               />
               <Label>
-                D18 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
+                D31 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
               </Label>
               <Select
                 name="people_invited"
@@ -340,7 +340,7 @@ Coronavírus (Covid-19)</Label>
 
       <Section>
         <Label>
-          D19 - Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
+          D32 - Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
         </Label>
         <CheckBoxContainer>
           <CheckboxInput
@@ -349,7 +349,7 @@ Coronavírus (Covid-19)</Label>
             options={[{
               id: 'income_unknown',
               value: 'true',
-              label: 'D20 - Não sei informar',
+              label: 'D33 - Não sei informar',
             }]}
             onChange={() => setIncome(!income)}
           />
@@ -359,7 +359,7 @@ Coronavírus (Covid-19)</Label>
 
           <Input
             icon={FiDollarSign}
-            placeholder="D21 - Renda familiar"
+            placeholder="D34 - Renda familiar"
             name="family_income"
             type="number"
             min="1"
@@ -369,7 +369,7 @@ Coronavírus (Covid-19)</Label>
           : null}
 
         <Label>
-          D - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
+          D35 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
       </Label>
         <Select
           name="people_income_range"
@@ -379,7 +379,7 @@ Coronavírus (Covid-19)</Label>
 
         <CheckBoxContainer>
           <Label>
-            <span>D22 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
+            <span>D36 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
           </Label>
 
           <CheckboxInput
@@ -427,7 +427,7 @@ Coronavírus (Covid-19)</Label>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          D - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
+          D37 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
         </Label>
         <Select
           name="matriculado_na_educacao_basica_publica"
@@ -435,7 +435,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D28 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
+          D38 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
         </Label>
         <Select
           name="government_assistance_program_pnae"
@@ -443,7 +443,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D23 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
+          D39 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
         </Label>
         <Select
           name="government_assistance_program_cadastro_unico"
@@ -451,7 +451,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D24 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
+          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
         </Label>
         <Select
           name="government_assistance_program_bolsa_familia"
@@ -459,7 +459,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D25 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          D41 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
           name="government_assistance_program_bpc"
@@ -467,7 +467,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D26 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
+          D42 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
           name="pension"
@@ -475,7 +475,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D27 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
+          D43 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
           name="prison_cash_assistance"
@@ -483,7 +483,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D29 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+          D44 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
           name="food_basket_assistance"
@@ -491,7 +491,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D30 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
+          D45 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
           name="low_income_restaurants"
@@ -499,7 +499,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D31 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+          D46 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
         </Label>
 
         <Select
@@ -513,7 +513,7 @@ Coronavírus (Covid-19)</Label>
           auxilio?.value === 'true' || auxilio === {} ?
             (
               <>
-                <Label>D32 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+                <Label>D47 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
                 <Input
                   placeholder="Número de vezes"
                   name="covid_cash_assistance_number_of_times"
@@ -526,7 +526,7 @@ Coronavírus (Covid-19)</Label>
         }
 
         <Label>
-          D33 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+          D48 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
         </Label>
 
         <Select
@@ -536,7 +536,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D34 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
+          D49 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
         </Label>
 
         <Select
@@ -546,7 +546,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D35 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
+          D50 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
         </Label>
 
         <Select
@@ -555,7 +555,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D36 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+          D51 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
         </Label>
 
         <Select
@@ -565,7 +565,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D37 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
+          D52 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
         </Label>
 
         <Select
@@ -576,7 +576,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D38 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
+          D53 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
         </Label>
 
         <Select
@@ -586,7 +586,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D39 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
+          D54 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
         </Label>
 
         <Select
@@ -596,7 +596,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D40 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
+          D55 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
         </Label>
 
         <Select
@@ -610,56 +610,56 @@ Coronavírus (Covid-19)</Label>
       <Section>
         <Label><strong>Escala de Segurança Alimentar</strong></Label>
         <Label>
-          D41 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
+          D56 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
         </Label>
         <Select
           name="worried_food_supply"
           options={worriedWithFoodSupplyOptions}
         />
         <Label>
-          D42 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
+          D57 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
           name="lack_food_supply"
           options={LackOfFoodOptions}
         />
         <Label>
-          D43 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
+          D58 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
         </Label>
         <Select
           name="afford_healthy_food"
           options={cannotAffordFoodOptions}
         />
         <Label>
-          D45 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
+          D59 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
         </Label>
         <Select
           name="poor_food_choice"
           options={yesOrNoOptions}
         />
         <Label>
-          D46 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_meals"
           options={yesOrNoOptions}
         />
         <Label>
-          D47 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_food_privation"
           options={yesOrNoOptions}
         />
         <Label>
-          D48 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_hunger"
           options={yesOrNoOptions}
         />
         <Label>
-          D49 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D63 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_one_meal_or_none"
@@ -667,14 +667,14 @@ Coronavírus (Covid-19)</Label>
         />
         <Label><strong></strong></Label>
         <Label>
-          D50 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
+          D64 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
         </Label>
         <Select
           name="how_food_is_obtained"
           options={howFoodIsObtainedOptions}
         />
         <Label>
-          D51 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
+          D65 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
           name="food_price_change"
@@ -683,7 +683,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D52 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
+          D66 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
         </Label>
         <Select
           name="food_profile_change"
@@ -692,7 +692,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D53 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
+          D67 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
           name="food_store_type"
@@ -700,7 +700,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D54 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
+          D68 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
           name="food_expenditure"
@@ -709,7 +709,7 @@ Coronavírus (Covid-19)</Label>
 
         <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
 
-        <Label>D55 -Ontem você comeu:</Label>
+        <Label>D69 - Ontem você comeu:</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
