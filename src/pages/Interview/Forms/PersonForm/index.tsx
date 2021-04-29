@@ -116,7 +116,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
           options={work_status}
           onChange={selectedOptions => setWorkType(selectedOptions)}
         />
-        <Label>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</Label>
+        <Label>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária ou salário após o início da pandemia?</Label>
         < Select
           name="work_shift_reduction"
           options={yesOrNoOptions}
