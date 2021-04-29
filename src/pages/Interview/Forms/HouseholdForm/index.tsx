@@ -173,14 +173,20 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
 
-        <Label>D6 - Qual a idade da pessoa de referência?</Label>
-        <Input
-          placeholder="Idade"
-          type="number"
-          min="18"
-          max="110"
-          name="main_person_age"
-        />
+
+        {mainPerson?.value === 'false' ?
+          (
+            <>
+              <Label>D6 - Qual a idade da pessoa de referência?</Label>
+              <Input
+                placeholder="Idade"
+                type="number"
+                min="18"
+                max="110"
+                name="main_person_age"
+              />
+            </>
+          ) : null}
 
         <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
@@ -190,30 +196,33 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
-        < Select name="race_color" options={raceOptions} />
+        < Select name="race_color" options={raceOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
-        < Select name="literacy" options={LiteracyOptions} />
+        < Select name="literacy" options={LiteracyOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
-        < Select name="education" options={educationOptions} />
+        < Select name="education" options={educationOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_status"
           options={main_person_work_status}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
         < Select
           name="main_person_work_occupation"
           options={main_person_work_occupation}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D13 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_situation"
           options={main_person_work_situation}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D14 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
