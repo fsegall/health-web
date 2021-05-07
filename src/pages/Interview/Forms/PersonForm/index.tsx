@@ -1,9 +1,9 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
-import {
+/* import {
   OptionTypeBase
-} from 'react-select';
+} from 'react-select'; */
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
