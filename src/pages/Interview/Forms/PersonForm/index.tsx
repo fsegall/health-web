@@ -47,7 +47,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
   const PersonFormRef = useRef<FormHandles>(null);
 
-  const [workType, setWorkType] = useState<OptionTypeBase | undefined | null>({});
+  /* const [workType, setWorkType] = useState<OptionTypeBase | undefined | null>({}); */
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
