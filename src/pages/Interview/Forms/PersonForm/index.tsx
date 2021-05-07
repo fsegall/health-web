@@ -26,7 +26,10 @@ import {
   educationOptions,
   LiteracyOptions,
   yesOrNoOptions,
-  work_status
+  /* work_status, */
+  main_person_work_status,
+  main_person_work_occupation,
+  main_person_work_situation
 } from '../../questions/SelectorOptions/options';
 
 
@@ -91,50 +94,55 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
       <section>
-        <Label>P1 - Nome</Label>
+        <Label>P1 - Qual o seu nome completo?</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="name" />
-        <Label>P2 - Data de Nascimento</Label>
-        <Input name="date_of_birth" type="date" />
+        <Label>P2 - Qual a sua idade?</Label>
+        <Input name="age" type="number" min="18" max="110" />
 
-        <Label>P3 - Gênero </Label>
+        <Label>P3 - Qual o seu sexo?</Label>
         < Select name="gender" options={genderOptions} />
-
-
       </section>
 
       < section >
-
-        <Label>P4 - Raça ou cor </Label>
+        <Label>P4 - Como você define sua raça ou cor?</Label>
         < Select name="race_color" options={raceOptions} />
-        <Label>
-          <span>P5 - Sabe ler e escrever ? </span>
-          < Select name="literacy" options={LiteracyOptions} />
-        </Label>
+        <Label>P5 - Você sabe ler e escrever?</Label>
+        < Select name="literacy" options={LiteracyOptions} />
       </section>
 
       < section >
-        <Label>P6 - Escolaridade </Label>
+        <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
         < Select name="education" options={educationOptions} />
+        {/*         <Label>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho?</Label>
+        < Select
+          name="work_status"
+          options={work_status}
+          onChange={selectedOptions => setWorkType(selectedOptions)}
+        />
+        <Label>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária ou salário após o início da pandemia?</Label>
+        < Select
+          name="work_shift_reduction"
+          options={yesOrNoOptions}
+          isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
+        /> */}
+        <Label>P7 - Qual a situação de trabalho?</Label>
+        < Select
+          name="main_person_work_status"
+          options={main_person_work_status}
+        />
 
-        <Label>
-          <span>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho? </span>
-          < Select
-            name="work_status"
-            options={work_status}
-            onChange={selectedOptions => setWorkType(selectedOptions)}
-          />
-        </Label>
+        <Label>P8 - Qual a sua ocupação profissional?</Label>
+        < Select
+          name="main_person_work_occupation"
+          options={main_person_work_occupation}
+        />
 
-        <Label>
-          <span>P8 - Caso esteja trabalhando ou empregado, você teve redução de carga horária?</span>
-          < Select
-            name="work_shift_reduction"
-            options={yesOrNoOptions}
-            isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
-          />
-        </Label>
-
-        <Label>P9 - Nos últimos 3 meses, você ou algum morador da sua casa teve diagnóstico de Coronavírus(Covid-19)?</Label>
+        <Label>P9 - Neste momento qual é o seu local de trabalho?</Label>
+        < Select
+          name="main_person_work_situation"
+          options={main_person_work_situation}
+        />
+        <Label>P10 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>

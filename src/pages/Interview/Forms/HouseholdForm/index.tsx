@@ -21,7 +21,6 @@ import ICreateHouseholdDTO from '../../dtos/ICreateHouseholdDTO';
 import { useToast } from '../../../../hooks/toast';
 import { HouseholdValidation } from '../../validation/schemas/HouseholdValidation';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
 import {
   drinkingWaterOptions,
   typeOfResidenceOptions,
@@ -46,8 +45,16 @@ import {
   FoodStoreOptions,
   FoodProfileOptions,
   FoodExpenditureOptions,
-  referencePersonGenderOptions
-
+  mainPersonGenderOptions,
+  genderOptions,
+  raceOptions,
+  educationOptions,
+  LiteracyOptions,
+  main_person_work_status,
+  main_person_work_occupation,
+  main_person_work_situation,
+  covidLossOptions,
+  peopleIncomeRangeOptions
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -81,6 +88,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
   const [produce, setProduce] = useState<OptionTypeBase | undefined | null>({});
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
+
+  const [covid2020, setCovid2020] = useState<OptionTypeBase | undefined | null>({});
+
+  const [covid2021, setCovid2021] = useState<OptionTypeBase | undefined | null>({});
+
+  const [educ, setEduc] = useState<OptionTypeBase | undefined | null>({});
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
@@ -166,16 +179,94 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
 
-        <Label>D6 - Qual o sexo da pessoa de referência?</Label>
+
+        {mainPerson?.value === 'false' ?
+          (
+            <>
+              <Label>D6 - Qual a idade da pessoa de referência?</Label>
+              <Input
+                placeholder="Idade"
+                type="number"
+                min="18"
+                max="110"
+                name="main_person_age"
+              />
+            </>
+          ) : null}
+
+        <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="reference_person_gender"
-          options={referencePersonGenderOptions}
+          name="main_person_gender"
+          options={mainPersonGenderOptions}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D7 - Tipo de residência</Label>
+        <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
+        < Select name="race_color" options={raceOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+
+        <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
+        < Select name="literacy" options={LiteracyOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+
+        <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
+        < Select name="education" options={educationOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+
+        <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_status"
+          options={main_person_work_status}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_occupation"
+          options={main_person_work_occupation}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
+        < Select
+          name="main_person_work_situation"
+          options={main_person_work_situation}
+          isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>D14 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
+Coronavírus (Covid-19)</Label>
+        < Select
+          name="covid_2020_household"
+          options={yesOrNoOptions}
+          onChange={selectedOption => {
+            setCovid2020(selectedOption)
+          }}
+        />
+
+        <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
+        < Select
+          name="covid_loss"
+          options={covidLossOptions}
+          isDisabled={covid2020?.value === 'false' ? true : false}
+        />
+
+        <Label>D16 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
+        < Select
+          name="covid_2021_household"
+          options={yesOrNoOptions}
+          onChange={selectedOption => {
+            setCovid2021(selectedOption)
+          }}
+        />
+
+        <Label>D17 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        < Select
+          name="covid_loss"
+          options={covidLossOptions}
+          isDisabled={covid2021?.value === 'false' ? true : false}
+        />
+
+        <Label>D18 - Tipo de residência</Label>
         <Select name="type_of_residence" options={typeOfResidenceOptions} />
-        <Label>D8 - Qual o número de cômodos na casa incluindo banheiros?</Label>
+        <Label>D19 - Qual o número de cômodos na casa incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
@@ -184,13 +275,22 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           name="number_of_rooms"
           defaultValue="1"
         />
-        <Label>D9 - Qual o material de construção das paredes externas da casa?</Label>
+        <Label>D20 - Qual o material de construção das paredes externas da casa?</Label>
         <Select name="construction_material" options={buildingMaterialOptions} />
-        <Label>D10 - Tem acesso à água potável na sua casa?</Label>
+        <Label>D21 - Tem acesso à água potável na sua casa?</Label>
         <Select name="drinking_water" options={drinkingWaterOptions} />
-        <Label>D11 - Como é feita a coleta de esgoto na casa?</Label>
+
+
+        <Label>D22 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
+        <Select name="water_rural_animals" options={yesOrNoOptions} />
+
+        <Label>D23 - Este domicílio tem água suficiente para produção de alimentos?</Label>
+        <Select name="water_rural_produce" options={yesOrNoOptions} />
+
+
+        <Label>D24 - Como é feita a coleta de esgoto na casa?</Label>
         <Select name="sewage" options={sewageOptions} />
-        <Label>D12 - Número de pessoas no domicílio</Label>
+        <Label>D25 - Número de pessoas no domicílio</Label>
         <Input
           placeholder="Número de pessoas"
           type="number"
@@ -205,7 +305,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
             options={[{
               id: 'one_person_household',
               value: 'true',
-              label: 'D13 - Eu moro sozinho',
+              label: 'D26 - Eu moro sozinho',
             }]}
             onChange={() => setMorePeople(!morePeople)}
           />
@@ -214,48 +314,48 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
           (
             <>
-              <Label>D14 - Quantos moradores com até 5 anos</Label>
+              <Label>Número de pessoas por faixa de idade:</Label>
+              <Label>D27 - Quantos moradores com até 5 anos</Label>
               <Input
-                placeholder="Menos de 5 anos"
+                placeholder="Menos de 5 anos - Digitar número"
                 name="five_years_old_or_more"
                 min="0"
                 max="6"
                 type="number"
 
               />
-              <Label>D15 - Quantos moradores entre 6 e 18 anos</Label>
+              <Label>D28 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
-                placeholder="Entre 6 e 18 anos"
+                placeholder="Entre 6 e 18 anos - Digitar número"
                 name="between_6_and_18"
                 min="0"
                 max="6"
                 type="number"
 
               />
-              <Label>D16 - Quantos moradores entre 19 e 59 anos</Label>
+              <Label>D29 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
-                placeholder="Entre 19 e 59 anos"
+                placeholder="Entre 19 e 59 anos - Digitar número"
                 name="between_19_and_59"
                 min="0"
                 max="6"
                 type="number"
 
               />
-              <Label>D17 - Quantos moradores 60 anos ou mais</Label>
+              <Label>D30 - Quantos moradores 60 anos ou mais</Label>
               <Input
-                placeholder="Com 60 anos ou mais"
+                placeholder="Com 60 anos ou mais - Digitar número"
                 name="sixty_years_old_or_more"
                 min="0"
                 max="6"
                 type="number"
               />
               <Label>
-                D18 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
+                D31 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
               </Label>
               <Select
                 name="people_invited"
                 options={peopleInvitedToHouseholdOptions}
-                onChange={() => { }}
               />
             </>
           ) : null}
@@ -263,7 +363,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
       <Section>
         <Label>
-          D19 - Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
+          D32 - Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
         </Label>
         <CheckBoxContainer>
           <CheckboxInput
@@ -272,22 +372,37 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
             options={[{
               id: 'income_unknown',
               value: 'true',
-              label: 'D20 - Não sei informar',
+              label: 'D33 - Não sei informar',
             }]}
             onChange={() => setIncome(!income)}
           />
         </CheckBoxContainer>
-        {income ? <Input
-          icon={FiDollarSign}
-          placeholder="D21 - Renda familiar"
-          name="family_income"
-          type="number"
-          min="1"
 
-        /> : null}
+        {income ?
+
+          <Input
+            icon={FiDollarSign}
+            placeholder="D34 - Renda familiar"
+            name="family_income"
+            type="number"
+            min="1"
+
+          />
+
+          : null}
+
+        <Label>
+          D35 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
+      </Label>
+        <Select
+          name="people_income_range"
+          options={peopleIncomeRangeOptions}
+        />
+
+
         <CheckBoxContainer>
           <Label>
-            <span>D22 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
+            <span>D36 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
           </Label>
 
           <CheckboxInput
@@ -335,7 +450,25 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          D23 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
+          D37 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
+        </Label>
+        <Select
+          name="matriculado_na_educacao_basica_publica"
+          options={yesOrNoOptions}
+          onChange={selectedOption => setEduc(selectedOption)}
+        />
+
+        <Label>
+          D38 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
+        </Label>
+        <Select
+          name="government_assistance_program_pnae"
+          options={governmentPNAEProgramOptions}
+          isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
+        />
+
+        <Label>
+          D39 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
         </Label>
         <Select
           name="government_assistance_program_cadastro_unico"
@@ -343,7 +476,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D24 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
+          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
         </Label>
         <Select
           name="government_assistance_program_bolsa_familia"
@@ -351,7 +484,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D25 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          D41 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
           name="government_assistance_program_bpc"
@@ -359,7 +492,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D26 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
+          D42 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
           name="pension"
@@ -367,7 +500,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D27 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
+          D43 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
           name="prison_cash_assistance"
@@ -375,15 +508,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D28 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente à alimentação escolar ou PNAE</b>?
-        </Label>
-        <Select
-          name="government_assistance_program_pnae"
-          options={governmentPNAEProgramOptions}
-        />
-
-        <Label>
-          D29 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+          D44 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
           name="food_basket_assistance"
@@ -391,7 +516,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D30 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
+          D45 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
           name="low_income_restaurants"
@@ -399,7 +524,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D31 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+          D46 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
         </Label>
 
         <Select
@@ -413,7 +538,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           auxilio?.value === 'true' || auxilio === {} ?
             (
               <>
-                <Label>D32 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+                <Label>D47 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
                 <Input
                   placeholder="Número de vezes"
                   name="covid_cash_assistance_number_of_times"
@@ -426,7 +551,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         }
 
         <Label>
-          D33 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+          D48 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
         </Label>
 
         <Select
@@ -436,7 +561,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D34 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
+          D49 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
         </Label>
 
         <Select
@@ -446,7 +571,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D35 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
+          D50 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
         </Label>
 
         <Select
@@ -455,7 +580,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D36 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+          D51 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
         </Label>
 
         <Select
@@ -465,7 +590,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D37 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
+          D52 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
         </Label>
 
         <Select
@@ -476,7 +601,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D38 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
+          D53 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
         </Label>
 
         <Select
@@ -486,7 +611,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D39 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
+          D54 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
         </Label>
 
         <Select
@@ -496,7 +621,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D40 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
+          D55 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
         </Label>
 
         <Select
@@ -510,56 +635,56 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
       <Section>
         <Label><strong>Escala de Segurança Alimentar</strong></Label>
         <Label>
-          D41 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
+          D56 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
         </Label>
         <Select
           name="worried_food_supply"
           options={worriedWithFoodSupplyOptions}
         />
         <Label>
-          D42 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
+          D57 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
           name="lack_food_supply"
           options={LackOfFoodOptions}
         />
         <Label>
-          D43 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
+          D58 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
         </Label>
         <Select
           name="afford_healthy_food"
           options={cannotAffordFoodOptions}
         />
         <Label>
-          D45 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
+          D59 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
         </Label>
         <Select
           name="poor_food_choice"
           options={yesOrNoOptions}
         />
         <Label>
-          D46 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_meals"
           options={yesOrNoOptions}
         />
         <Label>
-          D47 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_food_privation"
           options={yesOrNoOptions}
         />
         <Label>
-          D48 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_hunger"
           options={yesOrNoOptions}
         />
         <Label>
-          D49 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D63 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adult_one_meal_or_none"
@@ -567,14 +692,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
         <Label><strong></strong></Label>
         <Label>
-          D50 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
+          D64 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
         </Label>
         <Select
           name="how_food_is_obtained"
           options={howFoodIsObtainedOptions}
         />
         <Label>
-          D51 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
+          D65 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
           name="food_price_change"
@@ -583,7 +708,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D52 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
+          D66 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
         </Label>
         <Select
           name="food_profile_change"
@@ -592,7 +717,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D53 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
+          D67 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
           name="food_store_type"
@@ -600,7 +725,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         />
 
         <Label>
-          D54 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
+          D68 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
           name="food_expenditure"
@@ -609,117 +734,57 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
         <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
 
-        <Label>D55 - Você comeu algum dos alimentos listados abaixo ontem?</Label>
+        <Label>D69 - Ontem você comeu:</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="alface_acelga_repolho"
+            name="feijao"
 
             options={[{
-              id: 'alface, acelga ou repolho',
+              id: 'Feijão',
               value: 'true',
-              label: 'Alface, acelga ou repolho',
+              label: 'Feijão',
             }]}
 
           />
 
           <CheckboxInput
 
-            name="couve_brocolis_almeirao_agriao_espinafre"
+            name="arroz"
             options={[{
-              id: 'couve, brocolis, almeirao, agriao ou espinafre',
+              id: 'Arroz',
               value: 'true',
-              label: 'Couve, brócolis, almeirão, agrião ou espinafre',
+              label: 'Arroz',
             }]}
           />
 
           <CheckboxInput
 
-            name="abobora_cenoura_batata_doce_quiabo_caruru"
+            name="carnes"
             options={[{
-              id: 'abobora, cenoura, batata-doce ou quiabo/caruru',
+              id: 'Carnes (de boi, peixe, frango ou porco)',
               value: 'true',
-              label: 'Abóbora, cenoura, batata-doce ou quiabo/caruru',
+              label: 'Carnes (de boi, peixe, frango ou porco)',
             }]}
           />
 
           <CheckboxInput
 
-            name="mamao_manga_melaoamarelo_caqui_pequi"
+            name="verduras_legumes"
             options={[{
-              id: 'mamao, manga, melao amarelo, caqui ou pequi',
+              id: 'Verduras e/ou legumes',
               value: 'true',
-              label: 'Mamão, manga, melão amarelo, caqui ou pequi',
+              label: 'Verduras e/ou legumes (não considerar batata, mandioca, aipim, macaxeira, cará e inhame)',
             }]}
           />
 
           <CheckboxInput
 
-            name="tomate_pepino_abobrinha_berinjela_chuchu_beterraba"
+            name="frutas_frescas"
             options={[{
-              id: 'tomate, pepino, abobrinha, berinjela, chuchu ou beterraba',
+              id: 'Frutas frescas',
               value: 'true',
-              label: 'Tomate, pepino, abobrinha, berinjela, chuchu ou beterraba',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="laranja_banana_maca_abacaxi"
-            options={[{
-              id: 'laranja, banana, maçã ou abacaxi ',
-              value: 'true',
-              label: 'Laranja, banana, maçã ou abacaxi',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="arroz_macarrao_polenta_cuscuz_milho_verde"
-            options={[{
-              id: 'arroz, macarrao, polenta, cuscuz ou milho verde',
-              value: 'true',
-              label: 'Arroz, macarrão, polenta, cuscuz ou milho verde ',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="feijao_ervilha_lentilha_grao_de_bico"
-            options={[{
-              id: 'feijao, ervilha, lentilha ou grao de bico',
-              value: 'true',
-              label: 'Feijão, ervilha, lentilha ou grão de bico',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="batata_comum_mandioca_cara_inhame"
-            options={[{
-              id: 'batata comum, mandioca, cara ou inhame',
-              value: 'true',
-              label: 'Batata comum, mandioca, cará ou inhame',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="carne_de_boi_porco_frango_peixe"
-            options={[{
-              id: 'carne-de-boi_porco_frango_peixe',
-              value: 'true',
-              label: 'Carne de boi, porco, frango ou peixe',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="ovo_frito_cozido_mexido"
-            options={[{
-              id: 'ovo frito, cozido ou mexido',
-              value: 'true',
-              label: 'Ovo frito, cozido ou mexido',
+              label: 'Frutas frescas (não considerar suco de frutas)',
             }]}
           />
 
@@ -727,7 +792,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
             name="leite"
             options={[{
-              id: 'leite   ',
+              id: 'Leite',
               value: 'true',
               label: 'Leite',
             }]}
@@ -735,149 +800,46 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
           <CheckboxInput
 
-            name="amendoim_castanha_de_caju_ou_castanha_do_brasil_para"
+            name="hambúrguer_embutidos"
             options={[{
-              id: 'Amendoim, castanha de caju ou castanha do Brasil/ Para',
+              id: 'Hambúrguer e/ou embutidos',
               value: 'true',
-              label: 'Amendoim, castanha de caju ou castanha do Brasil/ Pará',
+              label: 'Hambúrguer e/ou embutidos (presunto, mortadela, salame, linguiça, salsicha)',
             }]}
           />
+
+          <CheckboxInput
+
+            name="bebidas_adocadas"
+            options={[{
+              id: 'Bebidas adoçadas',
+              value: 'true',
+              label: 'Bebidas adoçadas (refrigerante, suco de caixinha, suco em pó, água de coco de caixinha, xaropes de guaraná/groselha, suco de fruta com adição de açúcar)',
+            }]}
+          />
+
+          <CheckboxInput
+
+            name="macarrao-instantaneo_salgadinhos-de-pacote_biscoitos-salgados"
+            options={[{
+              id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
+              value: 'true',
+              label: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
+            }]}
+          />
+
+          <CheckboxInput
+
+            name="biscoito-recheado_doces_guloseimas"
+            options={[{
+              id: 'Biscoito recheado, doces ou guloseimas',
+              value: 'true',
+              label: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramelo, gelatina)',
+            }]}
+          />
+
+
         </CheckBoxContainer>
-
-        <Label>D56 - Você comeu algum dos alimentos <em>industrializados</em> listados abaixo ontem?</Label>
-        <CheckBoxContainer>
-          <CheckboxInput
-
-            name="soft_drink"
-            options={[{
-              id: 'refrigerante',
-              value: 'true',
-              label: 'Refrigerante',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="juice_can_or_box"
-            options={[{
-              id: 'suco de fruta em caixa, caixinha, lata (como Del Valle ou Tropicana)',
-              value: 'true',
-              label: 'Suco de fruta em caixa, caixinha, lata (como Del Valle® ou Tropicana®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="juice_powder"
-            options={[{
-              id: 'Refresco em po (como Tang ou Ki suco)',
-              value: 'true',
-              label: 'Refresco em pó (como Tang® ou Ki suco®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="chocolate_beverage"
-            options={[{
-              id: 'bebida achocolatada (como Toddynho ou Toddy)',
-              value: 'true',
-              label: 'Bebida achocolatada (como Toddynho® ou Toddy®)',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="flavored_yogurt"
-            options={[{
-              id: 'iogurte com sabor',
-              value: 'true',
-              label: 'Iogurte com sabor',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="salty_snacks"
-            options={[{
-              id: 'Salgadinho de pacote (ou chips) ou biscoito/bolacha salgado ',
-              value: 'true',
-              label: 'Salgadinho de pacote (ou chips) ou biscoito/bolacha salgado ',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="cookies"
-            options={[{
-              id: 'biscoito/bolacha doce, biscoito recheado ou bolinho de pacote',
-              value: 'true',
-              label: 'Biscoito/bolacha doce, biscoito recheado ou bolinho de pacote',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="industrialized_dessert"
-            options={[{
-              id: 'chocolate, sorvete, gelatina, ou outra sobremesa industrializada',
-              value: 'true',
-              label: 'Chocolate, sorvete, gelatina, ou outra sobremesa industrializada',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="sausages"
-            options={[{
-              id: 'salsicha, linguiça, mortadela ou presunto',
-              value: 'true',
-              label: 'Salsicha, linguiça, mortadela ou presunto',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="hot_dog_or_burguer_bread"
-            options={[{
-              id: 'Pao de forma, de cachorro quente ou de hamburguer',
-              value: 'true',
-              label: 'Pão de forma, de cachorro quente ou de hambúrguer',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="mayonnaise_ketchup_mustard"
-            options={[{
-              id: 'maionese, ketchup ou mostarda',
-              value: 'true',
-              label: 'Maionese, ketchup ou mostarda',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="margarine"
-            options={[{
-              id: 'margarina',
-              value: 'true',
-              label: 'Margarina',
-            }]}
-          />
-
-          <CheckboxInput
-
-            name="instant_noodles_or_soup_or_frozen_food"
-            options={[{
-              id: 'Macarrao instantaneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado',
-              value: 'true',
-              label: 'Macarrão instantâneo (como miojo ou cup noodles), sopa de pacote, lasanha congelada ou outro prato pronto comprado congelado',
-            }]}
-          />
-        </CheckBoxContainer>
-
-
 
         <Button>Submit</Button>
       </Section>

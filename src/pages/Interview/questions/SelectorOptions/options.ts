@@ -75,7 +75,7 @@ export const mainPersonOptions = [
 ];
 
 //17 Person
-export const referencePersonGenderOptions = [
+export const mainPersonGenderOptions = [
   { value: 'masculino', label: 'Masculino' },
   { value: 'feminino', label: 'Feminino' },
   { value: 'outro', label: 'Outro' },
@@ -89,6 +89,7 @@ export const raceOptions = [
   { value: 'parda', label: 'Parda' },
   { value: 'oriental', label: 'Oriental' },
   { value: 'indigena', label: 'Indígena' },
+  { value: 'outra', label: 'Outra' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -126,11 +127,136 @@ export const atWorkOptions = [
   { value: 'empregado(a)-com-reducao', label: 'Empregado ou Trabalhando como autônomo com redução de carga horária' },
 ]
 
-export const work_status = [
+export const main_person_work_status = [
   {
-    value: 'funcionario_publico_estatutario',
-    label: 'Funcionário publico estatutário',
+    value: 'trabalho remunerado',
+    label: 'Trabalho remunerado',
   },
+  {
+    value: 'desempregado em 2021',
+    label: 'Desempregado em 2021',
+  },
+  {
+    value: 'desempregado desde 2020',
+    label: 'Desempregado desde 2020',
+  },
+  {
+    value: 'desempregado desde antes de 2020',
+    label: 'Desempregado desde antes de 2020',
+  },
+  {
+    value: 'aposentado',
+    label: 'Aposenatado(a)',
+  },
+  {
+    value: 'estudante',
+    label: 'Estudante',
+  },
+  {
+    value: 'dona de casa',
+    label: 'Dona de casa',
+  },
+];
+
+export const main_person_work_occupation = [
+  {
+    value: 'agricultor(a) familiar ou produtor(a) rural',
+    label: 'Agricultor(a) familiar ou produtor(a) rural',
+  },
+  {
+    value: 'trabalhador(a) rural temporário (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário (diarista, safrista etc.)',
+  },
+  {
+    value: 'trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
+    label: 'Trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
+  },
+  {
+    value: 'funcionário(a) público',
+    label: 'Funcionário(a) público',
+  },
+  {
+    value: 'trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
+    label: 'Trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
+  },
+  {
+    value: 'estagiário(a) (remunerado)',
+    label: 'Estagiário(a) (remunerado)',
+  },
+  {
+    value: 'autônomo(a) regular/empreendedor(a) individual (paga INSS)',
+    label: 'Autônomo(a) regular/empreendedor(a) individual (paga INSS)',
+  },
+  {
+    value: 'profissional liberal (nível superior)',
+    label: 'Profissional liberal (nível superior)',
+  },
+  {
+    value: 'trabalhador(a) informal, bico, free lancer, outros',
+    label: 'Trabalhador(a) informal, bico, free lancer, outros',
+  },
+  {
+    value: 'empresário(a)  ',
+    label: 'Empresário(a)',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+export const main_person_work_situation = [
+  {
+    value: 'trabalha em casa',
+    label: 'Trabalha em casa',
+  },
+  {
+    value: 'frequenta normalmente o local de trabalho',
+    label: 'Frequenta normalmente o local de trabalho',
+  },
+  {
+    value: 'trabalha em casa e também frequenta o local de trabalho',
+    label: 'Trabalha em casa e também frequenta o local de trabalho',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+export const covidLossOptions = [
+  {
+    value: 'não',
+    label: 'Não',
+  },
+  {
+    value: 'sim, a pessoa de referência - adulto homem',
+    label: 'Sim, a pessoa de referência - adulto homem',
+  },
+  {
+    value: 'sim, a pessoa de referência - adulto mulher',
+    label: 'Sim, a pessoa de referência - adulto mulher',
+  },
+  {
+    value: 'sim, outro adulto homem',
+    label: 'Sim, a outro adulto homem',
+  },
+  {
+    value: 'sim, outro adulto mulher',
+    label: 'Sim, a outro adulto mulher',
+  },
+  {
+    value: 'sim, criança / adolescente (jovem menor de 20 anos)',
+    label: 'Sim, criança / adolescente (jovem menor de 20 anos)',
+  },
+  {
+    value: 'sim, mas por outra doença',
+    label: 'Sim, mas por outra doença',
+  },
+  { value: 'ns-nr', label: 'NS/NR' },
+
+];
+
+
+export const work_status = [
+  /*   {
+      value: 'funcionario_publico_estatutario',
+      label: 'Funcionário publico estatutário',
+    }, */
   {
     value: 'empregado_trabalho_formal',
     label: 'Empregado(a) com trabalho formal',
@@ -189,28 +315,38 @@ export const peopleInvitedToHouseholdOptions = [
 ];
 
 //27 income checkbox for NS/NR
+export const peopleIncomeRangeOptions = [
+  { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
+  { value: 'de R$ 275,00 a R$550, (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
+  { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
+  { value: 'mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)', label: 'Mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)' },
+  { value: 'mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)' },
+  { value: 'mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)', label: 'Mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)' },
+  { value: 'mais de 11.000,00(mais de 10 SM)', label: 'Mais de 11.000,00 (mais de 10 SM)' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
 
 //30 Household
 export const buildingMaterialOptions = [
-  { value: 'alvenaria-com-revestimento', label: 'Alvenaria Com Revestimento/Taipa Com Revestimento ' },
-  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria Sem Revestimento ' },
-  { value: 'taipa-sem-revestimento', label: 'Taipa Sem Revestimento' },
-  { value: 'madeira-para-construção', label: 'Madeira Apropriada Para Construção' },
-  { value: 'madeira-aproveitada', label: 'Madeira Aproveitada' },
-  { value: 'outro-material', label: 'Outro Material' },
+  { value: 'alvenaria-com-revestimento', label: 'Alvenaria com revestimento/Taipa com revestimento ' },
+  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria sem revestimento ' },
+  { value: 'taipa-sem-revestimento', label: 'Taipa sem revestimento' },
+  { value: 'madeira-para-construção', label: 'Madeira apropriada para construção' },
+  { value: 'madeira-aproveitada', label: 'Madeira aproveitada' },
+  { value: 'outro-material', label: 'Outro material' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
 //31 Household
 export const drinkingWaterOptions = [
-  { value: 'true', label: 'Sim' },
+  { value: 'sim', label: 'Sim' },
   {
     value: 'sim-mas-falha',
     label: 'Sim, mas o fornecimento falha semanalmente',
   },
   {
-    value: 'false',
-    label: 'Não tem fornecimento',
+    value: 'não',
+    label: 'Não',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
@@ -299,7 +435,8 @@ export const adultOneMealOrNoneOptions = [
 export const governmentProgramOptions = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
-  { value: 'tentou', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'já era cadastrado e se manteve', label: 'Já era cadastrado e se manteve' },
+  { value: 'tentou cadastrar, mas não conseguiu', label: 'Tentou cadastrar, mas não conseguiu ' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -335,9 +472,11 @@ export const governmentReclusaoProgramOptions = [
 
 //46 Household
 export const governmentPNAEProgramOptions = [
-  { value: 'sim-escola', label: 'Sim, na própria escola ' },
-  { value: 'sim-cesta', label: 'Sim, recebendo como cesta de alimentos' },
-  { value: 'nao', label: 'Não ' },
+  { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
+  { value: 'sim, recebi como cesta de alimentos (na própria escola ou em casa)', label: 'Sim, recebi como cesta de alimentos (na própria escola ou em casa)' },
+  { value: 'sim, como cesta de alimentos, mas a família não foi buscar', label: 'Sim, como cesta de alimentos, mas a família não foi buscar' },
+  { value: 'sim, recebi em dinheiro	ou Cartão Alimentação', label: 'Sim, recebi em dinheiro	ou Cartão Alimentação' },
+  { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -375,10 +514,10 @@ export const recievedCharityOptions = [
 
 //52 Household
 export const typeOfrecievedCharityOptions = [
-  { value: 'alimentos', label: 'Ajuda em Alimentos' },
-  { value: 'dinheiro', label: 'Ajuda em Dinheiro' },
-  { value: 'cuidados-deficiente', label: 'cuidado com pessoa que é dependente na família (criança, idoso; deficiente)' },
-  { value: 'outros', label: 'Outro tipo de ajuda' },
+  { value: 'ajuda em Alimentos', label: 'Ajuda em Alimentos' },
+  { value: 'ajuda em Dinheiro', label: 'Ajuda em Dinheiro' },
+  { value: 'cuidado com pessoa que é dependente na família (criança, idoso; deficiente) ', label: 'Cuidado com pessoa que é dependente na família (criança, idoso; deficiente) ' },
+  { value: 'outros', label: 'Outro  tipo de ajuda' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -391,8 +530,8 @@ export const embarassementOptions = [
 
 //54 Household
 export const homeGrownSellingFoodOptions = [
-  { value: 'consumo-venda', label: 'Consumo e venda' },
-  { value: 'venda', label: 'Apenas para venda' },
+  { value: 'consumo-venda', label: 'Parte da produção é para consumo e outra parte é para venda' },
+  { value: 'venda', label: 'Só produzo para venda' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
