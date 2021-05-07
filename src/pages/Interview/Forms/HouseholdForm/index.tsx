@@ -89,6 +89,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
 
+  const [covid2020, setCovid2020] = useState<OptionTypeBase | undefined | null>({});
+
+  const [covid2021, setCovid2021] = useState<OptionTypeBase | undefined | null>({});
+
+  const [educ, setEduc] = useState<OptionTypeBase | undefined | null>({});
+
   const HouseholdFormRef = useRef<FormHandles>(null);
 
   const handleHouseholdSubmit = useCallback(
@@ -218,7 +224,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D13 - Neste momento qual é a situação de trabalho da pessoa de referência?</Label>
+        <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
         < Select
           name="main_person_work_situation"
           options={main_person_work_situation}
@@ -230,24 +236,32 @@ Coronavírus (Covid-19)</Label>
         < Select
           name="covid_2020_household"
           options={yesOrNoOptions}
+          onChange={selectedOption => {
+            setCovid2020(selectedOption)
+          }}
         />
 
         <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
         < Select
           name="covid_loss"
           options={covidLossOptions}
+          isDisabled={covid2020?.value === 'false' ? true : false}
         />
 
         <Label>D16 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
         < Select
           name="covid_2021_household"
           options={yesOrNoOptions}
+          onChange={selectedOption => {
+            setCovid2021(selectedOption)
+          }}
         />
 
         <Label>D17 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
           name="covid_loss"
           options={covidLossOptions}
+          isDisabled={covid2021?.value === 'false' ? true : false}
         />
 
         <Label>D18 - Tipo de residência</Label>
@@ -441,6 +455,7 @@ Coronavírus (Covid-19)</Label>
         <Select
           name="matriculado_na_educacao_basica_publica"
           options={yesOrNoOptions}
+          onChange={selectedOption => setEduc(selectedOption)}
         />
 
         <Label>
@@ -449,6 +464,7 @@ Coronavírus (Covid-19)</Label>
         <Select
           name="government_assistance_program_pnae"
           options={governmentPNAEProgramOptions}
+          isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
         />
 
         <Label>

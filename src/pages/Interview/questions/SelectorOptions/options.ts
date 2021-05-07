@@ -129,6 +129,10 @@ export const atWorkOptions = [
 
 export const main_person_work_status = [
   {
+    value: 'trabalho remunerado',
+    label: 'Trabalho remunerado',
+  },
+  {
     value: 'desempregado em 2021',
     label: 'Desempregado em 2021',
   },

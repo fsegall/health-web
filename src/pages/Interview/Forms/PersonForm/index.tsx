@@ -26,7 +26,10 @@ import {
   educationOptions,
   LiteracyOptions,
   yesOrNoOptions,
-  work_status
+  /* work_status, */
+  main_person_work_status,
+  main_person_work_occupation,
+  main_person_work_situation
 } from '../../questions/SelectorOptions/options';
 
 
@@ -110,7 +113,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
       < section >
         <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
         < Select name="education" options={educationOptions} />
-        <Label>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho?</Label>
+        {/*         <Label>P7 - Atualmente qual a sua situação com relação ao emprego/trabalho?</Label>
         < Select
           name="work_status"
           options={work_status}
@@ -121,8 +124,25 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
           name="work_shift_reduction"
           options={yesOrNoOptions}
           isDisabled={(workType?.value === 'ns-nr' || workType?.value === 'desempregado_sem_procura_de_emprego' || workType?.value === 'desempregado_procurando_emprego' || workType?.value === 'aposentado-pensionista' || workType?.value === undefined) ? true : false}
+        /> */}
+        <Label>P7 - Qual a situação de trabalho?</Label>
+        < Select
+          name="main_person_work_status"
+          options={main_person_work_status}
         />
-        <Label>P9 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
+
+        <Label>P8 - Qual a sua ocupação profissional?</Label>
+        < Select
+          name="main_person_work_occupation"
+          options={main_person_work_occupation}
+        />
+
+        <Label>P9 - Neste momento qual é o seu local de trabalho?</Label>
+        < Select
+          name="main_person_work_situation"
+          options={main_person_work_situation}
+        />
+        <Label>P10 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
         < Select name="covid_diagnose" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>
