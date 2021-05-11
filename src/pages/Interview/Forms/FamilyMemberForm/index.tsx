@@ -17,7 +17,7 @@ import Button from '../../../../components/Button';
 import ICreateFamilyMemberDTO from '../../dtos/ICreateFamilyMemberDTO';
 import { FamilyMemberValidation } from '../../validation/schemas/FamilyMemberValidation';
 import {
-  genderOptions,
+  genero,
 } from '../../questions/SelectorOptions/options';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import { useToast } from '../../../../hooks/toast';
@@ -141,7 +141,7 @@ const FamilyMemberForm: React.FC = (props) => {
               />
               <Label>Gênero</Label>
 
-              <Select name="gender" options={genderOptions} />
+              <Select name="sexo" options={genero} />
               {item === listitems.length && <Button>Submit</Button>}
 
             </section>
