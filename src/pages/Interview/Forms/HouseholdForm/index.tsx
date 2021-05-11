@@ -189,7 +189,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
         <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="D7_idade_pessoa_de_referencia"
+          name="D7_sexo_pessoa_de_referencia"
           options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
@@ -400,42 +400,42 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="perda_de_emprego"
+            name="D35_perda_de_emprego"
             options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
           />
 
           <CheckboxInput
 
-            name="reducao_de_salario"
+            name="D35_reducao_de_salario"
             options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
           <CheckboxInput
 
-            name="ajuda_financeira"
+            name="D35_ajuda_financeira"
             options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
           />
 
           <CheckboxInput
 
-            name="divida"
+            name="D35_divida"
             options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
           />
 
           <CheckboxInput
 
-            name="corte_de_gastos"
+            name="D35_corte_de_gastos"
             options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
           />
 
           <CheckboxInput
 
-            name="corte_de_gastos_nao_essenciais"
+            name="D35_corte_de_gastos_nao_essenciais"
             options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
           />
 
           <CheckboxInput
-            name="ns_nr_trabalho_salario"
+            name="D35_ns_nr"
             options={[{ id: 'ns_nr', value: 'true', label: 'Não sabe ou não quis responder' }]}
           />
 
@@ -638,7 +638,7 @@ Coronavírus (Covid-19)</Label>
           D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
-          name="D56_alimentos acabaram"
+          name="D56_alimentos_acabaram"
           options={yesOrNoOptions}
         />
         <Label>
@@ -731,7 +731,7 @@ Coronavírus (Covid-19)</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="feijao"
+            name="D68_feijao"
 
             options={[{
               id: 'Feijão',
@@ -743,7 +743,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="arroz"
+            name="D68_arroz"
             options={[{
               id: 'Arroz',
               value: 'true',
@@ -753,7 +753,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="carnes"
+            name="D68_carnes"
             options={[{
               id: 'Carnes (de boi, peixe, frango ou porco)',
               value: 'true',
@@ -763,7 +763,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="verduras_legumes"
+            name="D68_verduras_legumes"
             options={[{
               id: 'Verduras e/ou legumes',
               value: 'true',
@@ -773,7 +773,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="frutas_frescas"
+            name="D68_frutas_frescas"
             options={[{
               id: 'Frutas frescas',
               value: 'true',
@@ -783,7 +783,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="leite"
+            name="D68_leite"
             options={[{
               id: 'Leite',
               value: 'true',
@@ -793,7 +793,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="hambúrguer_embutidos"
+            name="D68_hamburguer_embutidos"
             options={[{
               id: 'Hambúrguer e/ou embutidos',
               value: 'true',
@@ -803,7 +803,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="bebidas_adocadas"
+            name="D68_bebidas_adocadas"
             options={[{
               id: 'Bebidas adoçadas',
               value: 'true',
@@ -813,7 +813,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="macarrao-instantaneo_salgadinhos-de-pacote_biscoitos-salgados"
+            name="D68_macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados"
             options={[{
               id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
               value: 'true',
@@ -823,7 +823,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="biscoito-recheado_doces_guloseimas"
+            name="D68_biscoito_recheado_doces_guloseimas"
             options={[{
               id: 'Biscoito recheado, doces ou guloseimas',
               value: 'true',

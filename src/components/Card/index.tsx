@@ -10,7 +10,7 @@ import {
 
 interface CardPersonProps {
   person: {
-    name: string;
+    name?: string;
     organization_name?: string;
     gender?: string;
     age?: number;
@@ -28,7 +28,7 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
 
         <CardHeader hasAvatar={!!person.avatar_url}>
           {person.avatar_url ? <Avatar src={person.avatar_url} /> : null}
-          <div>{person.name}</div>
+          <div>{person.name ? person.name : null}</div>
 
           {!person.organization_name ?
             (<div>
