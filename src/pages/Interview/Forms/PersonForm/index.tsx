@@ -85,43 +85,43 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
       <section>
         <Label>P1 - Qual o seu nome completo?</Label>
-        <Input icon={FiUser} placeholder="Nome Completo" name="P1_nome" />
+        <Input icon={FiUser} placeholder="Nome Completo" name="nome" />
         <Label>P2 - Qual a sua idade?</Label>
-        <Input name="P2_idade" type="number" min="18" max="110" />
+        <Input name="idade" type="number" min="18" max="110" />
 
         <Label>P3 - Qual o seu sexo?</Label>
-        < Select name="P3_sexo" options={genero} />
+        < Select name="sexo" options={genero} />
       </section>
 
       < section >
         <Label>P4 - Como você define sua raça ou cor?</Label>
-        < Select name="P4_raca_cor" options={raca_cor} />
+        < Select name="raca_cor" options={raca_cor} />
         <Label>P5 - Você sabe ler e escrever?</Label>
-        < Select name="P5_ler_escrever" options={yesOrNoOptions} />
+        < Select name="ler_escrever" options={yesOrNoOptions} />
       </section>
 
       < section >
         <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
-        < Select name="P6_escolaridade" options={escolaridade} />
+        < Select name="escolaridade" options={escolaridade} />
         <Label>P7 - Qual a situação de trabalho?</Label>
         < Select
-          name="P7_situacao_de_trabalho"
+          name="situacao_de_trabalho"
           options={situacao_de_trabalho}
         />
 
         <Label>P8 - Qual a sua ocupação profissional?</Label>
         < Select
-          name="P8_ocupacao"
+          name="ocupacao"
           options={ocupacao_profissional}
         />
 
         <Label>P9 - Neste momento qual é o seu local de trabalho?</Label>
         < Select
-          name="P9_local_de_trabalho"
+          name="local_de_trabalho"
           options={local_de_trabalho}
         />
         <Label>P10 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
-        < Select name="P10_diagnostico_covid" options={yesOrNoOptions} />
+        < Select name="diagnostico_covid" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>
     </StyledForm>

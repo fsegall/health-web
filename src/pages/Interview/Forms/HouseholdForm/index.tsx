@@ -149,25 +149,25 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
       <Section>
         <Label>
           <span>D1 - Localização do domicílio</span>
-          <Select name="D1_local_do_domicilio" options={local_do_domicilio} />
+          <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
         <Label>D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
-        < Select name="D2_morador_de_rua" options={morador_de_rua} />
+        < Select name="morador_de_rua" options={morador_de_rua} />
         <Label>D3 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
         < Select
-          name="D3_povos_tradicionais"
+          name="povos_tradicionais"
           options={yesOrNoOptions}
           onChange={selectedOption => setTraditional(selectedOption)}
         />
         <Label>D4 - Qual comunidade tradicional ou povos?</Label>
         < Select
-          name="D4_qual_povo_tradicional"
+          name="qual_povo_tradicional"
           options={qual_povo_tradicional}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
         <Label>D5 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
         < Select
-          name="D5_pessoa_de_referencia"
+          name="pessoa_de_referencia"
           options={yesOrNoOptions}
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
@@ -182,44 +182,44 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
                 type="number"
                 min="18"
                 max="110"
-                name="D6_idade_pessoa_de_referencia"
+                name="idade_pessoa_de_referencia"
               />
             </>
           ) : null}
 
         <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="D7_sexo_pessoa_de_referencia"
+          name="sexo_pessoa_de_referencia"
           options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
-        < Select name="D8_raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
-        < Select name="D9_ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
-        < Select name="D10_escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
         < Select
-          name="D11_situacao_de_trabalho"
+          name="situacao_de_trabalho"
           options={situacao_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
         < Select
-          name="D12_ocupacao_profissional"
+          name="ocupacao_profissional"
           options={ocupacao_profissional}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
         < Select
-          name="D13_local_de_trabalho"
+          name="local_de_trabalho"
           options={local_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
@@ -227,7 +227,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         <Label>D14 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
 Coronavírus (Covid-19)</Label>
         < Select
-          name="D14_covid_2020"
+          name="covid_2020"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setCovid2020(selectedOption)
@@ -236,14 +236,14 @@ Coronavírus (Covid-19)</Label>
 
         <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
         < Select
-          name="D15_covid_perda_2020"
+          name="covid_perda_2020"
           options={covid_perda}
           isDisabled={covid2020?.value === 'false' ? true : false}
         />
 
         <Label>D16 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
         < Select
-          name="D16_covid_2021"
+          name="covid_2021"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setCovid2021(selectedOption)
@@ -252,49 +252,49 @@ Coronavírus (Covid-19)</Label>
 
         <Label>D17 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
-          name="D17_covid_perda_2021"
+          name="covid_perda_2021"
           options={covid_perda}
           isDisabled={covid2021?.value === 'false' ? true : false}
         />
 
         <Label>D18 - Tipo de residência</Label>
-        <Select name="D18_tipo_de_residencia" options={tipo_de_residencia} />
+        <Select name="tipo_de_residencia" options={tipo_de_residencia} />
         <Label>D19 - Qual o número de cômodos na casa incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
           min="1"
           max="12"
-          name="D19_numero_de_comodos"
+          name="numero_de_comodos"
           defaultValue="1"
         />
         <Label>D20 - Qual o material de construção das paredes externas da casa?</Label>
-        <Select name="D20_material_de_construcao" options={material_de_construcao} />
+        <Select name="material_de_construcao" options={material_de_construcao} />
         <Label>D21 - Tem acesso à água potável na sua casa?</Label>
-        <Select name="D21_agua_potavel" options={agua_potavel} />
+        <Select name="agua_potavel" options={agua_potavel} />
 
 
         <Label>D22 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
-        <Select name="D22_agua_animais" options={yesOrNoOptions} />
+        <Select name="agua_animais" options={yesOrNoOptions} />
 
         <Label>D23 - Este domicílio tem água suficiente para produção de alimentos?</Label>
-        <Select name="D23_agua_producao_alimentos" options={yesOrNoOptions} />
+        <Select name="agua_producao_alimentos" options={yesOrNoOptions} />
 
 
         <Label>D24 - Como é feita a coleta de esgoto na casa?</Label>
-        <Select name="D24_esgoto" options={esgoto} />
+        <Select name="esgoto" options={esgoto} />
         <Label>D25 - Número de pessoas no domicílio</Label>
         <Input
           placeholder="Número de pessoas"
           type="number"
           min="1"
           max="12"
-          name="D25_numero_de_pessoas"
+          name="numero_de_pessoas"
           defaultValue="1"
         />
         <CheckBoxContainer>
           <CheckboxInput
-            name="D26_uma_pessoa_domicilio"
+            name="uma_pessoa_domicilio"
             options={[{
               id: 'one_person_household',
               value: 'true',
@@ -311,7 +311,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D27 - Quantos moradores com até 5 anos</Label>
               <Input
                 placeholder="Menos de 5 anos - Digitar número"
-                name="D27_5_anos_ou_mais"
+                name="cinco_anos_ou_mais"
                 min="0"
                 max="6"
                 type="number"
@@ -320,7 +320,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D28 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
                 placeholder="Entre 6 e 18 anos - Digitar número"
-                name="D28_entre_6_e_18"
+                name="entre_6_e_18"
                 min="0"
                 max="6"
                 type="number"
@@ -329,7 +329,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D29 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
                 placeholder="Entre 19 e 59 anos - Digitar número"
-                name="D29_entre_19_e_59"
+                name="entre_19_e_59"
                 min="0"
                 max="6"
                 type="number"
@@ -338,7 +338,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D30 - Quantos moradores 60 anos ou mais</Label>
               <Input
                 placeholder="Com 60 anos ou mais - Digitar número"
-                name="D30_60_anos_ou_mais"
+                name="sessenta_anos_ou_mais"
                 min="0"
                 max="6"
                 type="number"
@@ -347,7 +347,7 @@ Coronavírus (Covid-19)</Label>
                 D31 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
               </Label>
               <Select
-                name="D31_pessoas_convidadas"
+                name="pessoas_convidadas"
                 options={pessoas_convidadas}
               />
             </>
@@ -361,7 +361,7 @@ Coronavírus (Covid-19)</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="D32_nao_sabe_renda"
+            name="nao_sabe_renda"
             options={[{
               id: 'income_unknown',
               value: 'true',
@@ -376,7 +376,7 @@ Coronavírus (Covid-19)</Label>
           <Input
             icon={FiDollarSign}
             placeholder="D33 - Renda familiar"
-            name="D33_renda_familiar"
+            name="renda_familiar"
             type="number"
             min="1"
 
@@ -388,7 +388,7 @@ Coronavírus (Covid-19)</Label>
           D34 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
       </Label>
         <Select
-          name="D34_faixa_de_renda"
+          name="faixa_de_renda"
           options={faixa_de_renda}
         />
 
@@ -400,42 +400,42 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D35_perda_de_emprego"
+            name="perda_de_emprego"
             options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
           />
 
           <CheckboxInput
 
-            name="D35_reducao_de_salario"
+            name="reducao_de_salario"
             options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
           <CheckboxInput
 
-            name="D35_ajuda_financeira"
+            name="ajuda_financeira"
             options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
           />
 
           <CheckboxInput
 
-            name="D35_divida"
+            name="divida"
             options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
           />
 
           <CheckboxInput
 
-            name="D35_corte_de_gastos"
+            name="corte_de_gastos"
             options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
           />
 
           <CheckboxInput
 
-            name="D35_corte_de_gastos_nao_essenciais"
+            name="corte_de_gastos_nao_essenciais"
             options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
           />
 
           <CheckboxInput
-            name="D35_ns_nr"
+            name="ns_nr"
             options={[{ id: 'ns_nr', value: 'true', label: 'Não sabe ou não quis responder' }]}
           />
 
@@ -446,7 +446,7 @@ Coronavírus (Covid-19)</Label>
           D36 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
         </Label>
         <Select
-          name="D36_educacao_basica_publica"
+          name="educacao_basica_publica"
           options={yesOrNoOptions}
           onChange={selectedOption => setEduc(selectedOption)}
         />
@@ -455,7 +455,7 @@ Coronavírus (Covid-19)</Label>
           D37 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
         </Label>
         <Select
-          name="D37_pnae"
+          name="pnae"
           options={pnae}
           isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
         />
@@ -464,7 +464,7 @@ Coronavírus (Covid-19)</Label>
           D38 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
         </Label>
         <Select
-          name="D38_cadastro_unico"
+          name="cadastro_unico"
           options={programas_de_assistencia}
         />
 
@@ -472,7 +472,7 @@ Coronavírus (Covid-19)</Label>
           D39 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
         </Label>
         <Select
-          name="D39_bolsa_familia"
+          name="bolsa_familia"
           options={programas_de_assistencia}
         />
 
@@ -480,7 +480,7 @@ Coronavírus (Covid-19)</Label>
           D40 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
-          name="D40_bpc"
+          name="bpc"
           options={programas_de_assistencia}
         />
 
@@ -488,7 +488,7 @@ Coronavírus (Covid-19)</Label>
           D41 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
-          name="D41_pensao"
+          name="pensao"
           options={yesOrNoOptions}
         />
 
@@ -496,7 +496,7 @@ Coronavírus (Covid-19)</Label>
           D42 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
-          name="D42_auxilio_reclusao"
+          name="auxilio_reclusao"
           options={yesOrNoOptions}
         />
 
@@ -504,7 +504,7 @@ Coronavírus (Covid-19)</Label>
           D43 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
-          name="D43_cesta_de_alimentos"
+          name="cesta_de_alimentos"
           options={yesOrNoOptions}
         />
 
@@ -512,7 +512,7 @@ Coronavírus (Covid-19)</Label>
           D44 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
-          name="D44_restaurantes_populares"
+          name="restaurantes_populares"
           options={yesOrNoOptions}
         />
 
@@ -521,7 +521,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D45_auxilio_emergencial"
+          name="auxilio_emergencial"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setAuxilio(selectedOption)
@@ -534,7 +534,7 @@ Coronavírus (Covid-19)</Label>
                 <Label>D46 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
                 <Input
                   placeholder="Número de vezes"
-                  name="D46_auxilio_vezes"
+                  name="auxilio_vezes"
                   type="number"
                   min="1"
                 />
@@ -548,7 +548,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D47_ajuda_instituicao_caridade"
+          name="ajuda_instituicao_caridade"
           options={yesOrNoOptions}
           onChange={selectedOption => setAjuda(selectedOption)}
         />
@@ -558,7 +558,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D48_tipo_de_ajuda"
+          name="tipo_de_ajuda"
           options={tipo_de_ajuda}
           isDisabled={ajuda?.value === 'true' ? false : true}
         />
@@ -568,7 +568,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D49_vergonha"
+          name="vergonha"
           options={yesOrNoOptions}
         />
 
@@ -577,7 +577,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D50_produz_alimento"
+          name="produz_alimento"
           options={yesOrNoOptions}
           onChange={selectedOptions => setHomegrown(selectedOptions)}
         />
@@ -587,7 +587,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D51_alimento_para_venda"
+          name="alimento_para_venda"
           options={yesOrNoOptions}
           onChange={selectedOptions => setProduce(selectedOptions)}
           isDisabled={homegrown?.value === 'true' ? false : true}
@@ -598,7 +598,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D52_divisao_alimento"
+          name="divisao_alimento"
           options={divisao_alimento}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -608,7 +608,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D53_dificuldade_venda"
+          name="dificuldade_venda"
           options={yesOrNoOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -618,7 +618,7 @@ Coronavírus (Covid-19)</Label>
         </Label>
 
         <Select
-          name="D54_nao_vendeu"
+          name="nao_vendeu"
           options={yesOrNoOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -631,56 +631,56 @@ Coronavírus (Covid-19)</Label>
           D55 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
         </Label>
         <Select
-          name="D55_preocupacao_alimentos"
+          name="preocupacao_alimentos"
           options={yesOrNoOptions}
         />
         <Label>
           D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
-          name="D56_alimentos_acabaram"
+          name="alimentos_acabaram"
           options={yesOrNoOptions}
         />
         <Label>
           D57 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
         </Label>
         <Select
-          name="D57_alimentos_saudaveis"
+          name="alimentos_saudaveis"
           options={yesOrNoOptions}
         />
         <Label>
           D58 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
         </Label>
         <Select
-          name="D58_alimentos_poucos_tipos"
+          name="alimentos_poucos_tipos"
           options={yesOrNoOptions}
         />
         <Label>
           D59 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
-          name="D59_refeicoes_adulto"
+          name="refeicoes_adulto"
           options={yesOrNoOptions}
         />
         <Label>
           D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
-          name="D60_adulto_comeu_menos"
+          name="adulto_comeu_menos"
           options={yesOrNoOptions}
         />
         <Label>
           D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
-          name="D61_adulto_fome"
+          name="adulto_fome"
           options={yesOrNoOptions}
         />
         <Label>
           D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
-          name="D62_adulto_uma_refeicao"
+          name="adulto_uma_refeicao"
           options={yesOrNoOptions}
         />
         <Label><strong></strong></Label>
@@ -688,14 +688,14 @@ Coronavírus (Covid-19)</Label>
           D63 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
         </Label>
         <Select
-          name="D63_como_adquiriu_comida"
+          name="como_adquiriu_comida"
           options={como_adquiriu_comida}
         />
         <Label>
           D64 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
-          name="D64_alteracao_preco_comida"
+          name="alteracao_preco_comida"
           options={alteracao_preco_comida}
           onChange={selectedOption => setBuyingProfile(selectedOption)}
         />
@@ -704,7 +704,7 @@ Coronavírus (Covid-19)</Label>
           D65 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
         </Label>
         <Select
-          name="D65_perfil_de_compra"
+          name="perfil_de_compra"
           options={perfil_de_compra}
           isDisabled={buyingProfile?.value === 'nao' || buyingProfile?.value === 'ns-nr' ? true : false}
         />
@@ -713,7 +713,7 @@ Coronavírus (Covid-19)</Label>
           D66 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
-          name="D66_mercado"
+          name="mercado"
           options={mercado}
         />
 
@@ -721,7 +721,7 @@ Coronavírus (Covid-19)</Label>
           D67 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
-          name="D67_gastos_alimentacao"
+          name="gastos_alimentacao"
           options={gastos_alimentacao}
         />
 
@@ -731,7 +731,7 @@ Coronavírus (Covid-19)</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="D68_feijao"
+            name="feijao"
 
             options={[{
               id: 'Feijão',
@@ -743,7 +743,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_arroz"
+            name="arroz"
             options={[{
               id: 'Arroz',
               value: 'true',
@@ -753,7 +753,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_carnes"
+            name="carnes"
             options={[{
               id: 'Carnes (de boi, peixe, frango ou porco)',
               value: 'true',
@@ -763,7 +763,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_verduras_legumes"
+            name="verduras_legumes"
             options={[{
               id: 'Verduras e/ou legumes',
               value: 'true',
@@ -773,7 +773,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_frutas_frescas"
+            name="frutas_frescas"
             options={[{
               id: 'Frutas frescas',
               value: 'true',
@@ -783,7 +783,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_leite"
+            name="leite"
             options={[{
               id: 'Leite',
               value: 'true',
@@ -793,7 +793,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_hamburguer_embutidos"
+            name="hamburguer_embutidos"
             options={[{
               id: 'Hambúrguer e/ou embutidos',
               value: 'true',
@@ -803,7 +803,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_bebidas_adocadas"
+            name="bebidas_adocadas"
             options={[{
               id: 'Bebidas adoçadas',
               value: 'true',
@@ -813,7 +813,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados"
+            name="macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados"
             options={[{
               id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
               value: 'true',
@@ -823,14 +823,13 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="D68_biscoito_recheado_doces_guloseimas"
+            name="biscoito_recheado_doces_guloseimas"
             options={[{
               id: 'Biscoito recheado, doces ou guloseimas',
               value: 'true',
               label: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramelo, gelatina)',
             }]}
           />
-
 
         </CheckBoxContainer>
 
