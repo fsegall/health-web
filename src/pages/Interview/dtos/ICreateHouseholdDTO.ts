@@ -45,7 +45,7 @@ export default interface ICreateHouseholdDTO {
   corte_de_gastos_nao_essenciais?: boolean;
   ns_nr?: boolean;
   //
-  educacao_basica_public: string;
+  educacao_basica_publica: string;
   pnae?: string;
   cadastro_unico: string;
   bolsa_familia: string;
@@ -78,7 +78,7 @@ export default interface ICreateHouseholdDTO {
   mercado: string;
   gastos_alimentacao: string;
   // D68 - multipla escolha
-  feijão?: boolean;
+  feijao?: boolean;
   arroz?: boolean;
   carnes?: boolean;
   verduras_legumes?: boolean;
