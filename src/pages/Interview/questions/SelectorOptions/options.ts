@@ -318,6 +318,15 @@ export const programas_de_assistencia = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+// D46_auxilio_vezes
+
+export const auxilio_vezes = [
+  { value: 'uma vez', label: 'Uma vez' },
+  { value: 'duas vezes', label: 'Duas vezes' },
+  { value: 'três vezes', label: 'Três vezes' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
 // D48_tipo_de_ajuda
 
 export const tipo_de_ajuda = [

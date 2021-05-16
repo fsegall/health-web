@@ -87,7 +87,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
         <Label>P1 - Qual o seu nome completo?</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="nome" />
         <Label>P2 - Qual a sua idade?</Label>
-        <Input name="idade" type="number" min="18" max="110" />
+        <Input name="idade" type="number" min="16" max="110" />
 
         <Label>P3 - Qual o seu sexo?</Label>
         < Select name="sexo" options={genero} />

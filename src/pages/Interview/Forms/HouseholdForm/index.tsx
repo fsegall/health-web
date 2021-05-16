@@ -34,6 +34,7 @@ import {
   faixa_de_renda,
   programas_de_assistencia,
   pnae,
+  auxilio_vezes,
   tipo_de_ajuda,
   divisao_alimento,
   como_adquiriu_comida,
@@ -172,15 +173,16 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
 
+        <Label>D6 - Qual a idade da pessoa de referência?</Label>
+
 
         {mainPerson?.value === 'false' ?
           (
             <>
-              <Label>D6 - Qual a idade da pessoa de referência?</Label>
               <Input
                 placeholder="Idade"
                 type="number"
-                min="18"
+                min="16"
                 max="110"
                 name="idade_pessoa_de_referencia"
               />
@@ -356,7 +358,8 @@ Coronavírus (Covid-19)</Label>
 
       <Section>
         <Label>
-          Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
+          <strong>Nos últimos 30 dias qual foi a renda familiar?</strong>
+          <Label>(DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)</Label>
         </Label>
         <CheckBoxContainer>
           <CheckboxInput
@@ -383,6 +386,7 @@ Coronavírus (Covid-19)</Label>
           />
 
           : null}
+        <Label><strong></strong></Label>
 
         <Label>
           D34 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
@@ -461,7 +465,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D38 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
+          D38 - Nos últimos três meses, você ou alguém da sua casa estava registrado(a) no <b>cadastro único do governo</b>?
         </Label>
         <Select
           name="cadastro_unico"
@@ -469,7 +473,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D39 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
+          D39 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>bolsa família</b>?
         </Label>
         <Select
           name="bolsa_familia"
@@ -477,7 +481,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
           name="bpc"
@@ -527,21 +531,14 @@ Coronavírus (Covid-19)</Label>
             setAuxilio(selectedOption)
           }}
         />
-        {
-          auxilio?.value === 'true' || auxilio === {} ?
-            (
-              <>
-                <Label>D46 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
-                <Input
-                  placeholder="Número de vezes"
-                  name="auxilio_vezes"
-                  type="number"
-                  min="1"
-                />
-              </>
-            ) :
-            null
-        }
+
+        <Label>D46 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+
+        <Select
+          name="auxilio_vezes"
+          options={auxilio_vezes}
+          isDisabled={auxilio?.value === 'true' ? false : true}
+        />
 
         <Label>
           D47 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
@@ -554,7 +551,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D48 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
+          D48 - Caso você ou alguém da sua casa tenha recebido ajuda <b>o que recebeu</b>?
         </Label>
 
         <Select
@@ -564,7 +561,7 @@ Coronavírus (Covid-19)</Label>
         />
 
         <Label>
-          D49 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
+          D49 - Nos últimos três meses, para conseguir alimentos, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
         </Label>
 
         <Select
@@ -692,7 +689,7 @@ Coronavírus (Covid-19)</Label>
           options={como_adquiriu_comida}
         />
         <Label>
-          D64 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
+          D64 - Nos últimos 3 meses, <b>observou alguma mudança nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
           name="alteracao_preco_comida"
