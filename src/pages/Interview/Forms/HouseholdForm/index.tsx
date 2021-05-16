@@ -22,19 +22,34 @@ import { useToast } from '../../../../hooks/toast';
 import { HouseholdValidation } from '../../validation/schemas/HouseholdValidation';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import {
-  drinkingWaterOptions,
-  typeOfResidenceOptions,
-  locationOptions,
-  traditionalPeoplesOptions,
-  whichTraditionalPeoplesOptions,
-  homelessOptions,
-  peopleInvitedToHouseholdOptions,
-  buildingMaterialOptions,
-  sewageOptions,
-  worriedWithFoodSupplyOptions,
-  LackOfFoodOptions,
-  cannotAffordFoodOptions,
+  local_do_domicilio,
+  morador_de_rua,
+  qual_povo_tradicional,
+  covid_perda,
+  tipo_de_residencia,
+  material_de_construcao,
+  agua_potavel,
+  pessoas_convidadas,
+  esgoto,
+  faixa_de_renda,
+  programas_de_assistencia,
+  pnae,
+  auxilio_vezes,
+  tipo_de_ajuda,
+  divisao_alimento,
+  como_adquiriu_comida,
+  alteracao_preco_comida,
+  mercado,
+  perfil_de_compra,
+  gastos_alimentacao,
+  genero,
+  raca_cor,
+  escolaridade,
+  situacao_de_trabalho,
+  ocupacao_profissional,
+  local_de_trabalho,
   yesOrNoOptions,
+<<<<<<< HEAD
   governmentProgramOptions,
   governmentPNAEProgramOptions,
   typeOfrecievedCharityOptions,
@@ -55,6 +70,8 @@ import {
   main_person_work_situation,
   covidLossOptions,
   peopleIncomeRangeOptions
+=======
+>>>>>>> develop
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -156,85 +173,86 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
       <Section>
         <Label>
           <span>D1 - Localização do domicílio</span>
-          <Select name="location_of_residence" options={locationOptions} />
+          <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
         <Label>D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
-        < Select name="homeless" options={homelessOptions} />
+        < Select name="morador_de_rua" options={morador_de_rua} />
         <Label>D3 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
         < Select
-          name="traditional_peoples"
-          options={traditionalPeoplesOptions}
+          name="povos_tradicionais"
+          options={yesOrNoOptions}
           onChange={selectedOption => setTraditional(selectedOption)}
         />
         <Label>D4 - Qual comunidade tradicional ou povos?</Label>
         < Select
-          name="which_traditional_peoples"
-          options={whichTraditionalPeoplesOptions}
+          name="qual_povo_tradicional"
+          options={qual_povo_tradicional}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
         <Label>D5 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
         < Select
-          name="household_main_person"
+          name="pessoa_de_referencia"
           options={yesOrNoOptions}
           onChange={selectedOption => setMainPerson(selectedOption)}
         />
+
+        <Label>D6 - Qual a idade da pessoa de referência?</Label>
 
 
         {mainPerson?.value === 'false' ?
           (
             <>
-              <Label>D6 - Qual a idade da pessoa de referência?</Label>
               <Input
                 placeholder="Idade"
                 type="number"
-                min="18"
+                min="16"
                 max="110"
-                name="main_person_age"
+                name="idade_pessoa_de_referencia"
               />
             </>
           ) : null}
 
         <Label>D7 - Qual o sexo da pessoa de referência?</Label>
         < Select
-          name="main_person_gender"
-          options={mainPersonGenderOptions}
+          name="sexo_pessoa_de_referencia"
+          options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
-        < Select name="race_color" options={raceOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
-        < Select name="literacy" options={LiteracyOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
-        < Select name="education" options={educationOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        < Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
         < Select
-          name="main_person_work_status"
-          options={main_person_work_status}
+          name="situacao_de_trabalho"
+          options={situacao_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
         < Select
-          name="main_person_work_occupation"
-          options={main_person_work_occupation}
+          name="ocupacao_profissional"
+          options={ocupacao_profissional}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
         < Select
-          name="main_person_work_situation"
-          options={main_person_work_situation}
+          name="local_de_trabalho"
+          options={local_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D14 - No ano de 2020 (entre fevereiro e Dezembro de 2020) você ou algum morador da sua casa teve diagnóstico de
 Coronavírus (Covid-19)</Label>
         < Select
-          name="covid_2020_household"
+          name="covid_2020"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setCovid2020(selectedOption)
@@ -243,14 +261,14 @@ Coronavírus (Covid-19)</Label>
 
         <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
         < Select
-          name="covid_loss"
-          options={covidLossOptions}
+          name="covid_perda_2020"
+          options={covid_perda}
           isDisabled={covid2020?.value === 'false' ? true : false}
         />
 
         <Label>D16 - Neste ano de 2021 (de janeiro até hoje) você ou algum morador da sua casa teve diagnóstico de Coronavírus (Covid-19)?</Label>
         < Select
-          name="covid_2021_household"
+          name="covid_2021"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setCovid2021(selectedOption)
@@ -259,49 +277,49 @@ Coronavírus (Covid-19)</Label>
 
         <Label>D17 - Neste ano de 2021 (de Janeiro até hoje) vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
-          name="covid_loss"
-          options={covidLossOptions}
+          name="covid_perda_2021"
+          options={covid_perda}
           isDisabled={covid2021?.value === 'false' ? true : false}
         />
 
         <Label>D18 - Tipo de residência</Label>
-        <Select name="type_of_residence" options={typeOfResidenceOptions} />
+        <Select name="tipo_de_residencia" options={tipo_de_residencia} />
         <Label>D19 - Qual o número de cômodos na casa incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
           min="1"
           max="12"
-          name="number_of_rooms"
+          name="numero_de_comodos"
           defaultValue="1"
         />
         <Label>D20 - Qual o material de construção das paredes externas da casa?</Label>
-        <Select name="construction_material" options={buildingMaterialOptions} />
+        <Select name="material_de_construcao" options={material_de_construcao} />
         <Label>D21 - Tem acesso à água potável na sua casa?</Label>
-        <Select name="drinking_water" options={drinkingWaterOptions} />
+        <Select name="agua_potavel" options={agua_potavel} />
 
 
         <Label>D22 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
-        <Select name="water_rural_animals" options={yesOrNoOptions} />
+        <Select name="agua_animais" options={yesOrNoOptions} />
 
         <Label>D23 - Este domicílio tem água suficiente para produção de alimentos?</Label>
-        <Select name="water_rural_produce" options={yesOrNoOptions} />
+        <Select name="agua_producao_alimentos" options={yesOrNoOptions} />
 
 
         <Label>D24 - Como é feita a coleta de esgoto na casa?</Label>
-        <Select name="sewage" options={sewageOptions} />
+        <Select name="esgoto" options={esgoto} />
         <Label>D25 - Número de pessoas no domicílio</Label>
         <Input
           placeholder="Número de pessoas"
           type="number"
           min="1"
           max="12"
-          name="number_of_people_household"
+          name="numero_de_pessoas"
           defaultValue="1"
         />
         <CheckBoxContainer>
           <CheckboxInput
-            name="one_person_household"
+            name="uma_pessoa_domicilio"
             options={[{
               id: 'one_person_household',
               value: 'true',
@@ -318,7 +336,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D27 - Quantos moradores com até 5 anos</Label>
               <Input
                 placeholder="Menos de 5 anos - Digitar número"
-                name="five_years_old_or_more"
+                name="cinco_anos_ou_mais"
                 min="0"
                 max="6"
                 type="number"
@@ -327,7 +345,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D28 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
                 placeholder="Entre 6 e 18 anos - Digitar número"
-                name="between_6_and_18"
+                name="entre_6_e_18"
                 min="0"
                 max="6"
                 type="number"
@@ -336,7 +354,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D29 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
                 placeholder="Entre 19 e 59 anos - Digitar número"
-                name="between_19_and_59"
+                name="entre_19_e_59"
                 min="0"
                 max="6"
                 type="number"
@@ -345,7 +363,7 @@ Coronavírus (Covid-19)</Label>
               <Label>D30 - Quantos moradores 60 anos ou mais</Label>
               <Input
                 placeholder="Com 60 anos ou mais - Digitar número"
-                name="sixty_years_old_or_more"
+                name="sessenta_anos_ou_mais"
                 min="0"
                 max="6"
                 type="number"
@@ -354,8 +372,8 @@ Coronavírus (Covid-19)</Label>
                 D31 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
               </Label>
               <Select
-                name="people_invited"
-                options={peopleInvitedToHouseholdOptions}
+                name="pessoas_convidadas"
+                options={pessoas_convidadas}
               />
             </>
           ) : null}
@@ -363,16 +381,17 @@ Coronavírus (Covid-19)</Label>
 
       <Section>
         <Label>
-          D32 - Nos últimos 30 dias qual foi a renda familiar? (DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)
+          <strong>Nos últimos 30 dias qual foi a renda familiar?</strong>
+          <Label>(DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)</Label>
         </Label>
         <CheckBoxContainer>
           <CheckboxInput
 
-            name="income_unknown"
+            name="nao_sabe_renda"
             options={[{
               id: 'income_unknown',
               value: 'true',
-              label: 'D33 - Não sei informar',
+              label: 'D32 - Não sei informar',
             }]}
             onChange={() => setIncome(!income)}
           />
@@ -382,67 +401,68 @@ Coronavírus (Covid-19)</Label>
 
           <Input
             icon={FiDollarSign}
-            placeholder="D34 - Renda familiar"
-            name="family_income"
+            placeholder="D33 - Renda familiar"
+            name="renda_familiar"
             type="number"
             min="1"
 
           />
 
           : null}
+        <Label><strong></strong></Label>
 
         <Label>
-          D35 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
+          D34 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
       </Label>
         <Select
-          name="people_income_range"
-          options={peopleIncomeRangeOptions}
+          name="faixa_de_renda"
+          options={faixa_de_renda}
         />
 
 
         <CheckBoxContainer>
           <Label>
-            <span>D36 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
+            <span>D35 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVÍRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
           </Label>
 
           <CheckboxInput
 
-            name="job_loss"
+            name="perda_de_emprego"
             options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
           />
 
           <CheckboxInput
 
-            name="salary_reduction"
+            name="reducao_de_salario"
             options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
           <CheckboxInput
 
-            name="financial_support"
+            name="ajuda_financeira"
             options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
           />
 
           <CheckboxInput
 
-            name="debt"
+            name="divida"
             options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
           />
 
           <CheckboxInput
 
-            name="cut_costs"
+            name="corte_de_gastos"
             options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
           />
 
           <CheckboxInput
 
-            name="cut_non_essential_costs"
+            name="corte_de_gastos_nao_essenciais"
             options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
           />
 
           <CheckboxInput
-            name="ns_nr_work_salary"
+            name="ns_nr"
             options={[{ id: 'ns_nr', value: 'true', label: 'Não sabe ou não quis responder' }]}
           />
 
@@ -450,182 +470,175 @@ Coronavírus (Covid-19)</Label>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          D37 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
+          D36 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
         </Label>
         <Select
-          name="matriculado_na_educacao_basica_publica"
+          name="educacao_basica_publica"
           options={yesOrNoOptions}
           onChange={selectedOption => setEduc(selectedOption)}
         />
 
         <Label>
-          D38 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
+          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
         </Label>
         <Select
-          name="government_assistance_program_pnae"
-          options={governmentPNAEProgramOptions}
+          name="pnae"
+          options={pnae}
           isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
         />
 
         <Label>
-          D39 - Nos últimos três meses, você ou alguém da sua casa tem cadastro no <b>cadastro único do governo</b>?
+          D38 - Nos últimos três meses, você ou alguém da sua casa estava registrado(a) no <b>cadastro único do governo</b>?
         </Label>
         <Select
-          name="government_assistance_program_cadastro_unico"
-          options={governmentProgramOptions}
+          name="cadastro_unico"
+          options={programas_de_assistencia}
         />
 
         <Label>
-          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu do programa <b>bolsa família</b>?
+          D39 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>bolsa família</b>?
         </Label>
         <Select
-          name="government_assistance_program_bolsa_familia"
-          options={governmentProgramOptions}
+          name="bolsa_familia"
+          options={programas_de_assistencia}
         />
 
         <Label>
-          D41 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
-          name="government_assistance_program_bpc"
-          options={governmentProgramOptions}
+          name="bpc"
+          options={programas_de_assistencia}
         />
 
         <Label>
-          D42 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
+          D41 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
-          name="pension"
+          name="pensao"
           options={yesOrNoOptions}
         />
 
         <Label>
-          D43 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
+          D42 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
-          name="prison_cash_assistance"
+          name="auxilio_reclusao"
           options={yesOrNoOptions}
         />
 
         <Label>
-          D44 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+          D43 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
-          name="food_basket_assistance"
+          name="cesta_de_alimentos"
           options={yesOrNoOptions}
         />
 
         <Label>
-          D45 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
+          D44 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
         </Label>
         <Select
-          name="low_income_restaurants"
+          name="restaurantes_populares"
           options={yesOrNoOptions}
         />
 
         <Label>
-          D46 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+          D45 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
         </Label>
 
         <Select
-          name="covid_cash_assistance"
+          name="auxilio_emergencial"
           options={yesOrNoOptions}
           onChange={selectedOption => {
             setAuxilio(selectedOption)
           }}
         />
-        {
-          auxilio?.value === 'true' || auxilio === {} ?
-            (
-              <>
-                <Label>D47 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
-                <Input
-                  placeholder="Número de vezes"
-                  name="covid_cash_assistance_number_of_times"
-                  type="number"
-                  min="1"
-                />
-              </>
-            ) :
-            null
-        }
+
+        <Label>D46 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+
+        <Select
+          name="auxilio_vezes"
+          options={auxilio_vezes}
+          isDisabled={auxilio?.value === 'true' ? false : true}
+        />
 
         <Label>
-          D48 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+          D47 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
         </Label>
 
         <Select
-          name="charity"
+          name="ajuda_instituicao_caridade"
           options={yesOrNoOptions}
           onChange={selectedOption => setAjuda(selectedOption)}
         />
 
         <Label>
-          D49 - Caso você ou alguém da sua casa tenha recebido ajuda <b>ela foi de que forma</b>?
+          D48 - Caso você ou alguém da sua casa tenha recebido ajuda <b>o que recebeu</b>?
         </Label>
 
         <Select
-          name="type_of_charity"
-          options={typeOfrecievedCharityOptions}
+          name="tipo_de_ajuda"
+          options={tipo_de_ajuda}
           isDisabled={ajuda?.value === 'true' ? false : true}
         />
 
         <Label>
-          D50 - Nos últimos três meses, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b> para conseguir alimentos?
+          D49 - Nos últimos três meses, para conseguir alimentos, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
         </Label>
 
         <Select
-          name="embarassement"
+          name="vergonha"
           options={yesOrNoOptions}
         />
 
         <Label>
-          D51 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+          D50 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
         </Label>
 
         <Select
-          name="home_grown"
+          name="produz_alimento"
           options={yesOrNoOptions}
           onChange={selectedOptions => setHomegrown(selectedOptions)}
         />
 
         <Label>
-          D52 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
+          D51 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
         </Label>
 
         <Select
-          name="food_for_market"
+          name="alimento_para_venda"
           options={yesOrNoOptions}
           onChange={selectedOptions => setProduce(selectedOptions)}
           isDisabled={homegrown?.value === 'true' ? false : true}
         />
 
         <Label>
-          D53 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
+          D52 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
         </Label>
 
         <Select
-          name="market_profile"
-          options={homeGrownSellingFoodOptions}
+          name="divisao_alimento"
+          options={divisao_alimento}
           isDisabled={produce?.value === 'true' ? false : true}
         />
 
         <Label>
-          D54 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
+          D53 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
         </Label>
 
         <Select
-          name="difficulty_selling_food"
-          options={FoodSellingOptions}
+          name="dificuldade_venda"
+          options={yesOrNoOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
 
         <Label>
-          D55 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
+          D54 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
         </Label>
 
         <Select
-          name="could_not_sell_food"
+          name="nao_vendeu"
           options={yesOrNoOptions}
           isDisabled={produce?.value === 'true' ? false : true}
         />
@@ -635,106 +648,106 @@ Coronavírus (Covid-19)</Label>
       <Section>
         <Label><strong>Escala de Segurança Alimentar</strong></Label>
         <Label>
-          D56 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
+          D55 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
         </Label>
         <Select
-          name="worried_food_supply"
-          options={worriedWithFoodSupplyOptions}
-        />
-        <Label>
-          D57 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
-        </Label>
-        <Select
-          name="lack_food_supply"
-          options={LackOfFoodOptions}
-        />
-        <Label>
-          D58 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
-        </Label>
-        <Select
-          name="afford_healthy_food"
-          options={cannotAffordFoodOptions}
-        />
-        <Label>
-          D59 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
-        </Label>
-        <Select
-          name="poor_food_choice"
+          name="preocupacao_alimentos"
           options={yesOrNoOptions}
         />
         <Label>
-          D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
-          name="adult_meals"
+          name="alimentos_acabaram"
           options={yesOrNoOptions}
         />
         <Label>
-          D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D57 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO FICARAM SEM DINHEIRO PARA TER UMA <b>ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
         </Label>
         <Select
-          name="adult_food_privation"
+          name="alimentos_saudaveis"
           options={yesOrNoOptions}
         />
         <Label>
-          D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D58 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO COMERAM APENAS ALGUNS <b>POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
         </Label>
         <Select
-          name="adult_hunger"
+          name="alimentos_poucos_tipos"
           options={yesOrNoOptions}
         />
         <Label>
-          D63 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          D59 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
-          name="adult_one_meal_or_none"
+          name="refeicoes_adulto"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adulto_comeu_menos"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adulto_fome"
+          options={yesOrNoOptions}
+        />
+        <Label>
+          D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+        </Label>
+        <Select
+          name="adulto_uma_refeicao"
           options={yesOrNoOptions}
         />
         <Label><strong></strong></Label>
         <Label>
-          D64 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
+          D63 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
         </Label>
         <Select
-          name="how_food_is_obtained"
-          options={howFoodIsObtainedOptions}
+          name="como_adquiriu_comida"
+          options={como_adquiriu_comida}
         />
         <Label>
-          D65 - Nos últimos 3 meses, <b>observou alguma alteração nos preços</b> dos alimentos que costuma comprar?
+          D64 - Nos últimos 3 meses, <b>observou alguma mudança nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
-          name="food_price_change"
-          options={FoodPriceOptions}
+          name="alteracao_preco_comida"
+          options={alteracao_preco_comida}
           onChange={selectedOption => setBuyingProfile(selectedOption)}
         />
 
         <Label>
-          D66 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
+          D65 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
         </Label>
         <Select
-          name="food_profile_change"
-          options={FoodProfileOptions}
+          name="perfil_de_compra"
+          options={perfil_de_compra}
           isDisabled={buyingProfile?.value === 'nao' || buyingProfile?.value === 'ns-nr' ? true : false}
         />
 
         <Label>
-          D67 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
+          D66 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
-          name="food_store_type"
-          options={FoodStoreOptions}
+          name="mercado"
+          options={mercado}
         />
 
         <Label>
-          D68 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
+          D67 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
-          name="food_expenditure"
-          options={FoodExpenditureOptions}
+          name="gastos_alimentacao"
+          options={gastos_alimentacao}
         />
 
         <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
 
-        <Label>D69 - Ontem você comeu:</Label>
+        <Label>D68 - Ontem você comeu:</Label>
         <CheckBoxContainer>
           <CheckboxInput
 
@@ -800,7 +813,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="hambúrguer_embutidos"
+            name="hamburguer_embutidos"
             options={[{
               id: 'Hambúrguer e/ou embutidos',
               value: 'true',
@@ -820,7 +833,7 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="macarrao-instantaneo_salgadinhos-de-pacote_biscoitos-salgados"
+            name="macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados"
             options={[{
               id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
               value: 'true',
@@ -830,14 +843,13 @@ Coronavírus (Covid-19)</Label>
 
           <CheckboxInput
 
-            name="biscoito-recheado_doces_guloseimas"
+            name="biscoito_recheado_doces_guloseimas"
             options={[{
               id: 'Biscoito recheado, doces ou guloseimas',
               value: 'true',
               label: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramelo, gelatina)',
             }]}
           />
-
 
         </CheckBoxContainer>
 
