@@ -1,12 +1,6 @@
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
-<<<<<<< HEAD
-/* import {
-  OptionTypeBase
-} from 'react-select'; */
-=======
->>>>>>> develop
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
@@ -47,11 +41,6 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
 
   const PersonFormRef = useRef<FormHandles>(null);
 
-<<<<<<< HEAD
-  /* const [workType, setWorkType] = useState<OptionTypeBase | undefined | null>({}); */
-
-=======
->>>>>>> develop
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
     try {
       PersonFormRef.current?.setErrors({});

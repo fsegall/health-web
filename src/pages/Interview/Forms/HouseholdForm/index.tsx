@@ -49,29 +49,6 @@ import {
   ocupacao_profissional,
   local_de_trabalho,
   yesOrNoOptions,
-<<<<<<< HEAD
-  governmentProgramOptions,
-  governmentPNAEProgramOptions,
-  typeOfrecievedCharityOptions,
-  homeGrownSellingFoodOptions,
-  FoodSellingOptions,
-  howFoodIsObtainedOptions,
-  FoodPriceOptions,
-  FoodStoreOptions,
-  FoodProfileOptions,
-  FoodExpenditureOptions,
-  mainPersonGenderOptions,
-  /* genderOptions, */
-  raceOptions,
-  educationOptions,
-  LiteracyOptions,
-  main_person_work_status,
-  main_person_work_occupation,
-  main_person_work_situation,
-  covidLossOptions,
-  peopleIncomeRangeOptions
-=======
->>>>>>> develop
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
