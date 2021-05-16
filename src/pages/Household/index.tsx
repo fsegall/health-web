@@ -65,12 +65,12 @@ const Household: React.FC = () => {
               <li>
 
                 <span>Região de Localização da Casa: </span>
-                {household?.location_of_residence}
+                {/* household?.location_of_residence */}
 
               </li>
               <li>
 
-                <span>{`Tipo de residência: ${household?.type_of_residence}`}</span>
+                <span>{/* `Tipo de residência: ${household?.type_of_residence}` */}</span>
 
               </li>
               {/*               <li>
