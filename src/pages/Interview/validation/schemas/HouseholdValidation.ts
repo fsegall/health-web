@@ -102,7 +102,7 @@ export const HouseholdValidation = Yup.object().shape({
   auxilio_emergencial: Yup.string().required(
     'Você precisa escolher um dos campos de auxílio emergencial',
   ),
-  auxilio_vezes: Yup.number(),
+  auxilio_vezes: Yup.string(),
   ajuda_instituicao_caridade: Yup.string().required(
     'Você precisa escolher um dos campos de ajuda recebida',
   ),
@@ -144,7 +144,7 @@ export const HouseholdValidation = Yup.object().shape({
   como_adquiriu_comida: Yup.string().required(
     'Você precisa escolher um dos campos de que forma você e as pessoas da sua casa estão adquirindo os alimentos',
   ),
-  alteracao_preco_comidas: Yup.string().required(
+  alteracao_preco_comida: Yup.string().required(
     'Você precisa escolher um dos campos observou alguma alteração nos preços dos alimentos',
   ),
   perfil_de_compra: Yup.string(),

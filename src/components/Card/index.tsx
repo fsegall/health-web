@@ -11,9 +11,10 @@ import {
 interface CardPersonProps {
   person: {
     name?: string;
+    nome?: string;
     organization_name?: string;
-    gender?: string;
-    age?: number;
+    sexo?: string;
+    idade?: number;
     covid_diagnose?: string;
     id?: string | undefined;
     avatar_url?: string;
@@ -28,7 +29,7 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
 
         <CardHeader hasAvatar={!!person.avatar_url}>
           {person.avatar_url ? <Avatar src={person.avatar_url} /> : null}
-          <div>{person.name ? person.name : null}</div>
+          <div>{person.nome ? person.nome : null}</div>
 
           {!person.organization_name ?
             (<div>
@@ -46,10 +47,10 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
           <div>
             <ul>
               {!person.organization_name ? (<><li>
-                <span>Gênero:</span> {person.gender}
+                <span>Gênero:</span> {person.sexo}
               </li>
                 <li>
-                  <span>Idade: </span>{person.age || ''}
+                  <span>Idade: </span>{person.idade || ''}
                 </li>
                 <li>
                   <span>Diagnosticado(a) com COVID: </span> {person.covid_diagnose === 'true' ? 'Sim' : 'Não'}

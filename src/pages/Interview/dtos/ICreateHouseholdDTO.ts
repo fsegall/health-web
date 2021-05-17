@@ -33,7 +33,7 @@ export default interface ICreateHouseholdDTO {
   entre_19_e_59?: number;
   sessenta_anos_ou_mais?: number;
   pessoas_convidadas?: string;
-  nao_sabe_renda: boolean;
+  nao_sabe_renda?: boolean;
   renda_familiar?: number;
   faixa_de_renda: string;
   // D35 - multipla escolha
@@ -43,7 +43,7 @@ export default interface ICreateHouseholdDTO {
   divida?: boolean;
   corte_de_gastos?: boolean;
   corte_de_gastos_nao_essenciais?: boolean;
-  ns_nr?: boolean;
+  ns_nr_trabalho?: boolean;
   //
   educacao_basica_publica: string;
   pnae?: string;
@@ -55,7 +55,7 @@ export default interface ICreateHouseholdDTO {
   cesta_de_alimentos: string;
   restaurantes_populares: string;
   auxilio_emergencial: string;
-  auxilio_vezes?: number;
+  auxilio_vezes?: string;
   ajuda_instituicao_caridade: string;
   tipo_de_ajuda?: string;
   vergonha: string;
@@ -73,7 +73,7 @@ export default interface ICreateHouseholdDTO {
   adulto_fome: string;
   adulto_uma_refeicao: string;
   como_adquiriu_comida: string;
-  alteracao_preco_comidas: string;
+  alteracao_preco_comida: string;
   perfil_de_compra?: string;
   mercado: string;
   gastos_alimentacao: string;

@@ -8,7 +8,7 @@ export default interface ICreatePersonDTO {
   ler_escrever: string;
   escolaridade: string;
   situacao_de_trabalho: string;
-  ocupacao?: string;
-  local_de_trabalho?: string;
+  ocupacao: string;
+  local_de_trabalho: string;
   diagnostico_covid: string;
 }

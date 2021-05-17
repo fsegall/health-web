@@ -130,6 +130,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
+          console.log(error);
           const errors = getValidationErrors(error);
 
           HouseholdFormRef.current?.setErrors(errors);
@@ -439,8 +440,8 @@ Coronavírus (Covid-19)</Label>
           />
 
           <CheckboxInput
-            name="ns_nr"
-            options={[{ id: 'ns_nr', value: 'true', label: 'Não sabe ou não quis responder' }]}
+            name="ns_nr_trabalho"
+            options={[{ id: 'ns_nr_trabalho', value: 'true', label: 'Não sabe ou não quis responder' }]}
           />
 
         </CheckBoxContainer>
