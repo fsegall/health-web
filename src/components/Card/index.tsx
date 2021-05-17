@@ -29,8 +29,8 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
 
         <CardHeader hasAvatar={!!person.avatar_url}>
           {person.avatar_url ? <Avatar src={person.avatar_url} /> : null}
-          {person.nome ? <div>person.nome</div> : null}
-          {person.name ? <div>person.name</div> : null}
+          {person.nome ? <div>{person.nome}</div> : null}
+          {person.name ? <div>{person.name}</div> : null}
 
           {!person.organization_name ?
             (<div>
