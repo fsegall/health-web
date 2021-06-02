@@ -57,20 +57,20 @@ export const situacao_de_trabalho = [
     label: 'Trabalho remunerado',
   },
   {
-    value: 'desempregado em 2021',
-    label: 'Desempregado em 2021',
+    value: 'desempregado(a) em 2021',
+    label: 'Desempregado(a) em 2021',
   },
   {
-    value: 'desempregado desde 2020',
-    label: 'Desempregado desde 2020',
+    value: 'desempregado(a) desde 2020',
+    label: 'Desempregado(a) desde 2020',
   },
   {
-    value: 'desempregado desde antes de 2020',
-    label: 'Desempregado desde antes de 2020',
+    value: 'desempregado(a) desde antes de 2020',
+    label: 'Desempregado(a) desde antes de 2020',
   },
   {
-    value: 'aposentado',
-    label: 'Aposenatado(a)',
+    value: 'aposentado(a) por tempo de serviço',
+    label: 'Aposentado(a) por tempo de serviço',
   },
   {
     value: 'estudante',
@@ -197,11 +197,11 @@ export const covid_perda = [
   },
   {
     value: 'sim, outro adulto homem',
-    label: 'Sim, a outro adulto homem',
+    label: 'Sim, outro adulto homem',
   },
   {
     value: 'sim, outro adulto mulher',
-    label: 'Sim, a outro adulto mulher',
+    label: 'Sim, outro adulto mulher',
   },
   {
     value: 'sim, criança / adolescente (jovem menor de 20 anos)',
@@ -289,7 +289,7 @@ export const pessoas_convidadas = [
 
 export const faixa_de_renda = [
   { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
-  { value: 'de R$ 275,00 a R$550, (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
+  { value: 'de R$ 275,00 a R$550,00 (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
   { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
   { value: 'mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)', label: 'Mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)' },
   { value: 'mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)' },
@@ -360,7 +360,7 @@ export const como_adquiriu_comida = [
 
 export const alteracao_preco_comida = [
   { value: 'sim-aumento', label: 'Sim, observei um aumento no preço dos alimentos.' },
-  { value: 'sim-diminuicao', label: 'Sim, observamos uma diminuição no preço dos alimentos.' },
+  { value: 'sim-diminuicao', label: 'Sim, observei uma diminuição no preço dos alimentos.' },
   { value: 'nao', label: 'Não, os alimentos mantiveram os mesmos preços.' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];

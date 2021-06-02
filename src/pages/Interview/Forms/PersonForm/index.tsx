@@ -120,7 +120,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
           name="local_de_trabalho"
           options={local_de_trabalho}
         />
-        <Label>P10 - Você já teve diagnóstico de Coronavírus(Covid-19)?</Label>
+        <Label>P10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
         < Select name="diagnostico_covid" options={yesOrNoOptions} />
         <Button type="submit" > Submit </Button>
       </section>
