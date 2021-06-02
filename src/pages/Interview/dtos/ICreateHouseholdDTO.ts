@@ -67,11 +67,11 @@ export default interface ICreateHouseholdDTO {
   preocupacao_alimentos: string;
   alimentos_acabaram: string;
   alimentos_saudaveis: string;
-  alimentos_poucos_tipos: string;
-  refeicoes_adulto: string;
-  adulto_comeu_menos: string;
-  adulto_fome: string;
-  adulto_uma_refeicao: string;
+  alimentos_poucos_tipos?: string;
+  refeicoes_adulto?: string;
+  adulto_comeu_menos?: string;
+  adulto_fome?: string;
+  adulto_uma_refeicao?: string;
   como_adquiriu_comida: string;
   alteracao_preco_comida: string;
   perfil_de_compra?: string;

@@ -126,21 +126,11 @@ export const HouseholdValidation = Yup.object().shape({
   alimentos_saudaveis: Yup.string().required(
     'Você precisa escolher um dos campos de ALIMENTAÇÃO SAUDÁVEL E VARIADA',
   ),
-  alimentos_poucos_tipos: Yup.string().required(
-    'Você precisa escolher um dos campos de POUCOS TIPOS DE ALIMENTOS',
-  ),
-  refeicoes_adulto: Yup.string().required(
-    'Você precisa escolher um dos campos de DEIXOU DE FAZER ALGUMA REFEIÇÃO',
-  ),
-  adulto_comeu_menos: Yup.string().required(
-    'Você precisa escolher um dos campos de COMEU MENOS DO QUE ACHOU QUE DEVIA',
-  ),
-  adulto_fome: Yup.string().required(
-    'Você precisa escolher um dos campos de SENTIU FOME',
-  ),
-  adulto_uma_refeicao: Yup.string().required(
-    'Você precisa escolher um dos campos de APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER',
-  ),
+  alimentos_poucos_tipos: Yup.string(),
+  refeicoes_adulto: Yup.string(),
+  adulto_comeu_menos: Yup.string(),
+  adulto_fome: Yup.string(),
+  adulto_uma_refeicao: Yup.string(),
   como_adquiriu_comida: Yup.string().required(
     'Você precisa escolher um dos campos de que forma você e as pessoas da sua casa estão adquirindo os alimentos',
   ),
