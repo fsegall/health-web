@@ -52,12 +52,17 @@ const Accept: React.FC = () => {
         <ListTitle>Termo de Aceite</ListTitle>
       </SubHeader>
       <Aceite>
-        <p>
+        <div>
 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit mollis eleifend. Phasellus vitae ipsum elementum, interdum quam ac, congue dui. Aliquam eget sodales lectus, vel aliquam massa. Proin non porta urna, ac rhoncus quam. Duis non hendrerit ex. Fusce porttitor consequat interdum. Aenean nec mi id lacus mollis efficitur nec vitae nunc. Morbi nec nunc quis ante aliquam fermentum. Proin sit amet lacus eget odio tempus semper sed sit amet elit.
+          Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, em uma pesquisa nacional. Serão algumas perguntas sobre você e seus familiares outras a casa, do trabalho, da saúde e da alimentação.
 
-          Nullam mattis velit vitae mattis vehicula. Curabitur rutrum cursus erat, sed faucibus nibh egestas eu. Vivamus est massa, viverra ut cursus eget, mollis quis dolor. Nam ac scelerisque odio. Sed malesuada massa eu odio molestie, eu lobortis ante aliquet. Nam sit amet felis sed metus sodales porta. Ut iaculis, dolor quis sodales dapibus, erat felis ullamcorper nibh, at dapibus leo felis eu tellus. Maecenas sit amet odio at mi luctus malesuada sed ac velit. Aliquam malesuada quam eget erat porta vehicula. Donec sed malesuada augue. Nam non ligula sed eros malesuada rhoncus in non erat. Nam bibendum lacus nec leo dignissim posuere. Fusce id consectetur est.
-        </p>
+          Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar as ações de enfrentamento da pandemia e de seus efeitos sobre a alimentação dos brasileiros.
+          <div style={{ padding: '1rem' }}>
+            Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Vox Populi, no telefone 31 - 3014 5000 ou através do e-mail: pesquisa@voxdobrasil.com.
+          </div>
+
+          <strong>Agradecemos, desde já, sua valorosa colaboração.</strong>
+        </div>
       </Aceite>
       <FormContainer>
 
