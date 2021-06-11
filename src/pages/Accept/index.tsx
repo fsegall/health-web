@@ -16,7 +16,6 @@ import {
 } from './styles';
 
 import logo from '../../assets/logo_transparent.png';
-import CheckboxInput from '../../components/Checkbox';
 
 const Accept: React.FC = () => {
   const { signOut } = useAuth();
