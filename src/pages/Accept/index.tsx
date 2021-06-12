@@ -57,7 +57,7 @@ const Accept: React.FC = () => {
 
           Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar as ações de enfrentamento da pandemia e de seus efeitos sobre a alimentação dos brasileiros.
           <div style={{ padding: '1rem' }}>
-            Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Vox Populi, no telefone 31 - 3014 5000 ou através do e-mail: pesquisa@voxdobrasil.com.
+            Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede PENSANN através do e-mail: ...@rede.com.
           </div>
 
           <strong>Agradecemos, desde já, sua valorosa colaboração.</strong>
