@@ -48,7 +48,7 @@ const Accept: React.FC = () => {
       </Header>
 
       < SubHeader >
-        <ListTitle>Termo de Aceite</ListTitle>
+        <ListTitle>TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN</ListTitle>
       </SubHeader>
       <Aceite>
         <div>
@@ -57,7 +57,7 @@ const Accept: React.FC = () => {
 
           Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar as ações de enfrentamento da pandemia e de seus efeitos sobre a alimentação dos brasileiros.
           <div style={{ padding: '1rem' }}>
-            Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede PENSANN através do e-mail: ...@rede.com.
+            Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com
           </div>
 
           <strong>Agradecemos, desde já, sua valorosa colaboração.</strong>
