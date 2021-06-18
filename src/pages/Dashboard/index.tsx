@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
       setInterviews(interviews.data);
     }
     fetchInterviews();
-  }, [token]);
+  }, [token, user.id]);
 
   console.log(interviews);
 

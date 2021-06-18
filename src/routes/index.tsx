@@ -8,7 +8,7 @@ import Accept from '../pages/Accept';
 import Interview from '../pages/Interview';
 import Profile from '../pages/Profile';
 import Project from '../pages/Project';
-import Household from '../pages/Household';
+/* import Household from '../pages/Household'; */
 import Interviewers from '../pages/Interviewers';
 import ForgotPasword from '../pages/ForgotPassword';
 import ResetPasword from '../pages/ResetPassword';
