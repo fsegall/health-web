@@ -1,6 +1,7 @@
 export default interface ICreateInterviewDTO {
+  id?: string; // uuid from backend
   interviewer_id: string;
-  project_name: string; // incluir no backend
+  project_name: string;
   project_number: number;
   person_id: string;
   household_id: string;

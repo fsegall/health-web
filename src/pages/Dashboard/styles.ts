@@ -123,13 +123,47 @@ export const ListTitle = styled.h2`
 `;
 
 export const StyledList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr ));
-  justify-content: space-around;
+  color: #59748c;
+  text-align: center;
+`;
+
+export const StyledItem = styled.ul`
+  color: #59748c;
+  text-align: center;
+  padding: 0.2rem;
+`;
+
+export const BadgeContainer = styled.div`
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+justify-items: center;
+gap: 1rem;
 `;
 
 export const StyledLink = styled(Link)`
   margin-left: 40px;
+`;
+
+export const Counter = styled.div`
+  color: #59748c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+    margin-right: 15%;
+  }
+
+  div{
+    display: flex;
+    padding: 20px 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 2px 1px #ccc;
+    display: inline;
+    width: fit-content;
+    margin-bottom: 30px;
+  }
 `;
 
 export const FilterButton = styled.button`

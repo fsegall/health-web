@@ -32,7 +32,7 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
           {person.nome ? <div>{person.nome}</div> : null}
           {person.name ? <div>{person.name}</div> : null}
 
-          {!person.organization_name ?
+          {/*           {!person.organization_name ?
             (<div>
               <Link to={{
                 pathname: '/household',
@@ -41,7 +41,7 @@ const Card: React.FC<CardPersonProps> = ({ person }) => {
                 Residência
               </Link>
             </div>) : null
-          }
+          } */}
         </CardHeader>
 
         <CardContent>

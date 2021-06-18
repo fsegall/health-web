@@ -23,7 +23,7 @@ const Routes: React.FC = () => {
       <Route path="/accept" isPrivate component={Accept} />
       <Route path="/interview" isPrivate component={Interview} />
       <Route path="/project" isPrivate component={Project} />
-      <Route path="/household" isPrivate component={Household} />
+      {/* <Route path="/household" isPrivate component={Household} /> */}
       <Route path="/interviewers" isPrivate component={Interviewers} />
       <Route path="/profile" isPrivate component={Profile} />
     </Switch>
