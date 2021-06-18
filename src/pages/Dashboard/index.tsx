@@ -40,8 +40,6 @@ const Dashboard: React.FC = () => {
     fetchInterviews();
   }, [token, user.id]);
 
-  console.log(interviews);
-
   return (
     <Container>
       <Header>
@@ -76,7 +74,6 @@ const Dashboard: React.FC = () => {
 
       <SubHeader>
         <ListTitle>Minhas Entrevistas</ListTitle>
-        {/* <FilterButton type="button" onClick={() => setFilteredByUser(!filteredByUser)}>{!filteredByUser ? 'Meus Entrevistados' : 'Todos'}</FilterButton> */}
       </SubHeader>
 
       <Counter><div>Você já realizou <strong>{interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>

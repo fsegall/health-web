@@ -29,8 +29,6 @@ const Household: React.FC = () => {
 
   let location = useLocation<ICreatePersonDTO>();
 
-  console.log(location.state.id);
-
   const { token } = useAuth();
   const [household, setHousehold] = useState<ICreateHouseholdDTO | null>(null);
   useEffect(() => {
@@ -44,7 +42,7 @@ const Household: React.FC = () => {
       setIsLoading(false);
       setHousehold(response.data);
     }
-    setTimeout(fetchHousehold, 1000);
+    fetchHousehold();
   }, [token, location]);
   return (
     <>

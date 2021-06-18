@@ -26,8 +26,6 @@ const Card: React.FC<InterviewProps> = ({ interview: { project_name,
   comments,
   created_at } }) => {
 
-  console.log(typeof created_at)
-
   return (
     <Container>
       <div><strong>Nome do projeto:</strong> {project_name}</div>

@@ -40,7 +40,7 @@ const Interviewers: React.FC = () => {
       setIsLoading(false);
       setUsers(users.data);
     }
-    setTimeout(fetchUsers, 1000);
+    fetchUsers();
   }, [token]);
 
   return (
@@ -57,7 +57,6 @@ const Interviewers: React.FC = () => {
         <ListTitle>Entrevistadores</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
           {users.map((user) => {
-            console.log(user);
             return <Card key={user.id} person={user} />;
           })}
         </StyledList>}
