@@ -53,16 +53,17 @@ export const HeaderContent = styled.div`
     margin-left: auto;
     background: transparent;
     border: 0;
-    @media (max-width: 768px) {
+   @media (max-width: 768px) {
     display: none;
   }
   }
 
   svg {
     color: #fff;
-    width: 20px;
-    height: 20px;
-    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-self: flex-start;
+    align-self: center;
   }
 `;
 
@@ -79,10 +80,7 @@ align-items: center;
 export const ListTitle = styled.h2`
   padding: 8px 0;
   color: #59748c;
-  span {
-    color: #ff9000;
-  }
-
+  margin-left: 20px;
 `;
 
 
