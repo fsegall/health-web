@@ -31,7 +31,7 @@ const Card: React.FC<InterviewProps> = ({ interview: { project_name,
       <div><strong>Nome do projeto:</strong> {project_name}</div>
       <div><strong>Id da entrevista:</strong> {id?.split('').splice(1, 6).join('')}</div>
       <div><strong>Comentários:</strong> {comments}</div>
-      <div><strong>Data de criação:</strong> {created_at ? format(parseJSON(created_at), 'dd/MM/yyyy hh:mm') : null}</div>
+      <div><strong>Data de criação:</strong> {created_at ? format(parseJSON(created_at), 'dd/MM/yyyy HH:mm') : null}</div>
 
     </Container>
   );
