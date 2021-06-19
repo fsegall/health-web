@@ -36,7 +36,7 @@ export default interface ICreateHouseholdDTO {
   nao_sabe_renda?: boolean;
   renda_familiar?: number;
   faixa_de_renda: string;
-  // D35 - multipla escolha
+  // multipla escolha
   perda_de_emprego?: boolean;
   reducao_de_salario?: boolean;
   ajuda_financeira?: boolean;
