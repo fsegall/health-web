@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
     }
     fetchInterviews();
   }, [token, user.id]);
-
+  console.log(interviews);
   return (
     <Container>
       <Header>
