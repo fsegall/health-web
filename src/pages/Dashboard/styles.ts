@@ -186,6 +186,9 @@ export const FilterButton = styled.button`
 `;
 
 export const FilterContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
   h2 {
     color: #59748c;
     margin-right: 1rem;
