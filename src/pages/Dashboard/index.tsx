@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ICreateInterviewDTO from '../Interview/dtos/ICreateInterviewDTO';
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
+import hasPermission, { Actions } from '../../authorization/constants';
 import {
   Container,
   Counter,
@@ -40,6 +41,8 @@ const Dashboard: React.FC = () => {
     fetchInterviews();
   }, [token, user.id]);
   console.log(interviews);
+  console.log(user.role, Actions.CREATE_PROJECT);
+  console.log(hasPermission(user.role, Actions.CREATE_PROJECT));
   return (
     <Container>
       <Header>
@@ -60,7 +63,7 @@ const Dashboard: React.FC = () => {
 
           <BigScreenLinkContainer>
             <StyledLink to="/accept">Faça uma entrevista</StyledLink>
-            <StyledLink to="/project">Adicione um projeto</StyledLink>
+            {hasPermission(user.role, Actions.CREATE_PROJECT) ? <StyledLink to="/project">Adicione um projeto</StyledLink> : null}
             <StyledLink to="/interviewers">Pesquisadores</StyledLink>
           </BigScreenLinkContainer>
 

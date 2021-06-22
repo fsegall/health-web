@@ -19,7 +19,7 @@ import {
 import logo from '../../assets/logo_transparent.png';
 
 const Accept: React.FC = () => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
   const { addToast } = useToast();
   const [accept, setAccept] = useState(false);
   const history = useHistory();
@@ -36,6 +36,7 @@ const Accept: React.FC = () => {
       })
     }
   }
+  console.log(user);
   return (
     <Container>
       <Header>
