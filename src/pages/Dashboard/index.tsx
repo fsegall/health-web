@@ -55,6 +55,19 @@ const Dashboard: React.FC = () => {
 
   }, [token, user.id]);
 
+  console.log(interviews);
+
+  const perProject = interviews.reduce((acc, obj) => {
+    if (!Object.keys(acc).includes(obj.project_name)) {
+      acc[obj.project_name] = [obj]
+    } else {
+      acc[obj.project_name].push(obj)
+    }
+    return acc;
+  }, {} as { [key: string]: ICreateInterviewDTO[] });
+
+  console.log('Per project', perProject);
+
   return (
     <Container>
       <Header>
@@ -88,10 +101,22 @@ const Dashboard: React.FC = () => {
       </Header>
 
       <SubHeader>
-        <ListTitle>Minhas Entrevistas</ListTitle>
+        {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) ? <ListTitle>Entrevistas</ListTitle> : <ListTitle>Minhas Entrevistas</ListTitle>}
       </SubHeader>
 
-      <Counter><div>Você já realizou <strong>{interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>
+      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Número de entrevistas realizadas: <strong>{interviews.length}</strong></div></Counter>}
+
+      {!hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Você já realizou <strong>{interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>}
+
+
+      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
+        <>
+          <h2>Projetos</h2>
+          <ul>{Object.keys(perProject).map(project => <li key={project}>{project}</li>)}
+          </ul>
+        </>
+      )}
+
       <BadgeContainer>
         {isLoading ? <Spinner /> : interviews.map((interview) => {
           return <InterviewBage key={interview.id} interview={interview} />;
