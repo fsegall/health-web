@@ -119,14 +119,14 @@ const Dashboard: React.FC = () => {
 
       <SubHeader>
         {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) ? <ListTitle>Entrevistas</ListTitle> : <ListTitle>Minhas Entrevistas</ListTitle>}
-        {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
-          <FilterContainer>
-            <h2>Projetos</h2>
-            <button onClick={() => onClick("all")}>Todos</button>
-            <ul>{Object.keys(perProject).map(project => <button key={project} onClick={() => onClick(project)}>{project}</button>)}
-            </ul>
-          </FilterContainer>
-        )}
+
+        <FilterContainer>
+          <h2>Projetos</h2>
+          <button onClick={() => onClick("all")}>Todos</button>
+          <ul>{Object.keys(perProject).map(project => <button key={project} onClick={() => onClick(project)}>{project}</button>)}
+          </ul>
+        </FilterContainer>
+
       </SubHeader>
 
       {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Número de entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div></Counter>}
