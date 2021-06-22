@@ -29,7 +29,16 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    async function fetchInterviews() {
+    async function fetchAllInterviews() {
+      const interviews = await api.get('/interviews', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setIsLoading(false);
+      setInterviews(interviews.data);
+    }
+    async function fetchMyInterviews() {
       const interviews = await api.get(`/interviews/${user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -38,7 +47,12 @@ const Dashboard: React.FC = () => {
       setIsLoading(false);
       setInterviews(interviews.data);
     }
-    fetchInterviews();
+    if (hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS)) {
+      fetchAllInterviews()
+    } else {
+      fetchMyInterviews()
+    }
+
   }, [token, user.id]);
 
   return (
