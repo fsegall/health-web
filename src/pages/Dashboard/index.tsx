@@ -14,7 +14,8 @@ import {
   SubHeader,
   BigScreenLinkContainer,
   StyledLink,
-  BadgeContainer
+  BadgeContainer,
+  FilterContainer
 } from './styles';
 import BurguerMenu from '../../components/BurguerMenu';
 import InterviewBage from '../../components/interviewBadge';
@@ -26,6 +27,22 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { signOut, user, token } = useAuth();
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
+  const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
+  const [isFiltered, setIsFiltered] = useState(false);
+
+  const selectInterviewPerProject = function (name: string) {
+    return perProject[name];
+  }
+
+  function onClick(project: string) {
+    if (project === 'all') {
+      setIsFiltered(false);
+    } else {
+      const selected = selectInterviewPerProject(project);
+      setFilteredBy(selected)
+      setIsFiltered(true);
+    }
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -102,25 +119,30 @@ const Dashboard: React.FC = () => {
 
       <SubHeader>
         {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) ? <ListTitle>Entrevistas</ListTitle> : <ListTitle>Minhas Entrevistas</ListTitle>}
+        {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
+          <FilterContainer>
+            <h2>Projetos</h2>
+            <button onClick={() => onClick("all")}>Todos</button>
+            <ul>{Object.keys(perProject).map(project => <button key={project} onClick={() => onClick(project)}>{project}</button>)}
+            </ul>
+          </FilterContainer>
+        )}
       </SubHeader>
 
-      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Número de entrevistas realizadas: <strong>{interviews.length}</strong></div></Counter>}
+      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Número de entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div></Counter>}
 
-      {!hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Você já realizou <strong>{interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>}
-
-
-      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
-        <>
-          <h2>Projetos</h2>
-          <ul>{Object.keys(perProject).map(project => <li key={project}>{project}</li>)}
-          </ul>
-        </>
-      )}
+      {!hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Você já realizou <strong>{isFiltered ? filteredBy.length : interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>}
 
       <BadgeContainer>
-        {isLoading ? <Spinner /> : interviews.map((interview) => {
-          return <InterviewBage key={interview.id} interview={interview} />;
-        })}
+        {isLoading ?
+          <Spinner /> :
+          isFiltered ?
+            filteredBy.map((interview) => {
+              return <InterviewBage key={interview.id} interview={interview} />;
+            }) :
+            interviews.map((interview) => {
+              return <InterviewBage key={interview.id} interview={interview} />;
+            })}
       </BadgeContainer>
     </Container>
   );
