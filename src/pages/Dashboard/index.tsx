@@ -40,9 +40,7 @@ const Dashboard: React.FC = () => {
     }
     fetchInterviews();
   }, [token, user.id]);
-  console.log(interviews);
-  console.log(user.role, Actions.CREATE_PROJECT);
-  console.log(hasPermission(user.role, Actions.CREATE_PROJECT));
+
   return (
     <Container>
       <Header>
