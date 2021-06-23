@@ -179,6 +179,9 @@ padding: 1rem;
 color: #59748c;
 font-weight: bold;
 font-size: 1.2rem;
+/* @media (max-width: 768px) {
+  padding: 0;
+  } */
 `;
 
 export const CheckboxContainer = styled.div`
@@ -186,6 +189,11 @@ display: flex;
 align-items: center;
 gap: 2rem;
 justify-content: flex-end;
+@media (max-width: 768px) {
+  gap: 0;
+  margin: 20px;
+  justify-content: space-evenly;
+  }
 `;
 
 export const UserContainer = styled.div`
