@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
       fetchMyInterviews()
     }
 
-  }, [token, user.id]);
+  }, [token, user.id, user.role]);
 
   console.log(interviews);
 
@@ -82,8 +82,6 @@ const Dashboard: React.FC = () => {
     }
     return acc;
   }, {} as { [key: string]: ICreateInterviewDTO[] });
-
-  console.log('Per project', perProject);
 
   return (
     <Container>
