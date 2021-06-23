@@ -23,6 +23,7 @@ import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
 import api from '../../../../services/api';
 import { validateCheckbox } from '../HouseholdForm/utils';
+import axios from 'axios';
 
 interface InterviewFormProps {
   dispatch: Function;
@@ -73,8 +74,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
         ...validatedData,
       };
 
-
-      await api.post('/interviews', interview, {
+      const response = await api.post('/interviews', interview, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -100,6 +100,12 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
         addToast({
           type: 'error',
           title: 'Erro ao adicionar entrevista',
+          description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
+        });
+      } else {
+        addToast({
+          type: 'error',
+          title: error.data.message,
           description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
         });
       }
