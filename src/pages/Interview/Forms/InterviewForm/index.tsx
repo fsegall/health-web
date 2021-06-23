@@ -23,7 +23,6 @@ import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
 import api from '../../../../services/api';
 import { validateCheckbox } from '../HouseholdForm/utils';
-import axios from 'axios';
 
 interface InterviewFormProps {
   dispatch: Function;
@@ -74,7 +73,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
         ...validatedData,
       };
 
-      const response = await api.post('/interviews', interview, {
+      await api.post('/interviews', interview, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
