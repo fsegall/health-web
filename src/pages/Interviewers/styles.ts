@@ -160,3 +160,36 @@ export const FilterButton = styled.button`
   float: right;
 `;
 
+export const Button = styled.button`
+  background: #59748c;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 0;
+  color: #fff;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-right: 0.5rem;
+
+  &:hover {
+    background: ${shade(0.2, '#59748c')};
+  }`;
+
+export const FormContainer = styled.div`
+padding: 1rem;
+color: #59748c;
+font-weight: bold;
+font-size: 1.2rem;
+`;
+
+export const CheckboxContainer = styled.div`
+display: flex;
+align-items: center;
+gap: 2rem;
+justify-content: flex-end;
+`;
+
+export const UserContainer = styled.div`
+display: flex;
+justify-content: center;
+margin: 1rem;
+`;

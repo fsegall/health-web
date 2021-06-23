@@ -105,8 +105,11 @@ export const Profile = styled.div`
 
 export const SubHeader = styled.div`
 display: flex;
-justify-content: space-around;
+justify-content: space-between;
 align-items: center;
+h2 {
+  margin: auto;
+}
 @media (min-width: 768px) {
   padding: 0 25px;
   }
@@ -151,7 +154,7 @@ export const Counter = styled.div`
   justify-content: center;
   @media (min-width: 768px) {
     justify-content: flex-end;
-    margin-right: 15%;
+    padding-right: 25px;
   }
 
   div{
@@ -180,7 +183,29 @@ export const FilterButton = styled.button`
   @media (min-width: 768px) {
     margin-left: auto;
   }
+`;
 
-
+export const FilterContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+  h2 {
+    color: #59748c;
+    margin-right: 1rem;
+  }
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background: #999;
+    border-radius: 4px;
+    color: #fff;
+    height: 2rem;
+    padding: 5px 10px;
+    border: none;
+    margin: 0 2px 0 2px;
+    &:hover {
+    background: ${shade(0.2, '#999')};
+  }
+  }
 `;
 

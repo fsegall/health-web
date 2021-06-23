@@ -9,6 +9,7 @@ interface User {
   email: string;
   telephone_number: string;
   organization_name: string;
+  role: string
 }
 
 interface AuthState {
@@ -35,6 +36,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@Safety:token');
     const user = localStorage.getItem('@Safety:user');
+
     if (token && user) {
       return { token, user: JSON.parse(user) };
     }
