@@ -66,6 +66,12 @@ const ProjectForm: React.FC = (props) => {
           title: 'Erro ao adicionar projeto',
           description: 'Ocorreu um erro ao adicionar o projeto, tente novamente',
         });
+      } else {
+        addToast({
+          type: 'error',
+          title: error.data.message,
+          description: 'Ocorreu um erro ao adicionar o projeto, tente novamente',
+        });
       }
     }
   }, [addToast, token]);
