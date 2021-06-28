@@ -1,6 +1,7 @@
 import React from 'react';
 import { SlideLinkContainer, StyledLink } from './styles'
 import { useAuth } from '../../hooks/auth';
+import hasPermission, { Actions } from '../../authorization/constants';
 
 interface NavProps {
   open: boolean;
@@ -8,12 +9,12 @@ interface NavProps {
 
 const MobileNav: React.FC<NavProps> = ({ open }) => {
 
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   return (
     <SlideLinkContainer open={open}>
       <StyledLink to="/accept">Faça uma entrevista</StyledLink>
-      <StyledLink to="/project">Adicione um projeto</StyledLink>
+      {hasPermission(user.role, Actions.CREATE_PROJECT) && <StyledLink to="/project">Adicione um projeto</StyledLink>}
       <StyledLink to="/interviewers">Pesquisadores</StyledLink>
       <StyledLink to="/profile">Profile</StyledLink>
       <a href="/" onClick={signOut}>
