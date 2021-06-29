@@ -21,10 +21,7 @@ mappings.set(Actions.CREATE_PROJECT, [Roles.ADMIN, Roles.COORDINATOR]);
 mappings.set(Actions.ASSIGN_COORDINATOR_ROLE, [Roles.ADMIN, Roles.COORDINATOR]);
 
 function hasPermission(role: string, action: string) {
-  console.log('action inside function', action);
-  console.log('mappings inside function', mappings.keys());
   if (mappings.has(action)) {
-    console.log('here')
     return mappings.get(action).includes(role);
   }
 
