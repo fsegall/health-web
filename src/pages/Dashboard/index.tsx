@@ -72,13 +72,31 @@ const Dashboard: React.FC = () => {
 
   }, [token, user.id, user.role]);
 
-  console.log(interviews);
-
   const perProject = interviews.reduce((acc, obj) => {
-    if (!Object.keys(acc).includes(obj.project_name)) {
-      acc[obj.project_name] = [obj]
+
+    let project_name_capitalize = (str: string): string => {
+      return str
+        .split(' ')
+        .map(word => word
+          .split('')
+          .map((letter, index) => {
+            if (index === 0) {
+              return letter.toUpperCase();
+            } else {
+              return letter.toLowerCase();
+            }
+          })
+          .join('')
+        )
+        .join(' ')
+    }
+
+    let capitalized = project_name_capitalize(obj.project_name);
+
+    if (!Object.keys(acc).includes(capitalized)) {
+      acc[capitalized] = [obj]
     } else {
-      acc[obj.project_name].push(obj)
+      acc[capitalized].push(obj)
     }
     return acc;
   }, {} as { [key: string]: ICreateInterviewDTO[] });
