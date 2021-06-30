@@ -78,7 +78,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
 
         addToast({
           type: 'error',
-          title: 'Erro ao adicionar endereço',
+          title: error.message,
           description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
         });
       }

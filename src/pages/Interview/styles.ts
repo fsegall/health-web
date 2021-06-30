@@ -15,10 +15,11 @@ export const SubmittedContainer = styled.div`
 `;
 
 export const Header = styled.h1`
-  padding: 30px 0;
+  padding: 10px 0;
   color: #59748c;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 
   a {
     text-decoration: none;

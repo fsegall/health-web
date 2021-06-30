@@ -16,7 +16,7 @@ import {
   SubHeader,
 } from './styles';
 
-import logo from '../../assets/logo_transparent.png';
+import logo from '../../assets/logo.png';
 
 const Accept: React.FC = () => {
   const { signOut, user } = useAuth();
@@ -49,7 +49,7 @@ const Accept: React.FC = () => {
             </Link>
           </div>
 
-          <img src={logo} alt="Safety" />
+          <img src={logo} alt="Rede PenSSAN" />
 
           <button type="button" onClick={signOut} >
             <FiPower />
