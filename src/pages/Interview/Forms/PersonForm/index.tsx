@@ -68,13 +68,14 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
+        console.log(error);
         const errors = getValidationErrors(error);
 
         PersonFormRef.current?.setErrors(errors);
 
         addToast({
           type: 'error',
-          title: 'Erro ao adicionar uma pessoa',
+          title: error.message,
           description: 'Todos os campos devem estar selecionados',
         });
       }

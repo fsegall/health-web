@@ -143,7 +143,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
 
           addToast({
             type: 'error',
-            title: 'Erro ao adicionar uma residência',
+            title: error.message,
             description: 'Todos os campos devem estar selecionados',
           });
         }
