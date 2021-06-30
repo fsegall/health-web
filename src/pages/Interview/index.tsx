@@ -11,9 +11,8 @@ import {
   FiMenu,
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-
+import logo from '../../assets/logo_transparent.png';
 import ScrollSpy from '../../components/ScrollSpy';
-/* import ProjectForm from './Forms/ProjectForm'; */
 import InterviewForm from './Forms/InterviewForm';
 import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
@@ -128,10 +127,13 @@ const Interview: React.FC = () => {
   return (
     <Container>
       <Header>
+        <Link to="/dashboard">
+          <img src={logo} alt="Rede PenSSAN" />
+        </Link>
         <div>
-          Safety <span>|</span> Interview
+          PenSSAN <span>|</span> Entrevista
         </div>
-        <Link to="/dashboard">Dashboard</Link>
+        <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
       </Header>
 
       <ResponsiveMenu>
@@ -141,7 +143,6 @@ const Interview: React.FC = () => {
         </div>
       </ResponsiveMenu>
 
-      <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
       <SectionTitle id="person">Dados Pessoais</SectionTitle>
       {formState.formsSubmitted.person.show ? (
 

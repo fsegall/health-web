@@ -11,5 +11,5 @@ export const AddressValidation = Yup.object().shape({
   house_number: Yup.number().required(
     'Você precisa informar o número da residência',
   ),
-  telephone_number: Yup.string(),
+  telephone_number: Yup.string().required('Você precisa informar o telefone'),
 });
