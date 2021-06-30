@@ -49,11 +49,16 @@ const Interviewers: React.FC = () => {
       })
       return;
     }
+
     await api.patch('/users/role', { gives_permission_id, receives_permission_id }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    window.location.reload();
+
+
 
   }
 
