@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FiPower, FiChevronLeft } from 'react-icons/fi';
+import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import {
@@ -43,13 +43,9 @@ const Accept: React.FC = () => {
 
         <HeaderContent>
 
-          <div>
-            <Link to="/dashboard">
-              <FiChevronLeft size={30} />
-            </Link>
-          </div>
-
-          <img src={logo} alt="Rede PenSSAN" />
+          <Link to="/dashboard">
+            <img src={logo} alt="Rede PenSSAN" />
+          </Link>
 
           <button type="button" onClick={signOut} >
             <FiPower />
