@@ -23,6 +23,7 @@ interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  password_confirmation?: string;
   organization_name: string;
   telephone_number: string;
 }
@@ -45,11 +46,15 @@ const Signup: React.FC = () => {
             'Digite o seu número de telefone',
           ),
           password: Yup.string().min(6, 'No mínimo 6 digitos'),
+          password_confirmation: Yup.string()
+            .oneOf([Yup.ref('password'), undefined], 'Senhas devem ser iguais')
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
+
+        delete data.password_confirmation
 
         await api.post('/users', data);
 
@@ -62,11 +67,18 @@ const Signup: React.FC = () => {
         });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
+          console.log('error', error);
           const errors = getValidationErrors(error);
 
           formRef.current?.setErrors(errors);
+          addToast({
+            type: 'error',
+            title: error.errors[0],
+            description: 'Ocorreu um erro ao fazer cadastro, tente novamente',
+          });
           return;
         }
+        console.log('error', error);
         addToast({
           type: 'error',
           title: 'Erro no cadastro',
@@ -102,6 +114,12 @@ const Signup: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder="Senha"
+            />
+            <Input
+              name="password_confirmation"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirmação da Senha"
             />
             <Button type="submit">Cadastrar</Button>
           </Form>
