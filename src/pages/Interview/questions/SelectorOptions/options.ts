@@ -1,6 +1,6 @@
 // Dados Pessoais
 
-// P3_sexo
+// P3 sexo
 
 export const genero = [
   { value: 'masculino', label: 'Masculino' },
@@ -8,7 +8,7 @@ export const genero = [
   { value: 'outro', label: 'Outro' },
 ];
 
-// P4_raca_cor
+// P4 raca_cor
 
 export const raca_cor = [
   { value: 'branca', label: 'Branca' },
@@ -20,7 +20,7 @@ export const raca_cor = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// P5_ler_escrever
+// P5 ler_escrever
 
 export const ler_ecrever = [
   { value: 'true', label: 'Sim' },
@@ -28,7 +28,7 @@ export const ler_ecrever = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// P6_escolaridade
+// P6 escolaridade
 
 export const escolaridade = [
   {
@@ -49,7 +49,7 @@ export const escolaridade = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// P7_situacao_de_trabalho
+// P7 situacao_de_trabalho
 
 export const situacao_de_trabalho = [
   {
@@ -82,7 +82,7 @@ export const situacao_de_trabalho = [
   },
 ];
 
-// P8_ocupacao
+// P8 ocupacao
 
 export const ocupacao_profissional = [
   {
@@ -128,7 +128,7 @@ export const ocupacao_profissional = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// P9_local_de_trabalho
+// P9 local_de_trabalho
 
 export const local_de_trabalho = [
   {
@@ -148,7 +148,7 @@ export const local_de_trabalho = [
 
 // Domicílio
 
-// D1_local_do_domicilio
+// D1 local_do_domicilio
 
 export const local_do_domicilio = [
   { value: 'urbano', label: 'Urbano' },
@@ -156,7 +156,7 @@ export const local_do_domicilio = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D2_morador_de_rua
+// D2 morador_de_rua
 
 export const morador_de_rua = [
   {
@@ -168,7 +168,7 @@ export const morador_de_rua = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D4_qual_povo_tradicional
+// D4 qual_povo_tradicional
 
 export const qual_povo_tradicional = [
   { value: 'indigenas', label: 'Povos indígenas' },
@@ -181,7 +181,7 @@ export const qual_povo_tradicional = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D15_covid_perda_2020 e D17_covid_perda_2021
+//D15 covid_perda_2020 e D17 covid_perda_2021
 export const covid_perda = [
   {
     value: 'não',
@@ -214,7 +214,7 @@ export const covid_perda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D18_tipo_de_residencia
+// D18 tipo_de_residencia
 
 export const tipo_de_residencia = [
   {
@@ -231,7 +231,7 @@ export const tipo_de_residencia = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D20_material_de_construcao
+// D20 material_de_construcao
 
 export const material_de_construcao = [
   { value: 'alvenaria-com-revestimento', label: 'Alvenaria com revestimento/Taipa com revestimento ' },
@@ -243,7 +243,7 @@ export const material_de_construcao = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D21_agua_potavel
+// D21 agua_potavel
 
 export const agua_potavel = [
   { value: 'sim', label: 'Sim' },
@@ -258,7 +258,7 @@ export const agua_potavel = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D24_esgoto
+// D24 esgoto
 
 export const esgoto = [
   { value: 'rede', label: 'Rede Geral, Rede Pluvial Ou Fossa Ligada À Rede' },
@@ -277,7 +277,7 @@ export const esgoto = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D31_pessoas_convidadas
+// D31 pessoas_convidadas
 
 export const pessoas_convidadas = [
   { value: 'nenhuma-pessoa-acolhidas', label: 'Essas pessoas não foram acolhidas pois todos já moravam na minha casa' },
@@ -285,7 +285,7 @@ export const pessoas_convidadas = [
   { value: 'acolhidas-tres-ou-mais-pessoas', label: 'Foram acolhidas 3 ou mais pessoas' },
 ];
 
-// D34_faixa_de_renda
+// D34 faixa_de_renda
 
 export const faixa_de_renda = [
   { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
@@ -298,7 +298,7 @@ export const faixa_de_renda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D37_pnae
+// D37 pnae
 
 export const pnae = [
   { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
@@ -309,7 +309,7 @@ export const pnae = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D38_cadastro_unico
+// D38 cadastro_unico
 export const programas_de_assistencia = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -318,7 +318,7 @@ export const programas_de_assistencia = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D46_auxilio_vezes
+// D46 auxilio_vezes
 
 export const auxilio_vezes = [
   { value: 'uma vez', label: 'Uma vez' },
@@ -327,7 +327,7 @@ export const auxilio_vezes = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D48_tipo_de_ajuda
+// D48 tipo_de_ajuda
 
 export const tipo_de_ajuda = [
   { value: 'ajuda em Alimentos', label: 'Ajuda em Alimentos' },
@@ -337,7 +337,7 @@ export const tipo_de_ajuda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D52_divisao_alimento
+// D52 divisao_alimento
 
 export const divisao_alimento = [
   { value: 'consumo-venda', label: 'Parte da produção é para consumo e outra parte é para venda' },
@@ -345,7 +345,7 @@ export const divisao_alimento = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D63_como_adquiriu_comida
+// D63 como_adquiriu_comida
 
 export const como_adquiriu_comida = [
   { value: 'compra-fisica', label: 'Por meio de compra física (indo ao mercado, mercearia etc.)' },
@@ -356,7 +356,7 @@ export const como_adquiriu_comida = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D64_alteracao_preco_comida
+// D64 alteracao_preco_comida
 
 export const alteracao_preco_comida = [
   { value: 'sim-aumento', label: 'Sim, observei um aumento no preço dos alimentos.' },
@@ -365,7 +365,7 @@ export const alteracao_preco_comida = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D65_perfil_de_compra
+// D65 perfil_de_compra
 
 export const perfil_de_compra = [
   { value: 'sim-mais-alimentos', label: 'Sim, a diminuição do preço possibilitou adquirir mais alimentos' },
@@ -375,7 +375,7 @@ export const perfil_de_compra = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D66_mercado
+// D66 mercado
 
 export const mercado = [
   { value: 'hiper-supermercados', label: 'Hipermercados e grandes redes de supermercados (Ex. Carrefour®, Extra®, Pão de Açúcar®)' },
@@ -388,7 +388,7 @@ export const mercado = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D67_gastos_alimentacao
+//D67 gastos_alimentacao
 
 export const gastos_alimentacao = [
   { value: 'nao-mudaram', label: 'Não, continuam as mesmas' },
@@ -396,6 +396,25 @@ export const gastos_alimentacao = [
   { value: 'aumentaram-muito', label: 'Sim, aumentaram muito' },
   { value: 'reduziram-um-pouco', label: 'Sim, reduziram um pouco' },
   { value: 'reduziram-muito', label: 'Sim, reduziram muito' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//D69 vacina
+
+export const vacina = [
+  { value: 'Sim, apenas a 1ª dose', label: 'Sim, apenas a 1ª dose' },
+  { value: 'Sim, as duas doses', label: 'Sim, as duas doses' },
+  { value: 'Sim, a vacina de dose única', label: 'Sim, a vacina de dose única' },
+  { value: 'Não tomei nenhuma dose da vacina', label: 'Não tomei nenhuma dose da vacina' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+//D70 nao_tomou_vacina
+
+export const nao_tomou_vacina = [
+  { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
+  { value: 'Não tomei a vacina pois não quis', label: 'Não tomei a vacina pois não quis' },
+  { value: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)', label: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 

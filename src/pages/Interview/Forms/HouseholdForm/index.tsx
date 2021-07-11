@@ -48,6 +48,8 @@ import {
   situacao_de_trabalho,
   ocupacao_profissional,
   local_de_trabalho,
+  nao_tomou_vacina,
+  vacina,
   yesOrNoOptions,
 } from '../../questions/SelectorOptions/options';
 
@@ -94,6 +96,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
   const [acabAlimentos, setAcabAlimentos] = useState<OptionTypeBase | undefined | null>({});
 
   const [saudAlimentos, setSaudAlimentos] = useState<OptionTypeBase | undefined | null>({});
+
+  const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
@@ -841,9 +845,27 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           />
 
         </CheckBoxContainer>
+        <Label>
+          D69 - Você já tomou a vacina da Covid-19?
+        </Label>
+        <Select
+          name="vacina"
+          options={vacina}
+          onChange={selectedOption => setVaccine(selectedOption)}
+        />
+
+        <Label>
+          D70 - Por que você não tomou a vacina da Covid-19?
+        </Label>
+        <Select
+          name="nao_tomou_vacina"
+          options={nao_tomou_vacina}
+          isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
+        />
 
         <Button>Submit</Button>
       </Section>
+
     </StyledForm >
   );
 
