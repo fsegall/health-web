@@ -59,6 +59,7 @@ import { parseHouseholdData } from './utils';
 
 interface HouseholdFormProps {
   dispatch: Function;
+  offline: boolean;
 }
 
 const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
@@ -114,6 +115,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
         const validatedData = await HouseholdValidation.validate(parsedData, {
           abortEarly: false,
         });
+
+
 
         const person_id = localStorage.getItem('@Safety:person_id');
 

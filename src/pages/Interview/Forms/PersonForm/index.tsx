@@ -16,6 +16,7 @@ import ICreatePersonDTO from '../../dtos/ICreatePersonDTO';
 import { PersonValidation } from '../../validation/schemas/PersonValidation';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { uuid } from 'uuidv4';
 
 import {
   genero,
@@ -29,11 +30,14 @@ import {
 
 import api from '../../../../services/api';
 
+import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
+
 interface PersonFormProps {
   dispatch: Function;
+  offline: boolean;
 }
 
-const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
+const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
 
   const { user, token } = useAuth();
 
@@ -53,19 +57,41 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
         ...validatedData,
       };
 
-      const response = await api.post('/persons', person, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      if (!offline) {
+        const response = await api.post('/persons', person, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:person_id', response.data.id);
 
-      localStorage.setItem('@Safety:person_id', response.data.id);
+        dispatch({ type: 'PERSON', payload: { id: response.data.id } })
 
-      dispatch({ type: 'PERSON' })
+        addToast({
+          type: 'success',
+          title: 'Uma pessoa foi adicionada com sucesso',
+          description: 'Você já pode adicionar uma residência',
+        });
+      } else {
 
-      addToast({
-        type: 'success',
-        title: 'Uma pessoa foi adicionada com sucesso',
-        description: 'Você já pode adicionar uma residência',
-      });
+        const uniqueId = uuid();
+
+        localStorage.setItem(`@Safety:current-offline-interview-id`, JSON.stringify(uniqueId));
+
+        const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('offline-interviews') || '{}');
+
+        const addPerson = Object.keys(offlineInterviews || {}).length ? { ...offlineInterviews, [uniqueId]: { person } } : { [uniqueId]: { person } };
+
+
+        localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addPerson));
+
+        dispatch({ type: 'PERSON', payload: { id: uniqueId } });
+
+        addToast({
+          type: 'success',
+          title: 'Uma pessoa foi salva com sucesso no modo offline!',
+          description: 'Você já pode adicionar uma residência no modo Offline!',
+        });
+
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         console.log(error);
@@ -80,7 +106,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch }) => {
         });
       }
     }
-  }, [addToast, user, token, dispatch]);
+  }, [addToast, user, token, dispatch, offline]);
 
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >

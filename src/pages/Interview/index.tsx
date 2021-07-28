@@ -5,6 +5,7 @@ import {
   SectionTitle,
   ResponsiveMenu,
   SubmittedContainer,
+  OfflineButton,
   ResetButton
 } from './styles';
 import {
@@ -18,6 +19,7 @@ import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
 import HouseholdForm from './Forms/HouseholdForm';
 import AddressForm from './Forms/AddressForm';
+import Button from '../../components/Button';
 
 interface StateFormat {
   formsSubmitted: {
@@ -74,6 +76,7 @@ const initialState: StateFormat = {
 function reducer(state: StateFormat, action: FormActionFormat) {
   switch (action.type) {
     case 'PERSON':
+      console.log('no payload', action?.payload?.id);
       return { formsSubmitted: { ...state.formsSubmitted, person: { id: action?.payload?.id, show: false } } };
     case 'HOUSEHOLD':
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };
@@ -91,6 +94,8 @@ const Interview: React.FC = () => {
   const [formState, dispatch] = useReducer(reducer, initialState);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [isOffline, setIsOffline] = useState(false);
 
 
 
@@ -125,7 +130,7 @@ const Interview: React.FC = () => {
 
 
   return (
-    <Container>
+    <Container offline={isOffline}>
       <Header>
         <Link to="/dashboard">
           <img src={logo} alt="Rede PenSSAN" />
@@ -133,6 +138,7 @@ const Interview: React.FC = () => {
         <div>
           PenSSAN <span>|</span> Entrevista
         </div>
+        <OfflineButton offline={isOffline} onClick={() => setIsOffline(!isOffline)}>Offline</OfflineButton>
         <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
       </Header>
 
@@ -146,13 +152,13 @@ const Interview: React.FC = () => {
       <SectionTitle id="person">Dados Pessoais</SectionTitle>
       {formState.formsSubmitted.person.show ? (
 
-        <PersonForm dispatch={dispatch} />) : null}
-      {formState.formsSubmitted.person.id !== '' ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
+        <PersonForm dispatch={dispatch} offline={isOffline} />) : null}
+      {formState.formsSubmitted.person.id !== '' || isOffline ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
 
       <SectionTitle id="household">Domicílio</SectionTitle>
       {formState.formsSubmitted.household.show ? (
 
-        <HouseholdForm dispatch={dispatch} />) : null}
+        <HouseholdForm dispatch={dispatch} offline={isOffline} />) : null}
       {formState.formsSubmitted.household.id !== '' ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
 
       {/*       <SectionTitle id="family">
