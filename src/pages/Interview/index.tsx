@@ -5,6 +5,7 @@ import {
   SectionTitle,
   ResponsiveMenu,
   SubmittedContainer,
+  ButtonsContainer,
   OfflineButton,
   ResetButton
 } from './styles';
@@ -19,23 +20,23 @@ import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
 import HouseholdForm from './Forms/HouseholdForm';
 import AddressForm from './Forms/AddressForm';
-import Button from '../../components/Button';
+import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 
 interface StateFormat {
   formsSubmitted: {
     person:
     {
-      id: string;
+      id: string | null;
       show: boolean
     };
     household:
     {
-      id: string;
+      id: string | null;
       show: boolean;
     };
     address:
     {
-      id: string;
+      id: string | null;
       show: boolean;
     };
     interview
@@ -48,7 +49,7 @@ interface StateFormat {
 interface FormActionFormat {
   type: string;
   payload: {
-    id: string;
+    id: string | null;
     show: boolean;
   }
 }
@@ -56,15 +57,15 @@ interface FormActionFormat {
 const initialState: StateFormat = {
   formsSubmitted: {
     person: {
-      id: '',
+      id: null,
       show: true,
     },
     household: {
-      id: '',
+      id: null,
       show: true,
     },
     address: {
-      id: '',
+      id: null,
       show: true,
     },
     interview: {
@@ -104,6 +105,7 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
+      localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
     [],
@@ -115,16 +117,25 @@ const Interview: React.FC = () => {
     const household_id = localStorage.getItem('@Safety:household_id');
     const address_id = localStorage.getItem('@Safety:address_id');
 
+    const offline_id = localStorage.getItem('@Safety:current-offline-interview-id');
+    const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
     if (person_id) {
       dispatch({ type: 'PERSON', payload: { id: person_id, show: false } })
+    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('person') : false) {
+      dispatch({ type: 'PERSON', payload: { id: offline_id, show: false } })
     }
 
     if (household_id) {
       dispatch({ type: 'HOUSEHOLD', payload: { id: household_id, show: false } })
+    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('household') : false) {
+      dispatch({ type: 'HOUSEHOLD', payload: { id: offline_id, show: false } })
     }
 
     if (address_id) {
       dispatch({ type: 'ADDRESS', payload: { id: address_id, show: false } })
+    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('address') : false) {
+      dispatch({ type: 'ADDRESS', payload: { id: offline_id, show: false } })
     }
   }, [dispatch])
 
@@ -138,8 +149,10 @@ const Interview: React.FC = () => {
         <div>
           PenSSAN <span>|</span> Entrevista
         </div>
-        <OfflineButton offline={isOffline} onClick={() => setIsOffline(!isOffline)}>Offline</OfflineButton>
-        <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
+        <ButtonsContainer>
+          <OfflineButton offline={isOffline} onClick={() => setIsOffline(!isOffline)}>Offline</OfflineButton>
+          <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
+        </ButtonsContainer>
       </Header>
 
       <ResponsiveMenu>

@@ -56,13 +56,14 @@ import {
 import api from '../../../../services/api';
 import CheckboxInput from '../../../../components/Checkbox';
 import { parseHouseholdData } from './utils';
+import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 
 interface HouseholdFormProps {
   dispatch: Function;
   offline: boolean;
 }
 
-const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
+const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
   const { token } = useAuth();
 
@@ -116,31 +117,61 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
           abortEarly: false,
         });
 
+        if (!offline) {
 
 
-        const person_id = localStorage.getItem('@Safety:person_id');
+          const person_id = localStorage.getItem('@Safety:person_id');
 
-        const household = {
-          person_id,
-          ...validatedData,
-        };
-
-
-        const response = await api.post('/households', household, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+          const household = {
+            person_id,
+            ...validatedData,
+          };
 
 
+          const response = await api.post('/households', household, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
 
-        localStorage.setItem('@Safety:household_id', response.data.id);
 
-        dispatch({ type: 'HOUSEHOLD' });
+          localStorage.setItem('@Safety:household_id', response.data.id);
 
-        addToast({
-          type: 'success',
-          title: 'Uma residência foi adicionada com sucesso',
-          description: 'Você já pode adicionar um endereço',
-        });
+          dispatch({ type: 'HOUSEHOLD', payload: { id: response.data.id } });
+
+          addToast({
+            type: 'success',
+            title: 'Uma residência foi adicionada com sucesso',
+            description: 'Você já pode adicionar um endereço',
+          });
+        } else {
+
+          const household = {
+            ...validatedData,
+          };
+
+          const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
+
+          console.log('uniqueId', uniqueId);
+
+          const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
+          console.log('interviews', offlineInterviews);
+
+          const addHousehold = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], household } } : false;
+
+          if (addHousehold) {
+            localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addHousehold));
+
+            dispatch({ type: 'HOUSEHOLD', payload: { id: uniqueId } });
+
+            addToast({
+              type: 'success',
+              title: 'Uma residência foi salva com sucesso no modo offline!',
+              description: 'Você já pode adicionar um endereço no modo Offline!',
+            });
+          } else {
+            throw new Error('Você também precisa adicionar uma pessoa antes de uma residência no modo offline');
+          }
+        }
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           console.log(error);
@@ -153,10 +184,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch }) => {
             title: error.message,
             description: 'Todos os campos devem estar selecionados',
           });
+        } else {
+          console.log(error);
         }
       }
     },
-    [addToast, token, dispatch],
+    [addToast, token, dispatch, offline],
   );
 
   return (
