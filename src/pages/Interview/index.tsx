@@ -117,25 +117,34 @@ const Interview: React.FC = () => {
     const household_id = localStorage.getItem('@Safety:household_id');
     const address_id = localStorage.getItem('@Safety:address_id');
 
-    const offline_id = localStorage.getItem('@Safety:current-offline-interview-id');
+    const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
     const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
+    console.log(offlineInterviews);
+    console.log(offlineInterviews[offline_id]);
 
     if (person_id) {
       dispatch({ type: 'PERSON', payload: { id: person_id, show: false } })
-    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('person') : false) {
-      dispatch({ type: 'PERSON', payload: { id: offline_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('person')) {
+        dispatch({ type: 'PERSON', payload: { id: offline_id, show: false } })
+      }
     }
 
     if (household_id) {
       dispatch({ type: 'HOUSEHOLD', payload: { id: household_id, show: false } })
-    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('household') : false) {
-      dispatch({ type: 'HOUSEHOLD', payload: { id: offline_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('household')) {
+        dispatch({ type: 'HOUSEHOLD', payload: { id: offline_id, show: false } })
+      }
     }
 
     if (address_id) {
       dispatch({ type: 'ADDRESS', payload: { id: address_id, show: false } })
-    } else if (offline_id ? offlineInterviews[offline_id].hasOwnProperty('address') : false) {
-      dispatch({ type: 'ADDRESS', payload: { id: offline_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('address')) {
+        dispatch({ type: 'ADDRESS', payload: { id: offline_id, show: false } })
+      }
     }
   }, [dispatch])
 
@@ -166,13 +175,13 @@ const Interview: React.FC = () => {
       {formState.formsSubmitted.person.show ? (
 
         <PersonForm dispatch={dispatch} offline={isOffline} />) : null}
-      {formState.formsSubmitted.person.id !== '' || isOffline ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
+      {formState.formsSubmitted.person.id !== null ? <SubmittedContainer>Uma pessoa já foi adicionada</SubmittedContainer> : null}
 
       <SectionTitle id="household">Domicílio</SectionTitle>
       {formState.formsSubmitted.household.show ? (
 
         <HouseholdForm dispatch={dispatch} offline={isOffline} />) : null}
-      {formState.formsSubmitted.household.id !== '' ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
+      {formState.formsSubmitted.household.id !== null ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
 
       {/*       <SectionTitle id="family">
         Membros da Família
@@ -182,13 +191,13 @@ const Interview: React.FC = () => {
       <SectionTitle id="address">Endereço</SectionTitle>
       {formState.formsSubmitted.address.show ? (
 
-        <AddressForm dispatch={dispatch} />) : null}
-      {formState.formsSubmitted.address.id !== '' ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
+        <AddressForm dispatch={dispatch} offline={isOffline} />) : null}
+      {formState.formsSubmitted.address.id !== null ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
 
       <SectionTitle id="interview">Entrevista</SectionTitle>
       {formState.formsSubmitted.interview.show ? (
 
-        <InterviewForm dispatch={dispatch} />) : null}
+        <InterviewForm dispatch={dispatch} offline={isOffline} />) : null}
 
     </Container>
   );

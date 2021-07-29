@@ -24,14 +24,16 @@ import ICreateAddressDTO from '../../dtos/ICreateAddressDTO';
 import { AddressValidation } from '../../validation/schemas/AddressValidation';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import { useToast } from '../../../../hooks/toast';
+import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 
 import api from '../../../../services/api';
 
 interface AddressFormProps {
   dispatch: Function;
+  offline: boolean;
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
+const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
 
   const { addToast } = useToast();
 
@@ -47,29 +49,58 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
         abortEarly: false,
       });
 
-      const household_id = localStorage.getItem('@Safety:household_id');
-      const address = {
-        household_id,
-        ...validatedData,
-      };
+      if (!offline) {
+
+        const household_id = localStorage.getItem('@Safety:household_id');
+
+        const address = {
+          household_id,
+          ...validatedData,
+        };
+
+        const response = await api.post('/addresses', address, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
 
 
-      const response = await api.post('/addresses', address, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+        localStorage.setItem('@Safety:address_id', response.data.id);
 
+        dispatch({ type: 'ADDRESS' });
 
+        addToast({
+          type: 'success',
+          title: 'Endereço adicionado com sucesso',
+          description: 'Você já pode preencher o formulário seguinte para concluir a entrevista.',
+        });
+      } else {
 
-      localStorage.setItem('@Safety:address_id', response.data.id);
+        const address = {
+          ...validatedData,
+        };
 
-      dispatch({ type: 'ADDRESS' });
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
 
-      addToast({
-        type: 'success',
-        title: 'Endereço adicionado com sucesso',
-        description: 'Você já pode preencher o formulário seguinte para concluir a entrevista.',
-      });
+        const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
+        console.log('interviews', offlineInterviews);
+
+        const addAddress = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], address } } : false;
+
+        if (addAddress) {
+          localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addAddress));
+
+          dispatch({ type: 'ADDRESS', payload: { id: uniqueId } });
+
+          addToast({
+            type: 'success',
+            title: 'Um endreço foi salvo com sucesso no modo offline!',
+            description: 'Você já pode adicionar uma entrevista no modo Offline!',
+          });
+        } else {
+          throw new Error('Você também precisa adicionar uma residência antes de um endereço no modo offline');
+        }
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
@@ -83,7 +114,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch }) => {
         });
       }
     }
-  }, [addToast, token, dispatch]);
+  }, [addToast, token, dispatch, offline]);
 
   return (
     <StyledForm ref={AddressFormRef} onSubmit={handleAddressSubmit}>

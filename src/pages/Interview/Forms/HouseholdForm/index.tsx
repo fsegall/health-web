@@ -150,8 +150,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
           const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
 
-          console.log('uniqueId', uniqueId);
-
           const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
           console.log('interviews', offlineInterviews);

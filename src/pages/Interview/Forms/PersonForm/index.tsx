@@ -76,9 +76,9 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
 
         localStorage.setItem(`@Safety:current-offline-interview-id`, JSON.stringify(uniqueId));
 
-        const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('offline-interviews') || '{}');
+        const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-        const addPerson = Object.keys(offlineInterviews || {}).length ? { ...offlineInterviews, [uniqueId]: { person } } : { [uniqueId]: { person } };
+        const addPerson = Object.keys(offlineInterviews).length ? { ...offlineInterviews, [uniqueId]: { person } } : { [uniqueId]: { person } };
 
 
         localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addPerson));
