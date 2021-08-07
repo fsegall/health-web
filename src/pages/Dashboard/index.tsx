@@ -15,13 +15,16 @@ import {
   BigScreenLinkContainer,
   StyledLink,
   BadgeContainer,
-  FilterContainer
+  FilterContainer,
+  OfflineButton
 } from './styles';
 import BurguerMenu from '../../components/BurguerMenu';
 import InterviewBage from '../../components/interviewBadge';
 import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
+import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
+import submitOfflineInterviews from '../../services/offlineInterviewsService';
 
 const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -29,6 +32,11 @@ const Dashboard: React.FC = () => {
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
+
+  const [offlineInterviews, setOfflineInterviews] = useState<{ [key: string]: ICreateOfflineInterviewDTO }>(() => {
+    const interviews = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+    return interviews;
+  });
 
   const selectInterviewPerProject = function (name: string) {
     return perProject[name];
@@ -145,9 +153,26 @@ const Dashboard: React.FC = () => {
 
       </SubHeader>
 
-      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Número de entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div></Counter>}
+      {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
+        <>
+          <Counter>
+            <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
+            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={submitOfflineInterviews}>Enviar</OfflineButton></div>
+          </Counter>
+        </>
+      )}
 
-      {!hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && <Counter><div>Você já realizou <strong>{isFiltered ? filteredBy.length : interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}</div></Counter>}
+      {!hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) && (
+        <>
+
+          <Counter>
+            <div>Você já realizou <strong>{isFiltered ? filteredBy.length : interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}
+            </div>
+            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong></div>
+          </Counter>
+
+        </>
+      )}
 
       <BadgeContainer>
         {isLoading ?
