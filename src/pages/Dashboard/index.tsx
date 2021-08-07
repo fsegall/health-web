@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
 
-  const [offlineInterviews, setOfflineInterviews] = useState<{ [key: string]: ICreateOfflineInterviewDTO }>(() => {
+  const [offlineInterviews] = useState<{ [key: string]: ICreateOfflineInterviewDTO }>(() => {
     const interviews = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
     return interviews;
   });
