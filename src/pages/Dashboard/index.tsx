@@ -15,7 +15,8 @@ import {
   BigScreenLinkContainer,
   StyledLink,
   BadgeContainer,
-  FilterContainer
+  FilterContainer,
+  OfflineButton
 } from './styles';
 import BurguerMenu from '../../components/BurguerMenu';
 import InterviewBage from '../../components/interviewBadge';
@@ -23,6 +24,7 @@ import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
+import submitOfflineInterviews from '../../services/offlineInterviewsService';
 
 const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -155,7 +157,7 @@ const Dashboard: React.FC = () => {
         <>
           <Counter>
             <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
-            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong></div>
+            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={submitOfflineInterviews}>Enviar</OfflineButton></div>
           </Counter>
         </>
       )}

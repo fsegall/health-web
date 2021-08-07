@@ -152,6 +152,7 @@ export const Counter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   @media (min-width: 768px) {
     justify-content: flex-end;
     padding-right: 25px;
@@ -209,3 +210,14 @@ export const FilterContainer = styled.div`
   }
 `;
 
+export const OfflineButton = styled.button`
+    background: #59748c;
+    border-radius: 4px;
+    color: #fff;
+    border: none;
+    padding: 2px 4px;
+    margin-left: 10px;
+    &:hover {
+    background: ${shade(0.2, '#59748c')};
+  }
+`;
