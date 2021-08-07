@@ -23,12 +23,14 @@ import { useToast } from '../../../../hooks/toast';
 import CheckBoxInput from '../../../../components/Checkbox';
 import api from '../../../../services/api';
 import { validateCheckbox } from '../HouseholdForm/utils';
+import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 
 interface InterviewFormProps {
   dispatch: Function;
+  offline: boolean;
 }
 
-const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
+const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
 
   const { addToast } = useToast();
 
@@ -48,48 +50,82 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
       is_complete: validateCheckbox(data.is_complete),
     }
 
-
-
     try {
+
       InterviewFormRef.current?.setErrors({});
 
       const validatedData = await InterviewValidation.validate(parsedData, {
         abortEarly: false,
       });
 
-      const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
+      if (!offline) {
 
-      const household_id = await localStorage.getItem('@Safety:household_id');
+        const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
 
-      const person_id = await localStorage.getItem('@Safety:person_id');
+        const household_id = await localStorage.getItem('@Safety:household_id');
 
-      const address_id = await localStorage.getItem('@Safety:address_id');
+        const person_id = await localStorage.getItem('@Safety:person_id');
 
-      const interview = {
-        interviewer_id,
-        household_id,
-        person_id,
-        address_id,
-        ...validatedData,
-      };
+        const address_id = await localStorage.getItem('@Safety:address_id');
 
-      await api.post('/interviews', interview, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+        const interview = {
+          interviewer_id,
+          household_id,
+          person_id,
+          address_id,
+          ...validatedData,
+        };
 
-      addToast({
-        type: 'success',
-        title: 'A entrevista foi adicionada com sucesso',
-        description: 'O formulário de pesquisa foi preenchido.',
-      });
+        await api.post('/interviews', interview, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      localStorage.removeItem('@Safety:person_id');
-      localStorage.removeItem('@Safety:household_id');
-      localStorage.removeItem('@Safety:address_id');
+        addToast({
+          type: 'success',
+          title: 'A entrevista foi adicionada com sucesso',
+          description: 'O formulário de pesquisa foi preenchido.',
+        });
 
-      dispatch({ type: "INTERVIEW" });
+        localStorage.removeItem('@Safety:person_id');
+        localStorage.removeItem('@Safety:household_id');
+        localStorage.removeItem('@Safety:address_id');
 
-      history.push('/dashboard');
+        dispatch({ type: "INTERVIEW" });
+
+        history.push('/dashboard');
+      } else {
+
+        const interview = {
+          ...validatedData,
+        };
+
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
+        console.log('interviews', offlineInterviews);
+
+        const addInterview = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], interview } } : false;
+
+        if (addInterview) {
+          localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addInterview));
+
+          addToast({
+            type: 'success',
+            title: 'A entrevista foi adicionada com sucesso no modo offline!',
+            description: 'O formulário de pesquisa foi preenchido no modo offline!.',
+          });
+
+          localStorage.removeItem('@Safety:current-offline-interview-id');
+
+          dispatch({ type: "INTERVIEW" });
+
+          history.push('/dashboard');
+
+        } else {
+          throw new Error('Você também precisa adicionar um endereço antes de finalizar uma entrevista no modo offline');
+        }
+      }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
@@ -109,7 +145,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch }) => {
         });
       }
     }
-  }, [addToast, token, history, dispatch]);
+  }, [addToast, token, history, dispatch, offline]);
 
   return (
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>

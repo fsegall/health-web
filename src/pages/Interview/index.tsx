@@ -5,6 +5,8 @@ import {
   SectionTitle,
   ResponsiveMenu,
   SubmittedContainer,
+  ButtonsContainer,
+  OfflineButton,
   ResetButton
 } from './styles';
 import {
@@ -18,22 +20,23 @@ import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
 import HouseholdForm from './Forms/HouseholdForm';
 import AddressForm from './Forms/AddressForm';
+import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 
 interface StateFormat {
   formsSubmitted: {
     person:
     {
-      id: string;
+      id: string | null;
       show: boolean
     };
     household:
     {
-      id: string;
+      id: string | null;
       show: boolean;
     };
     address:
     {
-      id: string;
+      id: string | null;
       show: boolean;
     };
     interview
@@ -46,7 +49,7 @@ interface StateFormat {
 interface FormActionFormat {
   type: string;
   payload: {
-    id: string;
+    id: string | null;
     show: boolean;
   }
 }
@@ -54,15 +57,15 @@ interface FormActionFormat {
 const initialState: StateFormat = {
   formsSubmitted: {
     person: {
-      id: '',
+      id: null,
       show: true,
     },
     household: {
-      id: '',
+      id: null,
       show: true,
     },
     address: {
-      id: '',
+      id: null,
       show: true,
     },
     interview: {
@@ -74,6 +77,7 @@ const initialState: StateFormat = {
 function reducer(state: StateFormat, action: FormActionFormat) {
   switch (action.type) {
     case 'PERSON':
+      console.log('no payload', action?.payload?.id);
       return { formsSubmitted: { ...state.formsSubmitted, person: { id: action?.payload?.id, show: false } } };
     case 'HOUSEHOLD':
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };
@@ -92,6 +96,8 @@ const Interview: React.FC = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [isOffline, setIsOffline] = useState(false);
+
 
 
   const resetForms = useCallback(
@@ -99,6 +105,7 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
+      localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
     [],
@@ -110,22 +117,40 @@ const Interview: React.FC = () => {
     const household_id = localStorage.getItem('@Safety:household_id');
     const address_id = localStorage.getItem('@Safety:address_id');
 
+    const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
+    const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+
+    console.log(offlineInterviews);
+    console.log(offlineInterviews[offline_id]);
+
     if (person_id) {
       dispatch({ type: 'PERSON', payload: { id: person_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('person')) {
+        dispatch({ type: 'PERSON', payload: { id: offline_id, show: false } })
+      }
     }
 
     if (household_id) {
       dispatch({ type: 'HOUSEHOLD', payload: { id: household_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('household')) {
+        dispatch({ type: 'HOUSEHOLD', payload: { id: offline_id, show: false } })
+      }
     }
 
     if (address_id) {
       dispatch({ type: 'ADDRESS', payload: { id: address_id, show: false } })
+    } else if (offlineInterviews && offline_id) {
+      if (offlineInterviews[offline_id]?.hasOwnProperty('address')) {
+        dispatch({ type: 'ADDRESS', payload: { id: offline_id, show: false } })
+      }
     }
   }, [dispatch])
 
 
   return (
-    <Container>
+    <Container offline={isOffline}>
       <Header>
         <Link to="/dashboard">
           <img src={logo} alt="Rede PenSSAN" />
@@ -133,7 +158,10 @@ const Interview: React.FC = () => {
         <div>
           PenSSAN <span>|</span> Entrevista
         </div>
-        <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
+        <ButtonsContainer>
+          <OfflineButton offline={isOffline} onClick={() => setIsOffline(!isOffline)}>Offline</OfflineButton>
+          <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
+        </ButtonsContainer>
       </Header>
 
       <ResponsiveMenu>
@@ -146,14 +174,14 @@ const Interview: React.FC = () => {
       <SectionTitle id="person">Dados Pessoais</SectionTitle>
       {formState.formsSubmitted.person.show ? (
 
-        <PersonForm dispatch={dispatch} />) : null}
-      {formState.formsSubmitted.person.id !== '' ? <SubmittedContainer>Uma pessoa já foi criada</SubmittedContainer> : null}
+        <PersonForm dispatch={dispatch} offline={isOffline} />) : null}
+      {formState.formsSubmitted.person.id !== null ? <SubmittedContainer>Uma pessoa já foi adicionada</SubmittedContainer> : null}
 
       <SectionTitle id="household">Domicílio</SectionTitle>
       {formState.formsSubmitted.household.show ? (
 
-        <HouseholdForm dispatch={dispatch} />) : null}
-      {formState.formsSubmitted.household.id !== '' ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
+        <HouseholdForm dispatch={dispatch} offline={isOffline} />) : null}
+      {formState.formsSubmitted.household.id !== null ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
 
       {/*       <SectionTitle id="family">
         Membros da Família
@@ -163,13 +191,13 @@ const Interview: React.FC = () => {
       <SectionTitle id="address">Endereço</SectionTitle>
       {formState.formsSubmitted.address.show ? (
 
-        <AddressForm dispatch={dispatch} />) : null}
-      {formState.formsSubmitted.address.id !== '' ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
+        <AddressForm dispatch={dispatch} offline={isOffline} />) : null}
+      {formState.formsSubmitted.address.id !== null ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
 
       <SectionTitle id="interview">Entrevista</SectionTitle>
       {formState.formsSubmitted.interview.show ? (
 
-        <InterviewForm dispatch={dispatch} />) : null}
+        <InterviewForm dispatch={dispatch} offline={isOffline} />) : null}
 
     </Container>
   );

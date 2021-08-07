@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
-export const Container = styled.div`
+
+interface containerProps {
+  offline: boolean;
+}
+export const Container = styled.div<containerProps>`
+${props => props.offline ? 'border: 3px solid red;' : ''}
   text-align: center;
 `;
 
@@ -62,6 +67,14 @@ export const ResponsiveMenu = styled.div`
   }
 `;
 
+export const ButtonsContainer = styled.div`
+  @media screen and (max-width: 600px) {
+    display:flex;
+    justify-content: space-between;
+  }
+
+`;
+
 export const ResetButton = styled.button`
   padding: 5px 10px;
   background: #59748c;
@@ -72,6 +85,27 @@ export const ResetButton = styled.button`
   transition: background-color 0.2s;
   &:hover {
     background: ${shade(0.2, '#59748c')};
+  }
+  @media screen and (max-width: 600px) {
+    margin: 1.5rem;
+  }
+
+`;
+
+export const OfflineButton = styled.button<containerProps>`
+  ${props => props.offline ? 'border: 1px solid red;' : 'border: 0;'}
+  padding: 5px 10px;
+  background: #999;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  &:hover {
+    background: ${shade(0.2, '#999')};
+  }
+  margin-right: 2rem;
+  @media screen and (max-width: 600px) {
+    margin: 1.5rem;
   }
 
 `;
