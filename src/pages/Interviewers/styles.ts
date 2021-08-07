@@ -136,6 +136,7 @@ export const ListTitle = styled.h2`
 
 export const StyledList = styled.ul`
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr ));
   justify-content: space-around;
 `;
@@ -179,9 +180,9 @@ padding: 1rem;
 color: #59748c;
 font-weight: bold;
 font-size: 1.2rem;
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   padding: 0;
-  } */
+  }
 `;
 
 export const CheckboxContainer = styled.div`
@@ -190,8 +191,7 @@ align-items: center;
 gap: 2rem;
 justify-content: flex-end;
 @media (max-width: 768px) {
-  gap: 0;
-  margin: 20px;
+  margin: 5px 15px;
   justify-content: space-evenly;
   }
 `;
@@ -199,5 +199,4 @@ justify-content: flex-end;
 export const UserContainer = styled.div`
 display: flex;
 justify-content: center;
-margin: 1rem;
 `;
