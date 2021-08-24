@@ -73,6 +73,14 @@ export const situacao_de_trabalho = [
     label: 'Aposentado(a) por tempo de serviço',
   },
   {
+    value: 'aposentado(a) por doença',
+    label: 'Aposentado(a) por doença',
+  },
+  {
+    value: 'aposentado(a), mas ainda trabalha',
+    label: 'Aposentado(a), mas ainda trabalha',
+  },
+  {
     value: 'estudante',
     label: 'Estudante',
   },
@@ -248,8 +256,12 @@ export const material_de_construcao = [
 export const agua_potavel = [
   { value: 'sim', label: 'Sim' },
   {
-    value: 'sim-mas-falha',
+    value: 'sim, mas o fornecimento falha semanalmente',
     label: 'Sim, mas o fornecimento falha semanalmente',
+  },
+  {
+    value: 'sim, mas a água é de baixa qualidade',
+    label: 'Sim, mas a água é de baixa qualidade',
   },
   {
     value: 'não',
@@ -258,7 +270,7 @@ export const agua_potavel = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D24 esgoto
+// D22 esgoto
 
 export const esgoto = [
   { value: 'rede', label: 'Rede Geral, Rede Pluvial Ou Fossa Ligada À Rede' },
@@ -277,7 +289,7 @@ export const esgoto = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D31 pessoas_convidadas
+// D29 pessoas_convidadas
 
 export const pessoas_convidadas = [
   { value: 'nenhuma-pessoa-acolhidas', label: 'Essas pessoas não foram acolhidas pois todos já moravam na minha casa' },
@@ -285,7 +297,7 @@ export const pessoas_convidadas = [
   { value: 'acolhidas-tres-ou-mais-pessoas', label: 'Foram acolhidas 3 ou mais pessoas' },
 ];
 
-// D34 faixa_de_renda
+// D32 faixa_de_renda
 
 export const faixa_de_renda = [
   { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
@@ -298,27 +310,29 @@ export const faixa_de_renda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D37 pnae
+// D35 pnae
 
 export const pnae = [
   { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
   { value: 'sim, recebi como cesta de alimentos (na própria escola ou em casa)', label: 'Sim, recebi como cesta de alimentos (na própria escola ou em casa)' },
   { value: 'sim, como cesta de alimentos, mas a família não foi buscar', label: 'Sim, como cesta de alimentos, mas a família não foi buscar' },
   { value: 'sim, recebi em dinheiro	ou Cartão Alimentação', label: 'Sim, recebi em dinheiro	ou Cartão Alimentação' },
+  { value: 'sim, recebi cesta básica e Cartão Alimentação', label: 'Sim, recebi cesta básica e Cartão Alimentação' },
   { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D38 cadastro_unico
+// D36 cadastro_unico
 export const programas_de_assistencia = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
-  { value: 'já era cadastrado e se manteve', label: 'Já era cadastrado e se manteve' },
-  { value: 'tentou cadastrar, mas não conseguiu', label: 'Tentou cadastrar, mas não conseguiu ' },
+  { value: 'tentou cadastrar, mas não conseguiu', label: 'Tentou cadastrar, mas não conseguiu' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D46 auxilio_vezes
+
+
+// D44 auxilio_vezes
 
 export const auxilio_vezes = [
   { value: 'uma vez', label: 'Uma vez' },
@@ -327,7 +341,7 @@ export const auxilio_vezes = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D48 tipo_de_ajuda
+// D46 tipo_de_ajuda
 
 export const tipo_de_ajuda = [
   { value: 'ajuda em Alimentos', label: 'Ajuda em Alimentos' },
@@ -415,6 +429,9 @@ export const nao_tomou_vacina = [
   { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
   { value: 'Não tomei a vacina pois não quis', label: 'Não tomei a vacina pois não quis' },
   { value: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)', label: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)' },
+  { value: 'não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros', label: 'Não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros' },
+  { value: 'não tomei porque já tive Covid', label: 'Não tomei porque já tive Covid' },
+  { value: 'não tomei porque não confio na vacina', label: 'Não tomei porque não confio na vacina' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
