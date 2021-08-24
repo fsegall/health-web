@@ -429,7 +429,7 @@ export const nao_tomou_vacina = [
   { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
   { value: 'Não tomei a vacina pois não quis', label: 'Não tomei a vacina pois não quis' },
   { value: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)', label: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)' },
-  { value: 'não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)', label: 'Não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros' },
+  { value: 'não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)', label: 'Não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)' },
   { value: 'não tomei porque já tive Covid', label: 'Não tomei porque já tive Covid' },
   { value: 'não tomei porque não confio na vacina', label: 'Não tomei porque não confio na vacina' },
   { value: 'ns-nr', label: 'NS/NR' },
