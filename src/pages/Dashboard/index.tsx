@@ -168,7 +168,7 @@ const Dashboard: React.FC = () => {
           <Counter>
             <div>Você já realizou <strong>{isFiltered ? filteredBy.length : interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}
             </div>
-            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong></div>
+            <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={submitOfflineInterviews}>Enviar</OfflineButton></div>
           </Counter>
 
         </>
