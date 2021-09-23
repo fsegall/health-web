@@ -12,10 +12,12 @@ import { useField } from '@unform/core';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
+  rows?: number;
+  cols?: number;
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-const TextArea: React.FC<TextAreaProps> = ({ name, icon: Icon, ...rest }) => {
+const TextArea: React.FC<TextAreaProps> = ({ name, icon: Icon, rows, cols, ...rest }) => {
   const TextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [isFilled, setIsFilled] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -49,6 +51,8 @@ const TextArea: React.FC<TextAreaProps> = ({ name, icon: Icon, ...rest }) => {
         ref={TextAreaRef}
         {...rest}
         style={{ border: 'none' }}
+        rows={rows}
+        cols={cols}
       />
       {error && (
         <Error title={error}>
