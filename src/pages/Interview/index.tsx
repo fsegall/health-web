@@ -158,7 +158,7 @@ const Interview: React.FC = () => {
           PenSSAN <span>|</span> Entrevista
         </div>
         <ButtonsContainer>
-          <OfflineLabel offline={isOffline}>Offline</OfflineLabel>
+          <OfflineLabel offline={isOffline}>{isOffline ? 'Offline' : 'Online'}</OfflineLabel>
           <Switch onColor="#c2024b" offColor="#dedede" onChange={() => setIsOffline(!isOffline)!} checked={isOffline} />
           <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
         </ButtonsContainer>
