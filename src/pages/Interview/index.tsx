@@ -6,13 +6,14 @@ import {
   ResponsiveMenu,
   SubmittedContainer,
   ButtonsContainer,
-  OfflineButton,
+  OfflineLabel,
   ResetButton
 } from './styles';
 import {
   FiMenu,
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import Switch from "react-switch";
 import logo from '../../assets/logo_transparent.png';
 import ScrollSpy from '../../components/ScrollSpy';
 import InterviewForm from './Forms/InterviewForm';
@@ -118,10 +119,8 @@ const Interview: React.FC = () => {
     const address_id = localStorage.getItem('@Safety:address_id');
 
     const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
-    const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-    console.log(offlineInterviews);
-    console.log(offlineInterviews[offline_id]);
+    const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
     if (person_id) {
       dispatch({ type: 'PERSON', payload: { id: person_id, show: false } })
@@ -159,7 +158,8 @@ const Interview: React.FC = () => {
           PenSSAN <span>|</span> Entrevista
         </div>
         <ButtonsContainer>
-          <OfflineButton offline={isOffline} onClick={() => setIsOffline(!isOffline)}>Offline</OfflineButton>
+          <OfflineLabel offline={isOffline}>Offline</OfflineLabel>
+          <Switch onColor="#c2024b" offColor="#dedede" onChange={() => setIsOffline(!isOffline)!} checked={isOffline} />
           <ResetButton onClick={resetForms}>Reiniciar</ResetButton>
         </ButtonsContainer>
       </Header>

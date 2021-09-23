@@ -68,6 +68,8 @@ export const ResponsiveMenu = styled.div`
 `;
 
 export const ButtonsContainer = styled.div`
+display: flex;
+align-items: center;
   @media screen and (max-width: 600px) {
     display:flex;
     justify-content: space-between;
@@ -86,26 +88,19 @@ export const ResetButton = styled.button`
   &:hover {
     background: ${shade(0.2, '#59748c')};
   }
+  margin-left: 2rem;
   @media screen and (max-width: 600px) {
     margin: 1.5rem;
   }
 
 `;
 
-export const OfflineButton = styled.button<containerProps>`
-  ${props => props.offline ? 'border: 1px solid red;' : 'border: 0;'}
-  padding: 5px 10px;
-  background: #999;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: bold;
-  transition: background-color 0.2s;
-  &:hover {
-    background: ${shade(0.2, '#999')};
-  }
-  margin-right: 2rem;
+export const OfflineLabel = styled.label<containerProps>`
+${props => props.offline ? 'color: #c2024b' : ''};
+  margin: 0.5rem;
   @media screen and (max-width: 600px) {
-    margin: 1.5rem;
+    margin-left: 3rem;
+    margin-right:0;
   }
 
 `;
