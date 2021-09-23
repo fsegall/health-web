@@ -179,7 +179,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
         <Label>Qual a modalidade de entrevista?</Label>
         <Select name="interview_type" options={interviewTypeOptions} />
         <Divider />
-        <TextArea name="comments" placeholder="Comentários sobre a entrevista" />
+        <TextArea name="comments" placeholder="Comentários sobre a entrevista" rows={4} cols={200} />
         <Button>Submit</Button>
       </section>
 
