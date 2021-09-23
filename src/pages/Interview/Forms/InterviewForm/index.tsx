@@ -15,6 +15,7 @@ import {
 import { useAuth } from '../../../../hooks/auth';
 import { useHistory } from 'react-router-dom';
 import Input from '../../../../components/Input';
+import TextArea from '../../../../components/TextArea';
 import Button from '../../../../components/Button';
 import ICreateInterviewDTO from '../../dtos/ICreateInterviewDTO';
 import { InterviewValidation } from '../../validation/schemas/InterviewValidation';
@@ -178,7 +179,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
         <Label>Qual a modalidade de entrevista?</Label>
         <Select name="interview_type" options={interviewTypeOptions} />
         <Divider />
-        <Input name="comments" placeholder="Comentários sobre a entrevista" />
+        <TextArea name="comments" placeholder="Comentários sobre a entrevista" />
         <Button>Submit</Button>
       </section>
 
