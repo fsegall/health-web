@@ -25,7 +25,7 @@ import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
-import submitOfflineInterviews from '../../services/offlineInterviewsService';
+import submitOfflineInterviews from '../../services/offlineInterviewsService2';
 
 interface PaginatorPageState {
   first: number;
