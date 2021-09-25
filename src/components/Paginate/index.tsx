@@ -21,7 +21,7 @@ interface PaginationProps {
 
 const Paginate: React.FC<{ children: React.ReactNode } & PaginationProps> = ({ onPageChange, totalCards }) => {
   const [basicFirst, setBasicFirst] = useState(0);
-  const [basicRows, setBasicRows] = useState(20);
+  const [basicRows, setBasicRows] = useState(10);
 
   const onBasicPageChange = (event: PaginatorPageState) => {
     onPageChange(event);
@@ -32,7 +32,7 @@ const Paginate: React.FC<{ children: React.ReactNode } & PaginationProps> = ({ o
   return (
     <div className="paginator-demo">
       <div className="card">
-        <Paginator first={basicFirst} rows={basicRows} totalRecords={totalCards} onPageChange={onBasicPageChange} rowsPerPageOptions={[20, 30, 40]} style={{ backgroundColor: '#dedede5c' }} ></Paginator>
+        <Paginator first={basicFirst} rows={basicRows} totalRecords={totalCards} onPageChange={onBasicPageChange} rowsPerPageOptions={[10, 20, 30, 40]} style={{ backgroundColor: '#dedede5c' }} ></Paginator>
       </div>
     </div>
   );

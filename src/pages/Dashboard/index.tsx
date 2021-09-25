@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
     return interviews;
   });
   const [basicFirst, setBasicFirst] = useState(0);
-  const [basicRows, setBasicRows] = useState(20);
+  const [basicRows, setBasicRows] = useState(10);
   const [, setPaginatorState] = useState({} as PaginatorPageState);
   const [paginatedInterviews, setPaginatedInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [paginatedFilteredInterviews, setPaginatedFilteredInterviews] = useState<ICreateInterviewDTO[]>([]);
