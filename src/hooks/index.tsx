@@ -5,6 +5,7 @@ import { ToastProvider } from './toast';
 
 const AppProvider: React.FC = ({ children }) => (
   <AuthProvider>
+    {/* <PaginationProvider>{children}</PaginationProvider> */}
     <ToastProvider>{children}</ToastProvider>
   </AuthProvider>
 );
