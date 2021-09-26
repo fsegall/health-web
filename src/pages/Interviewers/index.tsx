@@ -102,7 +102,7 @@ const Interviewers: React.FC = () => {
 
     }
     paginateInterviews()
-  }, [basicFirst, basicRows, paginatedUsers]);
+  }, [basicFirst, basicRows, paginatedUsers, users]);
 
   const onPageChange = (e: PaginatorPageState) => {
     setPaginatorState(e)
