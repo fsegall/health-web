@@ -15,6 +15,10 @@ export const Container = styled.div`
   border-radius: 4px;
   color: #59748c;
   border-left: 4px solid #ff9000;
+  max-width: none;
+  @media screen and (max-width: 600px) {
+    max-width: 80%;
+  }
 `;
 
 
