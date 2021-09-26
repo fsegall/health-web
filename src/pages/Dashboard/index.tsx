@@ -25,7 +25,8 @@ import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
-import submitOfflineInterviews from '../../services/offlineInterviewsService2';
+import submitOfflineInterviews from '../../services/offlineInterviewsService';
+import { useToast } from '../../hooks/toast';
 
 interface PaginatorPageState {
   first: number;
@@ -51,6 +52,8 @@ const Dashboard: React.FC = () => {
   const [paginatedFilteredInterviews, setPaginatedFilteredInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [interviewsOnPage, setInterviewsOnPage] = useState<ICreateInterviewDTO[]>([]);
   const [interviewsOnPageFiltered, setInterviewsOnPageFiltered] = useState<ICreateInterviewDTO[]>([]);
+
+  const { addToast } = useToast()
 
   useEffect(() => {
     setIsLoading(true);
@@ -99,6 +102,30 @@ const Dashboard: React.FC = () => {
     }
     paginateInterviews()
   }, [interviews, interviewsOnPage, interviewsOnPageFiltered, filteredBy, basicFirst, basicRows, isFiltered]);
+
+  const onsubmitOfflineInterviews = async () => {
+    const token = localStorage.getItem('@Safety:token') || "";
+
+    try {
+      const checkConnection = await api.get('/interviews', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (checkConnection.status === 200) {
+        submitOfflineInterviews()
+      }
+    } catch (error) {
+
+      addToast({
+        type: 'error',
+        title: error.message,
+        description: 'Sem Internet ou o banco de dados está temporariamente inacessível.',
+      });
+
+    }
+  }
 
 
   const onPageChange = (e: PaginatorPageState) => {
@@ -200,7 +227,7 @@ const Dashboard: React.FC = () => {
           <>
             <Counter>
               <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
-              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={submitOfflineInterviews}>Enviar</OfflineButton></div>
+              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>Enviar</OfflineButton></div>
             </Counter>
           </>
         )}
@@ -211,7 +238,7 @@ const Dashboard: React.FC = () => {
             <Counter>
               <div>Você já realizou <strong>{isFiltered ? filteredBy.length : interviews.length}</strong> {interviews.length === 1 ? 'entrevista' : 'entrevistas'}
               </div>
-              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={submitOfflineInterviews}>Enviar</OfflineButton></div>
+              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>Enviar</OfflineButton></div>
             </Counter>
 
           </>
