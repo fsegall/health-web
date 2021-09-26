@@ -120,7 +120,7 @@ const Dashboard: React.FC = () => {
 
       addToast({
         type: 'error',
-        title: error.message,
+        title: 'Sem Conexão',
         description: 'Sem Internet ou o banco de dados está temporariamente inacessível.',
       });
 
