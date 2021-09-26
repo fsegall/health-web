@@ -13,10 +13,18 @@ import {
   UserContainer,
   Button
 } from './styles';
+import Paginate from '../../components/Paginate';
 import Card from '../../components/Card';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import hasPermission, { Actions, Roles } from '../../authorization/constants';
+
+interface PaginatorPageState {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
 
 
 interface Interviewer {
@@ -38,6 +46,13 @@ const Interviewers: React.FC = () => {
 
   const { addToast } = useToast();
 
+  //Pagination
+  const [basicFirst, setBasicFirst] = useState(0);
+  const [basicRows, setBasicRows] = useState(10);
+  const [, setPaginatorState] = useState({} as PaginatorPageState);
+  const [paginatedUsers, setPaginatedUsers] = useState<Interviewer[]>([]);
+  //
+
   async function onSubmit(gives_permission_id: string, receives_permission_id: string) {
 
     if (!accept) {
@@ -57,9 +72,6 @@ const Interviewers: React.FC = () => {
     });
 
     window.location.reload();
-
-
-
   }
 
   useEffect(() => {
@@ -78,6 +90,25 @@ const Interviewers: React.FC = () => {
     }
     fetchUsers();
   }, [token]);
+
+
+  useEffect(() => {
+
+    function paginateInterviews() {
+      const firstCardOnPage = basicFirst;
+      const lastCardOnPage = basicFirst + basicRows;
+      const paginatedUsers = users.slice(firstCardOnPage, lastCardOnPage);
+      setPaginatedUsers(paginatedUsers);
+
+    }
+    paginateInterviews()
+  }, [basicFirst, basicRows, paginatedUsers]);
+
+  const onPageChange = (e: PaginatorPageState) => {
+    setPaginatorState(e)
+    setBasicFirst(e.first)
+    setBasicRows(e.rows)
+  }
 
   return (
     <Container>
@@ -119,6 +150,12 @@ const Interviewers: React.FC = () => {
           })}
         </StyledList>}
       </div>
+      <Paginate
+        totalCards={users.length}
+        onPageChange={onPageChange}
+      >
+        { }
+      </Paginate>
     </Container>
   );
 };
