@@ -165,6 +165,7 @@ export const Counter = styled.div`
     border: 1px solid #ccc;
     box-shadow: 1px 2px 1px #ccc;
     display: inline;
+    height: 84px;
     width: fit-content;
     margin-bottom: 30px;
   }
