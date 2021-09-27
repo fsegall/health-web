@@ -164,7 +164,7 @@ const Profile: React.FC = () => {
             <FiChevronLeft size={30} />
           </Link>
         </div>
-        <h1>Safety <span>|</span> Profile</h1>
+        <h1>Rede <span>|</span> Perfil</h1>
       </Header>
       <Grid>
         <Form ref={formRef} onSubmit={handleSubmit}>
