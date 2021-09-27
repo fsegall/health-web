@@ -198,8 +198,8 @@ const Dashboard: React.FC = () => {
             </Profile>
 
             <BigScreenLinkContainer>
-              <StyledLink to="/accept">Faça uma entrevista</StyledLink>
-              {hasPermission(user.role, Actions.CREATE_PROJECT) ? <StyledLink to="/project">Adicione um projeto</StyledLink> : null}
+              <StyledLink to="/accept">Entrevista</StyledLink>
+              {hasPermission(user.role, Actions.CREATE_PROJECT) ? <StyledLink to="/project">Projeto</StyledLink> : null}
               <StyledLink to="/interviewers">Pesquisadores</StyledLink>
             </BigScreenLinkContainer>
 

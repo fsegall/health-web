@@ -70,6 +70,7 @@ export const HeaderContent = styled.div`
     width: 20px;
     height: 20px;
     margin-right: 20px;
+    margin-left: 20px;
   }
 `;
 
