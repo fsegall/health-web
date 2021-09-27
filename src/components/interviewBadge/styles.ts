@@ -16,7 +16,7 @@ export const Container = styled.div`
   color: #59748c;
   border-left: 4px solid #ff9000;
   max-width: none;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     max-width: 80%;
   }
 `;
