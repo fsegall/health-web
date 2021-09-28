@@ -1,4 +1,7 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import {
+  OptionTypeBase
+} from 'react-select';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -25,6 +28,8 @@ import {
   situacao_de_trabalho,
   ocupacao_profissional,
   local_de_trabalho,
+  nao_tomou_vacina,
+  vacina,
   yesOrNoOptions,
 } from '../../questions/SelectorOptions/options';
 
@@ -38,6 +43,8 @@ interface PersonFormProps {
 }
 
 const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
+
+  const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
 
   const { user, token } = useAuth();
 
@@ -149,6 +156,23 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
         />
         <Label>P10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
         < Select name="diagnostico_covid" options={yesOrNoOptions} />
+        <Label>
+          P11 - Você já tomou a vacina da Covid-19?
+        </Label>
+        <Select
+          name="vacina"
+          options={vacina}
+          onChange={selectedOption => setVaccine(selectedOption)}
+        />
+
+        <Label>
+          P12 - Por que você não tomou a vacina da Covid-19?
+        </Label>
+        <Select
+          name="nao_tomou_vacina"
+          options={nao_tomou_vacina}
+          isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
+        />
         <Button type="submit" > Submit </Button>
       </section>
     </StyledForm>
