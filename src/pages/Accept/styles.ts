@@ -95,6 +95,7 @@ export const Button = styled.button`
   width: 100%;
   font-weight: 500;
   margin-top: 16px;
+  margin-bottom: 10px;
   max-width: 500px;
   float: right;
   transition: background-color 0.2s;

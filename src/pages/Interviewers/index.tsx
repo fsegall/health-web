@@ -91,7 +91,6 @@ const Interviewers: React.FC = () => {
     fetchUsers();
   }, [token]);
 
-
   useEffect(() => {
 
     function paginateInterviews() {
@@ -102,7 +101,7 @@ const Interviewers: React.FC = () => {
 
     }
     paginateInterviews()
-  }, [basicFirst, basicRows, paginatedUsers]);
+  }, [basicFirst, basicRows, paginatedUsers, users]);
 
   const onPageChange = (e: PaginatorPageState) => {
     setPaginatorState(e)
@@ -123,7 +122,7 @@ const Interviewers: React.FC = () => {
       <div>
         <ListTitle>Entrevistadores</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
-          {users.map((interviewer) => {
+          {paginatedUsers.map((interviewer) => {
             return (
               <UserContainer>
                 <FormContainer>

@@ -70,6 +70,7 @@ export const HeaderContent = styled.div`
     width: 20px;
     height: 20px;
     margin-right: 20px;
+    margin-left: 20px;
   }
 `;
 
@@ -165,6 +166,10 @@ export const Counter = styled.div`
     border: 1px solid #ccc;
     box-shadow: 1px 2px 1px #ccc;
     display: inline;
+    height: 65px;
+    @media (max-width: 768px) {
+      height: 84px;
+    }
     width: fit-content;
     margin-bottom: 30px;
   }
@@ -217,6 +222,10 @@ export const OfflineButton = styled.button`
     border: none;
     padding: 2px 4px;
     margin-left: 10px;
+    @media (max-width: 768px) {
+      margin-left: 38px;
+      margin-top: 5px;
+    }
     &:hover {
     background: ${shade(0.2, '#59748c')};
   }

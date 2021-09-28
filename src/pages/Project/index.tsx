@@ -84,7 +84,7 @@ const ProjectForm: React.FC = (props) => {
             <FiChevronLeft size={30} />
           </Link>
         </div>
-        <h1>Safety <span>|</span> Projeto</h1>
+        <h1>Rede <span>|</span> Projeto</h1>
       </Header>
       <Title>Adicione um projeto de pesquisa</Title>
       <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>

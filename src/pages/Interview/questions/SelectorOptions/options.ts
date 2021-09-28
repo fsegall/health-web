@@ -242,12 +242,13 @@ export const tipo_de_residencia = [
 // D20 material_de_construcao
 
 export const material_de_construcao = [
-  { value: 'alvenaria-com-revestimento', label: 'Alvenaria com revestimento/Taipa com revestimento ' },
-  { value: 'alvenaria-sem-revestimento', label: 'Alvenaria sem revestimento ' },
-  { value: 'taipa-sem-revestimento', label: 'Taipa sem revestimento' },
-  { value: 'madeira-para-construção', label: 'Madeira apropriada para construção' },
-  { value: 'madeira-aproveitada', label: 'Madeira aproveitada' },
-  { value: 'outro-material', label: 'Outro material' },
+  { value: 'alvenaria com revestimento', label: 'Alvenaria com revestimento' },
+  { value: 'alvenaria sem revestimento', label: 'Alvenaria sem revestimento' },
+  { value: 'taipa com revestimento', label: 'Taipa com revestimento' },
+  { value: 'taipa sem revestimento', label: 'Taipa sem revestimento' },
+  { value: 'madeira para construção', label: 'Madeira apropriada para construção' },
+  { value: 'madeira aproveitada', label: 'Madeira aproveitada' },
+  { value: 'outro material', label: 'Outro material' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -300,6 +301,7 @@ export const pessoas_convidadas = [
 // D32 faixa_de_renda
 
 export const faixa_de_renda = [
+  { value: 'não teve renda', label: 'Não teve renda' },
   { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
   { value: 'de R$ 275,00 a R$550,00 (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
   { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
@@ -338,6 +340,7 @@ export const auxilio_vezes = [
   { value: 'uma vez', label: 'Uma vez' },
   { value: 'duas vezes', label: 'Duas vezes' },
   { value: 'três vezes', label: 'Três vezes' },
+  { value: 'quatro vezes ou mais', label: 'Quatro vezes ou mais' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -366,7 +369,7 @@ export const como_adquiriu_comida = [
   { value: 'telefone-aplicativos', label: 'Por meio de compra por telefone ou pedidos por aplicativos on-line' },
   { value: 'doacoes-governo', label: 'Por meio de doação de instituição do governo' },
   { value: 'doacoes-ongs', label: 'Por meio de doação de organizações sociais' },
-  { value: 'doacoes-conhecidos', label: 'Por meio de doação de familiares, amigos e/ou vizinhos.' },
+  { value: 'doacoes-conhecidos', label: 'Por meio de doação de familiares, amigos, vizinhos ou outras pessoas.' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 

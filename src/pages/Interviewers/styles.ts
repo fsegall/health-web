@@ -176,27 +176,28 @@ export const Button = styled.button`
   }`;
 
 export const FormContainer = styled.div`
-padding: 1rem;
-color: #59748c;
-font-weight: bold;
-font-size: 1.2rem;
-@media (max-width: 768px) {
-  padding: 0;
+  padding: 1rem;
+  color: #59748c;
+  font-weight: bold;
+  font-size: 1.2rem;
+  @media (max-width: 768px) {
+    padding: 0;
   }
 `;
 
 export const CheckboxContainer = styled.div`
-display: flex;
-align-items: center;
-gap: 2rem;
-justify-content: flex-end;
-@media (max-width: 768px) {
-  margin: 5px 15px;
-  justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: flex-end;
+  @media (max-width: 768px) {
+    margin: 5px 15px;
+    justify-content: space-evenly;
   }
 `;
 
 export const UserContainer = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
+  min-height: 210px;
 `;

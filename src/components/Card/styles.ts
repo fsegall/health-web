@@ -21,6 +21,10 @@ export const Container = styled.div`
 
 export const CardContainer = styled.div`
   max-width: 400px;
+  @media screen and (max-width: 768px) {
+    width: 300px;
+  }
+  min-height: 186px;
   padding: 15px 20px;
   box-shadow: 1px 1px 2px 2px rgba(204, 215, 219, 0.6);
   border: 0;
