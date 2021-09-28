@@ -426,7 +426,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
         <Label>
           D32 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
-      </Label>
+        </Label>
         <Select
           name="faixa_de_renda"
           options={faixa_de_renda}
@@ -834,7 +834,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
             options={[{
               id: 'Leite',
               value: 'true',
-              label: 'Leite',
+              label: 'Leite e derivados',
             }]}
           />
 

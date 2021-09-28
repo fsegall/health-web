@@ -59,7 +59,7 @@ const Accept: React.FC = () => {
       <Aceite>
         <div>
 
-          Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, em uma pesquisa nacional. Serão algumas perguntas sobre você e seus familiares outras a casa, do trabalho, da saúde e da alimentação.
+          Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, em uma pesquisa nacional. Serão algumas perguntas sobre você e seus familiares; outras serão referentes às condições sobre a casa, o trabalho, a saúde e a alimentação.
 
           Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar as ações de enfrentamento da pandemia e de seus efeitos sobre a alimentação dos brasileiros.
           <div style={{ padding: '1rem' }}>
