@@ -25,4 +25,8 @@ export const PersonValidation = Yup.object().shape({
   diagnostico_covid: Yup.string().required(
     'Você precisa escolher um dos campos de diagnóstico de Covid',
   ),
+  vacina: Yup.string().required(
+    'Você precisa escolher um dos campos de diagnóstico de Covid',
+  ),
+  nao_tomou_vacina: Yup.string(),
 });
