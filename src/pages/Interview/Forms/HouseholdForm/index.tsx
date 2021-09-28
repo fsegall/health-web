@@ -577,7 +577,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>
-          D45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda <b>de alguma instituição/associação. igreja, amigos, parentes ou outros</b>?
+          D45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do seu estado, da prefeitura, <b>de outra instituição, associação, igreja, amigos, parentes ou outros</b>?
         </Label>
 
         <Select
