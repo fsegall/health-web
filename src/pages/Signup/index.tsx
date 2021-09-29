@@ -4,7 +4,7 @@ import { FormHandles } from '@unform/core';
 import api from '../../services/api';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer, Background, SignUpRules } from './styles';
 import {
   FiArrowLeft,
   FiMail,
@@ -129,7 +129,11 @@ const Signup: React.FC = () => {
           </Link>
         </AnimationContainer>
       </Content>
-    </Container>
+      <SignUpRules>O aplicativo é de livre acesso após cadastro. Entretanto, para utilização do app em pesquisas, é necessário estar filiado(a) à Rede PenSSAN e ter submetido projeto para análise e aprovação prévia para o email:
+        <strong>rbpssan@gmail.com</strong>
+      </SignUpRules>
+
+    </Container >
   );
 };
 
