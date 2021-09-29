@@ -89,6 +89,6 @@ export const SignUpRules = styled.h3`
   margin: 2rem;
   strong {
     display: block;
-    margin-top: 1rem;
+    margin: 1rem;
   }
 `;
