@@ -83,3 +83,12 @@ export const AnimationContainer = styled.div`
     }
   }
 `;
+
+export const SignUpRules = styled.h3`
+  color: #59748c;
+  margin: 2rem;
+  strong {
+    display: block;
+    margin-top: 1rem;
+  }
+`;
