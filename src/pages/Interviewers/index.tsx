@@ -117,10 +117,10 @@ const Interviewers: React.FC = () => {
             <FiChevronLeft size={30} />
           </Link>
         </div>
-        <h1>Safety <span>|</span> Entrevistadores</h1>
+        <h1>Rede <span>|</span> Pesquisadores</h1>
       </Header>
       <div>
-        <ListTitle>Entrevistadores</ListTitle>
+        <ListTitle>Equipe</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
           {paginatedUsers.map((interviewer) => {
             return (

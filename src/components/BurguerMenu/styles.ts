@@ -52,7 +52,7 @@ export const SlideLinkContainer = styled.div<MenuProps>`
     transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 
     ${props => props.open ? css`@media (max-width: 768px) {
-    z-index: 0; /* we're gonna avoid using -1 here, since it could position our navbar below other content on the page as well! */
+    z-index: 1; /* we're gonna avoid using -1 here, since it could position our navbar below other content on the page as well! */
     position: fixed;
     top: 0;
     left: 0;
@@ -86,4 +86,5 @@ export const SlideLinkContainer = styled.div<MenuProps>`
 
 export const StyledLink = styled(Link)`
   margin-left: auto;
+  z-index: 2;
 `;
