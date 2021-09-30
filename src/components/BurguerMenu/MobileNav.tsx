@@ -13,8 +13,12 @@ const MobileNav: React.FC<NavProps> = ({ open }) => {
 
   return (
     <SlideLinkContainer open={open}>
-      <StyledLink to="/accept">Entrevista</StyledLink>
-      {hasPermission(user.role, Actions.CREATE_PROJECT) && <StyledLink to="/project">Projeto</StyledLink>}
+
+      {hasPermission(user.role, Actions.CREATE_PROJECT) && (<>
+        <StyledLink to="/accept">Entrevista</StyledLink>
+        <StyledLink to="/project">Projeto</StyledLink>
+      </>
+      )}
       <StyledLink to="/interviewers">Pesquisadores</StyledLink>
       <StyledLink to="/profile">Perfil</StyledLink>
       <a href="/" onClick={signOut}>
