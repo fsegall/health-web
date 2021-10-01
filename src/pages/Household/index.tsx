@@ -31,7 +31,7 @@ const Household: React.FC = () => {
 
   const { token } = useAuth();
   const [household, setHousehold] = useState<ICreateHouseholdDTO | null>(null);
-  useEffect(() => {
+  /* useEffect(() => {
     setIsLoading(true);
     async function fetchHousehold() {
       const response = await api.get(`/persons/${location.state.id}/household`, {
@@ -43,7 +43,7 @@ const Household: React.FC = () => {
       setHousehold(response.data);
     }
     fetchHousehold();
-  }, [token, location]);
+  }, [token, location]); */
   return (
     <>
       <Header>
@@ -55,7 +55,7 @@ const Household: React.FC = () => {
         <h1>Safety <span>|</span> Residência</h1>
       </Header>
       {isLoading ? <Spinner /> : (<div>
-        { household ?
+        {household ?
           (<HouseholdContainer>
             <div><FiHome size="40" style={{ margin: 10 }} color="#ff9000" /></div>
             <HouseList>

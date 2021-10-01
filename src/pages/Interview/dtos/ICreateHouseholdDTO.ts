@@ -23,8 +23,8 @@ export default interface ICreateHouseholdDTO {
   numero_de_comodos: number;
   material_de_construcao: string;
   agua_potavel: string;
-  agua_animais: string;
-  agua_producao_alimentos: string;
+  agua_animais?: string;
+  agua_producao_alimentos?: string;
   esgoto: string;
   numero_de_pessoas: number;
   uma_pessoa_domicilio: boolean;
