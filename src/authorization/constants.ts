@@ -1,7 +1,8 @@
 const Roles = {
-  ADMIN: "ADMIN",
+  VISITOR: "VISITOR",
+  INTERVIEWER: "INTERVIEWER",
   COORDINATOR: "COORDINATOR",
-  INTERVIEWER: "INTERVIEWER"
+  ADMIN: "ADMIN",
 };
 
 const Actions = {
@@ -9,16 +10,18 @@ const Actions = {
   VIEW_MY_INTERVIEWS: "VIEW_MY_INTERVIEWS",
   VIEW_PROJECTS: "VIEW_PROJECTS",
   CREATE_PROJECT: "CREATE_PROJECT",
+  CREATE_INTERVIEW: "CREATE_INTERVIEW",
   ASSIGN_COORDINATOR_ROLE: "ASSIGN_COORDINATOR_ROLE",
 }
 
 const mappings = new Map();
 
-mappings.set(Actions.VIEW_ALL_INTERVIEWS, [Roles.ADMIN, Roles.COORDINATOR]);
-mappings.set(Actions.VIEW_MY_INTERVIEWS, [Roles.ADMIN, Roles.COORDINATOR, Roles.INTERVIEWER]);
-mappings.set(Actions.VIEW_PROJECTS, [Roles.ADMIN, Roles.COORDINATOR]);
-mappings.set(Actions.CREATE_PROJECT, [Roles.ADMIN, Roles.COORDINATOR]);
-mappings.set(Actions.ASSIGN_COORDINATOR_ROLE, [Roles.ADMIN, Roles.COORDINATOR]);
+mappings.set(Actions.VIEW_ALL_INTERVIEWS, [Roles.COORDINATOR, Roles.ADMIN]);
+mappings.set(Actions.VIEW_MY_INTERVIEWS, [Roles.INTERVIEWER, Roles.COORDINATOR, Roles.ADMIN]);
+mappings.set(Actions.VIEW_PROJECTS, [Roles.COORDINATOR, Roles.ADMIN]);
+mappings.set(Actions.CREATE_PROJECT, [Roles.COORDINATOR, Roles.ADMIN]);
+mappings.set(Actions.CREATE_INTERVIEW, [Roles.INTERVIEWER, Roles.COORDINATOR, Roles.ADMIN]);
+mappings.set(Actions.ASSIGN_COORDINATOR_ROLE, [Roles.COORDINATOR, Roles.ADMIN]);
 
 function hasPermission(role: string, action: string) {
   if (mappings.has(action)) {

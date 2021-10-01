@@ -301,7 +301,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
         <Label>D18 - Tipo de residência</Label>
         <Select name="tipo_de_residencia" options={tipo_de_residencia} />
-        <Label>D19 - Qual o número de cômodos na casa incluindo banheiros?</Label>
+        <Label>D19 - Qual o número de cômodos na sua residência incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
@@ -310,12 +310,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           name="numero_de_comodos"
           defaultValue="1"
         />
-        <Label>D20 - Qual o material de construção das paredes externas da casa?</Label>
+        <Label>D20 - Qual o material de construção das paredes externas da sua residência?</Label>
         <Select name="material_de_construcao" options={material_de_construcao} />
-        <Label>D21 - Tem acesso à água potável na sua casa?</Label>
+        <Label>D21 - Tem acesso à água potável na sua sua residência?</Label>
         <Select name="agua_potavel" options={agua_potavel} />
 
-        <Label>D22 - Como é feita a coleta de esgoto na casa?</Label>
+        <Label>D22 - Como é feita a coleta de esgoto na sua residência?</Label>
         <Select name="esgoto" options={esgoto} />
         <Label>D23 - Número de pessoas no domicílio</Label>
         <Input
@@ -612,10 +612,18 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>D49 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
-        <Select name="agua_animais" options={yesOrNoOptions} />
+        <Select
+          name="agua_animais"
+          options={yesOrNoOptions}
+          isDisabled={homegrown?.value === 'false' ? true : false}
+        />
 
         <Label>D50 - Este domicílio tem água suficiente para produção de alimentos?</Label>
-        <Select name="agua_producao_alimentos" options={yesOrNoOptions} />
+        <Select
+          name="agua_producao_alimentos"
+          options={yesOrNoOptions}
+          isDisabled={homegrown?.value === 'false' ? true : false}
+        />
 
         <Label>
           D51 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
