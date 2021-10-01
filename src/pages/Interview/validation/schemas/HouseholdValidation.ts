@@ -42,12 +42,8 @@ export const HouseholdValidation = Yup.object().shape({
   agua_potavel: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
-  agua_animais: Yup.string().required(
-    'Você precisa escolher um dos campos de abastecimento de água para animais',
-  ),
-  agua_producao_alimentos: Yup.string().required(
-    'Você precisa escolher um dos campos de abastecimento de água para produção de alimentos',
-  ),
+  agua_animais: Yup.string(),
+  agua_producao_alimentos: Yup.string(),
   esgoto: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
