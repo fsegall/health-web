@@ -127,7 +127,7 @@ const Interviewers: React.FC = () => {
               <UserContainer>
                 <FormContainer>
                   <Card key={interviewer.id} person={interviewer} />
-                  {hasPermission(user.role, Actions.ASSIGN_COORDINATOR_ROLE) && interviewer.role === Roles.INTERVIEWER && <form onSubmit={(e: React.SyntheticEvent) => {
+                  {hasPermission(user.role, Actions.ASSIGN_COORDINATOR_ROLE) && (interviewer.role === Roles.INTERVIEWER || interviewer.role === Roles.VISITOR) && <form onSubmit={(e: React.SyntheticEvent) => {
                     e.preventDefault();
                     return onSubmit(user.id, interviewer.id)
                   }}>
