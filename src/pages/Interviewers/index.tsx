@@ -127,12 +127,12 @@ const Interviewers: React.FC = () => {
               <UserContainer>
                 <FormContainer>
                   <Card key={interviewer.id} person={interviewer} />
-                  {hasPermission(user.role, Actions.ASSIGN_COORDINATOR_ROLE) && (interviewer.role === Roles.INTERVIEWER || interviewer.role === Roles.VISITOR) && <form onSubmit={(e: React.SyntheticEvent) => {
+                  {hasPermission(user.role, Actions.ASSIGN_INTERVIEWER_ROLE) && (interviewer.role === Roles.INTERVIEWER || interviewer.role === Roles.VISITOR) && <form onSubmit={(e: React.SyntheticEvent) => {
                     e.preventDefault();
                     return onSubmit(user.id, interviewer.id)
                   }}>
                     <CheckboxContainer>
-                      <label>Permissão de Coordenador</label>
+                      <label>Permissão de Entrevistador</label>
                       <input type="checkbox"
                         name="Accept"
                         onChange={() => setAccept(!accept)}

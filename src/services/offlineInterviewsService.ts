@@ -9,16 +9,18 @@ async function SubmitOfflineInterviews(): Promise<void> {
   const interviewer_id = JSON.parse(localStorage.getItem('@Safety:user') || '{}')?.id;
   const interviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
+  if (Object.keys(interviews).length === 0) {
+    return;
+  }
+
   if (interviews && interviewer_id && token) {
 
     localStorage.setItem(`@Safety:offlineBackup - ${format(parseJSON(Date.now()), 'dd/MM/yyyy HH:mm:ss')}`, btoa(JSON.stringify(interviews)));
 
     for (let interview in interviews) {
-      console.log('entrevista', interview)
+      
       if (Object.keys(interviews[interview]).length === 4) {
         try {
-
-          console.log('aqui');
 
           const person = {
             interviewer_id,

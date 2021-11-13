@@ -152,7 +152,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
       <section>
         <Label>Nome do Projeto</Label>
-        <Input name="project_name" placeholder="Nome do Projeto" defaultValue="PENSSAN" />
+        <Input name="project_name" placeholder="Nome do Projeto" defaultValue="Nome do Projeto" />
         <Label>Número do Projeto</Label>
         <Input name="project_number" placeholder="Número do Projeto" type="number" />
 
