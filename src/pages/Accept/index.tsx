@@ -19,7 +19,7 @@ import {
 import logo from '../../assets/logo.png';
 
 const Accept: React.FC = () => {
-  const { signOut, user } = useAuth();
+  const { signOut } = useAuth();
   const { addToast } = useToast();
   const [accept, setAccept] = useState(false);
   const history = useHistory();
