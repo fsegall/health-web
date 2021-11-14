@@ -104,8 +104,6 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
 
         const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-        console.log('interviews', offlineInterviews);
-
         const addInterview = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], interview } } : false;
 
         if (addInterview) {

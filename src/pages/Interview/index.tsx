@@ -78,7 +78,6 @@ const initialState: StateFormat = {
 function reducer(state: StateFormat, action: FormActionFormat) {
   switch (action.type) {
     case 'PERSON':
-      console.log('no payload', action?.payload?.id);
       return { formsSubmitted: { ...state.formsSubmitted, person: { id: action?.payload?.id, show: false } } };
     case 'HOUSEHOLD':
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };

@@ -36,7 +36,7 @@ const Accept: React.FC = () => {
       })
     }
   }
-  console.log(user);
+
   return (
     <Container>
       <Header>
