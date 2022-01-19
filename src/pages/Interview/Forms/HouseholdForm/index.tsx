@@ -267,7 +267,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para de Coronavirus (ou Covid-19)?</Label>
+        <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
         < Select
           name="covid_2020"
           options={yesOrNoOptions}
@@ -283,7 +283,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           isDisabled={covid2020?.value === 'false' ? true : false}
         />
 
-        <Label>D16 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para de Coronavirus (ou Covid-19)?</Label>
+        <Label>D16 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
         < Select
           name="covid_2021"
           options={yesOrNoOptions}
@@ -292,7 +292,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           }}
         />
 
-        <Label>D17 - No de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        <Label>D17 - No ano de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
           name="covid_perda_2021"
           options={covid_perda}
