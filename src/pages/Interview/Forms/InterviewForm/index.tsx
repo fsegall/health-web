@@ -104,8 +104,6 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
 
         const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-        console.log('interviews', offlineInterviews);
-
         const addInterview = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], interview } } : false;
 
         if (addInterview) {
@@ -152,9 +150,9 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
       <section>
         <Label>Nome do Projeto</Label>
-        <Input name="project_name" placeholder="Nome do Projeto" defaultValue="Nome do Projeto" />
+        <Input name="project_name" />
         <Label>Número do Projeto</Label>
-        <Input name="project_number" placeholder="Número do Projeto" type="number" />
+        <Input name="project_number" type="number" />
 
       </section>
       <section>
