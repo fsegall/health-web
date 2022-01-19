@@ -292,7 +292,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           }}
         />
 
-        <Label>D17 - No de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        <Label>D17 - No ano de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
           name="covid_perda_2021"
           options={covid_perda}
