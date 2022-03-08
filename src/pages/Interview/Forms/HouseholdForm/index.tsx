@@ -264,25 +264,25 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
+        <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
         < Select
           name="covid_2020"
           options={yesOrNoOptions}
         />
 
-        <Label>D15 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
+        <Label>D15 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
         < Select
           name="covid_2021"
           options={yesOrNoOptions}
         />
 
-        <Label>D16 - No ano de 2022 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
+        <Label>D16 - No ano de 2022 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
         < Select
           name="covid_2022"
           options={yesOrNoOptions}
         />
 
-        <Label>D17 - No ano de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        <Label>D17 - Desde o início da pandemia, vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
           name="covid_perda"
           options={covid_perda}
@@ -542,7 +542,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>
-          D43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavirus ou Covid-19?
+          D43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
         </Label>
 
         <Select
@@ -578,7 +578,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="tipo_de_ajuda"
           options={tipo_de_ajuda}
-          isDisabled={ajuda?.value === 'true' ? false : true}
+          isDisabled={(ajuda?.value === 'nao' || ajuda?.value === 'ns-nr') ? true : false}
         />
 
         <Label>
