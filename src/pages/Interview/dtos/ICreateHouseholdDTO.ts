@@ -16,9 +16,9 @@ export default interface ICreateHouseholdDTO {
   ocupacao_profissional?: string;
   local_de_trabalho?: string;
   covid_2020: string;
-  covid_perda_2020?: string;
   covid_2021: string;
-  covid_perda_2021?: string;
+  covid_2022: string;
+  covid_perda: string;
   tipo_de_residencia: string;
   numero_de_comodos: number;
   material_de_construcao: string;
