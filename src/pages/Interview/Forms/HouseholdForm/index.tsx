@@ -578,7 +578,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="tipo_de_ajuda"
           options={tipo_de_ajuda}
-          isDisabled={(ajuda?.value !== 'nao' || ajuda?.value !== 'ns-nr') ? false : true}
+          isDisabled={(ajuda?.value === 'nao' || ajuda?.value === 'ns-nr') ? true : false}
         />
 
         <Label>
