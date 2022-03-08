@@ -57,6 +57,10 @@ export const situacao_de_trabalho = [
     label: 'Trabalho remunerado',
   },
   {
+    value: 'desempregado(a) em 2022',
+    label: 'Desempregado(a) em 2022',
+  },
+  {
     value: 'desempregado(a) em 2021',
     label: 'Desempregado(a) em 2021',
   },
@@ -154,6 +158,27 @@ export const local_de_trabalho = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+// P10 diagnostico_covid
+
+export const diagnostico_covid = [
+  {
+    value: 'Sim, mas sem problemas de saúde após a doença',
+    label: 'Sim, mas sem problemas de saúde após a doença',
+  },
+  {
+    value: 'Sim, mas com problemas de saúde após a doença, que não atrapalham minha rotina de trabalho',
+    label: 'Sim, mas com problemas de saúde após a doença, que não atrapalham minha rotina de trabalho',
+  },
+  {
+    value: 'Sim, mas com problemas de saúde após a doença, que atrapalham minha rotina de trabalho',
+    label: 'Sim, mas com problemas de saúde após a doença, que atrapalham minha rotina de trabalho',
+  },
+  { value: 'nao', label: 'Não' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+
+
 // Domicílio
 
 // D1 local_do_domicilio
@@ -192,32 +217,32 @@ export const qual_povo_tradicional = [
 //D15 covid_perda_2020 e D17 covid_perda_2021
 export const covid_perda = [
   {
-    value: 'não',
+    value: 'nao',
     label: 'Não',
   },
   {
-    value: 'sim, a pessoa de referência - adulto homem',
-    label: 'Sim, a pessoa de referência - adulto homem',
+    value: 'Sim, no ano de 2020',
+    label: 'Sim, no ano de 2020',
   },
   {
-    value: 'sim, a pessoa de referência - adulto mulher',
-    label: 'Sim, a pessoa de referência - adulto mulher',
+    value: 'Sim, no ano de 2021',
+    label: 'Sim, no ano de 2021',
   },
   {
-    value: 'sim, outro adulto homem',
-    label: 'Sim, outro adulto homem',
+    value: 'Sim, neste ano de 2022',
+    label: 'Sim, neste ano de 2022',
   },
   {
-    value: 'sim, outro adulto mulher',
-    label: 'Sim, outro adulto mulher',
+    value: 'Sim, no ano de 2020 e 2021',
+    label: 'Sim, no ano de 2020 e 2021',
   },
   {
-    value: 'sim, criança / adolescente (jovem menor de 20 anos)',
-    label: 'Sim, criança / adolescente (jovem menor de 20 anos)',
+    value: 'Sim, no ano de 2021 e 2022',
+    label: 'Sim, no ano de 2021 e 2022',
   },
   {
-    value: 'sim, mas por outra doença',
-    label: 'Sim, mas por outra doença',
+    value: 'Sim, nos três anos',
+    label: 'Sim, nos três anos',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
@@ -265,7 +290,7 @@ export const agua_potavel = [
     label: 'Sim, mas a água é de baixa qualidade',
   },
   {
-    value: 'não',
+    value: 'nao',
     label: 'Não',
   },
   { value: 'ns-nr', label: 'NS/NR' },
@@ -293,9 +318,9 @@ export const esgoto = [
 // D29 pessoas_convidadas
 
 export const pessoas_convidadas = [
-  { value: 'nenhuma-pessoa-acolhidas', label: 'Essas pessoas não foram acolhidas pois todos já moravam na minha casa' },
-  { value: 'acolhidas-uma-ou-duas-pessoas', label: 'Foram acolhidas de 1 a 2 pessoas' },
-  { value: 'acolhidas-tres-ou-mais-pessoas', label: 'Foram acolhidas 3 ou mais pessoas' },
+  { value: 'Todos já moravam', label: 'Todos já moravam' },
+  { value: '1-2', label: '1-2' },
+  { value: '>3', label: '>3' },
 ];
 
 // D32 faixa_de_renda
@@ -341,6 +366,17 @@ export const auxilio_vezes = [
   { value: 'duas vezes', label: 'Duas vezes' },
   { value: 'três vezes', label: 'Três vezes' },
   { value: 'quatro vezes ou mais', label: 'Quatro vezes ou mais' },
+  { value: 'ns-nr', label: 'NS/NR' },
+];
+
+// D45 ajuda_instituicao_caridade
+
+export const ajuda_instituicao_caridade = [
+  { value: 'Sim, do governo do estado', label: 'Sim, do governo do estado' },
+  { value: 'Sim, da prefeitura', label: 'Sim, da prefeitura' },
+  { value: 'Sim, de outras instituições', label: 'Sim, de outras instituições' },
+  { value: 'Sim, de amigos ou parentes', label: 'Sim, de amigos ou parentes' },
+  { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -416,11 +452,12 @@ export const gastos_alimentacao = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D69 vacina
+//P11 vacina
 
 export const vacina = [
   { value: 'Sim, apenas a 1ª dose', label: 'Sim, apenas a 1ª dose' },
   { value: 'Sim, as duas doses', label: 'Sim, as duas doses' },
+  { value: 'Sim as duas doses mais o reforço', label: 'Sim as duas doses mais o reforço' },
   { value: 'Sim, a vacina de dose única', label: 'Sim, a vacina de dose única' },
   { value: 'Não tomei nenhuma dose da vacina', label: 'Não tomei nenhuma dose da vacina' },
   { value: 'ns-nr', label: 'NS/NR' },

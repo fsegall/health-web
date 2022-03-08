@@ -36,6 +36,7 @@ import {
   pnae,
   auxilio_vezes,
   tipo_de_ajuda,
+  ajuda_instituicao_caridade,
   divisao_alimento,
   como_adquiriu_comida,
   alteracao_preco_comida,
@@ -84,10 +85,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
   const [produce, setProduce] = useState<OptionTypeBase | undefined | null>({});
 
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
-
-  const [covid2020, setCovid2020] = useState<OptionTypeBase | undefined | null>({});
-
-  const [covid2021, setCovid2021] = useState<OptionTypeBase | undefined | null>({});
 
   const [educ, setEduc] = useState<OptionTypeBase | undefined | null>({});
 
@@ -271,32 +268,24 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         < Select
           name="covid_2020"
           options={yesOrNoOptions}
-          onChange={selectedOption => {
-            setCovid2020(selectedOption)
-          }}
         />
 
-        <Label>D15 - No ano de 2020 vocês perderam alguém (morreu alguém) por Covid-19 que morava nesta casa?</Label>
-        < Select
-          name="covid_perda_2020"
-          options={covid_perda}
-          isDisabled={covid2020?.value === 'false' ? true : false}
-        />
-
-        <Label>D16 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
+        <Label>D15 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
         < Select
           name="covid_2021"
           options={yesOrNoOptions}
-          onChange={selectedOption => {
-            setCovid2021(selectedOption)
-          }}
+        />
+
+        <Label>D16 - No ano de 2022 algum morador da sua casa teve diagnóstico positivo para Coronavirus (ou Covid-19)?</Label>
+        < Select
+          name="covid_2022"
+          options={yesOrNoOptions}
         />
 
         <Label>D17 - No ano de 2021 vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
         < Select
-          name="covid_perda_2021"
+          name="covid_perda"
           options={covid_perda}
-          isDisabled={covid2021?.value === 'false' ? true : false}
         />
 
         <Label>D18 - Tipo de residência</Label>
@@ -378,7 +367,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
                 type="number"
               />
               <Label>
-                D29 - Das pessoas que relacionou antes, quantas você acolheu no momento da pandemia?
+                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente? 
               </Label>
               <Select
                 name="pessoas_convidadas"
@@ -431,43 +420,43 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
         <CheckBoxContainer>
           <Label>
-            <span>D33 - Em relação ao trabalho e à renda das pessoas, A PANDEMIA DO CORONAVIRUS OU COVID-19 levou a: (Pode ter mais de uma resposta) </span>
+            <span>D33 - Nos últimos 3 meses, qual é a situação de emprego e renda na sua casa?</span>
           </Label>
 
           <CheckboxInput
 
             name="perda_de_emprego"
-            options={[{ id: 'Perda de emprego', value: 'true', label: 'Perda de emprego/trabalho de algum membro da casa' }]}
+            options={[{ id: 'Perda de emprego', value: 'true', label: 'Houve perda de emprego/trabalho de algum membro da casa' }]}
           />
 
           <CheckboxInput
 
             name="reducao_de_salario"
-            options={[{ id: 'reducao_de_renda', value: 'true', label: 'Redução da renda domiciliar (dos moradores da casa)' }]}
+            options={[{ id: 'reducao_de_renda', value: 'true', label: 'Houve redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
           <CheckboxInput
 
             name="ajuda_financeira"
-            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Necessidade de ajudar financeiramente algum parente ou amigo' }]}
+            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Houve necessidade de ajudar financeiramente algum parente ou amigo' }]}
           />
 
           <CheckboxInput
 
             name="divida"
-            options={[{ id: 'dividas', value: 'true', label: 'Endividamento de moradores' }]}
+            options={[{ id: 'dividas', value: 'true', label: 'Houve endividamento de moradores' }]}
           />
 
           <CheckboxInput
 
             name="corte_de_gastos"
-            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Corte de gastos em despesas essenciais' }]}
+            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Precisou fazer corte de gastos com despesas essenciais' }]}
           />
 
           <CheckboxInput
 
             name="corte_de_gastos_nao_essenciais"
-            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Corte de gastos em despesas não essenciais' }]}
+            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Precisou fazer corte de gastos em despesas não essenciais' }]}
           />
 
           <CheckboxInput
@@ -505,7 +494,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>
-          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>bolsa família</b>?
+          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do Programa <b>Auxílio Brasil</b> que é pago pela Caixa Econômica Federal?
         </Label>
         <Select
           name="bolsa_familia"
@@ -573,12 +562,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>
-          D45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do seu estado, da prefeitura, <b>de outra instituição, associação, igreja, amigos, parentes ou outros</b>?
+          D45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do seu estado, da prefeitura, de outra instituição, associação, igreja, amigos, parentes ou outros?
         </Label>
 
         <Select
           name="ajuda_instituicao_caridade"
-          options={yesOrNoOptions}
+          options={ajuda_instituicao_caridade}
           onChange={selectedOption => setAjuda(selectedOption)}
         />
 

@@ -30,6 +30,7 @@ import {
   local_de_trabalho,
   nao_tomou_vacina,
   vacina,
+  diagnostico_covid,
   yesOrNoOptions,
 } from '../../questions/SelectorOptions/options';
 
@@ -155,7 +156,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
           options={local_de_trabalho}
         />
         <Label>P10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
-        < Select name="diagnostico_covid" options={yesOrNoOptions} />
+        < Select name="diagnostico_covid" options={diagnostico_covid} />
         <Label>
           P11 - Você já tomou a vacina da Covid-19?
         </Label>

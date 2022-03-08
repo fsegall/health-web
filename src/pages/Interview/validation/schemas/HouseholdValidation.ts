@@ -25,11 +25,15 @@ export const HouseholdValidation = Yup.object().shape({
   covid_2020: Yup.string().required(
     'Você precisa escolher um dos campos de diagnóstico de covid em 2020',
   ),
-  covid_perda_2020: Yup.string(),
   covid_2021: Yup.string().required(
     'Você precisa escolher um dos campos de diagnóstico de covid em 2021',
   ),
-  covid_perda_2021: Yup.string(),
+  covid_2022: Yup.string().required(
+    'Você precisa escolher um dos campos de diagnóstico de covid em 2022',
+  ),
+  covid_perda: Yup.string().required(
+    'Você precisa escolher um dos campos de perda de pessoa por covid',
+  ),
   tipo_de_residencia: Yup.string().required(
     'Você precisa escolher um dos campos de tipo de residência',
   ),
