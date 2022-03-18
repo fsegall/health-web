@@ -542,7 +542,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         />
 
         <Label>
-          D43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou auxílio emergencial</b> por causa da pandemia do Coronavírus ou Covid-19?
+          D43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou o vale-gás</b>?
         </Label>
 
         <Select
@@ -553,7 +553,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           }}
         />
 
-        <Label>D44 - Quantas vezes você ou outra pessoa que mora na sua casa recebeu o auxílio?</Label>
+        <Label>D44 - Quantas vezes você recebeu o vale-gás?</Label>
 
         <Select
           name="auxilio_vezes"
