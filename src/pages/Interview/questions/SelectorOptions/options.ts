@@ -365,7 +365,7 @@ export const auxilio_vezes = [
   { value: 'uma vez', label: 'Uma vez' },
   { value: 'duas vezes', label: 'Duas vezes' },
   { value: 'três vezes', label: 'Três vezes' },
-  { value: 'três vezes ou mais', label: 'Três vezes ou mais' },
+  { value: 'três vezes', label: 'Três vezes' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
