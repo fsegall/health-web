@@ -168,7 +168,7 @@ export const Counter = styled.div`
     display: inline;
     height: 65px;
     @media (max-width: 768px) {
-      height: 84px;
+      height: 80px;
     }
     width: fit-content;
     margin-bottom: 30px;
@@ -223,8 +223,7 @@ export const OfflineButton = styled.button`
     padding: 2px 4px;
     margin-left: 10px;
     @media (max-width: 768px) {
-      margin-left: 38px;
-      margin-top: 5px;
+      margin-top: 6px;
     }
     &:hover {
     background: ${shade(0.2, '#59748c')};

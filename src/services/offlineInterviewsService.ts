@@ -74,6 +74,13 @@ async function SubmitOfflineInterviews(): Promise<void> {
         } catch (error) {
           console.log(error.data.message, interview)
           localStorage.setItem(`@Safety:offlineError - ${error.data.message}:${uuid()}`, JSON.stringify(interviews[interview]));
+          let errorCount = parseInt(localStorage.getItem('@Safety:errorCounter') || '0');
+          if(errorCount > 0) {
+            errorCount = errorCount + 1;
+            localStorage.setItem('@Safety:errorCounter', errorCount.toString());
+          } else {
+            localStorage.setItem('@Safety:errorCounter', '1');
+          }
         }
       } else {
         console.log('Essa entrevista não estava completa');
