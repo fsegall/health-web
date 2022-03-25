@@ -45,6 +45,12 @@ const Dashboard: React.FC = () => {
     const interviews = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
     return interviews;
   });
+  // Error offline counter
+  const [offlineInterviewsErrorsCounter] = useState(() => {
+    const counter = localStorage.getItem('@Safety:errorCounter') || '0';
+    return counter;
+  });
+  //
   const [basicFirst, setBasicFirst] = useState(0);
   const [basicRows, setBasicRows] = useState(10);
   const [, setPaginatorState] = useState({} as PaginatorPageState);
@@ -232,6 +238,7 @@ const Dashboard: React.FC = () => {
             <Counter>
               <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
               <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>Enviar</OfflineButton></div>
+              <div>Erros: <strong>{offlineInterviewsErrorsCounter}</strong></div>
             </Counter>
           </>
         )}
