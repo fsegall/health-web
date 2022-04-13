@@ -27,7 +27,7 @@ const OfflineInterviews: React.FC = () => {
     return (<Container>
                 <h1>Interviews</h1>
                 <OfflineButton onClick={OnClick}>Send</OfflineButton>
-                {/* <div>{interviews}</div> */}
+                <div>{interviews}</div>
             </Container>
             );
 
