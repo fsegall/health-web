@@ -1,7 +1,7 @@
 import React from 'react';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
-import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
+/* import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO'; */
 
 import {
     OfflineButton,
@@ -13,7 +13,7 @@ const OfflineInterviews: React.FC = () => {
 
     const { token } = useAuth();
 
-    const interviewsObject: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+    /* const interviewsObject: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}'); */
     const interviews: string = localStorage.getItem('@Safety:offline-interviews') || '';
 
     async function OnClick() {
