@@ -1,11 +1,7 @@
 import React from 'react';
-<<<<<<< HEAD
-
-=======
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
->>>>>>> release/offlineSend
 
 import {
     OfflineButton,
