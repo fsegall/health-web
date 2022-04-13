@@ -1,8 +1,7 @@
 import React from 'react';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
-
-/* import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO'; */
+import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 
 import {
     OfflineButton,
@@ -14,11 +13,11 @@ const OfflineInterviews: React.FC = () => {
 
     const { token } = useAuth();
 
-    /* const interviewsObject: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}'); */
-    const interviews: string = localStorage.getItem('@Safety:offline-interviews') || '';
+    const interviewsObject: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+    /* const interviews: string = localStorage.getItem('@Safety:offline-interviews') || ''; */
 
     async function OnClick() {
-        await api.post('/offline', {interviews}, {
+        await api.post('/offline', {interviews: interviewsObject}, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -26,9 +25,9 @@ const OfflineInterviews: React.FC = () => {
     }
 
     return (<Container>
-                <h1>Interviews</h1>
+                <h1>Interviews 2</h1>
                 <OfflineButton onClick={OnClick}>Send</OfflineButton>
-                <div>{interviews}</div>
+                <div>{JSON.stringify(interviewsObject)}</div>
             </Container>
             );
 
