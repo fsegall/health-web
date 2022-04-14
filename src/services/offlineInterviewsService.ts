@@ -15,7 +15,7 @@ async function SubmitOfflineInterviews(): Promise<void> {
 
   if (interviews && interviewer_id && token) {
 
-    localStorage.setItem(`@Safety:offlineBackup - ${format(parseJSON(Date.now()), 'dd/MM/yyyy HH:mm:ss')}`, btoa(JSON.stringify(interviews)));
+    localStorage.setItem(`@Safety:offlineBackup - ${format(parseJSON(Date.now()), 'dd/MM/yyyy HH:mm:ss')}`, JSON.stringify(interviews));
 
     for (let interview in interviews) {
       
