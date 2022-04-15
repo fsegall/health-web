@@ -10,6 +10,9 @@ export const Container = styled.div`
 export const Background = styled.div`
   background: url(${notebook}) no-repeat center;
   background-size: cover;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
@@ -33,6 +36,9 @@ export const AnimationContainer = styled.div`
   display: flex;
   flex-direction: column;
   animation: ${topToBottom} 1s;
+  @media (max-width: 768px) {
+    animation: none;
+  }
   align-items: center;
   width: 100%;
   img {
