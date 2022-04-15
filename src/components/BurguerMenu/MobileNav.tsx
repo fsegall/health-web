@@ -23,9 +23,9 @@ const MobileNav: React.FC<NavProps> = ({ open }) => {
         null}
       <StyledLink to="/interviewers">Pesquisadores</StyledLink>
       <StyledLink to="/profile">Perfil</StyledLink>
-      <a href="/" onClick={signOut}>
+      <StyledLink to="/" onClick={signOut}>
         Sair
-      </a>
+      </StyledLink>
     </SlideLinkContainer>
   );
 
