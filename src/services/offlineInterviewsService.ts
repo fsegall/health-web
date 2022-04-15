@@ -90,6 +90,7 @@ async function SubmitOfflineInterviews(): Promise<void> {
     }
     localStorage.removeItem('@Safety:offline-interviews');
     window.location.reload();
+    return Promise.resolve();
   }
 }
 
