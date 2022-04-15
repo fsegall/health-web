@@ -36,7 +36,8 @@ interface PaginatorPageState {
 }
 
 const Dashboard: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [isProcessingOffline, setIsProcessingOffline] = useState(false);
   const { signOut, user, token } = useAuth();
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
@@ -120,7 +121,9 @@ const Dashboard: React.FC = () => {
       })
 
       if (checkConnection.status === 200) {
-        submitOfflineInterviews()
+        setIsProcessingOffline(true);
+        await submitOfflineInterviews()
+        setIsProcessingOffline(false);
       }
     } catch (error) {
 
@@ -237,7 +240,7 @@ const Dashboard: React.FC = () => {
           <>
             <Counter>
               <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
-              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>Enviar</OfflineButton></div>
+              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>{isProcessingOffline? 'Aguarde' : 'Enviar'}</OfflineButton></div>
               <div>Erros: <strong>{offlineInterviewsErrorsCounter}</strong></div>
             </Counter>
           </>
