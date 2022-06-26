@@ -39,21 +39,7 @@ const Accept: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-
-        <HeaderContent>
-
-          <Link to="/dashboard">
-            <img src={logo} alt="Rede PenSSAN" />
-          </Link>
-
-          <button type="button" onClick={signOut} >
-            <FiPower />
-          </button>
-        </HeaderContent>
-      </Header>
-
-      < SubHeader >
+      <SubHeader >
         <ListTitle>TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN</ListTitle>
       </SubHeader>
       <Aceite>

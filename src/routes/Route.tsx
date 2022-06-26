@@ -22,10 +22,12 @@ const Route: React.FC<RouteProps> = ({
     <ReactDomRoute
       {...rest}
       render={({ location }) => {
-        return isPrivate === !!user ? (
+        return isPrivate === !!user ? isPrivate ? (
           <AdminTemplate>
             <Component />
           </AdminTemplate>
+        ) :  (
+          <Component />
         ) : (
           <Redirect
             to={{

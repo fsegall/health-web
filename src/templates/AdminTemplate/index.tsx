@@ -42,7 +42,7 @@ const AdminTemplate = ({
               padding: '20px',
               display: 'flex',
               justifyContent: 'center',
-              marginBottom: '10px',
+              marginBottom: '20px',
               boxShadow: '0px 4px 6px 0px rgba(0, 0, 0, 0.15)',
               gap: '20px'
             }}

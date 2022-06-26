@@ -190,40 +190,6 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <Container>
-        <Header>
-          <HeaderContent>
-            <img src={logo} alt="Safety" />
-            <Profile>
-              <img
-                src={user.avatar_url}
-                alt={user.name}
-              />
-              <div>
-                <span>Bem-vindo</span>
-                <Link to="/profile">
-                  <strong>{user.name}</strong>
-                </Link>
-              </div>
-            </Profile>
-
-            <BigScreenLinkContainer>
-
-                <StyledLink to="/accept">Entrevista</StyledLink>
-
-              {hasPermission(user.role, Actions.CREATE_PROJECT) ?
-                <StyledLink to="/project">Projeto</StyledLink>
-                : null}
-              <StyledLink to="/interviewers">Pesquisadores</StyledLink>
-            </BigScreenLinkContainer>
-
-            {/* <BurguerMenu /> */}
-
-            <button type="button" onClick={signOut}>
-              <FiPower />
-            </button>
-          </HeaderContent>
-        </Header>
-
         <SubHeader>
           {hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS) ? <ListTitle>Entrevistas</ListTitle> : <ListTitle>Minhas Entrevistas</ListTitle>}
 

@@ -15,11 +15,6 @@ const routesOptions = [
     action: Actions.VIEW_ALL_INTERVIEWS
   },
   {
-    path: '/profile',
-    name: 'Perfil',
-    action: null
-  },
-  {
     path: '/project',
     name: 'Novo Projeto',
     action: Actions.CREATE_PROJECT
@@ -38,5 +33,10 @@ const routesOptions = [
     path: '/offline',
     name: 'Registros Offline',
     action: Actions.VIEW_MY_INTERVIEWS
+  },
+  {
+    path: '/profile',
+    name: 'Perfil',
+    action: Actions.UPDATE_PROFILE
   },
 ]

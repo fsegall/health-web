@@ -111,14 +111,6 @@ const Interviewers: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <div>
-          <Link to="/dashboard">
-            <FiChevronLeft size={30} />
-          </Link>
-        </div>
-        <h1>Rede <span>|</span> Pesquisadores</h1>
-      </Header>
       <div>
         <ListTitle>Pessoas</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
