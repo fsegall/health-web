@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useAuth } from '../hooks/auth';
+import AdminTemplate from '../templates/AdminTemplate';
 
 interface RouteProps extends ReactDomRouteProps {
   isPrivate?: boolean;
@@ -22,7 +23,9 @@ const Route: React.FC<RouteProps> = ({
       {...rest}
       render={({ location }) => {
         return isPrivate === !!user ? (
-          <Component />
+          <AdminTemplate>
+            <Component />
+          </AdminTemplate>
         ) : (
           <Redirect
             to={{

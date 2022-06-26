@@ -207,16 +207,16 @@ const Dashboard: React.FC = () => {
             </Profile>
 
             <BigScreenLinkContainer>
-           
+
                 <StyledLink to="/accept">Entrevista</StyledLink>
- 
+
               {hasPermission(user.role, Actions.CREATE_PROJECT) ?
                 <StyledLink to="/project">Projeto</StyledLink>
                 : null}
               <StyledLink to="/interviewers">Pesquisadores</StyledLink>
             </BigScreenLinkContainer>
 
-            <BurguerMenu />
+            {/* <BurguerMenu /> */}
 
             <button type="button" onClick={signOut}>
               <FiPower />
