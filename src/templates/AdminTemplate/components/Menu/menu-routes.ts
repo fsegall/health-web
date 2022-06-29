@@ -12,7 +12,7 @@ const routesOptions = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    action: Actions.VIEW_ALL_INTERVIEWS
+    action: Actions.VIEW_MY_INTERVIEWS
   },
   {
     path: '/project',
