@@ -17,11 +17,13 @@ interface PaginatorPageState {
 interface PaginationProps {
   onPageChange: (e: PaginatorPageState) => void;
   totalCards: number;
+  first?: number;
+  rows?: number;
 }
 
-const Paginate: React.FC<{ children: React.ReactNode } & PaginationProps> = ({ onPageChange, totalCards }) => {
-  const [basicFirst, setBasicFirst] = useState(0);
-  const [basicRows, setBasicRows] = useState(10);
+const Paginate: React.FC<{ children: React.ReactNode } & PaginationProps> = ({ onPageChange, totalCards, first = 0, rows = 10 }) => {
+  const [basicFirst, setBasicFirst] = useState(first);
+  const [basicRows, setBasicRows] = useState(rows);
 
   const onBasicPageChange = (event: PaginatorPageState) => {
     onPageChange(event);
