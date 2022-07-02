@@ -74,30 +74,28 @@ const Interviewers: React.FC = () => {
     window.location.reload();
   }
 
-  async function fetchUsers() {
-    setIsLoading(true);
-    const users = await api.get('/users', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setUsers(users.data);
-    setIsLoading(false);
-  }
-
   useEffect(() => {
+    async function fetchUsers() {
+      setIsLoading(true);
+      const users = await api.get('/users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(users.data);
+      setIsLoading(false);
+    }
     fetchUsers();
   }, [token]);
 
-
-  function paginateInterviews() {
-    const firstCardOnPage = basicFirst;
-    const lastCardOnPage = basicFirst + basicRows;
-    const paginatedUsers = users.slice(firstCardOnPage, lastCardOnPage);
-    setPaginatedUsers(paginatedUsers);
-  }
-
   useEffect(() => {
+    function paginateInterviews() {
+      const firstCardOnPage = basicFirst;
+      const lastCardOnPage = basicFirst + basicRows;
+      const paginatedUsers = users.slice(firstCardOnPage, lastCardOnPage);
+      setPaginatedUsers(paginatedUsers);
+
+    }
     paginateInterviews()
   }, [basicFirst, basicRows, users]);
 
