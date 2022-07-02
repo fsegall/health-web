@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
     if (interviewsOnPage || interviewsOnPageFiltered) {
       paginateInterviews()
     }
-  }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows])
+  }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows, isFiltered])
 
   const onsubmitOfflineInterviews = async () => {
     const token = localStorage.getItem('@Safety:token') || "";
