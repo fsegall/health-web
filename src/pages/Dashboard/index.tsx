@@ -38,7 +38,7 @@ interface PaginatorPageState {
 const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isProcessingOffline, setIsProcessingOffline] = useState(false);
-  const { signOut, user, token } = useAuth();
+  const { /* signOut,  */user, token } = useAuth();
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
