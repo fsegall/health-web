@@ -87,7 +87,7 @@ const Interviewers: React.FC = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [token]);
+  }, [token, fetchUsers]);
 
 
   function paginateInterviews() {
@@ -99,7 +99,7 @@ const Interviewers: React.FC = () => {
 
   useEffect(() => {
     paginateInterviews()
-  }, [basicFirst, basicRows, users]);
+  }, [basicFirst, basicRows, users, paginateInterviews]);
 
   const onPageChange = (e: PaginatorPageState) => {
     setPaginatorState(e)
