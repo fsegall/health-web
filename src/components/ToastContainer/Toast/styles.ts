@@ -23,12 +23,13 @@ const toastTypeVariations = {
 
 export const Container = styled(animated.div) <ToastProps>`
   width: 360px;
-  position: relative;
+  position: fixed;
   margin-top: ${(props) => `${props.scrollposition}px`};
   padding: 16px 30px 16px 16px;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
+  margin-top: 50px;
 
   & + div {
     margin-top: 8px;
