@@ -139,7 +139,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
       } else {
         addToast({
           type: 'error',
-          title: error.data.message,
+          title: error?.data?.message,
           description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
         });
       }
