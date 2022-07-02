@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+/* import { Link } from 'react-router-dom'; */
 import ICreateInterviewDTO from '../Interview/dtos/ICreateInterviewDTO';
-import { FiPower } from 'react-icons/fi';
+/* import { FiPower } from 'react-icons/fi'; */
 import { useAuth } from '../../hooks/auth';
 import Paginate from '../../components/Paginate';
 import hasPermission, { Actions } from '../../authorization/constants';
 import {
   Container,
   Counter,
-  Header,
+/*   Header,
   HeaderContent,
-  Profile,
+  Profile, */
   ListTitle,
   SubHeader,
-  BigScreenLinkContainer,
-  StyledLink,
+/*   BigScreenLinkContainer,
+  StyledLink, */
   BadgeContainer,
   FilterContainer,
   OfflineButton,
 } from './styles';
-import BurguerMenu from '../../components/BurguerMenu';
+/* import BurguerMenu from '../../components/BurguerMenu'; */
 import InterviewBage from '../../components/interviewBadge';
-import logo from '../../assets/logo_transparent.png';
+/* import logo from '../../assets/logo_transparent.png'; */
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';

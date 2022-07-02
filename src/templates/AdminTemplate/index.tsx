@@ -15,10 +15,10 @@ const AdminTemplate = ({
   const maxWidth700px = window.matchMedia('(max-width: 700px)')
 
   const [showOnMobile, setShowOnMobile] = React.useState<boolean>(false)
-
+  const currentLocation = location?.pathname
   useEffect(() => {
     setShowOnMobile(false)
-  }, [location?.pathname])
+  }, [currentLocation])
 
   return (
     <>

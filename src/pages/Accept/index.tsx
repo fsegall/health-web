@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { FiPower } from 'react-icons/fi';
+/* import { Link } from 'react-router-dom';
+import { FiPower } from 'react-icons/fi'; */
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import {
   Container,
-  Header,
-  HeaderContent,
+/*   Header,
+  HeaderContent, */
   Aceite,
   FormContainer,
   CheckboxContainer,
@@ -16,10 +16,10 @@ import {
   SubHeader,
 } from './styles';
 
-import logo from '../../assets/logo.png';
+/* import logo from '../../assets/logo.png'; */
 
 const Accept: React.FC = () => {
-  const { signOut } = useAuth();
+/*   const { signOut } = useAuth(); */
   const { addToast } = useToast();
   const [accept, setAccept] = useState(false);
   const history = useHistory();

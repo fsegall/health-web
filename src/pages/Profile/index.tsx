@@ -2,7 +2,7 @@ import React, { useRef, ChangeEvent, useCallback } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { Grid, Header, Divider, AvatarInput } from './styles';
+import { Grid, /* Header, */ Divider, AvatarInput } from './styles';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import { useHistory } from 'react-router-dom';
