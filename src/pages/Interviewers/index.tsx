@@ -74,34 +74,32 @@ const Interviewers: React.FC = () => {
     window.location.reload();
   }
 
-  useEffect(() => {
-
+  async function fetchUsers() {
     setIsLoading(true);
+    const users = await api.get('/users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setUsers(users.data);
+    setIsLoading(false);
+  }
 
-    async function fetchUsers() {
-
-      const users = await api.get('/users', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsLoading(false);
-      setUsers(users.data);
-    }
+  useEffect(() => {
     fetchUsers();
   }, [token]);
 
+
+  function paginateInterviews() {
+    const firstCardOnPage = basicFirst;
+    const lastCardOnPage = basicFirst + basicRows;
+    const paginatedUsers = users.slice(firstCardOnPage, lastCardOnPage);
+    setPaginatedUsers(paginatedUsers);
+  }
+
   useEffect(() => {
-
-    function paginateInterviews() {
-      const firstCardOnPage = basicFirst;
-      const lastCardOnPage = basicFirst + basicRows;
-      const paginatedUsers = users.slice(firstCardOnPage, lastCardOnPage);
-      setPaginatedUsers(paginatedUsers);
-
-    }
     paginateInterviews()
-  }, [basicFirst, basicRows, paginatedUsers, users]);
+  }, [basicFirst, basicRows, users]);
 
   const onPageChange = (e: PaginatorPageState) => {
     setPaginatorState(e)
@@ -114,9 +112,9 @@ const Interviewers: React.FC = () => {
       <div>
         <ListTitle>Pessoas</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
-          {paginatedUsers.map((interviewer) => {
+          {!isLoading && paginatedUsers?.map((interviewer) => {
             return (
-              <UserContainer>
+              <UserContainer key={interviewer.id}>
                 <FormContainer>
                   <Card key={interviewer.id} person={interviewer} />
                   {hasPermission(user.role, Actions.ASSIGN_INTERVIEWER_ROLE) && interviewer.role === Roles.VISITOR && <form onSubmit={(e: React.SyntheticEvent) => {
@@ -144,6 +142,8 @@ const Interviewers: React.FC = () => {
       <Paginate
         totalCards={users.length}
         onPageChange={onPageChange}
+        first={basicFirst}
+        rows={basicRows}
       >
         { }
       </Paginate>

@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from 'react';
-/* import { Link } from 'react-router-dom'; */
 import ICreateInterviewDTO from '../Interview/dtos/ICreateInterviewDTO';
-/* import { FiPower } from 'react-icons/fi'; */
 import { useAuth } from '../../hooks/auth';
 import Paginate from '../../components/Paginate';
 import hasPermission, { Actions } from '../../authorization/constants';
 import {
   Container,
   Counter,
-/*   Header,
-  HeaderContent,
-  Profile, */
   ListTitle,
   SubHeader,
-/*   BigScreenLinkContainer,
-  StyledLink, */
   BadgeContainer,
   FilterContainer,
   OfflineButton,
 } from './styles';
-/* import BurguerMenu from '../../components/BurguerMenu'; */
 import InterviewBage from '../../components/interviewBadge';
-/* import logo from '../../assets/logo_transparent.png'; */
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
@@ -38,7 +29,7 @@ interface PaginatorPageState {
 const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isProcessingOffline, setIsProcessingOffline] = useState(false);
-  const { /* signOut,  */user, token } = useAuth();
+  const { user, token } = useAuth();
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
@@ -62,53 +53,68 @@ const Dashboard: React.FC = () => {
 
   const { addToast } = useToast()
 
+
+  async function fetchAllInterviews() {
+    const interviews = await api.get('/interviews', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setIsLoading(false);
+    setInterviews(interviews.data);
+  }
+  async function fetchMyInterviews() {
+    const interviews = await api.get(`/interviews/${user.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setIsLoading(false);
+    setInterviews(interviews.data);
+    setInterviewsOnPage(interviews.data);
+  }
+
   useEffect(() => {
     setIsLoading(true);
-    async function fetchAllInterviews() {
-      const interviews = await api.get('/interviews', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsLoading(false);
-      setInterviews(interviews.data);
-    }
-    async function fetchMyInterviews() {
-      const interviews = await api.get(`/interviews/${user.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsLoading(false);
-      setInterviews(interviews.data);
-      setInterviewsOnPage(interviews.data);
-    }
     if (hasPermission(user.role, Actions.VIEW_ALL_INTERVIEWS)) {
       fetchAllInterviews()
     } else {
       fetchMyInterviews()
     }
-
   }, [token, user.id, user.role]);
 
-  useEffect(() => {
-    setInterviewsOnPage([...interviews]);
-    setInterviewsOnPageFiltered([...filteredBy]);
-    function paginateInterviews() {
-      if (!isFiltered) {
-        const firstCardOnPage = basicFirst;
-        const lastCardOnPage = basicFirst + basicRows;
-        const paginatedCards: ICreateInterviewDTO[] = interviewsOnPage.slice(firstCardOnPage, lastCardOnPage);
-        setPaginatedInterviews(paginatedCards);
-      } else {
-        const firstCardOnPage = basicFirst;
-        const lastCardOnPage = basicFirst + basicRows;
-        const paginatedCards: ICreateInterviewDTO[] = interviewsOnPageFiltered.slice(firstCardOnPage, lastCardOnPage);
-        setPaginatedFilteredInterviews(paginatedCards);
-      }
+  function paginateInterviews() {
+    if (!isFiltered) {
+      const firstCardOnPage = basicFirst;
+      const lastCardOnPage = basicFirst + basicRows;
+      const paginatedCards: ICreateInterviewDTO[] = interviewsOnPage.slice(firstCardOnPage, lastCardOnPage);
+      setPaginatedInterviews(paginatedCards);
+    } else {
+      const firstCardOnPage = basicFirst;
+      const lastCardOnPage = basicFirst + basicRows;
+      const paginatedCards: ICreateInterviewDTO[] = interviewsOnPageFiltered.slice(firstCardOnPage, lastCardOnPage);
+      setPaginatedFilteredInterviews(paginatedCards);
     }
-    paginateInterviews()
-  }, [interviews, interviewsOnPage, interviewsOnPageFiltered, filteredBy, basicFirst, basicRows, isFiltered]);
+  }
+
+  useEffect(() => {
+    if (interviews) {
+      setInterviewsOnPage([...interviews]);
+    }
+  }, [interviews])
+
+
+  useEffect(() => {
+    if (filteredBy) {
+      setInterviewsOnPageFiltered([...filteredBy]);
+    }
+  }, [filteredBy])
+
+  useEffect(() => {
+    if (interviewsOnPage || interviewsOnPageFiltered) {
+      paginateInterviews()
+    }
+  }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows])
 
   const onsubmitOfflineInterviews = async () => {
     const token = localStorage.getItem('@Safety:token') || "";
@@ -242,6 +248,8 @@ const Dashboard: React.FC = () => {
       </Container>
       <Paginate
         totalCards={isFiltered ? filteredBy.length : interviews.length}
+        first={basicFirst}
+        rows={basicRows}
         onPageChange={onPageChange}
       >
         { }
