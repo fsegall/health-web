@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
     } else {
       fetchMyInterviews()
     }
-  }, [token, user.id, user.role, fetchAllInterviews, fetchMyInterviews]);
+  }, [token, user.id, user.role]);
 
   function paginateInterviews() {
     if (!isFiltered) {
@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
     if (interviewsOnPage || interviewsOnPageFiltered) {
       paginateInterviews()
     }
-  }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows, paginateInterviews])
+  }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows])
 
   const onsubmitOfflineInterviews = async () => {
     const token = localStorage.getItem('@Safety:token') || "";
