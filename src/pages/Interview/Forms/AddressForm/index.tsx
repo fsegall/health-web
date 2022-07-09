@@ -121,7 +121,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
       <section>
         <Input name="post_code" placeholder="Código Postal" icon={FiMail} />
         <Label>Estado da Federação</Label>
-        <Select name="state" options={brazilStatesOptions} id="state" />
+        <Select name="state" options={brazilStatesOptions} />
       </section>
       <section>
         <Input name="city" placeholder="Cidade" icon={FiMap} />

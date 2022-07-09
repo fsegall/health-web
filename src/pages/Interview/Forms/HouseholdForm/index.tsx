@@ -196,7 +196,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         < Select
           name="povos_tradicionais"
           options={yesOrNoOptions}
-          onChange={selectedOption => setTraditional(selectedOption)}
+          onChange={(selectedOption: any) => setTraditional(selectedOption)}
         />
         <Label>D4 - Qual comunidade tradicional ou povos?</Label>
         < Select
@@ -208,7 +208,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         < Select
           name="pessoa_de_referencia"
           options={yesOrNoOptions}
-          onChange={selectedOption => setMainPerson(selectedOption)}
+          onChange={(selectedOption: any) => setMainPerson(selectedOption)}
         />
 
         <Label>D6 - Qual a idade da pessoa de referência?</Label>
@@ -367,7 +367,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
                 type="number"
               />
               <Label>
-                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente? 
+                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente?
               </Label>
               <Select
                 name="pessoas_convidadas"
@@ -473,7 +473,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="educacao_basica_publica"
           options={yesOrNoOptions}
-          onChange={selectedOption => setEduc(selectedOption)}
+          onChange={(selectedOption: any) => setEduc(selectedOption)}
         />
 
         <Label>
@@ -548,7 +548,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="auxilio_emergencial"
           options={yesOrNoOptions}
-          onChange={selectedOption => {
+          onChange={(selectedOption: any) => {
             setAuxilio(selectedOption)
           }}
         />
@@ -568,7 +568,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="ajuda_instituicao_caridade"
           options={ajuda_instituicao_caridade}
-          onChange={selectedOption => setAjuda(selectedOption)}
+          onChange={(selectedOption: any) => setAjuda(selectedOption)}
         />
 
         <Label>
@@ -597,7 +597,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="produz_alimento"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setHomegrown(selectedOptions)}
+          onChange={(selectedOptions: any) => setHomegrown(selectedOptions)}
         />
 
         <Label>D49 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
@@ -621,7 +621,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimento_para_venda"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setProduce(selectedOptions)}
+          onChange={(selectedOptions: any) => setProduce(selectedOptions)}
           isDisabled={homegrown?.value === 'true' ? false : true}
         />
 
@@ -665,7 +665,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="preocupacao_alimentos"
           options={yesOrNoOptions}
-          onChange={selectedOption => setPreoAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setPreoAlimentos(selectedOption)}
         />
         <Label>
           D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
@@ -673,7 +673,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimentos_acabaram"
           options={yesOrNoOptions}
-          onChange={selectedOption => setAcabAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setAcabAlimentos(selectedOption)}
         />
         <Label>
           D57 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO <b>FICARAM SEM DINHEIRO PARA TER UMA ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
@@ -681,7 +681,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimentos_saudaveis"
           options={yesOrNoOptions}
-          onChange={selectedOption => setSaudAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setSaudAlimentos(selectedOption)}
         />
         <Label>
           D58 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO <b>COMERAM APENAS ALGUNS POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
@@ -737,7 +737,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alteracao_preco_comida"
           options={alteracao_preco_comida}
-          onChange={selectedOption => setBuyingProfile(selectedOption)}
+          onChange={(selectedOption: any) => setBuyingProfile(selectedOption)}
         />
 
         <Label>

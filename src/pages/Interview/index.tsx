@@ -3,25 +3,22 @@ import {
   Container,
   Header,
   SectionTitle,
-  ResponsiveMenu,
   SubmittedContainer,
   ButtonsContainer,
   OfflineLabel,
   ResetButton
 } from './styles';
-import {
-  FiMenu,
-} from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Switch from "react-switch";
 import logo from '../../assets/logo_transparent.png';
-import ScrollSpy from '../../components/ScrollSpy';
 import InterviewForm from './Forms/InterviewForm';
 import PersonForm from './Forms/PersonForm';
 /* import FamilyMemberForm from './Forms/FamilyMemberForm'; */
 import HouseholdForm from './Forms/HouseholdForm';
 import AddressForm from './Forms/AddressForm';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
+import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 interface StateFormat {
   formsSubmitted: {
@@ -91,6 +88,32 @@ function reducer(state: StateFormat, action: FormActionFormat) {
 }
 
 const Interview: React.FC = () => {
+  //@ts-ignore
+  const { id } = useParams();
+  const { token } = useAuth();
+  const [initialValues, setInitialValues] = useState<any>({})
+
+  async function handleInitialData(id: string) {
+    try {
+      const response = await api.get(`/interviews/get-one/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+        }
+      })
+      if (response?.data) {
+        setInitialValues(response?.data)
+      }
+    } catch(err) {
+      console.log('error ', err)
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      handleInitialData(id)
+    }
+  }, [id])
 
   const [formState, dispatch] = useReducer(reducer, initialState);
 
@@ -163,17 +186,17 @@ const Interview: React.FC = () => {
         </ButtonsContainer>
       </Header>
 
-      <ResponsiveMenu>
+      {/* <ResponsiveMenu>
         <FiMenu size={30} onClick={() => setMenuOpen(!menuOpen)} />
         <div>
           <ScrollSpy open={menuOpen} />
         </div>
-      </ResponsiveMenu>
+      </ResponsiveMenu> */}
 
       <SectionTitle id="person">Dados Pessoais</SectionTitle>
       {formState.formsSubmitted.person.show ? (
 
-        <PersonForm dispatch={dispatch} offline={isOffline} />) : null}
+      <PersonForm dispatch={dispatch} isEditForm offline={isOffline} initialValues={initialValues ? initialValues?.person : {}} />) : null}
       {formState.formsSubmitted.person.id !== null ? <SubmittedContainer>Uma pessoa já foi adicionada</SubmittedContainer> : null}
 
       <SectionTitle id="household">Domicílio</SectionTitle>
