@@ -19,6 +19,13 @@ export const SubmittedContainer = styled.div`
   margin-left: 20px;
 `;
 
+export const EditInterviewCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+`;
+
 export const Header = styled.h1`
   padding: 10px 0;
   color: #59748c;

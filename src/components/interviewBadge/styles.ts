@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
+  cursor: pointer;
   color: #59748c;
   gap: 0.3rem;
   padding: 1rem;

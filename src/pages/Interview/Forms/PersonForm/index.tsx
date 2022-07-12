@@ -49,8 +49,6 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
   const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
 
-  const valores = initialValues
-
   const { user, token } = useAuth();
 
   const { addToast } = useToast();
@@ -138,7 +136,6 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
     })
   }
 
-
   return (
     <StyledForm
       ref={PersonFormRef}
@@ -200,7 +197,8 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           options={nao_tomou_vacina}
           isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
         />
-        <Button type="submit" > Submit </Button>
+        {!isEditForm && <Button type="submit">Submit</Button>}
+
       </section>
     </StyledForm>
   );

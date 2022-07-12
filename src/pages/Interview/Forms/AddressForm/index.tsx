@@ -31,9 +31,11 @@ import api from '../../../../services/api';
 interface AddressFormProps {
   dispatch: Function;
   offline: boolean;
+  isEditForm?: boolean;
+  initialValues?: any;
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
+const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
 
   const { addToast } = useToast();
 
@@ -83,8 +85,6 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
 
         const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-        console.log('interviews', offlineInterviews);
-
         const addAddress = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], address } } : false;
 
         if (addAddress) {
@@ -116,6 +116,18 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
     }
   }, [addToast, token, dispatch, offline]);
 
+  if (isEditForm) {
+    AddressFormRef.current?.setData({
+      post_code: initialValues?.post_code,
+      state: initialValues?.state,
+      city: initialValues?.city,
+      neighborhood: initialValues?.neighborhood,
+      street_or_location: initialValues?.street_or_location,
+      house_number: initialValues?.house_number,
+      telephone_number: initialValues?.telephone_number,
+    })
+  }
+
   return (
     <StyledForm ref={AddressFormRef} onSubmit={handleAddressSubmit}>
       <section>
@@ -144,7 +156,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline }) => {
           placeholder="Número de telefone"
           name="telephone_number"
         />
-        <Button>Submit</Button>
+        {!isEditForm && <Button>Submit</Button>}
       </section>
     </StyledForm>
 

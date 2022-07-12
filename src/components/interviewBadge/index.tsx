@@ -3,6 +3,7 @@ import { parseJSON, format } from 'date-fns';
 import {
   Container
 } from './styles';
+import { useHistory } from 'react-router-dom';
 
 interface InterviewProps {
   interview: {
@@ -25,9 +26,10 @@ const Card: React.FC<InterviewProps> = ({ interview: { project_name,
   id,
   comments,
   created_at } }) => {
+    const history = useHistory()
 
   return (
-    <Container>
+    <Container onClick={() => history.push(`/interview/${id}`)}>
       <div><strong>Nome do projeto:</strong> {project_name}</div>
       <div><strong>Id da entrevista:</strong> {id?.split('').splice(1, 6).join('')}</div>
       <div><strong>Comentários:</strong> {comments}</div>
