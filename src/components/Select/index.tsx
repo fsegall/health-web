@@ -16,7 +16,7 @@ const Select: React.FC<Props> = ({ name, options, ...rest }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
   const [isFilled, setIsFilled] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({

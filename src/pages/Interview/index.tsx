@@ -93,23 +93,22 @@ const Interview: React.FC = () => {
   const { token } = useAuth();
   const [initialValues, setInitialValues] = useState<any>({})
 
-  async function handleInitialData(id: string) {
-    try {
-      const response = await api.get(`/interviews/get-one/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-        }
-      })
-      if (response?.data) {
-        setInitialValues(response?.data)
-      }
-    } catch(err) {
-      console.log('error ', err)
-    }
-  }
-
   useEffect(() => {
+    async function handleInitialData(id: string) {
+      try {
+        const response = await api.get(`/interviews/get-one/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+          }
+        })
+        if (response?.data) {
+          setInitialValues(response?.data)
+        }
+      } catch(err) {
+        console.log('error ', err)
+      }
+    }
     if (id) {
       handleInitialData(id)
     }
@@ -167,7 +166,7 @@ const Interview: React.FC = () => {
         }
       }
     }
-  }, [dispatch])
+  }, [dispatch, id])
 
   return (
     <Container offline={isOffline}>
