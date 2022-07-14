@@ -112,7 +112,7 @@ const Interview: React.FC = () => {
     if (id) {
       handleInitialData(id)
     }
-  }, [id])
+  }, [id, token])
 
   const [formState, dispatch] = useReducer(reducer, initialState);
 
