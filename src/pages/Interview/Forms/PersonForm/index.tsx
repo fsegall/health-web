@@ -41,9 +41,11 @@ import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 interface PersonFormProps {
   dispatch: Function;
   offline: boolean;
+  initialValues?: any
+  isEditForm?: boolean
 }
 
-const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
+const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
 
@@ -116,8 +118,29 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
     }
   }, [addToast, user, token, dispatch, offline]);
 
+
+  if (isEditForm) {
+    PersonFormRef.current?.setData({
+      nome: initialValues?.nome,
+      idade: initialValues?.idade,
+      sexo: initialValues?.sexo,
+      raca_cor: initialValues?.raca_cor,
+      ler_escrever: initialValues?.ler_escrever,
+      escolaridade: initialValues?.escolaridade,
+      situacao_de_trabalho: initialValues?.situacao_de_trabalho,
+      ocupacao: initialValues?.ocupacao,
+      local_de_trabalho: initialValues?.local_de_trabalho,
+      diagnostico_covid: initialValues?.diagnostico_covid,
+      vacina: initialValues?.vacina,
+      nao_tomou_vacina: initialValues?.nao_tomou_vacina,
+    })
+  }
+
   return (
-    <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
+    <StyledForm
+      ref={PersonFormRef}
+      onSubmit={handlePersonSubmit}
+    >
       <section>
         <Label>P1 - Qual o seu nome completo?</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="nome" />
@@ -125,45 +148,45 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
         <Input name="idade" type="number" min="16" max="110" />
 
         <Label>P3 - Qual o seu sexo?</Label>
-        < Select name="sexo" options={genero} />
+        <Select name="sexo" options={genero} />
       </section>
 
-      < section >
+      <section >
         <Label>P4 - Como você define sua raça ou cor?</Label>
-        < Select name="raca_cor" options={raca_cor} />
+        <Select name="raca_cor" options={raca_cor} />
         <Label>P5 - Você sabe ler e escrever?</Label>
-        < Select name="ler_escrever" options={yesOrNoOptions} />
+        <Select name="ler_escrever" options={yesOrNoOptions} />
       </section>
 
-      < section >
+      <section >
         <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
-        < Select name="escolaridade" options={escolaridade} />
+        <Select name="escolaridade" options={escolaridade} />
         <Label>P7 - Qual a situação de trabalho?</Label>
-        < Select
+        <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
         />
 
         <Label>P8 - Qual a sua ocupação profissional?</Label>
-        < Select
+        <Select
           name="ocupacao"
           options={ocupacao_profissional}
         />
 
         <Label>P9 - Neste momento qual é o seu local de trabalho?</Label>
-        < Select
+        <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
         />
         <Label>P10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
-        < Select name="diagnostico_covid" options={diagnostico_covid} />
+        <Select name="diagnostico_covid" options={diagnostico_covid} />
         <Label>
           P11 - Você já tomou a vacina da Covid-19?
         </Label>
         <Select
           name="vacina"
           options={vacina}
-          onChange={selectedOption => setVaccine(selectedOption)}
+          onChange={(selectedOption: any) => setVaccine(selectedOption)}
         />
 
         <Label>
@@ -174,7 +197,8 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
           options={nao_tomou_vacina}
           isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
         />
-        <Button type="submit" > Submit </Button>
+        {!isEditForm && <Button type="submit">Submit</Button>}
+
       </section>
     </StyledForm>
   );

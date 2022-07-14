@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import {
   OptionTypeBase
 } from 'react-select';
@@ -60,9 +60,11 @@ import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 interface HouseholdFormProps {
   dispatch: Function;
   offline: boolean;
+  isEditForm?: boolean;
+  initialValues?: any;
 }
 
-const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
+const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
 
   const { token } = useAuth();
 
@@ -183,6 +185,111 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
     [addToast, token, dispatch, offline],
   );
 
+  if (isEditForm) {
+    HouseholdFormRef.current?.setData({
+      local_do_domicilio: initialValues?.local_do_domicilio,
+      morador_de_rua: initialValues?.morador_de_rua,
+      povos_tradicionais: initialValues?.povos_tradicionais,
+      qual_povo_tradicional: initialValues?.qual_povo_tradicional,
+      pessoa_de_referencia: initialValues?.pessoa_de_referencia,
+      idade_pessoa_de_referencia: initialValues?.idade_pessoa_de_referencia,
+      sexo_pessoa_de_referencia: initialValues?.sexo_pessoa_de_referencia,
+      raca_cor: initialValues?.raca_cor,
+      nao_sabe_renda: initialValues?.nao_sabe_renda ? 'nao_sabe_renda' : '',
+      ler_escrever: initialValues?.ler_escrever,
+      escolaridade: initialValues?.escolaridade,
+      situacao_de_trabalho: initialValues?.situacao_de_trabalho,
+      covid_perda: initialValues?.covid_perda,
+      tipo_de_residencia: initialValues?.tipo_de_residencia,
+      numero_de_comodos: initialValues?.numero_de_comodos,
+      material_de_construcao: initialValues?.material_de_construcao,
+      agua_potavel: initialValues?.agua_potavel,
+      esgoto: initialValues?.esgoto,
+      numero_de_pessoas: initialValues?.numero_de_pessoas,
+      uma_pessoa_domicilio: initialValues?.uma_pessoa_domicilio ? 'uma_pessoa_domicilio' : '',
+      cinco_anos_ou_mais: initialValues?.cinco_anos_ou_mais,
+      entre_6_e_18: initialValues?.entre_6_e_18,
+      entre_19_e_59: initialValues?.entre_19_e_59,
+      sessenta_anos_ou_mais: initialValues?.sessenta_anos_ou_mais,
+      pessoas_convidadas: initialValues?.pessoas_convidadas,
+      renda_familiar: initialValues?.renda_familiar,
+      faixa_de_renda: initialValues?.faixa_de_renda,
+      educacao_basica_publica: initialValues?.educacao_basica_publica,
+      pnae: initialValues?.pnae,
+      cadastro_unico: initialValues?.cadastro_unico,
+      bolsa_familia: initialValues?.bolsa_familia,
+      bpc: initialValues?.bpc,
+      pensao: initialValues?.pensao,
+      auxilio_reclusao: initialValues?.auxilio_reclusao,
+      cesta_de_alimentos: initialValues?.cesta_de_alimentos,
+      restaurantes_populares: initialValues?.restaurantes_populares,
+      auxilio_emergencial: initialValues?.auxilio_emergencial,
+      auxilio_vezes: initialValues?.auxilio_vezes,
+      ajuda_instituicao_caridade: initialValues?.ajuda_instituicao_caridade,
+      tipo_de_ajuda: initialValues?.tipo_de_ajuda,
+      vergonha: initialValues?.vergonha,
+      produz_alimento: initialValues?.produz_alimento,
+      agua_animais: initialValues?.agua_animais,
+      agua_producao_alimentos: initialValues?.agua_producao_alimentos,
+      alimento_para_venda: initialValues?.alimento_para_venda,
+      divisao_alimento: initialValues?.divisao_alimento,
+      dificuldade_venda: initialValues?.dificuldade_venda,
+      nao_vendeu: initialValues?.nao_vendeu,
+      preocupacao_alimentos: initialValues?.preocupacao_alimentos,
+      alimentos_acabaram: initialValues?.alimentos_acabaram,
+      alimentos_saudaveis: initialValues?.alimentos_saudaveis,
+      alimentos_poucos_tipos: initialValues?.alimentos_poucos_tipos,
+      refeicoes_adulto: initialValues?.refeicoes_adulto,
+
+
+      ocupacao_profissional: initialValues?.ocupacao_profissional,
+      local_de_trabalho: initialValues?.local_de_trabalho,
+      covid_2020: initialValues?.covid_2020,
+      covid_2021: initialValues?.covid_2021,
+      covid_2022: initialValues?.covid_2022,
+
+      adulto_comeu_menos: initialValues?.adulto_comeu_menos,
+      adulto_fome: initialValues?.adulto_fome,
+      adulto_uma_refeicao: initialValues?.adulto_uma_refeicao,
+      como_adquiriu_comida: initialValues?.como_adquiriu_comida,
+      alteracao_preco_comida: initialValues?.alteracao_preco_comida,
+      perfil_de_compra: initialValues?.perfil_de_compra,
+      mercado: initialValues?.mercado,
+      gastos_alimentacao: initialValues?.gastos_alimentacao,
+
+      perda_de_emprego: initialValues?.perda_de_emprego ? 'perda_de_emprego' : '',
+      reducao_de_salario: initialValues?.reducao_de_salario ? 'reducao_de_salario' : '',
+      ajuda_financeira: initialValues?.ajuda_financeira ? 'ajuda_financeira' : '',
+      divida: initialValues?.divida ? 'divida' : '',
+      corte_de_gastos: initialValues?.corte_de_gastos ? 'corte_de_gastos' : '',
+      corte_de_gastos_nao_essenciais: initialValues?.corte_de_gastos_nao_essenciais ? 'corte_de_gastos_nao_essenciais' : '',
+      ns_nr_trabalho: initialValues?.ns_nr_trabalho ? 'ns_nr_trabalho' : '',
+
+      feijao: initialValues?.feijao ? 'feijao' : '',
+      arroz: initialValues?.arroz ? 'arroz' : '',
+      carnes: initialValues?.carnes ? 'carnes' : '',
+      verduras_legumes: initialValues?.verduras_legumes ? 'verduras_legumes' : '',
+      frutas_frescas: initialValues?.frutas_frescas ? 'frutas_frescas' : '',
+      leite: initialValues?.leite ? 'leite' : '',
+      hamburguer_embutidos: initialValues?.hamburguer_embutidos ? 'hamburguer_embutidos' : '',
+      bebidas_adocadas: initialValues?.bebidas_adocadas ? 'bebidas_adocadas' : '',
+      macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados: initialValues?.macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados ? 'macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados' : '',
+      biscoito_recheado_doces_guloseimas: initialValues?.biscoito_recheado_doces_guloseimas ? 'biscoito_recheado_doces_guloseimas' : ''
+    })
+  }
+
+  useEffect(() => {
+    if (initialValues?.pessoa_de_referencia) {
+      if (initialValues?.pessoa_de_referencia === 'true') {
+        setMainPerson({ value: 'true', label: 'Sim' })
+      } else if (initialValues?.pessoa_de_referencia === 'false') {
+        setMainPerson({ value: 'false', label: 'Não' })
+      } else {
+        setMainPerson({ value: 'ns-nr', label: 'NS/NR' })
+      }
+    }
+  }, [initialValues])
+
   return (
     <StyledForm ref={HouseholdFormRef} onSubmit={handleHouseholdSubmit} >
       <Section>
@@ -191,28 +298,27 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
         <Label>D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
-        < Select name="morador_de_rua" options={morador_de_rua} />
+        <Select name="morador_de_rua" options={morador_de_rua} />
         <Label>D3 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
-        < Select
+        <Select
           name="povos_tradicionais"
           options={yesOrNoOptions}
-          onChange={selectedOption => setTraditional(selectedOption)}
+          onChange={(selectedOption: any) => setTraditional(selectedOption)}
         />
         <Label>D4 - Qual comunidade tradicional ou povos?</Label>
-        < Select
+        <Select
           name="qual_povo_tradicional"
           options={qual_povo_tradicional}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
         <Label>D5 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
-        < Select
+        <Select
           name="pessoa_de_referencia"
           options={yesOrNoOptions}
-          onChange={selectedOption => setMainPerson(selectedOption)}
+          onChange={(selectedOption: any) => setMainPerson(selectedOption)}
         />
 
         <Label>D6 - Qual a idade da pessoa de referência?</Label>
-
 
         {mainPerson?.value === 'false' ?
           (
@@ -223,67 +329,68 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
                 min="16"
                 max="110"
                 name="idade_pessoa_de_referencia"
+                disabled={mainPerson?.value === 'false' ? false : true}
               />
             </>
           ) : null}
 
         <Label>D7 - Qual o sexo da pessoa de referência?</Label>
-        < Select
+        <Select
           name="sexo_pessoa_de_referencia"
           options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
-        < Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        <Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
-        < Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        <Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
-        < Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
+        <Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
         <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
-        < Select
+        <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
-        < Select
+        <Select
           name="ocupacao_profissional"
           options={ocupacao_profissional}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
-        < Select
+        <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
         <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
-        < Select
+        <Select
           name="covid_2020"
           options={yesOrNoOptions}
         />
 
         <Label>D15 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
-        < Select
+        <Select
           name="covid_2021"
           options={yesOrNoOptions}
         />
 
         <Label>D16 - No ano de 2022 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
-        < Select
+        <Select
           name="covid_2022"
           options={yesOrNoOptions}
         />
 
         <Label>D17 - Desde o início da pandemia, vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
-        < Select
+        <Select
           name="covid_perda"
           options={covid_perda}
         />
@@ -319,7 +426,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           <CheckboxInput
             name="uma_pessoa_domicilio"
             options={[{
-              id: 'one_person_household',
+              id: 'uma_pessoa_domicilio',
               value: 'true',
               label: 'D24 - Eu moro sozinho',
             }]}
@@ -367,7 +474,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
                 type="number"
               />
               <Label>
-                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente? 
+                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente?
               </Label>
               <Select
                 name="pessoas_convidadas"
@@ -387,7 +494,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="nao_sabe_renda"
             options={[{
-              id: 'income_unknown',
+              id: 'nao_sabe_renda',
               value: 'true',
               label: 'D30 - Não sei informar',
             }]}
@@ -426,13 +533,13 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           <CheckboxInput
 
             name="perda_de_emprego"
-            options={[{ id: 'Perda de emprego', value: 'true', label: 'Houve perda de emprego/trabalho de algum membro da casa' }]}
+            options={[{ id: 'perda_de_emprego', value: 'true', label: 'Houve perda de emprego/trabalho de algum membro da casa' }]}
           />
 
           <CheckboxInput
 
             name="reducao_de_salario"
-            options={[{ id: 'reducao_de_renda', value: 'true', label: 'Houve redução da renda domiciliar (dos moradores da casa)' }]}
+            options={[{ id: 'reducao_de_salario', value: 'true', label: 'Houve redução da renda domiciliar (dos moradores da casa)' }]}
           />
 
           <CheckboxInput
@@ -444,7 +551,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           <CheckboxInput
 
             name="divida"
-            options={[{ id: 'dividas', value: 'true', label: 'Houve endividamento de moradores' }]}
+            options={[{ id: 'divida', value: 'true', label: 'Houve endividamento de moradores' }]}
           />
 
           <CheckboxInput
@@ -473,7 +580,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="educacao_basica_publica"
           options={yesOrNoOptions}
-          onChange={selectedOption => setEduc(selectedOption)}
+          onChange={(selectedOption: any) => setEduc(selectedOption)}
         />
 
         <Label>
@@ -548,7 +655,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="auxilio_emergencial"
           options={yesOrNoOptions}
-          onChange={selectedOption => {
+          onChange={(selectedOption: any) => {
             setAuxilio(selectedOption)
           }}
         />
@@ -568,7 +675,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="ajuda_instituicao_caridade"
           options={ajuda_instituicao_caridade}
-          onChange={selectedOption => setAjuda(selectedOption)}
+          onChange={(selectedOption: any) => setAjuda(selectedOption)}
         />
 
         <Label>
@@ -597,7 +704,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="produz_alimento"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setHomegrown(selectedOptions)}
+          onChange={(selectedOptions: any) => setHomegrown(selectedOptions)}
         />
 
         <Label>D49 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
@@ -621,7 +728,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimento_para_venda"
           options={yesOrNoOptions}
-          onChange={selectedOptions => setProduce(selectedOptions)}
+          onChange={(selectedOptions: any) => setProduce(selectedOptions)}
           isDisabled={homegrown?.value === 'true' ? false : true}
         />
 
@@ -665,7 +772,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="preocupacao_alimentos"
           options={yesOrNoOptions}
-          onChange={selectedOption => setPreoAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setPreoAlimentos(selectedOption)}
         />
         <Label>
           D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
@@ -673,7 +780,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimentos_acabaram"
           options={yesOrNoOptions}
-          onChange={selectedOption => setAcabAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setAcabAlimentos(selectedOption)}
         />
         <Label>
           D57 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO <b>FICARAM SEM DINHEIRO PARA TER UMA ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
@@ -681,7 +788,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alimentos_saudaveis"
           options={yesOrNoOptions}
-          onChange={selectedOption => setSaudAlimentos(selectedOption)}
+          onChange={(selectedOption: any) => setSaudAlimentos(selectedOption)}
         />
         <Label>
           D58 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO <b>COMERAM APENAS ALGUNS POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
@@ -737,7 +844,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         <Select
           name="alteracao_preco_comida"
           options={alteracao_preco_comida}
-          onChange={selectedOption => setBuyingProfile(selectedOption)}
+          onChange={(selectedOption: any) => setBuyingProfile(selectedOption)}
         />
 
         <Label>
@@ -774,7 +881,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
             name="feijao"
 
             options={[{
-              id: 'Feijão',
+              id: 'feijao',
               value: 'true',
               label: 'Feijão',
             }]}
@@ -785,7 +892,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="arroz"
             options={[{
-              id: 'Arroz',
+              id: 'arroz',
               value: 'true',
               label: 'Arroz',
             }]}
@@ -795,7 +902,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="carnes"
             options={[{
-              id: 'Carnes (de boi, peixe, frango ou porco)',
+              id: 'carnes',
               value: 'true',
               label: 'Carnes (de boi, peixe, frango ou porco)',
             }]}
@@ -805,7 +912,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="verduras_legumes"
             options={[{
-              id: 'Verduras e/ou legumes',
+              id: 'verduras_legumes',
               value: 'true',
               label: 'Verduras e/ou legumes (não considerar batata, mandioca, aipim, macaxeira, cará e inhame)',
             }]}
@@ -815,7 +922,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="frutas_frescas"
             options={[{
-              id: 'Frutas frescas',
+              id: 'frutas_frescas',
               value: 'true',
               label: 'Frutas frescas (não considerar suco de frutas)',
             }]}
@@ -825,7 +932,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="leite"
             options={[{
-              id: 'Leite',
+              id: 'leite',
               value: 'true',
               label: 'Leite e derivados',
             }]}
@@ -835,7 +942,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="hamburguer_embutidos"
             options={[{
-              id: 'Hambúrguer e/ou embutidos',
+              id: 'hamburguer_embutidos',
               value: 'true',
               label: 'Hambúrguer e/ou embutidos (presunto, mortadela, salame, linguiça, salsicha)',
             }]}
@@ -845,7 +952,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="bebidas_adocadas"
             options={[{
-              id: 'Bebidas adoçadas',
+              id: 'bebidas_adocadas',
               value: 'true',
               label: 'Bebidas adoçadas (refrigerante, suco de caixinha, suco em pó, água de coco de caixinha, xaropes de guaraná/groselha, suco de fruta com adição de açúcar)',
             }]}
@@ -855,7 +962,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados"
             options={[{
-              id: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
+              id: 'macarrao_instantaneo_salgadinhos_de_pacote_biscoitos_salgados',
               value: 'true',
               label: 'Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados',
             }]}
@@ -865,14 +972,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
             name="biscoito_recheado_doces_guloseimas"
             options={[{
-              id: 'Biscoito recheado, doces ou guloseimas',
+              id: 'biscoito_recheado_doces_guloseimas',
               value: 'true',
               label: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramelo, gelatina)',
             }]}
           />
 
         </CheckBoxContainer>
-        <Button>Submit</Button>
+        {!isEditForm && <Button>Submit</Button>}
       </Section>
 
     </StyledForm >
