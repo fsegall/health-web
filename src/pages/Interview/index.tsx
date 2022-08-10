@@ -171,16 +171,16 @@ const Interview: React.FC = () => {
       </ResponsiveMenu>
 
       <SectionTitle id="person">Dados Pessoais</SectionTitle>
-      {formState.formsSubmitted.person.show ? (
+      {formState.formsSubmitted.person.show && (
 
-        <PersonForm dispatch={dispatch} offline={isOffline} />) : null}
-      {formState.formsSubmitted.person.id !== null ? <SubmittedContainer>Uma pessoa já foi adicionada</SubmittedContainer> : null}
+      <PersonForm dispatch={dispatch} offline={isOffline} />)}
+      {formState.formsSubmitted.person.id !== null && <SubmittedContainer>Uma pessoa já foi adicionada</SubmittedContainer>}
 
       <SectionTitle id="household">Domicílio</SectionTitle>
-      {formState.formsSubmitted.household.show ? (
+      {formState.formsSubmitted.household.show && (
 
-        <HouseholdForm dispatch={dispatch} offline={isOffline} />) : null}
-      {formState.formsSubmitted.household.id !== null ? <SubmittedContainer>Uma residência já foi criada</SubmittedContainer> : null}
+      <HouseholdForm dispatch={dispatch} offline={isOffline} />)}
+      {formState.formsSubmitted.household.id !== null && <SubmittedContainer>Uma residência já foi criada</SubmittedContainer>}
 
       {/*       <SectionTitle id="family">
         Membros da Família
@@ -188,15 +188,15 @@ const Interview: React.FC = () => {
 
       <FamilyMemberForm /> */}
       <SectionTitle id="address">Endereço</SectionTitle>
-      {formState.formsSubmitted.address.show ? (
+      {formState.formsSubmitted.address.show && (
 
-        <AddressForm dispatch={dispatch} offline={isOffline} />) : null}
-      {formState.formsSubmitted.address.id !== null ? <SubmittedContainer>Um endereço já foi criado</SubmittedContainer> : null}
+        <AddressForm dispatch={dispatch} offline={isOffline} />)}
+      {formState.formsSubmitted.address.id !== null && <SubmittedContainer>Um endereço já foi criado</SubmittedContainer>}
 
       <SectionTitle id="interview">Entrevista</SectionTitle>
-      {formState.formsSubmitted.interview.show ? (
+      {formState.formsSubmitted.interview.show && (
 
-        <InterviewForm dispatch={dispatch} offline={isOffline} />) : null}
+      <InterviewForm dispatch={dispatch} offline={isOffline} />)}
 
     </Container>
   );

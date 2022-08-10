@@ -96,6 +96,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
@@ -104,6 +106,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
 
 
       try {
+        setLoading(true)
         HouseholdFormRef.current?.setErrors({});
 
         const validatedData = await HouseholdValidation.validate(parsedData, {
@@ -178,9 +181,11 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
         } else {
           console.log(error);
         }
+      } finally {
+        setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline],
+    [addToast, token, dispatch, offline, setLoading],
   );
 
   return (
@@ -367,7 +372,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
                 type="number"
               />
               <Label>
-                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente? 
+                D29 - Desde o início da pandemia do Coronavírus (ou Convid-19) em 2020 até o dia de hoje, vocês acolheram alguém na sua família como morador permanente?
               </Label>
               <Select
                 name="pessoas_convidadas"
@@ -872,7 +877,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline }) => {
           />
 
         </CheckBoxContainer>
-        <Button>Submit</Button>
+        <Button loading={loading}>Submit</Button>
       </Section>
 
     </StyledForm >

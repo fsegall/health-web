@@ -53,8 +53,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
 
   const PersonFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
+
     try {
+      setLoading(true)
       PersonFormRef.current?.setErrors({});
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
@@ -113,8 +117,10 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
           description: 'Todos os campos devem estar selecionados',
         });
       }
+    } finally {
+      setLoading(false)
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, user, token, dispatch, offline, setLoading]);
 
   return (
     <StyledForm ref={PersonFormRef} onSubmit={handlePersonSubmit} >
@@ -174,7 +180,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline }) => {
           options={nao_tomou_vacina}
           isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
         />
-        <Button type="submit" > Submit </Button>
+        <Button loading={loading} type="submit">Submit</Button>
       </section>
     </StyledForm>
   );
