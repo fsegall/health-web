@@ -21,6 +21,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
 
 import api from '../../services/api';
+import Select from '../../components/Select';
+import { projectTypeOptions } from '../../hooks/useGetProjectsTypes';
 
 
 const ProjectForm: React.FC = (props) => {
@@ -80,7 +82,6 @@ const ProjectForm: React.FC = (props) => {
     <Container>
       <Title>Adicione um projeto de pesquisa</Title>
       <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>
-
         <section>
           <Label>Nome do Projeto</Label>
           <Input name="name" placeholder="Nome do Projeto" />
@@ -92,10 +93,17 @@ const ProjectForm: React.FC = (props) => {
         <section>
           <Label>Nome das Organizações reponsáveis</Label>
           <Input name="organizations" placeholder="Nomes separados por vírgula" />
+        </section>
+        <section>
+          <Label>Tipo</Label>
+          <Select
+            name="type"
+            options={projectTypeOptions}
+          />
+        </section>
+        <section>
           <Button>Submit</Button>
         </section>
-
-
       </StyledForm>
     </Container>
   );
