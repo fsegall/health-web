@@ -1,5 +1,5 @@
 
-export type ProjectType = 'default' | 'indian'
+export type ProjectType = 'default' | 'indigenous'
 
 export interface ProjectTypeOptions {
     value: ProjectType;
@@ -15,12 +15,12 @@ interface ProjectConfirmationInfo {
 
 interface AcceptInfoType {
     'default': ProjectConfirmationInfo,
-    'indian': ProjectConfirmationInfo,
+    'indigenous': ProjectConfirmationInfo,
 }
 
 interface InterviewURL {
     'default': string,
-    'indian': string,
+    'indigenous': string,
 }
 
 export const projectTypeOptions: ProjectTypeOptions[] = [
@@ -29,7 +29,7 @@ export const projectTypeOptions: ProjectTypeOptions[] = [
       label: 'Padrão'
     },
     {
-      value: 'indian',
+      value: 'indigenous',
       label: 'Ingígena'
     },
 ]
@@ -42,7 +42,7 @@ const useGetProjectsTypes = (type: ProjectType): {
 
     const interviewURL: InterviewURL = {
         'default': 'interview',
-        'indian': 'indian-interview'
+        'indigenous': 'indigenous-interview'
     }
 
     const acceptInfo: AcceptInfoType = {
@@ -54,7 +54,7 @@ const useGetProjectsTypes = (type: ProjectType): {
             ],
             contact: 'Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com'
         }
-    , 'indian': {
+    , 'indigenous': {
             title: 'TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN',
             description: [
                 'Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, E APÓS A PANDEMIA, ENTRE POVOS INDÍGENAS NO BRASIL, ESTAMOS COMEÇANDO AQUI NO MATOGROSSO DO SUL.',

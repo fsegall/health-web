@@ -57,7 +57,7 @@ const Accept: React.FC = () => {
             <label>Pesquisa Indígena</label>
             <input type="checkbox"
               name="projectType"
-              onChange={() => projectType == 'default' ? setProjectType('indian') : setProjectType('default')}
+              onChange={() => projectType == 'default' ? setProjectType('indigenous') : setProjectType('default')}
             />
           </CheckboxContainer>
           <CheckboxContainer>
