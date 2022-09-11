@@ -1,71 +1,49 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
-import {
+import React, { useRef, useEffect, useState } from 'react';
+import ReactSelect, {
   OptionTypeBase,
   Props as SelectProps,
 } from 'react-select';
 import { useField } from '@unform/core';
-import { Container, Error } from './styles';
-import { FiAlertCircle } from 'react-icons/fi';
 
 interface Props extends SelectProps<OptionTypeBase> {
   name: string;
-  options: { value: string; label: string }[];
 }
 
-const Select: React.FC<Props> = ({ name, options, ...rest }) => {
-  const selectRef = useRef<HTMLSelectElement>(null);
-  const [isFilled, setIsFilled] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const { fieldName, registerField, error } = useField(name);
+const Select: React.FC<Props> = ({ name, options, initialValue, ...rest }) => {
+  const selectRef = useRef(null);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
       getValue: (ref: any) => {
-        if (!ref.value) {
+        if (rest.isMulti) {
+          if (!ref.state.value) {
+            return [];
+          }
+          return ref.state.value.map((option: OptionTypeBase) => option.value);
+        }
+        if (!ref.state.value) {
           return '';
         }
-        return ref.value;
+        return ref.state.value.value;
       },
-      setValue: (ref, value) => {
-        ref.value = value
+      setValue: (ref: any, value) => {
+        const selectedOption = ref.props.options.find((v: any) => v.value === value)
+        ref.state.value = selectedOption
       }
     });
-  }, [fieldName, registerField]);
-
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
-
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-    setIsFilled(!!selectRef.current?.value);
-  }, []);
-
+  }, [fieldName, registerField, rest.isMulti]);
   return (
-    <>
-      <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>
-        <select
-          ref={selectRef}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          style={{ width: '100%', padding: '10px' }}
-          name={name}
-        >
-          <option disabled selected></option>
-          {options?.map(o => (
-            <option key={o.value} value={o.value}>{o.label}</option>
-          ))}
-        </select>
-        {error && (
-        <Error title={error}>
-          <FiAlertCircle color="#c53030" size={20} />
-        </Error>
-      )}
-      </Container>
-    </>
-  )
+    <ReactSelect
+      ref={selectRef}
+      options={options}
+      placeholder="Selecione"
+      classNamePrefix="react-select"
+      {...rest}
+    />
+  );
 };
 
 export default Select;
