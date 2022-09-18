@@ -15,20 +15,111 @@ import logo from '../../assets/logo_transparent.png';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import ArrayForm from './Forms/ArrayForm';
+import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
+
+interface StateFormat {
+  formsSubmitted: {
+    informacoes_basicas:
+    {
+      id: string | null;
+      show: boolean
+    };
+    demografico:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    domicilio:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    saude_doenca:
+    {
+      show: boolean;
+    };
+    alimentacao_nutricao:
+    {
+      show: boolean;
+    };
+    apoio_protecao_social:
+    {
+      show: boolean;
+    };
+  }
+}
+
+interface FormActionFormat {
+  type: string;
+  payload: {
+    id: string | null;
+    show: boolean;
+  }
+}
+
+
+const initialState: StateFormat = {
+  formsSubmitted: {
+    informacoes_basicas: {
+      id: null,
+      show: true,
+    },
+    demografico: {
+      id: null,
+      show: true,
+    },
+    domicilio: {
+      id: null,
+      show: true,
+    },
+    saude_doenca: {
+      show: true,
+    },
+    alimentacao_nutricao: {
+      show: true,
+    },
+    apoio_protecao_social: {
+      show: true,
+    },
+  }
+}
+
+function reducer(state: StateFormat, action: FormActionFormat) {
+  switch (action.type) {
+    case 'INFORMACOES_BASICAS':
+      return { formsSubmitted: { ...state.formsSubmitted, informacoes_basicas: { id: action?.payload?.id, show: false } } };
+    case 'DEMOGRAFICO':
+      return { formsSubmitted: { ...state.formsSubmitted, demografico: { id: action?.payload?.id, show: false } } };
+    case 'DOMICILIO':
+      return { formsSubmitted: { ...state.formsSubmitted, domicilio: { id: action?.payload?.id, show: false } } };
+    case 'SAUDE_DOENCA':
+      return { formsSubmitted: { ...state.formsSubmitted, saude_doenca: { id: action?.payload?.id, show: false } } };
+    case 'ALIMENTACAO_NUTRICAO':
+      return { formsSubmitted: { ...state.formsSubmitted, alimentacao_nutricao: { id: action?.payload?.id, show: false } } };
+    case 'APOIO_PROTECAO_SOCIAL':
+      return { formsSubmitted: { ...state.formsSubmitted, apoio_protecao_social: { id: action?.payload?.id, show: false } } };
+    case 'INTERVIEW':
+      return { ...initialState };
+    default:
+      return state;
+  }
+}
 
 const IndigenousInterview: React.FC = () => {
     //@ts-ignore
     const { id } = useParams();
     const { token } = useAuth();
     const [initialValues, setInitialValues] = useState<any>({})
-    // const [formState, dispatch] = useReducer(reducer, initialState);
+    const [formState, dispatch] = useReducer(reducer, initialState);
 
     const resetForms = useCallback(
         () => {
-          localStorage.removeItem('@Safety:person_id');
-          localStorage.removeItem('@Safety:household_id');
-          localStorage.removeItem('@Safety:address_id');
-          localStorage.removeItem('@Safety:current-offline-interview-id');
+          localStorage.removeItem('@Safety:informacoes_basicas');
+          localStorage.removeItem('@Safety:demografico');
+          localStorage.removeItem('@Safety:domicilio');
+          localStorage.removeItem('@Safety:saude_doenca');
+          localStorage.removeItem('@Safety:alimentacao_nutricao');
+          localStorage.removeItem('@Safety:apoio_protecao_social');
           window.location.reload();
         },
         [],
@@ -54,7 +145,15 @@ const IndigenousInterview: React.FC = () => {
                 )}
             </ButtonsContainer>
         </Header>
-        <ArrayForm />
+        <SectionTitle id="person">Informações Básicas</SectionTitle>
+        {formState.formsSubmitted.informacoes_basicas.show && (
+          <InformacoesBasicasForm
+            dispatch={dispatch}
+            isEditForm={id ? true : false}
+            offline={isOffline}
+            initialValues={initialValues ? initialValues?.informacoes_basicas : {}}
+          />
+        )}
 
         </Container>
     )
