@@ -1,4 +1,3 @@
-import { InputProps } from "react-select";
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { yesOrNoOptionsArray } from "../../questions/SelectorOptions/options";
@@ -10,7 +9,8 @@ export interface FormHelperType {
         name: string;
         placeholder?: string;
         isMulti?: boolean;
-        options?: Array<any>
+        options?: Array<any>;
+        type?: 'text' | 'textarea' | 'number';
     };
 }
 

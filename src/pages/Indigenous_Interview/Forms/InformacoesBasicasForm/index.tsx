@@ -36,8 +36,6 @@ interface InformacoesBasicasFormProps {
 
 const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
-
   const { user, token } = useAuth();
 
   const { addToast } = useToast();
@@ -117,7 +115,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
                     </span>
                 ))}
                 {s?.length == sectionIndex-1 && (
-                    !isEditForm && <Button type="submit">Submit</Button>
+                    !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>
         ))}

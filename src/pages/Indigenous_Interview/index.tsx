@@ -16,6 +16,7 @@ import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import ArrayForm from './Forms/ArrayForm';
 import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
+import DemograficoForm from './Forms/DemograficoForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -152,6 +153,15 @@ const IndigenousInterview: React.FC = () => {
             isEditForm={id ? true : false}
             offline={isOffline}
             initialValues={initialValues ? initialValues?.informacoes_basicas : {}}
+          />
+        )}
+        <SectionTitle id="person">Demográfico</SectionTitle>
+        {formState.formsSubmitted.demografico.show && (
+          <DemograficoForm
+            dispatch={dispatch}
+            isEditForm={id ? true : false}
+            offline={isOffline}
+            initialValues={initialValues ? initialValues?.demografico : {}}
           />
         )}
 
