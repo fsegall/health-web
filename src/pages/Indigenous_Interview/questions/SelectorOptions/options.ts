@@ -227,3 +227,157 @@ const renda30dOptions = {
 }
 export const renda30dOptionsArray = handleValueLabelOption(renda30dOptions)
 
+// DOENÇA E SAÚDE
+
+const vacinaCovidOptions = {
+    sim_1d: 'Sim, apenas a 1ª dose',
+    sim_2d: 'Sim, 2 doses',
+    sim_3d: 'Sim, 3 doses',
+    sim_4d: 'Sim, 4 doses',
+    sim_dose_unica: 'Sim, a vacina dose única',
+    nao: 'Não tomei nenhuma dose da vacina',
+    'ns-nr': 'NS/NR',
+}
+export const vacinaCovidOptionsArray = handleValueLabelOption(vacinaCovidOptions)
+
+const motivosNaoTomarVacinaCovidOptions = {
+    nao_tinha: 'Não tinha vacina',
+    nao_tinha_a_desejada: 'Não tinha a que quero',
+    nao_quis: 'Não quis',
+    indicacao_medica: 'Indicação médica',
+    indicacao_outra_pessoa: 'Indicação de outra pessoa',
+    ja_teve_covid: 'Já tive covid',
+    nao_confia: 'Não confio',
+    'ns-nr': 'NS/NR'
+}
+export const motivosNaoTomarVacinaCovidOptionsArray = handleValueLabelOption(motivosNaoTomarVacinaCovidOptions)
+
+const familiarMorteCovid = {
+    nao: 'Não',
+    chefe_homem: 'Sim, chefe homem',
+    chefe_mulher: 'Sim, chefe mulher',
+    homem_16_mais: 'Sim, homem maior de 16 anos',
+    mulher_16_mais: 'Sim, mulher maior de 16 anos',
+    crianca_adolescente: 'Sim, criança ou adolescente menor de 16 anos',
+    'ns-nr': 'NS/NR'
+}
+export const familiarMorteCovidArray = handleValueLabelOption(familiarMorteCovid)
+
+const condicaoSaudeOptions = {
+    muito_boa: 'Muito boa',
+    boa: 'Boa',
+    regular: 'Regular',
+    ruim: 'Ruim',
+    muito_ruim: 'Muito Ruim'
+}
+export const condicaoSaudeOptionsArray = handleValueLabelOption(condicaoSaudeOptions)
+
+const condicaoSaudeTekohaOptions = {
+    melhorou: 'Sim, melhorou',
+    piorou: 'Sim, piorou',
+    sem_mudancas: 'Não houveram mudanças importantes',
+    'ns-nr': 'NS/NR'
+}
+export const condicaoSaudeTekohaOptionsArray = handleValueLabelOption(condicaoSaudeTekohaOptions)
+
+const causasDoencasVenenoLavouraOptions = {
+    agua_contaminada: 'Sim, bebemos água contaminada',
+    alimentos_contaminados: 'Sim, bebemos alimentos contaminados',
+    trabalho_colheira: 'Sim, trabalho em colheira que faz uso de veneno',
+    veneno_proximo_a_casa: 'Sim, colocam veneno próximo à minha casa/roça',
+    avioes_maquinarios: 'Sim, jogaram com aviões e/ou maquinários',
+    'ns-nr': 'NS/NR'
+}
+export const causasDoencasVenenoLavouraOptionsArray = handleValueLabelOption(causasDoencasVenenoLavouraOptions)
+
+const acidentesOptions = {
+    cobra: 'Picada de cobra',
+    animais_peconhentos: 'Picada de animais peçonhentos (aranha, escorpião, etc)',
+    abelha: 'Acidentes com abelhas',
+    outros_animais: 'Acidentes com outros animais (cachorro, galinha, etc)',
+    acidente_trabalho: 'Outro tipo de acidente no trabalho',
+    acidente_transito: 'Acidentes de trânsito na estrada (com bicicleta e carro, caminhonete, etc)',
+    acidente_rio: 'Acidentes no rio',
+    queda_arvore: 'Queda de árvore / pinheiro / açai, etc',
+    queda_propria_altura: 'Queda da própria altura (tombo)',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR',
+}
+export const acidentesOptionsArray = handleValueLabelOption(acidentesOptions)
+
+const violenciaFisicaOptions = {
+    propria_casa: 'Na própria casa, por alguém da família ou morador da casa (violência doméstica)',
+    na_retomada_por_indigenas: 'Violência na retomada cometida por outros indígenas',
+    na_retomada_por_fazendeiro_ou_invasor: 'Violência na retomada cometida por fazendeiro ou invasores da Terra Indígena',
+    na_retomada_por_policial: 'Violência na retomada cometida pela polícia',
+    liderancas: 'Violência feita por lideranças',
+    cidade: 'Violência na cidade',
+    arredores_da_comunidade: 'Violência nos arredores da TI ou da Comunidade',
+    outro: 'Outro - Especificar',
+    'ns-nr': 'NS/NR',
+}
+export const violenciaFisicaOptionsArray = handleValueLabelOption(violenciaFisicaOptions)
+
+const tratamentosOptions = {
+    covid_19: 'COVID 19',
+    pressao_alta: 'Pressão alta',
+    diabetes: 'Diabetes (açucar no sangue)',
+    doenca_coracao: 'Doença no coração (lembrar Chagas)',
+    asma: 'Asma (chiado no peito)',
+    malaria: 'Malária',
+    tuberculose: 'Tuberculose',
+    gripe_tosse: 'Gripe/tosse',
+    pneumonia: 'Pneumonia',
+    ferida_pele: 'Úlcera (ferida) de pele',
+    anemia_ferropriva: 'Anemia ferropriva',
+    dst: 'HIV ou outra doença transmitida pelo sexo',
+    outro: 'Tratamento para outro tipo de doença',
+    feitico: 'Doença fruto de feitiço'
+}
+export const tratamentosOptionsArray = handleValueLabelOption(tratamentosOptions)
+
+const tratamentosPajeOptions = {
+    nao: 'Não',
+    nanderu: 'Sim, apenas com Ñanderu/Ñandesy',
+    nanderu_posto_ou_hospital: 'Sim, Ñanderu/Ñandesy e posto de saúde ou hospital',
+    'ns-nr': 'NS/NR'
+}
+export const tratamentosPajeOptionsArray = handleValueLabelOption(tratamentosPajeOptions)
+
+const medicamentosUsoContinuoOptions = {
+    nao: 'Não',
+    remedios: 'Sim, só remédios "de caixinha" (do branco)',
+    ervas: 'Sim, ervas',
+    remedios_e_ervas: 'Sim, remédios e ervas',
+    'ns-nr': 'NS/NR'
+}
+export const medicamentosUsoContinuoOptionsArray = handleValueLabelOption(medicamentosUsoContinuoOptions)
+
+const motivoMedicamentoUsoContinuo = {
+    anticoncepcional: 'Anticoncepcional',
+    diabetes: 'Diabetes',
+    pressao_alta: 'Pressão alta',
+    coracao: 'Doença do coração',
+    mental: 'Sofrimento mental (doença dos nervos)',
+    hiv: 'HIV',
+    anemia: 'Anemia',
+    outro: 'Outro - especifique'
+}
+export const motivoMedicamentoUsoContinuoArray = handleValueLabelOption(motivoMedicamentoUsoContinuo)
+
+const recorreAoAdoecerOptions = {
+    ais: 'Procura o AIS',
+    posto_saude: 'Procura o posto de saúde mais próximo',
+    lideranca: 'Procura a liderança',
+    polo_base: 'Vai ao Polo base',
+    casai: 'Vai à CASAI',
+    hospital: 'Vai ao hospital',
+    farmacia_cidade: 'Vai à farmácia da cidade',
+    remedios_caseiros: 'Toma remédios caseiros (ervas)',
+    nanderu: 'Procura Ñanderu / Ñandesy / pajé / benzedor',
+    mais_velhos: 'Conversa com os mais velhos da casa',
+    igreja: 'Procura a igreja',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
+}
+export const recorreAoAdoecerOptionsArray = handleValueLabelOption(recorreAoAdoecerOptions)

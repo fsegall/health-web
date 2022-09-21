@@ -18,6 +18,7 @@ import ArrayForm from './Forms/ArrayForm';
 import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
 import DemograficoForm from './Forms/DemograficoForm';
 import DomiciliosForm from './Forms/DomicilioForm';
+import SaudeDoencaForm from './Forms/SaudeDoencaForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -172,6 +173,15 @@ const IndigenousInterview: React.FC = () => {
             isEditForm={id ? true : false}
             offline={isOffline}
             initialValues={initialValues ? initialValues?.domicilio : {}}
+          />
+        )}
+        <SectionTitle id="person">Saúde e Doença</SectionTitle>
+        {formState.formsSubmitted.saude_doenca.show && (
+          <SaudeDoencaForm
+            dispatch={dispatch}
+            isEditForm={id ? true : false}
+            offline={isOffline}
+            initialValues={initialValues ? initialValues?.saude_doenca : {}}
           />
         )}
 

@@ -1,12 +1,10 @@
 export default interface ICreateDomicilioDTO {
     id?: string; //backend - generated UUID
     ultima_morada: string; //select
-    // como_define_ultima_morada?: string; //select
     piso: string; //select
     material_paredes: string; //select
     material_telhado: string; //select
     quantidade_comodos: number;
-    // UtensiliosNoDomicilioDTO
     utensilios_casa: string[]; //multi-select
     acesso_agua: string; //select
     origem_agua: string; //select

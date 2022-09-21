@@ -6,7 +6,7 @@ export default interface ICreateInformacoesBasicasDTO {
     area_de_retomada: string; //B4
     acampamento: string; //B5
     entrevistador: string; //B6
-    data_da_entrevista: string; // created_at?
+    data_da_entrevista: string;
 
     primeiro_contato_responsavel: boolean;
   }
