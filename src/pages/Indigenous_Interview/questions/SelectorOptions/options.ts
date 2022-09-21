@@ -1,41 +1,30 @@
-const handleValueLabelOption = (obj: any) => {
-    return Object.entries(obj).map?.((i: any) => ({
-        value: i[0],
-        label: i[1],
-    }))
-}
-
 // Sim,não ns-nr
-const yesOrNoOptions = {
+export const yesOrNoOptions = {
     true: 'Sim',
     false: 'Não',
     'ns-nr': 'NS/NR'
 }
-export const yesOrNoOptionsArray = handleValueLabelOption(yesOrNoOptions)
 
-const sexoOptions = {
+export const sexoOptions = {
     masculino: 'Masculino',
     feminino: 'Feminino',
     outro: 'Outro'
 }
-export const sexoOptionsArray = handleValueLabelOption(sexoOptions)
 
-const racaOptions = {
+export const racaOptions = {
     indigena: 'Indígena',
     'nao-indigena': 'Não indígena',
     'ns-nr': 'NS/NR'
 }
-export const racaOptionsArray = handleValueLabelOption(racaOptions)
 
-const etniaOptions = {
+export const etniaOptions = {
     guarani: 'Guarani (Ñandeva)',
     kaiowa: 'Kaiowá',
     terena: 'Terena',
     outro: 'Outro'
 }
-export const etniaOptionsArray = handleValueLabelOption(etniaOptions)
 
-const grauEscolaridadeOptions = {
+export const grauEscolaridadeOptions = {
     fundamental_incompleto: 'Fundamental Incompleto',
     fundamental_completo: 'Fundamental Completo',
     medio_incompleto: 'Médio Incompleto',
@@ -47,9 +36,8 @@ const grauEscolaridadeOptions = {
     nao_frequentou: 'Não frequentou',
     'ns-nr': 'NS/NR',
 }
-export const grauEscolaridadeOptionsArray = handleValueLabelOption(grauEscolaridadeOptions)
 
-const crencasOptions = {
+export const crencasOptions = {
     religiao_tradicional: 'Religião Tradicional',
     evangelico: 'Evangélico',
     catolico: 'Católico',
@@ -57,9 +45,8 @@ const crencasOptions = {
     budista: 'Budista',
     outra: 'Outra'
 }
-export const crencasOptionsArray = handleValueLabelOption(crencasOptions)
 
-const situacaoTrabalhoOptions = {
+export const situacaoTrabalhoOptions = {
     remunerado_aldeia: 'Trabalho Remunerado na Aldeia/Comunidade',
     remunerado_fora_aldeia: 'Trabalho Remunerado fora da Aldeia/Comunidade',
     desempregado_menos_6m: 'Desempregado a menos de 6 meses',
@@ -72,9 +59,8 @@ const situacaoTrabalhoOptions = {
     nao_remunerado_aldeia: 'Trabalho não remunerado na Aldeia/ comunidade (inclui dona de casa)',
     'ns-nr': 'NS/NR',
 }
-export const situacaoTrabalhoOptionsArray = handleValueLabelOption(situacaoTrabalhoOptions)
 
-const ocupacaoPrincipalOptions = {
+export const ocupacaoPrincipalOptions = {
     agricultor: 'Agricultor',
     rural_sem_carteira: 'Trabalhador rural sem carteira (diarista, temporário, permanente) (abrir aba para: coleta de maçã....)',
     rural_com_carteira: 'Trabalhador rural com carteira assinada',
@@ -90,28 +76,25 @@ const ocupacaoPrincipalOptions = {
     empresario: 'Empresário',
     'ns-nr': 'NS/NR',
 }
-export const ocupacaoPrincipalOptionsArray = handleValueLabelOption(ocupacaoPrincipalOptions)
 
 // DOMICÍLIO
 
-const ultimaMoradaOptions = {
+export const ultimaMoradaOptions = {
     reserva_indigena: 'Reserva Indígena',
     acampamento: 'Acampamento',
     outra_retomada: 'Outra Retomada',
     cidade: 'Cidade',
     'ns-nr': 'NS/NR'
 }
-export const ultimaMoradaOptionsArray = handleValueLabelOption(ultimaMoradaOptions)
 
-const pisoCasaOptions = {
+export const pisoCasaOptions = {
     terra: 'Terra batida/socada',
     cimento_ceramica: 'Cimento/Cerâmica',
     madeira: 'Madeira',
     outros: 'Outros'
 }
-export const pisoCasaOptionsArray = handleValueLabelOption(pisoCasaOptions)
 
-const paredesCasaOptions = {
+export const paredesCasaOptions = {
     lona_plastico: 'Lona/plástico',
     palha_taboca: 'Palha/taboca',
     barro_taipa: 'Barro/taipá',
@@ -119,9 +102,8 @@ const paredesCasaOptions = {
     outro: 'Outro',
     'ns-nr': 'NS/NR'
 }
-export const paredesCasaOptionsArray = handleValueLabelOption(paredesCasaOptions)
 
-const telhadoCasaOptions = {
+export const telhadoCasaOptions = {
     telha: 'Telha',
     zinco: 'Zinco',
     palha_precaria: 'Palha precária/sapé (velha)',
@@ -130,9 +112,8 @@ const telhadoCasaOptions = {
     palha_nobre: 'Palha nobre/sapé (nova)',
     outros: 'Outros'
 }
-export const telhadoCasaOptionsArray = handleValueLabelOption(telhadoCasaOptions)
 
-const utensiliosCasaOptions = {
+export const utensiliosCasaOptions = {
     televisao: 'Televisão',
     geladeira: 'Geladeira',
     fogao_gas: 'Fogão a gás',
@@ -142,9 +123,8 @@ const utensiliosCasaOptions = {
     celular_sem_internet: 'Celular SEM internet',
     trator: 'Trator/roçadeira para lavoura'
 }
-export const utensiliosCasaOptionsArray = handleValueLabelOption(utensiliosCasaOptions)
 
-const origemAguaOptions = {
+export const origemAguaOptions = {
     rio: 'Rio / "corgo" / igarapé / nascente / lago',
     rede_publica: 'Rede pública',
     poco_artesiano: 'Poço artesiano',
@@ -154,9 +134,8 @@ const origemAguaOptions = {
     outros: 'Outros',
     'ns-nr': 'NS/NR',
 }
-export const origemAguaOptionsArray = handleValueLabelOption(origemAguaOptions)
 
-const qualidadeAguaOptions = {
+export const qualidadeAguaOptions = {
     boa: 'Boa',
     muito_boa: 'Muito boa',
     regular: 'Regular',
@@ -164,26 +143,23 @@ const qualidadeAguaOptions = {
     muito_ruim: 'Muito ruim',
     'ns-nr': 'NS/NR'
 }
-export const qualidadeAguaOptionsArray = handleValueLabelOption(qualidadeAguaOptions)
 
-const acessoAguaCasaOptions = {
+export const acessoAguaCasaOptions = {
     encanada: 'Encanada dentro de casa',
     torneira_coletiva: 'Torneira coletiva',
     encanada_fora: 'Encanada fora de casa',
     nao_encanada: 'Não é encanada',
     'ns-nr': 'NS/NR',
 }
-export const acessoAguaCasaOptionsArray = handleValueLabelOption(acessoAguaCasaOptions)
 
-const banheiroCasaOptions = {
+export const banheiroCasaOptions = {
     nao: 'Não existe',
     fora_da_casa: 'Existe fora da casa',
     dentro_de_casa: 'Existe dentro de casa',
     dentro_e_fora: 'Existe dentro e fora da casa'
 }
-export const banheiroCasaOptionsArray = handleValueLabelOption(banheiroCasaOptions)
 
-const coletaEsgotoCasaOptions = {
+export const coletaEsgotoCasaOptions = {
     rede_esgoto: 'Rede de esgoto',
     fossa_septica: 'Fossa séptica',
     fossa_rudimentar: 'Fossa rudimentar',
@@ -191,9 +167,8 @@ const coletaEsgotoCasaOptions = {
     rio_ou_lago: 'Vai para rio ou lago',
     'ns-nr': 'NS/NR'
 }
-export const coletaEsgotoCasaOptionsArray = handleValueLabelOption(coletaEsgotoCasaOptions)
 
-const destinoLixoOptions = {
+export const destinoLixoOptions = {
     prefeitura: 'Coletado pela prefeitura',
     queimado_enterrado: 'Queimado ou enterrado no local',
     terreno_baldio_longe: 'Jogado em terreno baldio longe da casa',
@@ -201,9 +176,8 @@ const destinoLixoOptions = {
     corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago ou quintal da residência',
     'ns-nr': 'NS/NR',
 }
-export const destinoLixoOptionsArray = handleValueLabelOption(destinoLixoOptions)
 
-const veiculosOptions = {
+export const veiculosOptions = {
     bicicleta: 'Bicicleta',
     moto: 'Moto',
     carro: 'Carro',
@@ -212,9 +186,8 @@ const veiculosOptions = {
     nao_possui: 'Não possui',
     outros: 'Outros'
 }
-export const veiculosOptionsArray = handleValueLabelOption(veiculosOptions)
 
-const renda30dOptions = {
+export const renda30dOptions = {
     nao_teve: 'Não teve renda',
     menos_de_275: 'Menos de 275 reais',
     entre_275_550: 'Entre 275 e 550 reais',
@@ -225,11 +198,10 @@ const renda30dOptions = {
     mais_de_11000: 'Mais de 11.000 reais',
     'ns-nr': 'NS/NR',
 }
-export const renda30dOptionsArray = handleValueLabelOption(renda30dOptions)
 
 // DOENÇA E SAÚDE
 
-const vacinaCovidOptions = {
+export const vacinaCovidOptions = {
     sim_1d: 'Sim, apenas a 1ª dose',
     sim_2d: 'Sim, 2 doses',
     sim_3d: 'Sim, 3 doses',
@@ -238,9 +210,8 @@ const vacinaCovidOptions = {
     nao: 'Não tomei nenhuma dose da vacina',
     'ns-nr': 'NS/NR',
 }
-export const vacinaCovidOptionsArray = handleValueLabelOption(vacinaCovidOptions)
 
-const motivosNaoTomarVacinaCovidOptions = {
+export const motivosNaoTomarVacinaCovidOptions = {
     nao_tinha: 'Não tinha vacina',
     nao_tinha_a_desejada: 'Não tinha a que quero',
     nao_quis: 'Não quis',
@@ -250,9 +221,8 @@ const motivosNaoTomarVacinaCovidOptions = {
     nao_confia: 'Não confio',
     'ns-nr': 'NS/NR'
 }
-export const motivosNaoTomarVacinaCovidOptionsArray = handleValueLabelOption(motivosNaoTomarVacinaCovidOptions)
 
-const familiarMorteCovid = {
+export const familiarMorteCovid = {
     nao: 'Não',
     chefe_homem: 'Sim, chefe homem',
     chefe_mulher: 'Sim, chefe mulher',
@@ -261,26 +231,23 @@ const familiarMorteCovid = {
     crianca_adolescente: 'Sim, criança ou adolescente menor de 16 anos',
     'ns-nr': 'NS/NR'
 }
-export const familiarMorteCovidArray = handleValueLabelOption(familiarMorteCovid)
 
-const condicaoSaudeOptions = {
+export const condicaoSaudeOptions = {
     muito_boa: 'Muito boa',
     boa: 'Boa',
     regular: 'Regular',
     ruim: 'Ruim',
     muito_ruim: 'Muito Ruim'
 }
-export const condicaoSaudeOptionsArray = handleValueLabelOption(condicaoSaudeOptions)
 
-const condicaoSaudeTekohaOptions = {
+export const condicaoSaudeTekohaOptions = {
     melhorou: 'Sim, melhorou',
     piorou: 'Sim, piorou',
     sem_mudancas: 'Não houveram mudanças importantes',
     'ns-nr': 'NS/NR'
 }
-export const condicaoSaudeTekohaOptionsArray = handleValueLabelOption(condicaoSaudeTekohaOptions)
 
-const causasDoencasVenenoLavouraOptions = {
+export const causasDoencasVenenoLavouraOptions = {
     agua_contaminada: 'Sim, bebemos água contaminada',
     alimentos_contaminados: 'Sim, bebemos alimentos contaminados',
     trabalho_colheira: 'Sim, trabalho em colheira que faz uso de veneno',
@@ -288,9 +255,8 @@ const causasDoencasVenenoLavouraOptions = {
     avioes_maquinarios: 'Sim, jogaram com aviões e/ou maquinários',
     'ns-nr': 'NS/NR'
 }
-export const causasDoencasVenenoLavouraOptionsArray = handleValueLabelOption(causasDoencasVenenoLavouraOptions)
 
-const acidentesOptions = {
+export const acidentesOptions = {
     cobra: 'Picada de cobra',
     animais_peconhentos: 'Picada de animais peçonhentos (aranha, escorpião, etc)',
     abelha: 'Acidentes com abelhas',
@@ -303,9 +269,8 @@ const acidentesOptions = {
     outros: 'Outros',
     'ns-nr': 'NS/NR',
 }
-export const acidentesOptionsArray = handleValueLabelOption(acidentesOptions)
 
-const violenciaFisicaOptions = {
+export const violenciaFisicaOptions = {
     propria_casa: 'Na própria casa, por alguém da família ou morador da casa (violência doméstica)',
     na_retomada_por_indigenas: 'Violência na retomada cometida por outros indígenas',
     na_retomada_por_fazendeiro_ou_invasor: 'Violência na retomada cometida por fazendeiro ou invasores da Terra Indígena',
@@ -316,9 +281,8 @@ const violenciaFisicaOptions = {
     outro: 'Outro - Especificar',
     'ns-nr': 'NS/NR',
 }
-export const violenciaFisicaOptionsArray = handleValueLabelOption(violenciaFisicaOptions)
 
-const tratamentosOptions = {
+export const tratamentosOptions = {
     covid_19: 'COVID 19',
     pressao_alta: 'Pressão alta',
     diabetes: 'Diabetes (açucar no sangue)',
@@ -334,26 +298,23 @@ const tratamentosOptions = {
     outro: 'Tratamento para outro tipo de doença',
     feitico: 'Doença fruto de feitiço'
 }
-export const tratamentosOptionsArray = handleValueLabelOption(tratamentosOptions)
 
-const tratamentosPajeOptions = {
+export const tratamentosPajeOptions = {
     nao: 'Não',
     nanderu: 'Sim, apenas com Ñanderu/Ñandesy',
     nanderu_posto_ou_hospital: 'Sim, Ñanderu/Ñandesy e posto de saúde ou hospital',
     'ns-nr': 'NS/NR'
 }
-export const tratamentosPajeOptionsArray = handleValueLabelOption(tratamentosPajeOptions)
 
-const medicamentosUsoContinuoOptions = {
+export const medicamentosUsoContinuoOptions = {
     nao: 'Não',
     remedios: 'Sim, só remédios "de caixinha" (do branco)',
     ervas: 'Sim, ervas',
     remedios_e_ervas: 'Sim, remédios e ervas',
     'ns-nr': 'NS/NR'
 }
-export const medicamentosUsoContinuoOptionsArray = handleValueLabelOption(medicamentosUsoContinuoOptions)
 
-const motivoMedicamentoUsoContinuo = {
+export const motivoMedicamentoUsoContinuo = {
     anticoncepcional: 'Anticoncepcional',
     diabetes: 'Diabetes',
     pressao_alta: 'Pressão alta',
@@ -363,9 +324,8 @@ const motivoMedicamentoUsoContinuo = {
     anemia: 'Anemia',
     outro: 'Outro - especifique'
 }
-export const motivoMedicamentoUsoContinuoArray = handleValueLabelOption(motivoMedicamentoUsoContinuo)
 
-const recorreAoAdoecerOptions = {
+export const recorreAoAdoecerOptions = {
     ais: 'Procura o AIS',
     posto_saude: 'Procura o posto de saúde mais próximo',
     lideranca: 'Procura a liderança',
@@ -380,4 +340,3 @@ const recorreAoAdoecerOptions = {
     outros: 'Outros',
     'ns-nr': 'NS/NR'
 }
-export const recorreAoAdoecerOptionsArray = handleValueLabelOption(recorreAoAdoecerOptions)

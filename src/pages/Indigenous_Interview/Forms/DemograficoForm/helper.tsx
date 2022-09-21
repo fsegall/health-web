@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
-import { yesOrNoOptions } from "../../../Interview/questions/SelectorOptions/options";
-import { crencasOptionsArray, etniaOptionsArray, grauEscolaridadeOptionsArray, ocupacaoPrincipalOptionsArray, racaOptionsArray, sexoOptionsArray, situacaoTrabalhoOptionsArray, yesOrNoOptionsArray } from "../../questions/SelectorOptions/options";
+import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
+import { sexoOptions, racaOptions, etniaOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoOptions, ocupacaoPrincipalOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -48,7 +48,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'sexo',
-            options: sexoOptionsArray,
+            options: handleValueLabelOption(sexoOptions),
             isMulti: false
         }
     },
@@ -57,7 +57,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'raca',
-            options: racaOptionsArray,
+            options: handleValueLabelOption(racaOptions),
             isMulti: false
         }
     },
@@ -66,7 +66,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'povo_etnia',
-            options: etniaOptionsArray,
+            options: handleValueLabelOption(etniaOptions),
             isMulti: true
         }
     },
@@ -83,7 +83,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'crenca_religiao',
-            options: crencasOptionsArray,
+            options: handleValueLabelOption(crencasOptions),
             isMulti: false
         }
     },
@@ -92,7 +92,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'frequenta_escola',
-            options: yesOrNoOptions,
+            options: handleValueLabelOption(yesOrNoOptions),
             isMulti: false
         }
     },
@@ -101,7 +101,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'grau_escolaridade',
-            options: grauEscolaridadeOptionsArray,
+            options: handleValueLabelOption(grauEscolaridadeOptions),
             isMulti: false
         }
     },
@@ -110,7 +110,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'situacao_no_trabalho',
-            options: situacaoTrabalhoOptionsArray,
+            options: handleValueLabelOption(situacaoTrabalhoOptions),
             isMulti: false
         }
     },
@@ -119,7 +119,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         type: Select,
         props: {
             name: 'ocupacao_profissao',
-            options: ocupacaoPrincipalOptionsArray,
+            options: handleValueLabelOption(ocupacaoPrincipalOptions),
             isMulti: false
         }
     },

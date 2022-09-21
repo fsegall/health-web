@@ -1,6 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
-import { acidentesOptionsArray, causasDoencasVenenoLavouraOptionsArray, condicaoSaudeOptionsArray, condicaoSaudeTekohaOptionsArray, familiarMorteCovidArray, medicamentosUsoContinuoOptionsArray, motivoMedicamentoUsoContinuoArray, motivosNaoTomarVacinaCovidOptionsArray, recorreAoAdoecerOptionsArray, tratamentosOptionsArray, tratamentosPajeOptionsArray, vacinaCovidOptionsArray, violenciaFisicaOptionsArray, yesOrNoOptionsArray } from "../../questions/SelectorOptions/options";
+import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
+import { acidentesOptions, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, condicaoSaudeTekohaOptions, familiarMorteCovid, medicamentosUsoContinuoOptions, motivoMedicamentoUsoContinuo, motivosNaoTomarVacinaCovidOptions, recorreAoAdoecerOptions, tratamentosOptions, tratamentosPajeOptions, vacinaCovidOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -21,7 +22,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'tomou_vacina_covid',
-                options: vacinaCovidOptionsArray,
+                options: handleValueLabelOption(vacinaCovidOptions),
             }
         },
         {
@@ -29,7 +30,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'motivo_nao_tomar_vacina_covid',
-                options: motivosNaoTomarVacinaCovidOptionsArray,
+                options: handleValueLabelOption(motivosNaoTomarVacinaCovidOptions),
             }
         },
         {
@@ -37,7 +38,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'familiar_morte_covid',
-                options: familiarMorteCovidArray,
+                options: handleValueLabelOption(familiarMorteCovid),
             }
         },
         {
@@ -45,7 +46,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'familiar_morte_covid_contribuia_renda_familiar',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -53,7 +54,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'familiares_morte_outras_causas',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -69,7 +70,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'familiares_morte_outras_causas_contribuia_renda_familiar',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
     ],
@@ -79,7 +80,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'condicao_de_saude',
-                options: condicaoSaudeOptionsArray,
+                options: handleValueLabelOption(condicaoSaudeOptions),
             }
         },
         {
@@ -87,7 +88,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'tekoha_mudou_condicao_de_saude',
-                options: condicaoSaudeTekohaOptionsArray,
+                options: handleValueLabelOption(condicaoSaudeTekohaOptions),
             }
         },
         {
@@ -95,7 +96,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'morador_exposto_veneno_lavoura',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -103,7 +104,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'doencas_contato_veneno_lavoura',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -111,7 +112,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'motivo_doencas_contato_veneno_lavoura',
-                options: causasDoencasVenenoLavouraOptionsArray,
+                options: handleValueLabelOption(causasDoencasVenenoLavouraOptions),
             }
         },
         {
@@ -119,7 +120,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'acidentes',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -127,7 +128,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'acidentes_ocorridos',
-                options: acidentesOptionsArray,
+                options: handleValueLabelOption(acidentesOptions),
                 isMulti: true,
             }
         },
@@ -136,7 +137,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'ocorrencia_de_ameacas',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -144,7 +145,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'ocorrencia_violencia_fisica',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -152,7 +153,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'local_ocorrencia_violencia_fisica',
-                options: violenciaFisicaOptionsArray,
+                options: handleValueLabelOption(violenciaFisicaOptions),
                 isMulti: true,
             }
         },
@@ -161,7 +162,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'lista_tratamentos',
-                options: tratamentosOptionsArray,
+                options: handleValueLabelOption(tratamentosOptions),
                 isMulti: true,
             }
         },
@@ -172,7 +173,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'tratamento_com_paje_ou_similar',
-                options: tratamentosPajeOptionsArray,
+                options: handleValueLabelOption(tratamentosPajeOptions),
             }
         },
         {
@@ -180,7 +181,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'tratamento_igreja',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -188,7 +189,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'medicacao_uso_continuo',
-                options: medicamentosUsoContinuoOptionsArray,
+                options: handleValueLabelOption(medicamentosUsoContinuoOptions),
             }
         },
         {
@@ -196,7 +197,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'doenca_medicacao_uso_continuo',
-                options: motivoMedicamentoUsoContinuoArray,
+                options: handleValueLabelOption(motivoMedicamentoUsoContinuo),
                 isMulti: true,
             }
         },
@@ -205,7 +206,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'primeiro_recurso_ao_notar_doenca',
-                options: recorreAoAdoecerOptionsArray,
+                options: handleValueLabelOption(recorreAoAdoecerOptions),
             }
         },
         {
@@ -213,7 +214,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'morador_internado',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -221,7 +222,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'morador_problemas_bebidas_alcoolicas',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -229,7 +230,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'morador_problemas_uso_drogas',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
     ]

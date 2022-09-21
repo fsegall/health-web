@@ -1,6 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
-import { yesOrNoOptionsArray } from "../../questions/SelectorOptions/options";
+import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
+import { yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -66,7 +67,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
             props: {
                 name: 'primeiro_contato_responsavel',
                 isMulti: false,
-                options: yesOrNoOptionsArray
+                options: handleValueLabelOption(yesOrNoOptions)
             }
         },
     ]

@@ -1,6 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
-import { acessoAguaCasaOptionsArray, banheiroCasaOptionsArray, coletaEsgotoCasaOptionsArray, destinoLixoOptionsArray, origemAguaOptionsArray, paredesCasaOptionsArray, pisoCasaOptionsArray, qualidadeAguaOptionsArray, renda30dOptionsArray, telhadoCasaOptionsArray, utensiliosCasaOptionsArray, veiculosOptionsArray, yesOrNoOptionsArray } from "../../questions/SelectorOptions/options";
+import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
+import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, qualidadeAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, renda30dOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -29,7 +30,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'piso',
-                options: pisoCasaOptionsArray,
+                options: handleValueLabelOption(pisoCasaOptions),
             }
         },
         {
@@ -37,7 +38,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'material_paredes',
-                options: paredesCasaOptionsArray,
+                options: handleValueLabelOption(paredesCasaOptions),
             }
         },
         {
@@ -45,7 +46,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'material_telhado',
-                options: telhadoCasaOptionsArray,
+                options: handleValueLabelOption(telhadoCasaOptions),
             }
         },
         {
@@ -64,7 +65,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'utensilios_casa',
-                options: utensiliosCasaOptionsArray,
+                options: handleValueLabelOption(utensiliosCasaOptions),
                 isMulti: true,
             }
         },
@@ -73,7 +74,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'acesso_agua',
-                options: yesOrNoOptionsArray,
+                options: handleValueLabelOption(yesOrNoOptions),
             }
         },
         {
@@ -81,7 +82,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'origem_agua',
-                options: origemAguaOptionsArray,
+                options: handleValueLabelOption(origemAguaOptions),
             }
         },
         {
@@ -89,7 +90,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'qualidade_agua_para_beber_e_cozinhar',
-                options: qualidadeAguaOptionsArray,
+                options: handleValueLabelOption(qualidadeAguaOptions),
             }
         },
         {
@@ -97,7 +98,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'forma_acesso_agua',
-                options: acessoAguaCasaOptionsArray,
+                options: handleValueLabelOption(acessoAguaCasaOptions),
             }
         },
     ],
@@ -107,7 +108,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'possui_banheiro',
-                options: banheiroCasaOptionsArray,
+                options: handleValueLabelOption(banheiroCasaOptions),
             }
         },
         {
@@ -115,7 +116,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'forma_coleta_esgoto',
-                options: coletaEsgotoCasaOptionsArray,
+                options: handleValueLabelOption(coletaEsgotoCasaOptions),
             }
         },
         {
@@ -123,7 +124,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'destino_lixo_da_residencia',
-                options: destinoLixoOptionsArray,
+                options: handleValueLabelOption(destinoLixoOptions),
                 isMulti: true,
             }
         },
@@ -132,7 +133,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'veiculos',
-                options: veiculosOptionsArray,
+                options: handleValueLabelOption(veiculosOptions),
                 isMulti: true,
             }
         },
@@ -141,7 +142,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             type: Select,
             props: {
                 name: 'renda_total_30_dias',
-                options: renda30dOptionsArray,
+                options: handleValueLabelOption(renda30dOptions),
             }
         },
     ]

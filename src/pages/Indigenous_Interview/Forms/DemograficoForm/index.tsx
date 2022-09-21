@@ -17,7 +17,8 @@ import { FormHelperType, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
 import Input from '../../../../components/Input';
 import Select from '../../../../components/Select';
-import { yesOrNoOptionsArray } from '../../questions/SelectorOptions/options';
+import { yesOrNoOptions } from '../../questions/SelectorOptions/options';
+import { handleValueLabelOption } from '../../questions/handleValueLabelOption';
 
 
 
@@ -158,7 +159,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             <Label>
                 APENAS PARA A PESQUISA DOS Guarani Kaiowá: Alguém desta casa já trabalhou ou trabalha na colheita de maçã no sul do país no período de colheita (em geral de janeiro a abril)? 
             </Label>
-            <Select name="trabalho_colheita_de_maca" options={yesOrNoOptionsArray} />
+            <Select name="trabalho_colheita_de_maca" options={handleValueLabelOption(yesOrNoOptions)} />
             <Button type="submit">Enviar</Button>
         </section>
         {/* {residentsGrid?.length > 0 && (
