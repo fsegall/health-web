@@ -20,6 +20,7 @@ import DemograficoForm from './Forms/DemograficoForm';
 import DomiciliosForm from './Forms/DomicilioForm';
 import SaudeDoencaForm from './Forms/SaudeDoencaForm';
 import AlimentacaoNutricaoForm from './Forms/AlimentacaoNutricaoForm';
+import ApoioProtecaoSocialForm from './Forms/ApoioProtecaoSocialForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -192,6 +193,15 @@ const IndigenousInterview: React.FC = () => {
             isEditForm={id ? true : false}
             offline={isOffline}
             initialValues={initialValues ? initialValues?.alimentacao_nutricao : {}}
+          />
+        )}
+        <SectionTitle id="apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
+        {formState.formsSubmitted.apoio_protecao_social.show && (
+          <ApoioProtecaoSocialForm
+            dispatch={dispatch}
+            isEditForm={id ? true : false}
+            offline={isOffline}
+            initialValues={initialValues ? initialValues?.apoio_protecao_social : {}}
           />
         )}
 

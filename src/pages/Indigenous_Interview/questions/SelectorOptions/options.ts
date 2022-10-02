@@ -565,3 +565,94 @@ export const ultimoAComer = {
     todos: 'Todos comem juntos',
     'ns-nr': 'NS/NR'
 }
+
+// APOIO E PROTEÇÃO SOCIAL
+
+export const criancasComemNaEscola = {
+    sim: 'Sim',
+    nao: 'Não',
+    nem_sempre: 'Nem sempre tem comida na escola',
+    'ns-nr': 'NS/NR'
+}
+
+export const merendaEscolarIncluiAlimentosTradicionais = {
+    sim: 'Sim',
+    nao: 'Não',
+    as_vezes: 'Às vezes',
+    'ns-nr': 'NS/NR'
+}
+
+export const apoioFinanceiro = {
+    sim: 'Sim',
+    nao: 'Nao',
+    tentou: 'Tentou'
+}
+
+export const origemCestaAlimentos = {
+    estado: 'Estado',
+    municipio: 'Município',
+    funai: 'Da FUNAI (Conab)',
+    movimento_indigena: 'Do movimento indígena (Aty Guasu, Kuñangue, Aty Gusau, outros)',
+    apoiadores_nao_indigenas: 'De apoiadores não indígenas',
+    'ns-nr': 'NS/NR'
+}
+
+export const listaDeAlimentos = {
+    leite: 'Leite',
+    arroz: 'Arroz',
+    feijao: 'Feijão',
+    milho_derivados: 'Milho e derivados',
+    oleo_soja: 'Óleo de soja',
+    acucar: 'Açucar',
+    cafe: 'Café',
+    erva_mate: 'Erva Mate',
+    farinha_mandioca: 'Farinha de mandioca',
+    farinha_trigo: 'Farinha de trigo',
+    macarrao: 'Macarrão',
+    molho_tomate: 'Molho de tomate',
+    frutas: 'Frutas',
+    fuba: 'Fubá',
+    legumas_verduras: 'Legumes / verduras',
+    sardinha_atum_lata: 'Sardinha / atum em lata',
+    legumes_em_lata: 'Seleta de legumes (miho / ervinha) em lata',
+    ovos: 'Ovos',
+    outros: 'Outros'
+}
+
+export const motivosNaoReceberCesta = {
+    nao_sabe: 'Não sei',
+    nao_necessita: 'Não preciso',
+    nao_sabe_pedir: 'Não sei como fazer para pedir',
+    fornecimento_suspendido: 'O governo / FUNAI suspendeu a entrega',
+    outros: 'Outros'
+}
+
+export const recebeODinheiroDoAuxilio = {
+    propria_pessoa: 'Própria pessoa',
+    chefe_familia: 'Chefe da família',
+    esposa: 'Esposa',
+    funcionario_funai: 'Funcionário da FUNAI',
+    funcionario_sesai: 'Funcionário da SESAI',
+    ais: 'AIS',
+    outro_morador: 'Outra pessoa desta casa',
+    lideranca_indigena_professor: 'Liderança indígena / professor',
+    comerciante: 'Comerciante onde faz as compras',
+    outro: 'Outro'
+}
+
+export const quantidadeDeVezesAuxilio = {
+    uma: 'Uma vez',
+    duas: 'Duas vezes',
+    tres: 'Três vezes',
+    quatro_ou_mais: 'Quatro vezes ou mais',
+    'ns-nr': 'NS/NR'
+}
+
+export const tipoDeAuxilioRecebido = {
+    alimento: 'Alimento',
+    dinheiro: 'Dinheiro',
+    cuidado: 'Cuidado',
+    roupas_agua_utensilios_para_casa: 'Roupas, água, utensílios para casa',
+    outro: 'Outro tipo',
+    'ns-nr': 'NS/NR'
+}

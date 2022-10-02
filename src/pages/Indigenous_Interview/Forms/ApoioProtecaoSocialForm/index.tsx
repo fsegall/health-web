@@ -11,52 +11,52 @@ import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import api from '../../../../services/api';
-import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
-import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
-import { AlimentacaoNutricaoValidation } from '../../validation/schemas/alimentacaoNutricaoValidation';
+import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
+import ICreateSaudeDoencaDTO from '../../dtos/ICreateSaudeDoencaDTO';
+import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
 
 
 
-interface AlimentacaoNutricaoFormProps {
+interface ApoioProtecaoSocialFormProps {
   dispatch: Function;
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
 }
 
-const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
-  const AlimentacaoNutricaoFormRef = useRef<FormHandles>(null);
+  const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: ICreateAlimentacaoNutricaoDTO) => {
+  const handleSubmit = useCallback(async (data: ICreateSaudeDoencaDTO) => {
     try {
-      AlimentacaoNutricaoFormRef.current?.setErrors({});
-      const validatedData = await AlimentacaoNutricaoValidation.validate(data, {
+      ApoioProtecaoSocialFormRef.current?.setErrors({});
+      const validatedData = await SaudeDoencaValidation.validate(data, {
         abortEarly: false,
       });
 
-      const alimentacaoNutricao = {
+      const apoioProtecaoSocial = {
         ...data,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('alimentacaoNutricao ', alimentacaoNutricao)
-        // const response = await api.post('/indigenous-informacoes-basicas', alimentacaoNutricao, {
+        console.log('apoioProtecaoSocial ', apoioProtecaoSocial)
+        // const response = await api.post('/indigenous-informacoes-basicas', apoioProtecaoSocial, {
         //   headers: { Authorization: `Bearer ${token}` },
         // })
-        // localStorage.setItem('@Safety:alimentacaoNutricao_id', response.data.id);
+        // localStorage.setItem('@Safety:apoioProtecaoSocial_id', response.data.id);
 
         // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
-          title: 'Informações de alimentação e nutrição adicionadas com sucesso',
-          description: 'Você já pode prosseguir para o módulo apoio e proteção social',
+          title: 'Informações do apoio e proteção social adicionadas com sucesso',
+          description: 'Você já pode preencher as informações do projeto',
         });
       } else {
         //TODO: FAZER VERSÃO OFFLINE
@@ -66,7 +66,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         console.log(error);
         const errors = getValidationErrors(error);
 
-        AlimentacaoNutricaoFormRef.current?.setErrors(errors);
+        ApoioProtecaoSocialFormRef.current?.setErrors(errors);
 
         addToast({
           type: 'error',
@@ -79,16 +79,16 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
 
 
   if (isEditForm) {
-    AlimentacaoNutricaoFormRef.current?.setData({
+    ApoioProtecaoSocialFormRef.current?.setData({
         //TODO: FAZER EDIT FORM
     })
   }
   return (
     <StyledForm
-      ref={AlimentacaoNutricaoFormRef}
+      ref={ApoioProtecaoSocialFormRef}
       onSubmit={handleSubmit}
     >
-        {alimentacaoNutricaoFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
+        {apoioProtecaoSocialFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
@@ -96,7 +96,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {alimentacaoNutricaoFormHelper?.length == sectionIndex+1 && (
+                {apoioProtecaoSocialFormHelper?.length == sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>
@@ -105,4 +105,4 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
   );
 }
 
-export default AlimentacaoNutricaoForm;
+export default ApoioProtecaoSocialForm;
