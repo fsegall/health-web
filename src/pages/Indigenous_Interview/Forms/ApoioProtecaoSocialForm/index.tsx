@@ -12,8 +12,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import api from '../../../../services/api';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
-import ICreateSaudeDoencaDTO from '../../dtos/ICreateSaudeDoencaDTO';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
+import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
 
 
 
@@ -32,7 +32,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
 
   const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: ICreateSaudeDoencaDTO) => {
+  const handleSubmit = useCallback(async (data: ICreateApoioProtecaoSocialDTO) => {
     try {
       ApoioProtecaoSocialFormRef.current?.setErrors({});
       const validatedData = await SaudeDoencaValidation.validate(data, {

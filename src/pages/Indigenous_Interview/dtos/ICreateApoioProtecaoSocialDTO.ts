@@ -1,4 +1,4 @@
-export default interface ApoioProtecaoSocialDTO extends ApoioFinanceiroDTO {
+export default interface ICreateApoioProtecaoSocialDTO extends ApoioFinanceiroDTO {
     morador_matriculado_na_educacao_basica_publica: string; //select
     // se sim
     quantidade_morador_matriculado_na_educacao_basica_publica?: number;
