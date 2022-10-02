@@ -1,4 +1,4 @@
-export default interface ICreateAlimentacaoNutricaoDTO extends QuandoFaltaComidaDTO, AlimentosDiaAnteriorDTO {
+export default interface ICreateAlimentacaoNutricaoDTO {
     id?: string;
     morar_retomada_mudou_alimentacao?: string; //GK-ONLY select
     luta_por_terra: string; //select
@@ -10,6 +10,7 @@ export default interface ICreateAlimentacaoNutricaoDTO extends QuandoFaltaComida
     tabela_alimentacao: AlimentacaoSemMenoresDTO | AlimentacaoComMenoresDTO;
     consumiram_sempre_alimentos_da_cultura: string; //select
 
+    acao_quando_falta_comida: string[]; //multi-select
     // condicional QuandoFaltaComidaDTO
     morador_faz_horta: string; //select
     // se não
@@ -24,7 +25,7 @@ export default interface ICreateAlimentacaoNutricaoDTO extends QuandoFaltaComida
     dificuldade_com_horta: string; //select
     // se sim
     lista_dificuldades_com_horta: string[]; //multi-select
-    serventia_horta: string; //select
+    finalidade_horta: string; //select
     animais_de_criacao_alimentacao_ou_venda: string; //select
     // se sim
     lista_animais_de_criacao_alimentacao_ou_venda: string[]; //multi-select
@@ -37,7 +38,7 @@ export default interface ICreateAlimentacaoNutricaoDTO extends QuandoFaltaComida
     faz_remedios_com_plantas: string; //select
     moradia_possui_fogao: string[]; //multi-select
     material_utilizado_para_fazer_fogo: string; //select
-
+    alimentos_consumidos_dia_anterior: string[]; //multi-select
     // AlimentosDiaAnteriorDTO
     primeiros_a_se_alimentar?: string; //GK-REMOVE select
     ultimos_a_se_alimentar?: string; //GK-REMOVE select 
@@ -46,6 +47,7 @@ export default interface ICreateAlimentacaoNutricaoDTO extends QuandoFaltaComida
 interface TabelaBaseAlimentacaoDTO {
     alimentacao_saudavel_diariamente_30d: string; //select
     comida_disponivel_todos_os_dias_30d: string; //select
+    dia_sem_alimentos_30d: string;
 }
 
 interface AlimentacaoSemMenoresDTO extends TabelaBaseAlimentacaoDTO {
@@ -54,40 +56,7 @@ interface AlimentacaoSemMenoresDTO extends TabelaBaseAlimentacaoDTO {
 }
 
 interface AlimentacaoComMenoresDTO extends TabelaBaseAlimentacaoDTO {
-    comeu_menos_para_alimentar_os_jovens_39d: string; //select
+    comeu_menos_para_alimentar_os_jovens_30d: string; //select
     jovens_comeram_menos_do_necessario_30d: string; //select
     jovens_passaram_algum_dia_sem_alimentos_30d: string; //select
-}
-
-interface QuandoFaltaComidaDTO {
-    come_vende_animais_de_criacao: boolean;
-    vende_ferramentas_agricolas_ou_de_trabalho: boolean;
-    vende_equipamentos_domesticos: boolean;
-    vende_produtos_na_cidade: boolean;
-    vai_para_outra_comunidade: boolean;
-    vai_para_cidade: boolean;
-    compra_fiado: boolean;
-    ajuda_cidade: boolean;
-    ajuda_parente: boolean;
-    ajuda_igreja: boolean;
-    ajuda_vizinhos: boolean;
-    ajuda_funai: boolean;
-    ajuda_posto_de_saude: boolean;
-    ajuda_cras: boolean;
-    ajuda_cimi: boolean;
-    outros: boolean;
-}
-
-interface AlimentosDiaAnteriorDTO {
-    feijao_1d: boolean;
-    arroz_1d: boolean;
-    mandioca_cara_inhame_batata_1d: boolean;
-    carnes_1d: boolean;
-    verduras_legumes_1d: boolean;
-    frutas_frescas_1d: boolean;
-    leite_e_derivados_1d: boolean;
-    hamburguer_ou_embutidos_1d: boolean;
-    bebidas_adocadas_1d: boolean;
-    macarrao_salgadinhos_biscoitos_1d: boolean;
-    doces_guloseimas_1d: boolean;
 }

@@ -8,7 +8,7 @@ import { FormHandles } from '@unform/core';
 import {
   StyledForm,
   Label
-} from './styles';
+} from '../form-styles';
 import {
   FiUser,
 } from 'react-icons/fi';

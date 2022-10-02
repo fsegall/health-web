@@ -11,52 +11,52 @@ import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import api from '../../../../services/api';
-import { domicilioFormHelper, FormHelperType } from './helper';
-import ICreateDomicilioDTO from '../../dtos/ICreateDomicilioDTO';
-import { DomicilioValidation } from '../../validation/schemas/domicilioValidation';
+import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
+import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
+// import { AlimentacaoNutricaoValidation } from '../../validation/schemas/alimentacaoNutricaoValidation';
 
 
 
-interface DomiciliosFormProps {
+interface AlimentacaoNutricaoFormProps {
   dispatch: Function;
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
 }
 
-const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
-  const DomiciliosFormRef = useRef<FormHandles>(null);
+  const AlimentacaoNutricaoFormRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: ICreateDomicilioDTO) => {
+  const handleSubmit = useCallback(async (data: ICreateAlimentacaoNutricaoDTO) => {
     try {
-      DomiciliosFormRef.current?.setErrors({});
-      const validatedData = await DomicilioValidation.validate(data, {
-        abortEarly: false,
-      });
+      AlimentacaoNutricaoFormRef.current?.setErrors({});
+    //   const validatedData = await AlimentacaoNutricaoValidation.validate(data, {
+    //     abortEarly: false,
+    //   });
 
-      const domicilio = {
+      const alimentacaoNutricao = {
         ...data,
-        ...validatedData,
+        // ...validatedData,
       };
 
       if (!offline) {
-        console.log('domicilio ', domicilio)
-        // const response = await api.post('/indigenous-informacoes-basicas', domicilio, {
+        console.log('alimentacaoNutricao ', alimentacaoNutricao)
+        // const response = await api.post('/indigenous-informacoes-basicas', alimentacaoNutricao, {
         //   headers: { Authorization: `Bearer ${token}` },
         // })
-        // localStorage.setItem('@Safety:domicilio_id', response.data.id);
+        // localStorage.setItem('@Safety:alimentacaoNutricao_id', response.data.id);
 
         // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
-          title: 'Informações do domicílio adicionadas com sucesso',
-          description: 'Você já pode prosseguir para o módulo doença e saúde',
+          title: 'Informações de alimentação e nutrição adicionadas com sucesso',
+          description: 'Você já pode prosseguir para o módulo apoio e proteção social',
         });
       } else {
         //TODO: FAZER VERSÃO OFFLINE
@@ -66,7 +66,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         console.log(error);
         const errors = getValidationErrors(error);
 
-        DomiciliosFormRef.current?.setErrors(errors);
+        AlimentacaoNutricaoFormRef.current?.setErrors(errors);
 
         addToast({
           type: 'error',
@@ -79,16 +79,16 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
 
 
   if (isEditForm) {
-    DomiciliosFormRef.current?.setData({
+    AlimentacaoNutricaoFormRef.current?.setData({
         //TODO: FAZER EDIT FORM
     })
   }
   return (
     <StyledForm
-      ref={DomiciliosFormRef}
+      ref={AlimentacaoNutricaoFormRef}
       onSubmit={handleSubmit}
     >
-        {domicilioFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
+        {alimentacaoNutricaoFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
@@ -96,7 +96,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {domicilioFormHelper?.length == sectionIndex+1 && (
+                {alimentacaoNutricaoFormHelper?.length == sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>
@@ -105,4 +105,4 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
   );
 }
 
-export default DomiciliosForm;
+export default AlimentacaoNutricaoForm;

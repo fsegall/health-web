@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import {
     StyledForm,
     Label
-  } from './styles';
+  } from '../form-styles';
 import Button from "../../../../components/Button";
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import { useToast } from "../../../../hooks/toast";

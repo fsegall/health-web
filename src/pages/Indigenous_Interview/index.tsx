@@ -19,6 +19,7 @@ import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
 import DemograficoForm from './Forms/DemograficoForm';
 import DomiciliosForm from './Forms/DomicilioForm';
 import SaudeDoencaForm from './Forms/SaudeDoencaForm';
+import AlimentacaoNutricaoForm from './Forms/AlimentacaoNutricaoForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -148,7 +149,7 @@ const IndigenousInterview: React.FC = () => {
                 )}
             </ButtonsContainer>
         </Header>
-        <SectionTitle id="person">Informações Básicas</SectionTitle>
+        <SectionTitle id="informacoes_basicas">Informações Básicas</SectionTitle>
         {formState.formsSubmitted.informacoes_basicas.show && (
           <InformacoesBasicasForm
             dispatch={dispatch}
@@ -157,7 +158,7 @@ const IndigenousInterview: React.FC = () => {
             initialValues={initialValues ? initialValues?.informacoes_basicas : {}}
           />
         )}
-        <SectionTitle id="person">Demográfico</SectionTitle>
+        <SectionTitle id="demografico">Demográfico</SectionTitle>
         {formState.formsSubmitted.demografico.show && (
           <DemograficoForm
             dispatch={dispatch}
@@ -166,7 +167,7 @@ const IndigenousInterview: React.FC = () => {
             initialValues={initialValues ? initialValues?.demografico : {}}
           />
         )}
-        <SectionTitle id="person">Domicílio</SectionTitle>
+        <SectionTitle id="domicilio">Domicílio</SectionTitle>
         {formState.formsSubmitted.domicilio.show && (
           <DomiciliosForm
             dispatch={dispatch}
@@ -175,13 +176,22 @@ const IndigenousInterview: React.FC = () => {
             initialValues={initialValues ? initialValues?.domicilio : {}}
           />
         )}
-        <SectionTitle id="person">Saúde e Doença</SectionTitle>
+        <SectionTitle id="saude_doenca">Saúde e Doença</SectionTitle>
         {formState.formsSubmitted.saude_doenca.show && (
           <SaudeDoencaForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
             initialValues={initialValues ? initialValues?.saude_doenca : {}}
+          />
+        )}
+        <SectionTitle id="alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
+        {formState.formsSubmitted.alimentacao_nutricao.show && (
+          <AlimentacaoNutricaoForm
+            dispatch={dispatch}
+            isEditForm={id ? true : false}
+            offline={isOffline}
+            initialValues={initialValues ? initialValues?.alimentacao_nutricao : {}}
           />
         )}
 

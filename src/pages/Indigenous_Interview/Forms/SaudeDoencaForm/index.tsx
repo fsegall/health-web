@@ -4,7 +4,7 @@ import { FormHandles } from '@unform/core';
 import {
   StyledForm,
   Label
-} from './styles';
+} from '../form-styles';
 import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
