@@ -9,7 +9,7 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, options, initialValue, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, ...rest }) => {
   const selectRef = useRef(null);
   const { fieldName, registerField } = useField(name);
 
@@ -39,6 +39,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, ...rest }) => {
     <ReactSelect
       ref={selectRef}
       options={options}
+      isDisabled={isDisabled}
       placeholder="Selecione"
       classNamePrefix="react-select"
       {...rest}

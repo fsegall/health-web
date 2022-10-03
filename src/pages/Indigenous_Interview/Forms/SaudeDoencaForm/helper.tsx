@@ -13,6 +13,8 @@ export interface FormHelperType {
         options?: Array<any>;
         type?: 'text' | 'textarea' | 'number';
     };
+    hasDependencies?: boolean;
+    dependencies?: any;
 }
 
 export const saudeDoencaFormHelper: FormHelperType[][] = [
@@ -23,7 +25,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'tomou_vacina_covid',
                 options: handleValueLabelOption(vacinaCovidOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Por que você não tomou a vacina da Covid-19?',
@@ -31,6 +34,9 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'motivo_nao_tomar_vacina_covid',
                 options: handleValueLabelOption(motivosNaoTomarVacinaCovidOptions),
+            },
+            dependencies: {
+                tomou_vacina_covid: "nao",
             }
         },
         {
@@ -39,7 +45,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'familiar_morte_covid',
                 options: handleValueLabelOption(familiarMorteCovid),
-            }
+            },
         },
         {
             label: 'Essa pessoa contribuía para a renda da família?',

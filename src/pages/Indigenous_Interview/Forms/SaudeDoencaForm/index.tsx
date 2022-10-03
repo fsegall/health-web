@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -77,6 +77,33 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
     }
   }, [addToast, user, token, dispatch, offline]);
 
+  const [formDependencies, setFormDependencies] = useState<any>({})
+
+  function handleDependencies(element: FormHelperType, value: any) {
+    let currentForm: any = {
+      ...formDependencies,
+      [element.props.name]: value
+    }
+    setFormDependencies(currentForm)
+  }
+
+  function handleDisabled(element: FormHelperType): boolean {
+    const allDisabledValidations = Object.entries(element?.dependencies)?.map(obj => {
+      let isDisabled = true
+      const found = formDependencies[obj?.[0]]
+      if (found) {
+        if (found === obj?.[1]) {
+          isDisabled = false
+        }
+      }
+      return isDisabled
+    })
+    if (allDisabledValidations?.every(v => v === false)) {
+      return false
+    } else {
+      return true
+    }
+  }
 
   if (isEditForm) {
     SaudeDoencaFormRef.current?.setData({
@@ -93,7 +120,11 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
                         <Label>{element.label}</Label>
-                        <element.type {...element.props} />
+                        <element.type
+                          {...element.props}
+                          isDisabled={element?.dependencies && handleDisabled(element)}
+                          onChange={(e: any) => element?.hasDependencies && handleDependencies(element, e?.value)}
+                        />
                     </span>
                 ))}
                 {saudeDoencaFormHelper?.length == sectionIndex+1 && (
