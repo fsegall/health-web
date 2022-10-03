@@ -1,20 +1,15 @@
-import React, { useState, useEffect, useCallback, useReducer } from 'react';
+import React, { useState, useCallback, useReducer } from 'react';
 import {
   Container,
   Header,
   SectionTitle,
-  SubmittedContainer,
   ButtonsContainer,
   OfflineLabel,
   ResetButton,
-  EditInterviewCard
 } from './styles';
 import { Link, useParams } from 'react-router-dom';
 import Switch from "react-switch";
 import logo from '../../assets/logo_transparent.png';
-import api from '../../services/api';
-import { useAuth } from '../../hooks/auth';
-import ArrayForm from './Forms/ArrayForm';
 import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
 import DemograficoForm from './Forms/DemograficoForm';
 import DomiciliosForm from './Forms/DomicilioForm';
@@ -113,8 +108,8 @@ function reducer(state: StateFormat, action: FormActionFormat) {
 const IndigenousInterview: React.FC = () => {
     //@ts-ignore
     const { id } = useParams();
-    const { token } = useAuth();
-    const [initialValues, setInitialValues] = useState<any>({})
+    // const { token } = useAuth();
+    const [initialValues] = useState<any>({})
     const [formState, dispatch] = useReducer(reducer, initialState);
 
     const resetForms = useCallback(

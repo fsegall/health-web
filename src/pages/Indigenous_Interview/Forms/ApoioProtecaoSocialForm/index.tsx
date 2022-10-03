@@ -5,12 +5,10 @@ import {
   StyledForm,
   Label
 } from '../form-styles';
-import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import api from '../../../../services/api';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
@@ -25,8 +23,6 @@ interface ApoioProtecaoSocialFormProps {
 }
 
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
-
-  const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -75,7 +71,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, offline]);
 
 
   if (isEditForm) {
@@ -96,7 +92,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {apoioProtecaoSocialFormHelper?.length == sectionIndex+1 && (
+                {apoioProtecaoSocialFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>

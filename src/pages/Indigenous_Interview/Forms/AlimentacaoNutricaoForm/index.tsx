@@ -5,12 +5,11 @@ import {
   StyledForm,
   Label
 } from '../form-styles';
-import { useAuth } from '../../../../hooks/auth';
+// import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import api from '../../../../services/api';
 import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
 import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
 import { AlimentacaoNutricaoValidation } from '../../validation/schemas/alimentacaoNutricaoValidation';
@@ -26,7 +25,7 @@ interface AlimentacaoNutricaoFormProps {
 
 const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -75,7 +74,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, offline]);
 
 
   if (isEditForm) {
@@ -96,7 +95,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {alimentacaoNutricaoFormHelper?.length == sectionIndex+1 && (
+                {alimentacaoNutricaoFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>
