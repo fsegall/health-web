@@ -88,11 +88,12 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
   }
 
   function handleDisabled(element: FormHelperType): boolean {
-    const allDisabledValidations = Object.entries(element?.dependencies)?.map(obj => {
+    const dependencies: { [key: string]: string[] } | any = element?.dependencies
+    const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
       let isDisabled = true
       const found = formDependencies[obj?.[0]]
       if (found) {
-        if (found === obj?.[1]) {
+        if (obj?.[1]?.find((v: any) => v === found)) {
           isDisabled = false
         }
       }
