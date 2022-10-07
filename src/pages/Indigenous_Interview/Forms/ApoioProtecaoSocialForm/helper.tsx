@@ -13,6 +13,8 @@ export interface FormHelperType {
         options?: Array<any>;
         type?: 'text' | 'textarea' | 'number';
     };
+    hasDependencies?: boolean;
+    dependencies?: { [key: string]: string[]; };
 }
 
 export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
@@ -24,7 +26,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'morador_matriculado_na_educacao_basica_publica',
                 options: handleValueLabelOption(options?.yesOrNoOptions),
                 isMulti: false,
-            }
+            },
+            hasDependencies: true
         },
         {
             label: ' Se sim, quantas pessoas?',
@@ -32,6 +35,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             props: {
                 name: 'quantidade_morador_matriculado_na_educacao_basica_publica',
                 type: 'number',
+            },
+            dependencies: {
+                morador_matriculado_na_educacao_basica_publica: ["true"]
             }
         },
         {
@@ -41,6 +47,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'criancas_comem_na_escola',
                 options: handleValueLabelOption(options?.criancasComemNaEscola),
                 isMulti: false,
+            },
+            dependencies: {
+                morador_matriculado_na_educacao_basica_publica: ["true"]
             }
         },
         {
@@ -50,6 +59,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'escola_inclui_alimentos_da_cultura',
                 options: handleValueLabelOption(options?.merendaEscolarIncluiAlimentosTradicionais),
                 isMulti: false,
+            },
+            dependencies: {
+                morador_matriculado_na_educacao_basica_publica: ["true"]
             }
         },
     ],
@@ -61,16 +73,17 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'morador_recebe_ajuda_financeira',
                 options: handleValueLabelOption(options?.yesOrNoOptions),
                 isMulti: false,
-            }
+            },
         },
         {
             label: 'Se SIM, nos últimos 3 meses, você ou alguém da sua família recebeu de que programa? Bolsa Família/Auxílio Brasil?',
             type: Select,
             props: {
-                name: 'bolsa_familia_auxili_brasil',
+                name: 'bolsa_familia_auxilio_brasil',
                 options: handleValueLabelOption(options?.apoioFinanceiro),
                 isMulti: false,
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'Benefício de Prestação continuada (BPC)',
@@ -160,7 +173,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'cesta_de_alimentos',
                 options: handleValueLabelOption(options?.apoioFinanceiro),
                 isMulti: false,
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'SE respondeu SIM para recebimento de cestas, quantas recebeu nos últimos três meses',
@@ -168,6 +182,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             props: {
                 name: 'quantidade_cesta_de_alimentos_3m',
                 type: 'number'
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"]
             }
         },
         {
@@ -177,6 +194,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'origem_cesta_de_alimentos_3m',
                 options: handleValueLabelOption(options?.origemCestaAlimentos),
                 isMulti: true,
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"]
             }
         },
         {
@@ -186,14 +206,20 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'alimentos_deveriam_estar_na_cesta_e_nao_estao',
                 options: handleValueLabelOption(options?.listaDeAlimentos),
                 isMulti: true,
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"]
             }
         },
         {
-            label: 'Alimento que deveria ser adicionado',
+            label: 'Outros alimentos que deveriam ser adicionado',
             type: Input,
             props: {
                 name: 'descricao_adicionar_outro',
                 type: 'text',
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"],
             }
         },
         {
@@ -203,14 +229,20 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'alimentos_que_nao_deveriam_estar_na_cesta',
                 options: handleValueLabelOption(options?.listaDeAlimentos),
                 isMulti: true,
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"]
             }
         },
         {
-            label: 'Alimento que não deveria estar na cesta',
+            label: 'Outros alimento que não deveriam estar na cesta',
             type: Input,
             props: {
                 name: 'descricao_remover_outro',
                 type: 'text',
+            },
+            dependencies: {
+                cesta_de_alimentos: ["sim"],
             }
         },
         {
@@ -220,6 +252,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'motivo_nao_recebe_cesta_de_alimentos',
                 options: handleValueLabelOption(options?.motivosNaoReceberCesta),
                 isMulti: false,
+            },
+            dependencies: {
+                cesta_de_alimentos: ["nao"]
             }
         },
         {
@@ -229,6 +264,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'quem_pega_dinheiro_bolsa_familia',
                 options: handleValueLabelOption(options?.recebeODinheiroDoAuxilio),
                 isMulti: false,
+            },
+            dependencies: {
+                bolsa_familia_auxilio_brasil: ["sim"]
             }
         },
     ],
@@ -240,7 +278,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'auxilio_emergencial_na_pandemia',
                 options: handleValueLabelOption(options?.yesOrNoOptions),
                 isMulti: false,
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'Se sim, quantas vezes recebeu o auxílio?',
@@ -249,6 +288,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'quantidade_vezes_auxilio_emergencial_na_pandemia',
                 options: handleValueLabelOption(options?.quantidadeDeVezesAuxilio),
                 isMulti: false,
+            },
+            dependencies: {
+                auxilio_emergencial_na_pandemia: ["true"]
             }
         },
         {
@@ -258,7 +300,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'ajuda_estado_prefeitura_outros_3m',
                 options: handleValueLabelOption(options?.yesOrNoOptions),
                 isMulti: false,
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'Caso você ou alguém da sua casa tenha recebido ajuda, o que recebeu?',
@@ -267,6 +310,9 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 name: 'itens_recebidos_ajuda_estado_prefeitura_outros_3m',
                 options: handleValueLabelOption(options?.tipoDeAuxilioRecebido),
                 isMulti: false,
+            },
+            dependencies: {
+                ajuda_estado_prefeitura_outros_3m: ["true"]
             }
         },
         {
