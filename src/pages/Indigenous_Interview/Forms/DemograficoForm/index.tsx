@@ -121,6 +121,42 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         }
     }
 
+    
+  const [formDependencies, setFormDependencies] = useState<any>({})
+
+  function handleDependencies(element: FormHelperType, index: number, value: any) {
+    let currentForm: any = {
+      ...formDependencies,
+      [index]: {
+        ...formDependencies[index],
+        [element.props.name]: value
+      }
+    }
+    setFormDependencies(currentForm)
+  }
+
+  function handleDisabled(element: FormHelperType, index: number): boolean {
+    const dependencies: { [key: string]: string[] } | any = element?.dependencies
+    const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
+      console.log('obj ', obj)
+      let isDisabled = true
+      const found = formDependencies?.[index]?.[obj?.[0]]
+      console.log('formDependencies ', formDependencies)
+      console.log('teste found ', found)
+      if (found) {
+        if (obj?.[1]?.find((v: any) => Number(v) >= Number(found))) {
+          isDisabled = false
+        }
+      }
+      return isDisabled
+    })
+    if (allDisabledValidations?.every(v => v === false)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
     <StyledForm
       ref={DemograficoFormRef}
@@ -145,7 +181,11 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                     {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
                         <span key={elementIndex}>
                             <Label>{element.label}</Label>
-                            <element.type {...element.props} />
+                            <element.type
+                              {...element.props}
+                              isDisabled={element?.dependencies && handleDisabled(element, index+1)}
+                              onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target.value)}
+                              />
                         </span>
                         )
                     )}
