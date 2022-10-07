@@ -12,7 +12,10 @@ export interface FormHelperType {
         isMulti?: boolean;
         options?: Array<any>;
         type?: 'text' | 'textarea' | 'number';
-    };
+    },
+    hasDependencies?: boolean;
+    dependencies?: { [key: string]: string[]; };
+    dependenciesWithOr?: boolean;
 }
 
 export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
@@ -27,13 +30,14 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'VOCÊ E OS MORADORES DESTA CASA VIVEM EM SITUAÇÃO DE CONFLITO POR CAUSA DA LUTA PELATerra?',
+            label: 'VOCÊ E OS MORADORES DESTA CASA VIVEM EM SITUAÇÃO DE CONFLITO POR CAUSA DA LUTA PELA Terra?',
             type: Select,
             props: {
                 name: 'luta_por_terra',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'Se sim, você, sua família ou alguém da comunidade ficaram sem alimentação por causa de conflito pela terra?',
@@ -42,6 +46,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'sem_alimentacao_por_conflito_com_terras',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            hasDependencies: true,
+            dependencies: {
+                luta_por_terra: ["true"]
             }
         },
         {
@@ -51,6 +59,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'motivo_sem_alimentacao_por_conflito_com_terras',
                 isMulti: false,
                 options: handleValueLabelOption(options?.semAlimentosPorConflitos)
+            },
+            dependencies: {
+                sem_alimentacao_por_conflito_com_terras: ["true"]
             }
         },
         {
@@ -69,7 +80,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'possui_moradores_menores_de_16',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: '69. No mês passado, você sentiu preocupação em conseguir comida para sua casa?',
@@ -78,6 +90,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'preocupacao_em_conseguir_comida_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            dependencies: {
+                possui_moradores_menores_de_16: ["false"]
             }
         },
         {
@@ -87,7 +102,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'alimentacao_saudavel_diariamente_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: '71. No mês passado, vocês nesta casa comeram sempre comida boa (do gosto)?',
@@ -96,7 +112,11 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'alimentacao_do_gosto_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            dependencies: {
+                possui_moradores_menores_de_16: ["false"]
+            },
+            hasDependencies: true
         },
         {
             label: '72. No mês passado na sua casa teve comida todos os dias?',
@@ -105,7 +125,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'comida_disponivel_todos_os_dias_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: '73. No mês passado, teve dia de você passar o dia todo sem comer nada, porque não tinha comida na casa?',
@@ -114,7 +135,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'dia_sem_alimentos_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: '74. No mês passado, teve dia que você comeu menos para deixar comida para as crianças e jovens da casa?',
@@ -123,6 +145,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'comeu_menos_para_alimentar_os_jovens_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            hasDependencies: true,
+            dependencies: {
+                possui_moradores_menores_de_16: ["true"]
             }
         },
         {
@@ -132,6 +158,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'jovens_comeram_menos_do_necessario_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            dependencies: {
+                possui_moradores_menores_de_16: ["true"]
             }
         },
         {
@@ -141,6 +170,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'jovens_passaram_algum_dia_sem_alimentos_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            dependencies: {
+                possui_moradores_menores_de_16: ["true"],
             }
         },
         {
@@ -159,7 +191,15 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'acao_quando_falta_comida',
                 isMulti: true,
                 options: handleValueLabelOption(options?.acaoFaltaDeComida)
-            }
+            },
+            dependencies: {
+                alimentacao_saudavel_diariamente_30d: ["false"],
+                alimentacao_do_gosto_30d: ["true"],
+                comida_disponivel_todos_os_dias_30d: ["false"],
+                dia_sem_alimentos_30d: ["true"],
+                comeu_menos_para_alimentar_os_jovens_30d: ["true"],
+            },
+            dependenciesWithOr: true,
         },
     ],
     [
@@ -170,7 +210,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'morador_faz_horta',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Por que não faz roça/horta? ATENÇÃO: PODE SER MAIS DE UMA RESPOSTA',
@@ -179,6 +220,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'motivo_morador_nao_faz_horta',
                 isMulti: true,
                 options: handleValueLabelOption(options?.motivacaoNaoProduzirHorta)
+            },
+            dependencies: {
+                morador_faz_horta: ["false"]
             }
         },
         {
@@ -188,6 +232,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'alimentos_da_horta',
                 isMulti: true,
                 options: handleValueLabelOption(options?.plantiosHorta)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -197,6 +244,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'frutiferas_nas_proximidades',
                 isMulti: true,
                 options: handleValueLabelOption(options?.frutiferasEmCasaOuProximo)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -206,6 +256,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'producao_de_comida_ano_todo',
                 isMulti: false,
                 options: handleValueLabelOption(options?.producaoComidaAnoTodo)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -215,6 +268,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'origem_semente_plantio',
                 isMulti: true,
                 options: handleValueLabelOption(options?.fornecedorHorta)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -224,6 +280,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'adiciona_veneno_na_plantacao',
                 isMulti: false,
                 options: handleValueLabelOption(options?.utilizaVenenoPlantio)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -233,6 +292,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'dificuldade_com_horta',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            hasDependencies: true,
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
         {
@@ -242,6 +305,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'lista_dificuldades_com_horta',
                 isMulti: true,
                 options: handleValueLabelOption(options?.dificuldadesHorta)
+            },
+            dependencies: {
+                dificuldade_com_horta: ["true"]
             }
         },
         {
@@ -251,6 +317,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'finalidade_horta',
                 isMulti: false,
                 options: handleValueLabelOption(options?.finalidadeHorta)
+            },
+            dependencies: {
+                morador_faz_horta: ["true"]
             }
         },
     ],
@@ -262,7 +331,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'animais_de_criacao_alimentacao_ou_venda',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'Se sim, quais animais? (+1)',
@@ -271,6 +341,9 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'lista_animais_de_criacao_alimentacao_ou_venda',
                 isMulti: true,
                 options: handleValueLabelOption(options?.criacaoAnimaisComerOuVender)
+            },
+            dependencies: {
+                animais_de_criacao_alimentacao_ou_venda: ["true"]
             }
         },
         {
@@ -298,7 +371,8 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'precisou_comprar_alimentos_3m',
                 isMulti: false,
                 options: handleValueLabelOption(options?.necessidadeComprarAlimentos3m)
-            }
+            },
+            hasDependencies: true
         },
         {
             label: 'SE SIM NA ANTERIOR Nos últimos 3 meses, qual foi o tipo de lugar que você ou alguém da sua família compraram comida? (+1)',
@@ -307,6 +381,13 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'lugar_precisou_comprar_alimentos_3m',
                 isMulti: true,
                 options: handleValueLabelOption(options?.localCompraAlimentos3m)
+            },
+            dependencies: {
+                precisou_comprar_alimentos_3m: [
+                    "sim",
+                    "troca_parentes",
+                    "troca_mercado",
+                ]
             }
         },
         {
