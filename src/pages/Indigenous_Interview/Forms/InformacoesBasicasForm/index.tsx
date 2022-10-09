@@ -1,26 +1,15 @@
-import React, { useState, useRef, useCallback } from 'react';
-import {
-  OptionTypeBase
-} from 'react-select';
+import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
-import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
 import {
   StyledForm,
   Label
 } from '../form-styles';
-import {
-  FiUser,
-} from 'react-icons/fi';
 import { useAuth } from '../../../../hooks/auth';
-import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import { uuid } from 'uuidv4';
 
-
-import api from '../../../../services/api';
 import ICreateInformacoesBasicasDTO from '../../dtos/ICreateInformacoesBasicasDTO';
 import { InformacoesBasicasValidation } from '../../validation/schemas/InformacoesBasicasValidation';
 import { FormHelperType, informacoesBasicasFormHelper } from './helper';
@@ -36,14 +25,14 @@ interface InformacoesBasicasFormProps {
 
 const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const { user, token } = useAuth();
+  const { user } = useAuth();
 
   const { addToast } = useToast();
 
   const InformacoesBasicasFormRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(async (data: ICreateInformacoesBasicasDTO) => {
-    const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
+    // const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed).toISOString();
     data = {
@@ -93,7 +82,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, user, offline]);
 
 
   if (isEditForm) {
@@ -114,7 +103,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {s?.length == sectionIndex-1 && (
+                {s?.length === sectionIndex-1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>

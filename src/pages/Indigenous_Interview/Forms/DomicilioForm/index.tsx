@@ -5,12 +5,10 @@ import {
   StyledForm,
   Label
 } from '../form-styles';
-import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import api from '../../../../services/api';
 import { domicilioFormHelper, FormHelperType } from './helper';
 import ICreateDomicilioDTO from '../../dtos/ICreateDomicilioDTO';
 import { DomicilioValidation } from '../../validation/schemas/domicilioValidation';
@@ -26,7 +24,7 @@ interface DomiciliosFormProps {
 
 const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -75,7 +73,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, offline]);
 
 
   if (isEditForm) {
@@ -96,7 +94,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {domicilioFormHelper?.length == sectionIndex+1 && (
+                {domicilioFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>

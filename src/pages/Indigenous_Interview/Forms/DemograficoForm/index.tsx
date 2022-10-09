@@ -1,17 +1,15 @@
-import React, { useRef, useCallback, useReducer, useState } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import { FormHandles, Scope } from '@unform/core';
 import {
   StyledForm,
   Label
 } from '../form-styles';
-import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 
-import api from '../../../../services/api';
 import ICreateInformacoesBasicasDTO from '../../dtos/ICreateInformacoesBasicasDTO';
 import { FormHelperType, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
@@ -31,9 +29,9 @@ interface DemograficoFormProps {
 
 const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
     
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
 
-  const [formState, setFormState] = useState({})
+  const [formState] = useState({})
 
 //   function handleFormState(e: any) {
 //     setFormState({
@@ -91,7 +89,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, offline]);
 
     if (isEditForm) {
         DemograficoFormRef.current?.setData({
@@ -108,9 +106,9 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         const id = Math.floor(Math.random() * 1000)
         setResidentsGrid((prev: any) => [...prev, baseForm(id)])
     };
-    const removeForm = (id: number) => {
-        setResidentsGrid((prev: any) => prev.filter((p: any) => p.id !== id));
-    };
+    // const removeForm = (id: number) => {
+    //     setResidentsGrid((prev: any) => prev.filter((p: any) => p.id !== id));
+    // };
     const [baseArraySize, setBaseArraySize] = useState<number>(0)
     function handleArrayForm(e: any) {
         e.preventDefault()

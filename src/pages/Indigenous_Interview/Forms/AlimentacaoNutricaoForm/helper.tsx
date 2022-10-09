@@ -1,4 +1,3 @@
-import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
 import * as options from "../../questions/SelectorOptions/options";

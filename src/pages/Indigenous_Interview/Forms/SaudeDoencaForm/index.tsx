@@ -5,12 +5,11 @@ import {
   StyledForm,
   Label
 } from '../form-styles';
-import { useAuth } from '../../../../hooks/auth';
+// import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import api from '../../../../services/api';
 import { saudeDoencaFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
 import ICreateSaudeDoencaDTO from '../../dtos/ICreateSaudeDoencaDTO';
@@ -26,7 +25,7 @@ interface SaudeDoencaFormProps {
 
 const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const { user, token } = useAuth();
+  // const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -75,7 +74,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, user, token, dispatch, offline]);
+  }, [addToast, offline]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 
@@ -128,7 +127,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
                         />
                     </span>
                 ))}
-                {saudeDoencaFormHelper?.length == sectionIndex+1 && (
+                {saudeDoencaFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>

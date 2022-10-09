@@ -16,7 +16,7 @@ import {
 const Accept: React.FC = () => {
   const { addToast } = useToast();
   const [projectType, setProjectType] = useState<ProjectType>('default')
-  const { options, acceptInfo, interviewPath } = useGetProjectsTypes(projectType)
+  const { acceptInfo, interviewPath } = useGetProjectsTypes(projectType)
   const [accept, setAccept] = useState(false);
   const history = useHistory();
   function onSubmit(e: React.SyntheticEvent) {
@@ -57,7 +57,7 @@ const Accept: React.FC = () => {
             <label>Pesquisa Indígena</label>
             <input type="checkbox"
               name="projectType"
-              onChange={() => projectType == 'default' ? setProjectType('indigenous') : setProjectType('default')}
+              onChange={() => projectType === 'default' ? setProjectType('indigenous') : setProjectType('default')}
             />
           </CheckboxContainer>
           <CheckboxContainer>
