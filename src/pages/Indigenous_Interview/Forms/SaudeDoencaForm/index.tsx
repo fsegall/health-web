@@ -93,7 +93,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
       let isDisabled = true
       const found = formDependencies[obj?.[0]]
       if (found) {
-        if (obj?.[1]?.find((v: any) => Number(v) >= found)) {
+        if (obj?.[1]?.find((v: any) => v === found)) {
           isDisabled = false
         }
       }

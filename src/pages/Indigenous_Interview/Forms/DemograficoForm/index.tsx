@@ -138,11 +138,8 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   function handleDisabled(element: FormHelperType, index: number): boolean {
     const dependencies: { [key: string]: string[] } | any = element?.dependencies
     const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
-      console.log('obj ', obj)
       let isDisabled = true
       const found = formDependencies?.[index]?.[obj?.[0]]
-      console.log('formDependencies ', formDependencies)
-      console.log('teste found ', found)
       if (found) {
         if (obj?.[1]?.find((v: any) => Number(v) >= Number(found))) {
           isDisabled = false
