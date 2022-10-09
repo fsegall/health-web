@@ -194,7 +194,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             },
             dependencies: {
                 alimentacao_saudavel_diariamente_30d: ["false"],
-                alimentacao_do_gosto_30d: ["true"],
+                alimentacao_do_gosto_30d: ["false"],
                 comida_disponivel_todos_os_dias_30d: ["false"],
                 dia_sem_alimentos_30d: ["true"],
                 comeu_menos_para_alimentar_os_jovens_30d: ["true"],
