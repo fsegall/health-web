@@ -124,7 +124,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         }
     },
     {
-        label: 'Qual a ocupação profissional PRINCIPAL do MORADOR?  (Maiores de 14 anos)',
+        label: 'Qual a ocupação profissional PRINCIPAL do MORADOR? (Maiores de 14 anos)',
         type: Select,
         props: {
             name: 'ocupacao_profissao',

@@ -296,7 +296,8 @@ export const tratamentosOptions = {
     anemia_ferropriva: 'Anemia ferropriva',
     dst: 'HIV ou outra doença transmitida pelo sexo',
     outro: 'Tratamento para outro tipo de doença',
-    feitico: 'Doença fruto de feitiço'
+    feitico: 'Doença fruto de feitiço',
+    nenhum: 'Nenhum',
 }
 
 export const tratamentosPajeOptions = {

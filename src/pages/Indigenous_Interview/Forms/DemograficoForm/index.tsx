@@ -141,7 +141,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       let isDisabled = true
       const found = formDependencies?.[index]?.[obj?.[0]]
       if (found) {
-        if (obj?.[1]?.find((v: any) => Number(v) >= Number(found))) {
+        if (obj?.[1]?.find((v: any) => Number(v) <= Number(found))) {
           isDisabled = false
         }
       }
