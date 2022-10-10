@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -10,8 +10,8 @@ import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
-import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
+import { ApoioProtecaoSocialValidation } from '../../validation/schemas/apoioProtecaoSocialValidation';
 
 
 
@@ -31,7 +31,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
   const handleSubmit = useCallback(async (data: ICreateApoioProtecaoSocialDTO) => {
     try {
       ApoioProtecaoSocialFormRef.current?.setErrors({});
-      const validatedData = await SaudeDoencaValidation.validate(data, {
+      const validatedData = await ApoioProtecaoSocialValidation.validate(data, {
         abortEarly: false,
       });
 
@@ -73,12 +73,42 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
     }
   }, [addToast, offline]);
 
+  
+  const [formDependencies, setFormDependencies] = useState<any>({})
+
+  function handleDependencies(element: FormHelperType, value: any) {
+    let currentForm: any = {
+      ...formDependencies,
+      [element.props.name]: value
+    }
+    setFormDependencies(currentForm)
+  }
+
+  function handleDisabled(element: FormHelperType): boolean {
+    const dependencies: { [key: string]: string[] } | any = element?.dependencies
+    const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
+      let isDisabled = true
+      const found = formDependencies[obj?.[0]]
+      if (found) {
+        if (obj?.[1]?.find((v: any) => v === found)) {
+          isDisabled = false
+        }
+      }
+      return isDisabled
+    })
+    if (allDisabledValidations?.every(v => v === false)) {
+      return false
+    } else {
+      return true
+    }
+  }
 
   if (isEditForm) {
     ApoioProtecaoSocialFormRef.current?.setData({
         //TODO: FAZER EDIT FORM
     })
   }
+
   return (
     <StyledForm
       ref={ApoioProtecaoSocialFormRef}
@@ -89,7 +119,11 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
                         <Label>{element.label}</Label>
-                        <element.type {...element.props} />
+                        <element.type
+                          {...element.props}
+                          isDisabled={element?.dependencies && handleDisabled(element)}
+                          onChange={(e: any) => element?.hasDependencies && handleDependencies(element, e?.value)}
+                        />
                     </span>
                 ))}
                 {apoioProtecaoSocialFormHelper?.length === sectionIndex+1 && (

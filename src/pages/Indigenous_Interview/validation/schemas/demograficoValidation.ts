@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
 
 export const DemograficoValidation = Yup.object().shape({
-    total_moradores: Yup.number().required('Você precisa digitar o total de moradores').min(1, 'Nao pode ser um número negativo'),
+    total_moradores: Yup.number()
+    .test('validate-moradores', 'Você deve gerar a grade com o número correto de moradores', function(value){
+      return this.parent.quadro_social_demografico.length === value
+    }),
     trabalho_colheita_de_maca: Yup.string().nullable(), //GK-ONLY
     quadro_social_demografico: Yup.array()
     .of(
@@ -14,10 +17,22 @@ export const DemograficoValidation = Yup.object().shape({
         raca: Yup.string().required('Você precisa digitar a raça'),
         povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
         lingua_indigena: Yup.string().required('Você precisa preencher sobre a lingua indígena'),
-        crenca_religiao: Yup.string().nullable(),
+        crenca_religiao: Yup.string().nullable().when("idade", {
+          is: (val: any) => Number(val) > 14,
+          then: Yup.string().nullable().required("Você precisa preencher as sobre a religião"),
+          otherwise: Yup.string().nullable().notRequired(),
+        }),
+        situacao_no_trabalho: Yup.string().nullable().when("idade", {
+          is: (val: any) => Number(val) > 14,
+          then: Yup.string().nullable().required("Você precisa preencher sobre a situação no trabalho"),
+          otherwise: Yup.string().nullable().notRequired(),
+        }),
+        ocupacao_profissao: Yup.string().nullable().when("idade", {
+          is: (val: any) => Number(val) > 14,
+          then: Yup.string().nullable().required("Você precisa preencher sobre a profissão"),
+          otherwise: Yup.string().nullable().notRequired(),
+        }),
         grau_escolaridade: Yup.string().required('Você precisa preencher o grau de escolaridade'),
-        situacao_no_trabalho: Yup.string().nullable(),
-        profissao: Yup.string().nullable(),
       })
     ).required('Você precisa preencher as informações dos moradores'),
 });

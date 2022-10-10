@@ -13,6 +13,8 @@ export interface FormHelperType {
         options?: Array<any>;
         type?: 'text' | 'textarea' | 'number';
     };
+    hasDependencies?: boolean;
+    dependencies?: { [key: string]: string[]; };
 }
 
 export const saudeDoencaFormHelper: FormHelperType[][] = [
@@ -23,7 +25,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'tomou_vacina_covid',
                 options: handleValueLabelOption(vacinaCovidOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Por que você não tomou a vacina da Covid-19?',
@@ -31,6 +34,9 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'motivo_nao_tomar_vacina_covid',
                 options: handleValueLabelOption(motivosNaoTomarVacinaCovidOptions),
+            },
+            dependencies: {
+                tomou_vacina_covid: ["nao"],
             }
         },
         {
@@ -39,7 +45,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'familiar_morte_covid',
                 options: handleValueLabelOption(familiarMorteCovid),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Essa pessoa contribuía para a renda da família?',
@@ -47,6 +54,15 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'familiar_morte_covid_contribuia_renda_familiar',
                 options: handleValueLabelOption(yesOrNoOptions),
+            },
+            dependencies: {
+                familiar_morte_covid: [
+                    "chefe_homem",
+                    "chefe_mulher",
+                    "homem_16_mais",
+                    "mulher_16_mais",
+                    "crianca_adolescente",
+                ],
             }
         },
         {
@@ -55,7 +71,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'familiares_morte_outras_causas',
                 options: handleValueLabelOption(yesOrNoOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Se sim, qual (quais) foi (foram) a(s) causa(s)?',
@@ -63,6 +80,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'motivo_familiares_morte_outras_causas',
                 placeholder: 'Digite as causas'
+            },
+            dependencies: {
+                familiares_morte_outras_causas: [
+                    "true",
+                ],
             }
         },
         {
@@ -71,6 +93,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'familiares_morte_outras_causas_contribuia_renda_familiar',
                 options: handleValueLabelOption(yesOrNoOptions),
+            },
+            dependencies: {
+                familiares_morte_outras_causas: [
+                    "true",
+                ],
             }
         },
     ],
@@ -97,7 +124,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'morador_exposto_veneno_lavoura',
                 options: handleValueLabelOption(yesOrNoOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Se Sim, nos últimos 6 meses, você ou alguém da sua casa FICOU DOENTE, por CAUSA DE contato ou consumo de veneno de lavoura?',
@@ -105,6 +133,12 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'doencas_contato_veneno_lavoura',
                 options: handleValueLabelOption(yesOrNoOptions),
+            },
+            hasDependencies: true,
+            dependencies: {
+                morador_exposto_veneno_lavoura: [
+                    "true",
+                ],
             }
         },
         {
@@ -113,6 +147,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'motivo_doencas_contato_veneno_lavoura',
                 options: handleValueLabelOption(causasDoencasVenenoLavouraOptions),
+            },
+            dependencies: {
+                doencas_contato_veneno_lavoura: [
+                    "true",
+                ],
             }
         },
         {
@@ -121,7 +160,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'acidentes',
                 options: handleValueLabelOption(yesOrNoOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'SE sim, qual tipo de acidente? ( Atenção: pode ler a lista de acidentes)',
@@ -130,6 +170,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
                 name: 'acidentes_ocorridos',
                 options: handleValueLabelOption(acidentesOptions),
                 isMulti: true,
+            },
+            dependencies: {
+                acidentes: [
+                    "true",
+                ],
             }
         },
         {
@@ -146,7 +191,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'ocorrencia_violencia_fisica',
                 options: handleValueLabelOption(yesOrNoOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Se SIM, onde foi praticada essa violência física? (pode ser mais de uma resposta)',
@@ -155,6 +201,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
                 name: 'local_ocorrencia_violencia_fisica',
                 options: handleValueLabelOption(violenciaFisicaOptions),
                 isMulti: true,
+            },
+            dependencies: {
+                ocorrencia_violencia_fisica: [
+                    "true",
+                ],
             }
         },
         {
@@ -190,7 +241,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'medicacao_uso_continuo',
                 options: handleValueLabelOption(medicamentosUsoContinuoOptions),
-            }
+            },
+            hasDependencies: true,
         },
         {
             label: 'Se SIM, para quê (que problema/doença/motivo)?',
@@ -199,6 +251,13 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
                 name: 'doenca_medicacao_uso_continuo',
                 options: handleValueLabelOption(motivoMedicamentoUsoContinuo),
                 isMulti: true,
+            },
+            dependencies: {
+                medicacao_uso_continuo: [
+                    "remedios",
+                    "ervas",
+                    "remedios_e_ervas",
+                ],
             }
         },
         {

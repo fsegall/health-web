@@ -12,7 +12,9 @@ export interface FormHelperType {
         isMulti?: boolean;
         options?: Array<any>;
         type?: 'text' | 'textarea' | 'number';
-    };
+    },
+    hasDependencies?: boolean;
+    dependencies?: { [key: string]: string[]; };
 }
 
 export const quadroDemograficoHelper: FormHelperType[] = [
@@ -41,7 +43,8 @@ export const quadroDemograficoHelper: FormHelperType[] = [
             name: 'idade',
             placeholder: 'Digite a idade do morador',
             type: 'number',
-        }
+        },
+        hasDependencies: true
     },
     {
         label: 'Qual o sexo do MORADOR?',
@@ -85,6 +88,9 @@ export const quadroDemograficoHelper: FormHelperType[] = [
             name: 'crenca_religiao',
             options: handleValueLabelOption(crencasOptions),
             isMulti: false
+        },
+        dependencies: {
+            idade: ["14"]
         }
     },
     {
@@ -112,15 +118,21 @@ export const quadroDemograficoHelper: FormHelperType[] = [
             name: 'situacao_no_trabalho',
             options: handleValueLabelOption(situacaoTrabalhoOptions),
             isMulti: false
+        },
+        dependencies: {
+            idade: ["14"]
         }
     },
     {
-        label: 'Qual a ocupação profissional PRINCIPAL do MORADOR?  (Maiores de 14 anos)',
+        label: 'Qual a ocupação profissional PRINCIPAL do MORADOR? (Maiores de 14 anos)',
         type: Select,
         props: {
             name: 'ocupacao_profissao',
             options: handleValueLabelOption(ocupacaoPrincipalOptions),
             isMulti: false
+        },
+        dependencies: {
+            idade: ["14"]
         }
     },
 ]
