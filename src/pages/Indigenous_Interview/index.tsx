@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useReducer } from 'react';
+import React, { useState, useCallback, useReducer, useEffect } from 'react';
 import {
   Container,
   Header,
@@ -125,6 +125,16 @@ const IndigenousInterview: React.FC = () => {
         [],
       )
 
+    useEffect(() => {
+      if (!id) {
+        const indigenous_informacoes_basicas_id = localStorage.getItem('@Safety:indigenous_informacoes_basicas_id');
+  
+        if (indigenous_informacoes_basicas_id) {
+          dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: indigenous_informacoes_basicas_id, show: false } })
+        }
+      }
+    }, [dispatch, id])
+
     const [isOffline, setIsOffline] = useState(false);
     return (
         <Container offline={isOffline}>
@@ -160,7 +170,7 @@ const IndigenousInterview: React.FC = () => {
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.demografico : {}}
+            initialValues={initialValues ? initialValues?.demografico : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas }}
           />
         )}
         <SectionTitle id="domicilio">Domicílio</SectionTitle>
@@ -169,7 +179,7 @@ const IndigenousInterview: React.FC = () => {
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.domicilio : {}}
+            initialValues={initialValues ? initialValues?.domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas }}
           />
         )}
         <SectionTitle id="saude_doenca">Saúde e Doença</SectionTitle>
@@ -178,7 +188,7 @@ const IndigenousInterview: React.FC = () => {
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.saude_doenca : {}}
+            initialValues={initialValues ? initialValues?.saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas }}
           />
         )}
         <SectionTitle id="alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
@@ -187,7 +197,7 @@ const IndigenousInterview: React.FC = () => {
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.alimentacao_nutricao : {}}
+            initialValues={initialValues ? initialValues?.alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas }}
           />
         )}
         <SectionTitle id="apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
@@ -196,7 +206,7 @@ const IndigenousInterview: React.FC = () => {
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.apoio_protecao_social : {}}
+            initialValues={initialValues ? initialValues?.apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas }}
           />
         )}
 

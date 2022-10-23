@@ -3,10 +3,11 @@ export default interface ICreateInformacoesBasicasDTO {
     municipio: string; //B1
     aldeia_comunidade: string; //B2
     terra_indigena: string; //B3
-    area_de_retomada: string; //B4
+    area_retomada: string; //B4
     acampamento: string; //B5
-    entrevistador: string; //B6
-    data_da_entrevista: string;
+    entrevistador_id: string; //B6
+    numero_projeto: number;
+    data_entrevista: string;
 
     primeiro_contato_responsavel: boolean;
   }
