@@ -6,6 +6,7 @@ export const DemograficoValidation = Yup.object().shape({
       return this.parent.moradores.length === value
     }),
     trabalho_colheita_maca: Yup.string().nullable(), //GK-ONLY
+    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     moradores: Yup.array()
     .of(
       Yup.object().shape({
@@ -14,6 +15,7 @@ export const DemograficoValidation = Yup.object().shape({
         relacao_com_chefe: Yup.string().required('Você precisa digitar a relação com o chefe'),
         idade: Yup.number().required('Você precisa digitar uma idade').min(0, 'A idade não pode ser menor que zero'),
         sexo: Yup.string().required('Você precisa digitar o sexo'),
+        frequenta_escola: Yup.boolean().required('Você precisa digitar se o morador frequenta a escola'),
         raca: Yup.string().required('Você precisa digitar a raça'),
         povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
         lingua_indigena: Yup.string().required('Você precisa preencher sobre a lingua indígena'),

@@ -1,4 +1,4 @@
-export default interface ICreateDemograficoDO {
+export default interface ICreateDemograficoDTO {
     id?: string; //backend - generated UUID
     total_moradores: number; //D1 (base to create array form)
     moradores: QuadroSocioDemograficoDTO[] // form array
