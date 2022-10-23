@@ -21,7 +21,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             label: 'Antes de morar nessa ALDEIA/ COMUNIDADE onde você morava POR ÚLTIMO (ÚLTIMA MORADA)?',
             type: Input,
             props: {
-                name: 'ultima_morada',
+                name: 'ultima_moradia',
                 placeholder: 'Digite sua última morada',
             }
         },

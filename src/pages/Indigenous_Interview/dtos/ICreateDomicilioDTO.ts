@@ -1,6 +1,6 @@
 export default interface ICreateDomicilioDTO {
     id?: string; //backend - generated UUID
-    ultima_morada: string; //select
+    ultima_moradia: string; //select
     piso: string; //select
     material_paredes: string; //select
     material_telhado: string; //select
@@ -16,14 +16,3 @@ export default interface ICreateDomicilioDTO {
     veiculos: string[]; //multi-select
     renda_total_30_dias: string; //select
 }
-
-// interface UtensiliosNoDomicilioDTO {
-//     televisao: boolean;
-//     geladeira: boolean;
-//     fogao_a_gas: boolean;
-//     maquina_de_lavar_ou_tanque: boolean;
-//     computador: boolean;
-//     celular_com_internet: boolean;
-//     celular_sem_internet: boolean;
-//     trator_ou_rocadeira: boolean;
-// }

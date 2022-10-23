@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const DomicilioValidation = Yup.object().shape({
-    ultima_morada: Yup.string().required('Você precisa digitar a última moradia'),
+    ultima_moradia: Yup.string().required('Você precisa digitar a última moradia'),
     piso: Yup.string().required('Você precisa digitar o material do piso'),
     material_paredes: Yup.string().required('Você precisa selecionar o material das paredes'),
     material_telhado: Yup.string().required('Você precisa selecionar o material do telhado'),
