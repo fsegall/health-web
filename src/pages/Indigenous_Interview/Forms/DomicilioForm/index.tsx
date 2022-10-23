@@ -53,7 +53,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         const response = await api.post('/indigeanous-interviews/residence', domicilio, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:domicilio_id', response.data.id);
+        localStorage.setItem('@Safety:domicilio', response.data.id);
 
         dispatch({ type: 'DOMICILIO', payload: { id: response.data.id } })
 

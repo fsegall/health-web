@@ -114,7 +114,7 @@ const IndigenousInterview: React.FC = () => {
 
     const resetForms = useCallback(
         () => {
-          localStorage.removeItem('@Safety:informacoes_basicas');
+          localStorage.removeItem('@Safety:indigenous_informacoes_basicas_id');
           localStorage.removeItem('@Safety:demografico');
           localStorage.removeItem('@Safety:domicilio');
           localStorage.removeItem('@Safety:saude_doenca');
