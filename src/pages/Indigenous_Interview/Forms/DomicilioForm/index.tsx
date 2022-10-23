@@ -12,6 +12,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import { domicilioFormHelper, FormHelperType } from './helper';
 import ICreateDomicilioDTO from '../../dtos/ICreateDomicilioDTO';
 import { DomicilioValidation } from '../../validation/schemas/domicilioValidation';
+import { useAuth } from '../../../../hooks/auth';
+import api from '../../../../services/api';
 
 
 
@@ -24,7 +26,7 @@ interface DomiciliosFormProps {
 
 const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  // const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -33,24 +35,27 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
   const handleSubmit = useCallback(async (data: ICreateDomicilioDTO) => {
     try {
       DomiciliosFormRef.current?.setErrors({});
-      const validatedData = await DomicilioValidation.validate(data, {
+
+      const values = {
+        ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+      const validatedData = await DomicilioValidation.validate(values, {
         abortEarly: false,
       });
 
       const domicilio = {
-        ...data,
-        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+        ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('domicilio ', domicilio)
-        // const response = await api.post('/indigenous-informacoes-basicas', domicilio, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:domicilio_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews/residence', domicilio, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:domicilio_id', response.data.id);
 
-        // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'DOMICILIO', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
@@ -61,6 +66,15 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);
