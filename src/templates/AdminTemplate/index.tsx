@@ -52,7 +52,7 @@ const AdminTemplate = ({
                 <StyledBurger open={showOnMobile} onClick={() => setShowOnMobile(!showOnMobile)} ><div /><div /><div /></StyledBurger>
               </span>
             )}
-            <span style={{ color: colors.secundary }}>Rede Pensan</span>
+            <span style={{ color: colors.secundary }}>Rede Penssan</span>
             {getPageName(location.pathname) && (
               <>
                 <strong style={{ color: colors.orange }}>|</strong>

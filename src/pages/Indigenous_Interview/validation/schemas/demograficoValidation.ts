@@ -3,10 +3,10 @@ import * as Yup from 'yup';
 export const DemograficoValidation = Yup.object().shape({
     total_moradores: Yup.number()
     .test('validate-moradores', 'Você deve gerar a grade com o número correto de moradores', function(value){
-      return this.parent.quadro_social_demografico.length === value
+      return this.parent.moradores.length === value
     }),
-    trabalho_colheita_de_maca: Yup.string().nullable(), //GK-ONLY
-    quadro_social_demografico: Yup.array()
+    trabalho_colheita_maca: Yup.string().nullable(), //GK-ONLY
+    moradores: Yup.array()
     .of(
       Yup.object().shape({
         id: Yup.number().required('ID obrigatório'),

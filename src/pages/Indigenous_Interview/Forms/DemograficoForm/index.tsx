@@ -40,7 +40,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 //     })
 //   }
 
-  console.log('formState ', formState)
+  console.log('initialValues ', initialValues)
 
   const { addToast } = useToast();
 
@@ -55,6 +55,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
       const indigenous_demografico = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 
@@ -168,7 +169,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             )}
         </section>
         {residentsGrid?.map((item: any, index: number) => (
-            <Scope path={`quadro_social_demografico[${index}]`} key={item.id}>
+            <Scope path={`moradores[${index}]`} key={item.id}>
                 <section>
                     <span style={{ visibility: 'hidden' }}>
                         <Input name="id" value={index+1} type="number" />
@@ -194,7 +195,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             <Label>
                 APENAS PARA A PESQUISA DOS Guarani Kaiowá: Alguém desta casa já trabalhou ou trabalha na colheita de maçã no sul do país no período de colheita (em geral de janeiro a abril)? 
             </Label>
-            <Select name="trabalho_colheita_de_maca" options={handleValueLabelOption(yesOrNoOptions)} />
+            <Select name="trabalho_colheita_maca" options={handleValueLabelOption(yesOrNoOptions)} />
             <Button type="submit">Enviar</Button>
         </section>
         {/* {residentsGrid?.length > 0 && (

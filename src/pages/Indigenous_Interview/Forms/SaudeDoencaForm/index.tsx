@@ -40,6 +40,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
 
       const saudeDoenca = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 

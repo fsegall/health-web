@@ -37,6 +37,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
 
       const apoioProtecaoSocial = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 

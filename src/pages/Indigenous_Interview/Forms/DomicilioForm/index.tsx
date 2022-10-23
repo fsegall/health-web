@@ -39,6 +39,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
 
       const domicilio = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 

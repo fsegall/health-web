@@ -35,7 +35,7 @@ const AdminMenu = ({
   >
     <div style={{ display: 'flex', gap: '10px', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
       <img src={logo} style={{ maxWidth: '60px' }} alt="Safety" />
-      <p style={{ color: colors.primary, fontWeight: 700, fontSize: '20px' }}>Rede Pensan</p>
+      <p style={{ color: colors.primary, fontWeight: 700, fontSize: '20px' }}>Rede Penssan</p>
     </div>
     <nav style={{ display: 'flex', flexDirection: 'column', gap: '30px', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center' }}>
       {menuRoutes(user?.role)?.map(o => (

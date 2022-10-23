@@ -109,7 +109,7 @@ const IndigenousInterview: React.FC = () => {
     //@ts-ignore
     const { id } = useParams();
     // const { token } = useAuth();
-    const [initialValues] = useState<any>({})
+    const [initialValues] = useState<any>(null)
     const [formState, dispatch] = useReducer(reducer, initialState);
 
     const resetForms = useCallback(

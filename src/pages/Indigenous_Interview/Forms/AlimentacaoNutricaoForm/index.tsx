@@ -40,6 +40,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
 
       const alimentacaoNutricao = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 
