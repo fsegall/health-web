@@ -89,7 +89,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline]);
+  }, [addToast, offline, dispatch, initialValues, token]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 
