@@ -5,7 +5,6 @@ import {
   StyledForm,
   Label
 } from '../form-styles';
-// import { useAuth } from '../../../../hooks/auth';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
@@ -13,8 +12,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
 import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
 import { AlimentacaoNutricaoValidation } from '../../validation/schemas/alimentacaoNutricaoValidation';
-
-
+import { useAuth } from '../../../../hooks/auth';
+import api from '../../../../services/api';
 
 interface AlimentacaoNutricaoFormProps {
   dispatch: Function;
@@ -25,7 +24,7 @@ interface AlimentacaoNutricaoFormProps {
 
 const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  // const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -34,24 +33,26 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
   const handleSubmit = useCallback(async (data: ICreateAlimentacaoNutricaoDTO) => {
     try {
       AlimentacaoNutricaoFormRef.current?.setErrors({});
-      const validatedData = await AlimentacaoNutricaoValidation.validate(data, {
+      const values = {
+        ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+      const validatedData = await AlimentacaoNutricaoValidation.validate(values, {
         abortEarly: false,
       });
 
       const alimentacaoNutricao = {
-        ...data,
-        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+        ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('alimentacaoNutricao ', alimentacaoNutricao)
-        // const response = await api.post('/indigenous-informacoes-basicas', alimentacaoNutricao, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:alimentacaoNutricao_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews/nutrition', alimentacaoNutricao, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:alimentacao_nutricao', response.data.id);
 
-        // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
@@ -62,6 +63,15 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);

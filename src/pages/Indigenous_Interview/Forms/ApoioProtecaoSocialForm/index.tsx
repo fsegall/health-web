@@ -12,6 +12,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
 import { ApoioProtecaoSocialValidation } from '../../validation/schemas/apoioProtecaoSocialValidation';
+import { useAuth } from '../../../../hooks/auth';
+import api from '../../../../services/api';
 
 
 
@@ -24,6 +26,8 @@ interface ApoioProtecaoSocialFormProps {
 
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
+  const { token } = useAuth();
+  
   const { addToast } = useToast();
 
   const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
@@ -31,34 +35,48 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
   const handleSubmit = useCallback(async (data: ICreateApoioProtecaoSocialDTO) => {
     try {
       ApoioProtecaoSocialFormRef.current?.setErrors({});
-      const validatedData = await ApoioProtecaoSocialValidation.validate(data, {
+      const values = {
+        ...data,
+        quantidade_morador_matriculado_na_educacao_basica_publica: data?.quantidade_morador_matriculado_na_educacao_basica_publica ? Number(data?.quantidade_morador_matriculado_na_educacao_basica_publica) : null,
+        quantidade_vezes_auxilio_emergencial_na_pandemia: data?.quantidade_vezes_auxilio_emergencial_na_pandemia ? Number(data?.quantidade_vezes_auxilio_emergencial_na_pandemia) : null,
+        quantidade_cesta_de_alimentos_3m: data?.quantidade_cesta_de_alimentos_3m ? Number(data?.quantidade_cesta_de_alimentos_3m) : null,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+      const validatedData = await ApoioProtecaoSocialValidation.validate(values, {
         abortEarly: false,
       });
 
       const apoioProtecaoSocial = {
-        ...data,
-        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+        ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('apoioProtecaoSocial ', apoioProtecaoSocial)
-        // const response = await api.post('/indigenous-informacoes-basicas', apoioProtecaoSocial, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:apoioProtecaoSocial_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews/support', apoioProtecaoSocial, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:apoio_protecao_social', response.data.id);
 
-        // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
           title: 'Informações do apoio e proteção social adicionadas com sucesso',
-          description: 'Você já pode preencher as informações do projeto',
+          description: 'Todos os passos da entrevista estão finalizados',
         });
       } else {
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);

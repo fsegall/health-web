@@ -36,14 +36,17 @@ interface StateFormat {
     };
     saude_doenca:
     {
+      id: string | null;
       show: boolean;
     };
     alimentacao_nutricao:
     {
+      id: string | null;
       show: boolean;
     };
     apoio_protecao_social:
     {
+      id: string | null;
       show: boolean;
     };
   }
@@ -65,20 +68,23 @@ const initialState: StateFormat = {
       show: true,
     },
     demografico: {
-      id: null,
+      id: localStorage.getItem('@Safety:demografico') ?? null,
       show: true,
     },
     domicilio: {
-      id: null,
+      id: localStorage.getItem('@Safety:domicilio') ?? null,
       show: true,
     },
     saude_doenca: {
+      id: localStorage.getItem('@Safety:saude_doenca') ?? null,
       show: true,
     },
     alimentacao_nutricao: {
+      id: localStorage.getItem('@Safety:alimentacao_nutricao') ?? null,
       show: true,
     },
     apoio_protecao_social: {
+      id: localStorage.getItem('@Safety:apoio_protecao_social') ?? null,
       show: true,
     },
   }
@@ -128,9 +134,35 @@ const IndigenousInterview: React.FC = () => {
     useEffect(() => {
       if (!id) {
         const indigenous_informacoes_basicas_id = localStorage.getItem('@Safety:indigenous_informacoes_basicas_id');
+        const demografico = localStorage.getItem('@Safety:demografico');
+        const domicilio = localStorage.getItem('@Safety:domicilio');
+        const saude_doenca = localStorage.getItem('@Safety:saude_doenca');
+        const alimentacao_nutricao = localStorage.getItem('@Safety:alimentacao_nutricao');
+        const apoio_protecao_social = localStorage.getItem('@Safety:apoio_protecao_social');
   
+
         if (indigenous_informacoes_basicas_id) {
           dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: indigenous_informacoes_basicas_id, show: false } })
+        }
+  
+        if (demografico) {
+          dispatch({ type: 'DEMOGRAFICO', payload: { id: demografico, show: false } })
+        }
+  
+        if (domicilio) {
+          dispatch({ type: 'DOMICILIO', payload: { id: domicilio, show: false } })
+        }
+  
+        if (saude_doenca) {
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: saude_doenca, show: false } })
+        }
+  
+        if (alimentacao_nutricao) {
+          dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: alimentacao_nutricao, show: false } })
+        }
+  
+        if (apoio_protecao_social) {
+          dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: apoio_protecao_social, show: false } })
         }
       }
     }, [dispatch, id])
