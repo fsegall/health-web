@@ -29,19 +29,18 @@ interface DemograficoFormProps {
   isEditForm?: boolean
 }
 
-const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false }) => {
     
   const { token } = useAuth();
 
   const { addToast } = useToast();
 
   const DemograficoFormRef = useRef<FormHandles>(null);
-
   
   const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
-    console.log('initialValues ', initialValues?.entrevista_indigena_id)
     try {
       DemograficoFormRef.current?.setErrors({});
+
       const values = {
         ...data,
         moradores: data?.moradores?.map(morador => ({
@@ -99,7 +98,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline]);
+  }, [addToast, offline, initialValues, token]);
 
     if (isEditForm) {
         DemograficoFormRef.current?.setData({
