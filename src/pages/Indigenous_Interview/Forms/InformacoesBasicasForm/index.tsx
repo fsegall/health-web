@@ -90,7 +90,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline, dispatch, initialValues, token]);
+  }, [addToast, user, offline, dispatch, token]);
 
 
   if (isEditForm) {
