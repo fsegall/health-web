@@ -13,6 +13,8 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import { saudeDoencaFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
 import ICreateSaudeDoencaDTO from '../../dtos/ICreateSaudeDoencaDTO';
+import { useAuth } from '../../../../hooks/auth';
+import api from '../../../../services/api';
 
 
 
@@ -25,7 +27,7 @@ interface SaudeDoencaFormProps {
 
 const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  // const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const { addToast } = useToast();
 
@@ -34,33 +36,46 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
   const handleSubmit = useCallback(async (data: ICreateSaudeDoencaDTO) => {
     try {
       SaudeDoencaFormRef.current?.setErrors({});
-      const validatedData = await SaudeDoencaValidation.validate(data, {
+      const values = {
+        ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+      const validatedData = await SaudeDoencaValidation.validate(values, {
         abortEarly: false,
       });
 
       const saudeDoenca = {
         ...data,
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('saudeDoenca ', saudeDoenca)
-        // const response = await api.post('/indigenous-informacoes-basicas', saudeDoenca, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:saudeDoenca_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews/health-desease', saudeDoenca, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:saude_doenca', response.data.id);
 
-        // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'SAUDE_DOENCA', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
-          title: 'Informações do domicílio adicionadas com sucesso',
-          description: 'Você já pode prosseguir para o módulo doença e saúde',
+          title: 'Informações de saúde e doença adicionadas com sucesso',
+          description: 'Você já pode prosseguir para o módulo alimentação e nutrição',
         });
       } else {
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);
@@ -74,7 +89,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline]);
+  }, [addToast, offline, dispatch, initialValues, token]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

@@ -10,13 +10,15 @@ import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 
-import ICreateInformacoesBasicasDTO from '../../dtos/ICreateInformacoesBasicasDTO';
 import { FormHelperType, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
 import Input from '../../../../components/Input';
 import Select from '../../../../components/Select';
 import { yesOrNoOptions } from '../../questions/SelectorOptions/options';
 import { handleValueLabelOption } from '../../questions/handleValueLabelOption';
+import api from '../../../../services/api';
+import { useAuth } from '../../../../hooks/auth';
+import ICreateDemograficoDTO from '../../dtos/ICreateDemograficoDTO';
 
 
 
@@ -27,45 +29,43 @@ interface DemograficoFormProps {
   isEditForm?: boolean
 }
 
-const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false }) => {
     
-  // const { user, token } = useAuth();
-
-  const [formState] = useState({})
-
-//   function handleFormState(e: any) {
-//     setFormState({
-//         ...formState,
-//         [e.target.name || 'teste']: e.target.value
-//     })
-//   }
-
-  console.log('formState ', formState)
+  const { token } = useAuth();
 
   const { addToast } = useToast();
 
   const DemograficoFormRef = useRef<FormHandles>(null);
-
-  const handleSubmit = useCallback(async (data: ICreateInformacoesBasicasDTO) => {
+  
+  const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
     try {
       DemograficoFormRef.current?.setErrors({});
-      const validatedData = await DemograficoValidation.validate(data, {
+
+      const values = {
+        ...data,
+        moradores: data?.moradores?.map(morador => ({
+          ...morador,
+          frequenta_escola: morador?.frequenta_escola === "true" ? true : false
+        })),
+        entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+
+      const validatedData = await DemograficoValidation.validate(values, {
         abortEarly: false,
       });
 
       const indigenous_demografico = {
-        ...data,
+        ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        console.log('indigenous_demografico ', indigenous_demografico)
-        // const response = await api.post('/indigenous-demografico', indigenous_demografico, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:indigenous_demografico_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews/demography', indigenous_demografico, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:indigenous_demografico_id', response.data.id);
 
-        // dispatch({ type: 'DEMOGRAFICO', payload: { id: response.data.id } })
+        dispatch({ type: 'DEMOGRAFICO', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
@@ -76,6 +76,15 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);
@@ -89,7 +98,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline]);
+  }, [addToast, offline, initialValues, token, dispatch]);
 
     if (isEditForm) {
         DemograficoFormRef.current?.setData({
@@ -168,7 +177,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             )}
         </section>
         {residentsGrid?.map((item: any, index: number) => (
-            <Scope path={`quadro_social_demografico[${index}]`} key={item.id}>
+            <Scope path={`moradores[${index}]`} key={item.id}>
                 <section>
                     <span style={{ visibility: 'hidden' }}>
                         <Input name="id" value={index+1} type="number" />
@@ -194,7 +203,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             <Label>
                 APENAS PARA A PESQUISA DOS Guarani Kaiowá: Alguém desta casa já trabalhou ou trabalha na colheita de maçã no sul do país no período de colheita (em geral de janeiro a abril)? 
             </Label>
-            <Select name="trabalho_colheita_de_maca" options={handleValueLabelOption(yesOrNoOptions)} />
+            <Select name="trabalho_colheita_maca" options={handleValueLabelOption(yesOrNoOptions)} />
             <Button type="submit">Enviar</Button>
         </section>
         {/* {residentsGrid?.length > 0 && (

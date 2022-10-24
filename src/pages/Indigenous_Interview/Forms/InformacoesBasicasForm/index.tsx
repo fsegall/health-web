@@ -13,6 +13,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import ICreateInformacoesBasicasDTO from '../../dtos/ICreateInformacoesBasicasDTO';
 import { InformacoesBasicasValidation } from '../../validation/schemas/InformacoesBasicasValidation';
 import { FormHelperType, informacoesBasicasFormHelper } from './helper';
+import api from '../../../../services/api';
 
 
 
@@ -25,20 +26,19 @@ interface InformacoesBasicasFormProps {
 
 const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const { addToast } = useToast();
 
   const InformacoesBasicasFormRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(async (data: ICreateInformacoesBasicasDTO) => {
-    // const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed).toISOString();
     data = {
         ...data,
-        entrevistador: user.id,
-        data_da_entrevista: today,
+        entrevistador_id: user?.id,
+        data_entrevista: today,
     }
     try {
       InformacoesBasicasFormRef.current?.setErrors({});
@@ -52,13 +52,12 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
       };
 
       if (!offline) {
-        console.log('indigenous_informacoes_basicas ', indigenous_informacoes_basicas)
-        // const response = await api.post('/indigenous-informacoes-basicas', indigenous_informacoes_basicas, {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // })
-        // localStorage.setItem('@Safety:indigenous_informacoes_basicas_id', response.data.id);
+        const response = await api.post('/indigeanous-interviews', indigenous_informacoes_basicas, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        localStorage.setItem('@Safety:indigenous_informacoes_basicas_id', response.data.id);
 
-        // dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
 
         addToast({
           type: 'success',
@@ -69,6 +68,15 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         //TODO: FAZER VERSÃO OFFLINE
       }
     } catch (error) {
+      //@ts-ignore
+      const message = error?.data?.message
+      if (message) {
+        addToast({
+          type: 'error',
+          title: message,
+          description: '',
+        });
+      }
       if (error instanceof Yup.ValidationError) {
         console.log(error);
         const errors = getValidationErrors(error);
@@ -82,7 +90,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline]);
+  }, [addToast, user, offline, dispatch, token]);
 
 
   if (isEditForm) {
@@ -103,7 +111,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {s?.length === sectionIndex-1 && (
+                {informacoesBasicasFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Enviar</Button>
                 )}
             </section>

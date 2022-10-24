@@ -1,8 +1,8 @@
-export default interface ICreateDemograficoDO {
+export default interface ICreateDemograficoDTO {
     id?: string; //backend - generated UUID
     total_moradores: number; //D1 (base to create array form)
-    quadro_social_demografico: QuadroSocioDemograficoDTO[] // form array
-    trabalho_colheita_de_maca?: string //GK-ONLY select
+    moradores: QuadroSocioDemograficoDTO[] // form array
+    trabalho_colheita_maca?: string //GK-ONLY select
 }
 
 interface QuadroSocioDemograficoDTO {

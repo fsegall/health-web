@@ -47,7 +47,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
             label: 'Qual Área de Retomada?',
             type: Input,
             props: {
-                name: 'area_de_retomada',
+                name: 'area_retomada',
                 placeholder: 'Área de Retomada',
             }
         },
@@ -61,6 +61,15 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
         },
     ],
     [
+        {
+            label: 'Indique o número do Projeto de Pesquisa',
+            type: Input,
+            props: {
+                name: 'numero_projeto',
+                type: 'number',
+                placeholder: 'Número do Projeto'
+            }
+        },
         {
             label: 'Você pode ser considerada (o) uma pessoa de referência (chefe) da família? (Pessoa acima de 14 anos que trabalhe ou conheça a realidade alimentar e social da casa) ?',
             type: Select,

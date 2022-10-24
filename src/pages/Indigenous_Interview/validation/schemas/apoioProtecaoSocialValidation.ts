@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 export const ApoioProtecaoSocialValidation = Yup.object().shape({
     morador_matriculado_na_educacao_basica_publica: Yup.string().required('Você precisa preencher sobre a educação básica'),
+    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     quantidade_morador_matriculado_na_educacao_basica_publica: Yup.string().nullable().when("morador_matriculado_na_educacao_basica_publica", {
         is: (val: any) => String(val) === "true",
         then: Yup.string().nullable().required("O número deve ser maior que zero").test('validate-moradores', 'Você precisa preencher um número maior que zero', function(value){

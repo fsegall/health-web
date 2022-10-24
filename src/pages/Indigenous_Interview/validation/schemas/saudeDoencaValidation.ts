@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 export const SaudeDoencaValidation = Yup.object().shape({
     tomou_vacina_covid: Yup.string().required('Você precisa preencher sobre a vacina do COVID'),
+    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     motivo_nao_tomar_vacina_covid: Yup.string().nullable().when("tomou_vacina_covid", {
         is: (val: any) => String(val) === "nao",
         then: Yup.string().nullable().required("Você precisa preencher o motivo de não ter tomado a vacina"),

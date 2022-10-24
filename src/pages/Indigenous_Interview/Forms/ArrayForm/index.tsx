@@ -67,7 +67,7 @@ const ArrayForm: React.FC = () => {
     return (
         <StyledForm ref={ResidentsFormRef} onSubmit={handleSubmit}>
             {residentsGrid?.map((item: any, index: number) => (
-                <Scope path={`quadro_social_demografico[${index}]`} key={item.id}>
+                <Scope path={`moradores[${index}]`} key={item.id}>
                     <Label>
                         <Label>Residente #{index+1}:</Label>
                         Name:
