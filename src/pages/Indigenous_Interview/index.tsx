@@ -16,6 +16,7 @@ import DomiciliosForm from './Forms/DomicilioForm';
 import SaudeDoencaForm from './Forms/SaudeDoencaForm';
 import AlimentacaoNutricaoForm from './Forms/AlimentacaoNutricaoForm';
 import ApoioProtecaoSocialForm from './Forms/ApoioProtecaoSocialForm';
+import ICreateIndigenousOfflineInterviewDTO from './dtos/ICreateIndigenousOfflineInterviewDTO';
 
 interface StateFormat {
   formsSubmitted: {
@@ -64,27 +65,27 @@ interface FormActionFormat {
 const initialState: StateFormat = {
   formsSubmitted: {
     informacoes_basicas: {
-      id: localStorage.getItem('@Safety:indigenous_informacoes_basicas_id') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_informacoes_basicas') ?? null,
       show: true,
     },
     demografico: {
-      id: localStorage.getItem('@Safety:demografico') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_demografico') ?? null,
       show: true,
     },
     domicilio: {
-      id: localStorage.getItem('@Safety:domicilio') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_domicilio') ?? null,
       show: true,
     },
     saude_doenca: {
-      id: localStorage.getItem('@Safety:saude_doenca') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_saude_doenca') ?? null,
       show: true,
     },
     alimentacao_nutricao: {
-      id: localStorage.getItem('@Safety:alimentacao_nutricao') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_alimentacao_nutricao') ?? null,
       show: true,
     },
     apoio_protecao_social: {
-      id: localStorage.getItem('@Safety:apoio_protecao_social') ?? null,
+      id: localStorage.getItem('@Safety:indigenous_apoio_protecao_social') ?? null,
       show: true,
     },
   }
@@ -120,12 +121,12 @@ const IndigenousInterview: React.FC = () => {
 
     const resetForms = useCallback(
         () => {
-          localStorage.removeItem('@Safety:indigenous_informacoes_basicas_id');
-          localStorage.removeItem('@Safety:demografico');
-          localStorage.removeItem('@Safety:domicilio');
-          localStorage.removeItem('@Safety:saude_doenca');
-          localStorage.removeItem('@Safety:alimentacao_nutricao');
-          localStorage.removeItem('@Safety:apoio_protecao_social');
+          localStorage.removeItem('@Safety:indigenous_informacoes_basicas');
+          localStorage.removeItem('@Safety:indigenous_demografico');
+          localStorage.removeItem('@Safety:indigenous_domicilio');
+          localStorage.removeItem('@Safety:indigenous_saude_doenca');
+          localStorage.removeItem('@Safety:indigenous_alimentacao_nutricao');
+          localStorage.removeItem('@Safety:indigenous_apoio_protecao_social');
           window.location.reload();
         },
         [],
@@ -133,36 +134,64 @@ const IndigenousInterview: React.FC = () => {
 
     useEffect(() => {
       if (!id) {
-        const indigenous_informacoes_basicas_id = localStorage.getItem('@Safety:indigenous_informacoes_basicas_id');
-        const demografico = localStorage.getItem('@Safety:demografico');
-        const domicilio = localStorage.getItem('@Safety:domicilio');
-        const saude_doenca = localStorage.getItem('@Safety:saude_doenca');
-        const alimentacao_nutricao = localStorage.getItem('@Safety:alimentacao_nutricao');
-        const apoio_protecao_social = localStorage.getItem('@Safety:apoio_protecao_social');
-  
+        const indigenous_informacoes_basicas_id = localStorage.getItem('@Safety:indigenous_informacoes_basicas');
+        const demografico = localStorage.getItem('@Safety:indigenous_demografico');
+        const domicilio = localStorage.getItem('@Safety:indigenous_domicilio');
+        const saude_doenca = localStorage.getItem('@Safety:indigenous_saude_doenca');
+        const alimentacao_nutricao = localStorage.getItem('@Safety:indigenous_alimentacao_nutricao');
+        const apoio_protecao_social = localStorage.getItem('@Safety:indigenous_apoio_protecao_social');
+
+        const offline_id = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id')!);
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+    
 
         if (indigenous_informacoes_basicas_id) {
           dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: indigenous_informacoes_basicas_id, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('informacoes_basicas')) {
+            dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: offline_id, show: false } })
+          }
         }
   
         if (demografico) {
           dispatch({ type: 'DEMOGRAFICO', payload: { id: demografico, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('demografico')) {
+            dispatch({ type: 'DEMOGRAFICO', payload: { id: offline_id, show: false } })
+          }
         }
   
         if (domicilio) {
           dispatch({ type: 'DOMICILIO', payload: { id: domicilio, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('domicilio')) {
+            dispatch({ type: 'DOMICILIO', payload: { id: offline_id, show: false } })
+          }
         }
   
         if (saude_doenca) {
           dispatch({ type: 'SAUDE_DOENCA', payload: { id: saude_doenca, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('saude_doenca')) {
+            dispatch({ type: 'SAUDE_DOENCA', payload: { id: offline_id, show: false } })
+          }
         }
   
         if (alimentacao_nutricao) {
           dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: alimentacao_nutricao, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('alimentacao_nutricao')) {
+            dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: offline_id, show: false } })
+          }
         }
   
         if (apoio_protecao_social) {
           dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: apoio_protecao_social, show: false } })
+        } else if (offlineInterviews && offline_id) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('apoio_protecao_social')) {
+            dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: offline_id, show: false } })
+          }
         }
       }
     }, [dispatch, id])

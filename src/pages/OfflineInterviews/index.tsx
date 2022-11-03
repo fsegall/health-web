@@ -7,6 +7,7 @@ import {
     OfflineButton,
     Container
 } from './styles';
+import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 const OfflineInterviews: React.FC = () => {
@@ -14,14 +15,7 @@ const OfflineInterviews: React.FC = () => {
     const { token } = useAuth();
 
     const [interviewsObject, setInterviewObject] = useState<{ [key: string]: ICreateOfflineInterviewDTO }>(JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}'))
-
-    // async function OnClick() {
-    //     await api.post('/offline', {interviews: interviewsObject}, {
-    //         headers: {
-    //           Authorization: `Bearer ${token}`
-    //         },
-    //       });
-    // }
+    const [indigenousInterviewsObject, setIndigenousInterviewObject] = useState<{ [key: string]: ICreateIndigenousOfflineInterviewDTO }>(JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}'))
 
     async function handleOfflineInterviews() {
       const interviewsObject: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
@@ -42,10 +36,33 @@ const OfflineInterviews: React.FC = () => {
       }
     }
 
+    async function handleIndigenousOfflineInterviews() {
+      const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+      try {
+        const response = await api.post('/indigeanous-interviews/handle-offline-data', [offlineData],
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+          }
+        })
+        if (response) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify({...response?.data}));
+          setIndigenousInterviewObject({...response?.data})
+        }
+      } catch (err) {
+        console.log('erro ', err)
+      }
+    }
+
     return (<Container>
-                <h1>Interviews 2</h1>
+                <h1>Logs de Entrevistas Offline</h1>
                 <OfflineButton onClick={handleOfflineInterviews}>Enviar</OfflineButton>
+                <OfflineButton onClick={handleIndigenousOfflineInterviews}>Enviar Entrevistas Indígenas</OfflineButton>
+                <p><strong>Entrevistas:</strong></p>
                 <div>{JSON.stringify(interviewsObject)}</div>
+                <p><strong>Entrevistas Indígenas:</strong></p>
+                <div>{JSON.stringify(indigenousInterviewsObject)}</div>
             </Container>
             );
 

@@ -14,6 +14,7 @@ import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocial
 import { ApoioProtecaoSocialValidation } from '../../validation/schemas/apoioProtecaoSocialValidation';
 import { useAuth } from '../../../../hooks/auth';
 import api from '../../../../services/api';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 
@@ -55,7 +56,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
         const response = await api.post('/indigeanous-interviews/support', apoioProtecaoSocial, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:apoio_protecao_social', response.data.id);
+        localStorage.setItem('@Safety:indigenous_apoio_protecao_social', response.data.id);
 
         dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: response.data.id } })
 
@@ -65,7 +66,25 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
           description: 'Todos os passos da entrevista estão finalizados',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], apoioProtecaoSocial } } : false;
+
+        if (addData) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Informações do apoio e proteção social adicionadas com sucesso',
+            description: 'Todos os passos da entrevista estão finalizados',
+          });
+        } else {
+          throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
+        }
       }
     } catch (error) {
       //@ts-ignore

@@ -14,6 +14,7 @@ import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
 import { AlimentacaoNutricaoValidation } from '../../validation/schemas/alimentacaoNutricaoValidation';
 import { useAuth } from '../../../../hooks/auth';
 import api from '../../../../services/api';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 interface AlimentacaoNutricaoFormProps {
   dispatch: Function;
@@ -50,7 +51,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         const response = await api.post('/indigeanous-interviews/nutrition', alimentacaoNutricao, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:alimentacao_nutricao', response.data.id);
+        localStorage.setItem('@Safety:indigenous_alimentacao_nutricao', response.data.id);
 
         dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: response.data.id } })
 
@@ -60,7 +61,25 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
           description: 'Você já pode prosseguir para o módulo apoio e proteção social',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], alimentacaoNutricao } } : false;
+
+        if (addData) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Informações de alimentação e nutrição adicionadas com sucesso',
+            description: 'Você já pode prosseguir para o módulo apoio e proteção social',
+          });
+        } else {
+          throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
+        }
       }
     } catch (error) {
       //@ts-ignore

@@ -15,6 +15,7 @@ import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValid
 import ICreateSaudeDoencaDTO from '../../dtos/ICreateSaudeDoencaDTO';
 import { useAuth } from '../../../../hooks/auth';
 import api from '../../../../services/api';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 
@@ -54,7 +55,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         const response = await api.post('/indigeanous-interviews/health-desease', saudeDoenca, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:saude_doenca', response.data.id);
+        localStorage.setItem('@Safety:indigenous_saude_doenca', response.data.id);
 
         dispatch({ type: 'SAUDE_DOENCA', payload: { id: response.data.id } })
 
@@ -64,7 +65,25 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo alimentação e nutrição',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], saudeDoenca } } : false;
+
+        if (addData) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Informações de saúde e doença adicionadas com sucesso',
+            description: 'Você já pode prosseguir para o módulo alimentação e nutrição',
+          });
+        } else {
+          throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
+        }
       }
     } catch (error) {
       //@ts-ignore
