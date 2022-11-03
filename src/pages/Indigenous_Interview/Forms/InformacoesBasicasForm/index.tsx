@@ -14,6 +14,8 @@ import ICreateInformacoesBasicasDTO from '../../dtos/ICreateInformacoesBasicasDT
 import { InformacoesBasicasValidation } from '../../validation/schemas/InformacoesBasicasValidation';
 import { FormHelperType, informacoesBasicasFormHelper } from './helper';
 import api from '../../../../services/api';
+import { uuid } from 'uuidv4';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 
@@ -55,7 +57,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         const response = await api.post('/indigeanous-interviews', indigenous_informacoes_basicas, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:indigenous_informacoes_basicas_id', response.data.id);
+        localStorage.setItem('@Safety:indigenous_informacoes_basicas', response.data.id);
 
         dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
 
@@ -65,7 +67,23 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
           description: 'Você já pode prosseguir para o módulo demográfico',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = uuid();
+
+        localStorage.setItem(`@Safety:current-indigenous-offline-interview-id`, JSON.stringify(uniqueId));
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = Object.keys(offlineInterviews).length ? { ...offlineInterviews, [uniqueId]: { indigenous_informacoes_basicas } } : { [uniqueId]: { indigenous_informacoes_basicas } };
+
+        localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+        dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: uniqueId } })
+
+        addToast({
+          type: 'success',
+          title: 'Informações Básicas adicionadas com sucesso',
+          description: 'Você já pode prosseguir para o módulo demográfico',
+        });
       }
     } catch (error) {
       //@ts-ignore

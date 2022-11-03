@@ -19,6 +19,7 @@ import { handleValueLabelOption } from '../../questions/handleValueLabelOption';
 import api from '../../../../services/api';
 import { useAuth } from '../../../../hooks/auth';
 import ICreateDemograficoDTO from '../../dtos/ICreateDemograficoDTO';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 
@@ -63,7 +64,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         const response = await api.post('/indigeanous-interviews/demography', indigenous_demografico, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:indigenous_demografico_id', response.data.id);
+        localStorage.setItem('@Safety:indigenous_demografico', response.data.id);
 
         dispatch({ type: 'DEMOGRAFICO', payload: { id: response.data.id } })
 
@@ -73,7 +74,25 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo domicílio',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], indigenous_demografico } } : false;
+
+        if (addData) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'DEMOGRAFICO', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Módulo Demográfico adicionado com sucesso',
+            description: 'Você já pode prosseguir para o módulo domicílio',
+          });
+        } else {
+          throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
+        }
       }
     } catch (error) {
       //@ts-ignore

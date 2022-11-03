@@ -14,6 +14,7 @@ import ICreateDomicilioDTO from '../../dtos/ICreateDomicilioDTO';
 import { DomicilioValidation } from '../../validation/schemas/domicilioValidation';
 import { useAuth } from '../../../../hooks/auth';
 import api from '../../../../services/api';
+import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
 
 
 
@@ -53,7 +54,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         const response = await api.post('/indigeanous-interviews/residence', domicilio, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:domicilio', response.data.id);
+        localStorage.setItem('@Safety:indigenous_domicilio', response.data.id);
 
         dispatch({ type: 'DOMICILIO', payload: { id: response.data.id } })
 
@@ -63,7 +64,25 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
           description: 'Você já pode prosseguir para o módulo doença e saúde',
         });
       } else {
-        //TODO: FAZER VERSÃO OFFLINE
+        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+
+        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], domicilio } } : false;
+
+        if (addData) {
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'DOMICILIO', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Informações do domicílio adicionadas com sucesso',
+            description: 'Você já pode prosseguir para o módulo doença e saúde',
+          });
+        } else {
+          throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
+        }
       }
     } catch (error) {
       //@ts-ignore
