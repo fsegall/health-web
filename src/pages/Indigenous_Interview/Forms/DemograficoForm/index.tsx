@@ -41,7 +41,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   let counter = 0;
 
   function incrementCounter () {
-    if(counter == 12) {
+    if(counter === 12) {
       counter = 1
       return
     }
