@@ -33,6 +33,12 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
 
   const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
 
+  let counter = 0;
+
+  function incrementCounter () {
+    counter += 1;
+  }
+
   const handleSubmit = useCallback(async (data: ICreateApoioProtecaoSocialDTO) => {
     try {
       ApoioProtecaoSocialFormRef.current?.setErrors({});
@@ -156,7 +162,8 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
-                        <Label>{element.label}</Label>
+                        {incrementCounter()}
+                        <Label>{`${counter}. ${element.label}`}</Label>
                         <element.type
                           {...element.props}
                           isDisabled={element?.dependencies && handleDisabled(element)}

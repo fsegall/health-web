@@ -33,6 +33,12 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
 
   const DomiciliosFormRef = useRef<FormHandles>(null);
 
+  let counter = 0;
+
+  function incrementCounter () {
+    counter += 1;
+  }
+
   const handleSubmit = useCallback(async (data: ICreateDomicilioDTO) => {
     try {
       DomiciliosFormRef.current?.setErrors({});
@@ -124,7 +130,8 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
-                        <Label>{element.label}</Label>
+                      {incrementCounter()}
+                        <Label>{`${counter}. ${element.label}`}</Label>
                         <element.type {...element.props} />
                     </span>
                 ))}

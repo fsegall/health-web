@@ -37,6 +37,16 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   const { addToast } = useToast();
 
   const DemograficoFormRef = useRef<FormHandles>(null);
+
+  let counter = 0;
+
+  function incrementCounter () {
+    if(counter == 12) {
+      counter = 1
+      return
+    }
+    counter += 1;
+  }
   
   const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
     try {
@@ -203,7 +213,8 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                     </span>
                     {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
                         <span key={elementIndex}>
-                            <Label>{element.label}</Label>
+                            {incrementCounter()}
+                            <Label>{`${counter}. ${element.label}`}</Label>
                             <element.type
                               {...element.props}
                               isDisabled={element?.dependencies && handleDisabled(element, index+1)}
