@@ -63,7 +63,7 @@ const useGetProjectsTypes = (type: ProjectType): {
                 'A qualquer momento da entrevista você pode solicitar esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em participar da pesquisa sua colaboração vai contribuir para melhorar as ações de garantia de alimentação suficiente e saudável para todos os povos indígenas no Brasil, principalmente o povo de comunidades indígenas do Mato grosso do Sul',
                 'A equipe do projeto manterá um canal de informação, pela disponibilização de e-mail dos pesquisadores, sendo os dados divulgados em ações da Rede PENSSAN. O entrevistador que está em contato com você tem todos os contatos necessários. ',
             ],
-            contact: 'Se durante a pesquisa você tiver alguma dúvida, ou quiser solicitar algum esclarecimento, poderá entrar em contato com pesquisadora que coordena o projeto (Professora Verônica Luz e.…,  ou com o Comitê de Ética em Pesquisa (CEP) ............... nos contatos a seguir.'
+            contact: 'Se durante a pesquisa você tiver alguma dúvida, ou quiser solicitar algum esclarecimento, poderá entrar em contato com os pesquisadores que coordenam o projeto, Professora Verônica Gronau Luz e Lucas Luís de Faria, ou mesmo com o Comitê de Ética em Pesquisa (CEP), nos contatos a seguir: veronicaluz@ufgd.edu.br (19) 98328-6734, lucasluisf@outlook.com (67) 99337-2767.'
         }
     }
     return {
