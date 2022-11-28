@@ -30,7 +30,7 @@ export const projectTypeOptions: ProjectTypeOptions[] = [
     },
     {
       value: 'indigenous',
-      label: 'Ingígena'
+      label: 'Indígena'
     },
 ]
 
