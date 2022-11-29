@@ -408,7 +408,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'A casa tem fogão ? ATENÇÃO: PODE TER MAIS DE UMA PRESPOSTA',
+            label: 'A casa tem fogão ? ATENÇÃO: PODE TER MAIS DE UMA RESPOSTA',
             type: Select,
             props: {
                 name: 'moradia_possui_fogao',
