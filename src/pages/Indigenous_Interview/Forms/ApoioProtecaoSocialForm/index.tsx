@@ -8,7 +8,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
+import { useHistory } from 'react-router-dom';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
 import { ApoioProtecaoSocialValidation } from '../../validation/schemas/apoioProtecaoSocialValidation';
@@ -30,6 +30,8 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
   const { token } = useAuth();
   
   const { addToast } = useToast();
+
+  const history = useHistory();
 
   const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
 
@@ -71,6 +73,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
           title: 'Informações do apoio e proteção social adicionadas com sucesso',
           description: 'Todos os passos da entrevista estão finalizados',
         });
+        history.push('/dashboard');
       } else {
         const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
 
@@ -88,6 +91,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
             title: 'Informações do apoio e proteção social adicionadas com sucesso',
             description: 'Todos os passos da entrevista estão finalizados',
           });
+          history.push('/dashboard');
         } else {
           throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
         }
