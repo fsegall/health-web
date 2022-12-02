@@ -20,20 +20,25 @@ export const racaOptions = {
 export const etniaOptions = {
     guarani: 'Guarani (Ñandeva)',
     kaiowa: 'Kaiowá',
+    guarani_kaiowa: 'Guarani-Kaiowá',
     terena: 'Terena',
     outro: 'Outro'
 }
 
 export const grauEscolaridadeOptions = {
+    nao_frequentou: 'Nunca foi pra escola',
     fundamental_incompleto: 'Fundamental Incompleto',
     fundamental_completo: 'Fundamental Completo',
     medio_incompleto: 'Médio Incompleto',
     medio_completo: 'Médio Completo',
     supletivo_1_grau: 'Supletivo 1º grau',
     supletivo_2_grau: 'Supletivo 2º grau',
-    superior_incompleto: 'Superior Incompleto',
-    superior_completo: 'Superior Completo',
-    nao_frequentou: 'Não frequentou',
+    superior_incompleto: 'Superior Incompleto (graduação)',
+    superior_completo: 'Superior Completo (graduação)',
+    pos_graduacao_incompleta_mestrado: 'Pós-graduação incompleta (mestrado)',
+    pos_graduacao_completa_mestrado: 'Pós-graduação completa (mestrado)',
+    pos_graduacao_incompleta_doutorado: 'Pós-graduação incompleta (doutorado)',
+    pos_graduacao_completa_doutorado: 'Pós-graduação completa (doutorado)',
     'ns-nr': 'NS/NR',
 }
 
@@ -56,6 +61,7 @@ export const situacaoTrabalhoOptions = {
     aposentado_doenca: 'Aposentado por doença',
     aposentado_remunerado: 'Aposentado ainda trabalha com remuneração',
     estudante: 'Estudante',
+    bolsista: 'Bolsista',
     nao_remunerado_aldeia: 'Trabalho não remunerado na Aldeia/ comunidade (inclui dona de casa)',
     'ns-nr': 'NS/NR',
 }
@@ -72,9 +78,40 @@ export const ocupacaoPrincipalOptions = {
     funcionario_publico_fora_concursado: 'Funcionário público fora da comunidade concursado',
     estagiario: 'Estagiário',
     autonomo: 'Autônomo',
-    profissional_liberal: 'Profissional Liberal',
-    empresario: 'Empresário',
+    profissional_liberal: 'Profissional Liberal (para pessoa com formação)',
+    micro_empreendedor: 'Micro empreendedor',
+    dona_de_casa: 'Dona de casa',
     'ns-nr': 'NS/NR',
+}
+
+export const funcaoNaComunidadeOptions = {
+  cacique: 'Cacique',
+  page: 'Pagé / Ñanderu / Ñandesy / Parteira',
+  capitao: 'Capitão',
+  aprendiz_de_page: 'Aprendiz de Ñanderu / Ñandesy',
+  agente_de_saude: 'Agente de Saúde',
+  agente_de_saneamento: 'Agente de saneamento',
+  artesao: 'Produção de Artesanato (redes, canoas, cestas, ferramentas, vasos, arcos e flechas, panos, tipoia, tintas, tipiti)',
+  agricultor: 'Produção de alimentos - Agricultura',
+  'caça_pesca_coleta': 'Caça, pesca, coleta',
+  lideranca: 'Liderança ou trabalho em associação',
+  comercio_na_aldeia: 'Comércio de produtos na aldeia',
+  construtor_aldeia: 'Construção da aldeia',
+  protecao_seguranca_aldeia: 'Proteção / Segurança da aldeia',
+  trabalho_domestico: 'Trabalho doméstico',
+  turismo_aldeia: 'Turismo na aldeia',
+  cuidado_criancas_animais: 'Cuidado de crianças e animais',
+  professor_indigena: 'Professor indígena',
+  estudo: 'Estudo',
+  outros: 'Outros'
+}
+
+export const trabalhoColheitaRegioesOptions = {
+  nao: 'Não',
+  colheita_maca: 'Sim, colheira de maça',
+  colheita_cana: 'Sim, colheita de cana',
+  outros: 'Sim, outros',
+  'ns-nr': 'NS/NR'
 }
 
 // DOMICÍLIO
