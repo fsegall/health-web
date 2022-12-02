@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, qualidadeAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, renda30dOptions } from "../../questions/SelectorOptions/options";
+import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, qualidadeAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, renda30dOptions, ultimaMoradaOptions, moradaHojeOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -19,10 +19,18 @@ export const domicilioFormHelper: FormHelperType[][] = [
     [
         {
             label: 'Antes de morar nessa ALDEIA/ COMUNIDADE onde você morava POR ÚLTIMO (ÚLTIMA MORADA)?',
-            type: Input,
+            type: Select,
             props: {
                 name: 'ultima_moradia',
-                placeholder: 'Digite sua última morada',
+                options: handleValueLabelOption(ultimaMoradaOptions),
+            }
+        },
+        {
+            label: 'Como você define essa sua moradia de HOJE?',
+            type: Select,
+            props: {
+                name: 'morada_atual',
+                options: handleValueLabelOption(moradaHojeOptions),
             }
         },
         {
@@ -138,7 +146,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 30 dias qual foi a renda total da sua família? (Somando A RENDA DE TODOS OS MORADORES da casa) DE TRABALHO COM CARTEIRA ASSINADA OU NÃO, DE PENSÃO, DE APOSENTADORIAS, DE BENEFÍCIOS COMO O BOLSA FAMÍLIA OU DE OUTROS PROGRAMAS DE TRANSFERÊNCIA DE RENDA, DE SEGURO DESEMPREGO, DE DOAÇÕES OU OUTRAS FORMAS DE RENDA)',
+            label: 'Nos últimos 30 dias qual foi a renda total da sua família (sustento familiar)? (Somando DE TODOS OS MORADORES da casa) (de trabalho com carteira assinada ou não, de pensão, de aposentadorias, de benefícios como o bolsa família ou de outros programas de transferência de renda, de seguro desemprego, de doações ou outras formas de renda)',
             type: Select,
             props: {
                 name: 'renda_total_30_dias',

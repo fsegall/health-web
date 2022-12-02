@@ -1,6 +1,7 @@
 export default interface ICreateDomicilioDTO {
     id?: string; //backend - generated UUID
     ultima_moradia: string; //select
+    morada_atual: string; //select
     piso: string; //select
     material_paredes: string; //select
     material_telhado: string; //select

@@ -119,14 +119,24 @@ export const trabalhoColheitaRegioesOptions = {
 export const ultimaMoradaOptions = {
     reserva_indigena: 'Reserva Indígena',
     acampamento: 'Acampamento',
-    outra_retomada: 'Outra Retomada',
+    outra_retomada: 'Outra Retomada ou território tradicional',
+    terra_indigena: 'Terra indígena demarcada',
     cidade: 'Cidade',
     'ns-nr': 'NS/NR'
 }
 
+export const moradaHojeOptions = {
+  barraco: 'Barraco',
+  casa_propria: 'Casa própria',
+  casa_reza: 'Casa de reza',
+  sede: 'Sede (casa construída pelos fazendeiros)',
+  outro: 'Outro'
+}
+
 export const pisoCasaOptions = {
     terra: 'Terra batida/socada',
-    cimento_ceramica: 'Cimento/Cerâmica',
+    cimento: 'Cimento',
+    ceramica: 'Cerâmica',
     madeira: 'Madeira',
     outros: 'Outros'
 }
@@ -135,22 +145,25 @@ export const paredesCasaOptions = {
     lona_plastico: 'Lona/plástico',
     palha_taboca: 'Palha/taboca',
     barro_taipa: 'Barro/taipá',
+    madeira: 'Madeira ou Tábua (Talba)',
     alvenaria: 'Alvenaria',
-    outro: 'Outro',
+    bambu: 'Bambu',
+    outro: 'Outro material',
     'ns-nr': 'NS/NR'
 }
 
 export const telhadoCasaOptions = {
     telha: 'Telha',
     zinco: 'Zinco',
-    palha_precaria: 'Palha precária/sapé (velha)',
+    palha_precaria: 'Palha/ sapé (velha)',
     lona_plastico: 'Lona/plástico',
     brasilit_eternite: 'Brasilit - Eternite',
-    palha_nobre: 'Palha nobre/sapé (nova)',
+    palha_nobre: 'Palha/ sapé (nova)',
     outros: 'Outros'
 }
 
 export const utensiliosCasaOptions = {
+    energia_eletrica: 'Energia elétrica',
     televisao: 'Televisão',
     geladeira: 'Geladeira',
     fogao_gas: 'Fogão a gás',
@@ -200,16 +213,17 @@ export const coletaEsgotoCasaOptions = {
     rede_esgoto: 'Rede de esgoto',
     fossa_septica: 'Fossa séptica',
     fossa_rudimentar: 'Fossa rudimentar',
-    vala_ceu_aberto: 'Vala a céu aberto',
+    vala_ceu_aberto: 'Buraco no chão',
     rio_ou_lago: 'Vai para rio ou lago',
     'ns-nr': 'NS/NR'
 }
 
 export const destinoLixoOptions = {
     prefeitura: 'Coletado pela prefeitura',
-    queimado_enterrado: 'Queimado ou enterrado no local',
-    terreno_baldio_longe: 'Jogado em terreno baldio longe da casa',
-    local_proximo_casa: 'Joado em local próximo à casa',
+    queimado: 'Queimado',
+    enterrado_localmente: 'Enterrado no local',
+    jogado_longe_casa: 'Jogado longe da casa',
+    jogado_proximo_casa: 'Joado próximo à casa',
     corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago ou quintal da residência',
     'ns-nr': 'NS/NR',
 }
@@ -230,7 +244,9 @@ export const renda30dOptions = {
     entre_275_550: 'Entre 275 e 550 reais',
     entre_551_1100: 'Entre 551 e 1.100 reais',
     entre_1101_2200: 'Entre 1.101 e 2.200 reais',
-    entre_2201_5500: 'Entre 2.201 e 5.500 reais',
+    entre_2201_3300: 'Entre 2.201 e 3.300 reais',
+    entre_3301_4400: 'Entre 3.301 e 4.400 reais',
+    entre_4401_5500: 'Entre 4.401 e 5.500 reais',
     entre_5501_11000: 'Entre 5.501 e 11.000 reais',
     mais_de_11000: 'Mais de 11.000 reais',
     'ns-nr': 'NS/NR',
