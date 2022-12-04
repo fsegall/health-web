@@ -20,27 +20,6 @@ export interface FormHelperType {
 export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
     [
         {
-            label: 'Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?',
-            type: Select,
-            props: {
-                name: 'morador_matriculado_na_educacao_basica_publica',
-                options: handleValueLabelOption(options?.yesOrNoOptions),
-                isMulti: false,
-            },
-            hasDependencies: true
-        },
-        {
-            label: ' Se sim, quantas pessoas?',
-            type: Input,
-            props: {
-                name: 'quantidade_morador_matriculado_na_educacao_basica_publica',
-                type: 'number',
-            },
-            dependencies: {
-                morador_matriculado_na_educacao_basica_publica: ["true"]
-            }
-        },
-        {
             label: 'As crianças dessa casa comem na escola? (merenda escolar)',
             type: Select,
             props: {
@@ -48,12 +27,10 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.criancasComemNaEscola),
                 isMulti: false,
             },
-            dependencies: {
-                morador_matriculado_na_educacao_basica_publica: ["true"]
-            }
+            hasDependencies: true
         },
         {
-            label: 'A alimentação na escola (merenda escolar) inclui alimentos da tradição/ da cultura?',
+            label: 'A alimentação na escola (merenda escolar) inclui alimentos da tradição/ da cultura? (como por exemplo mandioca, banana, abobora, milho)',
             type: Select,
             props: {
                 name: 'escola_inclui_alimentos_da_cultura',
@@ -61,13 +38,11 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 isMulti: false,
             },
             dependencies: {
-                morador_matriculado_na_educacao_basica_publica: ["true"]
+              criancas_comem_na_escola: ["sim", "nao", "nem_sempre"]
             }
         },
-    ],
-    [
         {
-            label: 'Algum morador desta casa recebe alguma ajuda em dinheiro?',
+            label: 'Algum morador desta casa recebe alguma ajuda em dinheiro? (qualquer ajuda ou benefício social)',
             type: Select,
             props: {
                 name: 'morador_recebe_ajuda_financeira',
@@ -76,14 +51,14 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             },
         },
         {
-            label: 'Se SIM, nos últimos 3 meses, você ou alguém da sua família recebeu de que programa? Bolsa Família/Auxílio Brasil?',
-            type: Select,
-            props: {
-                name: 'bolsa_familia_auxilio_brasil',
-                options: handleValueLabelOption(options?.apoioFinanceiro),
-                isMulti: false,
-            },
-            hasDependencies: true
+          label: 'Nos últimos 3 meses, você ou alguém da sua família recebeu de que programa? Bolsa Família/Auxílio Brasil?',
+          type: Select,
+          props: {
+              name: 'bolsa_familia_auxilio_brasil',
+              options: handleValueLabelOption(options?.apoioFinanceiro),
+              isMulti: false,
+          },
+          hasDependencies: true
         },
         {
             label: 'Benefício de Prestação continuada (BPC)',
@@ -130,6 +105,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 isMulti: false,
             }
         },
+    ],
+    [
         {
             label: 'Aposentadoria',
             type: Select,
@@ -176,19 +153,19 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             },
             hasDependencies: true
         },
+        // {
+        //     label: 'SE respondeu SIM para recebimento de cestas, quantas recebeu nos últimos três meses',
+        //     type: Input,
+        //     props: {
+        //         name: 'quantidade_cesta_de_alimentos_3m',
+        //         type: 'number'
+        //     },
+        //     dependencies: {
+        //         cesta_de_alimentos: ["sim"]
+        //     }
+        // },
         {
-            label: 'SE respondeu SIM para recebimento de cestas, quantas recebeu nos últimos três meses',
-            type: Input,
-            props: {
-                name: 'quantidade_cesta_de_alimentos_3m',
-                type: 'number'
-            },
-            dependencies: {
-                cesta_de_alimentos: ["sim"]
-            }
-        },
-        {
-            label: 'De onde era a cesta de alimentos? (pode ter recebido mais de 1 cesta) ',
+            label: 'Se recebeu cesta(s) de alimentos, de onde era? (pode ter recebido mais de 1 cesta)',
             type: Select,
             props: {
                 name: 'origem_cesta_de_alimentos_3m',
@@ -223,29 +200,6 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Se recebe cesta de alimentos, que alimentos você acha que NÃO DEVERIAM estar na cesta?',
-            type: Select,
-            props: {
-                name: 'alimentos_que_nao_deveriam_estar_na_cesta',
-                options: handleValueLabelOption(options?.listaDeAlimentos),
-                isMulti: true,
-            },
-            dependencies: {
-                cesta_de_alimentos: ["sim"]
-            }
-        },
-        {
-            label: 'Outros alimento que não deveriam estar na cesta',
-            type: Input,
-            props: {
-                name: 'descricao_remover_outro',
-                type: 'text',
-            },
-            dependencies: {
-                cesta_de_alimentos: ["sim"],
-            }
-        },
-        {
             label: 'Se NÃO recebe a cesta de alimentos, por que não recebe?',
             type: Select,
             props: {
@@ -257,42 +211,8 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 cesta_de_alimentos: ["nao"]
             }
         },
-        {
-            label: 'Para quem respondeu SIM na 103: Quem pega o dinheiro do Bolsa Família/Auxílio Brasil para esta casa?',
-            type: Select,
-            props: {
-                name: 'quem_pega_dinheiro_bolsa_familia',
-                options: handleValueLabelOption(options?.recebeODinheiroDoAuxilio),
-                isMulti: false,
-            },
-            dependencies: {
-                bolsa_familia_auxilio_brasil: ["sim"]
-            }
-        },
     ],
     [
-        {
-            label: 'Na época da pandemia, você ou outra pessoa que mora na sua casa recebeu o auxílio emergencial?',
-            type: Select,
-            props: {
-                name: 'auxilio_emergencial_na_pandemia',
-                options: handleValueLabelOption(options?.yesOrNoOptions),
-                isMulti: false,
-            },
-            hasDependencies: true
-        },
-        {
-            label: 'Se sim, quantas vezes recebeu o auxílio?',
-            type: Select,
-            props: {
-                name: 'quantidade_vezes_auxilio_emergencial_na_pandemia',
-                options: handleValueLabelOption(options?.quantidadeDeVezesAuxilio),
-                isMulti: false,
-            },
-            dependencies: {
-                auxilio_emergencial_na_pandemia: ["true"]
-            }
-        },
         {
             label: 'Nos últimos 3 meses, você ou alguém da sua casa recebeu ajuda do estado, da prefeitura, de outra instituição, associação, movimento indígena, movimentos sociais, igreja, amigos, parentes ou outros?',
             type: Select,
@@ -309,7 +229,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             props: {
                 name: 'itens_recebidos_ajuda_estado_prefeitura_outros_3m',
                 options: handleValueLabelOption(options?.tipoDeAuxilioRecebido),
-                isMulti: false,
+                isMulti: true,
             },
             dependencies: {
                 ajuda_estado_prefeitura_outros_3m: ["true"]

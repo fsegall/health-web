@@ -626,6 +626,7 @@ export const criancasComemNaEscola = {
     sim: 'Sim',
     nao: 'Não',
     nem_sempre: 'Nem sempre tem comida na escola',
+    nao_tem_crianca: 'Não tem criança na casa',
     'ns-nr': 'NS/NR'
 }
 
@@ -652,9 +653,11 @@ export const origemCestaAlimentos = {
 }
 
 export const listaDeAlimentos = {
+    higiene_pessoal: 'Produtos de higiene pessoal',
+    sal: 'Sal',
     leite: 'Leite',
     arroz: 'Arroz',
-    feijao: 'Feijão',
+    feijao: 'Feijão (ou mais feijão)',
     milho_derivados: 'Milho e derivados',
     oleo_soja: 'Óleo de soja',
     acucar: 'Açucar',
@@ -670,7 +673,8 @@ export const listaDeAlimentos = {
     sardinha_atum_lata: 'Sardinha / atum em lata',
     legumes_em_lata: 'Seleta de legumes (miho / ervinha) em lata',
     ovos: 'Ovos',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const motivosNaoReceberCesta = {

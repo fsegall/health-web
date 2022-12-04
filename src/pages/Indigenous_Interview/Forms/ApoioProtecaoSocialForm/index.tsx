@@ -28,7 +28,7 @@ interface ApoioProtecaoSocialFormProps {
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const { token } = useAuth();
-  
+
   const { addToast } = useToast();
 
   const ApoioProtecaoSocialFormRef = useRef<FormHandles>(null);
@@ -38,9 +38,6 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
       ApoioProtecaoSocialFormRef.current?.setErrors({});
       const values = {
         ...data,
-        quantidade_morador_matriculado_na_educacao_basica_publica: data?.quantidade_morador_matriculado_na_educacao_basica_publica ? Number(data?.quantidade_morador_matriculado_na_educacao_basica_publica) : null,
-        quantidade_vezes_auxilio_emergencial_na_pandemia: data?.quantidade_vezes_auxilio_emergencial_na_pandemia ? Number(data?.quantidade_vezes_auxilio_emergencial_na_pandemia) : null,
-        quantidade_cesta_de_alimentos_3m: data?.quantidade_cesta_de_alimentos_3m ? Number(data?.quantidade_cesta_de_alimentos_3m) : null,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
       const validatedData = await ApoioProtecaoSocialValidation.validate(values, {
@@ -111,7 +108,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
     }
   }, [addToast, offline, dispatch, initialValues, token]);
 
-  
+
   const [formDependencies, setFormDependencies] = useState<any>({})
 
   function handleDependencies(element: FormHelperType, value: any) {
