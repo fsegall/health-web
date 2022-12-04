@@ -130,21 +130,4 @@ export const quadroDemograficoHelper: FormHelperType[] = [
           idade: ["14"]
       }
     },
-    // {
-    //     label: 'Qual lingua indígena o MORADOR fala?',
-    //     type: Input,
-    //     props: {
-    //         name: 'lingua_indigena',
-    //         placeholder: 'Digite a lingua inígena que o morador fala'
-    //     }
-    // },
-    // {
-    //     label: 'O morador frequenta a escola atualmente?',
-    //     type: Select,
-    //     props: {
-    //         name: 'frequenta_escola',
-    //         options: handleValueLabelOption(yesOrNoOptions),
-    //         isMulti: false
-    //     }
-    // },
 ]
