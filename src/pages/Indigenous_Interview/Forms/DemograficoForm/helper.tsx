@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { sexoOptions, racaOptions, etniaOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoOptions, ocupacaoPrincipalOptions, yesOrNoOptions, funcaoNaComunidadeOptions } from "../../questions/SelectorOptions/options";
+import { sexoOptions, racaOptions, etniaOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoOptions, ocupacaoPrincipalOptions, funcaoNaComunidadeOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;

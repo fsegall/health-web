@@ -208,7 +208,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 isMulti: false,
             },
             dependencies: {
-                cesta_de_alimentos: ["nao"]
+                cesta_de_alimentos: ["nao", "tentou"]
             }
         },
     ],

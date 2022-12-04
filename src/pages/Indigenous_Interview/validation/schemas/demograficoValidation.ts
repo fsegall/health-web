@@ -18,7 +18,7 @@ export const DemograficoValidation = Yup.object().shape({
         sexo: Yup.string().required('Você precisa digitar o sexo'),
         raca: Yup.string().required('Você precisa digitar a raça'),
         povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
-        crenca_religiao: Yup.array().nullable().when("idade", {
+        crenca_religiao: Yup.string().nullable().when("idade", {
           is: (val: any) => Number(val) > 14,
           then: Yup.array().nullable().required("Você precisa preencher as sobre a religião"),
           otherwise: Yup.array().nullable().notRequired(),
