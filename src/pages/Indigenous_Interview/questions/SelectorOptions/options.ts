@@ -285,10 +285,25 @@ export const familiarMorteCovid = {
     'ns-nr': 'NS/NR'
 }
 
+export const familiarMorteOptions = {
+    nao: 'Não morreu ninguém',
+    covid_uma_pessoa: 'Sim, apenas 1 pessoa por Covid',
+    covid_mais_de_um: 'Sim, mais de 1 pessoa por Covid',
+    outras_causas_uma_ou_mais_pessoas: 'Sim, 1 ou mais pessoas por outra causa. ',
+    'ns-nr': 'NS/NR'
+}
+
+export const familiarMorteRendaOptions = {
+  alguns: 'Sim, alguns',
+  todos: 'Sim, todos',
+  nao: 'Não',
+  'ns-nr': 'NS/NR'
+}
+
 export const condicaoSaudeOptions = {
     muito_boa: 'Muito boa',
     boa: 'Boa',
-    regular: 'Regular',
+    regular: 'Mais ou menos',
     ruim: 'Ruim',
     muito_ruim: 'Muito Ruim'
 }
@@ -296,7 +311,8 @@ export const condicaoSaudeOptions = {
 export const condicaoSaudeTekohaOptions = {
     melhorou: 'Sim, melhorou',
     piorou: 'Sim, piorou',
-    sem_mudancas: 'Não houveram mudanças importantes',
+    sem_mudancas: 'Não houve mudanças importantes',
+    nao_mora_em_retomada: 'Não moro em território tradicional / retomada',
     'ns-nr': 'NS/NR'
 }
 
@@ -309,14 +325,24 @@ export const causasDoencasVenenoLavouraOptions = {
     'ns-nr': 'NS/NR'
 }
 
+export const tiposAcidenteOptions = {
+  trabalho: 'Relacionado ao trabalho',
+  domestico: 'Acidente doméstico',
+  redor_da_casa: 'Acidente ao redor da casa',
+  fora_da_comunidade: 'Acidente fora da comunidade (Aldeia)',
+  nao: 'Não',
+  'ns-nr': 'NS/NR'
+}
+
 export const acidentesOptions = {
     cobra: 'Picada de cobra',
     animais_peconhentos: 'Picada de animais peçonhentos (aranha, escorpião, etc)',
     abelha: 'Acidentes com abelhas',
     outros_animais: 'Acidentes com outros animais (cachorro, galinha, etc)',
-    acidente_trabalho: 'Outro tipo de acidente no trabalho',
     acidente_transito: 'Acidentes de trânsito na estrada (com bicicleta e carro, caminhonete, etc)',
     acidente_rio: 'Acidentes no rio',
+    queimadura_casa: 'Queimadura com fogo em casa',
+    queimadura_outro_local: 'Queimadura com fogo na roça ou outro lugar de trabalho',
     queda_arvore: 'Queda de árvore / pinheiro / açai, etc',
     queda_propria_altura: 'Queda da própria altura (tombo)',
     outros: 'Outros',
@@ -328,10 +354,10 @@ export const violenciaFisicaOptions = {
     na_retomada_por_indigenas: 'Violência na retomada cometida por outros indígenas',
     na_retomada_por_fazendeiro_ou_invasor: 'Violência na retomada cometida por fazendeiro ou invasores da Terra Indígena',
     na_retomada_por_policial: 'Violência na retomada cometida pela polícia',
-    liderancas: 'Violência feita por lideranças',
+    liderancas: 'Violência feita pelo capitão/equipe do capitão',
     cidade: 'Violência na cidade',
-    arredores_da_comunidade: 'Violência nos arredores da TI ou da Comunidade',
-    outro: 'Outro - Especificar',
+    arredores_da_comunidade: 'Violência nos arredores da comunidade',
+    outro: 'Outro',
     'ns-nr': 'NS/NR',
 }
 
@@ -345,8 +371,12 @@ export const tratamentosOptions = {
     tuberculose: 'Tuberculose',
     gripe_tosse: 'Gripe/tosse',
     pneumonia: 'Pneumonia',
-    ferida_pele: 'Úlcera (ferida) de pele',
+    ferida_pele: 'Ferida na pele',
     anemia_ferropriva: 'Anemia ferropriva',
+    desnutricao: 'Desnutrição / baixo peso',
+    diarreia: 'Diarreia (Xiri)',
+    vomito: 'Vômito',
+    dor_de_cabeca: 'Dor de cabeça',
     dst: 'HIV ou outra doença transmitida pelo sexo',
     outro: 'Tratamento para outro tipo de doença',
     feitico: 'Doença fruto de feitiço',
@@ -355,14 +385,15 @@ export const tratamentosOptions = {
 
 export const tratamentosPajeOptions = {
     nao: 'Não',
-    nanderu: 'Sim, apenas com Ñanderu/Ñandesy',
+    nanderu: 'Sim, apenas com Ñanderu/Ñandesy/Pajé',
     nanderu_posto_ou_hospital: 'Sim, Ñanderu/Ñandesy e posto de saúde ou hospital',
+    casai: 'Sim, na CASAI',
     'ns-nr': 'NS/NR'
 }
 
 export const medicamentosUsoContinuoOptions = {
     nao: 'Não',
-    remedios: 'Sim, só remédios "de caixinha" (do branco)',
+    remedios: 'Sim, só remédios "de caixinha" (ou injeção)',
     ervas: 'Sim, ervas',
     remedios_e_ervas: 'Sim, remédios e ervas',
     'ns-nr': 'NS/NR'
@@ -373,10 +404,12 @@ export const motivoMedicamentoUsoContinuo = {
     diabetes: 'Diabetes',
     pressao_alta: 'Pressão alta',
     coracao: 'Doença do coração',
-    mental: 'Sofrimento mental (doença dos nervos)',
-    hiv: 'HIV',
+    mental: 'Sofrimento mental/depressão',
+    reumatismo: 'Reumatismo ou doença nos ossos',
+    hiv: 'HIV/AIDS',
+    feitico: 'Medicação contra feitiço',
     anemia: 'Anemia',
-    outro: 'Outro - especifique'
+    outro: 'Outro'
 }
 
 export const recorreAoAdoecerOptions = {

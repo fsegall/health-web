@@ -23,7 +23,7 @@ export const SaudeDoencaValidation = Yup.object().shape({
     }),
     acidentes: Yup.string().required('Você precisa preencher se houveram acidentes'),
     acidentes_ocorridos: Yup.string().nullable().when("acidentes", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => (String(val) !== "nao" || String(val) !== "ns-nr"),
         then: Yup.string().nullable().required("Você precisa preencher sobre os acidentes"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
@@ -51,9 +51,7 @@ export const SaudeDoencaValidation = Yup.object().shape({
     morador_internado: Yup.string().required('Você precisa preencher se houve algum morador internado'),
     morador_problemas_bebidas_alcoolicas: Yup.string().required('Você precisa preencher sobre problemas com bebidas'),
     morador_problemas_uso_drogas: Yup.string().required('Você precisa preencher sobre problemas com drogas'),
-    familiar_morte_covid: Yup.string().nullable().notRequired(),
-    familiar_morte_covid_contribuia_renda_familiar: Yup.string().nullable().notRequired(),
-    familiares_morte_outras_causas: Yup.string().nullable().notRequired(),
-    motivo_familiares_morte_outras_causas: Yup.string().nullable().notRequired(),
-    familiares_morte_outras_causas_contribuia_renda_familiar: Yup.string().nullable().notRequired(),
+    morador_fuma_cigarro: Yup.string().required('Você precisa preencher sobre cigarro'),
+    familiar_morte: Yup.string().nullable().notRequired(),
+    familiar_morte_contribuia_renda_familiar: Yup.string().nullable().notRequired(),
 });

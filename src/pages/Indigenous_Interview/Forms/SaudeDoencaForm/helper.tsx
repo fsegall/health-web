@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { acidentesOptions, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, condicaoSaudeTekohaOptions, familiarMorteCovid, medicamentosUsoContinuoOptions, motivoMedicamentoUsoContinuo, motivosNaoTomarVacinaCovidOptions, recorreAoAdoecerOptions, tratamentosOptions, tratamentosPajeOptions, vacinaCovidOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
+import { acidentesOptions, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, condicaoSaudeTekohaOptions, familiarMorteCovid, familiarMorteOptions, familiarMorteRendaOptions, medicamentosUsoContinuoOptions, motivoMedicamentoUsoContinuo, motivosNaoTomarVacinaCovidOptions, recorreAoAdoecerOptions, tiposAcidenteOptions, tratamentosOptions, tratamentosPajeOptions, vacinaCovidOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -40,63 +40,26 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'AGORA EU QUERO PEDIR LICENÇA PARA FAZER ALGUMAS PERGUNTAS SOBRE OUTRAS DOENÇAS NA SUA FAMÍLIA, SE NÃO QUISER RESPONDER NÃO TEM PROBLEMA. Vocês perderam alguém (morreu alguém), que morava nesta casa, por Covid-19, DESDE O INÍCIO DA PANDEMIA EM 2020?',
+            label: 'AGORA EU QUERO PEDIR LICENÇA PARA FAZER ALGUMAS PERGUNTAS SOBRE OUTRAS DOENÇAS NA SUA FAMÍLIA, SE NÃO QUISER RESPONDER NÃO TEM PROBLEMA. Nos últimos 12 meses morreu alguma(s) pessoa(s)  moradora(s) desta casa, por Covid-19 ou outra causa?',
             type: Select,
             props: {
-                name: 'familiar_morte_covid',
-                options: handleValueLabelOption(familiarMorteCovid),
+                name: 'familiar_morte',
+                options: handleValueLabelOption(familiarMorteOptions),
             },
             hasDependencies: true,
         },
         {
-            label: 'Essa pessoa contribuía para a renda da família?',
+            label: 'Essa(s) pessoa(s) que morreu (morreram) ajudava(m) com o sustento da família? ',
             type: Select,
             props: {
-                name: 'familiar_morte_covid_contribuia_renda_familiar',
-                options: handleValueLabelOption(yesOrNoOptions),
+                name: 'familiar_morte_contribuia_renda_familiar',
+                options: handleValueLabelOption(familiarMorteRendaOptions),
             },
             dependencies: {
-                familiar_morte_covid: [
-                    "chefe_homem",
-                    "chefe_mulher",
-                    "homem_16_mais",
-                    "mulher_16_mais",
-                    "crianca_adolescente",
-                ],
-            }
-        },
-        {
-            label: 'Nos últimos 12 meses morreu alguma(s) pessoa(s)  moradora(s) desta casa, por qualquer outra causa? ATENÇÃO: AQUI É MELHOR O (A) ENTREVISTADOR(A)  EXPLICITAR:  DO MÊS   XX  ATÉ ONTEM. TAMBÉM ATENTAR PARA O FATO QUE PODE TER HAVIDO MAIS DE UM ÓBITO',
-            type: Select,
-            props: {
-                name: 'familiares_morte_outras_causas',
-                options: handleValueLabelOption(yesOrNoOptions),
-            },
-            hasDependencies: true,
-        },
-        {
-            label: 'Se sim, qual (quais) foi (foram) a(s) causa(s)?',
-            type: Input,
-            props: {
-                name: 'motivo_familiares_morte_outras_causas',
-                placeholder: 'Digite as causas'
-            },
-            dependencies: {
-                familiares_morte_outras_causas: [
-                    "true",
-                ],
-            }
-        },
-        {
-            label: 'Essa(s)  pessoa(s) que faleceu (faleceram) contribuía(m) para a renda familiar?',
-            type: Select,
-            props: {
-                name: 'familiares_morte_outras_causas_contribuia_renda_familiar',
-                options: handleValueLabelOption(yesOrNoOptions),
-            },
-            dependencies: {
-                familiares_morte_outras_causas: [
-                    "true",
+              familiar_morte: [
+                    "covid_uma_pessoa",
+                    "covid_mais_de_um",
+                    "outras_causas_uma_ou_mais_pessoas",
                 ],
             }
         },
@@ -119,7 +82,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses, você ou algum morador desta casa foi exposto ao veneno de lavoura?',
+            label: 'Nos últimos 12 meses, você ou alguém desta casa foi exposto (teve contato) a veneno de lavoura?',
             type: Select,
             props: {
                 name: 'morador_exposto_veneno_lavoura',
@@ -128,7 +91,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true,
         },
         {
-            label: 'Se Sim, nos últimos 6 meses, você ou alguém da sua casa FICOU DOENTE, por CAUSA DE contato ou consumo de veneno de lavoura?',
+            label: 'Se Sim, nos últimos 12 meses, você ou alguém desta casa FICOU DOENTE, por causa do veneno de lavoura?',
             type: Select,
             props: {
                 name: 'doencas_contato_veneno_lavoura',
@@ -155,16 +118,17 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses alguém desta casa teve algum tipo de acidente?',
+            label: ' Nos últimos 12 meses alguém desta casa teve algum tipo de acidente com: (LER AS OPÇÕES) (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'acidentes',
-                options: handleValueLabelOption(yesOrNoOptions),
-            },
+                options: handleValueLabelOption(tiposAcidenteOptions),
+                isMulti: true
+              },
             hasDependencies: true,
         },
         {
-            label: 'SE sim, qual tipo de acidente? ( Atenção: pode ler a lista de acidentes)',
+            label: 'Se teve algum acidente nos últimos 12 meses, que tipo de acidente aconteceu? (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'acidentes_ocorridos',
@@ -173,12 +137,15 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             },
             dependencies: {
                 acidentes: [
-                    "true",
+                  "trabalho",
+                  "domestico",
+                  "redor_da_casa",
+                  "fora_da_comunidade",
                 ],
             }
         },
         {
-            label: 'Nos últimos 6 meses você ou alguém de sua família sofreu algum tipo de ameaça de agressão física, patrimonial (danificar pertences, por exemplo a queima da casa ou de alimentos) ou espiritual (feitiço)?',
+            label: 'Nos últimos 12 meses você ou alguém de sua família sofreu algum tipo de ameaça de agressão física, patrimonial (danificar pertences, por exemplo a queima da casa ou de alimentos) ou espiritual (feitiço)?',
             type: Select,
             props: {
                 name: 'ocorrencia_de_ameacas',
@@ -186,7 +153,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses alguém desta casa sofreu algum tipo de violência física?',
+            label: 'Nos últimos 12 meses alguém desta casa sofreu algum tipo de violência física?',
             type: Select,
             props: {
                 name: 'ocorrencia_violencia_fisica',
@@ -195,7 +162,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true,
         },
         {
-            label: 'Se SIM, onde foi praticada essa violência física? (pode ser mais de uma resposta)',
+            label: 'Se SIM, onde aconteceu a violência física? PODE TER MAIS DE 1 RESPOSTA). REFORÇAR QUE É SIGILOSO (segredo)',
             type: Select,
             props: {
                 name: 'local_ocorrencia_violencia_fisica',
@@ -209,7 +176,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'No último 6 meses você fez tratamento para: ATENÇÃO (LER A LISTA) (+1)',
+            label: ' Nos últimos 12 meses você fez tratamento para: ATENÇÃO: LER AS OPÇÕES. (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'lista_tratamentos',
@@ -220,7 +187,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
     ],
     [
         {
-            label: 'Nos últimos 6 meses você fez algum tratamento com o pajé/benzedor/Ñanderu/Ñandesy?',
+            label: 'Nos últimos 12 meses você fez tratamento com o pajé/benzedor/Ñanderu/Ñandesy?',
             type: Select,
             props: {
                 name: 'tratamento_com_paje_ou_similar',
@@ -228,7 +195,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses você fez tratamento de cura na igreja?',
+            label: 'Nos últimos 12 meses você fez tratamento de cura na igreja?',
             type: Select,
             props: {
                 name: 'tratamento_igreja',
@@ -236,7 +203,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Você toma algum medicamento todos os dias?',
+            label: 'Você toma algum medicamento todos os dias? (ou anticoncepcional de injeção)?',
             type: Select,
             props: {
                 name: 'medicacao_uso_continuo',
@@ -269,7 +236,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses alguém desta casa ficou internado?',
+            label: 'Nos últimos 12 meses alguém desta casa ficou internado?',
             type: Select,
             props: {
                 name: 'morador_internado',
@@ -277,7 +244,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Alguém desta casa tem problemas com bebidas alcoólicas?',
+            label: 'Alguém desta casa tem problemas com bebidas alcoólicas? Lembrar que é sigiloso',
             type: Select,
             props: {
                 name: 'morador_problemas_bebidas_alcoolicas',
@@ -285,7 +252,15 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Alguém desta casa tem problemas com uso de drogas (fuma alguma droga?)?',
+            label: 'Você fuma cigarro?',
+            type: Select,
+            props: {
+                name: 'morador_fuma_cigarro',
+                options: handleValueLabelOption(yesOrNoOptions),
+            }
+        },
+        {
+            label: 'Alguém desta casa tem problemas com uso de drogas (fuma, cheira ou aplica, alguma droga)?',
             type: Select,
             props: {
                 name: 'morador_problemas_uso_drogas',

@@ -120,13 +120,22 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
     setFormDependencies(currentForm)
   }
 
+  function handleArrayDependencies(element: FormHelperType, value: any) {
+    const arrayOfOptions = value?.map((v: any) => v?.value)
+    let currentForm: any = {
+      ...formDependencies,
+      [element.props.name]: arrayOfOptions
+    }
+    setFormDependencies(currentForm)
+  }
+
   function handleDisabled(element: FormHelperType): boolean {
     const dependencies: { [key: string]: string[] } | any = element?.dependencies
     const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
       let isDisabled = true
       const found = formDependencies[obj?.[0]]
       if (found) {
-        if (obj?.[1]?.find((v: any) => v === found)) {
+        if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
           isDisabled = false
         }
       }
@@ -157,7 +166,13 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
                         <element.type
                           {...element.props}
                           isDisabled={element?.dependencies && handleDisabled(element)}
-                          onChange={(e: any) => element?.hasDependencies && handleDependencies(element, e?.value)}
+                          onChange={(e: any) => {
+                            if (element?.props?.isMulti !== true) {
+                              element?.hasDependencies && handleDependencies(element, e?.value)
+                            } else {
+                              element?.hasDependencies && handleArrayDependencies(element, e)
+                            }
+                          }}
                         />
                     </span>
                 ))}
