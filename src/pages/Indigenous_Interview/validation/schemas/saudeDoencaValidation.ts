@@ -23,9 +23,9 @@ export const SaudeDoencaValidation = Yup.object().shape({
     }),
     acidentes: Yup.string().required('Você precisa preencher se houveram acidentes'),
     acidentes_ocorridos: Yup.string().nullable().when("acidentes", {
-        is: (val: any) => (String(val) !== "nao" || String(val) !== "ns-nr"),
-        then: Yup.string().nullable().required("Você precisa preencher sobre os acidentes"),
-        otherwise: Yup.string().nullable().notRequired(),
+        is: (val: any) => (String(val)?.includes("nao") || String(val)?.includes("ns-nr")),
+        then: Yup.string().nullable().notRequired(),
+        otherwise: Yup.string().nullable().required("Você precisa preencher sobre os acidentes"),
     }),
     ocorrencia_de_ameacas: Yup.string().required('Você precisa precisa preencher sobre ameaças'),
     ocorrencia_violencia_fisica: Yup.string().required('Você precisa sobre violência física'),
