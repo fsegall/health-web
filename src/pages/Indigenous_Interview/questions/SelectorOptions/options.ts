@@ -439,7 +439,10 @@ export const avaliaAlimentacaoRetomada = {
     piorou_nao_recebe_doacoes: 'Piorou, porque não recebemos doações',
     piorou_sem_matas_rios_plantacoes: 'Piorou, porque não temos acesso à mata, rios e plantação',
     piorou_sem_assistencia_estado: 'Piorou, porque não recebemos assistência do Estado',
-    piorou_sem_explicacao: 'Piorou, mas não sei explicar'
+    piorou_mais_violencia: 'Piorou, porque sofremos mais violências',
+    piorou_sem_explicacao: 'Piorou, mas não sei explicar',
+    piorou_outro_motivo: 'Piorou. Outro motivo',
+    'ns-nr': 'NS/NR'
 }
 
 export const semAlimentosPorConflitos = {
@@ -447,16 +450,18 @@ export const semAlimentosPorConflitos = {
     doacoes: 'Porque nos impediram de receber doações do Estado e apoiadores',
     permissao_sair_retomada: 'Porque não permitiram que a gente saísse da retomara para comprar',
     destruicao_roca: 'Porque destruiram nossa roça',
-    outro: 'Outro'
+    outro: 'Outro',
+    'ns-nr': 'NS/NR'
 }
 
 export const origemAlimento = {
     roca: 'Roça',
     horta: 'Horta',
-    mercado: 'Mercado',
-    venda: 'Venda',
+    supermercado: 'Supermercado',
+    mercearia: 'Mercearia',
     cesta_de_alimentos: 'Cesta de Alimentos',
-    doacao_apoiadores: 'Doação de apoiadores (FUNAI, Estado, outros)'
+    doacao_apoiadores: 'Doação de apoiadores (FUNAI, Estado, outros)',
+    'ns-nr': 'NS/NR'
 }
 
 export const acaoFaltaDeComida = {
@@ -467,6 +472,7 @@ export const acaoFaltaDeComida = {
     move_comunidade_proxima: 'Vai para outra comunidade próxima',
     move_cidade_trabalho: 'Vai para outra cidade buscar trabalho',
     move_cidade_ajuda: 'Vai para outra cidade buscar ajuda',
+    pesca_caca: 'Sai para caçar ou pescar',
     compra_fiado: 'Compra fiado no mercado / venda / comércio',
     ajuda_cidade: 'Pede ajuda na cidade',
     ajuda_parente: 'Pede ajuda de parente',
@@ -475,8 +481,19 @@ export const acaoFaltaDeComida = {
     ajuda_funai: 'Pede ajuda para a FUNAI',
     ajuda_posto_de_saude: 'Pede ajuda no Posto de saúde',
     ajuda_cras: 'Pede ajuda no CRAS',
-    ajuda_cimi: 'Pede ajuda no COMI ou outros apoiadores',
-    outros: 'Outro'
+    ajuda_cimi: 'Pede ajuda no CIMI ou outros apoiadores',
+    ajuda_aty_guasu: 'Pede ajuda Aty Guasu',
+    nao_falta_comida: 'Não fala comida na casa',
+    outros: 'Outro',
+    'ns-nr': 'NS/NR'
+}
+
+export const rocaOuHortaOptions = {
+    nao: 'Não',
+    roca_em_casa: 'Sim, somente roça dentro do terreno da casa',
+    roca_fora_de_casa: 'Sim, roça fora do terreno da casa',
+    roca_comunitaria: 'Sim, participa de roça comunitária',
+    'ns-nr': 'NS/NR'
 }
 
 export const motivacaoNaoProduzirHorta = {
@@ -487,7 +504,8 @@ export const motivacaoNaoProduzirHorta = {
     espaco: 'Pouco / nenhum espaço',
     ajuda_tecnica: 'Falta de ajuda técnica',
     maquinario: 'Falta de maquinário',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const plantiosHorta = {
@@ -501,7 +519,10 @@ export const plantiosHorta = {
     abobora: 'Abóbora',
     quiabo: 'Quiabo',
     verduras: 'Verduras (alface, rúcla, acelga etc)',
-    outros: 'Outros'
+    feijao_corda: 'Feijão de corda (cumandá)',
+    ervas_para_remedio: 'Evas para remédio',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const frutiferasEmCasaOuProximo = {
@@ -517,25 +538,39 @@ export const frutiferasEmCasaOuProximo = {
     jabuticaba: 'Jabuticaba',
     caju: 'Caju',
     melao: 'Melão',
-    outros: 'Outros'
+    cafe: 'Café',
+    acai: 'Açai',
+    coco: 'Côco',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const producaoComidaAnoTodo = {
-    nao: 'Não',
-    maior_parte_do_ano: 'Na maior parte do ano sim',
-    poucos_meses: 'Apenas poucos meses do ano',
-    apenas_epoca_do_alimento: 'Apenas na época de cada alimento',
+    nao: 'Não temos produção de alimentos',
+    maior_parte_do_ano: 'Temos produção de alimentos a maior parte do ano sim',
+    poucos_meses: 'Temos produção apenas poucos meses do ano',
+    apenas_epoca_do_alimento: 'Temos produção na época própria de cada alimento (sazonalidade)',
     'ns-nr': 'NS/NR'
 }
 
 export const fornecedorHorta = {
     doacao_parentes: 'Doação de parentes',
     doacao_funai: 'Doação da FUNAI',
-    doacao_outro: 'Doação de outra instituição (agraer, UFGD, município)',
+    doacao_outro: 'Doação de outra instituição (Agraer, Universidades, município)',
     troca_sementes: 'Troca de sementes',
     banco_de_sementes: 'Banco de sementes',
     compra: 'Compro',
     fazendo_mudas: 'Fazemos as mudas',
+    'ns-nr': 'NS/NR'
+}
+
+export const armazenamentoSementesPlantio = {
+    nao_guardam: 'Não guardamos',
+    em_casa_perto_fumaca: 'Guardamos em casa, próximo a fumaça (defumação)',
+    em_casa_longe_fumaca: 'Guardamos em casa em outro lugar, fora da fumaça',
+    com_terceiros_local_proprio_para_armazenamento: 'Guardamos com alguém quetenha como armazenar corretamente',
+    garrafas_plasticas: 'Guardamos em garrafas de plástico',
+    outro: 'Outro',
     'ns-nr': 'NS/NR'
 }
 
@@ -553,78 +588,83 @@ export const dificuldadesHorta = {
     roubo: 'Tem roubo',
     veneno_vizinhos: 'Veneno dos vizinhos matam a produção',
     terra_cansada: 'A terra está cansada',
-    doencas: 'Há doenças',
+    doencas: 'Dá doenças',
     geada: 'Geada no inverno',
-    falta_mandioca: 'Falta mandioca',
-    falta_sementes: 'Falta sementes de outras plantas',
+    falta_semente: 'Falta semente/rama/muda',
+    falta_outras_sementes: 'Falta sementes de outras plantas',
     capim_excesso: 'Dá capim demais',
     ataque_formigas: 'Formigas atacam',
     seca: 'Seca no verão',
-    falta_equipamento: 'Falta trator'
+    falta_equipamento: 'Falta trator',
+    falta_agua: 'Não tem água',
+    'ns-nr': 'NS/NR'
 }
 
 export const finalidadeHorta = {
-    sustento_casa_comunidade: 'Somente para o sustento da casa/comunidade',
-    sustento_venda: 'Para o sustento e venda do que sobra',
+    sustento_casa: 'Somente para o sustento da casa',
+    sustento_venda: 'Para o sustento da casa e venda do que sobra',
     sustento_troca: 'Para o sustento da casa e troca',
     venda: 'Somente para venda',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const criacaoAnimaisComerOuVender = {
     galinha: 'Galinha',
     porco: 'Porco',
     vaca: 'Vaca',
+    porco_mato: 'Porco do Mato',
+    quati: 'Quati',
+    ema: 'Ema',
+    veado: 'Veado',
+    macaco: 'Macaco',
     targaruga: 'Tartaruga',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const necessidadeComprarAlimentos3m = {
-    sim: 'Sim',
+    sim: 'Sim, compramos',
     nao: 'Não',
-    troca_parentes: 'Fizemos trocas com parentes',
-    troca_mercado: 'Fizemos trocas em mercado na cidade',
+    troca_parentes: 'Não, fizemos trocas com parentes',
+    troca_mercado: 'Não, fizemos trocas em mercado na cidade',
     'ns-nr': 'NS/NR'
 }
 
 export const localCompraAlimentos3m = {
-    hipermercado: 'Hipermercado',
+    hipermercado: 'Hipermercado (Ex: Atacadão)',
     supermercado: 'Supermercado',
-    mercadao: 'Mercadão',
+    mercearia: 'Mercearia (Mercadinho local)',
     hortifruti: 'Hortifruti',
     feira: 'Feira',
-    compra_direta: 'Compra direta',
     acougue: 'Açougue',
     'ns-nr': 'NS/NR'
 }
 
-export const casaPossuiFogao = {
-    fora_casa: 'Sim, fora da casa',
-    dentro_casa: 'Sim, dentro de casa',
-    nao: 'Não',
-    'ns-nr': 'NS/NR'
-}
-
 export const materialParaCozinhar = {
-    gas: 'Gás',
-    carvao: 'Carvão',
-    lenha: 'Lenha',
-    plastico: 'Plástico',
-    gas_carvao_alcool_gasolina_diesel: 'Combinação gás e carvão / álcool / gasolina / diesel'
+    gas_e_lenha: 'Nos dois',
+    prioridade_gas: 'Mais no fogão à gás',
+    prioridade_lenha: 'Mais no fogo à lenha',
+    somente_gas: 'Só no fogão à gás',
+    somente_lenha: 'Só no fogo à lenha',
+    depende_preco_gas: 'Depende do preço do gás',
+    'ns-nr': 'NS/NR'
 }
 
 export const alimentosConsumidosOntem = {
     feijao: 'Feijão',
     arroz: 'Arroz',
     mandioca: 'Mandioca, cará, inhame, batata',
-    carnes: 'Carnes (de boi, peixe, frango, porco ou caça)',
+    carnes: 'Carnes de boi, peixe, frango , porco ou caça',
     verduras_legumes: 'Verduras e/ou legumes (não considerar batata, mandioca, cará e inhame)',
     frutas_frescas: 'Frutas frescas (não considerar suco de frutas)',
-    leite_derivados: 'Leite e derivados',
-    hamburguer_ou_embutidos: 'Hambúguer e/ou embutidos (mortadela, salsicha, presunto, salame, linguiça)',
-    bebidas_adocadas: 'Bebidas adoçadas (refrigerante, suco de caixinha, suco em pó, água de côco de caixinha, xaropes, suco de frutas com adição de açucar)',
-    macarrao_instantaneo_salgadinhos_de_pacote: 'Macarrão instantâneo, salgadinhos de pacote ou biscoito salgados',
-    biscoito_recheado_doces_guloseimas: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramel, gelatina)',
+    leite_derivados: 'Leite ou derivados (como queijos, iogurtes)',
+    hamburguer_ou_embutidos: 'Hambúrguer ou outros embutidos como mortadela, salsicha, presunto, salame, linguiça',
+    bebidas_adocadas: 'Bebidas adoçadas como refrigerantes, suco de caixinha, suco em pó ou xaropes de guaraná/groselha',
+    macarrao_instantaneo_salgadinhos_de_pacote: 'Macarrão instantâneo (miojo), salgadinhos de pacote (fofão) ou bolachas salgados',
+    biscoito_recheado_doces_guloseimas: 'Bolacha recheada, doces, guloseimas, como balas, pirulitos, chiclete',
+    nao_comeu: 'Não comi nada',
+    'ns-nr': 'NS/NR'
 }
 
 export const primeiroAComer = {
