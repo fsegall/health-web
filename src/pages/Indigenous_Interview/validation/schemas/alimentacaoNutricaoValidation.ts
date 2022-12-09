@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 
 export const AlimentacaoNutricaoValidation = Yup.object().shape({
-    morar_retomada_mudou_alimentacao: Yup.string().nullable(),
-    luta_por_terra: Yup.string().required('Você precisa selecionar se há conflitos por terra'),
+    morar_retomada_mudou_alimentacao: Yup.string().nullable().required('Você precisa preencher sobre a retomada'),
     entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     sem_alimentacao_por_conflito_com_terras: Yup.string().nullable().when("luta_por_terra", {
         is: (val: any) => String(val) === "true",
@@ -57,27 +56,32 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
     }),
     morador_faz_horta: Yup.string().required('Você precisa preencher sobre fazer horta'),
     motivo_morador_nao_faz_horta: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "false",
+        is: (val: any) => (String(val) === "nao" || String(val) === "ns-nr"),
         then: Yup.string().nullable().required("Você precisa preencher sobre não fazer horta"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
     alimentos_da_horta: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre os alimentos da horta"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
     frutiferas_nas_proximidades: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre frutíferas"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
     producao_de_comida_ano_todo: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre frutíferas"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
     origem_semente_plantio: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
+        then: Yup.string().nullable().required("Você precisa preencher sobre sementes"),
+        otherwise: Yup.string().nullable().notRequired(),
+    }),
+    armazenamento_semente_plantio: Yup.string().nullable().when("morador_faz_horta", {
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre sementes"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
@@ -87,12 +91,12 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         otherwise: Yup.string().nullable().notRequired(),
     }),
     dificuldade_com_horta: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre dificuldades com horta"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
     finalidade_horta: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => String(val) === "true",
+        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre a finalidade da horta"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
@@ -117,9 +121,8 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
     }),
     possui_cultivo_plantas_medicinais: Yup.string().required('Você precisa preencher sobre o cultivo de plantas medicinais'),
     faz_remedios_com_plantas: Yup.string().required('Você precisa preencher sobre a produção de remédios'),
-    moradia_possui_fogao: Yup.array().required('Você precisa preencher sobre o fogão'),
     material_utilizado_para_fazer_fogo: Yup.string().required('Você precisa preencher sobre o material para fazer fogo'),
-    alimentos_consumidos_dia_anterior: Yup.array().required('Você precisa preencher sobre os alimentos do dia anterior'),
+    alimentos_consumidos_dia_anterior: Yup.string().required('Você precisa preencher sobre os alimentos do dia anterior'),
     primeiros_a_se_alimentar: Yup.string().nullable(),
     ultimos_a_se_alimentar: Yup.string().nullable(),
     comida_disponivel_todos_os_dias_30d: Yup.string().required('Você precisa preencher se teve comida todos os dias'),

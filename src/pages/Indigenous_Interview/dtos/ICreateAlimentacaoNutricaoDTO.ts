@@ -1,7 +1,6 @@
 export default interface ICreateAlimentacaoNutricaoDTO {
     id?: string;
     morar_retomada_mudou_alimentacao?: string; //GK-ONLY select
-    luta_por_terra: string; //select
     sem_alimentacao_por_conflito_com_terras?: string; //select
     // depende da anterior "sim"
     motivo_sem_alimentacao_por_conflito_com_terras?: string; //select
@@ -21,6 +20,7 @@ export default interface ICreateAlimentacaoNutricaoDTO {
 
     producao_de_comida_ano_todo?: string; //select
     origem_semente_plantio?: string[]; //multi-select
+    armazenamento_semente_plantio?: string[]; //multi-select
     adiciona_veneno_na_plantacao?: string; //select
     dificuldade_com_horta?: string; //select
     // se sim
@@ -36,12 +36,11 @@ export default interface ICreateAlimentacaoNutricaoDTO {
     lugar_precisou_comprar_alimentos_3m: string[]; //multi-select
     possui_cultivo_plantas_medicinais?: string; //select
     faz_remedios_com_plantas: string; //select
-    moradia_possui_fogao: string[]; //multi-select
     material_utilizado_para_fazer_fogo: string; //select
     alimentos_consumidos_dia_anterior: string[]; //multi-select
     // AlimentosDiaAnteriorDTO
     primeiros_a_se_alimentar?: string; //GK-REMOVE select
-    ultimos_a_se_alimentar?: string; //GK-REMOVE select 
+    ultimos_a_se_alimentar?: string; //GK-REMOVE select
 }
 
 interface TabelaBaseAlimentacaoDTO {
