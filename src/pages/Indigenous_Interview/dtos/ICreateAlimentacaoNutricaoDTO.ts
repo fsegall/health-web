@@ -36,11 +36,9 @@ export default interface ICreateAlimentacaoNutricaoDTO {
     lugar_precisou_comprar_alimentos_3m: string[]; //multi-select
     possui_cultivo_plantas_medicinais?: string; //select
     faz_remedios_com_plantas: string; //select
-    material_utilizado_para_fazer_fogo: string; //select
+    moradia_possui_fogao_ou_lenha: string; //select
     alimentos_consumidos_dia_anterior: string[]; //multi-select
     // AlimentosDiaAnteriorDTO
-    primeiros_a_se_alimentar?: string; //GK-REMOVE select
-    ultimos_a_se_alimentar?: string; //GK-REMOVE select
 }
 
 interface TabelaBaseAlimentacaoDTO {

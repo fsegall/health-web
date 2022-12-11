@@ -410,7 +410,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             label: 'Aqui na casa se cozinha no fogão à gás ou na lenha?',
             type: Select,
             props: {
-                name: 'material_utilizado_para_fazer_fogo',
+                name: 'moradia_possui_fogao_ou_lenha',
                 isMulti: false,
                 options: handleValueLabelOption(options?.materialParaCozinhar)
             }
@@ -422,24 +422,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'alimentos_consumidos_dia_anterior',
                 isMulti: true,
                 options: handleValueLabelOption(options?.alimentosConsumidosOntem)
-            }
-        },
-        {
-            label: 'Quando tem pouca comida na sua casa quem come primeiro?',
-            type: Select,
-            props: {
-                name: 'primeiros_a_se_alimentar',
-                isMulti: false,
-                options: handleValueLabelOption(options?.primeiroAComer)
-            }
-        },
-        {
-            label: 'Quando tem pouca comida quem come por último?',
-            type: Select,
-            props: {
-                name: 'ultimos_a_se_alimentar',
-                isMulti: false,
-                options: handleValueLabelOption(options?.ultimoAComer)
             }
         },
     ]

@@ -121,10 +121,8 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
     }),
     possui_cultivo_plantas_medicinais: Yup.string().required('Você precisa preencher sobre o cultivo de plantas medicinais'),
     faz_remedios_com_plantas: Yup.string().required('Você precisa preencher sobre a produção de remédios'),
-    material_utilizado_para_fazer_fogo: Yup.string().required('Você precisa preencher sobre o material para fazer fogo'),
+    moradia_possui_fogao_ou_lenha: Yup.string().required('Você precisa preencher sobre o material para fazer fogo'),
     alimentos_consumidos_dia_anterior: Yup.string().required('Você precisa preencher sobre os alimentos do dia anterior'),
-    primeiros_a_se_alimentar: Yup.string().nullable(),
-    ultimos_a_se_alimentar: Yup.string().nullable(),
     comida_disponivel_todos_os_dias_30d: Yup.string().required('Você precisa preencher se teve comida todos os dias'),
     dia_sem_alimentos_30d: Yup.string().required('Você precisa preencher sobre os dias sem alimentos'),
     preocupacao_em_conseguir_comida_30d: Yup.string().nullable().when("possui_moradores_menores_de_16", {
