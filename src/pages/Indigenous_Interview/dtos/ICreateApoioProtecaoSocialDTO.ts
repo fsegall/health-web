@@ -1,4 +1,4 @@
-export default interface ICreateApoioProtecaoSocialDTO {
+export default interface ICreateApoioProtecaoSocialDTO extends ApoioFinanceiroDTO {
     criancas_comem_escola: string; //select
     alimentacao_escolar_inclui_cultura: string; //select
     morador_recebe_ajuda_financeira: string; //select
@@ -6,7 +6,7 @@ export default interface ICreateApoioProtecaoSocialDTO {
     // ApoioFinanceiroDTO
     recebeu_cesta_alimentos?: string[]; //multi-select
     recebeu_cesta_alimentos_que_alimentos_deveriam_ter?: string[]; //multi-select
-    morador_recebe_programa_social: ApoioFinanceiroDTO
+    // morador_recebe_programa_social: ApoioFinanceiroDTO
     descricao_adicionar_outro?: string;
     motivo_nao_recebe_cesta_alimentos?: string; //select
 

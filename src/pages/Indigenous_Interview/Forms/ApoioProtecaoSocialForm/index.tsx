@@ -55,6 +55,19 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
       const apoioProtecaoSocial = {
         ...values,
         ...validatedData,
+        morador_recebe_programa_social: {
+          bolsa_familia_auxilio_brasil: values.bolsa_familia_auxilio_brasil,
+          bpc: values.bpc,
+          beneficio_deficientes_idosos: values.beneficio_deficientes_idosos,
+          auxilio_maternidade: values.auxilio_maternidade,
+          auxilio_doenca: values.auxilio_doenca,
+          auxilio_reclusao: values.auxilio_reclusao,
+          aposentadoria: values.aposentadoria,
+          pensao_morte: values.pensao_morte,
+          pronaf: values.pronaf,
+          programa_auxilio_estadual_municipal: values.programa_auxilio_estadual_municipal,
+          cesta_alimentos: values.cesta_alimentos,
+        },
       };
 
       if (!offline) {
