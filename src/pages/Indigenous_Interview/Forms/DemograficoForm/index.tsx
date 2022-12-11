@@ -230,11 +230,11 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
             <Label>
               Alguém desta casa trabalhou no último ano, ou tem trabalho temporário de colheita em fazendas em outras regiões do país (por exemplo, na colheita de maçã no sul do país ou corte manual de cana)? (PODE SER MAIS DE 1 RESPOSTA)
             </Label>
-            <Select name="trabalho_colheira_outras_regioes" isMulti={true} options={handleValueLabelOption(trabalhoColheitaRegioesOptions)} />
+            <Select name="morador_trabalhou_fazendas" isMulti={true} options={handleValueLabelOption(trabalhoColheitaRegioesOptions)} />
             <Label>
               Alguém desta casa já trabalhou no último ano, ou trabalha para fazendeiros desta região  na catação/colheita de milho, mandioca, soja, ou outro produto?
             </Label>
-            <Select name="trabalho_colheita_ultimo_ano" options={handleValueLabelOption(yesOrNoOptions)} />
+            <Select name="morador_trabalhou_catacao" options={handleValueLabelOption(yesOrNoOptions)} />
             <Button type="submit">Enviar</Button>
         </section>
         {/* {residentsGrid?.length > 0 && (

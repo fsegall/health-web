@@ -31,7 +31,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         label: 'Qual a relação do MORADOR com o chefe?',
         type: Input,
         props: {
-            name: 'relacao_com_chefe',
+            name: 'relacao_com_lider',
             placeholder: 'Digite a relação do morador com o chefe',
             type: 'text',
         }
@@ -59,7 +59,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         label: 'Como se define o MORADOR: indígena ou não indígena?',
         type: Select,
         props: {
-            name: 'raca',
+            name: 'indigena',
             options: handleValueLabelOption(racaOptions),
             isMulti: false
         }
@@ -77,7 +77,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
       label: 'Até que série (grau) o Morador completou a escola?',
       type: Select,
       props: {
-          name: 'grau_escolaridade',
+          name: 'serie_frequentada_escola',
           options: handleValueLabelOption(grauEscolaridadeOptions),
           isMulti: false
       }
@@ -110,7 +110,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
       label: 'Qual a ocupação profissional PRINCIPAL do MORADOR? (Maiores de 14 anos)',
       type: Select,
       props: {
-          name: 'ocupacao_profissao',
+          name: 'ocupacao_principal',
           options: handleValueLabelOption(ocupacaoPrincipalOptions),
           isMulti: false
       },
