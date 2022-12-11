@@ -5,6 +5,13 @@ export const yesOrNoOptions = {
     'ns-nr': 'NS/NR'
 }
 
+export const tipoDeComunidadeOptions = {
+    territorio_tradicional: 'Território tradicional / Área de retomada',
+    acampamento: 'Acampamento',
+    terra_indigena: 'Terra indígena demarcada',
+    reserva_indigena: 'Reserva indígena'
+}
+
 export const sexoOptions = {
     masculino: 'Masculino',
     feminino: 'Feminino',
