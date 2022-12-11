@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const DomicilioValidation = Yup.object().shape({
-    morada_atual: Yup.string().required('Você preencher sobre a moradia atual'),
+    tipo_moradia: Yup.string().required('Você preencher sobre a moradia atual'),
     ultima_moradia: Yup.string().required('Você preencher sobre a última moradia'),
     entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     piso: Yup.string().required('Você precisa digitar o material do piso'),

@@ -29,7 +29,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             label: 'Como você define essa sua moradia de HOJE?',
             type: Select,
             props: {
-                name: 'morada_atual',
+                name: 'tipo_moradia',
                 options: handleValueLabelOption(moradaHojeOptions),
             }
         },
