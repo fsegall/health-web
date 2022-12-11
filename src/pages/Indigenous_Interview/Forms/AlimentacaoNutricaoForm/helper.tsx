@@ -165,7 +165,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             label: 'No mês passado, teve alguns dias que vocês desta casa não puderam comer comida de sua cultura, porque não tinha esse tipo de comida? (Por exemplo: mandioca, milho, banana, abóbora, etc)',
             type: Select,
             props: {
-                name: 'consumiram_sempre_alimentos_da_cultura',
+                name: 'sem_consumo_alimentos_cultura_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
             }

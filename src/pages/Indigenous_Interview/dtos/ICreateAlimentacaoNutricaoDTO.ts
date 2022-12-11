@@ -7,7 +7,7 @@ export default interface ICreateAlimentacaoNutricaoDTO {
     origem_comida: string; //select
     possui_moradores_menores_de_16: string;
     tabela_alimentacao: AlimentacaoSemMenoresDTO | AlimentacaoComMenoresDTO;
-    consumiram_sempre_alimentos_da_cultura: string; //select
+    sem_consumo_alimentos_cultura_30d: string; //select
 
     acao_quando_falta_comida?: string[]; //multi-select
     // condicional QuandoFaltaComidaDTO

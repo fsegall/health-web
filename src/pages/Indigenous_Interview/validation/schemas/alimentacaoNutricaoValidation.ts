@@ -40,7 +40,7 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         then: Yup.string().nullable().required("Você precisa preencher sobre alimentação"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
-    consumiram_sempre_alimentos_da_cultura: Yup.string().required('Você precisa preencher se comeu alimentos da cultura'),
+    sem_consumo_alimentos_cultura_30d: Yup.string().required('Você precisa preencher se comeu alimentos da cultura'),
     acao_quando_falta_comida: Yup.string().nullable().when([
         "alimentacao_saudavel_diariamente_30d",
         "alimentacao_do_gosto_30d",
