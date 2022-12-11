@@ -1,7 +1,6 @@
-import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { acidentesOptions, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, condicaoSaudeTekohaOptions, familiarMorteCovid, familiarMorteOptions, familiarMorteRendaOptions, medicamentosUsoContinuoOptions, motivoMedicamentoUsoContinuo, motivosNaoTomarVacinaCovidOptions, recorreAoAdoecerOptions, tiposAcidenteOptions, tratamentosOptions, tratamentosPajeOptions, vacinaCovidOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
+import { acidentesOptions, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, condicaoSaudeTekohaOptions, familiarMorteOptions, familiarMorteRendaOptions, medicamentosUsoContinuoOptions, motivoMedicamentoUsoContinuo, motivosNaoTomarVacinaCovidOptions, recorreAoAdoecerOptions, tiposAcidenteOptions, tratamentosOptions, tratamentosPajeOptions, vacinaCovidOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
