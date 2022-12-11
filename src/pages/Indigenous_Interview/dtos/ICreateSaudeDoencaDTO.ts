@@ -34,7 +34,7 @@ export default interface ICreateSaudeDoencaDTO extends FamiliaresMortesOpcionalD
     morador_internado: string; //select
     morador_problemas_bebidas_alcoolicas: string; //select
     morador_problemas_uso_drogas: string; //select
-    morador_fuma_cigarro: string; //select
+    fuma_cigarro: string; //select
 }
 
 interface FamiliaresMortesOpcionalDTO {

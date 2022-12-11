@@ -51,7 +51,7 @@ export const SaudeDoencaValidation = Yup.object().shape({
     morador_internado: Yup.string().required('Você precisa preencher se houve algum morador internado'),
     morador_problemas_bebidas_alcoolicas: Yup.string().required('Você precisa preencher sobre problemas com bebidas'),
     morador_problemas_uso_drogas: Yup.string().required('Você precisa preencher sobre problemas com drogas'),
-    morador_fuma_cigarro: Yup.string().required('Você precisa preencher sobre cigarro'),
+    fuma_cigarro: Yup.string().required('Você precisa preencher sobre cigarro'),
     familiar_morte: Yup.string().nullable().notRequired(),
     familiar_morte_contribuia_renda_familiar: Yup.string().nullable().notRequired(),
 });

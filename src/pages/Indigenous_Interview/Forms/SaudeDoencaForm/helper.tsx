@@ -254,7 +254,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             label: 'Você fuma cigarro?',
             type: Select,
             props: {
-                name: 'morador_fuma_cigarro',
+                name: 'fuma_cigarro',
                 options: handleValueLabelOption(yesOrNoOptions),
             }
         },
