@@ -34,6 +34,12 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
 
   const InformacoesBasicasFormRef = useRef<FormHandles>(null);
 
+  let counter = 0;
+
+  function incrementCounter () {
+    counter += 1;
+  }
+
   const handleSubmit = useCallback(async (data: ICreateInformacoesBasicasDTO) => {
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed).toISOString();
@@ -125,7 +131,8 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
-                        <Label>{element.label}</Label>
+                      { incrementCounter() }
+                        <Label>{`${counter}. ${element.label}`}</Label>
                         <element.type {...element.props} />
                     </span>
                 ))}

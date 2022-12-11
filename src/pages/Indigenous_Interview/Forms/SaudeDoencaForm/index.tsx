@@ -34,6 +34,12 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
 
   const SaudeDoencaFormRef = useRef<FormHandles>(null);
 
+  let counter = 0;
+
+  function incrementCounter () {
+    counter += 1;
+  }
+
   const handleSubmit = useCallback(async (data: ICreateSaudeDoencaDTO) => {
     try {
       SaudeDoencaFormRef.current?.setErrors({});
@@ -162,7 +168,8 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
-                        <Label>{element.label}</Label>
+                        {incrementCounter()}
+                        <Label>{`${counter}. ${element.label}`}</Label>
                         <element.type
                           {...element.props}
                           isDisabled={element?.dependencies && handleDisabled(element)}

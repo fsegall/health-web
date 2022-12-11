@@ -31,6 +31,12 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
 
   const AlimentacaoNutricaoFormRef = useRef<FormHandles>(null);
 
+  let counter = 0;
+
+  function incrementCounter () {
+    counter += 1;
+  }
+
   const handleSubmit = useCallback(async (data: ICreateAlimentacaoNutricaoDTO) => {
     try {
       AlimentacaoNutricaoFormRef.current?.setErrors({});
@@ -158,7 +164,8 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
-                        <Label>{element.label}</Label>
+                      {incrementCounter()}
+                        <Label>{`${counter}. ${element.label}`}</Label>
                         <element.type {...element.props}
                           isDisabled={element?.dependencies && handleDisabled(element)}
                           onChange={(e: any) => element?.hasDependencies && handleDependencies(element, e?.value)}
