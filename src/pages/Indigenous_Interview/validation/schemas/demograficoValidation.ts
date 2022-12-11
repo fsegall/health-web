@@ -5,7 +5,7 @@ export const DemograficoValidation = Yup.object().shape({
     .test('validate-moradores', 'Você deve gerar a grade com o número correto de moradores', function(value){
       return this.parent.moradores.length === value
     }),
-    morador_trabalhou_fazendas: Yup.array().required('Você deve preencher sobre a colheita'),
+    morador_trabalhou_fazendas: Yup.string().required('Você deve preencher sobre a colheita'),
     morador_trabalhou_catacao: Yup.string().required('Você deve preencher sobre a colheita'),
     entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
     moradores: Yup.array()
@@ -20,8 +20,8 @@ export const DemograficoValidation = Yup.object().shape({
         povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
         crenca_religiao: Yup.string().nullable().when("idade", {
           is: (val: any) => Number(val) > 14,
-          then: Yup.array().nullable().required("Você precisa preencher as sobre a religião"),
-          otherwise: Yup.array().nullable().notRequired(),
+          then: Yup.string().nullable().required("Você precisa preencher as sobre a religião"),
+          otherwise: Yup.string().nullable().notRequired(),
         }),
         situacao_no_trabalho: Yup.string().nullable().when("idade", {
           is: (val: any) => Number(val) > 14,

@@ -38,7 +38,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
                 isMulti: false,
             },
             dependencies: {
-              criancas_comem_na_escola: ["sim", "nao", "nem_sempre"]
+                criancas_comem_escola: ["sim", "nao", "nem_sempre"]
             }
         },
         {
