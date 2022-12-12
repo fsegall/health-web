@@ -20,26 +20,16 @@ export interface FormHelperType {
 export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     [
         {
-            label: 'ESPECÍFICA PARA OS GUARANI KAIOWÁ: A partir do momento que veio morar na retomada, como você avalia sua alimentação e da sua família? (melhorou, piorou e por que?)',
+            label: 'ESPECÍFICA PARA OS GUARANI KAIOWÁ: A partir do momento que veio morar na retomada, como você avalia sua alimentação e da sua família? Melhorou, piorou e por que? (PODE TER MAIS DE 1 RESPOSTA).',
             type: Select,
             props: {
                 name: 'morar_retomada_mudou_alimentacao',
-                isMulti: false,
+                isMulti: true,
                 options: handleValueLabelOption(options?.avaliaAlimentacaoRetomada)
             }
         },
         {
-            label: 'VOCÊ E OS MORADORES DESTA CASA VIVEM EM SITUAÇÃO DE CONFLITO POR CAUSA DA LUTA PELA Terra?',
-            type: Select,
-            props: {
-                name: 'luta_por_terra',
-                isMulti: false,
-                options: handleValueLabelOption(options?.yesOrNoOptions)
-            },
-            hasDependencies: true
-        },
-        {
-            label: 'Se sim, você, sua família ou alguém da comunidade ficaram sem alimentação por causa de conflito pela terra?',
+            label: 'Você, sua família ou alguém da comunidade ficou sem alimentação por causa de conflito pela terra?',
             type: Select,
             props: {
                 name: 'sem_alimentacao_por_conflito_com_terras',
@@ -47,9 +37,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.yesOrNoOptions)
             },
             hasDependencies: true,
-            dependencies: {
-                luta_por_terra: ["true"]
-            }
         },
         {
             label: 'Se sim, por que?',
@@ -73,7 +60,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Aqui na sua casa tem moradores MENORES DE 16 ANOS?',
+            label: 'Agora vou te perguntar sobre como está a alimentação na sua casa. Aqui na sua casa tem moradores MENORES DE 16 ANOS?',
             type: Select,
             props: {
                 name: 'possui_moradores_menores_de_16',
@@ -83,7 +70,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: '69. No mês passado, você sentiu preocupação em conseguir comida para sua casa?',
+            label: 'No mês passado, você sentiu preocupação em conseguir comida para sua casa?',
             type: Select,
             props: {
                 name: 'preocupacao_em_conseguir_comida_30d',
@@ -95,17 +82,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: '70. Vocês nesta casa, no mês passado comeram sempre (TODOS OS DIAS) o que faz bem para saúde, comida saudável?',
-            type: Select,
-            props: {
-                name: 'alimentacao_saudavel_diariamente_30d',
-                isMulti: false,
-                options: handleValueLabelOption(options?.yesOrNoOptions)
-            },
-            hasDependencies: true
-        },
-        {
-            label: '71. No mês passado, vocês nesta casa comeram sempre comida boa (do gosto)?',
+            label: 'No mês passado, vocês nesta casa comeram sempre comida boa (do gosto)?',
             type: Select,
             props: {
                 name: 'alimentacao_do_gosto_30d',
@@ -118,7 +95,17 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: '72. No mês passado na sua casa teve comida todos os dias?',
+            label: 'Vocês nesta casa, no mês passado comeram sempre (TODOS OS DIAS) o que faz bem para saúde, comida saudável?',
+            type: Select,
+            props: {
+                name: 'alimentacao_saudavel_diariamente_30d',
+                isMulti: false,
+                options: handleValueLabelOption(options?.yesOrNoOptions)
+            },
+            hasDependencies: true
+        },
+        {
+            label: 'No mês passado na sua casa teve comida todos os dias?',
             type: Select,
             props: {
                 name: 'comida_disponivel_todos_os_dias_30d',
@@ -128,7 +115,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: '73. No mês passado, teve dia de você passar o dia todo sem comer nada, porque não tinha comida na casa?',
+            label: 'No mês passado, você ficou um dia todo sem comer nada, porque não tinha comida na casa?',
             type: Select,
             props: {
                 name: 'dia_sem_alimentos_30d',
@@ -138,7 +125,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: '74. No mês passado, teve dia que você comeu menos para deixar comida para as crianças e jovens da casa?',
+            label: 'No mês passado, teve dia que você comeu menos para deixar comida para as crianças e jovens da casa?',
             type: Select,
             props: {
                 name: 'comeu_menos_para_alimentar_os_jovens_30d',
@@ -151,7 +138,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: '75. Alguma vez no mês passado as crianças e jovens da casa comeram menos quantidade de comida do que é necessário, porque tinha pouca comida?',
+            label: 'Alguma vez no mês passado as crianças e jovens da casa comeram menos quantidade de comida do que o necessário, porque tinha pouca comida na casa?',
             type: Select,
             props: {
                 name: 'jovens_comeram_menos_do_necessario_30d',
@@ -163,7 +150,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: '76. Alguma vez no mês passado as crianças e jovens da casa passaram o dia todo sem comer e foram dormir querendo comer porque não tinha comida?',
+            label: 'Alguma vez no mês passado as crianças e jovens da casa passaram o dia todo com comer e foram dormir querendo comer porque não tinha comida?',
             type: Select,
             props: {
                 name: 'jovens_passaram_algum_dia_sem_alimentos_30d',
@@ -175,30 +162,30 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: '77. No mês passado, vocês desta casa comeram sempre comida de sua cultura citar os exemplos os principais alimentos de uso (mandioca, milho, banana, abobrinha, etc?',
+            label: 'No mês passado, teve alguns dias que vocês desta casa não puderam comer comida de sua cultura, porque não tinha esse tipo de comida? (Por exemplo: mandioca, milho, banana, abóbora, etc)',
             type: Select,
             props: {
-                name: 'consumiram_sempre_alimentos_da_cultura',
+                name: 'sem_consumo_alimentos_cultura_30d',
                 isMulti: false,
                 options: handleValueLabelOption(options?.yesOrNoOptions)
             }
         },
         {
-            label: 'QUANDO falta comida na casa (o que você faz para conseguir comida? Atenção: Ler a lista e pode ser mais de uma resposta:',
+            label: 'QUANDO falta comida na casa, o que você faz para conseguir comida? LER AS OPÇÕES. (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'acao_quando_falta_comida',
                 isMulti: true,
                 options: handleValueLabelOption(options?.acaoFaltaDeComida)
             },
-            dependencies: {
-                alimentacao_saudavel_diariamente_30d: ["false"],
-                alimentacao_do_gosto_30d: ["false"],
-                comida_disponivel_todos_os_dias_30d: ["false"],
-                dia_sem_alimentos_30d: ["true"],
-                comeu_menos_para_alimentar_os_jovens_30d: ["true"],
-            },
-            dependenciesWithOr: true,
+            // dependencies: {
+            //     alimentacao_saudavel_diariamente_30d: ["false"],
+            //     alimentacao_do_gosto_30d: ["false"],
+            //     comida_disponivel_todos_os_dias_30d: ["false"],
+            //     dia_sem_alimentos_30d: ["true"],
+            //     comeu_menos_para_alimentar_os_jovens_30d: ["true"],
+            // },
+            // dependenciesWithOr: true,
         },
     ],
     [
@@ -208,12 +195,12 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             props: {
                 name: 'morador_faz_horta',
                 isMulti: false,
-                options: handleValueLabelOption(options?.yesOrNoOptions)
+                options: handleValueLabelOption(options?.rocaOuHortaOptions)
             },
             hasDependencies: true,
         },
         {
-            label: 'Por que não faz roça/horta? ATENÇÃO: PODE SER MAIS DE UMA RESPOSTA',
+            label: ' Se não, por que não faz roça/horta? (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'motivo_morador_nao_faz_horta',
@@ -221,7 +208,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.motivacaoNaoProduzirHorta)
             },
             dependencies: {
-                morador_faz_horta: ["false"]
+                morador_faz_horta: ["nao"]
             }
         },
         {
@@ -233,7 +220,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.plantiosHorta)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
@@ -245,11 +232,11 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.frutiferasEmCasaOuProximo)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
-            label: 'Consegue ter produção de comida o ano todo?',
+            label: 'Conseguem ter produção de comida para sustento da casa?',
             type: Select,
             props: {
                 name: 'producao_de_comida_ano_todo',
@@ -257,7 +244,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.producaoComidaAnoTodo)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
@@ -269,7 +256,19 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.fornecedorHorta)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
+            }
+        },
+        {
+            label: 'Como são guardadas as sementes que vão ser plantadas ou que foram colhidas?',
+            type: Select,
+            props: {
+                name: 'armazenamento_semente_plantio',
+                isMulti: true,
+                options: handleValueLabelOption(options?.armazenamentoSementesPlantio)
+            },
+            dependencies: {
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
@@ -281,7 +280,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.utilizaVenenoPlantio)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
@@ -294,7 +293,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             },
             hasDependencies: true,
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
         {
@@ -318,7 +317,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 options: handleValueLabelOption(options?.finalidadeHorta)
             },
             dependencies: {
-                morador_faz_horta: ["true"]
+                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
             }
         },
     ],
@@ -374,7 +373,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: 'SE SIM NA ANTERIOR Nos últimos 3 meses, qual foi o tipo de lugar que você ou alguém da sua família compraram comida? (+1)',
+            label: 'Se sim, onde vocês compram comida? (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'lugar_precisou_comprar_alimentos_3m',
@@ -408,19 +407,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'A casa tem fogão ? ATENÇÃO: PODE TER MAIS DE UMA RESPOSTA',
+            label: 'Aqui na casa se cozinha no fogão à gás ou na lenha?',
             type: Select,
             props: {
-                name: 'moradia_possui_fogao',
-                isMulti: true,
-                options: handleValueLabelOption(options?.casaPossuiFogao)
-            }
-        },
-        {
-            label: 'Que material usa predominantemente para fazer o fogo na hora de cozinhar? ATENÇÃO: LER SE HOUVER DÚVIDA)',
-            type: Select,
-            props: {
-                name: 'material_utilizado_para_fazer_fogo',
+                name: 'moradia_possui_fogao_ou_lenha',
                 isMulti: false,
                 options: handleValueLabelOption(options?.materialParaCozinhar)
             }
@@ -432,24 +422,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 name: 'alimentos_consumidos_dia_anterior',
                 isMulti: true,
                 options: handleValueLabelOption(options?.alimentosConsumidosOntem)
-            }
-        },
-        {
-            label: 'Quando tem pouca comida na sua casa quem come primeiro?',
-            type: Select,
-            props: {
-                name: 'primeiros_a_se_alimentar',
-                isMulti: false,
-                options: handleValueLabelOption(options?.primeiroAComer)
-            }
-        },
-        {
-            label: 'Quando tem pouca comida quem come por último?',
-            type: Select,
-            props: {
-                name: 'ultimos_a_se_alimentar',
-                isMulti: false,
-                options: handleValueLabelOption(options?.ultimoAComer)
             }
         },
     ]

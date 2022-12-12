@@ -13,7 +13,7 @@ export default interface ICreateSaudeDoencaDTO extends FamiliaresMortesOpcionalD
     // depende anterior "sim"
     motivo_doencas_contato_veneno_lavoura?: string //select
 
-    acidentes: string; //select
+    acidentes: string[]; //select
     // dependa da anterior
     acidentes_ocorridos?: string[]; //multi-select
 
@@ -34,16 +34,12 @@ export default interface ICreateSaudeDoencaDTO extends FamiliaresMortesOpcionalD
     morador_internado: string; //select
     morador_problemas_bebidas_alcoolicas: string; //select
     morador_problemas_uso_drogas: string; //select
+    fuma_cigarro: string; //select
 }
 
 interface FamiliaresMortesOpcionalDTO {
     // perguntas pessoais sobre morte dos familiares - opcionais
-    familiar_morte_covid?: string; //select
+    familiar_morte?: string; //select
     // depende anterior
-    familiar_morte_covid_contribuia_renda_familiar?: string //select
-
-    familiares_morte_outras_causas?: string; //select
-    motivo_familiares_morte_outras_causas?: string; //select
-    // depende anterior
-    familiares_morte_outras_causas_contribuia_renda_familiar?: string; //select (dependa da anterior)
+    familiar_morte_contribuia_renda_familiar?: string //select
 }

@@ -28,7 +28,7 @@ interface ApoioProtecaoSocialFormProps {
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const { token } = useAuth();
-  
+
   const { addToast } = useToast();
 
   const history = useHistory();
@@ -46,9 +46,6 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
       ApoioProtecaoSocialFormRef.current?.setErrors({});
       const values = {
         ...data,
-        quantidade_morador_matriculado_na_educacao_basica_publica: data?.quantidade_morador_matriculado_na_educacao_basica_publica ? Number(data?.quantidade_morador_matriculado_na_educacao_basica_publica) : null,
-        quantidade_vezes_auxilio_emergencial_na_pandemia: data?.quantidade_vezes_auxilio_emergencial_na_pandemia ? Number(data?.quantidade_vezes_auxilio_emergencial_na_pandemia) : null,
-        quantidade_cesta_de_alimentos_3m: data?.quantidade_cesta_de_alimentos_3m ? Number(data?.quantidade_cesta_de_alimentos_3m) : null,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
       const validatedData = await ApoioProtecaoSocialValidation.validate(values, {
@@ -58,6 +55,19 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
       const apoioProtecaoSocial = {
         ...values,
         ...validatedData,
+        morador_recebe_programa_social: {
+          bolsa_familia_auxilio_brasil: values.bolsa_familia_auxilio_brasil,
+          bpc: values.bpc,
+          beneficio_deficientes_idosos: values.beneficio_deficientes_idosos,
+          auxilio_maternidade: values.auxilio_maternidade,
+          auxilio_doenca: values.auxilio_doenca,
+          auxilio_reclusao: values.auxilio_reclusao,
+          aposentadoria: values.aposentadoria,
+          pensao_morte: values.pensao_morte,
+          pronaf: values.pronaf,
+          programa_auxilio_estadual_municipal: values.programa_auxilio_estadual_municipal,
+          cesta_alimentos: values.cesta_alimentos,
+        },
       };
 
       if (!offline) {
@@ -121,7 +131,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
     }
   }, [addToast, offline, dispatch, initialValues, token]);
 
-  
+
   const [formDependencies, setFormDependencies] = useState<any>({})
 
   function handleDependencies(element: FormHelperType, value: any) {

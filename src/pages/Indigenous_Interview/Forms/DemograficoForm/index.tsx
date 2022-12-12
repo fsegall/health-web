@@ -14,7 +14,7 @@ import { FormHelperType, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
 import Input from '../../../../components/Input';
 import Select from '../../../../components/Select';
-import { yesOrNoOptions } from '../../questions/SelectorOptions/options';
+import { trabalhoColheitaRegioesOptions, yesOrNoOptions } from '../../questions/SelectorOptions/options';
 import { handleValueLabelOption } from '../../questions/handleValueLabelOption';
 import api from '../../../../services/api';
 import { useAuth } from '../../../../hooks/auth';
@@ -31,7 +31,7 @@ interface DemograficoFormProps {
 }
 
 const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false }) => {
-    
+
   const { token } = useAuth();
 
   const { addToast } = useToast();
@@ -47,17 +47,14 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     }
     counter += 1;
   }
-  
+
   const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
     try {
       DemograficoFormRef.current?.setErrors({});
 
       const values = {
         ...data,
-        moradores: data?.moradores?.map(morador => ({
-          ...morador,
-          frequenta_escola: morador?.frequenta_escola === "true" ? true : false
-        })),
+        moradores: data?.moradores,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
 
@@ -157,7 +154,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         }
     }
 
-    
+
   const [formDependencies, setFormDependencies] = useState<any>({})
 
   function handleDependencies(element: FormHelperType, index: number, value: any) {
@@ -231,9 +228,13 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         ))}
         <section>
             <Label>
-                APENAS PARA A PESQUISA DOS Guarani Kaiowá: Alguém desta casa já trabalhou ou trabalha na colheita de maçã no sul do país no período de colheita (em geral de janeiro a abril)? 
+              Alguém desta casa trabalhou no último ano, ou tem trabalho temporário de colheita em fazendas em outras regiões do país (por exemplo, na colheita de maçã no sul do país ou corte manual de cana)? (PODE SER MAIS DE 1 RESPOSTA)
             </Label>
-            <Select name="trabalho_colheita_maca" options={handleValueLabelOption(yesOrNoOptions)} />
+            <Select name="morador_trabalhou_fazendas" isMulti={true} options={handleValueLabelOption(trabalhoColheitaRegioesOptions)} />
+            <Label>
+              Alguém desta casa já trabalhou no último ano, ou trabalha para fazendeiros desta região  na catação/colheita de milho, mandioca, soja, ou outro produto?
+            </Label>
+            <Select name="morador_trabalhou_catacao" options={handleValueLabelOption(yesOrNoOptions)} />
             <Button type="submit">Enviar</Button>
         </section>
         {/* {residentsGrid?.length > 0 && (
@@ -244,7 +245,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 >
                     Adicionar
                 </Button>
-                
+
             </section>
         )} */}
     </StyledForm>
