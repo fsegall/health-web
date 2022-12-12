@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { yesOrNoOptions } from "../../questions/SelectorOptions/options";
+import { tipoDeComunidadeOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -34,29 +34,12 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Qual Terra indígena?',
-            type: Input,
+            label: 'Qual seu tipo de comunidade?',
+            type: Select,
             props: {
-                name: 'terra_indigena',
-                placeholder: 'Terra indígena',
-            }
-        },
-    ],
-    [
-        {
-            label: 'Qual Área de Retomada?',
-            type: Input,
-            props: {
-                name: 'area_retomada',
-                placeholder: 'Área de Retomada',
-            }
-        },
-        {
-            label: 'Qual Acampamento?',
-            type: Input,
-            props: {
-                name: 'acampamento',
-                placeholder: 'Acampamento',
+                name: 'tipo_comunidade',
+                isMulti: false,
+                options: handleValueLabelOption(tipoDeComunidadeOptions)
             }
         },
     ],
@@ -74,7 +57,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
             label: 'Você pode ser considerada (o) uma pessoa de referência (chefe) da família? (Pessoa acima de 14 anos que trabalhe ou conheça a realidade alimentar e social da casa) ?',
             type: Select,
             props: {
-                name: 'primeiro_contato_responsavel',
+                name: 'responsavel_domicilio',
                 isMulti: false,
                 options: handleValueLabelOption(yesOrNoOptions)
             }

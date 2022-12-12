@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { sexoOptions, racaOptions, etniaOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoOptions, ocupacaoPrincipalOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
+import { sexoOptions, racaOptions, etniaOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoOptions, ocupacaoPrincipalOptions, funcaoNaComunidadeOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -31,7 +31,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         label: 'Qual a relação do MORADOR com o chefe?',
         type: Input,
         props: {
-            name: 'relacao_com_chefe',
+            name: 'relacao_com_lider',
             placeholder: 'Digite a relação do morador com o chefe',
             type: 'text',
         }
@@ -59,7 +59,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         label: 'Como se define o MORADOR: indígena ou não indígena?',
         type: Select,
         props: {
-            name: 'raca',
+            name: 'indigena',
             options: handleValueLabelOption(racaOptions),
             isMulti: false
         }
@@ -74,65 +74,60 @@ export const quadroDemograficoHelper: FormHelperType[] = [
         }
     },
     {
-        label: 'Qual lingua indígena o MORADOR fala?',
-        type: Input,
-        props: {
-            name: 'lingua_indigena',
-            placeholder: 'Digite a lingua inígena que o morador fala'
-        }
+      label: 'Até que série (grau) o Morador completou a escola?',
+      type: Select,
+      props: {
+          name: 'serie_frequentada_escola',
+          options: handleValueLabelOption(grauEscolaridadeOptions),
+          isMulti: false
+      }
     },
     {
-        label: 'Qual a crença/ religião do MORADOR? (Maiores de 14 anos)',
-        type: Select,
-        props: {
-            name: 'crenca_religiao',
-            options: handleValueLabelOption(crencasOptions),
-            isMulti: false
-        },
-        dependencies: {
-            idade: ["14"]
-        }
+      label: 'Qual a crença/ religião do MORADOR? (Maiores de 14 anos)',
+      type: Select,
+      props: {
+          name: 'crenca_religiao',
+          options: handleValueLabelOption(crencasOptions),
+          isMulti: true
+      },
+      dependencies: {
+          idade: ["14"]
+      }
     },
     {
-        label: 'O morador frequenta a escola atualmente?',
-        type: Select,
-        props: {
-            name: 'frequenta_escola',
-            options: handleValueLabelOption(yesOrNoOptions),
-            isMulti: false
-        }
+      label: 'Qual a situação de trabalho PRINCIPAL DO MORADOR neste momento? (Maiores de 14 anos)',
+      type: Select,
+      props: {
+          name: 'situacao_no_trabalho',
+          options: handleValueLabelOption(situacaoTrabalhoOptions),
+          isMulti: false
+      },
+      dependencies: {
+          idade: ["14"]
+      }
     },
     {
-        label: 'Até que série (grau) o Morador X completou a escola?',
-        type: Select,
-        props: {
-            name: 'grau_escolaridade',
-            options: handleValueLabelOption(grauEscolaridadeOptions),
-            isMulti: false
-        }
+      label: 'Qual a ocupação profissional PRINCIPAL do MORADOR? (Maiores de 14 anos)',
+      type: Select,
+      props: {
+          name: 'ocupacao_principal',
+          options: handleValueLabelOption(ocupacaoPrincipalOptions),
+          isMulti: false
+      },
+      dependencies: {
+          idade: ["14"]
+      }
     },
     {
-        label: 'Qual a situação de trabalho PRINCIPAL DO MORADOR neste momento?  (Maiores de 14 anos)',
-        type: Select,
-        props: {
-            name: 'situacao_no_trabalho',
-            options: handleValueLabelOption(situacaoTrabalhoOptions),
-            isMulti: false
-        },
-        dependencies: {
-            idade: ["14"]
-        }
-    },
-    {
-        label: 'Qual a ocupação profissional PRINCIPAL do MORADOR? (Maiores de 14 anos)',
-        type: Select,
-        props: {
-            name: 'ocupacao_profissao',
-            options: handleValueLabelOption(ocupacaoPrincipalOptions),
-            isMulti: false
-        },
-        dependencies: {
-            idade: ["14"]
-        }
+      label: 'Qual a função do MORADOR na comunidade? (para maiores de 14 anos)',
+      type: Select,
+      props: {
+          name: 'funcao_na_comunidade',
+          options: handleValueLabelOption(funcaoNaComunidadeOptions),
+          isMulti: true
+      },
+      dependencies: {
+          idade: ["14"]
+      }
     },
 ]

@@ -1,14 +1,11 @@
 export default interface ICreateInformacoesBasicasDTO {
     id?: string; //backend - generated UUID
-    municipio: string; //B1
-    aldeia_comunidade: string; //B2
-    terra_indigena: string; //B3
-    area_retomada: string; //B4
-    acampamento: string; //B5
-    entrevistador_id: string; //B6
+    municipio: string;
+    aldeia_comunidade: string;
+    tipo_comunidade: string;
+    entrevistador_id: string;
     numero_projeto: number;
     data_entrevista: string;
 
-    primeiro_contato_responsavel: boolean;
+    responsavel_domicilio: boolean;
   }
-  

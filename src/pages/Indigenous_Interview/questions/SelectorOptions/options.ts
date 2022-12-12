@@ -5,6 +5,13 @@ export const yesOrNoOptions = {
     'ns-nr': 'NS/NR'
 }
 
+export const tipoDeComunidadeOptions = {
+    territorio_tradicional: 'Território tradicional / Área de retomada',
+    acampamento: 'Acampamento',
+    terra_indigena: 'Terra indígena demarcada',
+    reserva_indigena: 'Reserva indígena'
+}
+
 export const sexoOptions = {
     masculino: 'Masculino',
     feminino: 'Feminino',
@@ -20,20 +27,25 @@ export const racaOptions = {
 export const etniaOptions = {
     guarani: 'Guarani (Ñandeva)',
     kaiowa: 'Kaiowá',
+    guarani_kaiowa: 'Guarani-Kaiowá',
     terena: 'Terena',
     outro: 'Outro'
 }
 
 export const grauEscolaridadeOptions = {
+    nao_frequentou: 'Nunca foi pra escola',
     fundamental_incompleto: 'Fundamental Incompleto',
     fundamental_completo: 'Fundamental Completo',
     medio_incompleto: 'Médio Incompleto',
     medio_completo: 'Médio Completo',
     supletivo_1_grau: 'Supletivo 1º grau',
     supletivo_2_grau: 'Supletivo 2º grau',
-    superior_incompleto: 'Superior Incompleto',
-    superior_completo: 'Superior Completo',
-    nao_frequentou: 'Não frequentou',
+    superior_incompleto: 'Superior Incompleto (graduação)',
+    superior_completo: 'Superior Completo (graduação)',
+    pos_graduacao_incompleta_mestrado: 'Pós-graduação incompleta (mestrado)',
+    pos_graduacao_completa_mestrado: 'Pós-graduação completa (mestrado)',
+    pos_graduacao_incompleta_doutorado: 'Pós-graduação incompleta (doutorado)',
+    pos_graduacao_completa_doutorado: 'Pós-graduação completa (doutorado)',
     'ns-nr': 'NS/NR',
 }
 
@@ -56,6 +68,7 @@ export const situacaoTrabalhoOptions = {
     aposentado_doenca: 'Aposentado por doença',
     aposentado_remunerado: 'Aposentado ainda trabalha com remuneração',
     estudante: 'Estudante',
+    bolsista: 'Bolsista',
     nao_remunerado_aldeia: 'Trabalho não remunerado na Aldeia/ comunidade (inclui dona de casa)',
     'ns-nr': 'NS/NR',
 }
@@ -72,9 +85,40 @@ export const ocupacaoPrincipalOptions = {
     funcionario_publico_fora_concursado: 'Funcionário público fora da comunidade concursado',
     estagiario: 'Estagiário',
     autonomo: 'Autônomo',
-    profissional_liberal: 'Profissional Liberal',
-    empresario: 'Empresário',
+    profissional_liberal: 'Profissional Liberal (para pessoa com formação)',
+    micro_empreendedor: 'Micro empreendedor',
+    dona_de_casa: 'Dona de casa',
     'ns-nr': 'NS/NR',
+}
+
+export const funcaoNaComunidadeOptions = {
+  cacique: 'Cacique',
+  page: 'Pagé / Ñanderu / Ñandesy / Parteira',
+  capitao: 'Capitão',
+  aprendiz_de_page: 'Aprendiz de Ñanderu / Ñandesy',
+  agente_de_saude: 'Agente de Saúde',
+  agente_de_saneamento: 'Agente de saneamento',
+  artesao: 'Produção de Artesanato (redes, canoas, cestas, ferramentas, vasos, arcos e flechas, panos, tipoia, tintas, tipiti)',
+  agricultor: 'Produção de alimentos - Agricultura',
+  'caça_pesca_coleta': 'Caça, pesca, coleta',
+  lideranca: 'Liderança ou trabalho em associação',
+  comercio_na_aldeia: 'Comércio de produtos na aldeia',
+  construtor_aldeia: 'Construção da aldeia',
+  protecao_seguranca_aldeia: 'Proteção / Segurança da aldeia',
+  trabalho_domestico: 'Trabalho doméstico',
+  turismo_aldeia: 'Turismo na aldeia',
+  cuidado_criancas_animais: 'Cuidado de crianças e animais',
+  professor_indigena: 'Professor indígena',
+  estudo: 'Estudo',
+  outros: 'Outros'
+}
+
+export const trabalhoColheitaRegioesOptions = {
+  nao: 'Não',
+  colheita_maca: 'Sim, colheira de maça',
+  colheita_cana: 'Sim, colheita de cana',
+  outros: 'Sim, outros',
+  'ns-nr': 'NS/NR'
 }
 
 // DOMICÍLIO
@@ -82,14 +126,24 @@ export const ocupacaoPrincipalOptions = {
 export const ultimaMoradaOptions = {
     reserva_indigena: 'Reserva Indígena',
     acampamento: 'Acampamento',
-    outra_retomada: 'Outra Retomada',
+    outra_retomada: 'Outra Retomada ou território tradicional',
+    terra_indigena: 'Terra indígena demarcada',
     cidade: 'Cidade',
     'ns-nr': 'NS/NR'
 }
 
+export const moradaHojeOptions = {
+  barraco: 'Barraco',
+  casa_propria: 'Casa própria',
+  casa_reza: 'Casa de reza',
+  sede: 'Sede (casa construída pelos fazendeiros)',
+  outro: 'Outro'
+}
+
 export const pisoCasaOptions = {
     terra: 'Terra batida/socada',
-    cimento_ceramica: 'Cimento/Cerâmica',
+    cimento: 'Cimento',
+    ceramica: 'Cerâmica',
     madeira: 'Madeira',
     outros: 'Outros'
 }
@@ -98,22 +152,25 @@ export const paredesCasaOptions = {
     lona_plastico: 'Lona/plástico',
     palha_taboca: 'Palha/taboca',
     barro_taipa: 'Barro/taipá',
+    madeira: 'Madeira ou Tábua (Talba)',
     alvenaria: 'Alvenaria',
-    outro: 'Outro',
+    bambu: 'Bambu',
+    outro: 'Outro material',
     'ns-nr': 'NS/NR'
 }
 
 export const telhadoCasaOptions = {
     telha: 'Telha',
     zinco: 'Zinco',
-    palha_precaria: 'Palha precária/sapé (velha)',
+    palha_precaria: 'Palha/ sapé (velha)',
     lona_plastico: 'Lona/plástico',
     brasilit_eternite: 'Brasilit - Eternite',
-    palha_nobre: 'Palha nobre/sapé (nova)',
+    palha_nobre: 'Palha/ sapé (nova)',
     outros: 'Outros'
 }
 
 export const utensiliosCasaOptions = {
+    energia_eletrica: 'Energia elétrica',
     televisao: 'Televisão',
     geladeira: 'Geladeira',
     fogao_gas: 'Fogão a gás',
@@ -163,16 +220,17 @@ export const coletaEsgotoCasaOptions = {
     rede_esgoto: 'Rede de esgoto',
     fossa_septica: 'Fossa séptica',
     fossa_rudimentar: 'Fossa rudimentar',
-    vala_ceu_aberto: 'Vala a céu aberto',
+    vala_ceu_aberto: 'Buraco no chão',
     rio_ou_lago: 'Vai para rio ou lago',
     'ns-nr': 'NS/NR'
 }
 
 export const destinoLixoOptions = {
     prefeitura: 'Coletado pela prefeitura',
-    queimado_enterrado: 'Queimado ou enterrado no local',
-    terreno_baldio_longe: 'Jogado em terreno baldio longe da casa',
-    local_proximo_casa: 'Joado em local próximo à casa',
+    queimado: 'Queimado',
+    enterrado_localmente: 'Enterrado no local',
+    jogado_longe_casa: 'Jogado longe da casa',
+    jogado_proximo_casa: 'Joado próximo à casa',
     corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago ou quintal da residência',
     'ns-nr': 'NS/NR',
 }
@@ -193,7 +251,9 @@ export const renda30dOptions = {
     entre_275_550: 'Entre 275 e 550 reais',
     entre_551_1100: 'Entre 551 e 1.100 reais',
     entre_1101_2200: 'Entre 1.101 e 2.200 reais',
-    entre_2201_5500: 'Entre 2.201 e 5.500 reais',
+    entre_2201_3300: 'Entre 2.201 e 3.300 reais',
+    entre_3301_4400: 'Entre 3.301 e 4.400 reais',
+    entre_4401_5500: 'Entre 4.401 e 5.500 reais',
     entre_5501_11000: 'Entre 5.501 e 11.000 reais',
     mais_de_11000: 'Mais de 11.000 reais',
     'ns-nr': 'NS/NR',
@@ -232,10 +292,25 @@ export const familiarMorteCovid = {
     'ns-nr': 'NS/NR'
 }
 
+export const familiarMorteOptions = {
+    nao: 'Não morreu ninguém',
+    covid_uma_pessoa: 'Sim, apenas 1 pessoa por Covid',
+    covid_mais_de_um: 'Sim, mais de 1 pessoa por Covid',
+    outras_causas_uma_ou_mais_pessoas: 'Sim, 1 ou mais pessoas por outra causa. ',
+    'ns-nr': 'NS/NR'
+}
+
+export const familiarMorteRendaOptions = {
+  alguns: 'Sim, alguns',
+  todos: 'Sim, todos',
+  nao: 'Não',
+  'ns-nr': 'NS/NR'
+}
+
 export const condicaoSaudeOptions = {
     muito_boa: 'Muito boa',
     boa: 'Boa',
-    regular: 'Regular',
+    regular: 'Mais ou menos',
     ruim: 'Ruim',
     muito_ruim: 'Muito Ruim'
 }
@@ -243,7 +318,8 @@ export const condicaoSaudeOptions = {
 export const condicaoSaudeTekohaOptions = {
     melhorou: 'Sim, melhorou',
     piorou: 'Sim, piorou',
-    sem_mudancas: 'Não houveram mudanças importantes',
+    sem_mudancas: 'Não houve mudanças importantes',
+    nao_mora_em_retomada: 'Não moro em território tradicional / retomada',
     'ns-nr': 'NS/NR'
 }
 
@@ -256,14 +332,24 @@ export const causasDoencasVenenoLavouraOptions = {
     'ns-nr': 'NS/NR'
 }
 
+export const tiposAcidenteOptions = {
+  trabalho: 'Relacionado ao trabalho',
+  domestico: 'Acidente doméstico',
+  redor_da_casa: 'Acidente ao redor da casa',
+  fora_da_comunidade: 'Acidente fora da comunidade (Aldeia)',
+  nao: 'Não',
+  'ns-nr': 'NS/NR'
+}
+
 export const acidentesOptions = {
     cobra: 'Picada de cobra',
     animais_peconhentos: 'Picada de animais peçonhentos (aranha, escorpião, etc)',
     abelha: 'Acidentes com abelhas',
     outros_animais: 'Acidentes com outros animais (cachorro, galinha, etc)',
-    acidente_trabalho: 'Outro tipo de acidente no trabalho',
     acidente_transito: 'Acidentes de trânsito na estrada (com bicicleta e carro, caminhonete, etc)',
     acidente_rio: 'Acidentes no rio',
+    queimadura_casa: 'Queimadura com fogo em casa',
+    queimadura_outro_local: 'Queimadura com fogo na roça ou outro lugar de trabalho',
     queda_arvore: 'Queda de árvore / pinheiro / açai, etc',
     queda_propria_altura: 'Queda da própria altura (tombo)',
     outros: 'Outros',
@@ -275,10 +361,10 @@ export const violenciaFisicaOptions = {
     na_retomada_por_indigenas: 'Violência na retomada cometida por outros indígenas',
     na_retomada_por_fazendeiro_ou_invasor: 'Violência na retomada cometida por fazendeiro ou invasores da Terra Indígena',
     na_retomada_por_policial: 'Violência na retomada cometida pela polícia',
-    liderancas: 'Violência feita por lideranças',
+    liderancas: 'Violência feita pelo capitão/equipe do capitão',
     cidade: 'Violência na cidade',
-    arredores_da_comunidade: 'Violência nos arredores da TI ou da Comunidade',
-    outro: 'Outro - Especificar',
+    arredores_da_comunidade: 'Violência nos arredores da comunidade',
+    outro: 'Outro',
     'ns-nr': 'NS/NR',
 }
 
@@ -292,8 +378,12 @@ export const tratamentosOptions = {
     tuberculose: 'Tuberculose',
     gripe_tosse: 'Gripe/tosse',
     pneumonia: 'Pneumonia',
-    ferida_pele: 'Úlcera (ferida) de pele',
+    ferida_pele: 'Ferida na pele',
     anemia_ferropriva: 'Anemia ferropriva',
+    desnutricao: 'Desnutrição / baixo peso',
+    diarreia: 'Diarreia (Xiri)',
+    vomito: 'Vômito',
+    dor_de_cabeca: 'Dor de cabeça',
     dst: 'HIV ou outra doença transmitida pelo sexo',
     outro: 'Tratamento para outro tipo de doença',
     feitico: 'Doença fruto de feitiço',
@@ -302,14 +392,15 @@ export const tratamentosOptions = {
 
 export const tratamentosPajeOptions = {
     nao: 'Não',
-    nanderu: 'Sim, apenas com Ñanderu/Ñandesy',
+    nanderu: 'Sim, apenas com Ñanderu/Ñandesy/Pajé',
     nanderu_posto_ou_hospital: 'Sim, Ñanderu/Ñandesy e posto de saúde ou hospital',
+    casai: 'Sim, na CASAI',
     'ns-nr': 'NS/NR'
 }
 
 export const medicamentosUsoContinuoOptions = {
     nao: 'Não',
-    remedios: 'Sim, só remédios "de caixinha" (do branco)',
+    remedios: 'Sim, só remédios "de caixinha" (ou injeção)',
     ervas: 'Sim, ervas',
     remedios_e_ervas: 'Sim, remédios e ervas',
     'ns-nr': 'NS/NR'
@@ -320,10 +411,12 @@ export const motivoMedicamentoUsoContinuo = {
     diabetes: 'Diabetes',
     pressao_alta: 'Pressão alta',
     coracao: 'Doença do coração',
-    mental: 'Sofrimento mental (doença dos nervos)',
-    hiv: 'HIV',
+    mental: 'Sofrimento mental/depressão',
+    reumatismo: 'Reumatismo ou doença nos ossos',
+    hiv: 'HIV/AIDS',
+    feitico: 'Medicação contra feitiço',
     anemia: 'Anemia',
-    outro: 'Outro - especifique'
+    outro: 'Outro'
 }
 
 export const recorreAoAdoecerOptions = {
@@ -353,7 +446,10 @@ export const avaliaAlimentacaoRetomada = {
     piorou_nao_recebe_doacoes: 'Piorou, porque não recebemos doações',
     piorou_sem_matas_rios_plantacoes: 'Piorou, porque não temos acesso à mata, rios e plantação',
     piorou_sem_assistencia_estado: 'Piorou, porque não recebemos assistência do Estado',
-    piorou_sem_explicacao: 'Piorou, mas não sei explicar'
+    piorou_mais_violencia: 'Piorou, porque sofremos mais violências',
+    piorou_sem_explicacao: 'Piorou, mas não sei explicar',
+    piorou_outro_motivo: 'Piorou. Outro motivo',
+    'ns-nr': 'NS/NR'
 }
 
 export const semAlimentosPorConflitos = {
@@ -361,16 +457,18 @@ export const semAlimentosPorConflitos = {
     doacoes: 'Porque nos impediram de receber doações do Estado e apoiadores',
     permissao_sair_retomada: 'Porque não permitiram que a gente saísse da retomara para comprar',
     destruicao_roca: 'Porque destruiram nossa roça',
-    outro: 'Outro'
+    outro: 'Outro',
+    'ns-nr': 'NS/NR'
 }
 
 export const origemAlimento = {
     roca: 'Roça',
     horta: 'Horta',
-    mercado: 'Mercado',
-    venda: 'Venda',
+    supermercado: 'Supermercado',
+    mercearia: 'Mercearia',
     cesta_de_alimentos: 'Cesta de Alimentos',
-    doacao_apoiadores: 'Doação de apoiadores (FUNAI, Estado, outros)'
+    doacao_apoiadores: 'Doação de apoiadores (FUNAI, Estado, outros)',
+    'ns-nr': 'NS/NR'
 }
 
 export const acaoFaltaDeComida = {
@@ -381,6 +479,7 @@ export const acaoFaltaDeComida = {
     move_comunidade_proxima: 'Vai para outra comunidade próxima',
     move_cidade_trabalho: 'Vai para outra cidade buscar trabalho',
     move_cidade_ajuda: 'Vai para outra cidade buscar ajuda',
+    pesca_caca: 'Sai para caçar ou pescar',
     compra_fiado: 'Compra fiado no mercado / venda / comércio',
     ajuda_cidade: 'Pede ajuda na cidade',
     ajuda_parente: 'Pede ajuda de parente',
@@ -389,8 +488,19 @@ export const acaoFaltaDeComida = {
     ajuda_funai: 'Pede ajuda para a FUNAI',
     ajuda_posto_de_saude: 'Pede ajuda no Posto de saúde',
     ajuda_cras: 'Pede ajuda no CRAS',
-    ajuda_cimi: 'Pede ajuda no COMI ou outros apoiadores',
-    outros: 'Outro'
+    ajuda_cimi: 'Pede ajuda no CIMI ou outros apoiadores',
+    ajuda_aty_guasu: 'Pede ajuda Aty Guasu',
+    nao_falta_comida: 'Não fala comida na casa',
+    outros: 'Outro',
+    'ns-nr': 'NS/NR'
+}
+
+export const rocaOuHortaOptions = {
+    nao: 'Não',
+    roca_em_casa: 'Sim, somente roça dentro do terreno da casa',
+    roca_fora_de_casa: 'Sim, roça fora do terreno da casa',
+    roca_comunitaria: 'Sim, participa de roça comunitária',
+    'ns-nr': 'NS/NR'
 }
 
 export const motivacaoNaoProduzirHorta = {
@@ -401,7 +511,8 @@ export const motivacaoNaoProduzirHorta = {
     espaco: 'Pouco / nenhum espaço',
     ajuda_tecnica: 'Falta de ajuda técnica',
     maquinario: 'Falta de maquinário',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const plantiosHorta = {
@@ -415,7 +526,10 @@ export const plantiosHorta = {
     abobora: 'Abóbora',
     quiabo: 'Quiabo',
     verduras: 'Verduras (alface, rúcla, acelga etc)',
-    outros: 'Outros'
+    feijao_corda: 'Feijão de corda (cumandá)',
+    ervas_para_remedio: 'Evas para remédio',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const frutiferasEmCasaOuProximo = {
@@ -431,25 +545,39 @@ export const frutiferasEmCasaOuProximo = {
     jabuticaba: 'Jabuticaba',
     caju: 'Caju',
     melao: 'Melão',
-    outros: 'Outros'
+    cafe: 'Café',
+    acai: 'Açai',
+    coco: 'Côco',
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const producaoComidaAnoTodo = {
-    nao: 'Não',
-    maior_parte_do_ano: 'Na maior parte do ano sim',
-    poucos_meses: 'Apenas poucos meses do ano',
-    apenas_epoca_do_alimento: 'Apenas na época de cada alimento',
+    nao: 'Não temos produção de alimentos',
+    maior_parte_do_ano: 'Temos produção de alimentos a maior parte do ano sim',
+    poucos_meses: 'Temos produção apenas poucos meses do ano',
+    apenas_epoca_do_alimento: 'Temos produção na época própria de cada alimento (sazonalidade)',
     'ns-nr': 'NS/NR'
 }
 
 export const fornecedorHorta = {
     doacao_parentes: 'Doação de parentes',
     doacao_funai: 'Doação da FUNAI',
-    doacao_outro: 'Doação de outra instituição (agraer, UFGD, município)',
+    doacao_outro: 'Doação de outra instituição (Agraer, Universidades, município)',
     troca_sementes: 'Troca de sementes',
     banco_de_sementes: 'Banco de sementes',
     compra: 'Compro',
     fazendo_mudas: 'Fazemos as mudas',
+    'ns-nr': 'NS/NR'
+}
+
+export const armazenamentoSementesPlantio = {
+    nao_guardam: 'Não guardamos',
+    em_casa_perto_fumaca: 'Guardamos em casa, próximo a fumaça (defumação)',
+    em_casa_longe_fumaca: 'Guardamos em casa em outro lugar, fora da fumaça',
+    com_terceiros_local_proprio_para_armazenamento: 'Guardamos com alguém quetenha como armazenar corretamente',
+    garrafas_plasticas: 'Guardamos em garrafas de plástico',
+    outro: 'Outro',
     'ns-nr': 'NS/NR'
 }
 
@@ -467,78 +595,83 @@ export const dificuldadesHorta = {
     roubo: 'Tem roubo',
     veneno_vizinhos: 'Veneno dos vizinhos matam a produção',
     terra_cansada: 'A terra está cansada',
-    doencas: 'Há doenças',
+    doencas: 'Dá doenças',
     geada: 'Geada no inverno',
-    falta_mandioca: 'Falta mandioca',
-    falta_sementes: 'Falta sementes de outras plantas',
+    falta_semente: 'Falta semente/rama/muda',
+    falta_outras_sementes: 'Falta sementes de outras plantas',
     capim_excesso: 'Dá capim demais',
     ataque_formigas: 'Formigas atacam',
     seca: 'Seca no verão',
-    falta_equipamento: 'Falta trator'
+    falta_equipamento: 'Falta trator',
+    falta_agua: 'Não tem água',
+    'ns-nr': 'NS/NR'
 }
 
 export const finalidadeHorta = {
-    sustento_casa_comunidade: 'Somente para o sustento da casa/comunidade',
-    sustento_venda: 'Para o sustento e venda do que sobra',
+    sustento_casa: 'Somente para o sustento da casa',
+    sustento_venda: 'Para o sustento da casa e venda do que sobra',
     sustento_troca: 'Para o sustento da casa e troca',
     venda: 'Somente para venda',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const criacaoAnimaisComerOuVender = {
     galinha: 'Galinha',
     porco: 'Porco',
     vaca: 'Vaca',
+    porco_mato: 'Porco do Mato',
+    quati: 'Quati',
+    ema: 'Ema',
+    veado: 'Veado',
+    macaco: 'Macaco',
     targaruga: 'Tartaruga',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const necessidadeComprarAlimentos3m = {
-    sim: 'Sim',
+    sim: 'Sim, compramos',
     nao: 'Não',
-    troca_parentes: 'Fizemos trocas com parentes',
-    troca_mercado: 'Fizemos trocas em mercado na cidade',
+    troca_parentes: 'Não, fizemos trocas com parentes',
+    troca_mercado: 'Não, fizemos trocas em mercado na cidade',
     'ns-nr': 'NS/NR'
 }
 
 export const localCompraAlimentos3m = {
-    hipermercado: 'Hipermercado',
+    hipermercado: 'Hipermercado (Ex: Atacadão)',
     supermercado: 'Supermercado',
-    mercadao: 'Mercadão',
+    mercearia: 'Mercearia (Mercadinho local)',
     hortifruti: 'Hortifruti',
     feira: 'Feira',
-    compra_direta: 'Compra direta',
     acougue: 'Açougue',
     'ns-nr': 'NS/NR'
 }
 
-export const casaPossuiFogao = {
-    fora_casa: 'Sim, fora da casa',
-    dentro_casa: 'Sim, dentro de casa',
-    nao: 'Não',
-    'ns-nr': 'NS/NR'
-}
-
 export const materialParaCozinhar = {
-    gas: 'Gás',
-    carvao: 'Carvão',
-    lenha: 'Lenha',
-    plastico: 'Plástico',
-    gas_carvao_alcool_gasolina_diesel: 'Combinação gás e carvão / álcool / gasolina / diesel'
+    gas_e_lenha: 'Nos dois',
+    prioridade_gas: 'Mais no fogão à gás',
+    prioridade_lenha: 'Mais no fogo à lenha',
+    somente_gas: 'Só no fogão à gás',
+    somente_lenha: 'Só no fogo à lenha',
+    depende_preco_gas: 'Depende do preço do gás',
+    'ns-nr': 'NS/NR'
 }
 
 export const alimentosConsumidosOntem = {
     feijao: 'Feijão',
     arroz: 'Arroz',
     mandioca: 'Mandioca, cará, inhame, batata',
-    carnes: 'Carnes (de boi, peixe, frango, porco ou caça)',
+    carnes: 'Carnes de boi, peixe, frango , porco ou caça',
     verduras_legumes: 'Verduras e/ou legumes (não considerar batata, mandioca, cará e inhame)',
     frutas_frescas: 'Frutas frescas (não considerar suco de frutas)',
-    leite_derivados: 'Leite e derivados',
-    hamburguer_ou_embutidos: 'Hambúguer e/ou embutidos (mortadela, salsicha, presunto, salame, linguiça)',
-    bebidas_adocadas: 'Bebidas adoçadas (refrigerante, suco de caixinha, suco em pó, água de côco de caixinha, xaropes, suco de frutas com adição de açucar)',
-    macarrao_instantaneo_salgadinhos_de_pacote: 'Macarrão instantâneo, salgadinhos de pacote ou biscoito salgados',
-    biscoito_recheado_doces_guloseimas: 'Biscoito recheado, doces ou guloseimas (balas, pirulitos, chiclete, caramel, gelatina)',
+    leite_derivados: 'Leite ou derivados (como queijos, iogurtes)',
+    hamburguer_ou_embutidos: 'Hambúrguer ou outros embutidos como mortadela, salsicha, presunto, salame, linguiça',
+    bebidas_adocadas: 'Bebidas adoçadas como refrigerantes, suco de caixinha, suco em pó ou xaropes de guaraná/groselha',
+    macarrao_instantaneo_salgadinhos_de_pacote: 'Macarrão instantâneo (miojo), salgadinhos de pacote (fofão) ou bolachas salgados',
+    biscoito_recheado_doces_guloseimas: 'Bolacha recheada, doces, guloseimas, como balas, pirulitos, chiclete',
+    nao_comeu: 'Não comi nada',
+    'ns-nr': 'NS/NR'
 }
 
 export const primeiroAComer = {
@@ -573,6 +706,7 @@ export const criancasComemNaEscola = {
     sim: 'Sim',
     nao: 'Não',
     nem_sempre: 'Nem sempre tem comida na escola',
+    nao_tem_crianca: 'Não tem criança na casa',
     'ns-nr': 'NS/NR'
 }
 
@@ -599,9 +733,11 @@ export const origemCestaAlimentos = {
 }
 
 export const listaDeAlimentos = {
+    higiene_pessoal: 'Produtos de higiene pessoal',
+    sal: 'Sal',
     leite: 'Leite',
     arroz: 'Arroz',
-    feijao: 'Feijão',
+    feijao: 'Feijão (ou mais feijão)',
     milho_derivados: 'Milho e derivados',
     oleo_soja: 'Óleo de soja',
     acucar: 'Açucar',
@@ -617,7 +753,8 @@ export const listaDeAlimentos = {
     sardinha_atum_lata: 'Sardinha / atum em lata',
     legumes_em_lata: 'Seleta de legumes (miho / ervinha) em lata',
     ovos: 'Ovos',
-    outros: 'Outros'
+    outros: 'Outros',
+    'ns-nr': 'NS/NR'
 }
 
 export const motivosNaoReceberCesta = {
