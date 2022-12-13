@@ -161,7 +161,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true,
         },
         {
-            label: 'Se SIM, onde aconteceu a violência física? PODE TER MAIS DE 1 RESPOSTA). REFORÇAR QUE É SIGILOSO (segredo)',
+            label: 'Se sim, onde aconteceu a violência física? PODE TER MAIS DE 1 RESPOSTA). REFORÇAR QUE É SIGILOSO (segredo)',
             type: Select,
             props: {
                 name: 'local_ocorrencia_violencia_fisica',
@@ -211,7 +211,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true,
         },
         {
-            label: 'Se SIM, para quê (que problema/doença/motivo)?',
+            label: 'Se sim, para quê (que problema/doença/motivo)?',
             type: Select,
             props: {
                 name: 'doenca_medicacao_uso_continuo',
