@@ -90,7 +90,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true,
         },
         {
-            label: 'Se Sim, nos últimos 12 meses, você ou alguém desta casa FICOU DOENTE, por causa do veneno de lavoura?',
+            label: 'Se sim, nos últimos 12 meses, você ou alguém desta casa FICOU DOENTE, por causa do veneno de lavoura?',
             type: Select,
             props: {
                 name: 'doencas_contato_veneno_lavoura',
