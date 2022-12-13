@@ -40,8 +40,8 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
   let counter = 0;
 
-  function incrementCounter () {
-    if(counter === 12) {
+  function incrementCounterUpToLength (length: number):void {
+    if(counter === length) {
       counter = 1
       return
     }
@@ -210,7 +210,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                     </span>
                     {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
                         <span key={elementIndex}>
-                            {incrementCounter()}
+                            {incrementCounterUpToLength(quadroDemograficoHelper.length)}
                             <Label>{`${counter}. ${element.label}`}</Label>
                             <element.type
                               {...element.props}
