@@ -53,7 +53,7 @@ export const crencasOptions = {
     religiao_tradicional: 'Religião Tradicional',
     evangelico: 'Evangélico',
     catolico: 'Católico',
-    espirita: 'Espírota',
+    espirita: 'Espírita',
     budista: 'Budista',
     outra: 'Outra'
 }
