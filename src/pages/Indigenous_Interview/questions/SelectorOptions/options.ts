@@ -442,7 +442,7 @@ export const recorreAoAdoecerOptions = {
 export const avaliaAlimentacaoRetomada = {
     melhorou_produz_troca_alimentos: 'Melhorou, porque produzimos e trocamos alimentos',
     melhotou_doacoes: 'Melhorou, porque recebemos doações',
-    melhorou_matas_rios_plantacoes: 'Melhorou, porque temos acesso àm ata, rios e plantação',
+    melhorou_matas_rios_plantacoes: 'Melhorou, porque temos acesso à mata, rios e plantação',
     melhorou_sem_explicacao: 'Melhorou, mas não sei explicar',
     piorou_nao_produz_troca_alimentos: 'Piorou, porque não produzimos nem trocamos alimentos',
     piorou_nao_recebe_doacoes: 'Piorou, porque não recebemos doações',
