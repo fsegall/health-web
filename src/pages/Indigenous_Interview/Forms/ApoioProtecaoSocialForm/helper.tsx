@@ -70,7 +70,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Benefício para deficientes ou Idosos',
+            label: 'Outro benefício para deficientes ou idosos',
             type: Select,
             props: {
                 name: 'beneficio_deficientes_idosos',
