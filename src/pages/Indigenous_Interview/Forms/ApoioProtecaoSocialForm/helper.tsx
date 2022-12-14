@@ -177,7 +177,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Se recebe cesta de alimentos, que alimentos você acha que deveriam ter na cesta e que não tem?',
+            label: 'Se recebe cesta de alimentos, que itens ou alimentos você acha que deveriam ter na cesta e que não tem?',
             type: Select,
             props: {
                 name: 'recebeu_cesta_alimentos_que_alimentos_deveriam_ter',
