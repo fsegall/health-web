@@ -135,7 +135,8 @@ export const ultimaMoradaOptions = {
 
 export const moradaHojeOptions = {
   barraco: 'Barraco',
-  casa_propria: 'Casa própria',
+  tenda: 'Tenda de Lona/plástico e outros',
+  casa_madeira_alvenaria: 'Casa de madeira ou alvenaria',
   casa_reza: 'Casa de reza',
   sede: 'Sede (casa construída pelos fazendeiros)',
   outro: 'Outro'
