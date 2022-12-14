@@ -78,7 +78,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Tem acesso a água aqui na sua casa?',
+            label: 'Tem acesso a água na sua casa?',
             type: Select,
             props: {
                 name: 'acesso_agua',
