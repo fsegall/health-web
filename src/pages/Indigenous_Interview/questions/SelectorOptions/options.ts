@@ -296,7 +296,7 @@ export const familiarMorteCovid = {
 
 export const familiarMorteOptions = {
     nao: 'Não morreu ninguém',
-    covid_uma_pessoa: 'Sim, apenas 1 pessoa por Covid',
+    covid_uma_pessoa: 'Sim, 1 pessoa por Covid',
     covid_mais_de_um: 'Sim, mais de 1 pessoa por Covid',
     outras_causas_uma_ou_mais_pessoas: 'Sim, 1 ou mais pessoas por outra causa. ',
     'ns-nr': 'NS/NR'
