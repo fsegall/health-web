@@ -75,6 +75,7 @@ export const situacaoTrabalhoOptions = {
 
 export const ocupacaoPrincipalOptions = {
     agricultor: 'Agricultor',
+    artesao: 'Artesão',
     rural_sem_carteira: 'Trabalhador rural sem carteira (diarista, temporário, permanente)',
     rural_com_carteira: 'Trabalhador rural com carteira assinada',
     urbano_com_carteira: 'Trabalhador urbano (fora da comunidade) com carteira assinada',
