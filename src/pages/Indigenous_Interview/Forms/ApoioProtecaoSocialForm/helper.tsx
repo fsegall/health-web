@@ -42,7 +42,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Algum morador desta casa recebe alguma ajuda em dinheiro? (qualquer ajuda ou benefício social)',
+            label: 'Nos últimos 3 meses, algum morador desta casa recebe alguma ajuda em dinheiro? (qualquer ajuda ou benefício social)',
             type: Select,
             props: {
                 name: 'morador_recebe_ajuda_financeira',
@@ -51,7 +51,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             },
         },
         {
-          label: 'Nos últimos 3 meses, você ou alguém da sua família recebeu de que programa? Bolsa Família/Auxílio Brasil?',
+          label: 'Nos últimos 3 meses, você ou alguém da sua família recebeu dinheiro de que programa? Bolsa Família/Auxílio Brasil?',
           type: Select,
           props: {
               name: 'bolsa_familia_auxilio_brasil',
