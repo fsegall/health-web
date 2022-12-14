@@ -86,7 +86,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'De onde a água vem?',
+            label: 'De onde vem a água?',
             type: Select,
             props: {
                 name: 'origem_agua',
