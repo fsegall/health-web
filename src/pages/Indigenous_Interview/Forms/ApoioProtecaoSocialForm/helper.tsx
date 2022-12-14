@@ -135,7 +135,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Programa de auxilio estadual/ municipal',
+            label: 'Programa de auxilio em dinheiro estadual/ municipal',
             type: Select,
             props: {
                 name: 'programa_auxilio_estadual_municipal',
