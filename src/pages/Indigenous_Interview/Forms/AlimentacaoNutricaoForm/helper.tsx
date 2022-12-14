@@ -150,7 +150,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Alguma vez no mês passado as crianças e jovens da casa passaram o dia todo com comer e foram dormir querendo comer porque não tinha comida?',
+            label: 'Alguma vez no mês passado as crianças e jovens da casa passaram o dia todo sem comer e foram dormir querendo comer porque não tinha comida?',
             type: Select,
             props: {
                 name: 'jovens_passaram_algum_dia_sem_alimentos_30d',
