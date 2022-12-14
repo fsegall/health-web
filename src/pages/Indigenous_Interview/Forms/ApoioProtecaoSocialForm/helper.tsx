@@ -214,7 +214,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
     ],
     [
         {
-            label: 'Nos últimos 3 meses, você ou alguém da sua casa recebeu ajuda do estado, da prefeitura, de outra instituição, associação, movimento indígena, movimentos sociais, igreja, amigos, parentes ou outros?',
+            label: 'Nos últimos 3 meses, você ou alguém da sua casa recebeu ajuda de alguma instituição não governamental (associação, movimento indígena, movimentos sociais, igreja, amigos, parentes ou outros)?',
             type: Select,
             props: {
                 name: 'recebeu_ajuda_3m',
