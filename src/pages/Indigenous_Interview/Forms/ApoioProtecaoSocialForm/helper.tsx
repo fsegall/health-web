@@ -189,7 +189,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Outros alimentos que deveriam ser adicionado',
+            label: 'Outros alimentos que deveriam ser adicionados',
             type: Input,
             props: {
                 name: 'descricao_adicionar_outro',
