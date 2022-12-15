@@ -24,9 +24,10 @@ interface SaudeDoencaFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  hasPreviousStepCompleted: boolean;
 }
 
-const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -41,6 +42,14 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
   }
 
   const handleSubmit = useCallback(async (data: ICreateSaudeDoencaDTO) => {
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Atenção!',
+        description: 'É necessário preencher o(s) módulo(s) anteriores',
+      });
+      return
+    }
     try {
       SaudeDoencaFormRef.current?.setErrors({});
       const values = {
