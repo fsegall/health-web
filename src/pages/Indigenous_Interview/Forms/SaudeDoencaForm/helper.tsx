@@ -149,6 +149,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             props: {
                 name: 'ocorrencia_de_ameacas',
                 options: handleValueLabelOption(yesOrNoOptions),
+                isMulti: true
             }
         },
         {
