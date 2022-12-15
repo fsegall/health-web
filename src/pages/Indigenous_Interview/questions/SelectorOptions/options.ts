@@ -111,6 +111,7 @@ export const funcaoNaComunidadeOptions = {
   cuidado_criancas_animais: 'Cuidado de crianças e animais',
   professor_indigena: 'Professor indígena',
   estudo: 'Estudo',
+  nenhuma: 'Nenhuma',
   outros: 'Outros'
 }
 

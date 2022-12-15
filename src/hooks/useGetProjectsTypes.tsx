@@ -57,7 +57,7 @@ const useGetProjectsTypes = (type: ProjectType): {
     , 'indigenous': {
             title: 'TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN',
             description: [
-                'Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, E APÓS A PANDEMIA, ENTRE POVOS INDÍGENAS NO BRASIL, ESTAMOS COMEÇANDO AQUI NO MATOGROSSO DO SUL.',
+                'Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, E APÓS A PANDEMIA, ENTRE POVOS INDÍGENAS NO BRASIL, ESTAMOS COMEÇANDO AQUI NO MATO GROSSO DO SUL.',
                 'As perguntas serão sobre algumas informações sobre você e seus familiares, a respeito da casa, do trabalho, da saúde e da alimentação',
                 'Todas as informações que você fornecer serão confidenciais (VÃO SER MANTIDAS EM SEGREDO). Os resultados que serão divulgados vão mostrar todas as entrevistas juntas, por isso não vão conter dados pessoais de identificação',
                 'A qualquer momento da entrevista você pode solicitar esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em participar da pesquisa sua colaboração vai contribuir para melhorar as ações de garantia de alimentação suficiente e saudável para todos os povos indígenas no Brasil, principalmente o povo de comunidades indígenas do Mato grosso do Sul',
