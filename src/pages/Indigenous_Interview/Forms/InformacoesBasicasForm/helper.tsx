@@ -45,7 +45,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
     ],
     [
         {
-            label: 'Indique o número do Projeto de Pesquisa',
+            label: 'Indique o número do Projeto',
             type: Input,
             props: {
                 name: 'numero_projeto',
@@ -54,7 +54,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Você pode ser considerada (o) uma pessoa de referência (chefe) da família? (Pessoa acima de 14 anos que trabalhe ou conheça a realidade alimentar e social da casa) ?',
+            label: 'Você pode ser considerada (o) uma pessoa de referência (líder) da família? (Pessoa acima de 14 anos que trabalhe ou conheça a realidade alimentar e social da casa) ?',
             type: Select,
             props: {
                 name: 'responsavel_domicilio',

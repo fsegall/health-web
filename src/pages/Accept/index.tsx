@@ -47,14 +47,16 @@ const Accept: React.FC = () => {
             {acceptInfo.contact}
           </div>
           <strong>Agradecemos, desde já, sua valorosa colaboração.</strong>
+
         </div>
       </Aceite>
 
       <FormContainer>
         <form onSubmit={onSubmit}>
-
+        <p><strong>Assinale se é pesquisa nacional ou pesquisa indígena abaixo:</strong></p><br />
           <CheckboxContainer>
             <label>Pesquisa Indígena</label>
+
             <input type="checkbox"
               name="projectType"
               onChange={() => projectType === 'default' ? setProjectType('indigenous') : setProjectType('default')}
