@@ -65,11 +65,7 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         then: Yup.string().nullable().required("Você precisa preencher sobre os alimentos da horta"),
         otherwise: Yup.string().nullable().notRequired(),
     }),
-    frutiferas_nas_proximidades: Yup.string().nullable().when("morador_faz_horta", {
-        is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
-        then: Yup.string().nullable().required("Você precisa preencher sobre frutíferas"),
-        otherwise: Yup.string().nullable().notRequired(),
-    }),
+    frutiferas_nas_proximidades: Yup.string().nullable().required("Você precisa preencher sobre frutíferas"),
     producao_de_comida_ano_todo: Yup.string().nullable().when("morador_faz_horta", {
         is: (val: any) => ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"].includes(String(val)),
         then: Yup.string().nullable().required("Você precisa preencher sobre frutíferas"),
