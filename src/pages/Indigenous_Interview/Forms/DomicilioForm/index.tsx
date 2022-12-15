@@ -23,9 +23,10 @@ interface DomiciliosFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  hasPreviousStepCompleted: boolean;
 }
 
-const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -40,6 +41,14 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
   }
 
   const handleSubmit = useCallback(async (data: ICreateDomicilioDTO) => {
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Atenção!',
+        description: 'É necessário preencher o(s) módulo(s) anteriores',
+      });
+      return
+    }
     try {
       DomiciliosFormRef.current?.setErrors({});
 

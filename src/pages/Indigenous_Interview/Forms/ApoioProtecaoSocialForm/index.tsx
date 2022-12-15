@@ -23,9 +23,10 @@ interface ApoioProtecaoSocialFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  hasPreviousStepCompleted: boolean
 }
 
-const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -42,6 +43,14 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
   }
 
   const handleSubmit = useCallback(async (data: ICreateApoioProtecaoSocialDTO) => {
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Atenção!',
+        description: 'É necessário preencher o(s) módulo(s) anteriores',
+      });
+      return
+    }
     try {
       ApoioProtecaoSocialFormRef.current?.setErrors({});
       const values = {

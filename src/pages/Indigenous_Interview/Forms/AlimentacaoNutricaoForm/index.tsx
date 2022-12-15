@@ -21,9 +21,10 @@ interface AlimentacaoNutricaoFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  hasPreviousStepCompleted: boolean;
 }
 
-const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -38,6 +39,14 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
   }
 
   const handleSubmit = useCallback(async (data: ICreateAlimentacaoNutricaoDTO) => {
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Atenção!',
+        description: 'É necessário preencher o(s) módulo(s) anteriores',
+      });
+      return
+    }
     try {
       AlimentacaoNutricaoFormRef.current?.setErrors({});
       const values = {

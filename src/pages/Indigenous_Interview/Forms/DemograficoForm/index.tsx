@@ -28,9 +28,10 @@ interface DemograficoFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  hasPreviousStepCompleted?: boolean
 }
 
-const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false }) => {
+const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -49,6 +50,15 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   }
 
   const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
+
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Atenção!',
+        description: 'É necessário preencher o(s) módulo(s) anteriores',
+      });
+      return
+    }
     try {
       DemograficoFormRef.current?.setErrors({});
 
