@@ -16,7 +16,7 @@ export default interface ICreateAlimentacaoNutricaoDTO {
     motivo_morador_nao_faz_horta?: string[]; //multi-select
     // se sim
     alimentos_da_horta?: string[]; //multi-select
-    frutiferas_nas_proximidades?: string[]; //multi-select
+    frutiferas_nas_proximidades: string[]; //multi-select
 
     producao_de_comida_ano_todo?: string; //select
     origem_semente_plantio?: string[]; //multi-select

@@ -231,9 +231,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
                 isMulti: true,
                 options: handleValueLabelOption(options?.frutiferasEmCasaOuProximo)
             },
-            dependencies: {
-                morador_faz_horta: ["roca_em_casa", "roca_fora_de_casa", "roca_comunitaria"]
-            }
         },
         {
             label: 'Conseguem ter produção de comida para sustento da casa?',
