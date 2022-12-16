@@ -134,7 +134,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline, initialValues, token, dispatch]);
+  }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted]);
 
     if (isEditForm) {
         DemograficoFormRef.current?.setData({

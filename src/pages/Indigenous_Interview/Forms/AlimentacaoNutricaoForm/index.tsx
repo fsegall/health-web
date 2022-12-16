@@ -119,7 +119,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

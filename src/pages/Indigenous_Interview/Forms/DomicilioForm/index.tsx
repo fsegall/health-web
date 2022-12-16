@@ -122,7 +122,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted]);
 
 
   if (isEditForm) {
