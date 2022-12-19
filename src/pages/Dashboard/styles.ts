@@ -234,6 +234,7 @@ export const IndigenousSection = styled.div`
   padding: 30px;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 `;
 
 export const IndigenousCard = styled.div`
