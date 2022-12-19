@@ -5,9 +5,12 @@ import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineIntervie
 
 import {
     OfflineButton,
-    Container
+    Container,
+    CardSection,
+    SectionTitle
 } from './styles';
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
+import IndigenousCard from './IndigenousCard';
 
 
 const OfflineInterviews: React.FC = () => {
@@ -40,7 +43,7 @@ const OfflineInterviews: React.FC = () => {
       const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
       try {
-        const response = await api.post('/indigeanous-interviews/handle-offline-data', [offlineData],
+        const response = await api.post('/indigenous-interviews/handle-offline-data', [offlineData],
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -55,14 +58,22 @@ const OfflineInterviews: React.FC = () => {
       }
     }
 
+    function handleData(data: any) {
+      return Object.values(data)
+    }
+
     return (<Container>
                 <h1>Logs de Entrevistas Offline</h1>
                 <OfflineButton onClick={handleOfflineInterviews}>Enviar</OfflineButton>
                 <OfflineButton onClick={handleIndigenousOfflineInterviews}>Enviar Entrevistas Indígenas</OfflineButton>
-                <p><strong>Entrevistas:</strong></p>
+                <SectionTitle>Entrevistas Indígenas:</SectionTitle>
+                <CardSection>
+                  {handleData(indigenousInterviewsObject)?.map((ind: any, index) => (
+                    <IndigenousCard key={index} data={ind} index={index+1} />
+                  ))}
+                </CardSection>
+                <SectionTitle>Entrevistas Padrões:</SectionTitle>
                 <div>{JSON.stringify(interviewsObject)}</div>
-                <p><strong>Entrevistas Indígenas:</strong></p>
-                <div>{JSON.stringify(indigenousInterviewsObject)}</div>
             </Container>
             );
 
