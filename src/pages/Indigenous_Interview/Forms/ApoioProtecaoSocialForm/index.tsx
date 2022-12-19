@@ -61,7 +61,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
         abortEarly: false,
       });
 
-      const apoioProtecaoSocial = {
+      const indigenous_apoio_protecao_social = {
         ...values,
         ...validatedData,
         morador_recebe_programa_social: {
@@ -80,7 +80,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/support', apoioProtecaoSocial, {
+        const response = await api.post('/indigeanous-interviews/support', indigenous_apoio_protecao_social, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_apoio_protecao_social', response.data.id);
@@ -98,7 +98,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
-        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], apoioProtecaoSocial } } : false;
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], indigenous_apoio_protecao_social } } : false;
 
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
