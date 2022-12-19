@@ -18,6 +18,7 @@ import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 import submitOfflineInterviews from '../../services/offlineInterviewsService';
 import { useToast } from '../../hooks/toast';
+import IndigenousDashboardSection from './Indigenous';
 
 interface PaginatorPageState {
   first: number;
