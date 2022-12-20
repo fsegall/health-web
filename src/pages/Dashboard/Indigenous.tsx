@@ -6,7 +6,7 @@ import { Container, FilterContainer, IndigenousCard, IndigenousSection, ListTitl
 
 const IndigenousDashboardSection: React.FC = () => {
   const { user, token } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
+  const [,setIsLoading] = useState(false);
   const [interviews, setInterviews] = useState<any[]>([]);
 
   useEffect(() => {
