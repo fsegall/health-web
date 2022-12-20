@@ -11,7 +11,12 @@ export const getPageName = (path: string) => {
 const routesOptions = [
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'Entrevistas',
+    action: Actions.VIEW_MY_INTERVIEWS
+  },
+  {
+    path: '/indigenous-dashboard',
+    name: 'Entrevistas Indígenas',
     action: Actions.VIEW_MY_INTERVIEWS
   },
   {
