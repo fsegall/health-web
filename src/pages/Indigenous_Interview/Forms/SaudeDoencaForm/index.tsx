@@ -60,14 +60,14 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         abortEarly: false,
       });
 
-      const saudeDoenca = {
+      const indigenous_saude_doenca = {
         ...data,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         ...validatedData,
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/health-desease', saudeDoenca, {
+        const response = await api.post('/indigeanous-interviews/health-desease', indigenous_saude_doenca, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_saude_doenca', response.data.id);
@@ -84,7 +84,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
-        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], saudeDoenca } } : false;
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], indigenous_saude_doenca } } : false;
 
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));

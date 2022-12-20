@@ -60,13 +60,13 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         abortEarly: false,
       });
 
-      const domicilio = {
+      const indigenous_domicilio = {
         ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/residence', domicilio, {
+        const response = await api.post('/indigeanous-interviews/residence', indigenous_domicilio, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_domicilio', response.data.id);
@@ -83,7 +83,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
-        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], domicilio } } : false;
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], indigenous_domicilio } } : false;
 
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));

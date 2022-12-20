@@ -57,13 +57,13 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
         abortEarly: false,
       });
 
-      const alimentacaoNutricao = {
+      const indigenous_alimentacao_nutricao = {
         ...values,
         ...validatedData,
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/nutrition', alimentacaoNutricao, {
+        const response = await api.post('/indigeanous-interviews/nutrition', indigenous_alimentacao_nutricao, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_alimentacao_nutricao', response.data.id);
@@ -80,7 +80,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
-        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], alimentacaoNutricao } } : false;
+        const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], indigenous_alimentacao_nutricao } } : false;
 
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));

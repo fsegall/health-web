@@ -7,10 +7,10 @@ import ICreateSaudeDoencaDTO from "./ICreateSaudeDoencaDTO";
 
 
 export default interface ICreateIndigenousOfflineInterviewDTO {
-    informacoes_basicas: ICreateInformacoesBasicasDTO;
-    demografico: ICreateDemograficoDTO;
-    domicilio: ICreateDomicilioDTO;
-    saude_doenca: ICreateSaudeDoencaDTO;
-    alimentacao_nutricao: ICreateAlimentacaoNutricaoDTO;
-    apoio_protecao_social: ICreateApoioProtecaoSocialDTO;
+  indigenous_informacoes_basicas: ICreateInformacoesBasicasDTO;
+  indigenous_demografico: ICreateDemograficoDTO;
+  indigenous_domicilio: ICreateDomicilioDTO;
+  indigenous_saude_doenca: ICreateSaudeDoencaDTO;
+  indigenous_alimentacao_nutricao: ICreateAlimentacaoNutricaoDTO;
+  indigenous_apoio_protecao_social: ICreateApoioProtecaoSocialDTO;
 }
