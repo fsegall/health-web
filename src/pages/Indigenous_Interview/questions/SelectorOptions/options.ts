@@ -235,7 +235,7 @@ export const destinoLixoOptions = {
     queimado: 'Queimado',
     enterrado_localmente: 'Enterrado no local',
     jogado_longe_casa: 'Jogado longe da casa',
-    jogado_proximo_casa: 'Joado próximo à casa',
+    jogado_proximo_casa: 'Jogado próximo à casa',
     corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago ou quintal da residência',
     'ns-nr': 'NS/NR',
 }
@@ -330,8 +330,8 @@ export const condicaoSaudeTekohaOptions = {
 
 export const causasDoencasVenenoLavouraOptions = {
     agua_contaminada: 'Sim, bebemos água contaminada',
-    alimentos_contaminados: 'Sim, bebemos alimentos contaminados',
-    trabalho_colheira: 'Sim, trabalho em colheira que faz uso de veneno',
+    alimentos_contaminados: 'Sim, comemos alimentos contaminados',
+    trabalho_colheira: 'Sim, trabalho em colheita que faz uso de veneno',
     veneno_proximo_a_casa: 'Sim, colocam veneno próximo à minha casa/roça',
     avioes_maquinarios: 'Sim, jogaram com aviões e/ou maquinários',
     'ns-nr': 'NS/NR'
@@ -580,7 +580,7 @@ export const armazenamentoSementesPlantio = {
     nao_guardam: 'Não guardamos',
     em_casa_perto_fumaca: 'Guardamos em casa, próximo a fumaça (defumação)',
     em_casa_longe_fumaca: 'Guardamos em casa em outro lugar, fora da fumaça',
-    com_terceiros_local_proprio_para_armazenamento: 'Guardamos com alguém quetenha como armazenar corretamente',
+    com_terceiros_local_proprio_para_armazenamento: 'Guardamos com alguém que tenha como armazenar corretamente',
     garrafas_plasticas: 'Guardamos em garrafas de plástico',
     outro: 'Outro',
     'ns-nr': 'NS/NR'
@@ -724,7 +724,7 @@ export const merendaEscolarIncluiAlimentosTradicionais = {
 
 export const apoioFinanceiro = {
     sim: 'Sim',
-    nao: 'Nao',
+    nao: 'Não',
     tentou: 'Tentou'
 }
 
@@ -756,7 +756,7 @@ export const listaDeAlimentos = {
     fuba: 'Fubá',
     legumas_verduras: 'Legumes / verduras',
     sardinha_atum_lata: 'Sardinha / atum em lata',
-    legumes_em_lata: 'Seleta de legumes (miho / ervinha) em lata',
+    legumes_em_lata: 'Seleta de legumes (milho / ervilha) em lata',
     ovos: 'Ovos',
     outros: 'Outros',
     'ns-nr': 'NS/NR'
