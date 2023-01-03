@@ -212,7 +212,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Se tem roça/horta, o que você planta? ATENÇÃO CABEM VÁRIAS RESPOSTAS (+1)',
+            label: 'Se tem roça/horta, o que você planta? (PODE TER MAIS DE UMA RESPOSTA)',
             type: Select,
             props: {
                 name: 'alimentos_da_horta',
@@ -224,7 +224,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'E frutíferas, o que você tem aqui na casa ou próximo a ela? (+1)',
+            label: 'E frutíferas, o que você tem aqui na casa ou próximo a ela? (PODE TER MAIS DE UMA RESPOSTA)',
             type: Select,
             props: {
                 name: 'frutiferas_nas_proximidades',
@@ -245,7 +245,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Onde vocês conseguem a semente ou rama para plantar? (+1)',
+            label: 'Onde vocês conseguem a semente ou rama para plantar? (PODE TER MAIS DE UMA RESPOSTA)',
             type: Select,
             props: {
                 name: 'origem_semente_plantio',
@@ -294,7 +294,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Se sim, quais são as dificuldades? (Ler se a pessoa tiver dificuldade em lembrar) (+1)',
+            label: 'Se sim, quais são as dificuldades? (Ler se a pessoa tiver dificuldade em lembrar) (PODE TER MAIS DE UMA RESPOSTA)',
             type: Select,
             props: {
                 name: 'lista_dificuldades_com_horta',
@@ -330,7 +330,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: 'Se sim, quais animais? (+1)',
+            label: 'Se sim, quais animais? (PODE TER MAIS DE UMA RESPOSTA)',
             type: Select,
             props: {
                 name: 'lista_animais_de_criacao_alimentacao_ou_venda',

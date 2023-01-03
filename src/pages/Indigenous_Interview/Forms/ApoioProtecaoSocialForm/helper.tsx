@@ -51,7 +51,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
             },
         },
         {
-          label: 'Nos últimos 3 meses, você ou alguém da sua família recebeu dinheiro de que programa? Bolsa Família/Auxílio Brasil?',
+          label: 'Nos últimos 3 meses, você ou alguém da sua família recebeu dinheiro de algum desses programas, por exemplo, Programa Bolsa Família / Auxílio Brasil',
           type: Select,
           props: {
               name: 'bolsa_familia_auxilio_brasil',

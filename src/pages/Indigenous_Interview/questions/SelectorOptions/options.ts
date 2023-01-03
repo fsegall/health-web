@@ -54,7 +54,7 @@ export const crencasOptions = {
     evangelico: 'Evangélico',
     catolico: 'Católico',
     espirita: 'Espírita',
-    budista: 'Budista',
+    nenhuma: 'Nenhuma',
     outra: 'Outra'
 }
 
@@ -89,6 +89,7 @@ export const ocupacaoPrincipalOptions = {
     profissional_liberal: 'Profissional Liberal (para pessoa com formação)',
     micro_empreendedor: 'Micro empreendedor',
     dona_de_casa: 'Dona de casa',
+    nenhuma: 'Nenhuma',
     'ns-nr': 'NS/NR',
 }
 
@@ -131,6 +132,7 @@ export const ultimaMoradaOptions = {
     outra_retomada: 'Outra Retomada ou território tradicional',
     terra_indigena: 'Terra indígena demarcada',
     cidade: 'Cidade',
+    sempre_morou_nesse_lugar: 'Sempre morou nesse lugar',
     'ns-nr': 'NS/NR'
 }
 
@@ -196,8 +198,8 @@ export const origemAguaOptions = {
 }
 
 export const qualidadeAguaOptions = {
+  muito_boa: 'Muito boa',
     boa: 'Boa',
-    muito_boa: 'Muito boa',
     regular: 'Regular',
     ruim: 'Ruim',
     muito_ruim: 'Muito ruim',
