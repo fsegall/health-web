@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import * as Yup from 'yup';
 import Select from '../../../../components/Select';
 import { FormHandles } from '@unform/core';
@@ -43,9 +43,12 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
 
   const AddressFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
+
 
   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {
     try {
+      setLoading(true)
       AddressFormRef.current?.setErrors({});
       const validatedData = await AddressValidation.validate(data, {
         abortEarly: false,
@@ -113,8 +116,10 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
           description: 'Ocorreu um erro ao adicionar o endereço, tente novamente',
         });
       }
+    } finally {
+      setLoading(false)
     }
-  }, [addToast, token, dispatch, offline]);
+  }, [addToast, token, dispatch, offline, setLoading]);
 
   if (isEditForm) {
     AddressFormRef.current?.setData({
