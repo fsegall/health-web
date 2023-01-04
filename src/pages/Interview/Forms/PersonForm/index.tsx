@@ -55,8 +55,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
   const PersonFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
+
     try {
+      setLoading(true)
       PersonFormRef.current?.setErrors({});
       const validatedData = await PersonValidation.validate(data, {
         abortEarly: false,
@@ -115,6 +119,8 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           description: 'Todos os campos devem estar selecionados',
         });
       }
+    } finally {
+      setLoading(false)
     }
   }, [addToast, user, token, dispatch, offline]);
 

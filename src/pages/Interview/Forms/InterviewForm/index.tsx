@@ -45,6 +45,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
 
   const InterviewFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleInterviewSubmit = useCallback(async (data: ICreateInterviewDTO) => {
 
@@ -54,7 +55,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
     }
 
     try {
-
+      setLoading(true)
       InterviewFormRef.current?.setErrors({});
 
       const validatedData = await InterviewValidation.validate(parsedData, {
@@ -65,11 +66,11 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
 
         const interviewer_id = await JSON.parse(localStorage.getItem('@Safety:user') || '')?.id;
 
-        const household_id = await localStorage.getItem('@Safety:household_id');
+        const household_id = localStorage.getItem('@Safety:household_id');
 
-        const person_id = await localStorage.getItem('@Safety:person_id');
+        const person_id = localStorage.getItem('@Safety:person_id');
 
-        const address_id = await localStorage.getItem('@Safety:address_id');
+        const address_id = localStorage.getItem('@Safety:address_id');
 
         const interview = {
           interviewer_id,
@@ -146,8 +147,10 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
           description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
         });
       }
+    } finally {
+      setLoading(false)
     }
-  }, [addToast, token, history, dispatch, offline]);
+  }, [addToast, token, history, dispatch, offline, setLoading]);
 
   if (isEditForm) {
     InterviewFormRef.current?.setData({

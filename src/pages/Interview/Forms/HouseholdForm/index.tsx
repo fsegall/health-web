@@ -98,6 +98,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
@@ -106,6 +108,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
 
       try {
+        setLoading(true)
         HouseholdFormRef.current?.setErrors({});
 
         const validatedData = await HouseholdValidation.validate(parsedData, {
@@ -180,9 +183,11 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         } else {
           console.log(error);
         }
+      } finally {
+        setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline],
+    [addToast, token, dispatch, offline, setLoading],
   );
 
   if (isEditForm) {
