@@ -98,7 +98,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
   const HouseholdFormRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [,setLoading] = useState<boolean>(false)
 
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {

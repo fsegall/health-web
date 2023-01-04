@@ -55,7 +55,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
   const PersonFormRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [, setLoading] = useState<boolean>(false)
 
   const handlePersonSubmit = useCallback(async (data: ICreatePersonDTO) => {
 

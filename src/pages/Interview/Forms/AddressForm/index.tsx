@@ -43,7 +43,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
 
   const AddressFormRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [,setLoading] = useState<boolean>(false)
 
 
   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {

@@ -45,7 +45,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
 
   const InterviewFormRef = useRef<FormHandles>(null);
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [, setLoading] = useState<boolean>(false)
 
   const handleInterviewSubmit = useCallback(async (data: ICreateInterviewDTO) => {
 
