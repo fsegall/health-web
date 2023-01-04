@@ -18,7 +18,7 @@ async function SubmitOfflineInterviews(): Promise<void> {
     localStorage.setItem(`@Safety:offlineBackup - ${format(parseJSON(Date.now()), 'dd/MM/yyyy HH:mm:ss')}`, JSON.stringify(interviews));
 
     for (let interview in interviews) {
-      
+
       if (Object.keys(interviews[interview]).length === 4) {
         try {
 
@@ -83,7 +83,6 @@ async function SubmitOfflineInterviews(): Promise<void> {
           }
         }
       } else {
-        console.log('Essa entrevista não estava completa');
         localStorage.setItem(`@Safety:InterviewNotComplete:${uuid()}`, JSON.stringify(interviews[interview]));
       }
 

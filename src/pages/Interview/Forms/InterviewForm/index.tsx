@@ -29,9 +29,11 @@ import ICreateOfflineInterviewDTO from '../../dtos/ICreateOfflineInterviewDTO';
 interface InterviewFormProps {
   dispatch: Function;
   offline: boolean;
+  isEditForm?: boolean;
+  initialValues?: any;
 }
 
-const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
+const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
 
   const { addToast } = useToast();
 
@@ -140,7 +142,8 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
       } else {
         addToast({
           type: 'error',
-          title: error.data.message,
+          //@ts-ignore
+          title: error?.data?.message,
           description: 'Ocorreu um erro ao adicionar a entrevista, tente novamente',
         });
       }
@@ -148,6 +151,17 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
       setLoading(false)
     }
   }, [addToast, token, history, dispatch, offline, setLoading]);
+
+  if (isEditForm) {
+    InterviewFormRef.current?.setData({
+      project_name: initialValues?.project?.name,
+      project_number: initialValues?.project?.project_number,
+      interview_type: initialValues?.interview_type,
+      is_complete: initialValues?.is_complete ? 'completa' : 'completa_com_erros',
+      is_complete_with_errors: initialValues?.is_complete_with_errors ? 'completa_com_erros' : 'completa',
+      comments: initialValues?.comments,
+    })
+  }
 
   return (
     <StyledForm ref={InterviewFormRef} onSubmit={handleInterviewSubmit}>
@@ -181,7 +195,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline }) => {
         <Select name="interview_type" options={interviewTypeOptions} />
         <Divider />
         <TextArea name="comments" placeholder="Comentários sobre a entrevista" rows={4} cols={200} />
-        <Button loading={loading}>Submit</Button>
+        {!isEditForm && <Button>Submit</Button>}
       </section>
 
     </StyledForm>

@@ -1,13 +1,13 @@
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { Link } from 'react-router-dom';
-import { FiChevronLeft } from 'react-icons/fi';
+/* import { Link } from 'react-router-dom';
+import { FiChevronLeft } from 'react-icons/fi'; */
 import {
   StyledForm,
   Label,
   Container,
-  Header,
+/*   Header, */
   Title,
 } from './styles';
 import {
@@ -21,6 +21,8 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
 
 import api from '../../services/api';
+import Select from '../../components/Select';
+import { projectTypeOptions } from '../../hooks/useGetProjectsTypes';
 
 
 const ProjectForm: React.FC = (props) => {
@@ -69,7 +71,7 @@ const ProjectForm: React.FC = (props) => {
       } else {
         addToast({
           type: 'error',
-          title: error.data.message,
+          title: error?.data?.message,
           description: 'Ocorreu um erro ao adicionar o projeto, tente novamente',
         });
       }
@@ -78,17 +80,8 @@ const ProjectForm: React.FC = (props) => {
 
   return (
     <Container>
-      <Header>
-        <div>
-          <Link to="/dashboard">
-            <FiChevronLeft size={30} />
-          </Link>
-        </div>
-        <h1>Rede <span>|</span> Projeto</h1>
-      </Header>
       <Title>Adicione um projeto de pesquisa</Title>
       <StyledForm ref={ProjectFormRef} onSubmit={handleProjectSubmit}>
-
         <section>
           <Label>Nome do Projeto</Label>
           <Input name="name" placeholder="Nome do Projeto" />
@@ -100,10 +93,17 @@ const ProjectForm: React.FC = (props) => {
         <section>
           <Label>Nome das Organizações reponsáveis</Label>
           <Input name="organizations" placeholder="Nomes separados por vírgula" />
+        </section>
+        <section>
+          <Label>Tipo</Label>
+          <Select
+            name="type"
+            options={projectTypeOptions}
+          />
+        </section>
+        <section>
           <Button>Submit</Button>
         </section>
-
-
       </StyledForm>
     </Container>
   );

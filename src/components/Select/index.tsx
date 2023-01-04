@@ -9,9 +9,9 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, defaultValue, registerField } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -29,13 +29,18 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
         }
         return ref.state.value.value;
       },
+      setValue: (ref: any, value) => {
+        const selectedOption = ref.props.options.find((v: any) => v.value === value)
+        ref.state.value = selectedOption
+      }
     });
   }, [fieldName, registerField, rest.isMulti]);
-
   return (
     <ReactSelect
-      defaultValue={defaultValue}
       ref={selectRef}
+      options={options}
+      isDisabled={isDisabled}
+      placeholder="Selecione"
       classNamePrefix="react-select"
       {...rest}
     />

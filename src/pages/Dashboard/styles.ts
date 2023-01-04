@@ -230,5 +230,26 @@ export const OfflineButton = styled.button`
   }
 `;
 
+export const IndigenousSection = styled.div`
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+`;
+
+export const IndigenousCard = styled.div`
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  p {
+    line-height: 23px;
+  }
+  text-align: left;
+  background-color: rgb(89, 116, 140, 0.7);
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-left: 6px solid gray;
+  box-shadow: 1px 1px 2px 2px rgba(204, 215, 219, 0.6)
+`;
 
 

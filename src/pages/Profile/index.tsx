@@ -2,7 +2,7 @@ import React, { useRef, ChangeEvent, useCallback } from 'react';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { Grid, Header, Divider, AvatarInput } from './styles';
+import { Grid, /* Header, */ Divider, AvatarInput } from './styles';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import { useHistory } from 'react-router-dom';
@@ -17,10 +17,8 @@ import {
   FiSmartphone,
   FiBox,
   FiCamera,
-  FiChevronLeft,
 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-
+import emptyAvatar from '../../assets/default-user-logo.png';
 
 interface ProfileFormData {
   name: string;
@@ -158,19 +156,11 @@ const Profile: React.FC = () => {
   );
   return (
     <>
-      <Header>
-        <div>
-          <Link to="/dashboard">
-            <FiChevronLeft size={30} />
-          </Link>
-        </div>
-        <h1>Rede <span>|</span> Perfil</h1>
-      </Header>
       <Grid>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <AvatarInput>
             <img
-              src={user.avatar_url}
+              src={user.avatar_url || emptyAvatar}
               alt="Safety logo"
             />
             <label htmlFor="avatar">

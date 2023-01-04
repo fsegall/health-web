@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FiChevronLeft } from 'react-icons/fi';
+/* import { Link } from 'react-router-dom';
+import { FiChevronLeft } from 'react-icons/fi'; */
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 import {
   Container,
-  Header,
+/*   Header, */
   ListTitle,
   StyledList,
   FormContainer,
@@ -75,24 +75,20 @@ const Interviewers: React.FC = () => {
   }
 
   useEffect(() => {
-
-    setIsLoading(true);
-
     async function fetchUsers() {
-
+      setIsLoading(true);
       const users = await api.get('/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setIsLoading(false);
       setUsers(users.data);
+      setIsLoading(false);
     }
     fetchUsers();
   }, [token]);
 
   useEffect(() => {
-
     function paginateInterviews() {
       const firstCardOnPage = basicFirst;
       const lastCardOnPage = basicFirst + basicRows;
@@ -101,7 +97,7 @@ const Interviewers: React.FC = () => {
 
     }
     paginateInterviews()
-  }, [basicFirst, basicRows, paginatedUsers, users]);
+  }, [basicFirst, basicRows, users]);
 
   const onPageChange = (e: PaginatorPageState) => {
     setPaginatorState(e)
@@ -111,20 +107,12 @@ const Interviewers: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <div>
-          <Link to="/dashboard">
-            <FiChevronLeft size={30} />
-          </Link>
-        </div>
-        <h1>Rede <span>|</span> Pesquisadores</h1>
-      </Header>
       <div>
         <ListTitle>Pessoas</ListTitle>
         {isLoading ? <Spinner /> : <StyledList>
-          {paginatedUsers.map((interviewer) => {
+          {!isLoading && paginatedUsers?.map((interviewer) => {
             return (
-              <UserContainer>
+              <UserContainer key={interviewer.id}>
                 <FormContainer>
                   <Card key={interviewer.id} person={interviewer} />
                   {hasPermission(user.role, Actions.ASSIGN_INTERVIEWER_ROLE) && interviewer.role === Roles.VISITOR && <form onSubmit={(e: React.SyntheticEvent) => {
@@ -152,6 +140,8 @@ const Interviewers: React.FC = () => {
       <Paginate
         totalCards={users.length}
         onPageChange={onPageChange}
+        first={basicFirst}
+        rows={basicRows}
       >
         { }
       </Paginate>

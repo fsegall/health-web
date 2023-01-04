@@ -13,6 +13,8 @@ import Project from '../pages/Project';
 import Interviewers from '../pages/Interviewers';
 import ForgotPasword from '../pages/ForgotPassword';
 import ResetPasword from '../pages/ResetPassword';
+import IndigenousInterview from '../pages/Indigenous_Interview';
+import IndigenousDashboardSection from '../pages/Dashboard/Indigenous';
 const Routes: React.FC = () => {
   return (
     <Switch>
@@ -21,9 +23,12 @@ const Routes: React.FC = () => {
       <Route path="/forgot-password" component={ForgotPasword} />
       <Route path="/reset-password" component={ResetPasword} />
       <Route path="/dashboard" isPrivate component={Dashboard} />
+      <Route path="/indigenous-dashboard" isPrivate component={IndigenousDashboardSection} />
       <Route path="/offline" isPrivate component={OfflineInterviews} />
       <Route path="/accept" isPrivate component={Accept} />
-      <Route path="/interview" isPrivate component={Interview} />
+      <Route exact path="/interview" isPrivate component={Interview} />
+      <Route exact path="/indigenous-interview" isPrivate component={IndigenousInterview} />
+      <Route path="/interview/:id" isPrivate component={Interview} />
       <Route path="/project" isPrivate component={Project} />
       {/* <Route path="/household" isPrivate component={Household} /> */}
       <Route path="/interviewers" isPrivate component={Interviewers} />
