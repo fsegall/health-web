@@ -60,7 +60,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews', indigenous_informacoes_basicas, {
+        const response = await api.post('/indigenous-interviews', indigenous_informacoes_basicas, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_informacoes_basicas', response.data.id);
