@@ -78,7 +78,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/demography', indigenous_demografico, {
+        const response = await api.post('/indigenous-interviews/demography', indigenous_demografico, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_demografico', response.data.id);

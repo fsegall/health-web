@@ -63,7 +63,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({ dispa
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/nutrition', indigenous_alimentacao_nutricao, {
+        const response = await api.post('/indigenous-interviews/nutrition', indigenous_alimentacao_nutricao, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_alimentacao_nutricao', response.data.id);
