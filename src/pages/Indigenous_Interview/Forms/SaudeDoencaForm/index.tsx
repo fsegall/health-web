@@ -67,7 +67,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
       };
 
       if (!offline) {
-        const response = await api.post('/indigeanous-interviews/health-desease', indigenous_saude_doenca, {
+        const response = await api.post('/indigenous-interviews/health-desease', indigenous_saude_doenca, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_saude_doenca', response.data.id);
