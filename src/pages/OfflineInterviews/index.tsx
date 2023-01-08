@@ -62,7 +62,6 @@ const OfflineInterviews: React.FC = () => {
           }
         })
         if (response) {
-          console.log(response?.data)
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(response?.data));
           setIndigenousInterviewObject(response?.data)
         }
