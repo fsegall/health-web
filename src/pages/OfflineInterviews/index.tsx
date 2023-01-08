@@ -65,6 +65,12 @@ const OfflineInterviews: React.FC = () => {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(response?.data));
           setIndigenousInterviewObject(response?.data)
         }
+        console.log(response?.data)
+        addToast({
+          type: response?.data !== '{}' ? 'error' : 'success',
+          title: 'Envio realizado com sucesso',
+          description: response?.data !== '{}' ? 'Não foi possível salvar as entrevistas listadas' : '',
+        });
       } catch (err) {
         console.log('erro ', err)
         addToast({
@@ -78,7 +84,7 @@ const OfflineInterviews: React.FC = () => {
     }
 
     function handleData(data: any) {
-      return Object.values(data)
+      return Object.entries(data)
     }
 
     return (<Container>
@@ -87,8 +93,8 @@ const OfflineInterviews: React.FC = () => {
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
                 <SectionTitle>Entrevistas Indígenas:</SectionTitle>
                 <CardSection>
-                  {handleData(indigenousInterviewsObject)?.map((ind: any, index) => (
-                    <IndigenousCard key={index} data={ind} index={index+1} />
+                  {handleData(indigenousInterviewsObject)?.map(([id, ind]: [string, any], index) => (
+                    <IndigenousCard key={index} data={ind} index={index+1} id={id} />
                   ))}
                 </CardSection>
                 <SectionTitle>Entrevistas Padrões:</SectionTitle>

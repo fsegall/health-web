@@ -1,16 +1,20 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 import { Card } from './styles'
 
 interface IndigenousCardProps {
   index: number;
   data: ICreateIndigenousOfflineInterviewDTO
+  id: string
 }
 
-const IndigenousCard = ({ data, index }: IndigenousCardProps) => {
+const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
+  const history = useHistory()
   return (
-    <Card>
+    <Card onClick={() => history.push(`indigenous-interview/${id}`)}>
       <i>#{index}</i>
+      <p><strong>ID:</strong> {id?.toString()}</p>
       <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.numero_projeto?.toString()}</p>
       <p><strong>Município:</strong> {data?.indigenous_informacoes_basicas?.municipio}</p>
       <p><strong>Aldeia:</strong> {data?.indigenous_informacoes_basicas?.aldeia_comunidade}</p>

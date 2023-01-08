@@ -17,7 +17,7 @@ import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 // import submitOfflineInterviews from '../../services/offlineInterviewsService';
-import { useToast } from '../../hooks/toast';
+// import { useToast } from '../../hooks/toast';
 import { useHistory } from 'react-router-dom';
 
 interface PaginatorPageState {
