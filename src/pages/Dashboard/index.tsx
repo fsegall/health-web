@@ -16,8 +16,9 @@ import InterviewBage from '../../components/interviewBadge';
 import api from '../../services/api';
 import Spinner from '../../components/Spinner';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
-import submitOfflineInterviews from '../../services/offlineInterviewsService';
+// import submitOfflineInterviews from '../../services/offlineInterviewsService';
 import { useToast } from '../../hooks/toast';
+import { useHistory } from 'react-router-dom';
 
 interface PaginatorPageState {
   first: number;
@@ -28,7 +29,7 @@ interface PaginatorPageState {
 
 const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isProcessingOffline, setIsProcessingOffline] = useState(false);
+  // const [isProcessingOffline, setIsProcessingOffline] = useState(false);
   const { user, token } = useAuth();
   const [interviews, setInterviews] = useState<ICreateInterviewDTO[]>([]);
   const [filteredBy, setFilteredBy] = useState<ICreateInterviewDTO[]>([]);
@@ -51,7 +52,8 @@ const Dashboard: React.FC = () => {
   const [interviewsOnPage, setInterviewsOnPage] = useState<ICreateInterviewDTO[]>([]);
   const [interviewsOnPageFiltered, setInterviewsOnPageFiltered] = useState<ICreateInterviewDTO[]>([]);
 
-  const { addToast } = useToast()
+  // const { addToast } = useToast()
+  const history = useHistory()
 
   useEffect(() => {
 
@@ -116,30 +118,31 @@ const Dashboard: React.FC = () => {
     }
   }, [interviewsOnPage, interviewsOnPageFiltered, basicFirst, basicRows, isFiltered])
 
-  const onsubmitOfflineInterviews = async () => {
-    const token = localStorage.getItem('@Safety:token') || "";
+  const onsubmitOfflineInterviews = () => {
+    history.push('/offline')
+    // const token = localStorage.getItem('@Safety:token') || "";
 
-    try {
-      const checkConnection = await api.get('/interviews', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    // try {
+    //   const checkConnection = await api.get('/interviews', {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
 
-      if (checkConnection.status === 200) {
-        setIsProcessingOffline(true);
-        await submitOfflineInterviews()
-        setIsProcessingOffline(false);
-      }
-    } catch (error) {
+    //   if (checkConnection.status === 200) {
+    //     setIsProcessingOffline(true);
+    //     await submitOfflineInterviews()
+    //     setIsProcessingOffline(false);
+    //   }
+    // } catch (error) {
 
-      addToast({
-        type: 'error',
-        title: 'Sem Conexão',
-        description: 'Sem Internet ou o banco de dados está temporariamente inacessível.',
-      });
+    //   addToast({
+    //     type: 'error',
+    //     title: 'Sem Conexão',
+    //     description: 'Sem Internet ou o banco de dados está temporariamente inacessível.',
+    //   });
 
-    }
+    // }
   }
 
 
@@ -212,7 +215,7 @@ const Dashboard: React.FC = () => {
           <>
             <Counter>
               <div>Entrevistas realizadas: <strong>{isFiltered ? filteredBy.length : interviews.length}</strong></div>
-              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>{isProcessingOffline? 'Aguarde' : 'Enviar'}</OfflineButton></div>
+              <div>Entrevistas <strong>offline</strong> realizadas: <strong>{Object.keys(offlineInterviews).length}</strong><OfflineButton onClick={onsubmitOfflineInterviews}>Enviar</OfflineButton></div>
               <div>Erros: <strong>{offlineInterviewsErrorsCounter}</strong></div>
             </Counter>
           </>

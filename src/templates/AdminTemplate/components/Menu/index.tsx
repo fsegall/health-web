@@ -18,7 +18,7 @@ const AdminMenu = ({
     <header
     style={{
       display: 'flex',
-      height: '100%',
+      height: '100vh',
       minHeight: '100vh',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -29,7 +29,8 @@ const AdminMenu = ({
       width: isMobile ? '100vw' : '100%',
       boxShadow: '3px 0px 9px 0px rgba(0, 0, 0, 0.1)',
       zIndex: 20,
-      paddingTop: isMobile ? '80px' : '30px',
+      paddingTop: isMobile ? '70px' : '30px',
+      paddingBottom: '80px',
       position: isMobile ? 'fixed' : 'static',
     }}
   >
@@ -37,7 +38,7 @@ const AdminMenu = ({
       <img src={logo} style={{ maxWidth: '60px' }} alt="Safety" />
       <p style={{ color: colors.primary, fontWeight: 700, fontSize: '20px' }}>Rede Penssan</p>
     </div>
-    <nav style={{ display: 'flex', flexDirection: 'column', gap: '30px', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center' }}>
+    <nav style={{ display: 'flex', flexDirection: 'column', gap: '25px', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'center' }}>
       {menuRoutes(user?.role)?.map(o => (
         <Link key={o.path} to={o.path} style={{ textDecoration: 'none' }}>
           <p style={{ fontWeight: 500, color: location.pathname === o.path ? colors.primary : colors.white }}>{o.name}</p>
