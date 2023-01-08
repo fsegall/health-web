@@ -8,7 +8,7 @@ import {
   ResetButton,
   SubmittedContainer,
 } from './styles';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Router, useParams } from 'react-router-dom';
 import Switch from "react-switch";
 import logo from '../../assets/logo_transparent.png';
 import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
@@ -18,35 +18,36 @@ import SaudeDoencaForm from './Forms/SaudeDoencaForm';
 import AlimentacaoNutricaoForm from './Forms/AlimentacaoNutricaoForm';
 import ApoioProtecaoSocialForm from './Forms/ApoioProtecaoSocialForm';
 import ICreateIndigenousOfflineInterviewDTO from './dtos/ICreateIndigenousOfflineInterviewDTO';
+import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 
 interface StateFormat {
   formsSubmitted: {
-    informacoes_basicas:
+    indigenous_informacoes_basicas:
     {
       id: string | null;
       show: boolean
     };
-    demografico:
+    indigenous_demografico:
     {
       id: string | null;
       show: boolean;
     };
-    domicilio:
+    indigenous_domicilio:
     {
       id: string | null;
       show: boolean;
     };
-    saude_doenca:
+    indigenous_saude_doenca:
     {
       id: string | null;
       show: boolean;
     };
-    alimentacao_nutricao:
+    indigenous_alimentacao_nutricao:
     {
       id: string | null;
       show: boolean;
     };
-    apoio_protecao_social:
+    indigenous_apoio_protecao_social:
     {
       id: string | null;
       show: boolean;
@@ -65,27 +66,27 @@ interface FormActionFormat {
 
 const initialState: StateFormat = {
   formsSubmitted: {
-    informacoes_basicas: {
+    indigenous_informacoes_basicas: {
       id: localStorage.getItem('@Safety:indigenous_informacoes_basicas') ?? null,
       show: true,
     },
-    demografico: {
+    indigenous_demografico: {
       id: localStorage.getItem('@Safety:indigenous_demografico') ?? null,
       show: true,
     },
-    domicilio: {
+    indigenous_domicilio: {
       id: localStorage.getItem('@Safety:indigenous_domicilio') ?? null,
       show: true,
     },
-    saude_doenca: {
+    indigenous_saude_doenca: {
       id: localStorage.getItem('@Safety:indigenous_saude_doenca') ?? null,
       show: true,
     },
-    alimentacao_nutricao: {
+    indigenous_alimentacao_nutricao: {
       id: localStorage.getItem('@Safety:indigenous_alimentacao_nutricao') ?? null,
       show: true,
     },
-    apoio_protecao_social: {
+    indigenous_apoio_protecao_social: {
       id: localStorage.getItem('@Safety:indigenous_apoio_protecao_social') ?? null,
       show: true,
     },
@@ -95,17 +96,17 @@ const initialState: StateFormat = {
 function reducer(state: StateFormat, action: FormActionFormat) {
   switch (action.type) {
     case 'INFORMACOES_BASICAS':
-      return { formsSubmitted: { ...state.formsSubmitted, informacoes_basicas: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_informacoes_basicas: { id: action?.payload?.id, show: false } } };
     case 'DEMOGRAFICO':
-      return { formsSubmitted: { ...state.formsSubmitted, demografico: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_demografico: { id: action?.payload?.id, show: false } } };
     case 'DOMICILIO':
-      return { formsSubmitted: { ...state.formsSubmitted, domicilio: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_domicilio: { id: action?.payload?.id, show: false } } };
     case 'SAUDE_DOENCA':
-      return { formsSubmitted: { ...state.formsSubmitted, saude_doenca: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_saude_doenca: { id: action?.payload?.id, show: false } } };
     case 'ALIMENTACAO_NUTRICAO':
-      return { formsSubmitted: { ...state.formsSubmitted, alimentacao_nutricao: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_alimentacao_nutricao: { id: action?.payload?.id, show: false } } };
     case 'APOIO_PROTECAO_SOCIAL':
-      return { formsSubmitted: { ...state.formsSubmitted, apoio_protecao_social: { id: action?.payload?.id, show: false } } };
+      return { formsSubmitted: { ...state.formsSubmitted, indigenous_apoio_protecao_social: { id: action?.payload?.id, show: false } } };
     case 'INTERVIEW':
       return { ...initialState };
     default:
@@ -115,10 +116,30 @@ function reducer(state: StateFormat, action: FormActionFormat) {
 
 const IndigenousInterview: React.FC = () => {
     //@ts-ignore
-    const { id } = useParams();
-    // const { token } = useAuth();
-    const [initialValues] = useState<any>(null)
+    const params: any = useParams();
+    const id = params?.id || null
+
+    const [initialValues, setInitialValues] = useState<any>(null)
     const [formState, dispatch] = useReducer(reducer, initialState);
+    const [isOffline, setIsOffline] = useState(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') ? true : false);
+
+
+    useEffect(() => {
+      function handleInitialData(id: string) {
+        const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+        const response = offlineData[id]
+
+        if (response) {
+          setIsOffline(true)
+          setInitialValues(response)
+        }
+      }
+
+      if (id !== undefined) {
+        handleInitialData(id)
+      }
+    }, [id])
 
     const resetForms = useCallback(
         () => {
@@ -128,10 +149,12 @@ const IndigenousInterview: React.FC = () => {
           localStorage.removeItem('@Safety:indigenous_saude_doenca');
           localStorage.removeItem('@Safety:indigenous_alimentacao_nutricao');
           localStorage.removeItem('@Safety:indigenous_apoio_protecao_social');
+          localStorage.removeItem('@Safety:current-indigenous-offline-interview-id');
           window.location.reload();
         },
         [],
-      )
+    )
+
 
     useEffect(() => {
       if (!id) {
@@ -150,7 +173,7 @@ const IndigenousInterview: React.FC = () => {
         if (indigenous_informacoes_basicas_id) {
           dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: indigenous_informacoes_basicas_id, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('informacoes_basicas')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_informacoes_basicas')) {
             dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: offline_id, show: false } })
           }
         }
@@ -158,7 +181,7 @@ const IndigenousInterview: React.FC = () => {
         if (demografico) {
           dispatch({ type: 'DEMOGRAFICO', payload: { id: demografico, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('demografico')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_demografico')) {
             dispatch({ type: 'DEMOGRAFICO', payload: { id: offline_id, show: false } })
           }
         }
@@ -166,7 +189,7 @@ const IndigenousInterview: React.FC = () => {
         if (domicilio) {
           dispatch({ type: 'DOMICILIO', payload: { id: domicilio, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('domicilio')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_domicilio')) {
             dispatch({ type: 'DOMICILIO', payload: { id: offline_id, show: false } })
           }
         }
@@ -174,7 +197,7 @@ const IndigenousInterview: React.FC = () => {
         if (saude_doenca) {
           dispatch({ type: 'SAUDE_DOENCA', payload: { id: saude_doenca, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('saude_doenca')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_saude_doenca')) {
             dispatch({ type: 'SAUDE_DOENCA', payload: { id: offline_id, show: false } })
           }
         }
@@ -182,7 +205,7 @@ const IndigenousInterview: React.FC = () => {
         if (alimentacao_nutricao) {
           dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: alimentacao_nutricao, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('alimentacao_nutricao')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_alimentacao_nutricao')) {
             dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: offline_id, show: false } })
           }
         }
@@ -190,14 +213,14 @@ const IndigenousInterview: React.FC = () => {
         if (apoio_protecao_social) {
           dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: apoio_protecao_social, show: false } })
         } else if (offlineInterviews && offline_id) {
-          if (offlineInterviews[offline_id]?.hasOwnProperty('apoio_protecao_social')) {
+          if (offlineInterviews[offline_id]?.hasOwnProperty('indigenous_apoio_protecao_social')) {
             dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: offline_id, show: false } })
           }
         }
       }
     }, [dispatch, id])
 
-    const [isOffline, setIsOffline] = useState(false);
+
     return (
         <Container offline={isOffline}>
         <Header>
@@ -217,63 +240,64 @@ const IndigenousInterview: React.FC = () => {
                 )}
             </ButtonsContainer>
         </Header>
-        <SectionTitle id="informacoes_basicas">Informações Básicas</SectionTitle>
-        {formState.formsSubmitted.informacoes_basicas.show ? (
+        <SectionTitle id="indigenous_informacoes_basicas">Informações Básicas</SectionTitle>
+        {(id || formState.formsSubmitted.indigenous_informacoes_basicas.show) ? (
           <InformacoesBasicasForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.informacoes_basicas : {}}
+            offlineId={id}
+            initialValues={initialValues ? initialValues?.indigenous_informacoes_basicas : {}}
           />
         ) : <SubmittedContainer>Módulo informações básicas já cadastrado</SubmittedContainer>}
-        <SectionTitle id="demografico">Demográfico</SectionTitle>
-        {formState.formsSubmitted.demografico.show ? (
+        <SectionTitle id="indigenous_demografico">Demográfico</SectionTitle>
+        {!id && formState.formsSubmitted.indigenous_demografico.show ? (
           <DemograficoForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.demografico : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.informacoes_basicas.show}
+            initialValues={initialValues ? initialValues?.indigenous_demografico : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_informacoes_basicas.show}
           />
         ) : <SubmittedContainer>Módulo demográfico já cadastrado</SubmittedContainer>}
-        <SectionTitle id="domicilio">Domicílio</SectionTitle>
-        {formState.formsSubmitted.domicilio.show ? (
+        <SectionTitle id="indigenous_domicilio">Domicílio</SectionTitle>
+        {!id && formState.formsSubmitted.indigenous_domicilio.show ? (
           <DomiciliosForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.demografico.show}
+            initialValues={initialValues ? initialValues?.domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_demografico.show}
           />
         ) : <SubmittedContainer>Módulo domicílio já cadastrado</SubmittedContainer>}
-        <SectionTitle id="saude_doenca">Saúde e Doença</SectionTitle>
-        {formState.formsSubmitted.saude_doenca.show ? (
+        <SectionTitle id="indigenous_saude_doenca">Saúde e Doença</SectionTitle>
+        {!id && formState.formsSubmitted.indigenous_saude_doenca.show ? (
           <SaudeDoencaForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.domicilio.show}
+            initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
           />
         ) : <SubmittedContainer>Módulo saúde e doença já cadastrado</SubmittedContainer>}
-        <SectionTitle id="alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
-        {formState.formsSubmitted.alimentacao_nutricao.show ? (
+        <SectionTitle id="indigenous_alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
+        {!id && formState.formsSubmitted.indigenous_alimentacao_nutricao.show ? (
           <AlimentacaoNutricaoForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.saude_doenca.show}
+            initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_saude_doenca.show}
           />
         ) : <SubmittedContainer>Módulo alimentação e nutrição já cadastrado</SubmittedContainer>}
-        <SectionTitle id="apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
-        {formState.formsSubmitted.apoio_protecao_social.show ? (
+        <SectionTitle id="indigenous_apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
+        {!id && formState.formsSubmitted.indigenous_apoio_protecao_social.show ? (
           <ApoioProtecaoSocialForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.alimentacao_nutricao.show}
+            initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
           />
         ) : <SubmittedContainer>Módulo apoio social já cadastrado</SubmittedContainer>}
         </Container>

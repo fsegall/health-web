@@ -28,6 +28,7 @@ const Routes: React.FC = () => {
       <Route path="/accept" isPrivate component={Accept} />
       <Route exact path="/interview" isPrivate component={Interview} />
       <Route exact path="/indigenous-interview" isPrivate component={IndigenousInterview} />
+      <Route exact path="/indigenous-interview/:id" isPrivate component={IndigenousInterview} />
       <Route path="/interview/:id" isPrivate component={Interview} />
       <Route path="/project" isPrivate component={Project} />
       {/* <Route path="/household" isPrivate component={Household} /> */}

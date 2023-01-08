@@ -83,7 +83,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         })
         localStorage.setItem('@Safety:indigenous_demografico', response.data.id);
 
-        dispatch({ type: 'DEMOGRAFICO', payload: { id: response.data.id } })
+        dispatch({ type: 'DEMOGRAFICO', payload: { id: response.data.id, isOffline: false } })
 
         addToast({
           type: 'success',
@@ -100,7 +100,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
 
-          dispatch({ type: 'DEMOGRAFICO', payload: { id: uniqueId } })
+          dispatch({ type: 'DEMOGRAFICO', payload: { id: uniqueId, isOffline: true } })
 
           addToast({
             type: 'success',

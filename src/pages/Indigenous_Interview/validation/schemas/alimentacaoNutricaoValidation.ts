@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export const AlimentacaoNutricaoValidation = Yup.object().shape({
     morar_retomada_mudou_alimentacao: Yup.string().nullable().required('Você precisa preencher sobre a retomada'),
-    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
+    entrevista_indigena_id: Yup.string().nullable().notRequired(),
     sem_alimentacao_por_conflito_com_terras: Yup.string().nullable().when("luta_por_terra", {
         is: (val: any) => String(val) === "true",
         then: Yup.string().nullable().required("Você precisa preencher sobre os conflitos"),

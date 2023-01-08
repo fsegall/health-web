@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const ApoioProtecaoSocialValidation = Yup.object().shape({
-    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
+    entrevista_indigena_id: Yup.string().nullable().notRequired(),
     criancas_comem_escola: Yup.string().required('Você precisa preencher sobre a merenda escolar'),
     alimentacao_escolar_inclui_cultura: Yup.string().nullable().when("criancas_comem_escola", {
         is: (val: any) => (String(val) === "sim" || String(val) === "nao" || String(val) === "nem_sempre"),
