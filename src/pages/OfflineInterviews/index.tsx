@@ -50,6 +50,13 @@ const OfflineInterviews: React.FC = () => {
       }
     }
 
+    function isObjectEmpty(value: Object) {
+      return (
+        Object.prototype.toString.call(value) === '[object Object]' &&
+        JSON.stringify(value) === '{}'
+      );
+    }
+
     async function handleIndigenousOfflineInterviews() {
       const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -65,11 +72,10 @@ const OfflineInterviews: React.FC = () => {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(response?.data));
           setIndigenousInterviewObject(response?.data)
         }
-        console.log(response?.data)
         addToast({
-          type: response?.data !== '{}' ? 'error' : 'success',
+          type: isObjectEmpty(response?.data) ? 'success' : 'info',
           title: 'Envio realizado com sucesso',
-          description: response?.data !== '{}' ? 'Não foi possível salvar as entrevistas listadas' : '',
+          description: isObjectEmpty(response?.data) ? '' : 'Ainda não foi possível salvar as entrevistas da lista, verifique se o projeto existe',
         });
       } catch (err) {
         console.log('erro ', err)
@@ -91,14 +97,23 @@ const OfflineInterviews: React.FC = () => {
                 <h1>Logs de Entrevistas Offline</h1>
                 <OfflineButton onClick={handleOfflineInterviews} disabled={loading}>Enviar</OfflineButton>
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
-                <SectionTitle>Entrevistas Indígenas:</SectionTitle>
-                <CardSection>
-                  {handleData(indigenousInterviewsObject)?.map(([id, ind]: [string, any], index) => (
-                    <IndigenousCard key={index} data={ind} index={index+1} id={id} />
-                  ))}
-                </CardSection>
-                <SectionTitle>Entrevistas Padrões:</SectionTitle>
-                <div>{JSON.stringify(interviewsObject)}</div>
+                {!isObjectEmpty(indigenousInterviewsObject) &&
+                  <>
+                    <SectionTitle>Entrevistas Indígenas:</SectionTitle>
+                    <CardSection>
+                      {handleData(indigenousInterviewsObject)?.map(([id, ind]: [string, any], index) => (
+                        <IndigenousCard key={index} data={ind} index={index+1} id={id} />
+                      ))}
+                    </CardSection>
+                  </>
+                }
+                {!isObjectEmpty(interviewsObject) &&
+                  <>
+                    <SectionTitle>Entrevistas Padrões:</SectionTitle>
+                    <div>{JSON.stringify(interviewsObject)}</div>
+                  </>
+                }
+                {isObjectEmpty(interviewsObject) && isObjectEmpty(indigenousInterviewsObject) && <p style={{ marginTop: '20px' }}>Nenhuma entrevista encontrada</p>}
             </Container>
             );
 
