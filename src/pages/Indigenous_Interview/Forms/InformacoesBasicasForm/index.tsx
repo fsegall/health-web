@@ -134,7 +134,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline, dispatch, token]);
+  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId]);
 
 
   if (isEditForm) {

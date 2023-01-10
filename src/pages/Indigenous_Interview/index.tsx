@@ -8,7 +8,7 @@ import {
   ResetButton,
   SubmittedContainer,
 } from './styles';
-import { Link, Router, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Switch from "react-switch";
 import logo from '../../assets/logo_transparent.png';
 import InformacoesBasicasForm from './Forms/InformacoesBasicasForm';
