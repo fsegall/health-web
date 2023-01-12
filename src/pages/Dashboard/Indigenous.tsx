@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import hasPermission, { Actions, Roles } from '../../authorization/constants';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
-import { Button } from '../Accept/styles';
 import { Container, FilterContainer, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
 import Switch from "react-switch";
 
@@ -41,7 +40,7 @@ const IndigenousDashboardSection: React.FC = () => {
       }
     }
     fetchAllInterviews()
-  }, [token, user?.id, user?.role, showAll, setInterviews]);
+  }, [token, user.id, user.role, showAll, setInterviews]);
 
   return (
     <>

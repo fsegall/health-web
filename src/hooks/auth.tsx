@@ -61,7 +61,7 @@ export const AuthProvider: React.FC = ({ children }) => {
           'Verifique suas credenciais.',
       })
     }
-  }, []);
+  }, [addToast]);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Safety:token');
