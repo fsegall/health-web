@@ -1,5 +1,6 @@
 import React, { createContext, useState, useCallback, useContext } from 'react';
 import api from '../services/api';
+import { useToast } from './toast';
 
 interface User {
   id: string;
@@ -25,7 +26,7 @@ interface SignInCredentials {
 interface AuthContextData {
   user: User;
   token: string;
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn(credentials: SignInCredentials): Promise<User>;
   signOut(): void;
   updateUser(user: User): void;
 }
@@ -33,10 +34,10 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
+  const { addToast } = useToast()
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@Safety:token');
     const user = localStorage.getItem('@Safety:user');
-
     if (token && user) {
       return { token, user: JSON.parse(user) };
     }
@@ -44,13 +45,23 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
   const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', { email, password });
-    const { token, user } = response.data;
-    localStorage.setItem('@Safety:token', token);
-    localStorage.setItem('@Safety:user', JSON.stringify(user));
-    // api.defaults.headers.authorization = `Bearer ${token}`;
-    setData({ token, user });
-  }, []);
+    try {
+      const response = await api.post('sessions', { email, password });
+      const { token, user } = response.data;
+      localStorage.setItem('@Safety:token', token);
+      localStorage.setItem('@Safety:user', JSON.stringify(user));
+      // api.defaults.headers.authorization = `Bearer ${token}`;
+      setData({ token, user });
+      return user
+    } catch(err) {
+      addToast({
+        type: 'error',
+        title: 'Erro ao realizar login.',
+        description:
+          'Verifique suas credenciais.',
+      })
+    }
+  }, [addToast]);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Safety:token');
