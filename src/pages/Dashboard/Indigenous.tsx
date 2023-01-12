@@ -32,7 +32,7 @@ const IndigenousDashboardSection: React.FC = () => {
         },
       });
       setIsLoading(false);
-      if (user.role ===  Roles.INTERVIEWER && !showAll) {
+      if (user?.role ===  Roles.INTERVIEWER && !showAll) {
         const filteredInterviews = interviews?.data?.filter((i: IndigenousBasicInterviewResponse) => i?.entrevistador_id === user?.id)
         setInterviews(filteredInterviews);
       } else {
@@ -40,7 +40,7 @@ const IndigenousDashboardSection: React.FC = () => {
       }
     }
     fetchAllInterviews()
-  }, [token, user.id, user.role, showAll, setInterviews]);
+  }, [token, user, showAll, setInterviews]);
 
   return (
     <>
