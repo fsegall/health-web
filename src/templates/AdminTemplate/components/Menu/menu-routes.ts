@@ -32,12 +32,12 @@ const routesOptions = [
   {
     path: '/accept',
     name: 'Iniciar Pesquisa',
-    action: Actions.CREATE_INTERVIEW
+    action: Actions.VIEW_INTERVIEW
   },
   {
     path: '/offline',
     name: 'Registros Offline',
-    action: Actions.VIEW_MY_INTERVIEWS
+    action: Actions.VIEW_OFFLINE_INTERVIEWS
   },
   {
     path: '/profile',
