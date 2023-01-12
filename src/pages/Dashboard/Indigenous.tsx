@@ -61,10 +61,10 @@ const IndigenousDashboardSection: React.FC = () => {
         {interviews?.length === 0 ? <p>Nenhuma entrevista cadastrada</p> : (
           interviews?.map((i: IndigenousBasicInterviewResponse, index: number) => (
             <IndigenousCard key={index} isInterviewer={user?.id === i?.entrevistador_id}>
-              <p><strong>ID:</strong> {i.id}</p>
-              <p><strong>Municipio:</strong> {i.municipio}</p>
-              <p><strong>Aldeia:</strong> {i.aldeia_comunidade}</p>
-              <p><strong>Data:</strong> {new Date(i.created_at).toLocaleDateString('pt-BR')} - {new Date(i.created_at).toLocaleTimeString('pt-BR')}</p>
+              <p><strong>ID:</strong> {i?.id}</p>
+              <p><strong>Municipio:</strong> {i?.municipio}</p>
+              <p><strong>Aldeia:</strong> {i?.aldeia_comunidade}</p>
+              <p><strong>Data:</strong> {new Date(i?.created_at).toLocaleDateString('pt-BR')} - {new Date(i?.created_at).toLocaleTimeString('pt-BR')}</p>
             </IndigenousCard>
           ))
         )}
