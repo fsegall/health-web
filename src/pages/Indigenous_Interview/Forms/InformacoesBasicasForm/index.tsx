@@ -16,6 +16,7 @@ import { FormHelperType, informacoesBasicasFormHelper } from './helper';
 import api from '../../../../services/api';
 import { uuid } from 'uuidv4';
 import ICreateIndigenousOfflineInterviewDTO from '../../dtos/ICreateIndigenousOfflineInterviewDTO';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -24,13 +25,16 @@ interface InformacoesBasicasFormProps {
   offline: boolean;
   initialValues?: any
   isEditForm?: boolean
+  offlineId?: string | null
 }
 
-const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
+const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, offlineId = null }) => {
 
   const { user, token } = useAuth();
 
   const { addToast } = useToast();
+
+  const history = useHistory()
 
   const InformacoesBasicasFormRef = useRef<FormHandles>(null);
 
@@ -63,9 +67,9 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         const response = await api.post('/indigenous-interviews', indigenous_informacoes_basicas, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        localStorage.setItem('@Safety:indigenous_informacoes_basicas', response.data.id);
+        localStorage.setItem('@Safety:indigenous_informacoes_basicas', response?.data?.id);
 
-        dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response.data.id } })
+        dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: response?.data?.id } })
 
         addToast({
           type: 'success',
@@ -73,23 +77,39 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
           description: 'Você já pode prosseguir para o módulo demográfico',
         });
       } else {
-        const uniqueId = uuid();
+        if (isEditForm && offlineId) {
+          const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
-        localStorage.setItem(`@Safety:current-indigenous-offline-interview-id`, JSON.stringify(uniqueId));
+          const updateData = Object.keys(offlineInterviews).length ? { ...offlineInterviews, [offlineId]: { ...offlineInterviews[offlineId], indigenous_informacoes_basicas } } : { ...offlineInterviews };
 
-        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(updateData));
 
-        const addData = Object.keys(offlineInterviews).length ? { ...offlineInterviews, [uniqueId]: { indigenous_informacoes_basicas } } : { [uniqueId]: { indigenous_informacoes_basicas } };
 
-        localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+          addToast({
+            type: 'success',
+            title: 'Informações Básicas aualizadas com sucesso',
+            description: '',
+          });
+          history.push('/offline')
+        } else {
+          const uniqueId = uuid();
 
-        dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: uniqueId } })
+          localStorage.setItem(`@Safety:current-indigenous-offline-interview-id`, JSON.stringify(uniqueId));
 
-        addToast({
-          type: 'success',
-          title: 'Informações Básicas adicionadas com sucesso',
-          description: 'Você já pode prosseguir para o módulo demográfico',
-        });
+          const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+
+          const addData = Object.keys(offlineInterviews).length ? { ...offlineInterviews, [uniqueId]: { indigenous_informacoes_basicas } } : { [uniqueId]: { indigenous_informacoes_basicas } };
+
+          localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
+
+          dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: uniqueId } })
+
+          addToast({
+            type: 'success',
+            title: 'Informações Básicas adicionadas com sucesso',
+            description: 'Você já pode prosseguir para o módulo demográfico',
+          });
+        }
       }
     } catch (error) {
       //@ts-ignore
@@ -114,14 +134,15 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline, dispatch, token]);
+  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId]);
 
 
   if (isEditForm) {
     InformacoesBasicasFormRef.current?.setData({
-        //TODO: FAZER EDIT FORM
+      ...initialValues
     })
   }
+
   return (
     <StyledForm
       ref={InformacoesBasicasFormRef}
@@ -137,7 +158,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
                     </span>
                 ))}
                 {informacoesBasicasFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}

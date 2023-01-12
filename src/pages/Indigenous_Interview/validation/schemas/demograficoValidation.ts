@@ -7,7 +7,7 @@ export const DemograficoValidation = Yup.object().shape({
     }),
     morador_trabalhou_fazendas: Yup.string().required('Você deve preencher sobre a colheita'),
     morador_trabalhou_catacao: Yup.string().required('Você deve preencher sobre a colheita'),
-    entrevista_indigena_id: Yup.string().required('Esse módulo deve estar vinculado com uma entrevista indígena'),
+    entrevista_indigena_id: Yup.string().nullable().notRequired(),
     moradores: Yup.array()
     .of(
       Yup.object().shape({

@@ -30,6 +30,7 @@ export const CardSection = styled.div`
 export const Card = styled.div`
   width: 100%;
   max-width: 300px;
+  cursor: pointer;
   height: 100%;
   text-align: left;
   background-color: rgb(89, 116, 140, 0.7);
