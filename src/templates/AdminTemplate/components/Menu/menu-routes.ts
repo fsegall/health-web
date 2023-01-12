@@ -8,7 +8,7 @@ export const getPageName = (path: string) => {
   return routesOptions?.filter(r => r.path === path)?.[0]?.name
 }
 
-export const routesOptions = [
+const routesOptions = [
   {
     path: '/dashboard',
     name: 'Entrevistas',
@@ -32,12 +32,12 @@ export const routesOptions = [
   {
     path: '/accept',
     name: 'Iniciar Pesquisa',
-    action: Actions.VIEW_INTERVIEW
+    action: Actions.CREATE_INTERVIEW
   },
   {
     path: '/offline',
     name: 'Registros Offline',
-    action: Actions.VIEW_OFFLINE_INTERVIEWS
+    action: Actions.VIEW_MY_INTERVIEWS
   },
   {
     path: '/profile',
