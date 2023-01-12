@@ -8,7 +8,7 @@ export const getPageName = (path: string) => {
   return routesOptions?.filter(r => r.path === path)?.[0]?.name
 }
 
-const routesOptions = [
+export const routesOptions = [
   {
     path: '/dashboard',
     name: 'Entrevistas',
