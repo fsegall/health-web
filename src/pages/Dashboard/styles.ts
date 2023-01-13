@@ -237,7 +237,7 @@ export const IndigenousSection = styled.div`
   flex-wrap: wrap;
 `;
 
-export const IndigenousCard = styled.div`
+export const IndigenousCard = styled.div<{ isInterviewer: boolean }>`
   width: 100%;
   max-width: 400px;
   height: 100%;
@@ -245,7 +245,7 @@ export const IndigenousCard = styled.div`
     line-height: 23px;
   }
   text-align: left;
-  background-color: rgb(89, 116, 140, 0.7);
+  background-color: ${props => props.isInterviewer ? 'rgb(89, 116, 140, 0.7)' : 'rgb(89, 116, 140, 0.5)'};
   padding: 10px 20px;
   border-radius: 4px;
   border-left: 6px solid gray;
