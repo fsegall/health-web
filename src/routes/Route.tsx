@@ -7,7 +7,7 @@ import {
 import hasPermission from '../authorization/constants';
 import { useAuth } from '../hooks/auth';
 import AdminTemplate from '../templates/AdminTemplate';
-import { routesOptions } from '../templates/AdminTemplate/components/Menu/menu-routes';
+import { routesHandler } from './routes-options';
 
 interface RouteProps extends ReactDomRouteProps {
   isPrivate?: boolean;
@@ -24,11 +24,11 @@ const Route: React.FC<RouteProps> = ({
   const { user } = useAuth();
 
   function handlePagePermissionAccess(isPrivate: boolean) {
-    const route = routesOptions.find(r => r.path === path)
+    const route = routesHandler.find(r => r.path === path)
     if (!isPrivate) {
       return true
     }
-    if (isPrivate && route && user?.role) {
+    if (isPrivate && route && user?.role && route?.action) {
       return hasPermission(user?.role, route?.action)
     }
     return false
