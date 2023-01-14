@@ -1,13 +1,15 @@
-import hasPermission, { Actions } from "../../../../authorization/constants";
+import hasPermission from "../../../../authorization/constants";
+import { routesHandler } from "../../../../routes/routes-options";
 
 export const menuRoutes = (role: string) => {
   return routesOptions?.filter(r => r.action && hasPermission(role, r.action))
 }
 
 export const getPageName = (path: string) => {
-  return routesOptions?.filter(r => r.path === path)?.[0]?.name
+  return routesOptions?.filter(r => r?.path === path)?.[0]?.name
 }
 
+<<<<<<< HEAD
 const routesOptions = [
   {
     path: '/dashboard',
@@ -45,3 +47,6 @@ const routesOptions = [
     action: Actions.UPDATE_PROFILE
   },
 ]
+=======
+export const routesOptions = routesHandler?.filter(r => r?.displayOnMenu)
+>>>>>>> release/v3.1.3
