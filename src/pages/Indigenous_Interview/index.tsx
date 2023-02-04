@@ -298,6 +298,7 @@ const IndigenousInterview: React.FC = () => {
             offline={isOffline}
             initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
             hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
+            resetForms={resetForms}
           />
         ) : <SubmittedContainer>Módulo apoio social já cadastrado</SubmittedContainer>}
         </Container>

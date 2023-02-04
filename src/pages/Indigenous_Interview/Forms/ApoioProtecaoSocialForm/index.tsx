@@ -24,9 +24,17 @@ interface ApoioProtecaoSocialFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean
+  resetForms(): void
 }
 
-const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
+  dispatch,
+  offline,
+  initialValues = {},
+  isEditForm = false,
+  hasPreviousStepCompleted = false,
+  resetForms
+}) => {
 
   const { token } = useAuth();
 
@@ -115,6 +123,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({ dispa
           throw new Error('Você precisa adicionar adicionar o módulo anterior antes no modo offline');
         }
       }
+      resetForms()
     } catch (error) {
       //@ts-ignore
       const message = error?.data?.message
