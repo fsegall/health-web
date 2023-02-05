@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import hasPermission, { Actions, Roles } from '../../authorization/constants';
+import hasPermission, { Actions } from '../../authorization/constants';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { Container, FilterContainer, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
-import Switch from "react-switch";
 import Pagination from '../../templates/PaginatedListTemplate/Pagination';
 
 interface IndigenousBasicInterviewResponse {
