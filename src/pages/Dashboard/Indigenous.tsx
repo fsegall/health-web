@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import hasPermission, { Actions, Roles } from '../../authorization/constants';
+import hasPermission, { Actions } from '../../authorization/constants';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { Container, FilterContainer, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
-import Switch from "react-switch";
+import Pagination from '../../templates/PaginatedListTemplate/Pagination';
 
 interface IndigenousBasicInterviewResponse {
   id: string;
@@ -18,29 +18,47 @@ interface IndigenousBasicInterviewResponse {
   updated_at: Date
 }
 
+interface IndigenousInterviewData {
+  indigenous_interviews: any[]
+  totalCount: number;
+  pagination: {
+    hasNextPage: boolean;
+    hasPreviousPage: boolean
+  }
+}
+
 const IndigenousDashboardSection: React.FC = () => {
   const { user, token } = useAuth();
-  const [,setIsLoading] = useState(false);
-  const [interviews, setInterviews] = useState<any[]>([]);
-  const [showAll, setShowAll] = useState(false)
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [loading, setLoading] = useState(false);
+  const [interviews, setInterviews] = useState<IndigenousInterviewData>({
+    indigenous_interviews: [],
+    pagination: {
+      hasNextPage: false,
+      hasPreviousPage: false
+    },
+    totalCount: 0
+  });
 
   useEffect(() => {
     async function fetchAllInterviews() {
-      const interviews = await api.get('/indigenous-interviews', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setIsLoading(false);
-      if (user?.role ===  Roles.INTERVIEWER && !showAll) {
-        const filteredInterviews = interviews?.data?.filter((i: IndigenousBasicInterviewResponse) => i?.entrevistador_id === user?.id)
-        setInterviews(filteredInterviews);
-      } else {
-        setInterviews(interviews.data);
+      try {
+        setLoading(true)
+        const interviews = await api.get(`/indigenous-interviews/page/${page}/limit/${limit}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setInterviews(interviews?.data);
+      } catch(er) {
+        console.log(er)
+      } finally {
+        setLoading(false);
       }
     }
     fetchAllInterviews()
-  }, [token, user, showAll, setInterviews]);
+  }, [token, user, setInterviews, page, limit]);
 
   return (
     <>
@@ -48,18 +66,17 @@ const IndigenousDashboardSection: React.FC = () => {
         <SubHeader>
           {hasPermission(user?.role, Actions?.VIEW_ALL_INTERVIEWS) ? <ListTitle>Entrevistas</ListTitle> : <ListTitle>Minhas Entrevistas</ListTitle>}
           <FilterContainer>
-            <h2>Projetos Indígenas</h2>
+            <div style={{ textAlign: 'end' }}>
+              <h3>Entrevistas Indígenas</h3>
+              <p>Total de {interviews?.totalCount} entrevistas</p>
+            </div>
           </FilterContainer>
 
         </SubHeader>
-        {user?.role === Roles?.INTERVIEWER && (
-          <div style={{ padding: '5px 30px' }}>
-            <Switch onColor="rgb(89,116,140,0.7)" uncheckedIcon={false} checkedIcon={false} offColor="#dedede" onChange={() => setShowAll(!showAll)} checked={showAll} /> <p>{showAll ? 'Todas entrevistas' : 'Minhas entrevistas'}</p>
-          </div>
-        )}
       <IndigenousSection>
-        {interviews?.length === 0 ? <p>Nenhuma entrevista cadastrada</p> : (
-          interviews?.map((i: IndigenousBasicInterviewResponse, index: number) => (
+        {loading ? "..." :
+        interviews?.indigenous_interviews?.length === 0 ? <p>Nenhuma entrevista cadastrada</p> : (
+          interviews?.indigenous_interviews?.map((i: IndigenousBasicInterviewResponse, index: number) => (
             <IndigenousCard key={index} isInterviewer={user?.id === i?.entrevistador_id}>
               <p><strong>ID:</strong> {i?.id}</p>
               <p><strong>Municipio:</strong> {i?.municipio}</p>
@@ -69,6 +86,14 @@ const IndigenousDashboardSection: React.FC = () => {
           ))
         )}
       </IndigenousSection>
+      <Pagination
+        hasNextPage={interviews?.pagination?.hasNextPage}
+        hasPreviousPage={interviews?.pagination?.hasPreviousPage}
+        page={page}
+        setPage={setPage}
+        limit={limit}
+        setLimit={setLimit}
+      />
       </Container>
     </>
   )
