@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import hasPermission, { Actions, Roles } from '../../authorization/constants';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { Container, FilterContainer, FilterSection, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
 import Pagination from '../../templates/PaginatedListTemplate/Pagination';
-import Select from '../../components/Select';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
 import useFetch from '../../hooks/useFetch';
 import FilterSelect from '../../components/FilterSelect';
 
