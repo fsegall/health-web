@@ -25,7 +25,6 @@ import {
   local_do_domicilio,
   morador_de_rua,
   qual_povo_tradicional,
-  covid_perda,
   tipo_de_residencia,
   material_de_construcao,
   agua_potavel,
@@ -50,6 +49,9 @@ import {
   ocupacao_profissional,
   local_de_trabalho,
   yesOrNoOptions,
+  causa_morte_ultimos_12m,
+  frequentam_creche,
+  contribuicao_morte_ultimos_12m,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -89,6 +91,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
   const [buyingProfile, setBuyingProfile] = useState<OptionTypeBase | undefined | null>({});
 
   const [educ, setEduc] = useState<OptionTypeBase | undefined | null>({});
+
+  const [morte, setMorte] = useState<OptionTypeBase | undefined | null>({});
 
   const [preoAlimentos, setPreoAlimentos] = useState<OptionTypeBase | undefined | null>({});
 
@@ -204,7 +208,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       ler_escrever: initialValues?.ler_escrever,
       escolaridade: initialValues?.escolaridade,
       situacao_de_trabalho: initialValues?.situacao_de_trabalho,
-      covid_perda: initialValues?.covid_perda,
+      causa_morte_ultimos_12_meses: initialValues?.causa_morte_ultimos_12_meses,
       tipo_de_residencia: initialValues?.tipo_de_residencia,
       numero_de_comodos: initialValues?.numero_de_comodos,
       material_de_construcao: initialValues?.material_de_construcao,
@@ -219,7 +223,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       pessoas_convidadas: initialValues?.pessoas_convidadas,
       renda_familiar: initialValues?.renda_familiar,
       faixa_de_renda: initialValues?.faixa_de_renda,
-      educacao_basica_publica: initialValues?.educacao_basica_publica,
+      menores_6_anos: initialValues?.menores_6_anos,
       pnae: initialValues?.pnae,
       cadastro_unico: initialValues?.cadastro_unico,
       bolsa_familia: initialValues?.bolsa_familia,
@@ -249,9 +253,10 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
       ocupacao_profissional: initialValues?.ocupacao_profissional,
       local_de_trabalho: initialValues?.local_de_trabalho,
-      covid_2020: initialValues?.covid_2020,
-      covid_2021: initialValues?.covid_2021,
-      covid_2022: initialValues?.covid_2022,
+      diagnostico_covid_positivo: initialValues?.diagnostico_covid_positivo,
+      sequelas_covid: initialValues?.sequelas_covid,
+      morte_ultimos_12_meses: initialValues?.morte_ultimos_12_meses,
+      contribuicao_morte_ultimos_12_meses: initialValues?.contribuicao_morte_ultimos_12_meses,
 
       adulto_comeu_menos: initialValues?.adulto_comeu_menos,
       adulto_fome: initialValues?.adulto_fome,
@@ -302,8 +307,8 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           <span>D1 - Localização do domicílio</span>
           <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
-        <Label>D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
-        <Select name="morador_de_rua" options={morador_de_rua} />
+        <Label>[Inabilitada] D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
+        <Select isDisabled name="morador_de_rua" options={morador_de_rua} />
         <Label>D3 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
         <Select
           name="povos_tradicionais"
@@ -376,28 +381,37 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D14 - No ano de 2020 (entre Fevereiro e Dezembro de 2020) algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
+        <Label>D14 - Algum morador de sua casa teve diagnóstico positivo COVID-19?</Label>
         <Select
-          name="covid_2020"
+          name="diagnostico_covid_positivo" //TODO:alinhar_com_raul-diagnostico_covid_positivo
           options={yesOrNoOptions}
         />
 
-        <Label>D15 - No ano de 2021 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
+        <Label>D15 - Algum morador de sua casa está apresentando sequelas da COVID-19?</Label>
         <Select
-          name="covid_2021"
+          name="sequelas_covid" //TODO:alinhar_com_raul-sequelas_covid
           options={yesOrNoOptions}
         />
 
-        <Label>D16 - No ano de 2022 algum morador da sua casa teve diagnóstico positivo para Coronavírus (ou Covid-19)?</Label>
+        <Label>D16 - Vocês perderam alguém da família (morreu alguém) nos últimos 12 meses?</Label>
         <Select
-          name="covid_2022"
+          name="morte_ultimos_12_meses" //TODO:alinhar_com_raul-morte_ultimos_12_meses
           options={yesOrNoOptions}
+          onChange={(selectedOption: any) => setMorte(selectedOption)}
         />
 
-        <Label>D17 - Desde o início da pandemia, vocês perderam alguém (morreu alguém) que morava nesta casa?</Label>
+        <Label>D17 - Qual a causa da morte?</Label>
         <Select
-          name="covid_perda"
-          options={covid_perda}
+          name="causa_morte_ultimos_12_meses" //TODO:alinhar_com_raul-causa_morte_ultimos_12_meses
+          options={causa_morte_ultimos_12m}
+          isDisabled={morte?.value !== 'true'}
+        />
+
+        <Label>D17.2 - Essa pessoa contribuia com a renda familiar?</Label>
+        <Select
+          name="contribuicao_morte_ultimos_12_meses" //TODO:alinhar_com_raul-contribuicao_morte_ultimos_12_meses
+          options={contribuicao_morte_ultimos_12m}
+          isDisabled={morte?.value !== 'true'}
         />
 
         <Label>D18 - Tipo de residência</Label>
@@ -580,20 +594,20 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          D34 - Você ou alguém da sua casa está matriculado na educação básica pública (educação infantil, ensino fundamental, ensino médio e educação de jovens e adultos)?
+          D34 - Tem crianças menores de 6 anos?
         </Label>
         <Select
-          name="educacao_basica_publica"
+          name="menores_6_anos" //TODO:alinhar_com_raul-menores_6_anos
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setEduc(selectedOption)}
         />
 
         <Label>
-          D35 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio referente ao Programa de Alimentação Escolar (PNAE)</b>?
+          D35 - Se sim, as crianças frequentam a creche?
         </Label>
         <Select
           name="pnae"
-          options={pnae}
+          options={frequentam_creche}
           isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
         />
 
@@ -606,7 +620,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do Programa <b>Auxílio Brasil</b> que é pago pela Caixa Econômica Federal?
+          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do Programa <b>Bolsa Família</b> que é pago pela Caixa Econômica Federal?
         </Label>
         <Select
           name="bolsa_familia"

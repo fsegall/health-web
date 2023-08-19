@@ -57,20 +57,16 @@ export const situacao_de_trabalho = [
     label: 'Trabalho remunerado',
   },
   {
-    value: 'desempregado(a) em 2022',
-    label: 'Desempregado(a) em 2022',
+    value: 'desempregado há um ano',
+    label: 'Desempregado há um ano',
   },
   {
-    value: 'desempregado(a) em 2021',
-    label: 'Desempregado(a) em 2021',
+    value: 'desempregado entre 1 ano e 2 anos',
+    label: 'Desempregado entre 1 ano e 2 anos',
   },
   {
-    value: 'desempregado(a) desde 2020',
-    label: 'Desempregado(a) desde 2020',
-  },
-  {
-    value: 'desempregado(a) desde antes de 2020',
-    label: 'Desempregado(a) desde antes de 2020',
+    value: 'desempregado há mais de 2 anos',
+    label: 'Desempregado há mais de 2 anos',
   },
   {
     value: 'aposentado(a) por tempo de serviço',
@@ -106,16 +102,40 @@ export const ocupacao_profissional = [
     label: 'Trabalhador(a) rural temporário (diarista, safrista etc.)',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
-    label: 'Trabalhador(a) em emprego com carteira assinada (inclui empregada (o) doméstica(o))',
+    value: 'trabalhador(a) em emprego com carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego com carteira assinada no comércio',
+  },
+  {
+    value: 'trabalhador(a) em emprego com carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego com carteira assinada na indústria',
+  },
+  {
+    value: 'trabalhador(a) em emprego com carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego com carteira assinada em outro serviço',
+  },
+  {
+    value: 'trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'funcionário(a) público',
     label: 'Funcionário(a) público',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
-    label: 'Trabalhador(a) em emprego sem carteira assinada (inclui empregada (o) doméstica(o))',
+    value: 'trabalhador(a) em emprego sem carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego sem carteira assinada no comércio',
+  },
+  {
+    value: 'trabalhador(a) em emprego sem carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego sem carteira assinada na indústria',
+  },
+  {
+    value: 'trabalhador(a) em emprego sem carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego sem carteira assinada em outro serviço',
+  },
+  {
+    value: 'trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'estagiário(a) (remunerado)',
@@ -144,16 +164,16 @@ export const ocupacao_profissional = [
 
 export const local_de_trabalho = [
   {
-    value: 'trabalha em casa',
-    label: 'Trabalha em casa',
+    value: 'em casa',
+    label: 'Em casa',
   },
   {
-    value: 'frequenta normalmente o local de trabalho',
-    label: 'Frequenta normalmente o local de trabalho',
+    value: 'apenas no local de trabalho ',
+    label: 'Apenas no local de trabalho ',
   },
   {
-    value: 'trabalha em casa e também frequenta o local de trabalho',
-    label: 'Trabalha em casa e também frequenta o local de trabalho',
+    value: 'trabalha em casa e também frequenta o local de trabalho (híbrido)',
+    label: 'Trabalha em casa e também frequenta o local de trabalho (híbrido)',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
@@ -246,6 +266,47 @@ export const covid_perda = [
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
+
+//D17 Causa da morte
+export const causa_morte_ultimos_12m = [
+  {
+    value: 'morte natural',
+    label: 'Morte natural',
+  },
+  {
+    value: 'morte por acidente',
+    label: 'Morte por acidente',
+  },
+  {
+    value: 'morte por suicídio',
+    label: 'Morte por suicício',
+  },
+  {
+    value: 'morte por homocídio',
+    label: 'Morte por homocídio',
+  },
+  {
+    value: 'outra causa',
+    label: 'Outra causa',
+  },
+]
+
+//D17.2 Causa da morte
+export const contribuicao_morte_ultimos_12m = [
+  {
+    value: 'não',
+    label: 'Não',
+  },
+  {
+    value: 'sim, contribuia',
+    label: 'Sim, contribuia',
+  },
+  {
+    value: 'sim, mas não contribuia',
+    label: 'Sim, mas não contribuia',
+  },
+]
+
 
 // D18 tipo_de_residencia
 
@@ -348,6 +409,30 @@ export const pnae = [
   { value: 'nao', label: 'Não' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
+
+//D35 - creche
+export const frequentam_creche = [
+  {
+    value: 'sim',
+    label: 'Sim',
+  },
+  {
+    value: 'não, por opção',
+    label: 'Não, por opção',
+  },
+  {
+    value: 'não, por falta de vaga',
+    label: 'Não, por falta de vaga',
+  },
+  {
+    value: 'Não, por outro motivo',
+    label: 'Não, por outro motivo',
+  },
+  {
+    value: 'não possui crianças menores de 6 anos',
+    label: 'Não possui crianças menores de 6 anos',
+  },
+]
 
 // D36 cadastro_unico
 export const programas_de_assistencia = [
