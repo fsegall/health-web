@@ -47,7 +47,7 @@ export default interface ICreateHouseholdDTO {
   ns_nr_trabalho?: boolean;
   //
   menores_6_anos: string;
-  pnae?: string;
+  frequentam_creche?: string;
   cadastro_unico: string;
   bolsa_familia: string;
   bpc: string;

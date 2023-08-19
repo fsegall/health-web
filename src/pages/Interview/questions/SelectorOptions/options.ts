@@ -398,9 +398,9 @@ export const faixa_de_renda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D35 pnae
+// D35 pnaeOptions
 
-export const pnae = [
+export const pnaeOptinos = [
   { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
   { value: 'sim, recebi como cesta de alimentos (na própria escola ou em casa)', label: 'Sim, recebi como cesta de alimentos (na própria escola ou em casa)' },
   { value: 'sim, como cesta de alimentos, mas a família não foi buscar', label: 'Sim, como cesta de alimentos, mas a família não foi buscar' },

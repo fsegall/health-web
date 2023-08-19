@@ -75,7 +75,7 @@ export const HouseholdValidation = Yup.object().shape({
   menores_6_anos: Yup.string().required(
     'Você precisa escolher um dos campos de crianças menores de 6 anos',
   ),
-  pnae: Yup.string(),
+  frequentam_creche: Yup.string(),
   cadastro_unico: Yup.string().required(
     'Você precisa escolher um dos campos do cadastro único',
   ),

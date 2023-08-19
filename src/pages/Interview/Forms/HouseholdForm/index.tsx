@@ -32,7 +32,6 @@ import {
   esgoto,
   faixa_de_renda,
   programas_de_assistencia,
-  pnae,
   auxilio_vezes,
   tipo_de_ajuda,
   ajuda_instituicao_caridade,
@@ -224,7 +223,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       renda_familiar: initialValues?.renda_familiar,
       faixa_de_renda: initialValues?.faixa_de_renda,
       menores_6_anos: initialValues?.menores_6_anos,
-      pnae: initialValues?.pnae,
+      frequentam_creche: initialValues?.frequentam_creche,
       cadastro_unico: initialValues?.cadastro_unico,
       bolsa_familia: initialValues?.bolsa_familia,
       bpc: initialValues?.bpc,
@@ -606,7 +605,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           D35 - Se sim, as crianças frequentam a creche?
         </Label>
         <Select
-          name="pnae"
+          name="frequentam_creche"
           options={frequentam_creche}
           isDisabled={educ?.value === 'false' || educ?.value === 'ns-nr' ? true : false}
         />
