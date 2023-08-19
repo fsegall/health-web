@@ -251,3 +251,13 @@ export const IndigenousCard = styled.div<{ isInterviewer: boolean }>`
   border-left: 6px solid gray;
   box-shadow: 1px 1px 2px 2px rgba(204, 215, 219, 0.6)
 `;
+
+export const FilterSection = styled.div`
+  width: 100%;
+  padding: 10px 30px;
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
