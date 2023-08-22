@@ -15,10 +15,11 @@ export default interface ICreateHouseholdDTO {
   situacao_de_trabalho?: string;
   ocupacao_profissional?: string;
   local_de_trabalho?: string;
-  covid_2020: string;
-  covid_2021: string;
-  covid_2022: string;
-  covid_perda: string;
+  diagnostico_covid_positivo: string;
+  sequelas_covid: string;
+  morte_ultimos_12_meses: string;
+  contribuicao_morte_ultimos_12_meses?: string;
+  causa_morte_ultimos_12_meses: string;
   tipo_de_residencia: string;
   numero_de_comodos: number;
   material_de_construcao: string;
@@ -45,8 +46,8 @@ export default interface ICreateHouseholdDTO {
   corte_de_gastos_nao_essenciais?: boolean;
   ns_nr_trabalho?: boolean;
   //
-  educacao_basica_publica: string;
-  pnae?: string;
+  menores_6_anos: string;
+  frequentam_creche?: string;
   cadastro_unico: string;
   bolsa_familia: string;
   bpc: string;
