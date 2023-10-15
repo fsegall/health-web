@@ -462,7 +462,7 @@ export const vacina = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D70 nao_tomou_vacina
+//P12 nao_tomou_vacina
 
 export const nao_tomou_vacina = [
   { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
