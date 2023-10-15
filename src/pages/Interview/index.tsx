@@ -7,7 +7,8 @@ import {
   ButtonsContainer,
   OfflineLabel,
   ResetButton,
-  EditInterviewCard
+  EditInterviewCard,
+  SectionTitleGroup
 } from './styles';
 import { Link, useParams } from 'react-router-dom';
 import Switch from "react-switch";
@@ -19,6 +20,7 @@ import AddressForm from './Forms/AddressForm';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
+import DiscriminationForm from './Forms/DiscriminationForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -28,6 +30,11 @@ interface StateFormat {
       show: boolean
     };
     household:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    discrimination:
     {
       id: string | null;
       show: boolean;
@@ -62,6 +69,10 @@ const initialState: StateFormat = {
       id: null,
       show: true,
     },
+    discrimination: {
+      id: null,
+      show: false,
+    },
     address: {
       id: null,
       show: true,
@@ -80,6 +91,8 @@ function reducer(state: StateFormat, action: FormActionFormat) {
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };
     case 'ADDRESS':
       return { formsSubmitted: { ...state.formsSubmitted, address: { id: action?.payload?.id, show: false } } };
+    case 'DISCRIMINATION':
+      return { formsSubmitted: { ...state.formsSubmitted, discrimination: { id: action?.payload?.id, show: action?.payload?.show } } };
     case 'INTERVIEW':
       return { ...initialState };
     default:
@@ -118,13 +131,12 @@ const Interview: React.FC = () => {
 
   const [isOffline, setIsOffline] = useState(false);
 
-
-
   const resetForms = useCallback(
     () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
+      localStorage.removeItem('@Safety:discrimination_id');
       localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
@@ -137,6 +149,7 @@ const Interview: React.FC = () => {
       const person_id = localStorage.getItem('@Safety:person_id');
       const household_id = localStorage.getItem('@Safety:household_id');
       const address_id = localStorage.getItem('@Safety:address_id');
+      const discrimination_id = localStorage.getItem('@Safety:discrimination_id');
 
       const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
 
@@ -163,6 +176,14 @@ const Interview: React.FC = () => {
       } else if (offlineInterviews && offline_id) {
         if (offlineInterviews[offline_id]?.hasOwnProperty('address')) {
           dispatch({ type: 'ADDRESS', payload: { id: offline_id, show: false } })
+        }
+      }
+
+      if (discrimination_id) {
+        dispatch({ type: 'DISCRIMINATION', payload: { id: discrimination_id, show: false } })
+      } else if (offlineInterviews && offline_id) {
+        if (offlineInterviews[offline_id]?.hasOwnProperty('discrimination')) {
+          dispatch({ type: 'DISCRIMINATION', payload: { id: offline_id, show: false } })
         }
       }
     }
@@ -225,6 +246,22 @@ const Interview: React.FC = () => {
       </SectionTitle>
 
       <FamilyMemberForm /> */}
+      <SectionTitleGroup>
+        <SectionTitle id="discrimination">Discriminação</SectionTitle>
+        <Switch
+          onColor="#c2024b" offColor="#dedede"
+          onChange={() => dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })} checked={formState.formsSubmitted.discrimination.show}
+        />
+      </SectionTitleGroup>
+      {formState.formsSubmitted.discrimination.show && (
+      <DiscriminationForm
+          dispatch={dispatch}
+          isEditForm={id ? true : false}
+          offline={isOffline}
+          initialValues={initialValues ? initialValues?.discrimination : {}}
+          hasPreviousStepCompleted={true}
+        />
+      )}
       <SectionTitle id="address">Endereço</SectionTitle>
       {formState.formsSubmitted.address.show && (
         <AddressForm

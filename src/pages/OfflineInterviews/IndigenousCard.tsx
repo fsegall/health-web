@@ -12,9 +12,10 @@ interface IndigenousCardProps {
 
 const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
   const history = useHistory()
+  const isIncomplete = !data?.indigenous_apoio_protecao_social
   return (
     <Card onClick={() => history.push(`indigenous-interview/${id}`)}>
-      <i>#{index}</i>
+      <i>#{index} {isIncomplete && ' - Entrevista Incompleta'}</i>
       <p><strong>ID:</strong> {id?.toString()}</p>
       <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.numero_projeto?.toString()}</p>
       <p><strong>Município:</strong> {data?.indigenous_informacoes_basicas?.municipio}</p>
