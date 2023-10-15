@@ -72,11 +72,14 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
 
         const address_id = localStorage.getItem('@Safety:address_id');
 
+        const discrimination_id = localStorage.getItem('@Safety:discrimination_id') ?? null;
+
         const interview = {
           interviewer_id,
           household_id,
           person_id,
           address_id,
+          discrimination_id: discrimination_id,
           ...validatedData,
         };
 
@@ -93,6 +96,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
         localStorage.removeItem('@Safety:person_id');
         localStorage.removeItem('@Safety:household_id');
         localStorage.removeItem('@Safety:address_id');
+        localStorage.removeItem('@Safety:discrimination_id');
 
         dispatch({ type: "INTERVIEW" });
 

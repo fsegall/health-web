@@ -106,7 +106,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
-
       const parsedData = parseHouseholdData(data);
 
 
@@ -152,8 +151,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
 
           const offlineInterviews: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
-
-          console.log('interviews', offlineInterviews);
 
           const addHousehold = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], household } } : false;
 
