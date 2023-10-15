@@ -4,9 +4,7 @@ export const HouseholdValidation = Yup.object().shape({
   local_do_domicilio: Yup.string().required(
     'Você precisa escolher um dos campos de localização de residência',
   ),
-  morador_de_rua: Yup.string().required(
-    'Você precisa escolher um dos campos de localização de residência',
-  ),
+  morador_de_rua: Yup.string(),
   povos_tradicionais: Yup.string().required(
     'Você precisa escolher um dos campos de povos tradicionais',
   ),
@@ -22,18 +20,16 @@ export const HouseholdValidation = Yup.object().shape({
   situacao_de_trabalho: Yup.string(),
   ocupacao_profissional: Yup.string(),
   local_de_trabalho: Yup.string(),
-  covid_2020: Yup.string().required(
-    'Você precisa escolher um dos campos de diagnóstico de covid em 2020',
+  diagnostico_covid_positivo: Yup.string().required(
+    'Você precisa escolher um dos campos de diagnóstico de covid positivo',
   ),
-  covid_2021: Yup.string().required(
-    'Você precisa escolher um dos campos de diagnóstico de covid em 2021',
+  sequelas_covid: Yup.string().required(
+    'Você precisa escolher um dos campos de sequelas de covid',
   ),
-  covid_2022: Yup.string().required(
-    'Você precisa escolher um dos campos de diagnóstico de covid em 2022',
+  morte_ultimos_12_meses: Yup.string().required(
+    'Você precisa escolher um dos campos de morte nos últimos 12 meses',
   ),
-  covid_perda: Yup.string().required(
-    'Você precisa escolher um dos campos de perda de pessoa por covid',
-  ),
+  causa_morte_ultimos_12_meses: Yup.string(),
   tipo_de_residencia: Yup.string().required(
     'Você precisa escolher um dos campos de tipo de residência',
   ),
@@ -49,7 +45,7 @@ export const HouseholdValidation = Yup.object().shape({
   agua_animais: Yup.string(),
   agua_producao_alimentos: Yup.string(),
   esgoto: Yup.string().required(
-    'Você precisa escolher um dos campos de abastecimento de água potável',
+    'Você precisa escolher um dos campos de abastecimento de esgoto',
   ),
   numero_de_pessoas: Yup.number().required(
     'Você precisa informar o número de pessoas que moram na residência',
@@ -74,10 +70,10 @@ export const HouseholdValidation = Yup.object().shape({
   corte_de_gastos: Yup.boolean(),
   corte_de_gastos_nao_essenciais: Yup.boolean(),
   ns_nr: Yup.boolean(),
-  educacao_basica_publica: Yup.string().required(
-    'Você precisa escolher um dos campos do educação básica pública',
+  menores_6_anos: Yup.string().required(
+    'Você precisa escolher um dos campos de crianças menores de 6 anos',
   ),
-  pnae: Yup.string(),
+  frequentam_creche: Yup.string(),
   cadastro_unico: Yup.string().required(
     'Você precisa escolher um dos campos do cadastro único',
   ),

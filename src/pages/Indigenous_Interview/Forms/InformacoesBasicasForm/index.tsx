@@ -138,6 +138,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
 
 
   if (isEditForm) {
+    console.log('não era')
     InformacoesBasicasFormRef.current?.setData({
       ...initialValues
     })
