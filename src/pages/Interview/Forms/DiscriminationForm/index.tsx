@@ -119,7 +119,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, setLoading],
+    [addToast, token, dispatch, offline, loading, setLoading],
   );
 
 
