@@ -42,7 +42,9 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
     async (data: ICreateDiscriminationDTO) => {
 
       try {
+        if(!loading) {
         setLoading(true)
+        }
         DiscriminationFormRef.current?.setErrors({});
 
         const validatedData = await DiscrimiationValidation.validate(data, {
