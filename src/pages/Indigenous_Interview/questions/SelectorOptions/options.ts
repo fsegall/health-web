@@ -139,21 +139,24 @@ export const trabalhoColheitaRegioesOptions = {
 // DOMICÍLIO
 
 export const ultimaMoradaOptions = {
-    reserva_indigena: 'Reserva Indígena',
-    acampamento: 'Acampamento',
-    outra_retomada: 'Outra Retomada ou território tradicional',
-    terra_indigena: 'Terra indígena demarcada',
-    cidade: 'Cidade',
-    sempre_morou_nesse_lugar: 'Sempre morou nesse lugar',
-    'ns-nr': 'NS/NR'
+  sempre_morou_nesse_lugar: 'Sempre morou nesse lugar',
+  reserva_indigena: 'Reserva Indígena',
+  acampamento: 'Acampamento',
+  outra_retomada: 'Outra Retomada ou território tradicional',
+  territorio_tradicional: 'Retomada / território tradicional (não iniciada a demarcação)',
+  terra_indigena_em_demarcacao: 'Terra indígena (em algum processo de demarcação)',
+  terra_indigena: 'Terra indígena homologada (finalizada a demarcação)',
+  territorio_autodemarcado: 'Território autodemarcado',
+  cidade: 'Cidade',
+  'ns-nr': 'NS/NR'
 }
 
 export const moradaHojeOptions = {
   barraco: 'Barraco',
   tenda: 'Tenda de Lona/plástico e outros',
   casa_madeira_alvenaria: 'Casa de madeira ou alvenaria',
+  casa_coletiva: 'Casa coletiva',
   casa_reza: 'Casa de reza',
-  sede: 'Sede (casa construída pelos fazendeiros)',
   outro: 'Outro'
 }
 
@@ -180,57 +183,79 @@ export const telhadoCasaOptions = {
     telha: 'Telha',
     zinco: 'Zinco',
     palha_precaria: 'Palha/ sapé (velha)',
+    palha_nobre: 'Palha/ sapé (nova)',
     lona_plastico: 'Lona/plástico',
     brasilit_eternite: 'Brasilit - Eternite',
-    palha_nobre: 'Palha/ sapé (nova)',
     outros: 'Outros'
 }
 
+export const energiaEletricaOptions = {
+  sim_o_tempo_todo: 'Sim, o tempo todo',
+  sim_alguns_periodos: 'Sim, alguns períodos',
+  nao: 'Não'
+}
+
 export const utensiliosCasaOptions = {
-    energia_eletrica: 'Energia elétrica',
-    televisao: 'Televisão',
-    geladeira: 'Geladeira',
-    fogao_gas: 'Fogão a gás',
-    maquina_lavar: 'Máquina de levar/tanquinho',
-    computador: 'Computador/tablet/laptop',
-    celular_com_internet: 'Celular COM internet',
-    celular_sem_internet: 'Celular SEM internet',
-    trator: 'Trator/roçadeira para lavoura'
+  televisao: 'Televisão',
+  geladeira: 'Geladeira',
+  fogao_gas: 'Fogão a gás',
+  maquina_lavar: 'Máquina de levar/tanquinho',
+  computador: 'Computador/tablet/laptop',
+  celular_com_internet: 'Celular COM internet',
+  celular_sem_internet: 'Celular SEM internet',
+  nenhum: 'Não possui nenhum dos itens'
+}
+
+export const equipamentosDeTrabalhoRuralEmCasaOptions = {
+  trator: 'Trator',
+  arado_manual_ou_tracao_animal: 'Arado manual ou de tração animal',
+  rocadeira_para_lavoura: 'Roçadeira para lavoura',
+  escavadeira: 'Escavadeira',
+  enxada: 'Enxada',
+  outros_equipamentos_manuais: 'Outros equipamentos manuais',
+  nenhum: 'Não possui nenhum dos itens'
 }
 
 export const origemAguaOptions = {
-    rio: 'Rio / "corgo" / igarapé / nascente / lago',
-    rede_publica: 'Rede pública',
-    poco_artesiano: 'Poço artesiano',
-    caminhao_pipa: 'Caminhão pipa',
-    poco_caipira: 'Poço caipira',
-    cisterna: 'Cisterna',
-    outros: 'Outros',
-    'ns-nr': 'NS/NR',
+  rio: 'Rio / "corgo" / igarapé / nascente / lago',
+  rede_publica: 'Rede pública',
+  poco_artesiano: 'Poço artesiano',
+  caminhao_pipa: 'Caminhão pipa',
+  poco_caipira: 'Poço caipira',
+  cisterna: 'Cisterna',
+  outros: 'Outros',
+  'ns-nr': 'NS/NR',
 }
 
 export const qualidadeAguaOptions = {
   muito_boa: 'Muito boa',
-    boa: 'Boa',
-    regular: 'Regular',
-    ruim: 'Ruim',
-    muito_ruim: 'Muito ruim',
-    'ns-nr': 'NS/NR'
+  boa: 'Boa',
+  regular: 'Regular',
+  ruim: 'Ruim',
+  muito_ruim: 'Muito ruim',
+  'ns-nr': 'NS/NR'
+}
+
+export const motivoQualidadeRuimAguaOptions = {
+  contaminada_com_agrotoxico: 'Contaminada com agrotóxico',
+  suja_ou_poluida: 'Suja ou poluída',
+  gosto_ruim: 'Tem gosto ruim',
+  outros: 'Outros'
 }
 
 export const acessoAguaCasaOptions = {
-    encanada: 'Encanada dentro de casa',
-    torneira_coletiva: 'Torneira coletiva',
-    encanada_fora: 'Encanada fora de casa',
-    nao_encanada: 'Não é encanada',
-    'ns-nr': 'NS/NR',
+  encanada: 'Encanada dentro de casa',
+  encanada_fora: 'Encanada fora de casa',
+  torneira_coletiva: 'Torneira coletiva',
+  nao_encanada: 'Buscada no rio, nascente ou mina',
+  'ns-nr': 'NS/NR',
 }
 
 export const banheiroCasaOptions = {
-    nao: 'Não existe',
-    fora_da_casa: 'Existe fora da casa',
-    dentro_de_casa: 'Existe dentro de casa',
-    dentro_e_fora: 'Existe dentro e fora da casa'
+  fora_da_casa: 'Existe fora da casa',
+  dentro_de_casa: 'Existe dentro de casa',
+  dentro_e_fora: 'Existe dentro e fora da casa',
+  nao: 'Não existe banheiro',
 }
 
 export const coletaEsgotoCasaOptions = {
@@ -245,21 +270,22 @@ export const coletaEsgotoCasaOptions = {
 export const destinoLixoOptions = {
     prefeitura: 'Coletado pela prefeitura',
     queimado: 'Queimado',
-    enterrado_localmente: 'Enterrado no local',
+    enterrado_localmente: 'É Enterrado perto da casa',
     jogado_longe_casa: 'Jogado longe da casa',
     jogado_proximo_casa: 'Jogado próximo à casa',
-    corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago ou quintal da residência',
+    corrego_rio_lago_quintal: 'É Jogado em córrego, rio, lago',
     'ns-nr': 'NS/NR',
 }
 
 export const veiculosOptions = {
-    bicicleta: 'Bicicleta',
-    moto: 'Moto',
-    carro: 'Carro',
-    van_caminhao: 'Van ou caminhão',
-    cavalo_carroca: 'Cavalo ou carroça',
-    nao_possui: 'Não possui',
-    outros: 'Outros'
+  carro: 'Carro',
+  moto: 'Moto',
+  bicicleta: 'Bicicleta',
+  barco_a_motor: 'Barco a motor',
+  canoa: 'Canoa',
+  cavalo_ou_carroca: 'Cavalo ou carroça',
+  van_ou_caminhao: 'Van ou caminhão',
+  nao_possui: 'Não possui',
 }
 
 export const renda30dOptions = {
