@@ -289,17 +289,15 @@ export const veiculosOptions = {
 }
 
 export const renda30dOptions = {
-    nao_teve: 'Não teve renda',
-    menos_de_275: 'Menos de 275 reais',
-    entre_275_550: 'Entre 275 e 550 reais',
-    entre_551_1100: 'Entre 551 e 1.100 reais',
-    entre_1101_2200: 'Entre 1.101 e 2.200 reais',
-    entre_2201_3300: 'Entre 2.201 e 3.300 reais',
-    entre_3301_4400: 'Entre 3.301 e 4.400 reais',
-    entre_4401_5500: 'Entre 4.401 e 5.500 reais',
-    entre_5501_11000: 'Entre 5.501 e 11.000 reais',
-    mais_de_11000: 'Mais de 11.000 reais',
-    'ns-nr': 'NS/NR',
+  nao_teve: 'Não teve renda',
+  menos_de_um_quarto_salario_minimo: '< ¼ de salário mínimo',
+  entre_um_quarto_de_salario_minimo_e_meio_salario_minimo: 'de ¼ a < ½ salário mínimo',
+  entre_meio_salario_e_um_salario_minimo: 'de ½ a < 1 salário mínimo',
+  um_salario_minimo: '1 salário mínimo',
+  dois_salarios_minimos: '2 salários mínimos',
+  tres_salarios_minimos: '3 salários mínimos',
+  quatro_salarios_minimos_ou_mais: '4 ou mais salários mínimos',
+  'ns-nr': 'NS/NR',
 }
 
 // DOENÇA E SAÚDE
@@ -746,24 +744,23 @@ export const ultimoAComer = {
 // APOIO E PROTEÇÃO SOCIAL
 
 export const criancasComemNaEscola = {
-    sim: 'Sim',
-    nao: 'Não',
+    sim: 'Sim, comem todos os dias',
+    nao: 'Não, não oferecem comida na escola',
     nem_sempre: 'Nem sempre tem comida na escola',
-    nao_tem_crianca: 'Não tem criança na casa',
+    nao_se_aplica: 'Não se aplica (Não estuda em escola pública)',
     'ns-nr': 'NS/NR'
 }
 
 export const merendaEscolarIncluiAlimentosTradicionais = {
-    sim: 'Sim',
-    nao: 'Não',
-    as_vezes: 'Às vezes',
+    sim: 'Sim, só alimentação da cultura',
+    as_vezes: 'Sim, às vezes tem alimentos da cultura',
+    nao: 'Não tem alimentos da cultura',
     'ns-nr': 'NS/NR'
 }
 
 export const apoioFinanceiro = {
     sim: 'Sim',
     nao: 'Não',
-    tentou: 'Tentou'
 }
 
 export const origemCestaAlimentos = {

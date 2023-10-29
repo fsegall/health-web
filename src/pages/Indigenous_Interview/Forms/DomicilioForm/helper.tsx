@@ -1,6 +1,6 @@
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, qualidadeAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, renda30dOptions, ultimaMoradaOptions, moradaHojeOptions, energiaEletricaOptions, equipamentosDeTrabalhoRuralEmCasaOptions, motivoQualidadeRuimAguaOptions } from "../../questions/SelectorOptions/options";
+import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, ultimaMoradaOptions, moradaHojeOptions, energiaEletricaOptions, equipamentosDeTrabalhoRuralEmCasaOptions, motivoQualidadeRuimAguaOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
