@@ -15,7 +15,7 @@ interface IndigenousBasicInterviewResponse {
   entrevistador_id: string;
   projeto_id: string;
   data_entrevista: Date
-  responsavel_domicilio: string,
+  responsavel_documentos: string[],
   created_at: Date
   updated_at: Date
 }

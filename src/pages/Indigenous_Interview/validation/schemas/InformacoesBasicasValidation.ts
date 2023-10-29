@@ -7,5 +7,5 @@ export const InformacoesBasicasValidation = Yup.object().shape({
     entrevistador_id: Yup.string().required('Você precisa ter um entrevistador vinculado'),
     numero_projeto: Yup.number().required('Você precisa inserir o número do projeto'),
     data_entrevista: Yup.date(),
-    responsavel_domicilio: Yup.string().required('Você precisa cadastrar se é o responsável'),
+    responsavel_documentos: Yup.string().required('Você precisa cadastrar os documentos do responsável'),
 });

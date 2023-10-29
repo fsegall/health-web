@@ -6,10 +6,22 @@ export const yesOrNoOptions = {
 }
 
 export const tipoDeComunidadeOptions = {
-    territorio_tradicional: 'Território tradicional / Área de retomada',
-    acampamento: 'Acampamento',
-    terra_indigena: 'Terra indígena demarcada',
-    reserva_indigena: 'Reserva indígena'
+  terra_indigena_homologada: 'Terra indígena homologada (finalizada a demarcação)',
+  terra_indigena_em_demarcacao: 'Terra indígena (em algum processo de demarcação)',
+  territorio_tradicional: 'Retomada / território tradicional (não iniciada a demarcação)',
+  territorio_autodemarcado: 'Autodemarcação',
+  reserva_indigena: 'Reserva indígena',
+  acampamento: 'Acampamento',
+}
+
+export const documentoCivilOptions = {
+  certidao_de_nascimento: 'Certidão de nascimento ',
+  rg: 'RG',
+  cpf: 'CPF',
+  cartao_sus: 'Cartão SUS',
+  carteira_de_trabalho: 'Carteira de trabalho',
+  rani: 'RANI (Registro Administrativo de Nascimento de Indígena)',
+  nao_possui: 'Não tem documentos'
 }
 
 export const sexoOptions = {
