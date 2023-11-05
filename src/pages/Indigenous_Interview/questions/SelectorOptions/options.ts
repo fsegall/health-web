@@ -5,6 +5,31 @@ export const yesOrNoOptions = {
     'ns-nr': 'NS/NR'
 }
 
+export const simOuNao = {
+    sim: 'Sim',
+    nao: 'Não',
+}
+
+export const criancaComidaOptions = {
+  mingau: 'Mingau',
+  agua_ou_cha: 'Água ou Chá',
+  leite_em_po_ou_cru: 'Leite em pó, saquinho, caixinha ou leite cru',
+  formula_infantil: 'Fórmula infantil',
+  suco_de_fruta: 'Suco de fruta',
+  fruta: 'Fruta',
+  comida_de_sal: 'Comida de sal (papa, de panela ou sopa)',
+  outros_alimentos_ou_bebidas: 'Outros alimentos ou bebidas'
+}
+
+export const cuidadoresOptions = {
+  paje_cacique_lideranca_religiosa: 'Pajé / cacique / liderança religiosa tradicional',
+  parteira_tradicional: 'Parteira tradicional',
+  equipe_de_saude: 'A equipe de saúde vem até aqui',
+  agente_de_saude: 'Agente de saúde',
+  pessoas_da_igreja: 'Por pessoas da igreja',
+  outros: 'Outros'
+}
+
 export const tipoDeComunidadeOptions = {
   terra_indigena_homologada: 'Terra indígena homologada (finalizada a demarcação)',
   terra_indigena_em_demarcacao: 'Terra indígena (em algum processo de demarcação)',
@@ -12,6 +37,23 @@ export const tipoDeComunidadeOptions = {
   territorio_autodemarcado: 'Autodemarcação',
   reserva_indigena: 'Reserva indígena',
   acampamento: 'Acampamento',
+}
+
+export const acessoEquipeDeSaude = {
+  todos_os_dias: 'Sim, todos os dias',
+  uma_vez_por_semana: 'Sim, uma vez por semana',
+  uma_vez_por_mes: 'Sim, uma vez por mês',
+  raramente: 'Raramente (menos de 1 vez por mês)',
+  nunca: 'Nunca'
+}
+
+export const profissionaisEquipeDeSaude = {
+  medico: 'Médico',
+  enfermeiro_ou_auxiliar_de_enfermagem: 'Enfermeiro e/ou Auxiliar de enfermagem ',
+  dentista_ou_auxiliar_bucal: 'Dentista e/ou auxiliar de saúde bucal',
+  agente_indigena_de_saude: 'Agente Indígena de Saúde (AIS)',
+  agente_indigena_de_saneamento: 'Agente Indígena de Saneamento (AISAN)',
+  outros_profissionais: 'Outros profissionais, como psicólogo, nutricionista, farmacêutico, assistente social'
 }
 
 export const documentoCivilOptions = {
@@ -349,11 +391,17 @@ export const familiarMorteRendaOptions = {
 }
 
 export const condicaoSaudeOptions = {
-    muito_boa: 'Muito boa',
-    boa: 'Boa',
-    regular: 'Mais ou menos',
-    ruim: 'Ruim',
-    muito_ruim: 'Muito Ruim'
+    muito_boa: 'Boa ou Muito boa',
+    regular: 'Mais ou menos (regular)',
+    ruim: 'Ruim ou Muito Ruim'
+}
+
+export const desabilidadeOptions = {
+  deficiencia_fisica_e_mental: 'Com deficiência física e mental',
+  deficiencia_fisica: 'Com deficiência física',
+  deficiencia_mental: 'Com deficiência mental',
+  acamado: 'Acamado',
+  nao_possui: 'Não tem'
 }
 
 export const condicaoSaudeTekohaOptions = {
@@ -365,11 +413,11 @@ export const condicaoSaudeTekohaOptions = {
 }
 
 export const causasDoencasVenenoLavouraOptions = {
-    agua_contaminada: 'Sim, bebemos água contaminada',
-    alimentos_contaminados: 'Sim, comemos alimentos contaminados',
-    trabalho_colheira: 'Sim, trabalho em colheita que faz uso de veneno',
-    veneno_proximo_a_casa: 'Sim, colocam veneno próximo à minha casa/roça',
-    avioes_maquinarios: 'Sim, jogaram com aviões e/ou maquinários',
+    agua_contaminada: 'Porque bebemos água contaminada',
+    alimentos_contaminados: 'Porque, comemos alimentos contaminados',
+    trabalho_colheira: 'Porque o trabalho na colheita tem veneno',
+    veneno_proximo_a_casa: 'Porque, colocam veneno próximo à minha casa/roça',
+    avioes_maquinarios: 'Porque, jogaram veneno com aviões e/ou maquinários',
     'ns-nr': 'NS/NR'
 }
 
@@ -398,22 +446,49 @@ export const acidentesOptions = {
 }
 
 export const violenciaFisicaOptions = {
-    propria_casa: 'Na própria casa, por alguém da família ou morador da casa (violência doméstica)',
-    na_retomada_por_indigenas: 'Violência na retomada cometida por outros indígenas',
-    na_retomada_por_fazendeiro_ou_invasor: 'Violência na retomada cometida por fazendeiro ou invasores da Terra Indígena',
-    na_retomada_por_policial: 'Violência na retomada cometida pela polícia',
-    liderancas: 'Violência feita pelo capitão/equipe do capitão',
-    cidade: 'Violência na cidade',
-    arredores_da_comunidade: 'Violência nos arredores da comunidade',
+    brigas_internas_na_comunidade: 'Dentro da comunidade, por brigas internas',
+    pessoas_de_fora_na_comunidade: 'Dentro da comunidade, por pessoas de fora',
+    na_escola_fora_da_comunidade: 'Fora da comunidade, na escola',
+    outro_local_fora_da_comunidade: 'Fora da comunidade, em outro local',
     outro: 'Outro',
     'ns-nr': 'NS/NR',
 }
 
+export const diagnosticosOptions = {
+  pressao_alta: 'Pressão alta',
+  diabetes: 'Diabetes (açucar no sangue)',
+  doenca_coracao: 'Doença no coração (lembrar Chagas)',
+  doenca_rins: 'Doença nos rins (insuficiência renal)',
+  cancer: 'Câncer',
+  nenhuma: 'Nenhuma'
+}
+
+export const lugaresOptions = {
+  comercio_ou_mercado: 'Supermercado ou comércios em geral',
+  escola: 'Escola',
+  igreja: 'Igreja',
+  reparticao_publica: 'Repartição pública',
+  outros: 'Outros',
+  nenhum_nunca: 'Nunca fui'
+}
+
+export const diagnosticoRemedioOptions = {
+  caixinha_todos_os_dias: 'Sim, remédio de caixinha (da farmácia) todos os dias',
+  caixinha_nao_todos_os_dias: 'Sim, remédio de caixinha (da farmácia), mas não todos os dias',
+  tradicional_de_ervas_plantas: 'Sim, só remédio tradicional (ervas, plantas)',
+  caixinha_e_ervas_plantas: 'Sim, remédio de caixinha e ervas/plantas',
+  nao_toma_nada: 'Não tomo nada',
+  'ns-nr': 'NS/NR'
+}
+
+export const gestanteOptions = {
+  uma_ou_mais_gestantes: 'Uma ou mais gestante(s)',
+  uma_ou_mais_amamentando: 'Uma ou mais mulher(es) amamentando',
+  'ns-nr': 'NS/NR'
+}
+
 export const tratamentosOptions = {
     covid_19: 'COVID 19',
-    pressao_alta: 'Pressão alta',
-    diabetes: 'Diabetes (açucar no sangue)',
-    doenca_coracao: 'Doença no coração (lembrar Chagas)',
     asma: 'Asma (chiado no peito)',
     malaria: 'Malária',
     tuberculose: 'Tuberculose',
@@ -425,6 +500,7 @@ export const tratamentosOptions = {
     diarreia: 'Diarreia (Xiri)',
     vomito: 'Vômito',
     dor_de_cabeca: 'Dor de cabeça',
+    depressao_ou_ansiedade: 'Depressão ou ansiedade',
     dst: 'HIV ou outra doença transmitida pelo sexo',
     outro: 'Tratamento para outro tipo de doença',
     feitico: 'Doença fruto de feitiço',

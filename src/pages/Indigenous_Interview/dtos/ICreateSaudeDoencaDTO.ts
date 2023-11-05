@@ -1,45 +1,50 @@
-export default interface ICreateSaudeDoencaDTO extends FamiliaresMortesOpcionalDTO {
-    id?: string;
-    tomou_vacina_covid: string; //select
-    motivo_nao_tomar_vacina_covid?: string //select (depende da anterior)
+export default interface ICreateSaudeDoencaDTO {
+  id?: string;
+  condicao_de_saude: string //select
+  morador_com_desabilidade: string //select
+  local_permite_viver_com_saude: string //select
+  morador_exposto_veneno_lavoura: string; //select
+  // depende anterior "sim"
+  doencas_contato_veneno_lavoura?: string //select
+  // depende anterior "sim"
+  motivo_doencas_contato_veneno_lavoura?: string[] //select
 
-    //FamiliaresMortesOpcionalDTO
+  acidentes: string[]; //select
 
-    condicao_de_saude?: string //select
-    tekoha_mudou_condicao_de_saude?: string; //GK-ONLY select
-    morador_exposto_veneno_lavoura: string; //select
-    // depende anterior "sim"
-    doencas_contato_veneno_lavoura?: string //select
-    // depende anterior "sim"
-    motivo_doencas_contato_veneno_lavoura?: string //select
+  ocorrencia_de_ameacas: string; //select
+  // dependa da anterior
+  ocorrencia_violencia_fisica: string; //select
+  local_ocorrencia_violencia_fisica?: string[]; //multi-select
 
-    acidentes: string[]; //select
-    // dependa da anterior
-    acidentes_ocorridos?: string[]; //multi-select
+  locais_impedido_de_entrar: string[];
+  lista_diagnosticos: string[]; //multi-select
+  lista_diagnosticos_cronico_remedio?: string;
 
-    ocorrencia_de_ameacas: string; //select
-    // dependa da anterior
-    ocorrencia_violencia_fisica: string; //select
-    local_ocorrencia_violencia_fisica?: string[]; //multi-select
+  lista_diagnosticos_outros: string[];
+  lista_diagnosticos_outros_remedio?: string;
 
-    lista_tratamentos?: string[]; //multi-select
+  //
+  moradora_entre_13_e_45_anos: string;
+  mulheres_e_gestacao?: string;
 
-    tratamento_com_paje_ou_similar: string //select
-    tratamento_igreja: string; //select
-    medicacao_uso_continuo: string; //select
-    // dependa da anterior
-    doenca_medicacao_uso_continuo?: string[]; //multi-select
+  crianca_ate_6_meses: string;
+  crianca_ate_6_meses_leito_do_peito?: string;
+  crianca_ate_6_meses_outros_alimentos?: string;
 
-    primeiro_recurso_ao_notar_doenca: string; //select
-    morador_internado: string; //select
-    morador_problemas_bebidas_alcoolicas: string; //select
-    morador_problemas_uso_drogas: string; //select
-    fuma_cigarro: string; //select
-}
+  crianca_entre_6_meses_e_2_anos: string;
+  crianca_entre_6_meses_e_2_anos_leite_do_peito?: string
 
-interface FamiliaresMortesOpcionalDTO {
-    // perguntas pessoais sobre morte dos familiares - opcionais
-    familiar_morte?: string; //select
-    // depende anterior
-    familiar_morte_contribuia_renda_familiar?: string //select
+  aldeia_possui_posto_de_saude: string;
+  cuidadores_para_aldeia_sem_posto_de_saude?: string;
+
+  acesso_a_equipe_de_saude: string;
+  profissionais_acesso_a_equipe_de_saude?: string;
+
+  morador_internado: string; //select
+
+  possui_morador_menor_ou_igual_a_5_anos: string;
+
+  morador_problemas_bebidas_alcoolicas: string; //select
+  fuma_cigarro: string; //select
+  morador_problemas_uso_drogas: string; //select
 }
