@@ -17,7 +17,7 @@ export default interface ICreateSaudeDoencaDTO extends FamiliaresMortesOpcionalD
     // dependa da anterior
     acidentes_ocorridos?: string[]; //multi-select
 
-    ocorrencia_de_ameacas: string; //select
+    ocorrencia_de_ameacas: string[]; //muti-select
     // dependa da anterior
     ocorrencia_violencia_fisica: string; //select
     local_ocorrencia_violencia_fisica?: string[]; //multi-select
