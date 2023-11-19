@@ -1,27 +1,29 @@
 export default interface ICreateDemograficoDTO {
-    id?: string; //backend - generated UUID
-    total_moradores: number; //D1 (base to create array form)
-    moradores: QuadroSocioDemograficoDTO[] // form array
-    morador_trabalhou_fazendas: string[] // multi-select
-    morador_trabalhou_catacao: string //select
+  entrevista_indigena_id?: string; //backend - generated UUID
+  total_moradores: number; //D1 (base to create array form)
+  moradores: QuadroSocioDemograficoDTO[] // form array
+
+  morador_nao_indigena: string;
+  quantidade_morador_nao_indigena?: number;
+  povo_etnia?: string[];
+  serie_frequentada_escola: string;
+  crenca_religiao: string;
+  crenca_religiao_igreja?: string;
+  situacao_no_trabalho?: string[];
+  remuneracao_trabalho_na_aldeia?: string;
+  funcao_trabalho_remunerado_na_aldeia?: string;
+  remuneracao_trabalho_fora_aldeia?: string;
+  funcao_trabalho_remunerado_fora_da_aldeia?: string;
+  funcao_nao_remunerada_aldeia: string;
+  motivo_nao_trabalha?: string;
 }
 
 interface QuadroSocioDemograficoDTO {
-    id: number;
-    nome: string;
-    relacao_com_lider: string;
-    idade: number;
-    sexo: string; // select
-    indigena: string; // select
-    povo_etnia: string; // select
-    // lingua_indigena: string; // select -> REMOVIDO
-    // HOLD: em análise -> para ser eliminado da tabela
-    // fala_lingua_portuguesa: string; // select
-    // le_escreve_portugues: string; // select
-    crenca_religiao?: string[]; //14> // multi-select
-    // frequenta_escola: string; //select -> REMOVIDO
-    serie_frequentada_escola: string;
-    situacao_no_trabalho?: string //14> select
-    ocupacao_principal?: string //14>
-    funcao_na_comunidade?: string[] //14> multi-select
+  id: number;
+  nome: string;
+  relacao_com_lider: string;
+  maior_de_um_ano: string; // default "sim"
+  idade?: number;
+  idade_em_meses?: number;
+  sexo: string; // select
 }

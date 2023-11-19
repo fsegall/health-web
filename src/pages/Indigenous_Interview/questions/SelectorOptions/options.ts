@@ -83,7 +83,114 @@ export const etniaOptions = {
     kaiowa: 'Kaiowá',
     guarani_kaiowa: 'Guarani-Kaiowá',
     terena: 'Terena',
+    nao_indigena: 'Não indígena',
     outro: 'Outro'
+}
+
+export const etniasNewOptions = {
+  nao_indigena: 'Não indígena',
+  outro: 'Outro',
+  guarani: 'Guarani (Ñandeva)',
+  kaiowa: 'Kaiowá',
+  guarani_kaiowa: 'Guarani-Kaiowá',
+  amanaje: "Amanaje",
+  apalai: "Apalai",
+  ararandewara: "Ararandewara",
+  arikapu: "Arikapú",
+  awa_kwa: "Awa-Kwá",
+  ayapanekra: "Ayapanekra",
+  bare: "Baré",
+  banawa: "Banawá",
+  bara: "Bará",
+  chamacoco: "Chamacoco",
+  chavante: "Chavante",
+  cinta_larga: "Cinta Larga",
+  cocama_cocamilla: "Cocama-Cocamilla",
+  cocamilla: "Cocamilla",
+  cubeo: "Cubeo",
+  enawene_nawe: "Enawenê-Nawê",
+  fulni_o: "Fulni-ô",
+  galibi_marworno: "Galibi-Marworno",
+  guato: "Guató",
+  jahank: "Jahank",
+  jamamadi: "Jamamadi",
+  jarawara: "Jarawara",
+  juma: "Juma",
+  juruna_do_km_17: "Juruna do Km 17",
+  juruna_do_rio_xingu: "Juruna do Rio Xingu",
+  juruna_do_tocantins: "Juruna do Tocantins",
+  kamayura_do_alto_xingu: "Kamayurá do Alto Xingu",
+  kamayura_do_rio_capivari: "Kamayurá do Rio Capivari",
+  karaja_do_araguaia: "Karajá do Araguaia",
+  karaja_do_javae: "Karajá do Javaé",
+  karaja_do_rio_xingu: "Karajá do Rio Xingu",
+  karo: "Karo",
+  karubixexe: "Karubixexe",
+  karuazu: "Karuazu",
+  karutana: "Karutana",
+  kaxarari: "Kaxarari",
+  kaxinawa: "Kaxinawa",
+  kaxinawa_do_rio_humaita: "Kaxinawa do Rio Humaitá",
+  kaxinawa_do_rio_jordao: "Kaxinawa do Rio Jordão",
+  kaxinawa_do_rio_jurua: "Kaxinawa do Rio Juruá",
+  kaxinawa_do_rio_tejo: "Kaxinawa do Rio Tejo",
+  kaxinawa_do_riozinho: "Kaxinawa do Riozinho",
+  kuntanawa: "Kuntanawa",
+  mehinaku: "Mehináku",
+  mura: "Mura",
+  nambikwara: "Nambikwara",
+  nukini: "Nukini",
+  pankarare: "Pankararé",
+  pankararu: "Pankararu",
+  parakana: "Parakanã",
+  parintintin: "Parintintin",
+  pataxo: "Pataxó",
+  pataxo_hahahe: "Pataxó Hãhãhãe",
+  piaroa: "Piaroa",
+  piraha: "Pirahã",
+  piratapuya: "Piratapuya",
+  potiguara: "Potiguara",
+  puri: "Puri",
+  rikbaktsa: "Rikbaktsa",
+  satere_mawe: "Sateré-Mawé",
+  shanenawa: "Shanenawa",
+  surui: "Suruí",
+  suya: "Suyá",
+  tapayuna: "Tapayuna",
+  tapirape: "Tapirapé",
+  terena: "Terena",
+  ticuna: "Ticuna",
+  truka: "Truká",
+  tukano: "Tukano",
+  tuxa: "Tuxá",
+  tuyuca: "Tuyuca",
+  txukahamae_kayapo: "Txukahamãe (Kayapó)",
+  tupari: "Tupari",
+  tupinamba: "Tupinambá",
+  tupinikim: "Tupinikim",
+  tupiniquim: "Tupiniquim",
+  uru_eu_wau_wau: "Uru-Eu-Wau-Wau",
+  wiapi: "Waiãpi",
+  wajapi: "Wajãpi",
+  wajuru: "Wajuru",
+  wape: "Wapé",
+  wapixana: "Wapishana",
+  wari: "Wari'",
+  waura: "Waurá",
+  xavante: "Xavante",
+  xerente: "Xerente",
+  xeta: "Xetá",
+  xingu: "Xingu (conjunto de diversas etnias)",
+  xokleng: "Xokleng",
+  xukuru: "Xukuru",
+  yaminawa: "Yaminawá",
+  yawanawa: "Yawanawá",
+  yawalapiti: "Yawalapiti",
+  yawarani: "Yawarani",
+  yudja_juruna: "Yudjá (Juruna)",
+  zoe: "Zo'é",
+  zoro: "Zoró"
+
 }
 
 export const grauEscolaridadeOptions = {
@@ -96,7 +203,7 @@ export const grauEscolaridadeOptions = {
     supletivo_2_grau: 'Supletivo 2º grau',
     superior_incompleto: 'Superior Incompleto (graduação)',
     superior_completo: 'Superior Completo (graduação)',
-    pos_graduacao_incompleta_mestrado: 'Pós-graduação incompleta (mestrado)',
+    pos_graduacao_incompleta_mestrado: 'Pós-graduação incompleta (mestrado ou latu senso)',
     pos_graduacao_completa_mestrado: 'Pós-graduação completa (mestrado)',
     pos_graduacao_incompleta_doutorado: 'Pós-graduação incompleta (doutorado)',
     pos_graduacao_completa_doutorado: 'Pós-graduação completa (doutorado)',
@@ -104,15 +211,53 @@ export const grauEscolaridadeOptions = {
 }
 
 export const crencasOptions = {
-    religiao_tradicional: 'Religião Tradicional',
-    evangelico: 'Evangélico',
-    catolico: 'Católico',
-    espirita: 'Espírita',
-    nenhuma: 'Nenhuma',
-    outra: 'Outra'
+  igreja: 'Na igreja',
+  paje: 'Pajé / Nhanderu / Liderança religiosa tradicional',
+  igreja_e_paje: 'Nos dois',
+  nenhum_dos_dois: 'Em nenhum dos dois'
+}
+
+export const crencasIgrejaOptions = {
+  protestante: 'Protestante',
+  catolica: 'Católica',
+  umbanda_candomble: 'Umbanda/Candomblé',
+  espirita: 'Espírita',
+  outras_igrejas: 'Outras igrejas'
 }
 
 export const situacaoTrabalhoOptions = {
+  sim_aldeia: 'Sim, na aldeia',
+  sim_fora_da_aldeia: 'Sim, fora da aldeia',
+  nao: 'Não estou trabalhando'
+}
+
+export const funcaoTrabalhoAldeiaOptions = {
+  professor: 'Professor',
+  agente_de_saude: 'Agente de saúde',
+  agente_de_saneamento: 'Agente de saneamento',
+  motorista: 'Motorista',
+  dono_comercio_ou_empresa: 'Dono de comércio/empresa',
+  cuidador_de_criancas: 'Cuidadora/cuidador de crianças',
+  cozinheiro: 'Cozinheira/merendeira',
+  profissional_de_saude: 'Profissional de saúde (enfermenro, médico, odontólogo ou outros)',
+  agricultor: 'Agricultor (e vende na aldeia)',
+  outros: 'Outros'
+}
+
+export const funcaoTrabalhoForaAldeiaOptions = {
+  rural_sem_carteira: 'Trabalho rural como diarista/temporário (sem carteira assinada)',
+  rural_com_carteira: 'Trabalho rural permanente ou temporário (com carteira assinada)',
+  cidade_com_carteira: 'Trabalho na cidade (comércio ou empresa) (com carteira assinada)',
+  cidade_sem_carteira: 'Trabalho na cidade (sem carteira assinada)',
+  empresario: 'Dono de comércio/empresa',
+  domestica: 'Doméstica',
+  venda_artesanato: 'Venda de artesanato',
+  bolsista: 'Bolsista de faculdade ou curso',
+  outros: 'Outros',
+  'ns-nr': 'NS/NR'
+}
+
+export const tipoDeTrabalhoOptions = {
     remunerado_aldeia: 'Trabalho Remunerado na Aldeia/Comunidade',
     remunerado_fora_aldeia: 'Trabalho Remunerado fora da Aldeia/Comunidade',
     desempregado_menos_6m: 'Desempregado a menos de 6 meses',
@@ -148,26 +293,23 @@ export const ocupacaoPrincipalOptions = {
 }
 
 export const funcaoNaComunidadeOptions = {
-  cacique: 'Cacique',
-  page: 'Pagé / Ñanderu / Ñandesy / Parteira',
-  capitao: 'Capitão',
-  aprendiz_de_page: 'Aprendiz de Ñanderu / Ñandesy',
-  agente_de_saude: 'Agente de Saúde',
-  agente_de_saneamento: 'Agente de saneamento',
-  artesao: 'Produção de Artesanato (redes, canoas, cestas, ferramentas, vasos, arcos e flechas, panos, tipoia, tintas, tipiti)',
-  agricultor: 'Produção de alimentos - Agricultura',
-  'caça_pesca_coleta': 'Caça, pesca, coleta',
-  lideranca: 'Liderança ou trabalho em associação',
-  comercio_na_aldeia: 'Comércio de produtos na aldeia',
-  construtor_aldeia: 'Construção da aldeia',
-  protecao_seguranca_aldeia: 'Proteção / Segurança da aldeia',
-  trabalho_domestico: 'Trabalho doméstico',
-  turismo_aldeia: 'Turismo na aldeia',
-  cuidado_criancas_animais: 'Cuidado de crianças e animais',
-  professor_indigena: 'Professor indígena',
-  estudo: 'Estudo',
   nenhuma: 'Nenhuma',
-  outros: 'Outros'
+  cacique_paje: 'Pajé/Cacique',
+  aprendiz_de_cacique_paje: 'Aprendiz de Pajé/Cacique',
+  capitao: 'Capitão',
+  agricultor: 'Agricultor',
+  'caça_pesca_coleta': 'Caça, pesca, coleta',
+  outros: 'Outros',
+  'ns-nr': 'NS/NR',
+}
+
+export const motivosNaoTrabalhaOptions = {
+  desempregago: 'Estou desempregada(o)',
+  aposentado: 'Sou aposentada(o)',
+  dona_de_casa: 'Sou dona de casa',
+  estudante: 'Sou estudante',
+  outros: 'Outros',
+  'ns-nr': 'NS/NR',
 }
 
 export const trabalhoColheitaRegioesOptions = {
