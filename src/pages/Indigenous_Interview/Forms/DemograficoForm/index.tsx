@@ -10,12 +10,9 @@ import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
 
-import { FormHelperType, quadroDemograficoHelper } from './helper';
+import { FormHelperType, extraDemograficoHelper, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
 import Input from '../../../../components/Input';
-import Select from '../../../../components/Select';
-import { trabalhoColheitaRegioesOptions, yesOrNoOptions } from '../../questions/SelectorOptions/options';
-import { handleValueLabelOption } from '../../questions/handleValueLabelOption';
 import api from '../../../../services/api';
 import { useAuth } from '../../../../hooks/auth';
 import ICreateDemograficoDTO from '../../dtos/ICreateDemograficoDTO';
@@ -47,6 +44,12 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       return
     }
     counter += 1;
+  }
+
+  let regularCounter = 0;
+
+  function incrementCounter () {
+    regularCounter += 1;
   }
 
   const handleSubmit = useCallback(async (data: ICreateDemograficoDTO) => {
@@ -115,6 +118,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       //@ts-ignore
       const message = error?.data?.message
       if (message) {
+
         addToast({
           type: 'error',
           title: message,
@@ -184,7 +188,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       let isDisabled = true
       const found = formDependencies?.[index]?.[obj?.[0]]
       if (found) {
-        if (obj?.[1]?.find((v: any) => Number(v) <= Number(found))) {
+        if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
           isDisabled = false
         }
       }
@@ -197,67 +201,104 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     }
   }
 
+  function handleRegularDisabled(element: FormHelperType): boolean {
+      const dependencies: { [key: string]: string[] } | any = element?.dependencies
+      const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
+        let isDisabled = true
+        const found = formDependencies[obj?.[0]]
+        if (found) {
+          if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
+            isDisabled = false
+          }
+        }
+        return isDisabled
+      })
+      if (allDisabledValidations?.every(v => v === false)) {
+        return false
+      } else {
+        return true
+      }
+    }
+
+  function handleRegularDependencies(element: FormHelperType, value: any) {
+    let currentForm: any = {
+      ...formDependencies,
+      [element.props.name]: value
+    }
+    setFormDependencies(currentForm)
+  }
+
+  function handleArrayDependencies(element: FormHelperType, value: any) {
+    const arrayOfOptions = value?.map((v: any) => v?.value)
+    let currentForm: any = {
+      ...formDependencies,
+      [element.props.name]: arrayOfOptions
+    }
+    setFormDependencies(currentForm)
+  }
+
   return (
     <StyledForm
       ref={DemograficoFormRef}
       onSubmit={handleSubmit}
     >
-        <section>
-            <Label>Quantas pessoas são moradores permanentes desta casa? (exclui pessoas de passagem, visitantes parentes ou não)</Label>
-            <Input name="total_moradores" type="number" onChange={(e) => setBaseArraySize(Number(e.target.value))} />
-            <Button type="button" onClick={handleArrayForm}>Gerar tabela</Button>
-            {residentsGrid?.length > 0 && (
-                <Label>
-                    ATENÇÃO: Primeiro preencha o nome de cada morador. O primeiro sempre será o entrevistado e os seguintes estarão na ordem do mais velho ao mais novo. Conferir com o número de moradores referidos antes e perguntar se falta alguém.  Todas as perguntas do quadro devem ser preenchidas para cada morador, ao terminar 1 morador passa-se para o nome abaixo.
-                </Label>
-            )}
+      <section>
+        <Label>Quantas pessoas são moradores permanentes desta casa? (exclui pessoas de passagem, visitantes parentes ou não)</Label>
+        <Input name="total_moradores" type="number" onChange={(e) => setBaseArraySize(Number(e.target.value))} />
+        <Button type="button" onClick={handleArrayForm}>Gerar tabela</Button>
+        {residentsGrid?.length > 0 && (
+          <Label>
+              ATENÇÃO: Primeiro preencha o nome de cada morador. O primeiro sempre será o entrevistado e os seguintes estarão na ordem do mais velho ao mais novo. Conferir com o número de moradores referidos antes e perguntar se falta alguém.  Todas as perguntas do quadro devem ser preenchidas para cada morador, ao terminar 1 morador passa-se para o nome abaixo.
+          </Label>
+        )}
         </section>
         {residentsGrid?.map((item: any, index: number) => (
-            <Scope path={`moradores[${index}]`} key={item.id}>
-                <section>
-                    <span style={{ visibility: 'hidden' }}>
-                        <Input name="id" value={index+1} type="number" />
-                    </span>
-                    {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                        <span key={elementIndex}>
-                            {incrementCounterUpToLength(quadroDemograficoHelper.length)}
-                            <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
-                            <element.type
-                              {...element.props}
-                              isDisabled={element?.dependencies && handleDisabled(element, index+1)}
-                              onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target.value)}
-                              />
-                        </span>
-                        )
-                    )}
-                    {/* <Button type="button" onClick={() => removeForm(item.id)}>
-                        Remover
-                    </Button> */}
-                </section>
-            </Scope>
-        ))}
-        <section>
-            <Label>
-              Alguém desta casa trabalhou no último ano, ou tem trabalho temporário de colheita em fazendas em outras regiões do país (por exemplo, na colheita de maçã no sul do país ou corte manual de cana)? (PODE SER MAIS DE 1 RESPOSTA)
-            </Label>
-            <Select name="morador_trabalhou_fazendas" isMulti={true} options={handleValueLabelOption(trabalhoColheitaRegioesOptions)} />
-            <Label>
-              Alguém desta casa já trabalhou no último ano, ou trabalha para fazendeiros desta região  na catação/colheita de milho, mandioca, soja, ou outro produto?
-            </Label>
-            <Select name="morador_trabalhou_catacao" options={handleValueLabelOption(yesOrNoOptions)} />
-            <Button type="submit">Enviar</Button>
-        </section>
-        {/* {residentsGrid?.length > 0 && (
+          <Scope path={`moradores[${index}]`} key={item.id}>
             <section>
-                <Button
-                    onClick={() => addForm()}
-                    type="button"
-                >
-                    Adicionar
-                </Button>
-
+              <span style={{ visibility: 'hidden' }}>
+                <Input name="id" value={index+1} type="number" />
+              </span>
+              {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
+                <span key={elementIndex}>
+                  {incrementCounterUpToLength(quadroDemograficoHelper.length)}
+                  <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
+                  <element.type
+                    {...element.props}
+                    isDisabled={element?.dependencies && handleDisabled(element, index+1)}
+                    onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.value)}
+                    />
+                </span>
+                )
+              )}
             </section>
-        )} */}
+          </Scope>
+        ))}
+
+        {extraDemograficoHelper?.map((s: FormHelperType[], sectionIndex: number) => (
+          <section key={sectionIndex}>
+            {s?.map((element: FormHelperType, elementIndex: number) => (
+              <span key={elementIndex}>
+                {elementIndex === 0 && <Label>Seção apenas para o respondente/chefe</Label>}
+                {incrementCounter()}
+                <Label>{`${regularCounter}. ${element.label}`}</Label>
+                <element.type
+                  {...element.props}
+                  isDisabled={element?.dependencies && handleRegularDisabled(element)}
+                  onChange={(e: any) => {
+                    if (element?.props?.isMulti !== true) {
+                      element?.hasDependencies && handleRegularDependencies(element, e?.value)
+                    } else {
+                      element?.hasDependencies && handleArrayDependencies(element, e)
+                    }
+                  }}
+                />
+              </span>
+            ))}
+            {extraDemograficoHelper.length === sectionIndex + 1 && (
+              <Button type="submit">Enviar</Button>
+            )}
+          </section>
+        ))}
     </StyledForm>
   );
 }

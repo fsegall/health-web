@@ -5,17 +5,72 @@ export const DemograficoValidation = Yup.object().shape({
     .test('validate-moradores', 'Você deve gerar a grade com o número correto de moradores', function(value){
       return this.parent.moradores.length === value
     }),
-    morador_trabalhou_fazendas: Yup.string().required('Você deve preencher sobre a colheita'),
-    morador_trabalhou_catacao: Yup.string().required('Você deve preencher sobre a colheita'),
     entrevista_indigena_id: Yup.string().nullable().notRequired(),
+
+    morador_nao_indigena: Yup.string().required('Você precisa preencher sobre a existência de morador não indígena'),
+    quantidade_morador_nao_indigena: Yup.string().nullable().when("morador_nao_indigena", {
+      is: (val: any) => val === "true",
+      then: Yup.number().required('Você precisa digitar a quantidade de morador não indígena').min(1, 'A quantidade não pode ser menor que um'),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    povo_etnia: Yup.array().required('Você precisa preencher sobre a etnia'),
+    serie_frequentada_escola: Yup.string().required('Você precisa preencher sobre a escolaridade'),
+    crenca_religiao: Yup.string().required('Você precisa preencher sobre a crença religiosa'),
+    crenca_religiao_igreja: Yup.string().nullable().when("crenca_religiao", {
+      is: (val: any) => [
+        "igreja_e_paje", "igreja"
+      ].find(v => v === String(val)),
+      then: Yup.string().nullable().required("Você precisa preencher sobre a crença na igreja"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    situacao_no_trabalho: Yup.string().required('Você precisa preencher sobre a situação atual de trabalho'),
+    remuneracao_trabalho_na_aldeia: Yup.string().nullable().when("situacao_no_trabalho", {
+      is: (val: any) => String(val) === "sim_aldeia",
+      then: Yup.string().nullable().required("Você precisa preencher sobre a remuneração do trabalho na aldeia"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    funcao_trabalho_remunerado_na_aldeia: Yup.string().nullable().when("remuneracao_trabalho_na_aldeia", {
+      is: (val: any) => String(val) === "sim",
+      then: Yup.string().nullable().required("Você precisa preencher sobre a função do trabalho na aldeia"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    remuneracao_trabalho_fora_aldeia: Yup.string().nullable().when("situacao_no_trabalho", {
+      is: (val: any) => String(val) === "sim_fora_da_aldeia",
+      then: Yup.string().nullable().required("Você precisa preencher sobre a remuneração do trabalho fora da aldeia"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    funcao_trabalho_remunerado_fora_da_aldeia: Yup.string().nullable().when("remuneracao_trabalho_fora_aldeia", {
+      is: (val: any) => String(val) === "sim",
+      then: Yup.string().nullable().required("Você precisa preencher sobre a função do trabalho fora da aldeia"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
+    funcao_nao_remunerada_aldeia: Yup.string().nullable().required("Você precisa preencher sobre função não remunerada na aldeia"),
+    motivo_nao_trabalha: Yup.string().nullable().when("situacao_no_trabalho", {
+      is: (val: any) => String(val) === "nao",
+      then: Yup.string().nullable().required("Você precisa preencher sobre a o motivo de não trabalhar"),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
     moradores: Yup.array()
     .of(
       Yup.object().shape({
         id: Yup.number().required('ID obrigatório'),
         nome: Yup.string().required('Você precisa digitar um nome'),
         relacao_com_lider: Yup.string().required('Você precisa digitar a relação com o chefe'),
-        idade: Yup.number().required('Você precisa digitar uma idade').min(0, 'A idade não pode ser menor que zero'),
+        maior_de_um_ano: Yup.string().required('Você precisa preencher se é maior de um ano'),
+        idade: Yup.string().nullable().when("maior_de_um_ano", {
+          is: (val: any) => val === "sim",
+          then: Yup.number().required('Você precisa digitar uma idade').min(1, 'A idade não pode ser menor que um'),
+          otherwise: Yup.string().nullable().notRequired(),
+        }),
+        idade_em_meses: Yup.string().nullable().when("maior_de_um_ano", {
+          is: (val: any) => val === "nao",
+          then: Yup.number().required('Você precisa digitar uma idade em MESES').min(1, 'A idade não pode ser menor que um'),
+          otherwise: Yup.string().nullable().notRequired(),
+        }),
         sexo: Yup.string().required('Você precisa digitar o sexo'),
+
+
+
         indigena: Yup.string().required('Você precisa digitar a raça'),
         povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
         crenca_religiao: Yup.string().nullable().when("idade", {

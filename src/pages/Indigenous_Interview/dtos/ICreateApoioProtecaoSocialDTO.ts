@@ -1,31 +1,29 @@
 export default interface ICreateApoioProtecaoSocialDTO extends ApoioFinanceiroDTO {
-    criancas_comem_escola: string; //select
-    alimentacao_escolar_inclui_cultura: string; //select
-    morador_recebe_ajuda_financeira: string; //select
-    // se sim
-    // ApoioFinanceiroDTO
-    recebeu_cesta_alimentos?: string[]; //multi-select
-    recebeu_cesta_alimentos_que_alimentos_deveriam_ter?: string[]; //multi-select
-    // morador_recebe_programa_social: ApoioFinanceiroDTO
-    descricao_adicionar_outro?: string;
-    motivo_nao_recebe_cesta_alimentos?: string; //select
-
-    ajuda_estado_prefeitura_outros_3m: string; //select
-    // se sim
-    o_que_recebeu_ajuda_3m?: string[]; //select
-    constrangimento_pedir_ajuda_alimentos_3m: string; //select
+  possui_crianca_ou_jovem_que_frequenta_escola: string; //select
+  criancas_comem_escola?: string; //select
+  alimentacao_escolar_inclui_cultura?: string; //select
+  renda_total_30_dias?: string; //select
+  opcoes_renda_total_30_dias?: string; //select
+  // se sim
+  // ApoioFinanceiroDTO
+  recebeu_cesta_alimentos?: string[]; //multi-select
+  motivo_nao_recebe_cesta_alimentos?: string; //select
 }
 
 interface ApoioFinanceiroDTO {
-    bolsa_familia_auxilio_brasil: string; //select
-    bpc: string; //select
-    beneficio_deficientes_idosos: string; //select
-    auxilio_maternidade: string; //select
-    auxilio_doenca: string; //select
-    auxilio_reclusao: string; //select
-    aposentadoria: string; //select
-    pensao_morte: string; //select
-    pronaf: string; //select
-    programa_auxilio_estadual_municipal: string; //select
-    cesta_alimentos: string; //select
+  bolsa_familia_auxilio_brasil: string; //select
+  valor_bolsa_familia_auxilio_brasil?: number;
+  bpc: string; //select
+  valor_bpc?: number;
+  auxilio_maternidade: string; //select
+  valor_auxilio_maternidade?: number;
+  auxilio_doenca: string; //select
+  valor_auxilio_doenca?: number;
+  aposentadoria: string; //select
+  valor_aposentadoria?: number;
+  pensao_morte: string; //select
+  valor_pensao_morte?: number;
+  programa_auxilio_estadual_municipal: string; //select
+  valor_programa_auxilio_estadual_municipal?: number
+  cesta_alimentos: string; //select
 }
