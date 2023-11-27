@@ -152,11 +152,14 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         {informacoesBasicasFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
-                    <span key={elementIndex}>
-                      { incrementCounter() }
-                        <Label>{`${counter}. ${element.label}`}</Label>
-                        <element.type {...element.props} />
-                    </span>
+                  <span key={elementIndex}>
+                    { incrementCounter() }
+                      <Label>{`${counter}. ${element.label}`}</Label>
+                      {element.orientation && (
+                        <Label style={{ marginTop: '10px' }}><strong>Orientação: </strong> {element.orientation}</Label>
+                      )}
+                      <element.type {...element.props} />
+                  </span>
                 ))}
                 {informacoesBasicasFormHelper?.length === sectionIndex+1 && (
                     <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
