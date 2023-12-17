@@ -66,7 +66,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Se sim, porque?',
+            label: 'Se sim, porque? (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'motivo_doencas_contato_veneno_lavoura',
@@ -187,11 +187,12 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
       hasDependencies: true
     },
     {
-      label: 'Se sim, neste momento na sua casa tem: (LER AS OPÇÕES)',
+      label: 'Se sim, neste momento na sua casa tem: (LER AS OPÇÕES) (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
           name: 'mulheres_e_gestacao',
           options: handleValueLabelOption(gestanteOptions),
+          isMulti: true
       },
       dependencies: {
         moradora_entre_13_e_45_anos: [
@@ -222,7 +223,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Se sim, a criança ontem comeu ou bebeu? (se houver mais de 1 criança, perguntar apenas sobre a mais nova)',
+      label: ' Se sim, a criança ontem comeu ou bebeu: (LER TODAS AS OPÇÕES, PODE TER MAIS DE 1 RESPOSTA): (Obs: se houver mais de uma criança, pergunte apenas sobre a mais nova)',
       type: Select,
       props: {
           name: 'crianca_ate_6_meses_outros_alimentos',
@@ -249,7 +250,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
       type: Select,
       props: {
           name: 'crianca_entre_6_meses_e_2_anos_leite_do_peito',
-          options: handleValueLabelOption(criancaComidaOptions),
+          options: handleValueLabelOption(yesOrNoOptions),
       },
       dependencies: {
         crianca_entre_6_meses_e_2_anos: [
@@ -341,36 +342,27 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
         },
 
         {
-          label: 'Essa casa possui CRIANÇA(S)?',
-          type: Select,
-          props: {
-              name: 'possui_morador_crianca',
-              options: handleValueLabelOption(simOuNao),
-          },
-          hasDependencies: true
-        },
-        {
-          label: 'Para domicílio COM CRIANÇAS: No último mês, alguma criança desta casa foi diagnosticada (por médico, enfermeiro ou nutricionista) com diarreia?',
+          label: 'No último mês, alguma criança desta casa foi diagnosticada (por médico, enfermeiro ou nutricionista) com diarreia?',
           type: Select,
           props: {
               name: 'possui_morador_crianca_diarreia',
               options: handleValueLabelOption(yesOrNoOptions),
           },
           dependencies: {
-            possui_morador_crianca: [
+            possui_morador_menor_ou_igual_a_5_anos: [
               "sim"
             ],
           }
       },
         {
-          label: 'Para domicílio COM CRIANÇAS: No último mês, alguma criança desta casa foi diagnosticada (por médico ou enfermeiro) com pneumonia?',
+          label: 'No último mês, alguma criança desta casa foi diagnosticada (por médico ou enfermeiro) com pneumonia?',
           type: Select,
           props: {
               name: 'possui_morador_crianca_pneumonia',
               options: handleValueLabelOption(yesOrNoOptions),
           },
           dependencies: {
-            possui_morador_crianca: [
+            possui_morador_menor_ou_igual_a_5_anos: [
               "sim"
             ],
           }

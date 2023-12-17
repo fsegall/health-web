@@ -59,12 +59,12 @@ export const DemograficoValidation = Yup.object().shape({
         maior_de_um_ano: Yup.string().required('Você precisa preencher se é maior de um ano'),
         idade: Yup.string().nullable().when("maior_de_um_ano", {
           is: (val: any) => val === "sim",
-          then: Yup.number().required('Você precisa digitar uma idade').min(1, 'A idade não pode ser menor que um'),
+          then: Yup.number().required('Você precisa digitar uma idade').min(1, 'A idade não pode ser menor que um').max(100, 'A idade não pode ser menor que cem anos'),
           otherwise: Yup.string().nullable().notRequired(),
         }),
         idade_em_meses: Yup.string().nullable().when("maior_de_um_ano", {
           is: (val: any) => val === "nao",
-          then: Yup.number().required('Você precisa digitar uma idade em MESES').min(1, 'A idade não pode ser menor que um'),
+          then: Yup.number().required('Você precisa digitar uma idade em MESES').min(1, 'A idade não pode ser menor que um').max(12, 'A idade não pode ser menor que 12 meses'),
           otherwise: Yup.string().nullable().notRequired(),
         }),
         sexo: Yup.string().required('Você precisa digitar o sexo'),
