@@ -377,13 +377,13 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D14 - Algum morador de sua casa teve diagnóstico positivo COVID-19?</Label>
+        <Label>D14 - Algum morador de sua casa teve diagnóstico positivo de COVID-19?</Label>
         <Select
           name="diagnostico_covid_positivo" //TODO:alinhar_com_raul-diagnostico_covid_positivo
           options={yesOrNoOptions}
         />
 
-        <Label>D15 - Algum morador de sua casa está apresentando sequelas da COVID-19?</Label>
+        <Label>D15 - Algum morador(a) da sua casa ainda tem problema de saúde (sequela) decorrente da COVID-19?</Label>
         <Select
           name="sequelas_covid" //TODO:alinhar_com_raul-sequelas_covid
           options={yesOrNoOptions}

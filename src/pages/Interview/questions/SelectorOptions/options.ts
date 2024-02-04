@@ -88,6 +88,10 @@ export const situacao_de_trabalho = [
     value: 'dona de casa',
     label: 'Dona de casa',
   },
+  {
+    value: 'nao trabalha e nao procura emprego',
+    label: 'Não trabalha e não procura emprego',
+  },
 ];
 
 // P8 ocupacao
@@ -98,8 +102,8 @@ export const ocupacao_profissional = [
     label: 'Agricultor(a) familiar ou produtor(a) rural',
   },
   {
-    value: 'trabalhador(a) rural temporário (diarista, safrista etc.)',
-    label: 'Trabalhador(a) rural temporário (diarista, safrista etc.)',
+    value: 'trabalhador(a) rural com carteira assinada',
+    label: 'Trabalhador(a) rural com carteira assinada',
   },
   {
     value: 'trabalhador(a) em emprego com carteira assinada no comércio',
@@ -118,8 +122,12 @@ export const ocupacao_profissional = [
     label: 'Trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
   },
   {
-    value: 'funcionário(a) público',
-    label: 'Funcionário(a) público',
+    value: 'funcionario(a) publico(a)',
+    label: 'Funcionário(a) público(a)',
+  },
+  {
+    value: 'trabalhador(a) rural temporario (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário sem carteira assinada (diarista, safrista etc.)',
   },
   {
     value: 'trabalhador(a) em emprego sem carteira assinada no comércio',
@@ -429,8 +437,8 @@ export const frequentam_creche = [
     label: 'Não, por outro motivo',
   },
   {
-    value: 'não possui crianças menores de 6 anos',
-    label: 'Não possui crianças menores de 6 anos',
+    value: 'ns-nr',
+    label: 'NS/NR',
   },
 ]
 
