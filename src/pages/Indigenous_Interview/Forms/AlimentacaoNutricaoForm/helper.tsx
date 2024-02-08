@@ -209,7 +209,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
 
     {
       label:
-        'Vocês fazem coleta de outros tipos de castanhas, cocos ou outras frutas? (PODE TER MAIS DE UMA RESPOSTA)',
+        'Vocês fazem coleta de outros tipos de castanhas, cocos ou outras frutas? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
         name: 'coleta_castanhas_cocos_frutas',
@@ -219,7 +219,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'Se tem roça ou horta: O seu cultivo da roça ou horta é: (PODE TER MAIS DE UMA RESPOSTA)',
+        'Se tem roça ou horta: O seu cultivo da roça ou horta é: (PODE TER MAIS DE 1 RESPOSTA) (LER AS OPÇÕES)',
       type: Select,
       props: {
         name: 'funcao_cultivo_horta',
@@ -234,7 +234,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
   [
     {
       label:
-        'Onde vocês conseguem a semente ou rama para plantar? (PODE TER MAIS DE UMA RESPOSTA)',
+        'Onde vocês conseguem a semente ou rama para plantar? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
         name: 'origem_semente_plantio',
@@ -294,7 +294,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
       hasDependencies: true,
     },
     {
-      label: 'Se sim, quais animais? (PODE TER MAIS DE UMA RESPOSTA)',
+      label: 'Se sim, quais animais? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
         name: 'lista_animais_de_criacao_alimentacao_ou_venda',
@@ -334,7 +334,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'Agora queremos saber mais sobre a comida dos moradores desta casa. Ontem, na casa, vocês comeram:" (LER AS OPÇÕES)',
+        'Agora queremos saber mais sobre a comida dos moradores desta casa. Ontem, na casa, vocês comeram:" (LER TODAS AS OPÇÕES)',
       type: Select,
       props: {
         name: 'alimentos_consumidos_dia_anterior',

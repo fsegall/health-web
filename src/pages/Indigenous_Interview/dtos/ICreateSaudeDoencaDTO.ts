@@ -25,7 +25,7 @@ export default interface ICreateSaudeDoencaDTO {
 
   //
   moradora_entre_13_e_45_anos: string;
-  mulheres_e_gestacao?: string;
+  mulheres_e_gestacao?: string[];
 
   crianca_ate_6_meses: string;
   crianca_ate_6_meses_leito_do_peito?: string;

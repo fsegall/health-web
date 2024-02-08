@@ -45,8 +45,8 @@ export const SaudeDoencaValidation = Yup.object().shape({
     moradora_entre_13_e_45_anos: Yup.string().required('Você precisa preencher sobre mulher entre 13 e 45 anos'),
     mulheres_e_gestacao: Yup.string().nullable().when("moradora_entre_13_e_45_anos", {
       is: (val: any) => String(val) === "sim",
-      then: Yup.string().nullable().required("Você precisa preencher sobre gestação e amamentação"),
-      otherwise: Yup.string().nullable().notRequired(),
+      then: Yup.array().nullable().required("Você precisa preencher sobre gestação e amamentação"),
+      otherwise: Yup.array().nullable().notRequired(),
     }),
     crianca_ate_6_meses: Yup.string().required('Você precisa preencher sobre crianças até 6 meses'),
     crianca_ate_6_meses_leito_do_peito: Yup.string().nullable().when("crianca_ate_6_meses", {
@@ -90,15 +90,14 @@ export const SaudeDoencaValidation = Yup.object().shape({
       then: Yup.string().nullable().required("Você precisa preencher sobre desnutrição para crianças"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-    possui_morador_crianca: Yup.string().required('Você precisa preencher se possui morador criança'),
-    possui_morador_crianca_diarreia: Yup.string().nullable().when("possui_morador_crianca", {
+    possui_morador_crianca_diarreia: Yup.string().nullable().when("possui_morador_menor_ou_igual_a_5_anos", {
       is: (val: any) => [
         "sim"
       ].find(v => v === String(val)),
       then: Yup.string().nullable().required("Você precisa preencher sobre diarreia para crianças"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-    possui_morador_crianca_pneumonia: Yup.string().nullable().when("possui_morador_crianca", {
+    possui_morador_crianca_pneumonia: Yup.string().nullable().when("possui_morador_menor_ou_igual_a_5_anos", {
       is: (val: any) => [
         "sim"
       ].find(v => v === String(val)),
