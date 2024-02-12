@@ -39,6 +39,16 @@ interface StateFormat {
       id: string | null;
       show: boolean;
     };
+    violence:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    mental_health:
+    {
+      id: string | null;
+      show: boolean;
+    };
     address:
     {
       id: string | null;
@@ -73,6 +83,14 @@ const initialState: StateFormat = {
       id: null,
       show: false,
     },
+    violence: {
+      id: null,
+      show: false,
+    },
+    mental_health: {
+      id: null,
+      show: false,
+    },
     address: {
       id: null,
       show: true,
@@ -93,6 +111,10 @@ function reducer(state: StateFormat, action: FormActionFormat) {
       return { formsSubmitted: { ...state.formsSubmitted, address: { id: action?.payload?.id, show: false } } };
     case 'DISCRIMINATION':
       return { formsSubmitted: { ...state.formsSubmitted, discrimination: { id: action?.payload?.id, show: action?.payload?.show } } };
+    case 'VIOLENCE':
+      return { formsSubmitted: { ...state.formsSubmitted, violence: { id: action?.payload?.id, show: action?.payload?.show } } };
+    case 'MENTAL_HEALTH':
+      return { formsSubmitted: { ...state.formsSubmitted, mental_health: { id: action?.payload?.id, show: action?.payload?.show } } };
     case 'INTERVIEW':
       return { ...initialState };
     default:
@@ -136,7 +158,8 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
-      localStorage.removeItem('@Safety:discrimination_id');
+      localStorage.removeItem('@Safety:violence_id');
+      localStorage.removeItem('@Safety:mental_health_id');
       localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
@@ -150,6 +173,8 @@ const Interview: React.FC = () => {
       const household_id = localStorage.getItem('@Safety:household_id');
       const address_id = localStorage.getItem('@Safety:address_id');
       const discrimination_id = localStorage.getItem('@Safety:discrimination_id');
+      const violence_id = localStorage.getItem('@Safety:violence_id');
+      const mental_health_id = localStorage.getItem('@Safety:mental_health_id');
 
       const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
 
@@ -184,6 +209,22 @@ const Interview: React.FC = () => {
       } else if (offlineInterviews && offline_id) {
         if (offlineInterviews[offline_id]?.hasOwnProperty('discrimination')) {
           dispatch({ type: 'DISCRIMINATION', payload: { id: offline_id, show: false } })
+        }
+      }
+
+      if (violence_id) {
+        dispatch({ type: 'VIOLENCE', payload: { id: violence_id, show: false } })
+      } else if (offlineInterviews && offline_id) {
+        if (offlineInterviews[offline_id]?.hasOwnProperty('violence')) {
+          dispatch({ type: 'VIOLENCE', payload: { id: offline_id, show: false } })
+        }
+      }
+
+      if (mental_health_id) {
+        dispatch({ type: 'MENTAL_HEALTH', payload: { id: mental_health_id, show: false } })
+      } else if (offlineInterviews && offline_id) {
+        if (offlineInterviews[offline_id]?.hasOwnProperty('mental_health')) {
+          dispatch({ type: 'MENTAL_HEALTH', payload: { id: offline_id, show: false } })
         }
       }
     }
@@ -247,11 +288,18 @@ const Interview: React.FC = () => {
 
       <FamilyMemberForm /> */}
       <SectionTitleGroup>
-        <SectionTitle id="discrimination">Discriminação</SectionTitle>
+        <SectionTitle id="health_module">Qualidade de Vida</SectionTitle>
         <Switch
           onColor="#c2024b" offColor="#dedede"
-          onChange={() => dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })} checked={formState.formsSubmitted.discrimination.show}
+          onChange={() => {
+            dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })
+            dispatch({ type: 'VIOLENCE', payload: { id: formState.formsSubmitted.violence.id, show: !formState.formsSubmitted.violence.show } })
+            dispatch({ type: 'MENTAL_HEALTH', payload: { id: formState.formsSubmitted.mental_health.id, show: !formState.formsSubmitted.mental_health.show } })
+          }} checked={formState.formsSubmitted.discrimination.show && formState.formsSubmitted.violence.show && formState.formsSubmitted.mental_health.show}
         />
+      </SectionTitleGroup>
+      <SectionTitleGroup>
+        <SectionTitle id="discrimination">Discriminação</SectionTitle>
       </SectionTitleGroup>
       {formState.formsSubmitted.discrimination.show && (
       <DiscriminationForm
@@ -262,6 +310,18 @@ const Interview: React.FC = () => {
           hasPreviousStepCompleted={true}
         />
       )}
+      <SectionTitleGroup>
+        <SectionTitle id="violence">Violência</SectionTitle>
+        {formState.formsSubmitted.violence.show && (
+          <p>Formulário de Violência</p>
+        )}
+      </SectionTitleGroup>
+      <SectionTitleGroup>
+        <SectionTitle id="mental_health">Saúde Mental e Estresse</SectionTitle>
+        {formState.formsSubmitted.mental_health.show && (
+          <p>Formulário de Saúde Mental e Estresse</p>
+        )}
+      </SectionTitleGroup>
       <SectionTitle id="address">Endereço</SectionTitle>
       {formState.formsSubmitted.address.show && (
         <AddressForm
