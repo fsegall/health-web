@@ -21,6 +21,7 @@ import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineIntervie
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import DiscriminationForm from './Forms/DiscriminationForm';
+import MentalHealthForm from './Forms/MentalHealthForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -302,7 +303,7 @@ const Interview: React.FC = () => {
         <SectionTitle id="discrimination">Discriminação</SectionTitle>
       </SectionTitleGroup>
       {formState.formsSubmitted.discrimination.show && (
-      <DiscriminationForm
+        <DiscriminationForm
           dispatch={dispatch}
           isEditForm={id ? true : false}
           offline={isOffline}
@@ -312,16 +313,22 @@ const Interview: React.FC = () => {
       )}
       <SectionTitleGroup>
         <SectionTitle id="violence">Violência</SectionTitle>
-        {formState.formsSubmitted.violence.show && (
-          <p>Formulário de Violência</p>
-        )}
       </SectionTitleGroup>
+      {formState.formsSubmitted.violence.show && (
+        <p>Formulário de Violência</p>
+      )}
       <SectionTitleGroup>
         <SectionTitle id="mental_health">Saúde Mental e Estresse</SectionTitle>
-        {formState.formsSubmitted.mental_health.show && (
-          <p>Formulário de Saúde Mental e Estresse</p>
-        )}
       </SectionTitleGroup>
+      {formState.formsSubmitted.mental_health.show && (
+        <MentalHealthForm
+          dispatch={dispatch}
+          isEditForm={id ? true : false}
+          offline={isOffline}
+          initialValues={initialValues ? initialValues?.mental_health : {}}
+          hasPreviousStepCompleted={true}
+        />
+      )}
       <SectionTitle id="address">Endereço</SectionTitle>
       {formState.formsSubmitted.address.show && (
         <AddressForm
