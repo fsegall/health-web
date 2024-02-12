@@ -196,7 +196,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, setLoading],
+    [addToast, token, dispatch, offline, setLoading, hasPreviousStepCompleted],
   );
 
   if (isEditForm) {

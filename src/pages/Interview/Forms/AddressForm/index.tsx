@@ -128,7 +128,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
     } finally {
       setLoading(false)
     }
-  }, [addToast, token, dispatch, offline, setLoading]);
+  }, [addToast, token, dispatch, offline, setLoading, hasPreviousStepCompleted]);
 
   if (isEditForm) {
     AddressFormRef.current?.setData({

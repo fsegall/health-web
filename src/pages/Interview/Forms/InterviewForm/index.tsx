@@ -163,7 +163,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
     } finally {
       setLoading(false)
     }
-  }, [addToast, token, history, dispatch, offline, setLoading]);
+  }, [addToast, token, history, dispatch, offline, setLoading, hasPreviousStepCompleted]);
 
   if (isEditForm) {
     InterviewFormRef.current?.setData({

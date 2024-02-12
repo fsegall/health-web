@@ -132,7 +132,7 @@ const ViolenceForm: React.FC<ViolenceFormProps> = ({ dispatch, offline, initialV
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, loading, setLoading],
+    [addToast, token, dispatch, offline, loading, setLoading, hasPreviousStepCompleted],
   );
 
   const [formDependencies, setFormDependencies] = useState<any>({});

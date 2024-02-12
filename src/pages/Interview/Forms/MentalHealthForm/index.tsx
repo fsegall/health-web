@@ -126,7 +126,7 @@ const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, 
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, loading, setLoading],
+    [addToast, token, dispatch, offline, loading, setLoading, hasPreviousStepCompleted],
   );
 
 
