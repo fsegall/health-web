@@ -10,6 +10,17 @@ export const simOuNao = {
   nao: 'Não',
 };
 
+export const violencePlacesOptions = {
+  residencia: 'Residência',
+  local_publico: 'Via pública ou outro local público',
+  trabalho: 'Trabalho',
+  internet_celular: 'Internet / Redes Sociais / Celular',
+  estabalecimento_de_ensino: 'Escola, faculdade ou outro estabalecimento de ensino',
+  bar_comercio_restaurante: 'Bar, comércio, restaurante ou similar',
+  transporte_publico: 'Transporte público',
+  outros: 'Outros (especificar)'
+}
+
 export const criancaComidaOptions = {
   mingau: 'Mingau',
   agua_ou_cha: 'Água ou Chá',

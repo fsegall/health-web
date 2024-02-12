@@ -22,6 +22,7 @@ import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import DiscriminationForm from './Forms/DiscriminationForm';
 import MentalHealthForm from './Forms/MentalHealthForm';
+import ViolenceForm from './Forms/ViolenceForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -315,7 +316,13 @@ const Interview: React.FC = () => {
         <SectionTitle id="violence">Violência</SectionTitle>
       </SectionTitleGroup>
       {formState.formsSubmitted.violence.show && (
-        <p>Formulário de Violência</p>
+        <ViolenceForm
+          dispatch={dispatch}
+          isEditForm={id ? true : false}
+          offline={isOffline}
+          initialValues={initialValues ? initialValues?.violence : {}}
+          hasPreviousStepCompleted={true}
+        />
       )}
       <SectionTitleGroup>
         <SectionTitle id="mental_health">Saúde Mental e Estresse</SectionTitle>
