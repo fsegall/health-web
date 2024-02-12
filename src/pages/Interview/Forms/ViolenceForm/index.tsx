@@ -46,6 +46,14 @@ const ViolenceForm: React.FC<ViolenceFormProps> = ({ dispatch, offline, initialV
   const handleSubmit = useCallback(
     async (data: ICreateViolenceDTO) => {
 
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       try {
         if(!loading) {
         setLoading(true)

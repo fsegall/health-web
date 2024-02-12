@@ -33,9 +33,10 @@ interface AddressFormProps {
   offline: boolean;
   isEditForm?: boolean;
   initialValues?: any;
+  hasPreviousStepCompleted: boolean;
 }
 
-const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
+const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {}, hasPreviousStepCompleted = false }) => {
 
   const { addToast } = useToast();
 
@@ -47,6 +48,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
 
 
   const handleAddressSubmit = useCallback(async (data: ICreateAddressDTO) => {
+    if (!hasPreviousStepCompleted) {
+      addToast({
+        type: 'error',
+        title: 'Você ainda não enviou todos os formulários anteriores',
+        description: '',
+      });
+      return
+    }
     try {
       setLoading(true)
       AddressFormRef.current?.setErrors({});

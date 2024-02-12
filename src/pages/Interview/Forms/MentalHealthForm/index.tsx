@@ -40,7 +40,14 @@ const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, 
 
   const handleSubmit = useCallback(
     async (data: ICreateMentalHealthDTO) => {
-
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       try {
         if(!loading) {
         setLoading(true)

@@ -40,7 +40,14 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
   const handleSubmit = useCallback(
     async (data: ICreateDiscriminationDTO) => {
-
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       try {
         if(!loading) {
         setLoading(true)

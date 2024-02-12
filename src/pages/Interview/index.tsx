@@ -36,6 +36,11 @@ interface StateFormat {
       id: string | null;
       show: boolean;
     };
+    health_module:
+    {
+      id: string | null;
+      show: boolean;
+    };
     discrimination:
     {
       id: string | null;
@@ -81,6 +86,10 @@ const initialState: StateFormat = {
       id: null,
       show: true,
     },
+    health_module: {
+      id: null,
+      show: false,
+    },
     discrimination: {
       id: null,
       show: false,
@@ -111,6 +120,8 @@ function reducer(state: StateFormat, action: FormActionFormat) {
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };
     case 'ADDRESS':
       return { formsSubmitted: { ...state.formsSubmitted, address: { id: action?.payload?.id, show: false } } };
+    case 'HEALTH_MODULE':
+      return { formsSubmitted: { ...state.formsSubmitted, health_module: { id: null, show: action?.payload?.show } } };
     case 'DISCRIMINATION':
       return { formsSubmitted: { ...state.formsSubmitted, discrimination: { id: action?.payload?.id, show: action?.payload?.show } } };
     case 'VIOLENCE':
@@ -278,22 +289,18 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues?.household : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.person.id ? true : false}
         />
       )}
       {formState.formsSubmitted.household.id !== null && (
         <SubmittedContainer>Uma residência já foi criada</SubmittedContainer>
       )}
-
-      {/*       <SectionTitle id="family">
-        Membros da Família
-      </SectionTitle>
-
-      <FamilyMemberForm /> */}
       <SectionTitleGroup>
         <SectionTitle id="health_module">Qualidade de Vida</SectionTitle>
         <Switch
           onColor="#c2024b" offColor="#dedede"
           onChange={() => {
+            dispatch({ type: 'HEALTH_MODULE', payload: { id: null, show: !formState.formsSubmitted.health_module.show } })
             dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })
             dispatch({ type: 'VIOLENCE', payload: { id: formState.formsSubmitted.violence.id, show: !formState.formsSubmitted.violence.show } })
             dispatch({ type: 'MENTAL_HEALTH', payload: { id: formState.formsSubmitted.mental_health.id, show: !formState.formsSubmitted.mental_health.show } })
@@ -309,7 +316,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           offline={isOffline}
           initialValues={initialValues ? initialValues?.discrimination : {}}
-          hasPreviousStepCompleted={true}
+          hasPreviousStepCompleted={formState.formsSubmitted.household.id ? true : false}
         />
       )}
       <SectionTitleGroup>
@@ -321,7 +328,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           offline={isOffline}
           initialValues={initialValues ? initialValues?.violence : {}}
-          hasPreviousStepCompleted={true}
+          hasPreviousStepCompleted={formState.formsSubmitted.discrimination.id ? true : false}
         />
       )}
       <SectionTitleGroup>
@@ -333,7 +340,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           offline={isOffline}
           initialValues={initialValues ? initialValues?.mental_health : {}}
-          hasPreviousStepCompleted={true}
+          hasPreviousStepCompleted={formState.formsSubmitted.violence.id ? true : false}
         />
       )}
       <SectionTitle id="address">Endereço</SectionTitle>
@@ -343,6 +350,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues?.address : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.health_module.show ? (formState.formsSubmitted.mental_health.id ? true : false) : (formState.formsSubmitted.household.id ? true : false)}
         />
       )}
       {formState.formsSubmitted.address.id !== null && (
@@ -355,6 +363,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.address.id ? true : false}
         />
       )}
 
