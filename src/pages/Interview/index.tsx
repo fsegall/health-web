@@ -21,6 +21,8 @@ import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineIntervie
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import DiscriminationForm from './Forms/DiscriminationForm';
+import MentalHealthForm from './Forms/MentalHealthForm';
+import ViolenceForm from './Forms/ViolenceForm';
 
 interface StateFormat {
   formsSubmitted: {
@@ -34,7 +36,22 @@ interface StateFormat {
       id: string | null;
       show: boolean;
     };
+    health_module:
+    {
+      id: string | null;
+      show: boolean;
+    };
     discrimination:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    violence:
+    {
+      id: string | null;
+      show: boolean;
+    };
+    mental_health:
     {
       id: string | null;
       show: boolean;
@@ -69,7 +86,19 @@ const initialState: StateFormat = {
       id: null,
       show: true,
     },
+    health_module: {
+      id: null,
+      show: false,
+    },
     discrimination: {
+      id: null,
+      show: false,
+    },
+    violence: {
+      id: null,
+      show: false,
+    },
+    mental_health: {
       id: null,
       show: false,
     },
@@ -91,8 +120,14 @@ function reducer(state: StateFormat, action: FormActionFormat) {
       return { formsSubmitted: { ...state.formsSubmitted, household: { id: action?.payload?.id, show: false } } };
     case 'ADDRESS':
       return { formsSubmitted: { ...state.formsSubmitted, address: { id: action?.payload?.id, show: false } } };
+    case 'HEALTH_MODULE':
+      return { formsSubmitted: { ...state.formsSubmitted, health_module: { id: null, show: action?.payload?.show } } };
     case 'DISCRIMINATION':
       return { formsSubmitted: { ...state.formsSubmitted, discrimination: { id: action?.payload?.id, show: action?.payload?.show } } };
+    case 'VIOLENCE':
+      return { formsSubmitted: { ...state.formsSubmitted, violence: { id: action?.payload?.id, show: action?.payload?.show } } };
+    case 'MENTAL_HEALTH':
+      return { formsSubmitted: { ...state.formsSubmitted, mental_health: { id: action?.payload?.id, show: action?.payload?.show } } };
     case 'INTERVIEW':
       return { ...initialState };
     default:
@@ -136,7 +171,8 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
-      localStorage.removeItem('@Safety:discrimination_id');
+      localStorage.removeItem('@Safety:violence_id');
+      localStorage.removeItem('@Safety:mental_health_id');
       localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
@@ -150,6 +186,8 @@ const Interview: React.FC = () => {
       const household_id = localStorage.getItem('@Safety:household_id');
       const address_id = localStorage.getItem('@Safety:address_id');
       const discrimination_id = localStorage.getItem('@Safety:discrimination_id');
+      const violence_id = localStorage.getItem('@Safety:violence_id');
+      const mental_health_id = localStorage.getItem('@Safety:mental_health_id');
 
       const offline_id = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id')!);
 
@@ -184,6 +222,22 @@ const Interview: React.FC = () => {
       } else if (offlineInterviews && offline_id) {
         if (offlineInterviews[offline_id]?.hasOwnProperty('discrimination')) {
           dispatch({ type: 'DISCRIMINATION', payload: { id: offline_id, show: false } })
+        }
+      }
+
+      if (violence_id) {
+        dispatch({ type: 'VIOLENCE', payload: { id: violence_id, show: false } })
+      } else if (offlineInterviews && offline_id) {
+        if (offlineInterviews[offline_id]?.hasOwnProperty('violence')) {
+          dispatch({ type: 'VIOLENCE', payload: { id: offline_id, show: false } })
+        }
+      }
+
+      if (mental_health_id) {
+        dispatch({ type: 'MENTAL_HEALTH', payload: { id: mental_health_id, show: false } })
+      } else if (offlineInterviews && offline_id) {
+        if (offlineInterviews[offline_id]?.hasOwnProperty('mental_health')) {
+          dispatch({ type: 'MENTAL_HEALTH', payload: { id: offline_id, show: false } })
         }
       }
     }
@@ -235,31 +289,58 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues?.household : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.person.id ? true : false}
         />
       )}
       {formState.formsSubmitted.household.id !== null && (
         <SubmittedContainer>Uma residência já foi criada</SubmittedContainer>
       )}
-
-      {/*       <SectionTitle id="family">
-        Membros da Família
-      </SectionTitle>
-
-      <FamilyMemberForm /> */}
       <SectionTitleGroup>
-        <SectionTitle id="discrimination">Discriminação</SectionTitle>
+        <SectionTitle id="health_module">Qualidade de Vida</SectionTitle>
         <Switch
           onColor="#c2024b" offColor="#dedede"
-          onChange={() => dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })} checked={formState.formsSubmitted.discrimination.show}
+          onChange={() => {
+            dispatch({ type: 'HEALTH_MODULE', payload: { id: null, show: !formState.formsSubmitted.health_module.show } })
+            dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })
+            dispatch({ type: 'VIOLENCE', payload: { id: formState.formsSubmitted.violence.id, show: !formState.formsSubmitted.violence.show } })
+            dispatch({ type: 'MENTAL_HEALTH', payload: { id: formState.formsSubmitted.mental_health.id, show: !formState.formsSubmitted.mental_health.show } })
+          }} checked={formState.formsSubmitted.discrimination.show && formState.formsSubmitted.violence.show && formState.formsSubmitted.mental_health.show}
         />
       </SectionTitleGroup>
+      <SectionTitleGroup>
+        <SectionTitle id="discrimination">Discriminação</SectionTitle>
+      </SectionTitleGroup>
       {formState.formsSubmitted.discrimination.show && (
-      <DiscriminationForm
+        <DiscriminationForm
           dispatch={dispatch}
           isEditForm={id ? true : false}
           offline={isOffline}
           initialValues={initialValues ? initialValues?.discrimination : {}}
-          hasPreviousStepCompleted={true}
+          hasPreviousStepCompleted={formState.formsSubmitted.household.id ? true : false}
+        />
+      )}
+      <SectionTitleGroup>
+        <SectionTitle id="violence">Violência</SectionTitle>
+      </SectionTitleGroup>
+      {formState.formsSubmitted.violence.show && (
+        <ViolenceForm
+          dispatch={dispatch}
+          isEditForm={id ? true : false}
+          offline={isOffline}
+          initialValues={initialValues ? initialValues?.violence : {}}
+          hasPreviousStepCompleted={formState.formsSubmitted.discrimination.id ? true : false}
+        />
+      )}
+      <SectionTitleGroup>
+        <SectionTitle id="mental_health">Saúde Mental e Estresse</SectionTitle>
+      </SectionTitleGroup>
+      {formState.formsSubmitted.mental_health.show && (
+        <MentalHealthForm
+          dispatch={dispatch}
+          isEditForm={id ? true : false}
+          offline={isOffline}
+          initialValues={initialValues ? initialValues?.mental_health : {}}
+          hasPreviousStepCompleted={formState.formsSubmitted.violence.id ? true : false}
         />
       )}
       <SectionTitle id="address">Endereço</SectionTitle>
@@ -269,6 +350,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues?.address : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.health_module.show ? (formState.formsSubmitted.mental_health.id ? true : false) : (formState.formsSubmitted.household.id ? true : false)}
         />
       )}
       {formState.formsSubmitted.address.id !== null && (
@@ -281,6 +363,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues : {}}
           offline={isOffline}
+          hasPreviousStepCompleted={formState.formsSubmitted.address.id ? true : false}
         />
       )}
 

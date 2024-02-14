@@ -31,9 +31,10 @@ interface InterviewFormProps {
   offline: boolean;
   isEditForm?: boolean;
   initialValues?: any;
+  hasPreviousStepCompleted: boolean;
 }
 
-const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
+const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {}, hasPreviousStepCompleted = false }) => {
 
   const { addToast } = useToast();
 
@@ -55,6 +56,14 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
     }
 
     try {
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       setLoading(true)
       InterviewFormRef.current?.setErrors({});
 
@@ -154,7 +163,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
     } finally {
       setLoading(false)
     }
-  }, [addToast, token, history, dispatch, offline, setLoading]);
+  }, [addToast, token, history, dispatch, offline, setLoading, hasPreviousStepCompleted]);
 
   if (isEditForm) {
     InterviewFormRef.current?.setData({

@@ -63,9 +63,10 @@ interface HouseholdFormProps {
   offline: boolean;
   isEditForm?: boolean;
   initialValues?: any;
+  hasPreviousStepCompleted: boolean;
 }
 
-const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
+const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {}, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -106,6 +107,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       const parsedData = parseHouseholdData(data);
 
 
@@ -187,7 +196,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, setLoading],
+    [addToast, token, dispatch, offline, setLoading, hasPreviousStepCompleted],
   );
 
   if (isEditForm) {
