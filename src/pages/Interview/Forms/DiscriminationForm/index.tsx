@@ -11,6 +11,7 @@ import api from '../../../../services/api';
 import { Label, StyledForm } from '../../../Indigenous_Interview/Forms/form-styles';
 import { DiscrimiationValidation } from '../../validation/schemas/DiscriminationValidation';
 import ICreateDiscriminationDTO from '../../dtos/ICreateDiscriminationDTO';
+import { uuid } from 'uuidv4';
 
 
 
@@ -61,20 +62,22 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
         if (!offline) {
           const person_id = localStorage.getItem('@Safety:person_id');
 
+          const id = uuid();
           const discriminationData = {
             person_id,
+            id,
             ...validatedData,
           };
 
 
-          const response = await api.post('/discrimination', discriminationData, {
+          await api.post('/interviews/discrimination', discriminationData, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
 
-          localStorage.setItem('@Safety:discrimination_id', response.data.id);
+          localStorage.setItem('@Safety:discrimination_id', id);
 
-          dispatch({ type: 'DISCRIMINATION', payload: { id: response.data.id } });
+          dispatch({ type: 'DISCRIMINATION', payload: { id: id } });
 
           addToast({
             type: 'success',
