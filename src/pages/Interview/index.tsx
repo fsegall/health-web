@@ -173,6 +173,9 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:address_id');
       localStorage.removeItem('@Safety:violence_id');
       localStorage.removeItem('@Safety:mental_health_id');
+      localStorage.removeItem('@Safety:discrimination_id');
+      localStorage.removeItem('@Safety:violence_id');
+      localStorage.removeItem('@Safety:mental_health_id');
       localStorage.removeItem('@Safety:current-offline-interview-id');
       window.location.reload();
     },
@@ -301,9 +304,15 @@ const Interview: React.FC = () => {
           onColor="#c2024b" offColor="#dedede"
           onChange={() => {
             dispatch({ type: 'HEALTH_MODULE', payload: { id: null, show: !formState.formsSubmitted.health_module.show } })
-            dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: !formState.formsSubmitted.discrimination.show } })
-            dispatch({ type: 'VIOLENCE', payload: { id: formState.formsSubmitted.violence.id, show: !formState.formsSubmitted.violence.show } })
-            dispatch({ type: 'MENTAL_HEALTH', payload: { id: formState.formsSubmitted.mental_health.id, show: !formState.formsSubmitted.mental_health.show } })
+            const showDiscrimination = formState.formsSubmitted.discrimination.show
+            const discriminationId = formState.formsSubmitted.discrimination.id
+            dispatch({ type: 'DISCRIMINATION', payload: { id: formState.formsSubmitted.discrimination.id, show: discriminationId ? false : !showDiscrimination } })
+            const showViolence = formState.formsSubmitted.violence.show
+            const violenceId = formState.formsSubmitted.violence.id
+            dispatch({ type: 'VIOLENCE', payload: { id: violenceId, show: violenceId ? false : !showViolence} })
+            const mentalHealthId = formState.formsSubmitted.mental_health.id
+            const showMentalHealth = formState.formsSubmitted.mental_health.show
+            dispatch({ type: 'MENTAL_HEALTH', payload: { id: mentalHealthId, show: mentalHealthId ? false : !showMentalHealth } })
           }} checked={formState.formsSubmitted.discrimination.show && formState.formsSubmitted.violence.show && formState.formsSubmitted.mental_health.show}
         />
       </SectionTitleGroup>
