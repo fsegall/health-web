@@ -3,7 +3,6 @@ export default interface ICreateHouseholdDTO {
   person_id?: string; // Supplied by local storage, not part of user form validation
 
   local_do_domicilio: string;
-  morador_de_rua?: string;
   povos_tradicionais: string;
   qual_povo_tradicional?: string;
   pessoa_de_referencia: string;
