@@ -32,6 +32,12 @@ import {
   vacina,
   diagnostico_covid,
   yesOrNoOptions,
+  estado_de_saude,
+  local_de_procura_do_servico_de_saude,
+  motivo_procura_servico_saude,
+  motivo_nao_atendimento_servico_saude,
+  doenca_ultimos_12_meses,
+  diagnostico_doenca_ultimos_12_meses,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -48,6 +54,7 @@ interface PersonFormProps {
 const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
+  const [motivoProcuraServicoSaude, setMotivoProcuraServicoSaude] = useState<any[]>([]);
 
   const { user, token } = useAuth();
 
@@ -139,6 +146,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
       diagnostico_covid: initialValues?.diagnostico_covid,
       vacina: initialValues?.vacina,
       nao_tomou_vacina: initialValues?.nao_tomou_vacina,
+      estado_de_saude: initialValues?.estado_de_saude,
+      local_de_procura_do_servico_de_saude: initialValues?.local_de_procura_do_servico_de_saude,
+      motivo_procura_servico_saude: initialValues?.motivo_procura_servico_saude,
+      motivo_nao_atendimento_servico_saude: initialValues?.motivo_nao_atendimento_servico_saude,
+      doenca_ultimos_12_meses: initialValues?.doenca_ultimos_12_meses,
+      diagnostico_doenca_ultimos_12_meses: initialValues?.diagnostico_doenca_ultimos_12_meses,
     })
   }
 
@@ -155,16 +168,12 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
         <Label>P3 - Qual o seu sexo?</Label>
         <Select name="sexo" options={genero} />
-      </section>
 
-      <section >
         <Label>P4 - Como você define sua raça ou cor?</Label>
         <Select name="raca_cor" options={raca_cor} />
         <Label>P5 - Você sabe ler e escrever?</Label>
         <Select name="ler_escrever" options={yesOrNoOptions} />
-      </section>
 
-      <section >
         <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
         <Select name="escolaridade" options={escolaridade} />
         <Label>P7 - Qual a situação de trabalho?</Label>
@@ -172,7 +181,9 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
         />
+        </section>
 
+        <section>
         <Label>P8 - Qual a sua ocupação profissional?</Label>
         <Select
           name="ocupacao"
@@ -203,6 +214,64 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           options={nao_tomou_vacina}
           isDisabled={vaccine?.value === 'Não tomei nenhuma dose da vacina' || vaccine?.value === 'ns-nr' ? false : true}
         />
+
+        <Label>
+          P13 - De um modo geral, como você considera seu estado de saúde?
+        </Label>
+        <Select
+          name="estado_de_saude"
+          options={estado_de_saude}
+        />
+        </section>
+
+        <section>
+        <Label>
+          P14 - Quando está doente ou precisando de atendimento de saúde costuma procurar:
+        </Label>
+        <Select
+          name="local_de_procura_do_servico_de_saude"
+          options={local_de_procura_do_servico_de_saude}
+          isMulti={true}
+        />
+
+        <Label>
+          P15 - O que ocorreu quando procurou o serviço de saúde?
+        </Label>
+        <Select
+          name="motivo_procura_servico_saude"
+          options={motivo_procura_servico_saude}
+          isMulti={true}
+          onChange={(selectedOption: any) => setMotivoProcuraServicoSaude(selectedOption)}
+        />
+
+        <Label>
+          P16 - Caso não tenha sido atendido(a), qual foi o motivo?
+        </Label>
+        <Select
+          name="motivo_nao_atendimento_servico_saude"
+          options={motivo_nao_atendimento_servico_saude}
+          isMulti={true}
+          isDisabled={motivoProcuraServicoSaude?.find((m: any) => m.value === 'nao_foi_atendido') ? false : true}
+        />
+
+        <Label>
+          P17 - Nos últimos 12 meses apresentou alguma dessas doenças?
+        </Label>
+        <Select
+          name="doenca_ultimos_12_meses"
+          options={doenca_ultimos_12_meses}
+          isMulti={true}
+        />
+
+        <Label>
+          P18 - Doenças específicas: Nos últimos 12 meses recebeu diagnóstico de alguma dessas doenças?
+        </Label>
+        <Select
+          name="diagnostico_doenca_ultimos_12_meses"
+          options={diagnostico_doenca_ultimos_12_meses}
+          isMulti={true}
+        />
+
         {!isEditForm && <Button type="submit">Submit</Button>}
 
       </section>
