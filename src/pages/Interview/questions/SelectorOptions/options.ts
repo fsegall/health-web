@@ -567,6 +567,75 @@ export const nao_tomou_vacina = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+//P13 estado_de_saude
+
+export const estado_de_saude = [
+  { label: 'Muito bom', value: 'muito_bom' },
+  { label: 'Bom', value: 'bom' },
+  { label: 'Regular', value: 'regular' },
+  { label: 'Ruim', value: 'ruim' },
+  { label: 'Muito ruim', value: 'muito_ruim' },
+]
+
+//P14 local_de_procura_do_servico_de_saude
+
+export const local_de_procura_do_servico_de_saude = [
+  { label: 'Farmácia', value: 'farmacia' },
+  { label: 'Unidade básica de saúde UBS (posto ou centro de saúde ou unidade de saúde da família)', value: 'ubs_ou_posto_de_saude' },
+  { label: 'Policlínica pública, PAM (Posto de Assistência Médica) ou Centro de Especialidades público', value: 'pam_ou_centro_de_especialidades_publico' },
+  { label: 'UPA (Unidade de Pronto Atendimento), outro tipo de pronto atendimento público (24 horas), pronto socorro ou emergência de hospital público', value: 'upa_ou_ps' },
+  { label: 'Ambulatório de hospital público', value: 'ambulatorio_publico' },
+  { label: 'Consultório particular, clínica privada ou ambulatório de hospital privado', value: 'consultorio_clinica__ou_hospital_privado' },
+  { label: 'Pronto atendimento ou emergência de hospital privado ou residencial ', value: 'pronto_atendimento_de_hospital_privado_ou_residencial' },
+  { label: 'Outro serviços', value: 'outros_servicos' },
+]
+
+//P15 - motivo_procura_servico_saude
+
+export const motivo_procura_servico_saude = [
+  { label: 'Foi atendido', value: 'foi_atendido' },
+  { label: 'Foi agendado para outro dia / outro local', value: 'agendado_para_outro_dia_ou_local' },
+  { label: 'Não foi atendido', value: 'nao_foi_atendido' },
+]
+
+//P16 - motivo_nao_atendimento_servico_saude
+
+export const motivo_nao_atendimento_servico_saude = [
+  { label: 'Não conseguiu vaga nem pegar senha', value: 'nao_conseguiu_vaga_ou_senha' },
+  { label: 'Não tinha médico ou dentista atendendo', value: 'nao_havia_medico_ou_dentista_atendendo' },
+  { label: 'Não havia serviço ou profissional de saúde especializado para atender', value: 'nao_havia_servico_ou_profissional' },
+  { label: 'Esperou muito e desistiu', value: 'esperou_muito_e_desistiu' },
+  { label: 'Os equipamentos do serviço de saúde não estavam funcionando ou disponíveis para uso', value: 'equipamentos_nao_funcionando_ou_indisponiveis' },
+  { label: 'Não podia pagar pela consulta com especialista para atender', value: 'nao_podia_pagar_pela_consulta_com_especialista' },
+  { label: 'Outros', value: 'outros' }
+]
+
+//P17 - doenca_ultimos_12_meses
+
+export const doenca_ultimos_12_meses = [
+  { label: 'Problemas nos ossos e articulações (Dor nas costas, problema no pescoço ou na nuca/Dor nos braços ou nas mãos/Artrite ou reumatismo)', value: 'problema_ossos_ou_articulacoes' },
+  { label: 'Dor de cabeça ou enxaqueca', value: 'dor_de_cabeca_ou_enxaqueca' },
+  { label: 'Problemas gineco-obstétricos (Problemas menstruais ou da gravidez e parto)', value: 'problemas_gineco_obstetricos' },
+  { label: 'Problemas odontológico / Dor de dente', value: 'problemas_odontologicos' },
+  { label: 'Problemas respiratórios (Resfriado / gripe / sinusite / asma / bronquite / pneumonia)', value: 'problemas_respiratorios' },
+  { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problema_cardiovasculares' },
+  { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental', value: 'problemas_de_saude_mental' },
+  { label: 'Outro', value: 'outro' },
+]
+
+//P18 - diagnostico_doenca_ultimos_12_meses
+
+export const diagnostico_doenca_ultimos_12_meses = [
+  { label: 'Anemia Falciforme', value: 'anemia_falciforme' },
+  { label: 'Doença de Chagas', v: 'doenca_de_chagas' },
+  { label: 'Problemas gineco-obstétricos (Problemas menstruais ou da gravidez e parto)', value: 'problemas_gineco_obstetricos' },
+  { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problemas_cardiovasculares' },
+  { label: 'Diabetes', value: 'diabetes' },
+  { label: 'Câncer (inclusive quimioterapia / radioterapia)', value: 'cancer' },
+  { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental)', value: '' },
+  { label: 'Outro', value: 'outro' },
+]
+
 // Project
 
 export const interviewTypeOptions = [
