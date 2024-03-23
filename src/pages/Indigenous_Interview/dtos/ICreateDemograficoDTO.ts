@@ -1,6 +1,6 @@
 export default interface ICreateDemograficoDTO {
   entrevista_indigena_id?: string; //backend - generated UUID
-  total_moradores: number; //D1 (base to create array form)
+  total_moradores: number;
   moradores: QuadroSocioDemograficoDTO[] // form array
 
   morador_nao_indigena: string;
