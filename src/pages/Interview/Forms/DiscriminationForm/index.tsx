@@ -62,22 +62,20 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
         if (!offline) {
           const person_id = localStorage.getItem('@Safety:person_id');
 
-          const id = uuid();
           const discriminationData = {
             person_id,
-            id,
             ...validatedData,
           };
 
 
-          await api.post('/interviews/discrimination', discriminationData, {
+          const response = await api.post('/discrimination', discriminationData, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
 
-          localStorage.setItem('@Safety:discrimination_id', id);
+          localStorage.setItem('@Safety:discrimination_id', response.data.id);
 
-          dispatch({ type: 'DISCRIMINATION', payload: { id: id } });
+          dispatch({ type: 'DISCRIMINATION', payload: { id: response.data.id } });
 
           addToast({
             type: 'success',
