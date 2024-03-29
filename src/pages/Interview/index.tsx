@@ -372,7 +372,7 @@ const Interview: React.FC = () => {
           isEditForm={id ? true : false}
           initialValues={initialValues ? initialValues : {}}
           offline={isOffline}
-          hasPreviousStepCompleted={formState.formsSubmitted.address.id ? true : false}
+          hasPreviousStepCompleted={formState.formsSubmitted.address.id !== null ? true : false}
         />
       )}
 
