@@ -84,8 +84,8 @@ const ViolenceForm: React.FC<ViolenceFormProps> = ({ dispatch, offline, initialV
 
           addToast({
             type: 'success',
-            title: 'Uma residência foi adicionada com sucesso',
-            description: 'Você já pode adicionar um endereço',
+            title: 'Formulário de violência foi adicionada com sucesso',
+            description: 'Você já pode avançar para o próximo formulário',
           });
         } else {
 
