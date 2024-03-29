@@ -79,8 +79,8 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
           addToast({
             type: 'success',
-            title: 'Uma residência foi adicionada com sucesso',
-            description: 'Você já pode adicionar um endereço',
+            title: 'Formulário de iscriminação enviado com sucesso',
+            description: 'Você já pode avançar para o próximo módulo',
           });
         } else {
 
