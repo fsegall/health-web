@@ -78,8 +78,8 @@ const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, 
 
           addToast({
             type: 'success',
-            title: 'Uma residência foi adicionada com sucesso',
-            description: 'Você já pode adicionar um endereço',
+            title: 'Saúde mental adicionado com sucesso',
+            description: 'Você já pode avançar para o próximo módulo',
           });
         } else {
 
