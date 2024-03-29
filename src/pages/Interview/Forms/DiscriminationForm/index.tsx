@@ -75,6 +75,8 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
           localStorage.setItem('@Safety:discrimination_id', response.data.id);
 
+          localStorage.setItem('@Safety:discrimination_form_sent', 'true');
+
           dispatch({ type: 'DISCRIMINATION', payload: { id: response.data.id } });
 
           addToast({
@@ -84,7 +86,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
           });
         } else {
 
-          const discriminationData = {
+          const discrimination = {
             ...validatedData,
           };
 
@@ -92,10 +94,12 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
           const offlineInterviews: { [key: string]: ICreateDiscriminationDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-          const addDiscrimination = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], discriminationData } } : false;
+          const addDiscrimination = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], discrimination } } : false;
 
           if (addDiscrimination) {
             localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addDiscrimination));
+
+            localStorage.setItem('@Safety:discrimination_form_sent', 'true');
 
             dispatch({ type: 'DISCRIMINATION', payload: { id: uniqueId } });
 

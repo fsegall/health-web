@@ -183,6 +183,7 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:mental_health_id');
       localStorage.removeItem('@Safety:current-offline-interview-id');
       localStorage.removeItem('@Safety:hide_health_module');
+      localStorage.removeItem('@Safety:discrimination_form_sent');
       window.location.reload();
     },
     [],
@@ -309,7 +310,7 @@ const Interview: React.FC = () => {
         <Switch
           onColor="#c2024b" offColor="#dedede"
           onChange={() => {
-            const discriminationFormID = localStorage.getItem('@Safety:discrimination_id')
+            const discriminationFormID = localStorage.getItem('@Safety:discrimination_form_sent')
             if (!discriminationFormID) {
             const healthModuleShow = formState.formsSubmitted.health_module.show
               dispatch({ type: 'HEALTH_MODULE', payload: { id: null, show: !healthModuleShow } })

@@ -89,7 +89,7 @@ const ViolenceForm: React.FC<ViolenceFormProps> = ({ dispatch, offline, initialV
           });
         } else {
 
-          const violence_data = {
+          const violence = {
             ...validatedData,
           };
 
@@ -97,7 +97,7 @@ const ViolenceForm: React.FC<ViolenceFormProps> = ({ dispatch, offline, initialV
 
           const offlineInterviews: { [key: string]: ICreateViolenceDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-          const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], violence_data } } : false;
+          const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], violence } } : false;
 
           if (addData) {
             localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addData));
