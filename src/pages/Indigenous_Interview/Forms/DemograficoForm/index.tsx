@@ -71,12 +71,9 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
 
-      console.log('values ', values)
       const validatedData = await DemograficoValidation.validate(values, {
         abortEarly: false,
       });
-
-      console.log('validatedData ', validatedData)
 
       const indigenous_demografico = {
         ...values,
