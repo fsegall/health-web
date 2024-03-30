@@ -71,9 +71,12 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
 
+      console.log('values ', values)
       const validatedData = await DemograficoValidation.validate(values, {
         abortEarly: false,
       });
+
+      console.log('validatedData ', validatedData)
 
       const indigenous_demografico = {
         ...values,
@@ -259,7 +262,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                <span key={elementIndex}>
+                <span key={`${elementIndex}:${element.label}`}>
                   {incrementCounterUpToLength(quadroDemograficoHelper.length)}
                   <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
                   <element.type

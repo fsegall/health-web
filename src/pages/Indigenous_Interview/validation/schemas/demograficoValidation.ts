@@ -8,7 +8,7 @@ export const DemograficoValidation = Yup.object().shape({
     entrevista_indigena_id: Yup.string().nullable().notRequired(),
 
     morador_nao_indigena: Yup.string().required('Você precisa preencher sobre a existência de morador não indígena'),
-    quantidade_morador_nao_indigena: Yup.string().nullable().when("morador_nao_indigena", {
+    quantidade_morador_nao_indigena: Yup.mixed().nullable().when("morador_nao_indigena", {
       is: (val: any) => val === "true",
       then: Yup.number().required('Você precisa digitar a quantidade de morador não indígena').min(1, 'A quantidade não pode ser menor que um'),
       otherwise: Yup.string().nullable().notRequired(),
@@ -57,38 +57,17 @@ export const DemograficoValidation = Yup.object().shape({
         nome: Yup.string().required('Você precisa digitar um nome'),
         relacao_com_lider: Yup.string().required('Você precisa digitar a relação com o chefe'),
         maior_de_um_ano: Yup.string().required('Você precisa preencher se é maior de um ano'),
-        idade: Yup.string().nullable().when("maior_de_um_ano", {
+        idade: Yup.mixed().nullable().when("maior_de_um_ano", {
           is: (val: any) => val === "sim",
           then: Yup.number().required('Você precisa digitar uma idade').min(1, 'A idade não pode ser menor que um').max(100, 'A idade não pode ser menor que cem anos'),
           otherwise: Yup.string().nullable().notRequired(),
         }),
-        idade_em_meses: Yup.string().nullable().when("maior_de_um_ano", {
+        idade_em_meses: Yup.mixed().nullable().when("maior_de_um_ano", {
           is: (val: any) => val === "nao",
           then: Yup.number().required('Você precisa digitar uma idade em MESES').min(1, 'A idade não pode ser menor que um').max(12, 'A idade não pode ser menor que 12 meses'),
           otherwise: Yup.string().nullable().notRequired(),
         }),
         sexo: Yup.string().required('Você precisa digitar o sexo'),
-
-
-
-        indigena: Yup.string().required('Você precisa digitar a raça'),
-        povo_etnia: Yup.string().required('Você precisa digitar uma etnia'),
-        crenca_religiao: Yup.string().nullable().when("idade", {
-          is: (val: any) => Number(val) > 14,
-          then: Yup.string().nullable().required("Você precisa preencher as sobre a religião"),
-          otherwise: Yup.string().nullable().notRequired(),
-        }),
-        situacao_no_trabalho: Yup.string().nullable().when("idade", {
-          is: (val: any) => Number(val) > 14,
-          then: Yup.string().nullable().required("Você precisa preencher sobre a situação no trabalho"),
-          otherwise: Yup.string().nullable().notRequired(),
-        }),
-        ocupacao_principal: Yup.string().nullable().when("idade", {
-          is: (val: any) => Number(val) > 14,
-          then: Yup.string().nullable().required("Você precisa preencher sobre a profissão"),
-          otherwise: Yup.string().nullable().notRequired(),
-        }),
-        serie_frequentada_escola: Yup.string().required('Você precisa preencher o grau de escolaridade'),
       })
     ).required('Você precisa preencher as informações dos moradores'),
 });
