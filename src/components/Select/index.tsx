@@ -31,7 +31,13 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       },
       setValue: (ref: any, value) => {
         const selectedOption = ref.props.options.find((v: any) => v.value === value)
-        ref.state.value = selectedOption
+        if (selectedOption) {
+          ref.state.value = selectedOption
+        } else {
+          const splittedValue = value.split(',')
+          const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(v.value))
+          ref.state.value = selectedOptions
+        }
       }
     });
   }, [fieldName, registerField, rest.isMulti]);
