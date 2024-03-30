@@ -17,7 +17,7 @@ const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
     <Card onClick={() => history.push(`indigenous-interview/${id}`)}>
       <i>#{index} {isIncomplete && ' - Entrevista Incompleta'}</i>
       <p><strong>ID:</strong> {id?.toString()}</p>
-      <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.numero_projeto?.toString()}</p>
+      <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.projeto_numero?.toString()}</p>
       <p><strong>Município:</strong> {data?.indigenous_informacoes_basicas?.municipio}</p>
       <p><strong>Aldeia:</strong> {data?.indigenous_informacoes_basicas?.aldeia_comunidade}</p>
       <p><strong>Chefe:</strong> {data?.indigenous_demografico?.moradores[0]?.nome}</p>

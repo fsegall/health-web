@@ -92,7 +92,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
       };
 
       if (!offline) {
-        const response = await api.post('/indigenous-interviews/support', indigenous_apoio_protecao_social, {
+        const response = await api.post('/indigenous-interviews/v2/support', indigenous_apoio_protecao_social, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_apoio_protecao_social', response.data.id);

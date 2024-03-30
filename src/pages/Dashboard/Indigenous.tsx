@@ -85,7 +85,7 @@ const IndigenousDashboardSection: React.FC = () => {
       }
       try {
         setLoading(true)
-        const interviews = await api.get(`/indigenous-interviews/page/${page}/limit/${limit}`,
+        const interviews = await api.get(`/indigenous-interviews/v2/page/${page}/limit/${limit}`,
         {
           params: {
             ...filters
