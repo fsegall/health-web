@@ -72,23 +72,21 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
       const indigenous_apoio_protecao_social = {
         ...values,
         ...validatedData,
-        morador_recebe_programa_social: {
           bolsa_familia_auxilio_brasil: values.bolsa_familia_auxilio_brasil,
-          valor_bolsa_familia_auxilio_brasil: values.valor_bolsa_familia_auxilio_brasil,
+          valor_bolsa_familia_auxilio_brasil: values.valor_bolsa_familia_auxilio_brasil || 0,
           bpc: values.bpc,
-          valor_bpc: values.valor_bpc,
+          valor_bpc: values.valor_bpc || 0,
           auxilio_maternidade: values.auxilio_maternidade,
-          valor_auxilio_maternidade: values.valor_auxilio_maternidade,
+          valor_auxilio_maternidade: values.valor_auxilio_maternidade || 0,
           auxilio_doenca: values.auxilio_doenca,
-          valor_auxilio_doenca: values.valor_auxilio_doenca,
+          valor_auxilio_doenca: values.valor_auxilio_doenca || 0,
           aposentadoria: values.aposentadoria,
-          valor_aposentadoria: values.valor_aposentadoria,
+          valor_aposentadoria: values.valor_aposentadoria || 0,
           pensao_morte: values.pensao_morte,
-          valor_pensao_morte: values.valor_pensao_morte,
+          valor_pensao_morte: values.valor_pensao_morte || 0,
           programa_auxilio_estadual_municipal: values.programa_auxilio_estadual_municipal,
-          valor_programa_auxilio_estadual_municipal: values.valor_programa_auxilio_estadual_municipal,
+          valor_programa_auxilio_estadual_municipal: values.valor_programa_auxilio_estadual_municipal || 0,
           cesta_alimentos: values.cesta_alimentos,
-        },
       };
 
       if (!offline) {
