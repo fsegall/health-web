@@ -11,9 +11,6 @@ import api from '../../../../services/api';
 import { Label, StyledForm } from '../../../Indigenous_Interview/Forms/form-styles';
 import { DiscrimiationValidation } from '../../validation/schemas/DiscriminationValidation';
 import ICreateDiscriminationDTO from '../../dtos/ICreateDiscriminationDTO';
-import { uuid } from 'uuidv4';
-
-
 
 interface DiscriminationFormProps {
   dispatch: Function;
