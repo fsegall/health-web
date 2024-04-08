@@ -55,7 +55,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
         }
     },
     {
-      label: 'Nos últimos 30 dias qual foi a RENDA TOTAL da sua família, contando apenas com salário de TRABALHO. (SOMAR DE TODOS OS MORADORES da casa)',
+      label: 'Nos últimos 30 dias qual foi a RENDA TOTAL da sua família, contando apenas com salário de TRABALHO. (SOMAR DE TODOS OS MORADORES da casa) (Exemplo: 1.400,00)',
       type: Input,
       props: {
           name: 'renda_total_30_dias',
@@ -81,7 +81,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
       hasDependencies: true
     },
     {
-      label: 'Valor recebido no Programa Bolsa Família',
+      label: 'Valor recebido do Programa Bolsa Família (Exemplo: 600,00)',
       type: Input,
       props: {
           name: 'valor_bolsa_familia_auxilio_brasil',
@@ -102,7 +102,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
         hasDependencies: true
     },
     {
-      label: 'Valor recebido no Benefício de Prestação continuada (BPC)',
+      label: 'Valor recebido do Benefício de Prestação continuada (BPC) (Exemplo: 1.302,00)',
       type: Input,
       props: {
           name: 'valor_bpc',

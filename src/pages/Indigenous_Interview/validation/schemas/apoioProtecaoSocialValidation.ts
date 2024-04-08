@@ -31,46 +31,46 @@ export const ApoioProtecaoSocialValidation = Yup.object().shape({
   }),
 
   bolsa_familia_auxilio_brasil: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_bolsa_familia_auxilio_brasil: Yup.string().nullable().when("bolsa_familia_auxilio_brasil", {
+  valor_bolsa_familia_auxilio_brasil: Yup.mixed().nullable().when("bolsa_familia_auxilio_brasil", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   bpc: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_bpc: Yup.string().nullable().when("bpc", {
+  valor_bpc: Yup.mixed().nullable().when("bpc", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   auxilio_maternidade: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_auxilio_maternidade: Yup.string().nullable().when("auxilio_maternidade", {
+  valor_auxilio_maternidade: Yup.mixed().nullable().when("auxilio_maternidade", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   auxilio_doenca: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_auxilio_doenca: Yup.string().nullable().when("auxilio_doenca", {
+  valor_auxilio_doenca: Yup.mixed().nullable().when("auxilio_doenca", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   aposentadoria: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_aposentadoria: Yup.string().nullable().when("aposentadoria", {
+  valor_aposentadoria: Yup.mixed().nullable().when("aposentadoria", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   pensao_morte: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_pensao_morte: Yup.string().nullable().when("pensao_morte", {
+  valor_pensao_morte: Yup.mixed().nullable().when("pensao_morte", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   programa_auxilio_estadual_municipal: Yup.string().required('Você deve preencher sobre o auxílio financeiro'),
-  valor_programa_auxilio_estadual_municipal: Yup.string().nullable().when("programa_auxilio_estadual_municipal", {
+  valor_programa_auxilio_estadual_municipal: Yup.mixed().nullable().when("programa_auxilio_estadual_municipal", {
     is: (val: any) => String(val) === "sim",
     then: Yup.number().nullable().required("Você precisa preencher sobre o valor do auxílio recebido."),
-    otherwise: Yup.number().nullable().notRequired(),
+    otherwise: Yup.string().nullable().notRequired(),
   }),
   cesta_alimentos: Yup.string().required('Você deve preencher sobre cestas de alimentos'),
 });

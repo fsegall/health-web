@@ -25,7 +25,7 @@ export default interface ICreateSaudeDoencaDTO {
 
   //
   moradora_entre_13_e_45_anos: string;
-  mulheres_e_gestacao?: string;
+  mulheres_e_gestacao?: string[];
 
   crianca_ate_6_meses: string;
   crianca_ate_6_meses_leito_do_peito?: string;
@@ -43,6 +43,9 @@ export default interface ICreateSaudeDoencaDTO {
   morador_internado: string; //select
 
   possui_morador_menor_ou_igual_a_5_anos: string;
+  possui_morador_menor_ou_igual_a_5_anos_desnutricao: string; //select
+  possui_morador_crianca_diarreia: string; //select
+  possui_morador_crianca_pneumonia: string; //select
 
   morador_problemas_bebidas_alcoolicas: string; //select
   fuma_cigarro: string; //select

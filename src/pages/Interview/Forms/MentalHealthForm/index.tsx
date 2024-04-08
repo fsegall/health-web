@@ -5,14 +5,16 @@ import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import { discriminationFormHelper, FormHelperType } from './helper';
+import { mentalHealthFormHelper, FormHelperType } from './helper';
 import { useAuth } from '../../../../hooks/auth';
 import api from '../../../../services/api';
 import { Label, StyledForm } from '../../../Indigenous_Interview/Forms/form-styles';
-import { DiscrimiationValidation } from '../../validation/schemas/DiscriminationValidation';
-import ICreateDiscriminationDTO from '../../dtos/ICreateDiscriminationDTO';
+import { MentalHealthValidation } from '../../validation/schemas/MentalHealthValidation';
+import ICreateMentalHealthDTO from '../../dtos/ICreateMentalHealthDTO';
 
-interface DiscriminationFormProps {
+
+
+interface MentalHealthFormProps {
   dispatch: Function;
   offline: boolean;
   initialValues?: any
@@ -20,7 +22,7 @@ interface DiscriminationFormProps {
   hasPreviousStepCompleted: boolean;
 }
 
-const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -28,7 +30,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
   const [loading, setLoading] = useState(false);
 
-  const DiscriminationFormRef = useRef<FormHandles>(null);
+  const MentalHealthFormRef = useRef<FormHandles>(null);
 
   let counter = 0;
 
@@ -37,7 +39,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
   }
 
   const handleSubmit = useCallback(
-    async (data: ICreateDiscriminationDTO) => {
+    async (data: ICreateMentalHealthDTO) => {
       if (!hasPreviousStepCompleted) {
         addToast({
           type: 'error',
@@ -50,60 +52,56 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
         if(!loading) {
         setLoading(true)
         }
-        DiscriminationFormRef.current?.setErrors({});
+        MentalHealthFormRef.current?.setErrors({});
 
-        const validatedData = await DiscrimiationValidation.validate(data, {
+        const validatedData = await MentalHealthValidation.validate(data, {
           abortEarly: false,
         });
 
         if (!offline) {
           const person_id = localStorage.getItem('@Safety:person_id');
 
-          const discriminationData = {
+          const mental_health_data = {
             person_id,
             ...validatedData,
           };
 
 
-          const response = await api.post('/discrimination', discriminationData, {
+          const response = await api.post('/mental_health', mental_health_data, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
 
-          localStorage.setItem('@Safety:discrimination_id', response.data.id);
+          localStorage.setItem('@Safety:mental_health_id', response.data.id);
 
-          localStorage.setItem('@Safety:discrimination_form_sent', 'true');
-
-          dispatch({ type: 'DISCRIMINATION', payload: { id: response.data.id } });
+          dispatch({ type: 'MENTAL_HEALTH', payload: { id: response.data.id } });
 
           addToast({
             type: 'success',
-            title: 'Formulário de iscriminação enviado com sucesso',
+            title: 'Saúde mental adicionado com sucesso',
             description: 'Você já pode avançar para o próximo módulo',
           });
         } else {
 
-          const discrimination = {
+          const mental_health = {
             ...validatedData,
           };
 
           const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-offline-interview-id') || "");
 
-          const offlineInterviews: { [key: string]: ICreateDiscriminationDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
+          const offlineInterviews: { [key: string]: ICreateMentalHealthDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-          const addDiscrimination = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], discrimination } } : false;
+          const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], mental_health } } : false;
 
-          if (addDiscrimination) {
-            localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addDiscrimination));
+          if (addData) {
+            localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addData));
 
-            localStorage.setItem('@Safety:discrimination_form_sent', 'true');
-
-            dispatch({ type: 'DISCRIMINATION', payload: { id: uniqueId } });
+            dispatch({ type: 'MENTAL_HEALTH', payload: { id: uniqueId } });
 
             addToast({
               type: 'success',
-              title: 'Módulo de discriminação salvo com sucesso no modo offline!',
-              description: 'Você já pode adicionar um endereço no modo Offline!',
+              title: 'Módulo de saúde mental e estresse salvo com sucesso no modo offline!',
+              description: 'Você já pode avançar para o próximo módulo no modo Offline!',
             });
           } else {
             throw new Error('Você precisa preecher os módulos anteriores');
@@ -114,7 +112,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
           console.log(error);
           const errors = getValidationErrors(error);
 
-          DiscriminationFormRef.current?.setErrors(errors);
+          MentalHealthFormRef.current?.setErrors(errors);
 
           addToast({
             type: 'error',
@@ -133,16 +131,16 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
 
   if (isEditForm) {
-    DiscriminationFormRef.current?.setData({
+    MentalHealthFormRef.current?.setData({
         //TODO: FAZER EDIT FORM
     })
   }
   return (
     <StyledForm
-      ref={DiscriminationFormRef}
+      ref={MentalHealthFormRef}
       onSubmit={handleSubmit}
     >
-        {discriminationFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
+        {mentalHealthFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
                 {s?.map((element: FormHelperType, elementIndex: number) => (
                     <span key={elementIndex}>
@@ -151,7 +149,7 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
                         <element.type {...element.props} />
                     </span>
                 ))}
-                {discriminationFormHelper?.length === sectionIndex+1 && (
+                {mentalHealthFormHelper?.length === sectionIndex+1 && (
                     !isEditForm && <Button type="submit">Submit</Button>
                 )}
             </section>
@@ -160,4 +158,4 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
   );
 }
 
-export default DiscriminationForm;
+export default MentalHealthForm;

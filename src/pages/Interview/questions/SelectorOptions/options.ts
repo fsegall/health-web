@@ -88,6 +88,10 @@ export const situacao_de_trabalho = [
     value: 'dona de casa',
     label: 'Dona de casa',
   },
+  {
+    value: 'nao trabalha e nao procura emprego',
+    label: 'Não trabalha e não procura emprego',
+  },
 ];
 
 // P8 ocupacao
@@ -98,8 +102,8 @@ export const ocupacao_profissional = [
     label: 'Agricultor(a) familiar ou produtor(a) rural',
   },
   {
-    value: 'trabalhador(a) rural temporário (diarista, safrista etc.)',
-    label: 'Trabalhador(a) rural temporário (diarista, safrista etc.)',
+    value: 'trabalhador(a) rural com carteira assinada',
+    label: 'Trabalhador(a) rural com carteira assinada',
   },
   {
     value: 'trabalhador(a) em emprego com carteira assinada no comércio',
@@ -118,8 +122,12 @@ export const ocupacao_profissional = [
     label: 'Trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
   },
   {
-    value: 'funcionário(a) público',
-    label: 'Funcionário(a) público',
+    value: 'funcionario(a) publico(a)',
+    label: 'Funcionário(a) público(a)',
+  },
+  {
+    value: 'trabalhador(a) rural temporario (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário sem carteira assinada (diarista, safrista etc.)',
   },
   {
     value: 'trabalhador(a) em emprego sem carteira assinada no comércio',
@@ -209,19 +217,7 @@ export const local_do_domicilio = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D2 morador_de_rua
-
-export const morador_de_rua = [
-  {
-    value: 'sim-fixa',
-    label: 'Com permanência fixa na cidade',
-  },
-  { value: 'sim-em-transito', label: 'Em permanente trânsito para vários locais' },
-  { value: 'nao', label: 'Não' },
-  { value: 'ns-nr', label: 'NS/NR' },
-];
-
-// D4 qual_povo_tradicional
+// qual_povo_tradicional
 
 export const qual_povo_tradicional = [
   { value: 'indigenas', label: 'Povos indígenas' },
@@ -234,7 +230,7 @@ export const qual_povo_tradicional = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D15 covid_perda_2020 e D17 covid_perda_2021
+//covid_perda_2020 e D17 covid_perda_2021
 export const covid_perda = [
   {
     value: 'nao',
@@ -267,7 +263,7 @@ export const covid_perda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D17 Causa da morte
+//Causa da morte
 export const causa_morte_ultimos_12m = [
   {
     value: 'morte natural',
@@ -291,24 +287,24 @@ export const causa_morte_ultimos_12m = [
   },
 ]
 
-//D17.2 Causa da morte
+//Causa da morte
 export const contribuicao_morte_ultimos_12m = [
+  {
+    value: 'sim',
+    label: 'Sim',
+  },
   {
     value: 'não',
     label: 'Não',
   },
   {
-    value: 'sim, contribuia',
-    label: 'Sim, contribuia',
-  },
-  {
-    value: 'sim, mas não contribuia',
-    label: 'Sim, mas não contribuia',
+    value: 'ns-nr',
+    label: 'NS/NR',
   },
 ]
 
 
-// D18 tipo_de_residencia
+// tipo_de_residencia
 
 export const tipo_de_residencia = [
   {
@@ -325,7 +321,7 @@ export const tipo_de_residencia = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D20 material_de_construcao
+// material_de_construcao
 
 export const material_de_construcao = [
   { value: 'alvenaria com revestimento', label: 'Alvenaria com revestimento' },
@@ -338,7 +334,7 @@ export const material_de_construcao = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D21 agua_potavel
+// agua_potavel
 
 export const agua_potavel = [
   { value: 'sim', label: 'Sim' },
@@ -357,7 +353,7 @@ export const agua_potavel = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D22 esgoto
+// esgoto
 
 export const esgoto = [
   { value: 'rede', label: 'Rede Geral, Rede Pluvial Ou Fossa Ligada À Rede' },
@@ -376,7 +372,7 @@ export const esgoto = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D29 pessoas_convidadas
+// pessoas_convidadas
 
 export const pessoas_convidadas = [
   { value: 'Todos já moravam', label: 'Todos já moravam' },
@@ -384,7 +380,7 @@ export const pessoas_convidadas = [
   { value: '>3', label: '>3' },
 ];
 
-// D32 faixa_de_renda
+// faixa_de_renda
 
 export const faixa_de_renda = [
   { value: 'não teve renda', label: 'Não teve renda' },
@@ -398,7 +394,7 @@ export const faixa_de_renda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D35 pnaeOptions
+// pnaeOptions
 
 export const pnaeOptinos = [
   { value: 'sim, recebi como merenda na própria escola', label: 'Sim, recebi como merenda na própria escola' },
@@ -410,7 +406,7 @@ export const pnaeOptinos = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D35 - creche
+//creche
 export const frequentam_creche = [
   {
     value: 'sim',
@@ -429,12 +425,12 @@ export const frequentam_creche = [
     label: 'Não, por outro motivo',
   },
   {
-    value: 'não possui crianças menores de 6 anos',
-    label: 'Não possui crianças menores de 6 anos',
+    value: 'ns-nr',
+    label: 'NS/NR',
   },
 ]
 
-// D36 cadastro_unico
+// cadastro_unico
 export const programas_de_assistencia = [
   { value: 'true', label: 'Sim' },
   { value: 'false', label: 'Não' },
@@ -444,7 +440,7 @@ export const programas_de_assistencia = [
 
 
 
-// D44 auxilio_vezes
+// auxilio_vezes
 
 export const auxilio_vezes = [
   { value: 'uma vez', label: 'Uma vez' },
@@ -453,7 +449,7 @@ export const auxilio_vezes = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D45 ajuda_instituicao_caridade
+// ajuda_instituicao_caridade
 
 export const ajuda_instituicao_caridade = [
   { value: 'Sim, do governo do estado', label: 'Sim, do governo do estado' },
@@ -464,7 +460,7 @@ export const ajuda_instituicao_caridade = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D46 tipo_de_ajuda
+// tipo_de_ajuda
 
 export const tipo_de_ajuda = [
   { value: 'ajuda em Alimentos', label: 'Ajuda em Alimentos' },
@@ -474,7 +470,7 @@ export const tipo_de_ajuda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D52 divisao_alimento
+// divisao_alimento
 
 export const divisao_alimento = [
   { value: 'consumo-venda', label: 'Parte da produção é para consumo e outra parte é para venda' },
@@ -482,7 +478,7 @@ export const divisao_alimento = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D63 como_adquiriu_comida
+// como_adquiriu_comida
 
 export const como_adquiriu_comida = [
   { value: 'compra-fisica', label: 'Por meio de compra física (indo ao mercado, mercearia etc.)' },
@@ -493,7 +489,7 @@ export const como_adquiriu_comida = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D64 alteracao_preco_comida
+// alteracao_preco_comida
 
 export const alteracao_preco_comida = [
   { value: 'sim-aumento', label: 'Sim, observei um aumento no preço dos alimentos.' },
@@ -502,7 +498,7 @@ export const alteracao_preco_comida = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D65 perfil_de_compra
+// perfil_de_compra
 
 export const perfil_de_compra = [
   { value: 'sim-mais-alimentos', label: 'Sim, a diminuição do preço possibilitou adquirir mais alimentos' },
@@ -512,7 +508,7 @@ export const perfil_de_compra = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-// D66 mercado
+// mercado
 
 export const mercado = [
   { value: 'hiper-supermercados', label: 'Hipermercados e grandes redes de supermercados (Ex. Carrefour®, Extra®, Pão de Açúcar®)' },
@@ -525,7 +521,7 @@ export const mercado = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//D67 gastos_alimentacao
+//gastos_alimentacao
 
 export const gastos_alimentacao = [
   { value: 'nao-mudaram', label: 'Não, continuam as mesmas' },
@@ -536,7 +532,7 @@ export const gastos_alimentacao = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
-//P11 vacina
+//vacina
 
 export const vacina = [
   { value: 'Sim, apenas a 1ª dose', label: 'Sim, apenas a 1ª dose' },
@@ -558,6 +554,75 @@ export const nao_tomou_vacina = [
   { value: 'não tomei porque não confio na vacina', label: 'Não tomei porque não confio na vacina' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
+
+//P13 estado_de_saude
+
+export const estado_de_saude = [
+  { label: 'Muito bom', value: 'muito_bom' },
+  { label: 'Bom', value: 'bom' },
+  { label: 'Regular', value: 'regular' },
+  { label: 'Ruim', value: 'ruim' },
+  { label: 'Muito ruim', value: 'muito_ruim' },
+]
+
+//P14 local_de_procura_do_servico_de_saude
+
+export const local_de_procura_do_servico_de_saude = [
+  { label: 'Farmácia', value: 'farmacia' },
+  { label: 'Unidade básica de saúde UBS (posto ou centro de saúde ou unidade de saúde da família)', value: 'ubs_ou_posto_de_saude' },
+  { label: 'Policlínica pública, PAM (Posto de Assistência Médica) ou Centro de Especialidades público', value: 'pam_ou_centro_de_especialidades_publico' },
+  { label: 'UPA (Unidade de Pronto Atendimento), outro tipo de pronto atendimento público (24 horas), pronto socorro ou emergência de hospital público', value: 'upa_ou_ps' },
+  { label: 'Ambulatório de hospital público', value: 'ambulatorio_publico' },
+  { label: 'Consultório particular, clínica privada ou ambulatório de hospital privado', value: 'consultorio_clinica__ou_hospital_privado' },
+  { label: 'Pronto atendimento ou emergência de hospital privado ou residencial ', value: 'pronto_atendimento_de_hospital_privado_ou_residencial' },
+  { label: 'Outro serviços', value: 'outros_servicos' },
+]
+
+//P15 - motivo_procura_servico_saude
+
+export const motivo_procura_servico_saude = [
+  { label: 'Foi atendido', value: 'foi_atendido' },
+  { label: 'Foi agendado para outro dia / outro local', value: 'agendado_para_outro_dia_ou_local' },
+  { label: 'Não foi atendido', value: 'nao_foi_atendido' },
+]
+
+//P16 - motivo_nao_atendimento_servico_saude
+
+export const motivo_nao_atendimento_servico_saude = [
+  { label: 'Não conseguiu vaga nem pegar senha', value: 'nao_conseguiu_vaga_ou_senha' },
+  { label: 'Não tinha médico ou dentista atendendo', value: 'nao_havia_medico_ou_dentista_atendendo' },
+  { label: 'Não havia serviço ou profissional de saúde especializado para atender', value: 'nao_havia_servico_ou_profissional' },
+  { label: 'Esperou muito e desistiu', value: 'esperou_muito_e_desistiu' },
+  { label: 'Os equipamentos do serviço de saúde não estavam funcionando ou disponíveis para uso', value: 'equipamentos_nao_funcionando_ou_indisponiveis' },
+  { label: 'Não podia pagar pela consulta com especialista para atender', value: 'nao_podia_pagar_pela_consulta_com_especialista' },
+  { label: 'Outros', value: 'outros' }
+]
+
+//P17 - doenca_ultimos_12_meses
+
+export const doenca_ultimos_12_meses = [
+  { label: 'Problemas nos ossos e articulações (Dor nas costas, problema no pescoço ou na nuca/Dor nos braços ou nas mãos/Artrite ou reumatismo)', value: 'problema_ossos_ou_articulacoes' },
+  { label: 'Dor de cabeça ou enxaqueca', value: 'dor_de_cabeca_ou_enxaqueca' },
+  { label: 'Problemas gineco-obstétricos (Problemas menstruais ou da gravidez e parto)', value: 'problemas_gineco_obstetricos' },
+  { label: 'Problemas odontológico / Dor de dente', value: 'problemas_odontologicos' },
+  { label: 'Problemas respiratórios (Resfriado / gripe / sinusite / asma / bronquite / pneumonia)', value: 'problemas_respiratorios' },
+  { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problema_cardiovasculares' },
+  { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental', value: 'problemas_de_saude_mental' },
+  { label: 'Outro', value: 'outro' },
+]
+
+//P18 - diagnostico_doenca_ultimos_12_meses
+
+export const diagnostico_doenca_ultimos_12_meses = [
+  { label: 'Anemia Falciforme', value: 'anemia_falciforme' },
+  { label: 'Doença de Chagas', v: 'doenca_de_chagas' },
+  { label: 'Problemas gineco-obstétricos (Problemas menstruais ou da gravidez e parto)', value: 'problemas_gineco_obstetricos' },
+  { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problemas_cardiovasculares' },
+  { label: 'Diabetes', value: 'diabetes' },
+  { label: 'Câncer (inclusive quimioterapia / radioterapia)', value: 'cancer' },
+  { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental)', value: '' },
+  { label: 'Outro', value: 'outro' },
+]
 
 // Project
 

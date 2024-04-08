@@ -23,7 +23,6 @@ import { HouseholdValidation } from '../../validation/schemas/HouseholdValidatio
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import {
   local_do_domicilio,
-  morador_de_rua,
   qual_povo_tradicional,
   tipo_de_residencia,
   material_de_construcao,
@@ -63,9 +62,10 @@ interface HouseholdFormProps {
   offline: boolean;
   isEditForm?: boolean;
   initialValues?: any;
+  hasPreviousStepCompleted: boolean;
 }
 
-const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {} }) => {
+const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEditForm = false, initialValues = {}, hasPreviousStepCompleted = false }) => {
 
   const { token } = useAuth();
 
@@ -106,6 +106,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
   const handleHouseholdSubmit = useCallback(
     async (data: ICreateHouseholdDTO) => {
 
+      if (!hasPreviousStepCompleted) {
+        addToast({
+          type: 'error',
+          title: 'Você ainda não enviou todos os formulários anteriores',
+          description: '',
+        });
+        return
+      }
       const parsedData = parseHouseholdData(data);
 
 
@@ -187,13 +195,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         setLoading(false)
       }
     },
-    [addToast, token, dispatch, offline, setLoading],
+    [addToast, token, dispatch, offline, setLoading, hasPreviousStepCompleted],
   );
 
   if (isEditForm) {
     HouseholdFormRef.current?.setData({
       local_do_domicilio: initialValues?.local_do_domicilio,
-      morador_de_rua: initialValues?.morador_de_rua,
       povos_tradicionais: initialValues?.povos_tradicionais,
       qual_povo_tradicional: initialValues?.qual_povo_tradicional,
       pessoa_de_referencia: initialValues?.pessoa_de_referencia,
@@ -303,28 +310,27 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           <span>D1 - Localização do domicílio</span>
           <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
-        <Label>[Inabilitada] D2 - A pessoa entrevistada é moradora em situação de rua?</Label>
-        <Select isDisabled name="morador_de_rua" options={morador_de_rua} />
-        <Label>D3 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
+
+        <Label>D2 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
         <Select
           name="povos_tradicionais"
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setTraditional(selectedOption)}
         />
-        <Label>D4 - Qual comunidade tradicional ou povos?</Label>
+        <Label>D3 - Qual comunidade tradicional ou povos?</Label>
         <Select
           name="qual_povo_tradicional"
           options={qual_povo_tradicional}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
-        <Label>D5 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
+        <Label>D4 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
         <Select
           name="pessoa_de_referencia"
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setMainPerson(selectedOption)}
         />
 
-        <Label>D6 - Qual a idade da pessoa de referência?</Label>
+        <Label>D5 - Qual a idade da pessoa de referência?</Label>
 
         {mainPerson?.value === 'false' ?
           (
@@ -340,70 +346,70 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
             </>
           ) : null}
 
-        <Label>D7 - Qual o sexo da pessoa de referência?</Label>
+        <Label>D6 - Qual o sexo da pessoa de referência?</Label>
         <Select
           name="sexo_pessoa_de_referencia"
           options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D8 - Como você define a raça ou cor da pessoa de referência?</Label>
+        <Label>D7 - Como você define a raça ou cor da pessoa de referência?</Label>
         <Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D9 - A pessoa de referência sabe ler e escrever?</Label>
+        <Label>D8 - A pessoa de referência sabe ler e escrever?</Label>
         <Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D10 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
+        <Label>D9 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
         <Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D11 - Qual a situação de trabalho da pessoa de referência?</Label>
+        <Label>D10 - Qual a situação de trabalho da pessoa de referência?</Label>
         <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D12 - Qual a ocupação da pessoa de referência?</Label>
+        <Label>D11 - Qual a ocupação da pessoa de referência?</Label>
         <Select
           name="ocupacao_profissional"
           options={ocupacao_profissional}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D13 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
+        <Label>D12 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
         <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D14 - Algum morador de sua casa teve diagnóstico positivo COVID-19?</Label>
+        <Label>D13 - Algum morador de sua casa teve diagnóstico positivo de COVID-19?</Label>
         <Select
           name="diagnostico_covid_positivo" //TODO:alinhar_com_raul-diagnostico_covid_positivo
           options={yesOrNoOptions}
         />
 
-        <Label>D15 - Algum morador de sua casa está apresentando sequelas da COVID-19?</Label>
+        <Label>D14 - Algum morador(a) da sua casa ainda tem problema de saúde (sequela) decorrente da COVID-19?</Label>
         <Select
           name="sequelas_covid" //TODO:alinhar_com_raul-sequelas_covid
           options={yesOrNoOptions}
         />
 
-        <Label>D16 - Vocês perderam alguém da família (morreu alguém) nos últimos 12 meses?</Label>
+        <Label>D15 - Vocês perderam alguém da família (morreu alguém) nos últimos 12 meses?</Label>
         <Select
           name="morte_ultimos_12_meses" //TODO:alinhar_com_raul-morte_ultimos_12_meses
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setMorte(selectedOption)}
         />
 
-        <Label>D17 - Qual a causa da morte?</Label>
+        <Label>D16 - Qual a causa da morte?</Label>
         <Select
           name="causa_morte_ultimos_12_meses" //TODO:alinhar_com_raul-causa_morte_ultimos_12_meses
           options={causa_morte_ultimos_12m}
           isDisabled={morte?.value !== 'true'}
         />
 
-        <Label>D17.2 - Essa pessoa contribuia com a renda familiar?</Label>
+        <Label>D17 - Essa pessoa contribuia com a renda familiar?</Label>
         <Select
           name="contribuicao_morte_ultimos_12_meses" //TODO:alinhar_com_raul-contribuicao_morte_ultimos_12_meses
           options={contribuicao_morte_ultimos_12m}

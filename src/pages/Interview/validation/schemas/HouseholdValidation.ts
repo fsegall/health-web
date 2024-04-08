@@ -4,7 +4,6 @@ export const HouseholdValidation = Yup.object().shape({
   local_do_domicilio: Yup.string().required(
     'Você precisa escolher um dos campos de localização de residência',
   ),
-  morador_de_rua: Yup.string(),
   povos_tradicionais: Yup.string().required(
     'Você precisa escolher um dos campos de povos tradicionais',
   ),

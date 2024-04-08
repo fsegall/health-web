@@ -96,7 +96,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'A sua casa possui algum meio de transporte?',
+      label: 'A sua casa possui algum meio de transporte? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
           name: 'veiculos',

@@ -81,7 +81,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       };
 
       if (!offline) {
-        const response = await api.post('/indigenous-interviews/demography', indigenous_demografico, {
+        const response = await api.post('/indigenous-interviews/v2/demography', indigenous_demografico, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_demografico', response.data.id);
@@ -243,12 +243,12 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       onSubmit={handleSubmit}
     >
       <section>
-        <Label>Quantas pessoas são moradores permanentes desta casa? (exclui pessoas de passagem, visitantes parentes ou não)</Label>
+        <Label>Quantas pessoas são moradores permanentes desta casa? (excluir pessoas de passagem, visitantes parentes ou não)</Label>
         <Input name="total_moradores" type="number" onChange={(e) => setBaseArraySize(Number(e.target.value))} />
         <Button type="button" onClick={handleArrayForm}>Gerar tabela</Button>
         {residentsGrid?.length > 0 && (
           <Label>
-              ATENÇÃO: Primeiro preencha o nome de cada morador. O primeiro sempre será o entrevistado e os seguintes estarão na ordem do mais velho ao mais novo. Conferir com o número de moradores referidos antes e perguntar se falta alguém.  Todas as perguntas do quadro devem ser preenchidas para cada morador, ao terminar 1 morador passa-se para o nome abaixo.
+              ATENÇÃO: Primeiro preencha o nome de cada morador. O primeiro sempre será o entrevistado e os seguintes estarão na ordem do mais velho ao mais novo. Conferir com o número de moradores referidos antes e perguntar se falta alguém. Todas as perguntas do quadro devem ser preenchidas para cada morador, ao terminar o primeiro morador, passe para o próximo.
           </Label>
         )}
         </section>
@@ -259,7 +259,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                <span key={elementIndex}>
+                <span key={`${elementIndex}:${element.label}`}>
                   {incrementCounterUpToLength(quadroDemograficoHelper.length)}
                   <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
                   <element.type

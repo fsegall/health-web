@@ -12,18 +12,18 @@ export default interface ICreateApoioProtecaoSocialDTO extends ApoioFinanceiroDT
 
 interface ApoioFinanceiroDTO {
   bolsa_familia_auxilio_brasil: string; //select
-  valor_bolsa_familia_auxilio_brasil?: number;
+  valor_bolsa_familia_auxilio_brasil?: number | string;
   bpc: string; //select
-  valor_bpc?: number;
+  valor_bpc?: number | string;
   auxilio_maternidade: string; //select
-  valor_auxilio_maternidade?: number;
+  valor_auxilio_maternidade?: number | string;
   auxilio_doenca: string; //select
-  valor_auxilio_doenca?: number;
+  valor_auxilio_doenca?: number | string;
   aposentadoria: string; //select
-  valor_aposentadoria?: number;
+  valor_aposentadoria?: number | string;
   pensao_morte: string; //select
-  valor_pensao_morte?: number;
+  valor_pensao_morte?: number | string;
   programa_auxilio_estadual_municipal: string; //select
-  valor_programa_auxilio_estadual_municipal?: number
+  valor_programa_auxilio_estadual_municipal?: number | string
   cesta_alimentos: string; //select
 }
