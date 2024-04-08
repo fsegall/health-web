@@ -16,7 +16,7 @@ export const SaudeDoencaValidation = Yup.object().shape({
         then: Yup.array().nullable().required("Você precisa preencher sobre as causas da doença do contato com veneno"),
         otherwise: Yup.array().nullable().notRequired(),
     }),
-    acidentes: Yup.string().required('Você precisa preencher se houveram acidentes'),
+    acidentes: Yup.array().required('Você precisa preencher se houveram acidentes'),
     ocorrencia_de_ameacas: Yup.string().required('Você precisa precisa preencher sobre ameaças'),
     ocorrencia_violencia_fisica: Yup.string().required('Você precisa sobre violência física'),
     local_ocorrencia_violencia_fisica: Yup.string().nullable().when("ocorrencia_violencia_fisica", {
@@ -43,7 +43,7 @@ export const SaudeDoencaValidation = Yup.object().shape({
       otherwise: Yup.string().nullable().notRequired(),
     }),
     moradora_entre_13_e_45_anos: Yup.string().required('Você precisa preencher sobre mulher entre 13 e 45 anos'),
-    mulheres_e_gestacao: Yup.string().nullable().when("moradora_entre_13_e_45_anos", {
+    mulheres_e_gestacao: Yup.array().nullable().when("moradora_entre_13_e_45_anos", {
       is: (val: any) => String(val) === "sim",
       then: Yup.array().nullable().required("Você precisa preencher sobre gestação e amamentação"),
       otherwise: Yup.array().nullable().notRequired(),

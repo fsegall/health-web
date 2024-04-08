@@ -81,7 +81,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       };
 
       if (!offline) {
-        const response = await api.post('/indigenous-interviews/demography', indigenous_demografico, {
+        const response = await api.post('/indigenous-interviews/v2/demography', indigenous_demografico, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_demografico', response.data.id);
@@ -259,7 +259,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                <span key={elementIndex}>
+                <span key={`${elementIndex}:${element.label}`}>
                   {incrementCounterUpToLength(quadroDemograficoHelper.length)}
                   <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
                   <element.type

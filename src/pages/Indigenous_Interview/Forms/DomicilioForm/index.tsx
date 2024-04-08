@@ -66,7 +66,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
       };
 
       if (!offline) {
-        const response = await api.post('/indigenous-interviews/residence', indigenous_domicilio, {
+        const response = await api.post('/indigenous-interviews/v2/residence', indigenous_domicilio, {
           headers: { Authorization: `Bearer ${token}` },
         })
         localStorage.setItem('@Safety:indigenous_domicilio', response.data.id);

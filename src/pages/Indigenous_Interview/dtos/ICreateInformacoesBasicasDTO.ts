@@ -4,7 +4,7 @@ export default interface ICreateInformacoesBasicasDTO {
   aldeia_comunidade: string;
   tipo_comunidade: string;
   entrevistador_id: string;
-  numero_projeto: number;
+  projeto_numero: number;
   data_entrevista: string;
   responsavel_documentos: string[];
 }

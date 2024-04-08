@@ -49,7 +49,7 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
       label: 'Indique o número do Projeto',
       type: Input,
       props: {
-          name: 'numero_projeto',
+          name: 'projeto_numero',
           type: 'number',
           placeholder: 'Número do Projeto'
       }

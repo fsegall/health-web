@@ -82,13 +82,17 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
         const address_id = localStorage.getItem('@Safety:address_id');
 
         const discrimination_id = localStorage.getItem('@Safety:discrimination_id') ?? null;
+        const violence_id = localStorage.getItem('@Safety:violence_id') ?? null;
+        const mental_health_id = localStorage.getItem('@Safety:mental_health_id') ?? null;
 
         const interview = {
           interviewer_id,
           household_id,
           person_id,
           address_id,
-          discrimination_id: discrimination_id,
+          discrimination_id,
+          violence_id,
+          mental_health_id,
           ...validatedData,
         };
 
@@ -105,7 +109,13 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
         localStorage.removeItem('@Safety:person_id');
         localStorage.removeItem('@Safety:household_id');
         localStorage.removeItem('@Safety:address_id');
+        localStorage.removeItem('@Safety:violence_id');
         localStorage.removeItem('@Safety:discrimination_id');
+        localStorage.removeItem('@Safety:violence_id');
+        localStorage.removeItem('@Safety:mental_health_id');
+        localStorage.removeItem('@Safety:current-offline-interview-id');
+        localStorage.removeItem('@Safety:hide_health_module');
+        localStorage.removeItem('@Safety:discrimination_form_sent');
 
         dispatch({ type: "INTERVIEW" });
 

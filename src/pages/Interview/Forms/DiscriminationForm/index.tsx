@@ -11,9 +11,6 @@ import api from '../../../../services/api';
 import { Label, StyledForm } from '../../../Indigenous_Interview/Forms/form-styles';
 import { DiscrimiationValidation } from '../../validation/schemas/DiscriminationValidation';
 import ICreateDiscriminationDTO from '../../dtos/ICreateDiscriminationDTO';
-import { uuid } from 'uuidv4';
-
-
 
 interface DiscriminationFormProps {
   dispatch: Function;
@@ -62,31 +59,31 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
         if (!offline) {
           const person_id = localStorage.getItem('@Safety:person_id');
 
-          const id = uuid();
           const discriminationData = {
             person_id,
-            id,
             ...validatedData,
           };
 
 
-          await api.post('/interviews/discrimination', discriminationData, {
+          const response = await api.post('/discrimination', discriminationData, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
 
-          localStorage.setItem('@Safety:discrimination_id', id);
+          localStorage.setItem('@Safety:discrimination_id', response.data.id);
 
-          dispatch({ type: 'DISCRIMINATION', payload: { id: id } });
+          localStorage.setItem('@Safety:discrimination_form_sent', 'true');
+
+          dispatch({ type: 'DISCRIMINATION', payload: { id: response.data.id } });
 
           addToast({
             type: 'success',
-            title: 'Uma residência foi adicionada com sucesso',
-            description: 'Você já pode adicionar um endereço',
+            title: 'Formulário de iscriminação enviado com sucesso',
+            description: 'Você já pode avançar para o próximo módulo',
           });
         } else {
 
-          const discriminationData = {
+          const discrimination = {
             ...validatedData,
           };
 
@@ -94,10 +91,12 @@ const DiscriminationForm: React.FC<DiscriminationFormProps> = ({ dispatch, offli
 
           const offlineInterviews: { [key: string]: ICreateDiscriminationDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-          const addDiscrimination = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], discriminationData } } : false;
+          const addDiscrimination = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], discrimination } } : false;
 
           if (addDiscrimination) {
             localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addDiscrimination));
+
+            localStorage.setItem('@Safety:discrimination_form_sent', 'true');
 
             dispatch({ type: 'DISCRIMINATION', payload: { id: uniqueId } });
 

@@ -78,12 +78,12 @@ const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, 
 
           addToast({
             type: 'success',
-            title: 'Uma residência foi adicionada com sucesso',
-            description: 'Você já pode adicionar um endereço',
+            title: 'Saúde mental adicionado com sucesso',
+            description: 'Você já pode avançar para o próximo módulo',
           });
         } else {
 
-          const mental_health_data = {
+          const mental_health = {
             ...validatedData,
           };
 
@@ -91,7 +91,7 @@ const MentalHealthForm: React.FC<MentalHealthFormProps> = ({ dispatch, offline, 
 
           const offlineInterviews: { [key: string]: ICreateMentalHealthDTO } = JSON.parse(localStorage.getItem('@Safety:offline-interviews') || '{}');
 
-          const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], mental_health_data } } : false;
+          const addData = offlineInterviews.hasOwnProperty(uniqueId) ? { ...offlineInterviews, [uniqueId]: { ...offlineInterviews[uniqueId], mental_health } } : false;
 
           if (addData) {
             localStorage.setItem(`@Safety:offline-interviews`, JSON.stringify(addData));

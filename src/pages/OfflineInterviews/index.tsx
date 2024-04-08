@@ -62,7 +62,7 @@ const OfflineInterviews: React.FC = () => {
 
       try {
         setLoading(true)
-        const response = await api.post('/indigenous-interviews/handle-offline-data', [offlineData],
+        const response = await api.post('/indigenous-interviews/v2/handle-offline-data', [offlineData],
           {
             headers: {
               Authorization: `Bearer ${token}`
