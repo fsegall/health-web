@@ -27,13 +27,13 @@ export const CardSection = styled.div`
   margin-top: 20px;
 `;
 
-export const Card = styled.div`
+export const Card = styled.div<{ backgroundColor?: string }>`
   width: 100%;
   max-width: 300px;
   cursor: pointer;
   height: 100%;
   text-align: left;
-  background-color: rgb(89, 116, 140, 0.7);
+  background-color: ${props => props?.backgroundColor || 'rgb(89, 116, 140, 0.7)'};
   padding: 10px 20px;
   border-radius: 4px;
   border-left: 6px solid gray;
