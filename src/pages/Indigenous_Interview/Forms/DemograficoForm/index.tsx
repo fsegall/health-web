@@ -65,6 +65,11 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     try {
       DemograficoFormRef.current?.setErrors({});
 
+      if (data?.moradores) {
+        data.moradores[0].maior_de_um_ano = 'sim'
+      }
+
+
       const values = {
         ...data,
         moradores: data?.moradores,
@@ -243,7 +248,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       onSubmit={handleSubmit}
     >
       <section>
-        <Label>Quantas pessoas são moradores permanentes desta casa? (excluir pessoas de passagem, visitantes parentes ou não)</Label>
+        <Label>Quantas pessoas são moradoras permanentes desta casa? (excluir pessoas que estão apenas de passagem ou visitando, parentes ou não)</Label>
         <Input name="total_moradores" type="number" onChange={(e) => setBaseArraySize(Number(e.target.value))} />
         <Button type="button" onClick={handleArrayForm}>Gerar tabela</Button>
         {residentsGrid?.length > 0 && (
@@ -258,17 +263,37 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
               <span style={{ visibility: 'hidden' }}>
                 <Input name="id" value={index+1} type="number" />
               </span>
-              {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                <span key={`${elementIndex}:${element.label}`}>
-                  {incrementCounterUpToLength(quadroDemograficoHelper.length)}
-                  <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
-                  <element.type
-                    {...element.props}
-                    isDisabled={element?.dependencies && handleDisabled(element, index+1)}
-                    onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.value)}
+              {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => {
+                let isFirstInterviewerAgeElement = false
+                const isFirstInterviewer = index === 0
+                if (isFirstInterviewer && element?.props?.name === 'maior_de_um_ano') {
+                  element.props.defaultValue = {
+                    value: 'sim',
+                    label: 'Sim'
+                  }
+                } else {
+                  element.props.defaultValue = null
+                }
+                if (isFirstInterviewer) {
+                  isFirstInterviewerAgeElement = element?.props?.name === 'idade'
+                  const isFirstInterviewerMonthsElement = element?.props?.name === 'idade_em_meses'
+                  const isFirstInterviewerOlderThanOne = element?.props?.name === 'maior_de_um_ano'
+                  if (isFirstInterviewerMonthsElement || isFirstInterviewerOlderThanOne) {
+                    return
+                  }
+                }
+                return (
+                  <span key={`${elementIndex}:${element.label}`}>
+                    {incrementCounterUpToLength(quadroDemograficoHelper.length)}
+                    <Label>{`${counter}. ${index > 0 ? (element.alternative_label || element.label) : element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
+                    <element.type
+                      {...element.props}
+                      isDisabled={isFirstInterviewerAgeElement ? false : element?.dependencies && handleDisabled(element, index+1)}
+                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.value)}
                     />
-                </span>
-                )
+                  </span>
+                  )
+              }
               )}
             </section>
           </Scope>

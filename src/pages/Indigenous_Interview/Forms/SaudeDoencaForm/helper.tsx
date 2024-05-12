@@ -1,6 +1,6 @@
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { acessoEquipeDeSaude, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, criancaComidaOptions, cuidadoresOptions, desabilidadeOptions, diagnosticoRemedioOptions, diagnosticosOptions, gestanteOptions, lugaresOptions, profissionaisEquipeDeSaude, simOuNao, tiposAcidenteOptions, tratamentosOptions, violenciaFisicaOptions, yesOrNoOptions } from "../../questions/SelectorOptions/options";
+import { acessoEquipeDeSaude, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, criancaComidaOptions, cuidadoresOptions, desabilidadeOptions, diagnosticoRemedioOptions, diagnosticosOptions, gestanteOptions, lugaresOptions, profissionaisEquipeDeSaude, simOuNao, tiposAcidenteOptions, doencasInfecciosas, violenciaFisicaOptions, yesOrNoOptions, doencasOutras } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -122,7 +122,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
       ],
       [
         {
-            label: 'Você, por ser indígena, já foi impedido alguma vez de entrar em:',
+            label: 'Você, por ser indígena, já foi impedido alguma vez de entrar em: (LER AS OPÇÕES - PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'locais_impedido_de_entrar',
@@ -141,7 +141,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             hasDependencies: true
         },
         {
-            label: 'Se sim, você toma remédio por causa disso?',
+            label: 'Se sim, você toma remédio por causa disso? (Remédio de caixinha seria o remédio comprado, retirado no posto ou entregue pelo profisisonal de saúde)',
             type: Select,
             props: {
                 name: 'lista_diagnosticos_cronico_remedio',
@@ -149,16 +149,40 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             },
             dependencies: {
               lista_diagnosticos: [
-                "pressao_alta", "diabetes", "doenca_coracao", "doenca_rins", "cancer"
+                "pressao_alta", "diabetes", "doenca_coracao", "doenca_rins", "cancer", "obesidade"
               ],
           }
         },
         {
-          label: 'Nos últimos 6 meses algum médico ou enfermeiro(a) já te disse que você tem/teve alguma dessas outras doenças?: (LER AS OPÇÕES). PODE TER MAIS DE 1 RESPOSTA',
+            label: 'Nos últimos 6 meses, algum médico ou enfermeira(o) já te disse que você tem/teve alguma dessas doenças infecciosas?: (LER AS OPÇÕES). PODE TER MAIS DE 1 OPÇÃO DE RESPOSTA.',
+            type: Select,
+            props: {
+                name: 'lista_diagnosticos_doencas_infecciosas',
+                options: handleValueLabelOption(doencasInfecciosas),
+                isMulti: true,
+            },
+            hasDependencies: true
+        },
+        {
+            label: 'Se sim, você toma remédio por causa disso? (Remédio de caixinha seria o remédio comprado, retirado no posto ou entregue pelo profisisonal de saúde)',
+            type: Select,
+            props: {
+                name: 'lista_diagnosticos_doencas_infecciosas_remedio',
+                options: handleValueLabelOption(diagnosticoRemedioOptions),
+            },
+            dependencies: {
+              lista_diagnosticos_doencas_infecciosas: [
+                "malaria", "gripe", "infeccao_de_pele", "dst", "hepatite", "tuberculose", "pneumonia", "outra_doenca_respiratoria",
+                "diarreia", "covid_19"
+              ],
+          }
+        },
+        {
+          label: 'Nos últimos 6 meses, algum médico ou enfermeira(o) já te disse que você tem/teve alguma dessas outras doenças ou problemas de saúde? (LER AS OPÇÕES). PODE TER MAIS DE 1 OPÇÃO DE RESPOSTA.',
           type: Select,
           props: {
               name: 'lista_diagnosticos_outros',
-              options: handleValueLabelOption(tratamentosOptions),
+              options: handleValueLabelOption(doencasOutras),
               isMulti: true,
           },
           hasDependencies: true
@@ -172,8 +196,7 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
         },
         dependencies: {
           lista_diagnosticos_outros: [
-            "covid_19", "asma", "malaria", "tuberculose", "gripe_tosse", "pneumonia", "ferida_pele", "anemia_ferropriva",
-            "desnutricao", "diarreia", "vomito", "dor_de_cabeca", "depressao_ou_ansiedade", "dst", "outro", "feitico"
+            'anemia_ferropriva', 'desnutricao_peso_baixo', 'vomito', 'dor_de_cabeca', 'ansiedade_ou_depressao', 'doenca_fruto_de_feitico'
           ],
       }
     },

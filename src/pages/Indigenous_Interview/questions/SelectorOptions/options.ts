@@ -23,8 +23,12 @@ export const violencePlacesOptions = {
 
 export const criancaComidaOptions = {
   mingau: 'Mingau',
-  agua_ou_cha: 'Água ou Chá',
-  leite_em_po_ou_cru: 'Leite em pó, saquinho, caixinha ou leite cru',
+  agua: 'Água',
+  cha: 'Chá',
+  leite_em_po_ou_cru: 'Leite (em pó, de saquinho, de caixinha ou leite cru)',
+  leite_com_farinha: 'Leite engrossado com alguma farinha',
+  leite_com_achocolatado: 'Leite com achocolatado',
+  leite_com_acucar: 'Leite com açúcar',
   formula_infantil: 'Fórmula infantil',
   suco_de_fruta: 'Suco de fruta',
   fruta: 'Fruta',
@@ -246,10 +250,10 @@ export const etniasNewOptions = {
 
 export const grauEscolaridadeOptions = {
   nao_frequentou: 'Nunca foi pra escola',
-  fundamental_incompleto: 'Fundamental Incompleto',
-  fundamental_completo: 'Fundamental Completo',
-  medio_incompleto: 'Médio Incompleto',
-  medio_completo: 'Médio Completo',
+  fundamental_incompleto: 'Fundamental Incompleto (< 9 anos)',
+  fundamental_completo: 'Fundamental Completo (9 anos)',
+  medio_incompleto: 'Médio Incompleto (< 12 anos)',
+  medio_completo: 'Médio Completo (12 anos)',
   supletivo_1_grau: 'Supletivo 1º grau',
   supletivo_2_grau: 'Supletivo 2º grau',
   superior_incompleto: 'Superior Incompleto (graduação)',
@@ -284,7 +288,7 @@ export const situacaoTrabalhoOptions = {
 };
 
 export const funcaoTrabalhoAldeiaOptions = {
-  professor: 'Professor',
+  professor: 'Professor (a)',
   agente_de_saude: 'Agente de saúde',
   agente_de_saneamento: 'Agente de saneamento',
   motorista: 'Motorista',
@@ -292,7 +296,7 @@ export const funcaoTrabalhoAldeiaOptions = {
   cuidador_de_criancas: 'Cuidadora/cuidador de crianças',
   cozinheiro: 'Cozinheira/merendeira',
   profissional_de_saude:
-    'Profissional de saúde (enfermenro, médico, odontólogo ou outros)',
+    'Profissional de saúde (enfermeiro, médico, odontólogo ou outros)',
   agricultor: 'Agricultor (e vende na aldeia)',
   outros: 'Outros',
 };
@@ -402,11 +406,11 @@ export const ultimaMoradaOptions = {
 
 export const moradaHojeOptions = {
   barraco: 'Barraco',
-  tenda: 'Tenda de Lona/plástico e outros',
-  casa_madeira_alvenaria: 'Casa de madeira ou alvenaria',
+  tenda: 'Tenda de lona/plástico',
+  casa_madeira: 'Casa de madeira',
+  casa_alvenaria: 'Casa de alvenaria',
   casa_coletiva: 'Casa coletiva',
-  casa_reza: 'Casa de reza',
-  outro: 'Outro',
+  outro: 'Outro tipo de moradia',
 };
 
 export const pisoCasaOptions = {
@@ -669,6 +673,7 @@ export const diagnosticosOptions = {
   pressao_alta: 'Pressão alta',
   diabetes: 'Diabetes (açucar no sangue)',
   doenca_coracao: 'Doença no coração (lembrar Chagas)',
+  obesidade: 'Obesidade',
   doenca_rins: 'Doença nos rins (insuficiência renal)',
   cancer: 'Câncer',
   nenhuma: 'Nenhuma',
@@ -678,7 +683,7 @@ export const lugaresOptions = {
   comercio_ou_mercado: 'Supermercado ou comércios em geral',
   escola: 'Escola',
   igreja: 'Igreja',
-  reparticao_publica: 'Repartição pública',
+  reparticao_publica: 'Repartição pública (Ex: Prefeitura, CRAS, Cartório)',
   outros: 'Outros',
   nenhum_nunca: 'Nunca fui',
 };
@@ -700,23 +705,27 @@ export const gestanteOptions = {
   'ns-nr': 'NS/NR',
 };
 
-export const tratamentosOptions = {
-  covid_19: 'COVID 19',
-  asma: 'Asma (chiado no peito)',
-  malaria: 'Malária',
-  tuberculose: 'Tuberculose',
-  gripe_tosse: 'Gripe/tosse',
-  pneumonia: 'Pneumonia',
-  ferida_pele: 'Ferida na pele',
-  anemia_ferropriva: 'Anemia ferropriva',
-  desnutricao: 'Desnutrição / baixo peso',
-  diarreia: 'Diarreia (Xiri)',
+export const doencasOutras = {
+  anemia_ferropriva: 'Anemia Ferropriva',
+  desnutricao_peso_baixo: 'Desnutrição / Baixo peso',
   vomito: 'Vômito',
   dor_de_cabeca: 'Dor de cabeça',
-  depressao_ou_ansiedade: 'Depressão ou ansiedade',
-  dst: 'HIV ou outra doença transmitida pelo sexo',
-  outro: 'Tratamento para outro tipo de doença',
-  feitico: 'Doença fruto de feitiço',
+  ansiedade_ou_depressao: 'Ansiedade ou depressão',
+  doenca_fruto_de_feitico: 'Doença fruto de feitiço',
+  nenhuma: 'nenhuma',
+}
+
+export const doencasInfecciosas = {
+  malaria: 'Malária',
+  gripe: 'Gripe',
+  infeccao_de_pele: 'Infecção de pele',
+  dst: 'HIV/AIDS ou doença transmitida pelo sexo',
+  hepatite: 'Hepatite B ou C',
+  tuberculose: 'Tuberculose',
+  pneumonia: 'Pneumonia',
+  outra_doenca_respiratoria: 'Outra doença respiratória',
+  diarreia: 'Diarreia',
+  covid_19: 'COVID-19',
   nenhuma: 'Nenhuma',
 };
 
@@ -853,16 +862,16 @@ export const motivacaoNaoProduzirHorta = {
 };
 
 export const plantiosHorta = {
-  mandioca: 'Mandioca',
+  mandioca_macaxera_aipim: 'Mandioca / Macaxera / Aipim',
   inhame: 'Inhame',
   cara: 'Cará',
   batata: 'Batata',
   batata_doce: 'Batata doce',
   milho: 'Milho',
-  feijao: 'Feijão',
-  abobora: 'Abóbora',
+  feijao: 'Feijão (qualquer tipo)',
+  abobora: 'Abóbora (qualquer tipo: Cabotia, Moranga, de pescoço)',
   quiabo: 'Quiabo',
-  verduras: 'Verduras (alface, rúcla, acelga etc)',
+  verduras: 'Verduras (Rúcula...)',
   outros: 'Outros (especificar)',
   'ns-nr': 'NS/NR',
 };
@@ -1028,7 +1037,7 @@ export const alimentosConsumidosOntem = {
   macarrao_instantaneo_salgadinhos_de_pacote:
     'Macarrão instantâneo (miojo), salgadinhos de pacote (fofão) ou bolachas salgados',
   biscoito_recheado_doces_guloseimas:
-    'Bolacha recheada, doces, guloseimas, como balas, pirulitos, chiclete',
+    'Biscoitos salgados e biscoito recheado, doces, guloseimas, como balas, pirulitos, chiclete',
   nao_comeu: 'Não comemos nada',
   'ns-nr': 'NS/NR',
 };

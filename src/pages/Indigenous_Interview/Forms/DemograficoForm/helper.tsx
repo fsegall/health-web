@@ -5,10 +5,12 @@ import { sexoOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoO
 
 export interface FormHelperType {
     label: string;
+    alternative_label?: string;
     type: React.FC<any>;
     props: {
       name: string;
       placeholder?: string;
+      defaultValue?: any;
       isMulti?: boolean;
       options?: Array<any>;
       type?: 'text' | 'textarea' | 'number';
@@ -42,7 +44,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Qual a sua etnia? (Pode ser marcada mais de 1 opção) APENAS PARA O RESPONDENTE E PARA O CHEFE',
+      label: ' Qual sua etnia/povo?',
       type: Select,
       props: {
         name: 'povo_etnia',
@@ -60,7 +62,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Em relação a crença, você acredita na igreja ou no pagé / nhanderu / lideranças religiosas tradicional? (Apenas para respondente e chefe)',
+      label: 'Em relação a crença, você acredita na igreja ou no pagé / nhanderu / lideranças religiosas tradicional? (Apenas para respondente/chefe)',
       type: Select,
       props: {
         name: 'crenca_religiao',
@@ -84,7 +86,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Você está trabalhando no momento? (PODE TER MAIS DE 1 RESPOSTA) (obs: apenas para respondente e chefe)',
+      label: 'Você está trabalhando no momento? (PODE TER MAIS DE 1 RESPOSTA) (obs: apenas para respondente/chefe)',
       type: Select,
       props: {
         name: 'situacao_no_trabalho',
@@ -140,7 +142,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Na aldeia, você exerce algum outro tipo de função (não remunerada)?',
+      label: 'Na aldeia, você exerce algum outro tipo de função (não remunerada)? (LER AS OPÇÕES)',
       type: Select,
       props: {
         name: 'funcao_nao_remunerada_aldeia',
@@ -165,7 +167,8 @@ export const extraDemograficoHelper: FormHelperType[][] = [
 
 export const quadroDemograficoHelper: FormHelperType[] = [
   {
-    label: 'Qual o nome do MORADOR?',
+    label: 'Qual o seu nome?',
+    alternative_label: 'Qual o nome do próximo morador?',
     type: Input,
     props: {
       name: 'nome',
@@ -174,7 +177,8 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     }
   },
   {
-    label: 'Qual a relação do MORADOR com o chefe?',
+    label: 'Qual a sua relação com o chefe ou pessoa de referência da família?',
+    alternative_label: 'Qual a relação dele(a) com o(a) chefe ou pessoa de referência da família?',
     type: Input,
     props: {
       name: 'relacao_com_lider',
@@ -184,6 +188,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
   },
   {
     label: 'O MORADOR possui mais de 1 ano de idade?',
+    alternative_label: 'O morador possui mais de 1 ano de idade? (se a resposta for não)',
     type: Select,
     props: {
       name: 'maior_de_um_ano',
@@ -193,7 +198,8 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     hasDependencies: true
   },
   {
-    label: 'Qual a idade do MORADOR?',
+    label: 'Quantos anos você tem?',
+    alternative_label: 'Quantos anos tem o morador?',
     type: Input,
     props: {
       name: 'idade',
@@ -207,6 +213,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
   },
   {
     label: 'Qual a idade do MORADOR em MESES?',
+    alternative_label: 'Qual a idade do morador em meses?',
     type: Input,
     props: {
       name: 'idade_em_meses',
@@ -219,7 +226,8 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     }
   },
   {
-    label: 'Qual o sexo do MORADOR?',
+    label: 'Qual o seu sexo?',
+    alternative_label: 'Qual o sexo do morador?',
     type: Select,
     props: {
       name: 'sexo',

@@ -20,6 +20,9 @@ export default interface ICreateSaudeDoencaDTO {
   lista_diagnosticos: string[]; //multi-select
   lista_diagnosticos_cronico_remedio?: string;
 
+  lista_diagnosticos_doencas_infecciosas: string[];
+  lista_diagnosticos_doencas_infecciosas_remedio?: string;
+
   lista_diagnosticos_outros: string[];
   lista_diagnosticos_outros_remedio?: string;
 
