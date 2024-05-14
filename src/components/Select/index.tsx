@@ -34,9 +34,11 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         if (selectedOption) {
           ref.state.value = selectedOption
         } else {
-          const splittedValue = value.split(',')
-          const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(v.value))
-          ref.state.value = selectedOptions
+          const splittedValue = value?.split(',')
+          if (splittedValue?.length > 0) {
+            const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(v.value))
+            ref.state.value = selectedOptions
+          }
         }
       }
     });

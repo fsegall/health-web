@@ -21,7 +21,7 @@ export interface FormHelperType {
 export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
   [
     {
-      label: 'Nesta casa tem morador/moradora com idade abaixo de 16 anos?',
+      label: 'Nesta casa tem morador ou moradora com idade menor de 16 anos (de 0 a 15 anos)?',
       type: Select,
       props: {
         name: 'possui_moradores_menores_de_16',
@@ -32,7 +32,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb1] No mês passado, você sentiu preocupação de não conseguir comida para sua casa?',
+        'EB1. No mês passado, você sentiu preocupação em conseguir comida para sua casa?',
       type: Select,
       props: {
         name: 'preocupação_nao_conseguir_comida',
@@ -45,10 +45,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb2] No mês passado, teve alguns dias que vocês desta casa não puderam comer comida de sua cultura, porque não tinha esse tipo de comida?',
+        'EB2. No mês passado, vocês desta casa, comeram sempre comida da sua cultura?',
       type: Select,
       props: {
-        name: 'nao_comeu_comida_cultura',
+        name: 'comeu_sempre_comida_da_cultura',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
@@ -58,10 +58,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb3] No mês passado, vocês nesta casa, não puderam comer sempre comida saudável (que faz bem pra saúde), porque não tinha esse tipo de comida?',
+        'EB3. No mês passado, vocês nesta casa, comeram sempre comida saudável (que faz bem para saúde)?',
       type: Select,
       props: {
-        name: 'nao_comeu_comida_saudavel',
+        name: 'comeram_sempre_comida_saudavel',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
@@ -71,10 +71,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb4] No mês passado, teve dia ou dias que faltou comida na sua casa?',
+        'EB4. No mês passado, na sua casa, teve comida todos os dias?',
       type: Select,
       props: {
-        name: 'faltou_comida',
+        name: 'teve_comida_todos_os_dias',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
@@ -84,7 +84,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb5] No mês passado, teve dia de você passar o dia todo sem comer nada, porque não tinha comida na casa?',
+        'EB5. No mês passado, você ficou um dia todo sem comer nada, porque não tinha comida na casa?',
       type: Select,
       props: {
         name: 'dia_todo_sem_comer',
@@ -97,7 +97,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb6] No mês passado, teve dia que você comeu menos para deixar comida para as crianças e jovens da casa?',
+        'EB6. No mês passado, teve dia que você comeu menos para deixar comida para as crianças e jovens da casa?',
       type: Select,
       props: {
         name: 'comeu_menos_para_deixar_comida_crianca',
@@ -110,7 +110,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb7] No mês passado, teve dia em que as crianças e jovens da casa comeram menos quantidade de comida do que é necessário, porque tinha pouca comida?',
+        'EB7. No mês passado, teve dia em que as crianças e jovens da casa comeram menos quantidade de comida do que é necessário, porque tinha pouca comida?',
       type: Select,
       props: {
         name: 'crianca_comeu_menos',
@@ -123,7 +123,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        '[Eb8] No mês passado, teve dia em que as crianças e jovens da casa passaram o dia todo sem comer e foram dormir querendo comer, porque não tinha comida?',
+        'EB8. No mês passado, teve dia em que as crianças e jovens da casa passaram o dia todo sem comer e foram dormir querendo comer, porque não tinha comida?',
       type: Select,
       props: {
         name: 'criança_dia_todo_sem_comer',
@@ -171,7 +171,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'Se FAZ roça/horta, o que você planta? (PODE TER MAIS DE 1 RESPOSTA)',
+        'Se faz roça/horta, o que você planta? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
         name: 'alimentos_da_horta',
@@ -185,7 +185,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'Vocês cultivam algum tipo de frutífera próximo a casa ou na comunidade?',
+        'Se outro, qual?',
       type: Input,
       props: {
         name: 'alimentos_da_horta_outros',
@@ -205,6 +205,18 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
       hasDependencies: true,
+    },
+    {
+      label:
+        ' Se sim, cite as 5 frutíferas mais comuns na sua aldeia',
+      type: Input,
+      props: {
+        name: 'frutiferas_nas_proximidades_quais',
+        type: 'text',
+      },
+      dependencies: {
+        frutiferas_nas_proximidades: ['true'],
+      },
     },
 
     {
@@ -234,7 +246,7 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
   [
     {
       label:
-        'Onde vocês conseguem a semente ou rama para plantar? (PODE TER MAIS DE 1 RESPOSTA)',
+        'Onde vocês conseguem as sementes ou rama para plantar? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
         name: 'origem_semente_plantio',

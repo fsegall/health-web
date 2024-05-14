@@ -19,7 +19,7 @@ export interface FormHelperType {
 export const informacoesBasicasFormHelper: FormHelperType[][] = [
   [
     {
-      label: 'Qual seu Município?',
+      label: 'Qual seu Município / Estado da federação? (Ex: Dourados/MS; Boa Vista/RR; Porto Seguro/BA)',
       type: Input,
       props: {
           name: 'municipio',

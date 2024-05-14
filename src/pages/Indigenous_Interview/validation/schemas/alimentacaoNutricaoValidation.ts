@@ -15,7 +15,7 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         ),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-  nao_comeu_comida_cultura: Yup.string()
+  comeu_sempre_comida_da_cultura: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {
       is: (val: any) => String(val) === 'nao',
@@ -24,7 +24,7 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         .required('Você precisa preencher se comeu alimentos da cultura'),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-  nao_comeu_comida_saudavel: Yup.string()
+  comeram_sempre_comida_saudavel: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {
       is: (val: any) => String(val) === 'nao' || String(val) === 'sim',
@@ -33,7 +33,7 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
         .required('Você precisa preencher se comeu alimentos saudáveis'),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-  faltou_comida: Yup.string()
+  teve_comida_todos_os_dias: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {
       is: (val: any) => String(val) === 'nao' || String(val) === 'sim',
@@ -124,6 +124,15 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
   frutiferas_nas_proximidades: Yup.string()
     .nullable()
     .required('Você precisa preencher sobre frutíferas'),
+    frutiferas_nas_proximidades_quais: Yup.string()
+    .nullable()
+    .when('frutiferas_nas_proximidades', {
+      is: (val: any) => String(val) === 'true',
+      then: Yup.string()
+        .nullable()
+        .required('Você precisa citar as frutíferas mais comuns na sua área'),
+      otherwise: Yup.string().nullable().notRequired(),
+    }),
   coleta_castanhas_cocos_frutas: Yup.string()
     .nullable()
     .required('Você precisa preencher sobre frutíferas'),

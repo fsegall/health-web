@@ -100,7 +100,7 @@ const initialState: StateFormat = {
     },
     mental_health: {
       id: null,
-      show: localStorage.getItem('@Safety:hide_health_module') === 'true' ? false : true,
+      show: true,
     },
     address: {
       id: null,
@@ -177,7 +177,6 @@ const Interview: React.FC = () => {
       localStorage.removeItem('@Safety:person_id');
       localStorage.removeItem('@Safety:household_id');
       localStorage.removeItem('@Safety:address_id');
-      localStorage.removeItem('@Safety:violence_id');
       localStorage.removeItem('@Safety:discrimination_id');
       localStorage.removeItem('@Safety:violence_id');
       localStorage.removeItem('@Safety:mental_health_id');
