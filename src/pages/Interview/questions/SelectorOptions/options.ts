@@ -612,6 +612,7 @@ export const doenca_ultimos_12_meses = [
   { label: 'Problemas respiratórios (Resfriado / gripe / sinusite / asma / bronquite / pneumonia)', value: 'problemas_respiratorios' },
   { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problema_cardiovasculares' },
   { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental', value: 'problemas_de_saude_mental' },
+  { label: 'Nenhuma', value: 'nenhuma' },
   { label: 'Outro', value: 'outro' },
 ]
 
