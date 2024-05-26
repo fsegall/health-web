@@ -218,6 +218,7 @@ export const diagnostico_covid = [
 export const local_do_domicilio = [
   { value: 'urbano', label: 'Urbano' },
   { value: 'rural', label: 'Rural' },
+  { value: 'periurbana', label: 'Periurbana' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
