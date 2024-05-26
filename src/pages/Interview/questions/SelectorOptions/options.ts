@@ -479,6 +479,14 @@ export const tipo_de_ajuda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+export const produz_alimento = [
+  { value: 'Sim, horta/roça', label: 'Sim, horta/roça' },
+  { value: 'Sim, crio animais', label: 'Sim, crio animais' },
+  { value: 'Sim, os dois', label: 'Sim, os dois' },
+  { value: 'Não, nenhum', label: 'Não, nenhum' },
+  { value: 'ns-nr', label: 'NS/NR' },
+]
+
 // divisao_alimento
 
 export const divisao_alimento = [

@@ -50,6 +50,7 @@ import {
   causa_morte_ultimos_12m,
   frequentam_creche,
   contribuicao_morte_ultimos_12m,
+  produz_alimento,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -720,12 +721,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          48 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+          48 - Na casa você produz algum tipo de comida (roça/horta) ou cria animais?
         </Label>
 
         <Select
           name="produz_alimento"
-          options={yesOrNoOptions}
+          options={produz_alimento}
           onChange={(selectedOptions: any) => setHomegrown(selectedOptions)}
         />
 
