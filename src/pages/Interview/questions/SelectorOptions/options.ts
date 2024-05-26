@@ -549,7 +549,7 @@ export const vacina = [
 //P12 nao_tomou_vacina
 
 export const nao_tomou_vacina = [
-  { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
+  { value: 'Não tomei a vacina pois não tinha a que eu queria tomar', label: 'Não tomei a vacina pois não tinha a que eu queria tomar' },
   { value: 'Não tomei a vacina pois não quis', label: 'Não tomei a vacina pois não quis' },
   { value: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)', label: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)' },
   { value: 'não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)', label: 'Não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)' },
