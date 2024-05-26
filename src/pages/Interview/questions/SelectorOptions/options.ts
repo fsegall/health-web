@@ -102,24 +102,24 @@ export const ocupacao_profissional = [
     label: 'Agricultor(a) familiar ou produtor(a) rural',
   },
   {
-    value: 'trabalhador(a) rural com carteira assinada',
-    label: 'Trabalhador(a) rural com carteira assinada',
+    value: 'trabalhador(a) rural COM carteira assinada',
+    label: 'Trabalhador(a) rural COM carteira assinada',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada no comércio',
-    label: 'Trabalhador(a) em emprego com carteira assinada no comércio',
+    value: 'trabalhador(a) em emprego COM carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego COM carteira assinada no comércio',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada no indústria',
-    label: 'Trabalhador(a) em emprego com carteira assinada na indústria',
+    value: 'trabalhador(a) em emprego COM carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego COM carteira assinada na indústria',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada em outro serviço',
-    label: 'Trabalhador(a) em emprego com carteira assinada em outro serviço',
+    value: 'trabalhador(a) em emprego COM carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego COM carteira assinada em outro serviço',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
-    label: 'Trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
+    value: 'trabalhador(a) em emprego COM carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego COM carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'funcionario(a) publico(a)',
@@ -127,23 +127,23 @@ export const ocupacao_profissional = [
   },
   {
     value: 'trabalhador(a) rural temporario (diarista, safrista etc.)',
-    label: 'Trabalhador(a) rural temporário sem carteira assinada (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário SEM carteira assinada (diarista, safrista etc.)',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada no comércio',
-    label: 'Trabalhador(a) em emprego sem carteira assinada no comércio',
+    value: 'trabalhador(a) em emprego SEM carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada no comércio',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada no indústria',
-    label: 'Trabalhador(a) em emprego sem carteira assinada na indústria',
+    value: 'trabalhador(a) em emprego SEM carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada na indústria',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada em outro serviço',
-    label: 'Trabalhador(a) em emprego sem carteira assinada em outro serviço',
+    value: 'trabalhador(a) em emprego SEM carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada em outro serviço',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
-    label: 'Trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
+    value: 'trabalhador(a) em emprego SEM carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'estagiário(a) (remunerado)',
