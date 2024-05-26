@@ -322,7 +322,11 @@ export const tipo_de_residencia = [
     label: 'Casa de vila ou condomínio',
   },
   { value: 'oca-maloca', label: 'Oca ou  maloca' },
-  { value: 'precaria', label: ' Cômodos, barraco, cortiço ou cabeça de porco' },
+  { value: 'comodos', label: ' Cômodoso' },
+  { value: 'barraco', label: 'Barraco' },
+  { value: 'cortico', label: 'Cortiço' },
+  { value: 'cabeca_de_porco', label: 'Cabeça de porco' },
+  { value: 'sobrado', label: 'Sobrado / sobreposta' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
