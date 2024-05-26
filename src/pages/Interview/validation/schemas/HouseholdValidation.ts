@@ -45,7 +45,11 @@ export const HouseholdValidation = Yup.object().shape({
   agua_potavel: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
-  agua_animais: Yup.string(),
+  agua_animais: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => val === "sim_animais",
+    then: Yup.string().required('Você precisa preencher sobre a causa da morte'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
   agua_producao_alimentos: Yup.string(),
   esgoto: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de esgoto',

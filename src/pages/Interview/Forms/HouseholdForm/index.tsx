@@ -730,11 +730,11 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           onChange={(selectedOptions: any) => setHomegrown(selectedOptions)}
         />
 
-        <Label>49 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
+        <Label>49 - Se tem animais, este domicílio tem água suficiente para matar a sede dos animais?</Label>
         <Select
           name="agua_animais"
           options={yesOrNoOptions}
-          isDisabled={homegrown?.value === 'false' ? true : false}
+          isDisabled={homegrown?.value === 'sim_animais' ? false : true}
         />
 
         <Label>50 - Este domicílio tem água suficiente para produção de alimentos?</Label>
