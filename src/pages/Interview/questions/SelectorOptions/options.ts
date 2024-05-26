@@ -540,10 +540,9 @@ export const gastos_alimentacao = [
 
 export const vacina = [
   { value: 'Sim, apenas a 1ª dose', label: 'Sim, apenas a 1ª dose' },
-  { value: 'Sim, as duas doses', label: 'Sim, as duas doses' },
-  { value: 'Sim as duas doses mais o reforço', label: 'Sim as duas doses mais o reforço' },
-  { value: 'Sim, a vacina de dose única', label: 'Sim, a vacina de dose única' },
-  { value: 'Não tomei nenhuma dose da vacina', label: 'Não tomei nenhuma dose da vacina' },
+  { value: 'Sim, 2 ou mais doses', label: 'Sim, 2 ou mais doses' },
+  { value: 'Sim, mas não me lembro quantas doses', label: 'Sim, mas não me lembro quantas doses' },
+  { value: 'Não tomei nenhuma dose', label: 'Não tomei nenhuma dose' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
