@@ -626,6 +626,7 @@ export const diagnostico_doenca_ultimos_12_meses = [
   { label: 'Diabetes', value: 'diabetes' },
   { label: 'Câncer (inclusive quimioterapia / radioterapia)', value: 'cancer' },
   { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental)', value: '' },
+  { label: 'Nenhuma', value: 'nenhuma' },
   { label: 'Outro', value: 'outro' },
 ]
 
