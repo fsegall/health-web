@@ -226,7 +226,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
         <section>
         <Label>
-          14 - Quando está doente ou precisando de atendimento de saúde costuma procurar:
+          14 - Quando está doente ou precisando de atendimento de saúde, o que você procura com mais frequência? (LER AS OPÇÕES)
         </Label>
         <Select
           name="local_de_procura_do_servico_de_saude"
