@@ -140,6 +140,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({ dispatch, offline, isEdit
             description: 'O formulário de pesquisa foi preenchido no modo offline!.',
           });
 
+          localStorage.removeItem('@Safety:discrimination_form_sent');
           localStorage.removeItem('@Safety:current-offline-interview-id');
 
           dispatch({ type: "INTERVIEW" });
