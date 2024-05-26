@@ -410,7 +410,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isMulti={true}
         />
 
-        <Label>17 - Essa pessoa contribuia com a renda familiar?</Label>
+        <Label>17 - Essa(s) pessoa(s) contribuía(m) com a renda familiar?</Label>
         <Select
           name="contribuicao_morte_ultimos_12_meses" //TODO:alinhar_com_raul-contribuicao_morte_ultimos_12_meses
           options={contribuicao_morte_ultimos_12m}
