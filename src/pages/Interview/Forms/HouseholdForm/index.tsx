@@ -402,11 +402,12 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           onChange={(selectedOption: any) => setMorte(selectedOption)}
         />
 
-        <Label>16 - Qual a causa da morte?</Label>
+        <Label>16 - Quais as causas da morte?</Label>
         <Select
           name="causa_morte_ultimos_12_meses" //TODO:alinhar_com_raul-causa_morte_ultimos_12_meses
           options={causa_morte_ultimos_12m}
           isDisabled={morte?.value !== 'true'}
+          isMulti={true}
         />
 
         <Label>17 - Essa pessoa contribuia com a renda familiar?</Label>

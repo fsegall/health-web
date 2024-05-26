@@ -28,7 +28,11 @@ export const HouseholdValidation = Yup.object().shape({
   morte_ultimos_12_meses: Yup.string().required(
     'Você precisa escolher um dos campos de morte nos últimos 12 meses',
   ),
-  causa_morte_ultimos_12_meses: Yup.string(),
+  causa_morte_ultimos_12_meses: Yup.mixed().nullable().when("morte_ultimos_12_meses", {
+    is: (val: any) => val === "true",
+    then: Yup.array().required('Você precisa preencher sobre a causa da morte'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
   tipo_de_residencia: Yup.string().required(
     'Você precisa escolher um dos campos de tipo de residência',
   ),

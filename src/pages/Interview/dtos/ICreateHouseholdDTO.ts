@@ -18,7 +18,7 @@ export default interface ICreateHouseholdDTO {
   sequelas_covid: string;
   morte_ultimos_12_meses: string;
   contribuicao_morte_ultimos_12_meses?: string;
-  causa_morte_ultimos_12_meses: string;
+  causa_morte_ultimos_12_meses: string[];
   tipo_de_residencia: string;
   numero_de_comodos: number;
   material_de_construcao: string;

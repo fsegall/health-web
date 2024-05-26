@@ -34,7 +34,7 @@ export const PersonValidation = Yup.object().shape({
   local_de_procura_do_servico_de_saude: Yup.string().nullable().required("Você precisa preencher sobre os locais de atendimento"),
   motivo_procura_servico_saude: Yup.string().nullable().required("Você precis preencher sobre quando busca atendimento"),
 
-  motivo_nao_atendimento_servico_saude: Yup.array().nullable().when("motivo_procura_servico_saude", {
+  motivo_nao_atendimento_servico_saude: Yup.mixed().nullable().when("motivo_procura_servico_saude", {
     is: (val: string) => val === 'nao_foi_atendido',
     then: Yup.array().nullable().required("Você precisa preencher sobre quando não foi atendido"),
     otherwise: Yup.string().nullable().notRequired(),

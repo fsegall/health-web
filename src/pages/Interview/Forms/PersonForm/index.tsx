@@ -251,7 +251,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           name="motivo_nao_atendimento_servico_saude"
           options={motivo_nao_atendimento_servico_saude}
           isMulti={true}
-          isDisabled={motivoProcuraServicoSaude == 'nao_foi_atendido' ? false : true}
+          isDisabled={motivoProcuraServicoSaude === 'nao_foi_atendido' ? false : true}
         />
 
         <Label>
