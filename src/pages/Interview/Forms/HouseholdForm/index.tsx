@@ -395,7 +395,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           options={yesOrNoOptions}
         />
 
-        <Label>15 - Vocês perderam alguém da família (morreu alguém) nos últimos 12 meses?</Label>
+        <Label>15 - Você perdeu uma ou mais pessoas da família (morreu alguém) nos últimos 12 meses?</Label>
         <Select
           name="morte_ultimos_12_meses" //TODO:alinhar_com_raul-morte_ultimos_12_meses
           options={yesOrNoOptions}
