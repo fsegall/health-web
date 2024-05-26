@@ -79,13 +79,9 @@ export const HouseholdValidation = Yup.object().shape({
   faixa_de_renda: Yup.string().required(
     'Você precisa escolher um dos campos de faixa de renda',
   ),
-  perda_de_emprego: Yup.boolean(),
-  reducao_de_salario: Yup.boolean(),
-  ajuda_financeira: Yup.boolean(),
-  divida: Yup.boolean(),
-  corte_de_gastos: Yup.boolean(),
-  corte_de_gastos_nao_essenciais: Yup.boolean(),
-  ns_nr: Yup.boolean(),
+  situacao_de_emprego_e_renda: Yup.string().required(
+    'Você precisa preencher sobre a situação de emprego e renda',
+  ),
   menores_6_anos: Yup.string().required(
     'Você precisa escolher um dos campos de crianças menores de 6 anos',
   ),

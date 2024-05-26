@@ -36,15 +36,7 @@ export default interface ICreateHouseholdDTO {
   nao_sabe_renda?: boolean;
   renda_familiar?: number;
   faixa_de_renda: string;
-  // multipla escolha
-  perda_de_emprego?: boolean;
-  reducao_de_salario?: boolean;
-  ajuda_financeira?: boolean;
-  divida?: boolean;
-  corte_de_gastos?: boolean;
-  corte_de_gastos_nao_essenciais?: boolean;
-  ns_nr_trabalho?: boolean;
-  //
+  situacao_de_emprego_e_renda: string[];
   menores_6_anos: string;
   frequentam_creche?: string;
   cadastro_unico: string;

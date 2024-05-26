@@ -403,6 +403,16 @@ export const faixa_de_renda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+export const situacao_de_emprego_e_renda = [
+  { value: 'Houve perda de emprego/trabalho de algum membro da casa', label: 'Houve perda de emprego/trabalho de algum membro da casa' },
+  { value: 'Houve redução da renda domiciliar (dos moradores da casa)', label: 'Houve redução da renda domiciliar (dos moradores da casa)' },
+  { value: 'Houve necessidade de ajudar financeiramente algum parente ou amigo', label: 'Houve necessidade de ajudar financeiramente algum parente ou amigo' },
+  { value: 'Houve endividamento de moradores', label: 'Houve endividamento de moradores' },
+  { value: 'Precisou fazer corte de gastos com despesas essenciais', label: 'Precisou fazer corte de gastos com despesas essenciais' },
+  { value: 'Precisou fazer corte de gastos em despesas não essenciais', label: 'Precisou fazer corte de gastos em despesas não essenciais' },
+  { value: 'ns-nr', label: 'NS/NR' },
+]
+
 // pnaeOptions
 
 export const pnaeOptinos = [

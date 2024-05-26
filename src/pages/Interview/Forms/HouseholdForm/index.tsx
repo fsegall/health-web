@@ -51,6 +51,7 @@ import {
   frequentam_creche,
   contribuicao_morte_ultimos_12m,
   produz_alimento,
+  situacao_de_emprego_e_renda,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -227,6 +228,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       pessoas_convidadas: initialValues?.pessoas_convidadas,
       renda_familiar: initialValues?.renda_familiar,
       faixa_de_renda: initialValues?.faixa_de_renda,
+      situacao_de_emprego_e_renda: initialValues?.situacao_de_emprego_e_renda,
       menores_6_anos: initialValues?.menores_6_anos,
       frequentam_creche: initialValues?.frequentam_creche,
       cadastro_unico: initialValues?.cadastro_unico,
@@ -269,14 +271,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       perfil_de_compra: initialValues?.perfil_de_compra,
       mercado: initialValues?.mercado,
       gastos_alimentacao: initialValues?.gastos_alimentacao,
-
-      perda_de_emprego: initialValues?.perda_de_emprego ? 'perda_de_emprego' : '',
-      reducao_de_salario: initialValues?.reducao_de_salario ? 'reducao_de_salario' : '',
-      ajuda_financeira: initialValues?.ajuda_financeira ? 'ajuda_financeira' : '',
-      divida: initialValues?.divida ? 'divida' : '',
-      corte_de_gastos: initialValues?.corte_de_gastos ? 'corte_de_gastos' : '',
-      corte_de_gastos_nao_essenciais: initialValues?.corte_de_gastos_nao_essenciais ? 'corte_de_gastos_nao_essenciais' : '',
-      ns_nr_trabalho: initialValues?.ns_nr_trabalho ? 'ns_nr_trabalho' : '',
 
       feijao: initialValues?.feijao ? 'feijao' : '',
       arroz: initialValues?.arroz ? 'arroz' : '',
@@ -546,54 +540,15 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           options={faixa_de_renda}
         />
 
+        <Label>
+          33 - Nos últimos 3 meses, qual é a situação de emprego e renda na sua casa?
+        </Label>
+        <Select
+          name="situacao_de_emprego_e_renda"
+          options={situacao_de_emprego_e_renda}
+          isMulti={true}
+        />
 
-        <CheckBoxContainer>
-          <Label>
-            <span>33 - Nos últimos 3 meses, qual é a situação de emprego e renda na sua casa?</span>
-          </Label>
-
-          <CheckboxInput
-
-            name="perda_de_emprego"
-            options={[{ id: 'perda_de_emprego', value: 'true', label: 'Houve perda de emprego/trabalho de algum membro da casa' }]}
-          />
-
-          <CheckboxInput
-
-            name="reducao_de_salario"
-            options={[{ id: 'reducao_de_salario', value: 'true', label: 'Houve redução da renda domiciliar (dos moradores da casa)' }]}
-          />
-
-          <CheckboxInput
-
-            name="ajuda_financeira"
-            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Houve necessidade de ajudar financeiramente algum parente ou amigo' }]}
-          />
-
-          <CheckboxInput
-
-            name="divida"
-            options={[{ id: 'divida', value: 'true', label: 'Houve endividamento de moradores' }]}
-          />
-
-          <CheckboxInput
-
-            name="corte_de_gastos"
-            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Precisou fazer corte de gastos com despesas essenciais' }]}
-          />
-
-          <CheckboxInput
-
-            name="corte_de_gastos_nao_essenciais"
-            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Precisou fazer corte de gastos em despesas não essenciais' }]}
-          />
-
-          <CheckboxInput
-            name="ns_nr_trabalho"
-            options={[{ id: 'ns_nr_trabalho', value: 'true', label: 'Não sabe ou não quis responder' }]}
-          />
-
-        </CheckBoxContainer>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
