@@ -172,16 +172,20 @@ export const ocupacao_profissional = [
 
 export const local_de_trabalho = [
   {
-    value: 'em casa',
-    label: 'Em casa',
+    value: 'presencial',
+    label: 'Presencial',
   },
   {
-    value: 'apenas no local de trabalho ',
-    label: 'Apenas no local de trabalho ',
+    value: 'hibrido',
+    label: 'Híbrido (em casa / home office)',
   },
   {
-    value: 'trabalha em casa e também frequenta o local de trabalho (híbrido)',
-    label: 'Trabalha em casa e também frequenta o local de trabalho (híbrido)',
+    value: 'ambos',
+    label: 'Ambos',
+  },
+  {
+    value: 'nenhum',
+    label: 'Nenhum',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];

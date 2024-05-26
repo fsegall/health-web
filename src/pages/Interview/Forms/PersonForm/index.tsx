@@ -190,7 +190,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           options={ocupacao_profissional}
         />
 
-        <Label>9 - Neste momento qual é o seu local de trabalho?</Label>
+        <Label>9 - Neste momento qual é a forma de trabalho?</Label>
         <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
