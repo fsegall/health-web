@@ -734,14 +734,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         <Select
           name="agua_animais"
           options={yesOrNoOptions}
-          isDisabled={homegrown?.value === 'sim_animais' ? false : true}
+          isDisabled={(homegrown?.value === 'sim_animais' || homegrown?.value === 'os_dois') ? false : true}
         />
 
-        <Label>50 - Este domicílio tem água suficiente para produção de alimentos?</Label>
+        <Label>50 - Se produz alimentos, esse domicílio tem água suficiente para a irrigação?</Label>
         <Select
           name="agua_producao_alimentos"
           options={yesOrNoOptions}
-          isDisabled={homegrown?.value === 'false' ? true : false}
+          isDisabled={(homegrown?.value === 'sim_horta' || homegrown?.value === 'os_dois') ? false : true}
         />
 
         <Label>
@@ -752,7 +752,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           name="alimento_para_venda"
           options={yesOrNoOptions}
           onChange={(selectedOptions: any) => setProduce(selectedOptions)}
-          isDisabled={homegrown?.value === 'true' ? false : true}
+          isDisabled={(homegrown?.value === 'sim_horta' || homegrown?.value === 'os_dois') ? false : true}
         />
 
         <Label>

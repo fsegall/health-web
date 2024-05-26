@@ -46,11 +46,20 @@ export const HouseholdValidation = Yup.object().shape({
     'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
   agua_animais: Yup.string().nullable().when("produz_alimento", {
-    is: (val: any) => val === "sim_animais",
-    then: Yup.string().required('Você precisa preencher sobre a causa da morte'),
+    is: (val: any) => (val === 'sim_animais' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para animais'),
     otherwise: Yup.string().nullable().notRequired(),
   }),
-  agua_producao_alimentos: Yup.string(),
+  agua_producao_alimentos: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => (val === 'sim_horta' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para produção de alimentos'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
+  alimento_para_venda: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => (val === 'sim_horta' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para venda'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
   esgoto: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de esgoto',
   ),
@@ -116,7 +125,6 @@ export const HouseholdValidation = Yup.object().shape({
   produz_alimento: Yup.string().required(
     'Você precisa escolher um dos campos de produção de alimentos',
   ),
-  alimento_para_venda: Yup.string(),
   divisao_alimento: Yup.string(),
   dificuldade_venda: Yup.string(),
   nao_vendeu: Yup.string(),
