@@ -126,7 +126,6 @@ export const HouseholdValidation = Yup.object().shape({
     'Você precisa escolher um dos campos de produção de alimentos',
   ),
   divisao_alimento: Yup.string(),
-  dificuldade_venda: Yup.string(),
   nao_vendeu: Yup.string(),
   preocupacao_alimentos: Yup.string().required(
     'Você precisa escolher um dos campos de PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM',

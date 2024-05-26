@@ -62,7 +62,6 @@ export default interface ICreateHouseholdDTO {
   produz_alimento: string;
   alimento_para_venda?: string;
   divisao_alimento?: string;
-  dificuldade_venda?: string;
   nao_vendeu?: string;
   preocupacao_alimentos: string;
   alimentos_acabaram: string;
