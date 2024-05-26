@@ -663,7 +663,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          42 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
+          42 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares ou “Bom Prato</b> para fazer refeições?
         </Label>
         <Select
           name="restaurantes_populares"
