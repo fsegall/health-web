@@ -54,7 +54,7 @@ interface PersonFormProps {
 const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
-  const [motivoProcuraServicoSaude, setMotivoProcuraServicoSaude] = useState<any[]>([]);
+  const [motivoProcuraServicoSaude, setMotivoProcuraServicoSaude] = useState<string>('');
 
   const { user, token } = useAuth();
 
@@ -231,7 +231,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         <Select
           name="local_de_procura_do_servico_de_saude"
           options={local_de_procura_do_servico_de_saude}
-          isMulti={true}
+          isMulti={false}
         />
 
         <Label>
@@ -240,8 +240,8 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         <Select
           name="motivo_procura_servico_saude"
           options={motivo_procura_servico_saude}
-          isMulti={true}
-          onChange={(selectedOption: any) => setMotivoProcuraServicoSaude(selectedOption)}
+          isMulti={false}
+          onChange={(selectedOption: any) => setMotivoProcuraServicoSaude(selectedOption?.value)}
         />
 
         <Label>
@@ -251,7 +251,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
           name="motivo_nao_atendimento_servico_saude"
           options={motivo_nao_atendimento_servico_saude}
           isMulti={true}
-          isDisabled={motivoProcuraServicoSaude?.find((m: any) => m.value === 'nao_foi_atendido') ? false : true}
+          isDisabled={motivoProcuraServicoSaude == 'nao_foi_atendido' ? false : true}
         />
 
         <Label>
