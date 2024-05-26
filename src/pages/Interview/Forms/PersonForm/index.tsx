@@ -235,7 +235,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         />
 
         <Label>
-          15 - O que ocorreu quando procurou o serviço de saúde?
+          15 - O que geralmente ocorre quando procura o serviço de saúde?
         </Label>
         <Select
           name="motivo_procura_servico_saude"

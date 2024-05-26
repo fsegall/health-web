@@ -587,6 +587,7 @@ export const motivo_procura_servico_saude = [
   { label: 'Foi atendido', value: 'foi_atendido' },
   { label: 'Foi agendado para outro dia / outro local', value: 'agendado_para_outro_dia_ou_local' },
   { label: 'Não foi atendido', value: 'nao_foi_atendido' },
+  { value: 'ns-nr', label: 'NS/NR' },
 ]
 
 //P16 - motivo_nao_atendimento_servico_saude
