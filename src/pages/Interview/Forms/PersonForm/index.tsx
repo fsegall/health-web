@@ -176,7 +176,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
         <Label>6 - Até que série (grau) você frequentou na escola?</Label>
         <Select name="escolaridade" options={escolaridade} />
-        <Label>7 - Qual a situação de trabalho?</Label>
+        <Label>7 - Qual a sua situação de trabalho? (LER AS OPÇÕES)</Label>
         <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
