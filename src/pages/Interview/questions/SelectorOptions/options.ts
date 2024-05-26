@@ -393,13 +393,13 @@ export const pessoas_convidadas = [
 
 export const faixa_de_renda = [
   { value: 'não teve renda', label: 'Não teve renda' },
-  { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
-  { value: 'de R$ 275,00 a R$550,00 (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
-  { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
-  { value: 'mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)', label: 'Mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)' },
-  { value: 'mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)' },
-  { value: 'mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)', label: 'Mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)' },
-  { value: 'mais de 11.000,00(mais de 10 SM)', label: 'Mais de 11.000,00 (mais de 10 SM)' },
+  { value: 'menos R$ 353,00 (menos de ¼ de  SM)', label: 'Menos R$ 353,00 (menos de ¼ de  SM)' },
+  { value: 'de R$ 354,00 a R$ 706,00 (entre ¼ e  ½  SM)', label: 'De R$ 354,00 a R$ 706,00 (entre ¼ e  ½  SM)' },
+  { value: 'de R$ 707,00 a R$ 1.412,00 (mais de 1/2 até 1 SM)', label: 'De R$ 707,00 a R$ 1.412,00 (mais de 1/2 até 1 SM)' },
+  { value: 'mais de R$ 1.412,00 a 2.824,00 (mais de 1 até 2 SM)', label: 'Mais de R$ 1.412,00 a 2.824,00 (mais de 1 até 2 SM)' },
+  { value: 'mais de  R$ 2.824,00 a R$ 7.060,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2.824,00 a R$ 7.060,00 (mais de 2 até 5SM)' },
+  { value: 'mais R$ 7.060,00 a R$ 14.120,00 (mais de 5 até 10 SM)', label: 'Mais R$ 7.060,00 a R$ 14.120,00 (mais de 5 até 10 SM)' },
+  { value: 'mais de R$ 14.120,00 (mais de 10 SM)', label: 'Mais de R$ 14.120,00 (mais de 10 SM)' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
