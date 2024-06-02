@@ -18,7 +18,7 @@ export default interface ICreateHouseholdDTO {
   sequelas_covid: string;
   morte_ultimos_12_meses: string;
   contribuicao_morte_ultimos_12_meses?: string;
-  causa_morte_ultimos_12_meses: string;
+  causa_morte_ultimos_12_meses: string[];
   tipo_de_residencia: string;
   numero_de_comodos: number;
   material_de_construcao: string;
@@ -36,15 +36,7 @@ export default interface ICreateHouseholdDTO {
   nao_sabe_renda?: boolean;
   renda_familiar?: number;
   faixa_de_renda: string;
-  // multipla escolha
-  perda_de_emprego?: boolean;
-  reducao_de_salario?: boolean;
-  ajuda_financeira?: boolean;
-  divida?: boolean;
-  corte_de_gastos?: boolean;
-  corte_de_gastos_nao_essenciais?: boolean;
-  ns_nr_trabalho?: boolean;
-  //
+  situacao_de_emprego_e_renda: string[];
   menores_6_anos: string;
   frequentam_creche?: string;
   cadastro_unico: string;
@@ -62,7 +54,6 @@ export default interface ICreateHouseholdDTO {
   produz_alimento: string;
   alimento_para_venda?: string;
   divisao_alimento?: string;
-  dificuldade_venda?: string;
   nao_vendeu?: string;
   preocupacao_alimentos: string;
   alimentos_acabaram: string;

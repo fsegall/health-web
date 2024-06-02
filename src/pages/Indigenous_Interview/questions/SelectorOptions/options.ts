@@ -303,12 +303,12 @@ export const funcaoTrabalhoAldeiaOptions = {
 
 export const funcaoTrabalhoForaAldeiaOptions = {
   rural_sem_carteira:
-    'Trabalho rural como diarista/temporário (sem carteira assinada)',
+    'Trabalho rural como diarista/temporário (SEM carteira assinada)',
   rural_com_carteira:
-    'Trabalho rural permanente ou temporário (com carteira assinada)',
+    'Trabalho rural permanente ou temporário (COM carteira assinada)',
   cidade_com_carteira:
-    'Trabalho na cidade (comércio ou empresa) (com carteira assinada)',
-  cidade_sem_carteira: 'Trabalho na cidade (sem carteira assinada)',
+    'Trabalho na cidade (comércio ou empresa) (COM carteira assinada)',
+  cidade_sem_carteira: 'Trabalho na cidade (SEM carteira assinada)',
   empresario: 'Dono de comércio/empresa',
   domestica: 'Doméstica',
   venda_artesanato: 'Venda de artesanato',
@@ -338,10 +338,10 @@ export const ocupacaoPrincipalOptions = {
   artesao: 'Artesão',
   rural_sem_carteira:
     'Trabalhador rural sem carteira (diarista, temporário, permanente)',
-  rural_com_carteira: 'Trabalhador rural com carteira assinada',
+  rural_com_carteira: 'Trabalhador rural COM carteira assinada',
   urbano_com_carteira:
-    'Trabalhador urbano (fora da comunidade) com carteira assinada',
-  urbano_sem_carteira: 'Trabalhador urbano sem carteira assinada',
+    'Trabalhador urbano (fora da comunidade) COM carteira assinada',
+  urbano_sem_carteira: 'Trabalhador urbano SEM carteira assinada',
   funcionario_publico_comunidade_contratado:
     'Funcionário público na comunidade contratado',
   funcionario_publico_comunidade_concursado:

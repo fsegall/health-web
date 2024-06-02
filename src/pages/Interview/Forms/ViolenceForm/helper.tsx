@@ -21,7 +21,7 @@ export interface FormHelperType {
 export const violenceHealthFormHelper: FormHelperType[][] = [
   [
     {
-      label: 'Nos últimos 12 meses alguém: Te ofendeu, humilhou ou ridicularizou na frente de outras pessoas?',
+      label: 'Nos últimos 12 meses, alguém te ofendeu, humilhou ou ridicularizou na frente de outras pessoas?',
       type: Select,
       props: {
         name: 'ofensa_humilhacao_ridicularizacao',
@@ -54,7 +54,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Gritou com você ou te xingou?',
+      label: 'Nos últimos 12 meses, alguém gritou com você ou te xingou?',
       type: Select,
       props: {
         name: 'gritou_xingou',
@@ -87,7 +87,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Usou redes sociais ou celular para ameaçar, ofender, xingar ou expor imagens suas sem o seu consentimento?',
+      label: 'Nos últimos 12 meses, alguém usou redes sociais ou celular para ameaçar, ofender, xingar ou expor imagens suas sem o seu consentimento?',
       type: Select,
       props: {
         name: 'ameacas_ofensas_exposicao_por_redes_sociais',
@@ -120,7 +120,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Ameaçou verbalmente lhe ferir ou machucar alguém importante para você?',
+      label: 'Nos últimos 12 meses, alguém ameaçou verbalmente lhe ferir ou machucar alguém importante para você?',
       type: Select,
       props: {
         name: 'ameacas_verbais',
@@ -153,7 +153,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Destruir alguma coisa sua de propósito?',
+      label: 'Nos últimos 12 meses, alguém destruiu alguma coisa sua de propósito?',
       type: Select,
       props: {
         name: 'destruiu_pertences_de_proposito',
@@ -188,7 +188,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
   ],
   [
     {
-      label: 'Nos últimos 12 meses alguém: Te deu um tapa ou uma bofetada?',
+      label: 'Nos últimos 12 meses, alguém te deu um tapa ou uma bofetada?',
       type: Select,
       props: {
         name: 'tapa_bofetada',
@@ -221,7 +221,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Te empurrou, segurou com força ou jogou algo em você com a intenção de machucar?',
+      label: 'Nos últimos 12 meses, alguém te empurrou, segurou com força ou jogou algo em você com a intenção de machucar?',
       type: Select,
       props: {
         name: 'empurrou_segurou_ou_jogou_algo_com_intencao_de_machucar',
@@ -254,7 +254,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Te deu um soco, chutou ou arrastou pelo cabelo?',
+      label: 'Nos últimos 12 meses, alguém te deu um soco, chutou ou arrastou pelo cabelo?',
       type: Select,
       props: {
         name: 'soco_chute_ou_arrastou_pelo_cabelo',
@@ -287,7 +287,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Tentou ou efetivamente estrangulou, asfixiou ou te queimou de propósito?',
+      label: 'Nos últimos 12 meses, alguém tentou ou efetivamente estrangulou, asfixiou ou te queimou de propósito?',
       type: Select,
       props: {
         name: 'tentou_ou_estrangulou_asfixiou_ou_queimou',
@@ -320,7 +320,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Te ameaçou ou feriu com uma faca, arma de fogo ou alguma outra arma ou objeto?',
+      label: 'Nos últimos 12 meses, alguém te ameaçou ou feriu com uma faca, arma de fogo ou alguma outra arma ou objeto?',
       type: Select,
       props: {
         name: 'ameacou_ou_feriu_com_faca_arma_ou_outros_objetos',
@@ -355,7 +355,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
   ],
   [
     {
-      label: 'Nos últimos 12 meses alguém: Tocou, manipulou, beijou ou expôs partes do seu corpo contra sua vontade?',
+      label: 'Nos últimos 12 meses, alguém tocou, manipulou, beijou ou expôs partes do seu corpo contra sua vontade?',
       type: Select,
       props: {
         name: 'tocou_manipulou_beijou_expos_corpo_contra_vontade',
@@ -388,7 +388,7 @@ export const violenceHealthFormHelper: FormHelperType[][] = [
       },
     },
     {
-      label: 'Nos últimos 12 meses alguém: Te ameaçou ou forçou a ter relações sexuais ou quaisquer outros atos sexuais contra sua vontade?',
+      label: 'Nos últimos 12 meses, alguém te ameaçou ou forçou a ter relações sexuais ou quaisquer outros atos sexuais contra sua vontade?',
       type: Select,
       props: {
         name: 'ameacou_forcou_relacoes_ou_atos_sexuais_contra_vontade',

@@ -28,7 +28,11 @@ export const HouseholdValidation = Yup.object().shape({
   morte_ultimos_12_meses: Yup.string().required(
     'Você precisa escolher um dos campos de morte nos últimos 12 meses',
   ),
-  causa_morte_ultimos_12_meses: Yup.string(),
+  causa_morte_ultimos_12_meses: Yup.mixed().nullable().when("morte_ultimos_12_meses", {
+    is: (val: any) => val === "true",
+    then: Yup.array().required('Você precisa preencher sobre a causa da morte'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
   tipo_de_residencia: Yup.string().required(
     'Você precisa escolher um dos campos de tipo de residência',
   ),
@@ -41,8 +45,21 @@ export const HouseholdValidation = Yup.object().shape({
   agua_potavel: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de água potável',
   ),
-  agua_animais: Yup.string(),
-  agua_producao_alimentos: Yup.string(),
+  agua_animais: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => (val === 'sim_animais' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para animais'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
+  agua_producao_alimentos: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => (val === 'sim_horta' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para produção de alimentos'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
+  alimento_para_venda: Yup.string().nullable().when("produz_alimento", {
+    is: (val: any) => (val === 'sim_horta' || val === 'os_dois'),
+    then: Yup.string().required('Você precisa preencher sobre a água para venda'),
+    otherwise: Yup.string().nullable().notRequired(),
+  }),
   esgoto: Yup.string().required(
     'Você precisa escolher um dos campos de abastecimento de esgoto',
   ),
@@ -62,13 +79,9 @@ export const HouseholdValidation = Yup.object().shape({
   faixa_de_renda: Yup.string().required(
     'Você precisa escolher um dos campos de faixa de renda',
   ),
-  perda_de_emprego: Yup.boolean(),
-  reducao_de_salario: Yup.boolean(),
-  ajuda_financeira: Yup.boolean(),
-  divida: Yup.boolean(),
-  corte_de_gastos: Yup.boolean(),
-  corte_de_gastos_nao_essenciais: Yup.boolean(),
-  ns_nr: Yup.boolean(),
+  situacao_de_emprego_e_renda: Yup.string().required(
+    'Você precisa preencher sobre a situação de emprego e renda',
+  ),
   menores_6_anos: Yup.string().required(
     'Você precisa escolher um dos campos de crianças menores de 6 anos',
   ),
@@ -108,9 +121,7 @@ export const HouseholdValidation = Yup.object().shape({
   produz_alimento: Yup.string().required(
     'Você precisa escolher um dos campos de produção de alimentos',
   ),
-  alimento_para_venda: Yup.string(),
   divisao_alimento: Yup.string(),
-  dificuldade_venda: Yup.string(),
   nao_vendeu: Yup.string(),
   preocupacao_alimentos: Yup.string().required(
     'Você precisa escolher um dos campos de PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM',

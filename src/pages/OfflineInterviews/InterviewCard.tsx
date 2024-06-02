@@ -9,7 +9,7 @@ interface InterviewCardProps {
 }
 
 const InterviewCard = ({ data, index, id }: InterviewCardProps) => {
-  const isIncomplete = !data?.interview?.id
+  const isIncomplete = !data?.interview?.project_number
   return (
     <Card backgroundColor='rgb(89, 116, 140, 0.5)'>
       <i>#{index} {isIncomplete && ' - Entrevista Incompleta'}</i>

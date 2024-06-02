@@ -17,7 +17,7 @@ export interface FormHelperType {
 export const mentalHealthFormHelper: FormHelperType[][] = [
   [
     {
-      label: 'Nos últimos 30 dias: Sente-se nervoso, tenso ou preocupado?',
+      label: 'Nos últimos 30 dias, você se sentiu ou tem se sentido nervoso, tenso ou preocupado?',
       type: Select,
       props: {
           name: 'nervoso_tenso_preocupado',
@@ -25,7 +25,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Assusta-se com facilidade?',
+      label: 'Nos últimos 30 dias, você se assustou ou tem se assustado com facilidade?',
       type: Select,
       props: {
           name: 'facilidade_assustar',
@@ -33,7 +33,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Sente-se triste ultimamente?',
+      label: 'Nos últimos 30 dias, você tem se sentido triste ultimamente?',
       type: Select,
       props: {
           name: 'sentimento_tristeza',
@@ -41,7 +41,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Você chora mais do que de costume',
+      label: 'Nos últimos 30 dias, você chorou ou tem chorado mais do que de costume?',
       type: Select,
       props: {
           name: 'chora_mais_que_de_costume',
@@ -49,7 +49,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Tem dores de cabeça frequentemente?',
+      label: 'Nos últimos 30 dias, teve ou tem tido dores de cabeça frequentemente?',
       type: Select,
       props: {
           name: 'dor_de_cabeca_frequente',
@@ -57,7 +57,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Você dorme mal?',
+      label: 'Nos últimos 30 dias, você dormiu ou tem dormido mal?',
       type: Select,
       props: {
           name: 'dorme_mal',
@@ -65,7 +65,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Você sente desconforto estomacal? ',
+      label: 'Nos últimos 30 dias, você sentiu ou tem sentido desconforto estomacal?',
       type: Select,
       props: {
           name: 'desconforto_estomacal',
@@ -75,7 +75,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
   ],
   [
     {
-      label: 'Nos últimos 30 dias: Você tem má digestão?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido má digestão?',
       type: Select,
       props: {
           name: 'ma_digestao',
@@ -83,7 +83,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Você tem falta de apetite?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido falta de apetite?',
       type: Select,
       props: {
           name: 'falta_de_apetite',
@@ -91,7 +91,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Tem tremores nas mãos?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido tremores nas mãos?',
       type: Select,
       props: {
           name: 'tremores_nas_maos',
@@ -99,7 +99,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Você se cansa com facilidade?',
+      label: 'Nos últimos 30 dias, você se cansou ou tem se cansado com facilidade?',
       type: Select,
       props: {
           name: 'cansa_com_facilidade',
@@ -107,7 +107,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Tem dificuldade em tomar decisão?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido dificuldade em tomar decisão?',
       type: Select,
       props: {
           name: 'dificuldade_tomada_de_decisao',
@@ -115,7 +115,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Tem dificuldades de ter satisfação em suas tarefas?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido dificuldade de ter satisfação em suas tarefas?',
       type: Select,
       props: {
           name: 'dificuldade_satisfacao_em_tarefas',
@@ -123,7 +123,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: O seu trabalho traz sofrimento?',
+      label: 'Nos últimos 30 dias, o seu trabalho te trouxe ou te traz sofrimento?',
       type: Select,
       props: {
           name: 'trabalho_traz_sofrimento',
@@ -133,7 +133,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
   ],
   [
     {
-      label: 'Nos últimos 30 dias: Sente-se cansado todo o tempo?',
+      label: 'Nos últimos 30 dias, você sentiu-se ou tem se sentido cansado todo o tempo?',
       type: Select,
       props: {
           name: 'cansado_tempo_todo',
@@ -141,7 +141,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Tem dificuldade de pensar claramente?',
+      label: 'Nos últimos 30 dias, você teve ou tem tido dificuldade de pensar claramente?',
       type: Select,
       props: {
           name: 'dificuldade_pensar_claramente',
@@ -149,7 +149,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Sente-se incapaz de desempenhar papel útil em sua vida?',
+      label: 'Nos últimos 30 dias, você se sentiu ou se sente incapaz de desempenhar papel útil na sua vida?',
       type: Select,
       props: {
           name: 'incapaz_desempenhar_papel_util',
@@ -173,7 +173,7 @@ export const mentalHealthFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Nos últimos 30 dias: Sente-se inútil em sua vida?',
+      label: 'Nos últimos 30 dias, você se sentiu ou se sente inútil em sua vida?',
       type: Select,
       props: {
           name: 'sentimento_inutilidade_em_sua_vida',
