@@ -6,5 +6,5 @@ export default interface ICreateAddressDTO {
   neighborhood: string;
   street_or_location: string;
   house_number: number;
-  telephone_number: string;
+  telephone_number?: string;
 }
