@@ -5,6 +5,6 @@ export default interface ICreateAddressDTO {
   post_code?: string;
   neighborhood: string;
   street_or_location: string;
-  house_number: number;
+  house_number: string;
   telephone_number: string;
 }
