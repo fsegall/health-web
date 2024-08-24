@@ -137,7 +137,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
       city: initialValues?.city,
       neighborhood: initialValues?.neighborhood,
       street_or_location: initialValues?.street_or_location,
-      house_number: initialValues?.house_number,
+      house_number: String(initialValues?.house_number),
       telephone_number: initialValues?.telephone_number,
     })
   }
@@ -163,7 +163,6 @@ const AddressForm: React.FC<AddressFormProps> = ({ dispatch, offline, isEditForm
           icon={FiHome}
           placeholder="Número da casa"
           name="house_number"
-          type="number"
         />
         <Input
           icon={FiPhoneCall}
