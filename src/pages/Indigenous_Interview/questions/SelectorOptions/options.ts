@@ -1084,13 +1084,14 @@ export const plantiosHorta = {
   mandioca_macaxera_aipim: 'Mandioca / Macaxera / Aipim',
   inhame: 'Inhame',
   cara: 'Cará',
-  batata: 'Batata',
+  batatas: 'Batatas',
   batata_doce: 'Batata doce',
   milho: 'Milho',
   feijao: 'Feijão (qualquer tipo)',
   abobora: 'Abóbora (qualquer tipo: Cabotia, Moranga, de pescoço)',
   quiabo: 'Quiabo',
   verduras: 'Verduras (Rúcula...)',
+  soja: 'Soja',
   outros: 'Outros (especificar)',
   'ns-nr': 'NS/NR',
 };
@@ -1128,6 +1129,8 @@ export const funcaoHortaOptions = {
   troca_comunidade: 'Para troca na comunidade',
   troca_fora_da_comunidade:
     'Para troca fora da comunidade (comércio ou outras comunidades)',
+  para_o_paa_venda_pro_governo: 'Para o PAA (venda pro governo)',
+  para_as_escolas_pelo_pnae: 'Para as escolas (pelo PNAE)',
   venda_comercio: 'Para venda no comércio',
   'ns-nr': 'NS/NR',
 };
