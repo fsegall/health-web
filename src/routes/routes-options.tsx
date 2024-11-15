@@ -75,7 +75,7 @@ export const routesHandler = [
     isPrivate: true,
     displayOnMenu: true,
     action: Actions.VIEW_INTERVIEW,
-    name: 'Iniciar Pesquisa'
+    name: 'Iniciar Entrevista'
   },
   {
     path: '/interview',
@@ -120,7 +120,7 @@ export const routesHandler = [
     isPrivate: true,
     displayOnMenu: true,
     action: Actions.CREATE_PROJECT,
-    name: 'Novo Projeto'
+    name: 'Criar Projeto'
   },
   {
     path: '/interviewers',
@@ -129,7 +129,7 @@ export const routesHandler = [
     isPrivate: true,
     displayOnMenu: true,
     action: Actions.VIEW_ALL_INTERVIEWERS,
-    name: 'Pesquisadores'
+    name: 'Pesquisadores(as)'
   },
   {
     path: '/offline',
@@ -138,7 +138,7 @@ export const routesHandler = [
     isPrivate: true,
     displayOnMenu: true,
     action: Actions.VIEW_MY_INTERVIEWS,
-    name: 'Registros Offline'
+    name: 'Enviar Entrevistas Offline'
   },
   {
     path: '/profile',
