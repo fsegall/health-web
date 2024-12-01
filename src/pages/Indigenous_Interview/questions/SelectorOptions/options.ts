@@ -46,6 +46,47 @@ export const cuidadoresOptions = {
   outros: 'Outros',
 };
 
+export const distritoSanitarioIndigenaOptions = {
+  'DSEI ALAGOAS E SERGIPE': 'DSEI ALAGOAS E SERGIPE',
+  'DSEI ALTAMIRA': 'DSEI ALTAMIRA',
+  'DSEI ALTO RIO JURUÁ': 'DSEI ALTO RIO JURUÁ',
+  'DSEI ALTO RIO NEGRO': 'DSEI ALTO RIO NEGRO',
+  'DSEI ALTO RIO PURUS': 'DSEI ALTO RIO PURUS',
+  'DSEI ALTO RIO SOLIMÕES': 'DSEI ALTO RIO SOLIMÕES',
+  'DSEI AMAPÁ E NORTE DO PARÁ': 'DSEI AMAPÁ E NORTE DO PARÁ',
+  'DSEI ARAGUAIA': 'DSEI ARAGUAIA',
+  'DSEI BAHIA': 'DSEI BAHIA',
+  'DSEI CEARÁ': 'DSEI CEARÁ',
+  'DSEI CUIABÁ': 'DSEI CUIABÁ',
+  'DSEI GUAMÁ-TOCANTINS': 'DSEI GUAMÁ-TOCANTINS',
+  'DSEI INTERIOR SUL': 'DSEI INTERIOR SUL',
+  'DSEI KAIAPÓ DO MATO GROSSO': 'DSEI KAIAPÓ DO MATO GROSSO',
+  'DSEI KAIAPÓ DO PARÁ': 'DSEI KAIAPÓ DO PARÁ',
+  'DSEI LESTE DE RORAIMA': 'DSEI LESTE DE RORAIMA',
+  'DSEI LITORAL SUL': 'DSEI LITORAL SUL',
+  'DSEI MANAUS': 'DSEI MANAUS',
+  'DSEI MARANHÃO': 'DSEI MARANHÃO',
+  'DSEI MATO GROSSO DO SUL': 'DSEI MATO GROSSO DO SUL',
+  'DSEI MÉDIO RIO PURUS': 'DSEI MÉDIO RIO PURUS',
+  'DSEI MÉDIO RIO SOLIMÕES E AFLUENTES': 'DSEI MÉDIO RIO SOLIMÕES E AFLUENTES',
+  'DSEI MINAS GERAIS E ESPÍRITO SANTO': 'DSEI MINAS GERAIS E ESPÍRITO SANTO',
+  'DSEI PARINTINS': 'DSEI PARINTINS',
+  'DSEI PERNAMBUCO': 'DSEI PERNAMBUCO',
+  'DSEI PORTO VELHO': 'DSEI PORTO VELHO',
+  'DSEI POTIGUARA': 'DSEI POTIGUARA',
+  'DSEI RIO TAPAJÓS': 'DSEI RIO TAPAJÓS',
+  'DSEI TOCANTINS': 'DSEI TOCANTINS',
+  'DSEI VALE DO JAVARI': 'DSEI VALE DO JAVARI',
+  'DSEI VILHENA': 'DSEI VILHENA',
+  'DSEI XAVANTE': 'DSEI XAVANTE',
+  'DSEI XINGU': 'DSEI XINGU',
+  'DSEI YANOMAMI': 'DSEI YANOMAMI'
+}
+
+export const municipioOptions = {} // TODO: Falta receber a listagem
+
+export const aldeiaComunidadeOptions = {} // TODO: Falta receber a listagem
+
 export const tipoDeComunidadeOptions = {
   terra_indigena_homologada:
     'Terra indígena homologada (finalizada a demarcação)',
@@ -56,6 +97,7 @@ export const tipoDeComunidadeOptions = {
   territorio_autodemarcado: 'Autodemarcação',
   reserva_indigena: 'Reserva indígena',
   acampamento: 'Acampamento',
+  'Não sei': 'Não sei',
 };
 
 export const acessoEquipeDeSaude = {

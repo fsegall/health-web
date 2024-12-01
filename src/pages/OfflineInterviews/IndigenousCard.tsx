@@ -18,9 +18,9 @@ const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
       <i>#{index} {isIncomplete && ' - Entrevista Incompleta'}</i>
       <p><strong>ID:</strong> {id?.toString()}</p>
       <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.projeto_numero?.toString()}</p>
+      <p><strong>DSI:</strong> {data?.indigenous_informacoes_basicas?.distrito_sanitario_indigena}</p>
       <p><strong>Município:</strong> {data?.indigenous_informacoes_basicas?.municipio}</p>
       <p><strong>Aldeia:</strong> {data?.indigenous_informacoes_basicas?.aldeia_comunidade}</p>
-      <p><strong>Chefe:</strong> {data?.indigenous_demografico?.moradores[0]?.nome}</p>
       <p><strong>Data:</strong> {new Date(data?.indigenous_informacoes_basicas?.data_entrevista).toLocaleDateString('pt-BR')}</p>
       <p style={{ marginTop: '5px', textAlign: 'end' }}><FiEdit /> Editar</p>
     </Card>

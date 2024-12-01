@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { documentoCivilOptions, tipoDeComunidadeOptions } from "../../questions/SelectorOptions/options";
+import { aldeiaComunidadeOptions, distritoSanitarioIndigenaOptions, documentoCivilOptions, municipioOptions, tipoDeComunidadeOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
   label: string;
@@ -19,39 +19,51 @@ export interface FormHelperType {
 export const informacoesBasicasFormHelper: FormHelperType[][] = [
   [
     {
-      label: 'Qual seu Município / Estado da federação? (Ex: Dourados/MS; Boa Vista/RR; Porto Seguro/BA)',
-      type: Input,
-      props: {
-          name: 'municipio',
-          placeholder: 'Município',
-      }
-    },
-    {
-      label: 'Qual sua Aldeia/Comunidade?',
-      type: Input,
-      props: {
-          name: 'aldeia_comunidade',
-          placeholder: 'Aldeia/Comunidade',
-      }
-    },
-    {
-      label: 'Qual seu tipo de comunidade?',
-      type: Select,
-      props: {
-          name: 'tipo_comunidade',
-          isMulti: false,
-          options: handleValueLabelOption(tipoDeComunidadeOptions)
-      }
-    },
-  ],
-  [
-    {
       label: 'Indique o número do Projeto',
       type: Input,
       props: {
           name: 'projeto_numero',
           type: 'number',
           placeholder: 'Número do Projeto'
+      }
+    },
+    {
+      label: 'Qual é a DSEI (Distrito Sanitário Indígena) de referência?',
+      type: Select,
+      props: {
+          name: 'distrito_sanitario_indigena',
+          isMulti: false,
+          options: handleValueLabelOption(distritoSanitarioIndigenaOptions)
+      }
+    },
+    {
+      label: 'Qual seu Município?',
+      type: Select,
+      props: {
+          name: 'municipio',
+          isMulti: false,
+          placeholder: 'Município',
+          options: handleValueLabelOption(municipioOptions)
+      }
+    },
+    {
+      label: 'Qual sua Aldeia/Comunidade?',
+      type: Select,
+      props: {
+          name: 'aldeia_comunidade',
+          isMulti: false,
+          options: handleValueLabelOption(aldeiaComunidadeOptions)
+      }
+    },
+  ],
+  [
+    {
+      label: 'Qual a situação legal da terra? (LER AS OPÇÕES)',
+      type: Select,
+      props: {
+          name: 'tipo_comunidade',
+          isMulti: false,
+          options: handleValueLabelOption(tipoDeComunidadeOptions)
       }
     },
     {
