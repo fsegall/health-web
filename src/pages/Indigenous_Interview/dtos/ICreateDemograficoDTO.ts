@@ -21,7 +21,6 @@ export default interface ICreateDemograficoDTO {
 interface QuadroSocioDemograficoDTO {
   id: number;
   nome: string;
-  relacao_com_lider: string;
   maior_de_um_ano: string; // default "sim"
   idade?: number;
   idade_em_meses?: number;

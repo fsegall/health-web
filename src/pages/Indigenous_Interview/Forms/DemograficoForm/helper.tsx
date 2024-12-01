@@ -6,6 +6,7 @@ import { sexoOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoO
 export interface FormHelperType {
     label: string;
     alternative_label?: string;
+    second_alternative_label?: string;
     type: React.FC<any>;
     props: {
       name: string;
@@ -32,7 +33,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       hasDependencies: true
     },
     {
-      label: 'Quantos moradores NÃO INDÍGENAS existem na casa?',
+      label: 'Se existe, quantos moradores NÃO INDÍGENAS existem na casa?',
       type: Input,
       props: {
         name: 'quantidade_morador_nao_indigena',
@@ -44,11 +45,11 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: ' Qual sua etnia/povo?',
+      label: 'Qual sua etnia/povo?',
       type: Select,
       props: {
         name: 'povo_etnia',
-        options: handleValueLabelOption(etniasNewOptions),
+        options: handleValueLabelOption(etniasNewOptions)?.sort((a, b) => a?.label?.localeCompare(b?.label, 'pt', { sensitivity: 'base' })),
         isMulti: true
       }
     },
@@ -168,21 +169,12 @@ export const extraDemograficoHelper: FormHelperType[][] = [
 export const quadroDemograficoHelper: FormHelperType[] = [
   {
     label: 'Qual o seu nome?',
-    alternative_label: 'Qual o nome do próximo morador?',
+    alternative_label: 'Qual o nome do morador mais velho? (Primeiro nome apenas)',
+    second_alternative_label: 'Qual o nome do próximo morador mais velho? (Primeiro nome apenas)',
     type: Input,
     props: {
       name: 'nome',
       placeholder: 'Digite o nome do morador',
-      type: 'text',
-    }
-  },
-  {
-    label: 'Qual a sua relação com o chefe ou pessoa de referência da família?',
-    alternative_label: 'Qual a relação dele(a) com o(a) chefe ou pessoa de referência da família?',
-    type: Input,
-    props: {
-      name: 'relacao_com_lider',
-      placeholder: 'Digite a relação do morador com o chefe',
       type: 'text',
     }
   },
@@ -227,7 +219,7 @@ export const quadroDemograficoHelper: FormHelperType[] = [
   },
   {
     label: 'Qual o seu sexo?',
-    alternative_label: 'Qual o sexo do morador?',
+    alternative_label: 'Qual o sexo da pessoa?',
     type: Select,
     props: {
       name: 'sexo',

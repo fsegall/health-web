@@ -54,8 +54,7 @@ export const DemograficoValidation = Yup.object().shape({
     .of(
       Yup.object().shape({
         id: Yup.number().required('ID obrigatório'),
-        nome: Yup.string().required('Você precisa digitar um nome'),
-        relacao_com_lider: Yup.string().required('Você precisa digitar a relação com o chefe'),
+        nome: Yup.string().required('Você precisa digitar o nome'),
         maior_de_um_ano: Yup.string().required('Você precisa preencher se é maior de um ano'),
         idade: Yup.mixed().nullable().when("maior_de_um_ano", {
           is: (val: any) => val === "sim",
