@@ -179,13 +179,13 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     }
   },
   {
-    label: 'O MORADOR possui mais de 1 ano de idade?',
-    alternative_label: 'O morador possui mais de 1 ano de idade? (se a resposta for não)',
-    type: Select,
+    label: 'Qual sua data de nascimento?',
+    alternative_label: 'Qual a data de nascimento da pessoa? (Se souber)',
+    type: Input,
     props: {
-      name: 'maior_de_um_ano',
-      options: handleValueLabelOption(simOuNao),
-      isMulti: false
+      name: 'data_nascimento',
+      placeholder: 'Digite a data de nascimento do morador',
+      type: 'text',
     },
     hasDependencies: true
   },
@@ -198,23 +198,8 @@ export const quadroDemograficoHelper: FormHelperType[] = [
       placeholder: 'Digite a idade do morador',
       type: 'number',
     },
-    hasDependencies: true,
     dependencies: {
-      maior_de_um_ano: ["sim"]
-    }
-  },
-  {
-    label: 'Qual a idade do MORADOR em MESES?',
-    alternative_label: 'Qual a idade do morador em meses?',
-    type: Input,
-    props: {
-      name: 'idade_em_meses',
-      placeholder: 'Digite quantos meses tem o morador',
-      type: 'number',
-    },
-    hasDependencies: true,
-    dependencies: {
-      maior_de_um_ano: ["nao"]
+      data_nascimento: [""]
     }
   },
   {

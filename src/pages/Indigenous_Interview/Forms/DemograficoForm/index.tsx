@@ -65,11 +65,6 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     try {
       DemograficoFormRef.current?.setErrors({});
 
-      if (data?.moradores) {
-        data.moradores[0].maior_de_um_ano = 'sim'
-      }
-
-
       const values = {
         ...data,
         moradores: data?.moradores,
@@ -193,10 +188,16 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
       let isDisabled = true
       const found = formDependencies?.[index]?.[obj?.[0]]
-      if (found) {
-        if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
-          isDisabled = false
-        }
+      if (found !== undefined && found !== null) {
+        obj?.[1]?.forEach((v: any) => {
+          if (v === '') {
+            if (found === '') {
+              isDisabled = false
+            }
+          } else if (v === found || found?.includes(v)) {
+            isDisabled = false
+          }
+        })
       }
       return isDisabled
     })
@@ -286,32 +287,15 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => {
-                let isFirstInterviewerAgeElement = false
-                const isFirstInterviewer = index === 0
-                if (isFirstInterviewer && element?.props?.name === 'maior_de_um_ano') {
-                  element.props.defaultValue = {
-                    value: 'sim',
-                    label: 'Sim'
-                  }
-                } else {
-                  element.props.defaultValue = null
-                }
-                if (isFirstInterviewer) {
-                  isFirstInterviewerAgeElement = element?.props?.name === 'idade'
-                  const isFirstInterviewerMonthsElement = element?.props?.name === 'idade_em_meses'
-                  const isFirstInterviewerOlderThanOne = element?.props?.name === 'maior_de_um_ano'
-                  if (isFirstInterviewerMonthsElement || isFirstInterviewerOlderThanOne) {
-                    return
-                  }
-                }
                 return (
                   <span key={`${elementIndex}:${element.label}`}>
                     {incrementCounterUpToLength(quadroDemograficoHelper.length)}
                     <Label>{handleDemograficoFormLabel(index, element)}</Label>
                     <element.type
                       {...element.props}
-                      isDisabled={isFirstInterviewerAgeElement ? false : element?.dependencies && handleDisabled(element, index+1)}
-                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.value)}
+                      isDisabled={element?.dependencies && handleDisabled(element, index+1)}
+                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target?.value)}
+                      onMount={(val: any) => element?.hasDependencies && handleDependencies(element, index+1, val)}
                     />
                   </span>
                   )
