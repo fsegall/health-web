@@ -23,7 +23,7 @@ const AdminMenu = ({
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'flex-start',
-      backgroundColor: colors.secundary,
+      backgroundColor: colors.secondary,
       padding: '30px',
       minWidth: '200px',
       width: isMobile ? '100vw' : '100%',
