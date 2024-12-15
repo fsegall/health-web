@@ -48,18 +48,19 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, isDisabled = false, onM
     }
   }, [isDisabled])
 
-  const onInputMount = () => {
+  const onInputMount = useCallback(() => {
     if (InputRef.current) {
       const inputValue = InputRef.current.value || "";
       if (onMount) {
         onMount(inputValue);
       }
     }
-  };
+  }, [onMount]);
+
 
   useEffect(() => {
     onInputMount();
-  }, []);
+  }, [onInputMount]);
 
   return (
     <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>
