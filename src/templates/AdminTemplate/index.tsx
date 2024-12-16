@@ -52,11 +52,11 @@ const AdminTemplate = ({
                 <StyledBurger open={showOnMobile} onClick={() => setShowOnMobile(!showOnMobile)} ><div /><div /><div /></StyledBurger>
               </span>
             )}
-            <span style={{ color: colors.secundary }}>Rede Penssan</span>
+            <span style={{ color: colors.secondary }}>Rede Penssan</span>
             {getPageName(location.pathname) && (
               <>
                 <strong style={{ color: colors.orange }}>|</strong>
-                <strong style={{ color: colors.secundary }}>{getPageName(location.pathname)}</strong>
+                <strong style={{ color: colors.secondary }}>{getPageName(location.pathname)}</strong>
               </>
             )}
           </div>

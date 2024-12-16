@@ -6,6 +6,7 @@ import { sexoOptions, crencasOptions, grauEscolaridadeOptions, situacaoTrabalhoO
 export interface FormHelperType {
     label: string;
     alternative_label?: string;
+    second_alternative_label?: string;
     type: React.FC<any>;
     props: {
       name: string;
@@ -32,7 +33,7 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       hasDependencies: true
     },
     {
-      label: 'Quantos moradores NÃO INDÍGENAS existem na casa?',
+      label: 'Se existe, quantos moradores NÃO INDÍGENAS existem na casa?',
       type: Input,
       props: {
         name: 'quantidade_morador_nao_indigena',
@@ -44,11 +45,11 @@ export const extraDemograficoHelper: FormHelperType[][] = [
       }
     },
     {
-      label: ' Qual sua etnia/povo?',
+      label: 'Qual sua etnia/povo?',
       type: Select,
       props: {
         name: 'povo_etnia',
-        options: handleValueLabelOption(etniasNewOptions),
+        options: handleValueLabelOption(etniasNewOptions)?.sort((a, b) => a?.label?.localeCompare(b?.label, 'pt', { sensitivity: 'base' })),
         isMulti: true
       }
     },
@@ -168,7 +169,8 @@ export const extraDemograficoHelper: FormHelperType[][] = [
 export const quadroDemograficoHelper: FormHelperType[] = [
   {
     label: 'Qual o seu nome?',
-    alternative_label: 'Qual o nome do próximo morador?',
+    alternative_label: 'Qual o nome do morador mais velho? (Primeiro nome apenas)',
+    second_alternative_label: 'Qual o nome do próximo morador mais velho? (Primeiro nome apenas)',
     type: Input,
     props: {
       name: 'nome',
@@ -177,23 +179,13 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     }
   },
   {
-    label: 'Qual a sua relação com o chefe ou pessoa de referência da família?',
-    alternative_label: 'Qual a relação dele(a) com o(a) chefe ou pessoa de referência da família?',
+    label: 'Qual sua data de nascimento?',
+    alternative_label: 'Qual a data de nascimento da pessoa? (Se souber)',
     type: Input,
     props: {
-      name: 'relacao_com_lider',
-      placeholder: 'Digite a relação do morador com o chefe',
+      name: 'data_nascimento',
+      placeholder: 'Digite a data de nascimento do morador',
       type: 'text',
-    }
-  },
-  {
-    label: 'O MORADOR possui mais de 1 ano de idade?',
-    alternative_label: 'O morador possui mais de 1 ano de idade? (se a resposta for não)',
-    type: Select,
-    props: {
-      name: 'maior_de_um_ano',
-      options: handleValueLabelOption(simOuNao),
-      isMulti: false
     },
     hasDependencies: true
   },
@@ -206,28 +198,13 @@ export const quadroDemograficoHelper: FormHelperType[] = [
       placeholder: 'Digite a idade do morador',
       type: 'number',
     },
-    hasDependencies: true,
     dependencies: {
-      maior_de_um_ano: ["sim"]
-    }
-  },
-  {
-    label: 'Qual a idade do MORADOR em MESES?',
-    alternative_label: 'Qual a idade do morador em meses?',
-    type: Input,
-    props: {
-      name: 'idade_em_meses',
-      placeholder: 'Digite quantos meses tem o morador',
-      type: 'number',
-    },
-    hasDependencies: true,
-    dependencies: {
-      maior_de_um_ano: ["nao"]
+      data_nascimento: [""]
     }
   },
   {
     label: 'Qual o seu sexo?',
-    alternative_label: 'Qual o sexo do morador?',
+    alternative_label: 'Qual o sexo da pessoa?',
     type: Select,
     props: {
       name: 'sexo',

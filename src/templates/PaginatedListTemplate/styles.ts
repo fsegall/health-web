@@ -6,7 +6,7 @@ export const PaginationButton = styled.button.attrs((props: { current: boolean }
   padding: 5px 10px;
   opacity: ${props => props.disabled ? '0.5' : '1'};
   cursor: ${props => props.disabled ? 'auto' : 'pointer'};
-  background-color: ${props => props.current ? colors?.secundary : '#FAFAFA'};
+  background-color: ${props => props.current ? colors?.secondary : '#FAFAFA'};
   display: flex;
   justify-content: center;
   align-items: center;
