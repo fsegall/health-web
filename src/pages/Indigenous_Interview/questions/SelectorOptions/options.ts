@@ -823,18 +823,36 @@ export const familiarMorteRendaOptions = {
 };
 
 export const condicaoSaudeOptions = {
-  muito_boa: 'Boa ou Muito boa',
-  regular: 'Mais ou menos (regular)',
-  ruim: 'Ruim ou Muito Ruim',
+  muito_boa: 'Muito boa',
+  boa: 'Boa',
+  regular: 'Regular (maisou menos)',
+  ruim: 'Ruim',
+  muito_ruim: 'Muito Ruim'
 };
 
 export const desabilidadeOptions = {
-  deficiencia_fisica_e_mental: 'Com deficiência física e mental',
-  deficiencia_fisica: 'Com deficiência física',
-  deficiencia_mental: 'Com deficiência mental',
-  acamado: 'Acamado',
-  nao_possui: 'Não tem',
+  'Com deficiência auditiva (não escuta)': 'Com deficiência auditiva (não escuta)',
+  'Com deficiência visual (não vê)': 'Com deficiência visual (não vê)',
+  'Com deficiência física': 'Com deficiência física',
+  'Com deficiência intelectual': 'Com deficiência intelectual',
+  'Com deficiência mental / psicossocial': 'Com deficiência mental / psicossocial',
+  'Acamado (de cama, que não levanta)': 'Acamado (de cama, que não levanta)',
+  'Não tem nenhum': 'Não tem nenhum'
 };
+
+export const exposicaoOptions = {
+  'Veneno (agrotóxico) de plantação': 'Veneno (agrotóxico) de plantação',
+  'Contaminação de água ou alimentos por mineração (mercúrio)': 'Contaminação de água ou alimentos por mineração (mercúrio)',
+  'Ninguém foi exposto': 'Ninguém foi exposto',
+  'NS/NR': 'NS/NR'
+}
+
+export const doencaExposicaoOptions = {
+  'Sim, veneno (agrotóxico) da plantação': 'Sim, veneno (agrotóxico) da plantação',
+  'Sim, contaminação mineração': 'Sim, contaminação mineração',
+  'Não': 'Não',
+  'NS/NR': 'NS/NR'
+}
 
 export const condicaoSaudeTekohaOptions = {
   melhorou: 'Sim, melhorou',
@@ -862,6 +880,22 @@ export const tiposAcidenteOptions = {
   'ns-nr': 'NS/NR',
 };
 
+export const ameacaOptions = {
+  'Sim, de pessoas de dentro da comunidade': 'Sim, de pessoas de dentro da comunidade',
+  'Sim, de pessoas de fora da comunidade': 'Sim, de pessoas de fora da comunidade',
+  'Sim, de feitiço (espiritual)': 'Sim, de feitiço (espiritual)',
+  'Não': 'Não',
+  'NS/NR': 'NS/NR'
+}
+
+export const violenciaFisicaOptions = {
+  'Sim, dentro da comunidade, por brigas internas': 'Sim, dentro da comunidade, por brigas internas',
+  'Sim, dentro da comunidade, por pessoas de fora': 'Sim, dentro da comunidade, por pessoas de fora',
+  'Sim, fora da comunidade': 'Sim, fora da comunidade',
+  'Não': 'Não',
+  'NS/NR': 'NS/NR'
+}
+
 export const acidentesOptions = {
   cobra: 'Picada de cobra',
   animais_peconhentos: 'Picada de animais peçonhentos (aranha, escorpião, etc)',
@@ -879,15 +913,6 @@ export const acidentesOptions = {
   'ns-nr': 'NS/NR',
 };
 
-export const violenciaFisicaOptions = {
-  brigas_internas_na_comunidade: 'Dentro da comunidade, por brigas internas',
-  pessoas_de_fora_na_comunidade: 'Dentro da comunidade, por pessoas de fora',
-  na_escola_fora_da_comunidade: 'Fora da comunidade, na escola',
-  outro_local_fora_da_comunidade: 'Fora da comunidade, em outro local',
-  outro: 'Outro',
-  'ns-nr': 'NS/NR',
-};
-
 export const diagnosticosOptions = {
   pressao_alta: 'Pressão alta',
   diabetes: 'Diabetes (açucar no sangue)',
@@ -895,6 +920,7 @@ export const diagnosticosOptions = {
   obesidade: 'Obesidade',
   doenca_rins: 'Doença nos rins (insuficiência renal)',
   cancer: 'Câncer',
+  outra: 'Outra',
   nenhuma: 'Nenhuma',
 };
 

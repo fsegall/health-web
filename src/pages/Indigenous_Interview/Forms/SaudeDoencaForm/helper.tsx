@@ -1,6 +1,6 @@
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { acessoEquipeDeSaude, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, criancaComidaOptions, cuidadoresOptions, desabilidadeOptions, diagnosticoRemedioOptions, diagnosticosOptions, gestanteOptions, lugaresOptions, profissionaisEquipeDeSaude, simOuNao, tiposAcidenteOptions, doencasInfecciosas, violenciaFisicaOptions, yesOrNoOptions, doencasOutras } from "../../questions/SelectorOptions/options";
+import { acessoEquipeDeSaude, causasDoencasVenenoLavouraOptions, condicaoSaudeOptions, criancaComidaOptions, cuidadoresOptions, desabilidadeOptions, diagnosticoRemedioOptions, diagnosticosOptions, gestanteOptions, lugaresOptions, profissionaisEquipeDeSaude, simOuNao, tiposAcidenteOptions, doencasInfecciosas, violenciaFisicaOptions, yesOrNoOptions, doencasOutras, exposicaoOptions, doencaExposicaoOptions, ameacaOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -19,7 +19,7 @@ export interface FormHelperType {
 export const saudeDoencaFormHelper: FormHelperType[][] = [
     [
         {
-            label: 'Como você considera a sua saúde hoje?',
+            label: 'Como você considera a sua saúde hoje? (LER AS OPÇÕES)',
             type: Select,
             props: {
                 name: 'condicao_de_saude',
@@ -27,10 +27,11 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Na sua família, tem algum morador: (LER AS OPÇÕES)',
+            label: 'Na sua família, tem algum morador: (LER AS OPÇÕES) (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'morador_com_desabilidade',
+                isMulti: true,
                 options: handleValueLabelOption(desabilidadeOptions),
             }
         },
@@ -43,25 +44,27 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             }
         },
         {
-            label: 'Nos últimos 6 meses, você ou alguém desta casa foi exposto (teve contato) a veneno de lavoura?',
+            label: 'Nos últimos 6 meses, você ou alguém desta casa foi exposto (teve contato) a: (LER AS OPÇÕES) (PODE TER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'morador_exposto_veneno_lavoura',
-                options: handleValueLabelOption(yesOrNoOptions),
+                isMulti: true,
+                options: handleValueLabelOption(exposicaoOptions),
             },
             hasDependencies: true,
         },
         {
-            label: 'Se sim, nos últimos 6 meses, você ou alguém desta casa FICOU DOENTE, por causa do veneno de lavoura?',
+            label: 'Se sim, nos últimos 6 meses, você ou alguém desta casa FICOU DOENTE, por causa do veneno (agrotóxico) de plantação ou contaminação por mineração?',
             type: Select,
             props: {
                 name: 'doencas_contato_veneno_lavoura',
-                options: handleValueLabelOption(yesOrNoOptions),
+                options: handleValueLabelOption(doencaExposicaoOptions),
             },
             hasDependencies: true,
             dependencies: {
                 morador_exposto_veneno_lavoura: [
-                    "true",
+                    'Veneno (agrotóxico) de plantação',
+                    'Contaminação de água ou alimentos por mineração (mercúrio)'
                 ],
             }
         },
@@ -75,7 +78,8 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
             },
             dependencies: {
                 doencas_contato_veneno_lavoura: [
-                    "true",
+                    "Sim, veneno (agrotóxico) da plantação",
+                    "Sim, contaminação mineração"
                 ],
             }
         },
@@ -89,35 +93,23 @@ export const saudeDoencaFormHelper: FormHelperType[][] = [
               },
         },
         {
-            label: 'Nos últimos 6 meses você ou alguém de sua família sofreu algum tipo de AMEAÇA de agressão física, patrimonial (danificar pertences, por exemplo a queima da casa ou de alimentos) ou espiritual (feitiço)?',
+            label: 'Nos últimos 6 meses você ou alguém de sua família sofreu algum tipo de AMEAÇA de agressão física ou patrimonial (danificar pertences, por exemplo a queima da casa ou de alimentos)? Se sim, por pessoas de dentro ou fora da comunidade? (PODE SER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'ocorrencia_de_ameacas',
-                options: handleValueLabelOption(yesOrNoOptions),
+                isMulti: true,
+                options: handleValueLabelOption(ameacaOptions),
             }
         },
         {
-            label: 'Nos últimos 6 meses alguém desta casa sofreu algum tipo de VIOLÊNCIA FÍSICA (Alguém foi agredido fisicamente?)',
+            label: 'Nos últimos 6 meses alguém desta casa sofreu algum tipo de VIOLÊNCIA FÍSICA (Alguém foi agredido fisicamente?) Se sim, por pessoas de dentro ou fora da comunidade? (PODE SER MAIS DE 1 RESPOSTA)',
             type: Select,
             props: {
                 name: 'ocorrencia_violencia_fisica',
-                options: handleValueLabelOption(yesOrNoOptions),
+                isMulti: true,
+                options: handleValueLabelOption(violenciaFisicaOptions),
             },
             hasDependencies: true,
-        },
-        {
-            label: 'Se sim, onde aconteceu a violência física? (LER AS OPÇÕES) PODE TER MAIS DE 1 RESPOSTA. Reforçar que é sigiloso (segredo)',
-            type: Select,
-            props: {
-                name: 'local_ocorrencia_violencia_fisica',
-                options: handleValueLabelOption(violenciaFisicaOptions),
-                isMulti: true,
-            },
-            dependencies: {
-                ocorrencia_violencia_fisica: [
-                    "true",
-                ],
-            }
         },
       ],
       [
