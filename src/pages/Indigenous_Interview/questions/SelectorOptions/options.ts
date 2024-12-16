@@ -623,13 +623,22 @@ export const ultimaMoradaOptions = {
   'ns-nr': 'NS/NR',
 };
 
+export const moradiaOptions = {
+  'Muito boa': 'Muito boa',
+  'Boa': 'Boa',
+  'Regular (mais ou menos)': 'Regular (mais ou menos)',
+  'Ruim': 'Ruim',
+  'Muito ruim': 'Muito ruim'
+}
+
 export const moradaHojeOptions = {
-  barraco: 'Barraco',
-  tenda: 'Tenda de lona/plástico',
-  casa_madeira: 'Casa de madeira',
-  casa_alvenaria: 'Casa de alvenaria',
-  casa_coletiva: 'Casa coletiva',
-  outro: 'Outro tipo de moradia',
+  'Casa de sapé': 'Casa de sapé',
+  'Casa de madeira': 'Casa de madeira',
+  'Casa de alvenaria (tijolos)': 'Casa de alvenaria (tijolos)',
+  'Casa coletiva': 'Casa coletiva',
+  'Barraco': 'Barraco',
+  'Casa de lona / plástico': 'Casa de lona / plástico',
+  'Outro tipo de moradia': 'Outro tipo de moradia'
 };
 
 export const pisoCasaOptions = {
@@ -746,7 +755,7 @@ export const destinoLixoOptions = {
   jogado_longe_casa: 'Jogado longe da casa',
   jogado_proximo_casa: 'Jogado próximo à casa',
   corrego_rio_lago_quintal: 'Jogado em córrego, rio, lago',
-  prefeitura: 'Coletado pela prefeitura',
+  'Coletado pela prefeitura ou outro': 'Coletado pela prefeitura ou outro',
   'ns-nr': 'NS/NR',
 };
 

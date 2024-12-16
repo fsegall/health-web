@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const DomicilioValidation = Yup.object().shape({
-    tipo_moradia: Yup.string().required('Você preencher sobre a moradia atual'),
+    tipo_moradia: Yup.array().required('Você preencher sobre a moradia atual'),
     considera_moradia_adequada: Yup.string().required('Você preencher se considera sua moradia adequada para viver'),
     ultima_moradia: Yup.string().required('Você preencher sobre a última moradia'),
     entrevista_indigena_id: Yup.string().nullable().notRequired(),
@@ -21,6 +21,6 @@ export const DomicilioValidation = Yup.object().shape({
     }),
     forma_acesso_agua: Yup.string().required('Você precisa selecionar a forma de acesso à água'),
     possui_banheiro: Yup.string().required('Você precisa preencher sobre os banheiros'),
-    forma_coleta_esgoto: Yup.string().required('Você precisa preencher a forma de esgoto'),
+    forma_coleta_esgoto: Yup.array().required('Você precisa preencher a forma de esgoto'),
     destino_lixo_da_residencia: Yup.array().required('Você precisa preencher sobre o destino do lixo'),
 });
