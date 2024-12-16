@@ -1,5 +1,6 @@
 
 export type ProjectType = 'default' | 'indigenous'
+export type InterviewerAgeType = 'greater-than-18' | 'between-14-and-18'
 
 export interface ProjectTypeOptions {
     value: ProjectType;
@@ -34,7 +35,7 @@ export const projectTypeOptions: ProjectTypeOptions[] = [
     },
 ]
 
-const useGetProjectsTypes = (type: ProjectType): {
+const useGetProjectsTypes = (type: ProjectType, interviewedPersonAge: InterviewerAgeType): {
     options: ProjectTypeOptions[];
     acceptInfo: ProjectConfirmationInfo;
     interviewPath: string
@@ -43,6 +44,15 @@ const useGetProjectsTypes = (type: ProjectType): {
     const interviewURL: InterviewURL = {
         'default': 'interview',
         'indigenous': 'indigenous-interview'
+    }
+
+    const indigenousDescription = {
+        'greater-than-18': [
+            'Termo de Consentimento Livre e Esclarecido (TCLE) para pessoa com mais de 18 anos de idade.'
+        ],
+        'between-14-and-18': [
+            'Termo de Assentimento Livre e Esclarecido (TALE para pessoa entre 14 e 18 anos de idade.'
+        ],
     }
 
     const acceptInfo: AcceptInfoType = {
@@ -54,14 +64,9 @@ const useGetProjectsTypes = (type: ProjectType): {
             ],
             contact: 'Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com'
         }
-    , 'indigenous': {
+        , 'indigenous': {
             title: 'TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN',
-            description: [
-                'Você está sendo convidado(a) a participar, como voluntário(a) de nossa pesquisa, por meio de entrevista. Esta tem por objetivo avaliar a insegurança alimentar e nutricional e seus fatores associados em famílias indígenas do Brasil.',
-                'As perguntas serão sobre você e seus familiares, a respeito da casa, do trabalho, da saúde, da alimentação e sobre acesso a políticas públicas.',
-                'Todas as informações que você fornecer serão confidenciais (VÃO SER MANTIDAS EM SEGREDO). Os resultados que serão divulgados vão mostrar todas as entrevistas juntas, por isso não vão aparecer dados que identifiquem você ou alguém de sua família.',
-                'A qualquer momento da entrevista você poderá solicitar esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em participar, sua colaboração vai contribuir para conhecermos a realidade indígena do país e podermos lutar por ações que garantam alimentação suficiente e saudável para os povos indígenas no Brasil.',
-              ],
+            description: indigenousDescription[interviewedPersonAge],
             contact: 'Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com.'
         }
     }
