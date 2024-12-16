@@ -8,8 +8,8 @@ export const AddressValidation = Yup.object().shape({
     'Você precisa informar a rua ou localização',
   ),
   neighborhood: Yup.string().required('Você precisa informar o bairro'),
-  house_number: Yup.number().required(
+  house_number: Yup.string().required(
     'Você precisa informar o número da residência',
   ),
-  telephone_number: Yup.string().required('Você precisa informar o telefone'),
+  telephone_number: Yup.string(),
 });
