@@ -5,25 +5,11 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
     'Você precisa preencher se há moradores menores de 16 anos',
   ),
   preocupação_nao_conseguir_comida: Yup.string()
-    .nullable()
-    .when('possui_moradores_menores_de_16', {
-      is: (val: any) => String(val) === 'nao',
-      then: Yup.string()
-        .nullable()
-        .required(
-          'Você precisa preencher sobre preocupações em conseguir comida',
-        ),
-      otherwise: Yup.string().nullable().notRequired(),
-    }),
+    .required(
+    'Você precisa preencher sobre preocupações em conseguir comida',
+  ),
   comeu_sempre_comida_da_cultura: Yup.string()
-    .nullable()
-    .when('possui_moradores_menores_de_16', {
-      is: (val: any) => String(val) === 'nao',
-      then: Yup.string()
-        .nullable()
-        .required('Você precisa preencher se comeu alimentos da cultura'),
-      otherwise: Yup.string().nullable().notRequired(),
-    }),
+    .required('Você precisa preencher se comeu alimentos da cultura'),
   comeram_sempre_comida_saudavel: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {

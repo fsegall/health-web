@@ -39,9 +39,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
-      dependencies: {
-        possui_moradores_menores_de_16: ['nao'],
-      },
     },
     {
       label:
@@ -51,9 +48,6 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
         name: 'comeu_sempre_comida_da_cultura',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
-      },
-      dependencies: {
-        possui_moradores_menores_de_16: ['nao'],
       },
     },
     {
