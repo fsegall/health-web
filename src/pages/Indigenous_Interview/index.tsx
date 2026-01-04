@@ -252,6 +252,31 @@ const IndigenousInterview: React.FC = () => {
             dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: offline_id, show: false } })
           }
         }
+      } else if (id && offlineInterviews && offlineInterviews[id]) {
+        // Quando há id (modo edição), marca os módulos como disponíveis para edição
+        const interviewData = offlineInterviews[id];
+        if (interviewData.hasOwnProperty('indigenous_informacoes_basicas')) {
+          dispatch({ type: 'INFORMACOES_BASICAS', payload: { id: id, show: true } })
+        }
+        if (interviewData.hasOwnProperty('indigenous_demografico')) {
+          dispatch({ type: 'DEMOGRAFICO', payload: { id: id, show: true } })
+        }
+        if (interviewData.hasOwnProperty('indigenous_domicilio')) {
+          dispatch({ type: 'DOMICILIO', payload: { id: id, show: true } })
+        }
+        if (interviewData.hasOwnProperty('indigenous_saude_doenca')) {
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: id, show: true } })
+        } else {
+          // Verifica se o módulo está desabilitado
+          const isModuleDisabled = localStorage.getItem('@Safety:hide_indigenous_saude_doenca') === 'true';
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: null, show: !isModuleDisabled } })
+        }
+        if (interviewData.hasOwnProperty('indigenous_alimentacao_nutricao')) {
+          dispatch({ type: 'ALIMENTACAO_NUTRICAO', payload: { id: id, show: true } })
+        }
+        if (interviewData.hasOwnProperty('indigenous_apoio_protecao_social')) {
+          dispatch({ type: 'APOIO_PROTECAO_SOCIAL', payload: { id: id, show: true } })
+        }
       }
     }, [dispatch, id])
 
@@ -286,7 +311,7 @@ const IndigenousInterview: React.FC = () => {
           />
         ) : <SubmittedContainer>Módulo informações básicas já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_demografico">Demográfico</SectionTitle>
-        {!id && formState.formsSubmitted.indigenous_demografico.show ? (
+        {(id || formState.formsSubmitted.indigenous_demografico.show) ? (
           <DemograficoForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
@@ -296,12 +321,12 @@ const IndigenousInterview: React.FC = () => {
           />
         ) : <SubmittedContainer>Módulo demográfico já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_domicilio">Domicílio</SectionTitle>
-        {!id && formState.formsSubmitted.indigenous_domicilio.show ? (
+        {(id || formState.formsSubmitted.indigenous_domicilio.show) ? (
           <DomiciliosForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
             offline={isOffline}
-            initialValues={initialValues ? initialValues?.domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+            initialValues={initialValues ? initialValues?.indigenous_domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
             hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_demografico.show}
           />
         ) : <SubmittedContainer>Módulo domicílio já cadastrado</SubmittedContainer>}
@@ -319,7 +344,7 @@ const IndigenousInterview: React.FC = () => {
             />
           )}
         </SectionTitleGroup>
-        {!id && formState.formsSubmitted.indigenous_saude_doenca.show ? (
+        {(id || formState.formsSubmitted.indigenous_saude_doenca.show) ? (
           <SaudeDoencaForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
@@ -333,7 +358,7 @@ const IndigenousInterview: React.FC = () => {
           <SubmittedContainer>Módulo saúde e doença desabilitado</SubmittedContainer>
         )}
         <SectionTitle id="indigenous_alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
-        {!id && formState.formsSubmitted.indigenous_alimentacao_nutricao.show ? (
+        {(id || formState.formsSubmitted.indigenous_alimentacao_nutricao.show) ? (
           <AlimentacaoNutricaoForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
@@ -343,7 +368,7 @@ const IndigenousInterview: React.FC = () => {
           />
         ) : <SubmittedContainer>Módulo alimentação e nutrição já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
-        {!id && formState.formsSubmitted.indigenous_apoio_protecao_social.show ? (
+        {(id || formState.formsSubmitted.indigenous_apoio_protecao_social.show) ? (
           <ApoioProtecaoSocialForm
             dispatch={dispatch}
             isEditForm={id ? true : false}
