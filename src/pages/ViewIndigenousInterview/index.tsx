@@ -304,26 +304,68 @@ const ViewIndigenousInterview: React.FC = () => {
           );
         })()}
 
-        {saudeDoenca && (
-          <Section>
-            <SectionTitle>Saúde e Doença</SectionTitle>
-            <p>Dados de saúde e doença cadastrados</p>
-          </Section>
-        )}
+        {saudeDoenca && (() => {
+          const formattedData = formatSaudeDoencaData(saudeDoenca);
+          
+          return (
+            <Section>
+              <SectionTitle>Saúde e Doença</SectionTitle>
+              
+              {formattedData && Object.keys(formattedData).length > 0 ? (
+                Object.entries(formattedData).map(([label, value]) => (
+                  <Field key={label}>
+                    <FieldLabel>{label}:</FieldLabel>
+                    <FieldValue>{value}</FieldValue>
+                  </Field>
+                ))
+              ) : (
+                <p>Dados de saúde e doença cadastrados</p>
+              )}
+            </Section>
+          );
+        })()}
 
-        {alimentacaoNutricao && (
-          <Section>
-            <SectionTitle>Alimentação e Nutrição</SectionTitle>
-            <p>Dados de alimentação e nutrição cadastrados</p>
-          </Section>
-        )}
+        {alimentacaoNutricao && (() => {
+          const formattedData = formatAlimentacaoNutricaoData(alimentacaoNutricao);
+          
+          return (
+            <Section>
+              <SectionTitle>Alimentação e Nutrição</SectionTitle>
+              
+              {formattedData && Object.keys(formattedData).length > 0 ? (
+                Object.entries(formattedData).map(([label, value]) => (
+                  <Field key={label}>
+                    <FieldLabel>{label}:</FieldLabel>
+                    <FieldValue>{value}</FieldValue>
+                  </Field>
+                ))
+              ) : (
+                <p>Dados de alimentação e nutrição cadastrados</p>
+              )}
+            </Section>
+          );
+        })()}
 
-        {apoioProtecaoSocial && (
-          <Section>
-            <SectionTitle>Apoio e Proteção Social</SectionTitle>
-            <p>Dados de apoio e proteção social cadastrados</p>
-          </Section>
-        )}
+        {apoioProtecaoSocial && (() => {
+          const formattedData = formatApoioProtecaoSocialData(apoioProtecaoSocial);
+          
+          return (
+            <Section>
+              <SectionTitle>Apoio e Proteção Social</SectionTitle>
+              
+              {formattedData && Object.keys(formattedData).length > 0 ? (
+                Object.entries(formattedData).map(([label, value]) => (
+                  <Field key={label}>
+                    <FieldLabel>{label}:</FieldLabel>
+                    <FieldValue>{value}</FieldValue>
+                  </Field>
+                ))
+              ) : (
+                <p>Dados de apoio e proteção social cadastrados</p>
+              )}
+            </Section>
+          );
+        })()}
       </Content>
     </Container>
   );

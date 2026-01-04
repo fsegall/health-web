@@ -57,25 +57,20 @@ const formatMultiSelect = (value: any, options: { [key: string]: string }): stri
   return options[value] || value || '-';
 };
 
-// Função para formatar etnias (busca em array de objetos)
+// Função para formatar etnias (etniasNewOptions é um objeto chave-valor)
 const formatEtnias = (value: any): string => {
   if (!value) return '-';
+  const etniasObj = etniasNewOptions as { [key: string]: string };
   if (Array.isArray(value)) {
     return value
-      .map((v) => {
-        const option = etniasNewOptions.find((opt: any) => opt.value === v);
-        return option?.label || v;
-      })
+      .map((v) => etniasObj[String(v)] || v)
       .filter(Boolean)
       .join(', ');
   }
   if (typeof value === 'string') {
     return value
       .split(',')
-      .map((v) => {
-        const option = etniasNewOptions.find((opt: any) => opt.value === v.trim());
-        return option?.label || v.trim();
-      })
+      .map((v) => etniasObj[v.trim()] || v.trim())
       .filter(Boolean)
       .join(', ');
   }
@@ -186,19 +181,72 @@ export const formatDomicilioData = (data: any) => {
   };
 };
 
-// Placeholder para outros módulos - vamos expandir conforme necessário
+// Função genérica para formatar dados com labels legíveis
+const formatGenericData = (
+  data: any,
+  fieldMapping: { [key: string]: { label: string; options?: { [key: string]: string }; isMulti?: boolean } },
+): { [key: string]: any } => {
+  if (!data) return {};
+  
+  const formatted: { [key: string]: any } = {};
+  
+  Object.entries(fieldMapping).forEach(([key, config]) => {
+    if (data[key] !== undefined && data[key] !== null && data[key] !== '') {
+      if (config.isMulti && config.options) {
+        formatted[config.label] = formatMultiSelect(data[key], config.options);
+      } else if (config.options) {
+        formatted[config.label] = getLabel(data[key], config.options);
+      } else {
+        formatted[config.label] = data[key];
+      }
+    }
+  });
+  
+  return formatted;
+};
+
 export const formatSaudeDoencaData = (data: any) => {
   if (!data) return null;
-  return data; // Retornar dados brutos por enquanto
+  
+  // Mapeamento dos principais campos
+  const fieldMapping: { [key: string]: { label: string; options?: { [key: string]: string }; isMulti?: boolean } } = {
+    condicao_de_saude: { label: 'Condição de saúde', options: undefined },
+    morador_com_desabilidade: { label: 'Morador com deficiência', isMulti: true },
+    local_permite_viver_com_saude: { label: 'Local permite viver com saúde', options: yesOrNoOptions },
+    morador_exposto_veneno_lavoura: { label: 'Exposição a veneno/lavoura', isMulti: true },
+    acidentes: { label: 'Acidentes', isMulti: true },
+    ocorrencia_de_ameacas: { label: 'Ocorrência de ameaças', isMulti: true },
+    ocorrencia_violencia_fisica: { label: 'Ocorrência de violência física', isMulti: true },
+  };
+  
+  return formatGenericData(data, fieldMapping);
 };
 
 export const formatAlimentacaoNutricaoData = (data: any) => {
   if (!data) return null;
-  return data; // Retornar dados brutos por enquanto
+  
+  const fieldMapping: { [key: string]: { label: string; options?: { [key: string]: string }; isMulti?: boolean } } = {
+    preocupação_nao_conseguir_comida: { label: 'Preocupação em conseguir comida', options: yesOrNoOptions },
+    deixaram_de_comer_comida_da_cultura: { label: 'Deixaram de comer comida da cultura', options: yesOrNoOptions },
+    deixaram_de_comer_comida_saudavel: { label: 'Deixaram de comer comida saudável', options: yesOrNoOptions },
+    faltou_comida_algum_dia: { label: 'Faltou comida algum dia', options: yesOrNoOptions },
+    dia_todo_sem_comer: { label: 'Dia todo sem comer', options: yesOrNoOptions },
+    tem_horta: { label: 'Tem horta', options: yesOrNoOptions },
+    alimentos_da_horta: { label: 'Alimentos da horta', isMulti: true },
+  };
+  
+  return formatGenericData(data, fieldMapping);
 };
 
 export const formatApoioProtecaoSocialData = (data: any) => {
   if (!data) return null;
-  return data; // Retornar dados brutos por enquanto
+  
+  const fieldMapping: { [key: string]: { label: string; options?: { [key: string]: string }; isMulti?: boolean } } = {
+    possui_crianca_ou_jovem_que_frequenta_escola: { label: 'Possui criança/jovem na escola', options: yesOrNoOptions },
+    criancas_comem_escola: { label: 'Crianças comem na escola', options: undefined },
+    recebeu_cesta_alimentos: { label: 'Recebeu cesta de alimentos', isMulti: true },
+  };
+  
+  return formatGenericData(data, fieldMapping);
 };
 
