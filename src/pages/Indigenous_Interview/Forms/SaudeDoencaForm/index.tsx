@@ -241,7 +241,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
                     </span>
                 ))}
                 {saudeDoencaFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}

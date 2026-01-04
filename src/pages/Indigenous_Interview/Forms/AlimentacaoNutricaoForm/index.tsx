@@ -287,7 +287,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
               </span>
             ))}
             {alimentacaoNutricaoFormHelper?.length === sectionIndex + 1 &&
-              !isEditForm && <Button type='submit'>Enviar</Button>}
+              <Button type='submit'>{isEditForm ? 'Salvar' : 'Enviar'}</Button>}
           </section>
         ),
       )}

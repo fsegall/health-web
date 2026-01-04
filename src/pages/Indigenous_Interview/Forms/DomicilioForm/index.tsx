@@ -216,7 +216,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
                     </span>
                 ))}
                 {domicilioFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}

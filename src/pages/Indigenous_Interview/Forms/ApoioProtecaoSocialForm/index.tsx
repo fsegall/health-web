@@ -228,7 +228,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
                     </span>
                 ))}
                 {apoioProtecaoSocialFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}
