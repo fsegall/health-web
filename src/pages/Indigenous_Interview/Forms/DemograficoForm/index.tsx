@@ -227,31 +227,25 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       if (!dependencies) {
         return false
       }
-      console.log('[handleRegularDisabled] Campo:', element.props.name, 'Dependencies:', dependencies, 'formDependencies atual:', formDependencies);
       const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
         let isDisabled = true
         const found = formDependencies[obj?.[0]]
-        console.log('[handleRegularDisabled] Verificando dependência:', obj?.[0], 'Valor encontrado:', found, 'Valores permitidos:', obj?.[1]);
         if (found !== undefined && found !== null && found !== '') {
           // Se found é um array (campo multi-select), verifica se algum valor do array está na lista permitida
           if (Array.isArray(found)) {
             if (found.length > 0 && obj?.[1]?.some((v: any) => found.includes(String(v)))) {
               isDisabled = false
-              console.log('[handleRegularDisabled] Array match encontrado! Campo será habilitado');
             }
           } else {
             // Se found é um valor simples, verifica se está na lista permitida
             if (obj?.[1]?.some((v: any) => String(v) === String(found))) {
               isDisabled = false
-              console.log('[handleRegularDisabled] Match encontrado! Campo será habilitado');
             }
           }
         }
-        console.log('[handleRegularDisabled] Resultado da validação:', isDisabled ? 'desabilitado' : 'habilitado');
         return isDisabled
       })
       const finalResult = allDisabledValidations?.every(v => v === false) ? false : true
-      console.log('[handleRegularDisabled] Resultado final para', element.props.name, ':', finalResult ? 'desabilitado' : 'habilitado');
       return finalResult
     }
 
@@ -359,10 +353,21 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                   {...element.props}
                   isDisabled={element?.dependencies && handleRegularDisabled(element)}
                   onChange={(e: any) => {
+                    console.log('[onChange] Campo:', element.props.name, 'Evento completo:', e, 'e?.value:', e?.value, 'e tipo:', typeof e, 'hasDependencies:', element?.hasDependencies, 'isMulti:', element?.props?.isMulti);
+                    // react-select passa o objeto da opção no onChange: {value: "...", label: "..."}
+                    // Para campos não multi, e será um objeto ou null
+                    // Para campos multi, e será um array de objetos
                     if (element?.props?.isMulti !== true) {
-                      element?.hasDependencies && handleRegularDependencies(element, e?.value)
+                      if (element?.hasDependencies) {
+                        const value = e?.value || e || null;
+                        console.log('[onChange] Chamando handleRegularDependencies com valor:', value);
+                        handleRegularDependencies(element, value)
+                      }
                     } else {
-                      element?.hasDependencies && handleArrayDependencies(element, e)
+                      if (element?.hasDependencies) {
+                        console.log('[onChange] Chamando handleArrayDependencies com valor:', e);
+                        handleArrayDependencies(element, e)
+                      }
                     }
                   }}
                 />
