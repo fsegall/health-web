@@ -95,7 +95,7 @@ const OfflineInterviews: React.FC = () => {
     }
 
     return (<Container>
-                <h1>Logs de Entrevistas Offline</h1>
+                <h1>Entrevistas Offline não Submetidas</h1>
                 <OfflineButton onClick={handleOfflineInterviews} disabled={loading}>Enviar</OfflineButton>
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
                 {!isObjectEmpty(indigenousInterviewsObject) &&
