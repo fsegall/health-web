@@ -41,7 +41,7 @@ const ViewIndigenousInterview: React.FC = () => {
   const [canEdit, setCanEdit] = useState(false);
   const [isOffline, setIsOffline] = useState(false);
 
-  const checkEditPermission = React.useCallback((interviewData: any) => {
+  const checkEditPermission = React.useCallback((interviewData: any, isOfflineMode: boolean) => {
     if (!user) {
       setCanEdit(false);
       return;
@@ -53,6 +53,41 @@ const ViewIndigenousInterview: React.FC = () => {
       return;
     }
 
+    // Para entrevistas offline
+    if (isOfflineMode) {
+      // INTERVIEWER: pode editar se for o criador da entrevista
+      if (user.role === Roles.INTERVIEWER) {
+        const interviewerId = interviewData?.indigenous_informacoes_basicas?.entrevistador_id;
+        // Se não tiver entrevistador_id salvo, permite edição (compatibilidade com entrevistas antigas)
+        // ou se o entrevistador_id corresponder ao usuário logado
+        setCanEdit(!interviewerId || interviewerId === user.id);
+        return;
+      }
+
+      // COORDINATOR: pode editar se o projeto corresponder
+      if (user.role === Roles.COORDINATOR) {
+        const projectNumber = interviewData?.indigenous_informacoes_basicas?.projeto_numero;
+        
+        // Busca os projetos do coordenador para verificar
+        api.get('/projects', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then(response => {
+            const userProjects = response.data.filter((p: any) => p.user_id === user.id);
+            // Para entrevistas offline, compara pelo número do projeto
+            const projectNumbers = userProjects.map((p: any) => p.project_number);
+            setCanEdit(projectNumber && projectNumbers.includes(Number(projectNumber)));
+          })
+          .catch(() => setCanEdit(false));
+        return;
+      }
+
+      // Por padrão, para entrevistas offline criadas pelo próprio usuário, permite edição
+      setCanEdit(true);
+      return;
+    }
+
+    // Para entrevistas online (da API)
     // INTERVIEWER só pode editar suas próprias entrevistas
     if (user.role === Roles.INTERVIEWER) {
       const interviewerId = interviewData?.entrevistador_id || 
@@ -63,8 +98,6 @@ const ViewIndigenousInterview: React.FC = () => {
 
     // COORDINATOR pode editar entrevistas dos seus projetos
     if (user.role === Roles.COORDINATOR) {
-      // Para entrevistas offline, precisamos verificar via project_id
-      // Para entrevistas online, já temos project_id na resposta
       const projectId = interviewData?.project_id || 
                        interviewData?.indigenous_informacoes_basicas?.project_id;
       
@@ -98,7 +131,7 @@ const ViewIndigenousInterview: React.FC = () => {
           });
           setInterview(response.data);
           setIsOffline(false);
-          checkEditPermission(response.data);
+          checkEditPermission(response.data, false);
         } catch (apiError) {
           // Se não encontrou na API, tenta buscar do localStorage (offline)
           const offlineInterviews: { [key: string]: any } = JSON.parse(
@@ -108,7 +141,7 @@ const ViewIndigenousInterview: React.FC = () => {
           if (offlineInterviews[id]) {
             setInterview(offlineInterviews[id]);
             setIsOffline(true);
-            checkEditPermission(offlineInterviews[id]);
+            checkEditPermission(offlineInterviews[id], true);
           } else {
             const error = apiError as any;
             throw new Error(error?.response?.data?.message || 'Entrevista não encontrada');
