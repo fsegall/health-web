@@ -78,8 +78,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
             ref.state.value = rest.isMulti ? [] : null;
           }
           // Só atualiza internalValue se estamos realmente limpando um valor existente
-          // Se internalValue já é null/undefined, não precisa atualizar (evita re-renders desnecessários)
-          if (internalValue !== null && internalValue !== undefined) {
+          // Verifica o estado atual do ref para evitar re-renders desnecessários
+          const currentValue = ref?.state?.value;
+          if (currentValue !== null && currentValue !== undefined && 
+              !(Array.isArray(currentValue) && currentValue.length === 0)) {
             setInternalValue(rest.isMulti ? [] : null);
           }
           return;
