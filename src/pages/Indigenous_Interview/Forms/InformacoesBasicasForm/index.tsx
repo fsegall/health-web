@@ -141,7 +141,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId]);
+  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId, initialValues]);
 
 
   useEffect(() => {

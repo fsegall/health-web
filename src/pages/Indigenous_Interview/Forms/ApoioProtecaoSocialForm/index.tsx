@@ -158,7 +158,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms]);
+  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms, isEditForm]);
 
 
   const [formDependencies, setFormDependencies] = useState<any>({})

@@ -145,7 +145,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

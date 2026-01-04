@@ -136,7 +136,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

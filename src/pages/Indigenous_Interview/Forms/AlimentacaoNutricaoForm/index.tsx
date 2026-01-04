@@ -188,6 +188,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
       initialValues,
       token,
       hasPreviousStepCompleted,
+      isEditForm,
     ],
   );
 
