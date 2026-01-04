@@ -25,19 +25,22 @@ export const CardSection = styled.div`
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 20px;
+  height: 100%;
 `;
 
-export const Card = styled.div`
-  width: 100%;
-  max-width: 300px;
+export const Card = styled.div<{ backgroundColor?: string }>`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   cursor: pointer;
+  min-width: 300px;
   height: 100%;
   text-align: left;
-  background-color: rgb(89, 116, 140, 0.7);
+  background-color: ${props => props?.backgroundColor || 'rgb(89, 116, 140, 0.7)'};
   padding: 10px 20px;
   border-radius: 4px;
   border-left: 6px solid gray;
-  box-shadow: 1px 1px 2px 2px rgba(204, 215, 219, 0.6)
+  box-shadow: 1px 1px 2px 2px rgba(204, 215, 219, 0.6);
 `;
 
 export const SectionTitle = styled.h2`

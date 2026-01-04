@@ -1,6 +1,6 @@
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, ultimaMoradaOptions, moradaHojeOptions, energiaEletricaOptions, equipamentosDeTrabalhoRuralEmCasaOptions, motivoQualidadeRuimAguaOptions } from "../../questions/SelectorOptions/options";
+import { pisoCasaOptions, paredesCasaOptions, telhadoCasaOptions, utensiliosCasaOptions, yesOrNoOptions, origemAguaOptions, acessoAguaCasaOptions, banheiroCasaOptions, coletaEsgotoCasaOptions, destinoLixoOptions, veiculosOptions, ultimaMoradaOptions, moradaHojeOptions, energiaEletricaOptions, equipamentosDeTrabalhoRuralEmCasaOptions, motivoQualidadeRuimAguaOptions, moradiaOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
     label: string;
@@ -28,18 +28,19 @@ export const domicilioFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Você considera a sua moradia adequada para viver?',
+      label: 'Como você considera a sua moradia hoje',
       type: Select,
       props: {
           name: 'considera_moradia_adequada',
-          options: handleValueLabelOption(yesOrNoOptions),
+          options: handleValueLabelOption(moradiaOptions),
       }
     },
     {
-      label: 'Como você define essa sua moradia de HOJE?',
+      label: 'Como você define essa sua moradia? (LER AS OPÇÕES) (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
           name: 'tipo_moradia',
+          isMulti: true,
           options: handleValueLabelOption(moradaHojeOptions),
       }
     },
@@ -78,7 +79,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
 ],
 [
     {
-      label: 'Selecione os utensílios que sua casa tem?',
+      label: 'Selecione os utensílios que sua casa tem. (Ler as opções)',
       type: Select,
       props: {
           name: 'utensilios_casa',
@@ -105,7 +106,7 @@ export const domicilioFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'De onde vem a água?',
+      label: 'De onde vem a água que vocês usam na casa?',
       type: Select,
       props: {
           name: 'origem_agua',
@@ -151,15 +152,16 @@ export const domicilioFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'Para onde vai o esgoto do banheiro, na sua casa?',
+      label: 'Para onde vai o esgoto do banheiro, na sua casa? (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
           name: 'forma_coleta_esgoto',
+          isMulti: true,
           options: handleValueLabelOption(coletaEsgotoCasaOptions),
       }
     },
     {
-      label: 'Para onde vai o lixo da casa? (PODE TER MAIS DE 1 RESPOSTA)',
+      label: 'O que é feito com o lixo da sua casa? Ler as opções. (PODE TER MAIS DE 1 RESPOSTA)',
       type: Select,
       props: {
           name: 'destino_lixo_da_residencia',

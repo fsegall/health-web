@@ -155,12 +155,13 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         const id = Math.floor(Math.random() * 1000)
         setResidentsGrid((prev: any) => [...prev, baseForm(id)])
     };
-    // const removeForm = (id: number) => {
-    //     setResidentsGrid((prev: any) => prev.filter((p: any) => p.id !== id));
-    // };
-    const [baseArraySize, setBaseArraySize] = useState<number>(0)
+
+    const [baseArraySize, setBaseArraySize] = useState<number>()
     function handleArrayForm(e: any) {
         e.preventDefault()
+        if (!baseArraySize) {
+          return
+        }
         const arraySize = baseArraySize
         setResidentsGrid([])
         for (let i = 0; i < arraySize; i++) {
@@ -187,10 +188,16 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
       let isDisabled = true
       const found = formDependencies?.[index]?.[obj?.[0]]
-      if (found) {
-        if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
-          isDisabled = false
-        }
+      if (found !== undefined && found !== null) {
+        obj?.[1]?.forEach((v: any) => {
+          if (v === '') {
+            if (found === '') {
+              isDisabled = false
+            }
+          } else if (v === found || found?.includes(v)) {
+            isDisabled = false
+          }
+        })
       }
       return isDisabled
     })
@@ -237,14 +244,35 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     setFormDependencies(currentForm)
   }
 
+  function updateBaseArraySize(value: any) {
+    let selectedValue = value?.replace(/[^0-9]/g, "")
+    if (selectedValue > 20) {
+      selectedValue = 20
+    }
+    setBaseArraySize(selectedValue)
+  }
+
+  function handleDemograficoFormLabel(index: number, element: FormHelperType): string {
+    const counterInfo = `Morador ${index+1}: ${counter}`
+    let label = element.label
+    if (index === 1) {
+      label = (element?.alternative_label || element.label)
+    } else if (index > 1) {
+      label = (element?.second_alternative_label || element?.alternative_label || element.label)
+    }
+    
+    const interviewerOnlyAditionalText = `${index === 0 ? '(pessoa entrevistada)' : ''}`
+    return `${counterInfo}. ${label} ${interviewerOnlyAditionalText}`
+  }
+
   return (
     <StyledForm
       ref={DemograficoFormRef}
       onSubmit={handleSubmit}
     >
       <section>
-        <Label>Quantas pessoas são moradores permanentes desta casa? (excluir pessoas de passagem, visitantes parentes ou não)</Label>
-        <Input name="total_moradores" type="number" onChange={(e) => setBaseArraySize(Number(e.target.value))} />
+        <Label>Quantas pessoas são moradoras permanentes desta casa? (excluir pessoas que estão apenas de passagem ou visitando, parentes ou não)</Label>
+        <Input name="total_moradores" type="number" value={baseArraySize} onChange={(e) => updateBaseArraySize(e?.target?.value)} />
         <Button type="button" onClick={handleArrayForm}>Gerar tabela</Button>
         {residentsGrid?.length > 0 && (
           <Label>
@@ -258,17 +286,20 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
               <span style={{ visibility: 'hidden' }}>
                 <Input name="id" value={index+1} type="number" />
               </span>
-              {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => (
-                <span key={`${elementIndex}:${element.label}`}>
-                  {incrementCounterUpToLength(quadroDemograficoHelper.length)}
-                  <Label>{`${counter}. ${element.label} ${index === 0 ? '(pessoa entrevistada)' : ''}`}</Label>
-                  <element.type
-                    {...element.props}
-                    isDisabled={element?.dependencies && handleDisabled(element, index+1)}
-                    onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.value)}
+              {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => {
+                return (
+                  <span key={`${elementIndex}:${element.label}`}>
+                    {incrementCounterUpToLength(quadroDemograficoHelper.length)}
+                    <Label>{handleDemograficoFormLabel(index, element)}</Label>
+                    <element.type
+                      {...element.props}
+                      isDisabled={element?.dependencies && handleDisabled(element, index+1)}
+                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target?.value)}
+                      onMount={(val: any) => element?.hasDependencies && handleDependencies(element, index+1, val)}
                     />
-                </span>
-                )
+                  </span>
+                  )
+              }
               )}
             </section>
           </Scope>
@@ -278,7 +309,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           <section key={sectionIndex}>
             {s?.map((element: FormHelperType, elementIndex: number) => (
               <span key={elementIndex}>
-                {elementIndex === 0 && <Label>Seção apenas para o respondente/chefe</Label>}
+                {elementIndex === 0 && <Label>Apenas para o respondente ou chefe</Label>}
                 {incrementCounter()}
                 <Label>{`${regularCounter}. ${element.label}`}</Label>
                 <element.type

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
+import { lighten, shade } from 'polished';
 
 export const Container = styled.div``;
 
@@ -118,8 +118,41 @@ font-size: 1.2rem;
 `;
 
 export const CheckboxContainer = styled.div`
-display: flex;
-align-items: center;
-gap: 2rem;
-margin-bottom: 1rem
+  display: grid;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem
+`;
+
+export const Select = styled.select`
+  background: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
+  border: 1px solid #fff;
+  padding: 6px;
+  min-width: 200px;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  & + div {
+    margin-top: 8px;
+  }
+  select {
+    color: #59748c;
+    flex: 1;
+    background: transparent;
+    border: 0;
+    transition: 0.3s;
+
+    &::placeholder {
+      color: '#666360';
+    }
+    &:focus {
+      border-bottom: 1px solid ${lighten(0.3, '#59748c')};
+      padding-bottom: 5px;
+    }
+  }
+  svg {
+    margin-right: 16px;
+  }
 `;

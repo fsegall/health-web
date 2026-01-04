@@ -12,6 +12,7 @@ import {
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 import IndigenousCard from './IndigenousCard';
 import { useToast } from '../../hooks/toast';
+import InterviewCard from './InterviewCard';
 
 
 const OfflineInterviews: React.FC = () => {
@@ -110,7 +111,11 @@ const OfflineInterviews: React.FC = () => {
                 {!isObjectEmpty(interviewsObject) &&
                   <>
                     <SectionTitle>Entrevistas Padrões:</SectionTitle>
-                    <div>{JSON.stringify(interviewsObject)}</div>
+                    <CardSection>
+                      {handleData(interviewsObject)?.map(([id, ind]: [string, any], index) => (
+                        <InterviewCard key={index} data={ind} index={index+1} id={id} />
+                      ))}
+                    </CardSection>
                   </>
                 }
                 {isObjectEmpty(interviewsObject) && isObjectEmpty(indigenousInterviewsObject) && <p style={{ marginTop: '20px' }}>Nenhuma entrevista encontrada</p>}

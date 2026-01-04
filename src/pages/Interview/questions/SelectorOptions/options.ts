@@ -102,24 +102,24 @@ export const ocupacao_profissional = [
     label: 'Agricultor(a) familiar ou produtor(a) rural',
   },
   {
-    value: 'trabalhador(a) rural com carteira assinada',
-    label: 'Trabalhador(a) rural com carteira assinada',
+    value: 'trabalhador(a) rural COM carteira assinada',
+    label: 'Trabalhador(a) rural COM carteira assinada',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada no comércio',
-    label: 'Trabalhador(a) em emprego com carteira assinada no comércio',
+    value: 'trabalhador(a) em emprego COM carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego COM carteira assinada no comércio',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada no indústria',
-    label: 'Trabalhador(a) em emprego com carteira assinada na indústria',
+    value: 'trabalhador(a) em emprego COM carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego COM carteira assinada na indústria',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada em outro serviço',
-    label: 'Trabalhador(a) em emprego com carteira assinada em outro serviço',
+    value: 'trabalhador(a) em emprego COM carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego COM carteira assinada em outro serviço',
   },
   {
-    value: 'trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
-    label: 'Trabalhador(a) em emprego com carteira assinada como empregado(a) doméstica',
+    value: 'trabalhador(a) em emprego COM carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego COM carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'funcionario(a) publico(a)',
@@ -127,23 +127,23 @@ export const ocupacao_profissional = [
   },
   {
     value: 'trabalhador(a) rural temporario (diarista, safrista etc.)',
-    label: 'Trabalhador(a) rural temporário sem carteira assinada (diarista, safrista etc.)',
+    label: 'Trabalhador(a) rural temporário SEM carteira assinada (diarista, safrista etc.)',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada no comércio',
-    label: 'Trabalhador(a) em emprego sem carteira assinada no comércio',
+    value: 'trabalhador(a) em emprego SEM carteira assinada no comércio',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada no comércio',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada no indústria',
-    label: 'Trabalhador(a) em emprego sem carteira assinada na indústria',
+    value: 'trabalhador(a) em emprego SEM carteira assinada no indústria',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada na indústria',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada em outro serviço',
-    label: 'Trabalhador(a) em emprego sem carteira assinada em outro serviço',
+    value: 'trabalhador(a) em emprego SEM carteira assinada em outro serviço',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada em outro serviço',
   },
   {
-    value: 'trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
-    label: 'Trabalhador(a) em emprego sem carteira assinada como empregado(a) doméstica',
+    value: 'trabalhador(a) em emprego SEM carteira assinada como empregado(a) doméstica',
+    label: 'Trabalhador(a) em emprego SEM carteira assinada como empregado(a) doméstica',
   },
   {
     value: 'estagiário(a) (remunerado)',
@@ -172,16 +172,20 @@ export const ocupacao_profissional = [
 
 export const local_de_trabalho = [
   {
-    value: 'em casa',
-    label: 'Em casa',
+    value: 'presencial',
+    label: 'Presencial',
   },
   {
-    value: 'apenas no local de trabalho ',
-    label: 'Apenas no local de trabalho ',
+    value: 'hibrido',
+    label: 'Híbrido (em casa / home office)',
   },
   {
-    value: 'trabalha em casa e também frequenta o local de trabalho (híbrido)',
-    label: 'Trabalha em casa e também frequenta o local de trabalho (híbrido)',
+    value: 'ambos',
+    label: 'Ambos',
+  },
+  {
+    value: 'nenhum',
+    label: 'Nenhum',
   },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
@@ -214,6 +218,7 @@ export const diagnostico_covid = [
 export const local_do_domicilio = [
   { value: 'urbano', label: 'Urbano' },
   { value: 'rural', label: 'Rural' },
+  { value: 'periurbana', label: 'Periurbana' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -317,7 +322,11 @@ export const tipo_de_residencia = [
     label: 'Casa de vila ou condomínio',
   },
   { value: 'oca-maloca', label: 'Oca ou  maloca' },
-  { value: 'precaria', label: ' Cômodos, barraco, cortiço ou cabeça de porco' },
+  { value: 'comodos', label: ' Cômodoso' },
+  { value: 'barraco', label: 'Barraco' },
+  { value: 'cortico', label: 'Cortiço' },
+  { value: 'cabeca_de_porco', label: 'Cabeça de porco' },
+  { value: 'sobrado', label: 'Sobrado / sobreposta' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
@@ -384,15 +393,25 @@ export const pessoas_convidadas = [
 
 export const faixa_de_renda = [
   { value: 'não teve renda', label: 'Não teve renda' },
-  { value: 'menos R$ 275,00 (menos de ¼ de  SM)', label: 'Menos R$ 275,00 (menos de ¼ de  SM)' },
-  { value: 'de R$ 275,00 a R$550,00 (entre ¼ e  ½  SM)', label: 'De R$ 275,00 a R$550, (entre ¼ e  ½  SM)' },
-  { value: 'de R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)', label: 'De R$ 551,00 a R$ 1100,00 (mais de 1/2 até 1 SM)' },
-  { value: 'mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)', label: 'Mais de 1100,00 a 2200,00 (mais de 1 até 2 SM)' },
-  { value: 'mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2200,00 a R$ 5.500,00 (mais de 2 até 5SM)' },
-  { value: 'mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)', label: 'Mais 5.500,00 a R$ 11.000,00 (mais de 5 até 10 SM)' },
-  { value: 'mais de 11.000,00(mais de 10 SM)', label: 'Mais de 11.000,00 (mais de 10 SM)' },
+  { value: 'menos R$ 353,00 (menos de ¼ de  SM)', label: 'Menos R$ 353,00 (menos de ¼ de  SM)' },
+  { value: 'de R$ 354,00 a R$ 706,00 (entre ¼ e  ½  SM)', label: 'De R$ 354,00 a R$ 706,00 (entre ¼ e  ½  SM)' },
+  { value: 'de R$ 707,00 a R$ 1.412,00 (mais de 1/2 até 1 SM)', label: 'De R$ 707,00 a R$ 1.412,00 (mais de 1/2 até 1 SM)' },
+  { value: 'mais de R$ 1.412,00 a 2.824,00 (mais de 1 até 2 SM)', label: 'Mais de R$ 1.412,00 a 2.824,00 (mais de 1 até 2 SM)' },
+  { value: 'mais de  R$ 2.824,00 a R$ 7.060,00 (mais de 2 até 5SM)', label: 'Mais de  R$ 2.824,00 a R$ 7.060,00 (mais de 2 até 5SM)' },
+  { value: 'mais R$ 7.060,00 a R$ 14.120,00 (mais de 5 até 10 SM)', label: 'Mais R$ 7.060,00 a R$ 14.120,00 (mais de 5 até 10 SM)' },
+  { value: 'mais de R$ 14.120,00 (mais de 10 SM)', label: 'Mais de R$ 14.120,00 (mais de 10 SM)' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
+
+export const situacao_de_emprego_e_renda = [
+  { value: 'Houve perda de emprego/trabalho de algum membro da casa', label: 'Houve perda de emprego/trabalho de algum membro da casa' },
+  { value: 'Houve redução da renda domiciliar (dos moradores da casa)', label: 'Houve redução da renda domiciliar (dos moradores da casa)' },
+  { value: 'Houve necessidade de ajudar financeiramente algum parente ou amigo', label: 'Houve necessidade de ajudar financeiramente algum parente ou amigo' },
+  { value: 'Houve endividamento de moradores', label: 'Houve endividamento de moradores' },
+  { value: 'Precisou fazer corte de gastos com despesas essenciais', label: 'Precisou fazer corte de gastos com despesas essenciais' },
+  { value: 'Precisou fazer corte de gastos em despesas não essenciais', label: 'Precisou fazer corte de gastos em despesas não essenciais' },
+  { value: 'ns-nr', label: 'NS/NR' },
+]
 
 // pnaeOptions
 
@@ -470,6 +489,14 @@ export const tipo_de_ajuda = [
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
+export const produz_alimento = [
+  { value: 'sim_horta', label: 'Sim, horta/roça' },
+  { value: 'sim_animais', label: 'Sim, crio animais' },
+  { value: 'os_dois', label: 'Sim, os dois' },
+  { value: 'nenhum', label: 'Não, nenhum' },
+  { value: 'ns-nr', label: 'NS/NR' },
+]
+
 // divisao_alimento
 
 export const divisao_alimento = [
@@ -536,17 +563,16 @@ export const gastos_alimentacao = [
 
 export const vacina = [
   { value: 'Sim, apenas a 1ª dose', label: 'Sim, apenas a 1ª dose' },
-  { value: 'Sim, as duas doses', label: 'Sim, as duas doses' },
-  { value: 'Sim as duas doses mais o reforço', label: 'Sim as duas doses mais o reforço' },
-  { value: 'Sim, a vacina de dose única', label: 'Sim, a vacina de dose única' },
-  { value: 'Não tomei nenhuma dose da vacina', label: 'Não tomei nenhuma dose da vacina' },
+  { value: 'Sim, 2 ou mais doses', label: 'Sim, 2 ou mais doses' },
+  { value: 'Sim, mas não me lembro quantas doses', label: 'Sim, mas não me lembro quantas doses' },
+  { value: 'Não tomei nenhuma dose', label: 'Não tomei nenhuma dose' },
   { value: 'ns-nr', label: 'NS/NR' },
 ];
 
 //P12 nao_tomou_vacina
 
 export const nao_tomou_vacina = [
-  { value: 'Não tomei a vacina pois não tem a que eu quero tomar', label: 'Não tomei a vacina pois não tem a que eu quero tomar' },
+  { value: 'Não tomei a vacina pois não tinha a que eu queria tomar', label: 'Não tomei a vacina pois não tinha a que eu queria tomar' },
   { value: 'Não tomei a vacina pois não quis', label: 'Não tomei a vacina pois não quis' },
   { value: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)', label: 'Não tomei, pois meu médico disse que não posso tomar (gestantes, por doença crônica e outras)' },
   { value: 'não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)', label: 'Não tomei por orientação de outra pessoa (padre, pastor, líder comunitário, outros)' },
@@ -584,6 +610,7 @@ export const motivo_procura_servico_saude = [
   { label: 'Foi atendido', value: 'foi_atendido' },
   { label: 'Foi agendado para outro dia / outro local', value: 'agendado_para_outro_dia_ou_local' },
   { label: 'Não foi atendido', value: 'nao_foi_atendido' },
+  { value: 'ns-nr', label: 'NS/NR' },
 ]
 
 //P16 - motivo_nao_atendimento_servico_saude
@@ -608,6 +635,7 @@ export const doenca_ultimos_12_meses = [
   { label: 'Problemas respiratórios (Resfriado / gripe / sinusite / asma / bronquite / pneumonia)', value: 'problemas_respiratorios' },
   { label: 'Problemas cardiovasculares ( Pressão alta / doença do coração / AVC ou derrame)', value: 'problema_cardiovasculares' },
   { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental', value: 'problemas_de_saude_mental' },
+  { label: 'Nenhuma', value: 'nenhuma' },
   { label: 'Outro', value: 'outro' },
 ]
 
@@ -621,6 +649,7 @@ export const diagnostico_doenca_ultimos_12_meses = [
   { label: 'Diabetes', value: 'diabetes' },
   { label: 'Câncer (inclusive quimioterapia / radioterapia)', value: 'cancer' },
   { label: 'Saúde mental (Depressão / bipolaridade /esquizofrenia / Transtorno de ansiedade / outro problema de saúde mental)', value: '' },
+  { label: 'Nenhuma', value: 'nenhuma' },
   { label: 'Outro', value: 'outro' },
 ]
 

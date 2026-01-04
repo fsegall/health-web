@@ -1,5 +1,6 @@
 
 export type ProjectType = 'default' | 'indigenous'
+export type InterviewerAgeType = 'greater-than-18' | 'between-14-and-18'
 
 export interface ProjectTypeOptions {
     value: ProjectType;
@@ -34,7 +35,7 @@ export const projectTypeOptions: ProjectTypeOptions[] = [
     },
 ]
 
-const useGetProjectsTypes = (type: ProjectType): {
+const useGetProjectsTypes = (type: ProjectType, interviewedPersonAge: InterviewerAgeType): {
     options: ProjectTypeOptions[];
     acceptInfo: ProjectConfirmationInfo;
     interviewPath: string
@@ -45,25 +46,28 @@ const useGetProjectsTypes = (type: ProjectType): {
         'indigenous': 'indigenous-interview'
     }
 
+    const indigenousDescription = {
+        'greater-than-18': [
+            'Termo de Consentimento Livre e Esclarecido (TCLE) para pessoa com mais de 18 anos de idade.'
+        ],
+        'between-14-and-18': [
+            'Termo de Assentimento Livre e Esclarecido (TALE para pessoa entre 14 e 18 anos de idade.'
+        ],
+    }
+
     const acceptInfo: AcceptInfoType = {
         'default': {
             title: 'TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN',
             description: [
-                'Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, em uma pesquisa nacional. Serão algumas perguntas sobre você e seus familiares; outras serão referentes às condições sobre a casa, o trabalho, a saúde e a alimentação.',
-                'Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar as ações de enfrentamento da pandemia e de seus efeitos sobre a alimentação dos brasileiros.',
+                'Você está sendo convidado(a) a participar, como voluntário(a) de nossa pesquisa, por meio de entrevista. Esta tem por objetivo avaliar a insegurança alimentar e nutricional no seu domicílio. Serão algumas perguntas sobre você e seus familiares; outras serão referentes às condições sobre a casa, o trabalho, a saúde e a alimentação.',
+                'Todas as informações que você fornecer serão confidenciais e os resultados que serão divulgados não conterão quaisquer dados pessoais de identificação. A qualquer momento você poderá solicitar maiores esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em respondê-la, sua participação contribuirá para melhorar o diagnóstico dos grupos específicos da população brasileira e, consequentemente, lutar por ações que garantam alimentação suficiente e saudável para as famílias.',
             ],
             contact: 'Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com'
         }
-    , 'indigenous': {
+        , 'indigenous': {
             title: 'TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO – APLICATIVO VIGISAN',
-            description: [
-                'Você está sendo convidado (a) a participar, como voluntário (a) de nossa pesquisa, por meio de entrevista. Este projeto tem por objetivo avaliar a insegurança alimentar durante a pandemia do novo coronavírus ou Covid-19, E APÓS A PANDEMIA, ENTRE POVOS INDÍGENAS NO BRASIL, ESTAMOS COMEÇANDO AQUI NO MATO GROSSO DO SUL.',
-                'As perguntas serão sobre algumas informações sobre você e seus familiares, a respeito da casa, do trabalho, da saúde e da alimentação',
-                'Todas as informações que você fornecer serão confidenciais (VÃO SER MANTIDAS EM SEGREDO). Os resultados que serão divulgados vão mostrar todas as entrevistas juntas, por isso não vão conter dados pessoais de identificação',
-                'A qualquer momento da entrevista você pode solicitar esclarecimentos, recusar-se a participar ou desistir da entrevista. Mas, se concordar em participar da pesquisa sua colaboração vai contribuir para melhorar as ações de garantia de alimentação suficiente e saudável para todos os povos indígenas no Brasil, principalmente o povo de comunidades indígenas do Mato grosso do Sul',
-                'A equipe do projeto manterá um canal de informação, pela disponibilização de e-mail dos pesquisadores, sendo os dados divulgados em ações da Rede PENSSAN. O entrevistador que está em contato com você tem todos os contatos necessários. ',
-            ],
-            contact: 'Se durante a pesquisa você tiver alguma dúvida, ou quiser solicitar algum esclarecimento, poderá entrar em contato com pesquisadora que coordena o projeto (Professora Verônica Gronau Luz ou com Lucas Luís de Faria, ou mesmo com o Comitê de Ética em Pesquisa (CEP) nos contatos a seguir: veronicaluz@ufgd.edu.br (19) 98328-6734. / lucasluisf@outlook.com (67) 99337-2767.'
+            description: indigenousDescription[interviewedPersonAge],
+            contact: 'Em caso de dúvidas sobre a pesquisa, você poderá entrar em contato com a Rede Brasileira de Pesquisa em Soberania e Segurança Alimentar e Nutricional (RedePenSSAN) através do e-mail: rbpssan@gmail.com.'
         }
     }
     return {

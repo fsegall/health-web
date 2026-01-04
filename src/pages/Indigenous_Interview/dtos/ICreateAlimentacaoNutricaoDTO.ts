@@ -4,9 +4,9 @@ export default interface ICreateAlimentacaoNutricaoDTO {
 
   possui_moradores_menores_de_16?: string;
   preocupação_nao_conseguir_comida?: string;
-  nao_comeu_comida_cultura?: string;
-  nao_comeu_comida_saudavel?: string;
-  faltou_comida?: string;
+  comeu_sempre_comida_da_cultura?: string;
+  comeram_sempre_comida_saudavel?: string;
+  teve_comida_todos_os_dias?: string;
   dia_todo_sem_comer?: string;
   comeu_menos_para_deixar_comida_crianca?: string;
   crianca_comeu_menos?: string;
@@ -17,6 +17,7 @@ export default interface ICreateAlimentacaoNutricaoDTO {
   alimentos_da_horta?: string[];
   alimentos_da_horta_outros?: string;
   frutiferas_nas_proximidades: string;
+  frutiferas_nas_proximidades_quais?: string;
   coleta_castanhas_cocos_frutas: string[];
   funcao_cultivo_horta?: string[];
   origem_semente_plantio?: string[];

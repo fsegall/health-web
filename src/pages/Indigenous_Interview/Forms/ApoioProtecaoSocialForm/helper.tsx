@@ -71,7 +71,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
       }
     },
     {
-      label: 'No último mês, você ou alguém da sua família recebe dinheiro de: Programa Bolsa Família',
+      label: 'No último mês, você ou alguém da sua família recebeu o dinheiro do: Programa Bolsa Família?',
       type: Select,
       props: {
           name: 'bolsa_familia_auxilio_brasil',
@@ -180,7 +180,7 @@ export const apoioProtecaoSocialFormHelper: FormHelperType[][] = [
   ],
   [
     {
-      label: 'Pensão morte cônjuge',
+      label: 'Pensão por morte cônjuge',
       type: Select,
       props: {
           name: 'pensao_morte',

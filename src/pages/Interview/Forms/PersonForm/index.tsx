@@ -54,7 +54,7 @@ interface PersonFormProps {
 const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false }) => {
 
   const [vaccine, setVaccine] = useState<OptionTypeBase | undefined | null>({});
-  const [motivoProcuraServicoSaude, setMotivoProcuraServicoSaude] = useState<any[]>([]);
+  const [motivoProcuraServicoSaude, setMotivoProcuraServicoSaude] = useState<string>('');
 
   const { user, token } = useAuth();
 
@@ -161,22 +161,22 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
       onSubmit={handlePersonSubmit}
     >
       <section>
-        <Label>P1 - Qual o seu nome completo?</Label>
+        <Label>1 - Qual o seu nome completo?</Label>
         <Input icon={FiUser} placeholder="Nome Completo" name="nome" />
-        <Label>P2 - Qual a sua idade?</Label>
+        <Label>2 - Qual a sua idade?</Label>
         <Input name="idade" type="number" min="16" max="110" />
 
-        <Label>P3 - Qual o seu sexo?</Label>
+        <Label>3 - Qual o seu sexo?</Label>
         <Select name="sexo" options={genero} />
 
-        <Label>P4 - Como você define sua raça ou cor?</Label>
+        <Label>4 - Como você define sua raça ou cor?</Label>
         <Select name="raca_cor" options={raca_cor} />
-        <Label>P5 - Você sabe ler e escrever?</Label>
+        <Label>5 - Você sabe ler e escrever?</Label>
         <Select name="ler_escrever" options={yesOrNoOptions} />
 
-        <Label>P6 - Até que série (grau) você frequentou na escola?</Label>
+        <Label>6 - Até que série (grau) você frequentou na escola?</Label>
         <Select name="escolaridade" options={escolaridade} />
-        <Label>P7 - Qual a situação de trabalho?</Label>
+        <Label>7 - Qual a sua situação de trabalho? (LER AS OPÇÕES)</Label>
         <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
@@ -184,21 +184,21 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         </section>
 
         <section>
-        <Label>P8 - Qual a sua ocupação profissional?</Label>
+        <Label>8 - Qual a sua ocupação profissional?</Label>
         <Select
           name="ocupacao"
           options={ocupacao_profissional}
         />
 
-        <Label>P9 - Neste momento qual é o seu local de trabalho?</Label>
+        <Label>9 - Neste momento qual é a forma de trabalho?</Label>
         <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
         />
-        <Label>P10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
+        <Label>10 - Você já teve diagnóstico positivo para o novo coronavírus (ou Covid-19)?</Label>
         <Select name="diagnostico_covid" options={diagnostico_covid} />
         <Label>
-          P11 - Você já tomou a vacina da Covid-19?
+          11 - Você já tomou a vacina da Covid-19?
         </Label>
         <Select
           name="vacina"
@@ -207,7 +207,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         />
 
         <Label>
-          P12 - Por que você não tomou a vacina da Covid-19?
+          12 - Por que você não tomou a vacina da Covid-19?
         </Label>
         <Select
           name="nao_tomou_vacina"
@@ -216,7 +216,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         />
 
         <Label>
-          P13 - De um modo geral, como você considera seu estado de saúde?
+          13 - De um modo geral, como você considera seu estado de saúde?
         </Label>
         <Select
           name="estado_de_saude"
@@ -226,36 +226,36 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
 
         <section>
         <Label>
-          P14 - Quando está doente ou precisando de atendimento de saúde costuma procurar:
+          14 - Quando está doente ou precisando de atendimento de saúde, o que você procura com mais frequência? (LER AS OPÇÕES)
         </Label>
         <Select
           name="local_de_procura_do_servico_de_saude"
           options={local_de_procura_do_servico_de_saude}
-          isMulti={true}
+          isMulti={false}
         />
 
         <Label>
-          P15 - O que ocorreu quando procurou o serviço de saúde?
+          15 - O que geralmente ocorre quando procura o serviço de saúde?
         </Label>
         <Select
           name="motivo_procura_servico_saude"
           options={motivo_procura_servico_saude}
-          isMulti={true}
-          onChange={(selectedOption: any) => setMotivoProcuraServicoSaude(selectedOption)}
+          isMulti={false}
+          onChange={(selectedOption: any) => setMotivoProcuraServicoSaude(selectedOption?.value)}
         />
 
         <Label>
-          P16 - Caso não tenha sido atendido(a), qual foi o motivo?
+          16 - Caso não tenha sido atendido(a), qual foi o motivo?
         </Label>
         <Select
           name="motivo_nao_atendimento_servico_saude"
           options={motivo_nao_atendimento_servico_saude}
           isMulti={true}
-          isDisabled={motivoProcuraServicoSaude?.find((m: any) => m.value === 'nao_foi_atendido') ? false : true}
+          isDisabled={motivoProcuraServicoSaude === 'nao_foi_atendido' ? false : true}
         />
 
         <Label>
-          P17 - Nos últimos 12 meses apresentou alguma dessas doenças?
+          17 - Nos últimos 12 meses apresentou alguma dessas doenças?
         </Label>
         <Select
           name="doenca_ultimos_12_meses"
@@ -264,7 +264,7 @@ const PersonForm: React.FC<PersonFormProps> = ({ dispatch, offline, initialValue
         />
 
         <Label>
-          P18 - Doenças específicas: Nos últimos 12 meses recebeu diagnóstico de alguma dessas doenças?
+          18 - Doenças específicas: Nos últimos 12 meses recebeu diagnóstico de alguma dessas doenças?
         </Label>
         <Select
           name="diagnostico_doenca_ultimos_12_meses"

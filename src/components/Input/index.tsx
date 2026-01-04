@@ -14,9 +14,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   icon?: React.ComponentType<IconBaseProps>;
   isDisabled?: boolean;
+  onMount?: (inputValue: any) => void;
 }
 
-const Input: React.FC<InputProps> = ({ name, icon: Icon, isDisabled = false, ...rest }) => {
+const Input: React.FC<InputProps> = ({ name, icon: Icon, isDisabled = false, onMount, ...rest }) => {
   const InputRef = useRef<HTMLInputElement>(null);
   const [isFilled, setIsFilled] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -39,6 +40,28 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, isDisabled = false, ...
     });
   }, [fieldName, registerField]);
 
+  useEffect(() => {
+    if (isDisabled) {
+      if (InputRef && InputRef.current) {
+        InputRef.current.value = ''
+      }
+    }
+  }, [isDisabled])
+
+  const onInputMount = useCallback(() => {
+    if (InputRef.current) {
+      const inputValue = InputRef.current.value || "";
+      if (onMount) {
+        onMount(inputValue);
+      }
+    }
+  }, [onMount]);
+
+
+  useEffect(() => {
+    onInputMount();
+  }, [onInputMount]);
+
   return (
     <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>
       {Icon && (
@@ -48,6 +71,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, isDisabled = false, ...
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         defaultValue={defaultValue}
+        style={{ opacity: isDisabled ? '0.5' : 1 }}
         ref={InputRef}
         disabled={isDisabled}
         {...rest}

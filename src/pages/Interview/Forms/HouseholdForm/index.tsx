@@ -50,6 +50,8 @@ import {
   causa_morte_ultimos_12m,
   frequentam_creche,
   contribuicao_morte_ultimos_12m,
+  produz_alimento,
+  situacao_de_emprego_e_renda,
 } from '../../questions/SelectorOptions/options';
 
 import api from '../../../../services/api';
@@ -226,6 +228,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       pessoas_convidadas: initialValues?.pessoas_convidadas,
       renda_familiar: initialValues?.renda_familiar,
       faixa_de_renda: initialValues?.faixa_de_renda,
+      situacao_de_emprego_e_renda: initialValues?.situacao_de_emprego_e_renda,
       menores_6_anos: initialValues?.menores_6_anos,
       frequentam_creche: initialValues?.frequentam_creche,
       cadastro_unico: initialValues?.cadastro_unico,
@@ -245,7 +248,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       agua_producao_alimentos: initialValues?.agua_producao_alimentos,
       alimento_para_venda: initialValues?.alimento_para_venda,
       divisao_alimento: initialValues?.divisao_alimento,
-      dificuldade_venda: initialValues?.dificuldade_venda,
       nao_vendeu: initialValues?.nao_vendeu,
       preocupacao_alimentos: initialValues?.preocupacao_alimentos,
       alimentos_acabaram: initialValues?.alimentos_acabaram,
@@ -269,14 +271,6 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       perfil_de_compra: initialValues?.perfil_de_compra,
       mercado: initialValues?.mercado,
       gastos_alimentacao: initialValues?.gastos_alimentacao,
-
-      perda_de_emprego: initialValues?.perda_de_emprego ? 'perda_de_emprego' : '',
-      reducao_de_salario: initialValues?.reducao_de_salario ? 'reducao_de_salario' : '',
-      ajuda_financeira: initialValues?.ajuda_financeira ? 'ajuda_financeira' : '',
-      divida: initialValues?.divida ? 'divida' : '',
-      corte_de_gastos: initialValues?.corte_de_gastos ? 'corte_de_gastos' : '',
-      corte_de_gastos_nao_essenciais: initialValues?.corte_de_gastos_nao_essenciais ? 'corte_de_gastos_nao_essenciais' : '',
-      ns_nr_trabalho: initialValues?.ns_nr_trabalho ? 'ns_nr_trabalho' : '',
 
       feijao: initialValues?.feijao ? 'feijao' : '',
       arroz: initialValues?.arroz ? 'arroz' : '',
@@ -307,30 +301,30 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
     <StyledForm ref={HouseholdFormRef} onSubmit={handleHouseholdSubmit} >
       <Section>
         <Label>
-          <span>D1 - Localização do domicílio</span>
+          <span>1 - Localização do domicílio</span>
           <Select name="local_do_domicilio" options={local_do_domicilio} />
         </Label>
 
-        <Label>D2 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
+        <Label>2 - A moradia está localizada em território de povos e comunidades tradicionais?</Label>
         <Select
           name="povos_tradicionais"
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setTraditional(selectedOption)}
         />
-        <Label>D3 - Qual comunidade tradicional ou povos?</Label>
+        <Label>3 - Qual comunidade tradicional ou povos?</Label>
         <Select
           name="qual_povo_tradicional"
           options={qual_povo_tradicional}
           isDisabled={traditional?.value === 'true' ? false : true}
         />
-        <Label>D4 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
+        <Label>4 - Você é a pessoa de referência da sua casa (chefe da casa)?</Label>
         <Select
           name="pessoa_de_referencia"
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setMainPerson(selectedOption)}
         />
 
-        <Label>D5 - Qual a idade da pessoa de referência?</Label>
+        <Label>5 - Qual a idade da pessoa de referência?</Label>
 
         {mainPerson?.value === 'false' ?
           (
@@ -346,79 +340,80 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
             </>
           ) : null}
 
-        <Label>D6 - Qual o sexo da pessoa de referência?</Label>
+        <Label>6 - Qual o sexo da pessoa de referência?</Label>
         <Select
           name="sexo_pessoa_de_referencia"
           options={genero}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D7 - Como você define a raça ou cor da pessoa de referência?</Label>
+        <Label>7 - Como você define a raça ou cor da pessoa de referência?</Label>
         <Select name="raca_cor" options={raca_cor} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D8 - A pessoa de referência sabe ler e escrever?</Label>
+        <Label>8 - A pessoa de referência sabe ler e escrever?</Label>
         <Select name="ler_escrever" options={yesOrNoOptions} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D9 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
+        <Label>9 - Até que série (grau) escolar frequentou a pessoa de referência?</Label>
         <Select name="escolaridade" options={escolaridade} isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false} />
 
-        <Label>D10 - Qual a situação de trabalho da pessoa de referência?</Label>
+        <Label>10 - Qual a situação de trabalho da pessoa de referência?</Label>
         <Select
           name="situacao_de_trabalho"
           options={situacao_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D11 - Qual a ocupação da pessoa de referência?</Label>
+        <Label>11 - Qual a ocupação da pessoa de referência?</Label>
         <Select
           name="ocupacao_profissional"
           options={ocupacao_profissional}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D12 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
+        <Label>12 - Neste momento qual é o local de trabalho da pessoa de referência?</Label>
         <Select
           name="local_de_trabalho"
           options={local_de_trabalho}
           isDisabled={mainPerson?.value === 'true' || mainPerson?.value === 'ns-nr' ? true : false}
         />
 
-        <Label>D13 - Algum morador de sua casa teve diagnóstico positivo de COVID-19?</Label>
+        <Label>13 - Algum morador de sua casa teve diagnóstico positivo de COVID-19?</Label>
         <Select
           name="diagnostico_covid_positivo" //TODO:alinhar_com_raul-diagnostico_covid_positivo
           options={yesOrNoOptions}
         />
 
-        <Label>D14 - Algum morador(a) da sua casa ainda tem problema de saúde (sequela) decorrente da COVID-19?</Label>
+        <Label>14 - Algum morador(a) da sua casa ainda tem problema de saúde (sequela) decorrente da COVID-19?</Label>
         <Select
           name="sequelas_covid" //TODO:alinhar_com_raul-sequelas_covid
           options={yesOrNoOptions}
         />
 
-        <Label>D15 - Vocês perderam alguém da família (morreu alguém) nos últimos 12 meses?</Label>
+        <Label>15 - Você perdeu uma ou mais pessoas da família (morreu alguém) nos últimos 12 meses?</Label>
         <Select
           name="morte_ultimos_12_meses" //TODO:alinhar_com_raul-morte_ultimos_12_meses
           options={yesOrNoOptions}
           onChange={(selectedOption: any) => setMorte(selectedOption)}
         />
 
-        <Label>D16 - Qual a causa da morte?</Label>
+        <Label>16 - Quais as causas da morte?</Label>
         <Select
           name="causa_morte_ultimos_12_meses" //TODO:alinhar_com_raul-causa_morte_ultimos_12_meses
           options={causa_morte_ultimos_12m}
           isDisabled={morte?.value !== 'true'}
+          isMulti={true}
         />
 
-        <Label>D17 - Essa pessoa contribuia com a renda familiar?</Label>
+        <Label>17 - Essa(s) pessoa(s) contribuía(m) com a renda familiar?</Label>
         <Select
           name="contribuicao_morte_ultimos_12_meses" //TODO:alinhar_com_raul-contribuicao_morte_ultimos_12_meses
           options={contribuicao_morte_ultimos_12m}
           isDisabled={morte?.value !== 'true'}
         />
 
-        <Label>D18 - Tipo de residência</Label>
+        <Label>18 - Tipo de residência</Label>
         <Select name="tipo_de_residencia" options={tipo_de_residencia} />
-        <Label>D19 - Qual o número de cômodos na sua residência incluindo banheiros?</Label>
+        <Label>19 - Qual o número de cômodos na sua residência incluindo banheiros?</Label>
         <Input
           placeholder="Número de cômodos"
           type="number"
@@ -427,14 +422,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           name="numero_de_comodos"
           defaultValue="1"
         />
-        <Label>D20 - Qual o material de construção das paredes externas da sua residência?</Label>
+        <Label>20 - Qual o material de construção das paredes externas da sua residência?</Label>
         <Select name="material_de_construcao" options={material_de_construcao} />
-        <Label>D21 - Tem acesso à água potável na sua sua residência?</Label>
+        <Label>21 - Tem acesso à água potável na sua sua residência?</Label>
         <Select name="agua_potavel" options={agua_potavel} />
 
-        <Label>D22 - Como é feita a coleta de esgoto na sua residência?</Label>
+        <Label>22 - Como é feita a coleta de esgoto na sua residência?</Label>
         <Select name="esgoto" options={esgoto} />
-        <Label>D23 - Número de pessoas no domicílio</Label>
+        <Label>23 - Número de pessoas no domicílio</Label>
         <Input
           placeholder="Número de pessoas"
           type="number"
@@ -459,7 +454,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           (
             <>
               <Label>Número de pessoas por faixa de idade:</Label>
-              <Label>D25 - Quantos moradores com até 5 anos</Label>
+              <Label>25 - Quantos moradores com até 5 anos</Label>
               <Input
                 placeholder="Menos de 5 anos - Digitar número"
                 name="cinco_anos_ou_mais"
@@ -468,7 +463,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
                 type="number"
 
               />
-              <Label>D26 - Quantos moradores entre 6 e 18 anos</Label>
+              <Label>26 - Quantos moradores entre 6 e 18 anos</Label>
               <Input
                 placeholder="Entre 6 e 18 anos - Digitar número"
                 name="entre_6_e_18"
@@ -477,7 +472,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
                 type="number"
 
               />
-              <Label>D27 - Quantos moradores entre 19 e 59 anos</Label>
+              <Label>27 - Quantos moradores entre 19 e 59 anos</Label>
               <Input
                 placeholder="Entre 19 e 59 anos - Digitar número"
                 name="entre_19_e_59"
@@ -486,7 +481,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
                 type="number"
 
               />
-              <Label>D28 - Quantos moradores 60 anos ou mais</Label>
+              <Label>28 - Quantos moradores 60 anos ou mais</Label>
               <Input
                 placeholder="Com 60 anos ou mais - Digitar número"
                 name="sessenta_anos_ou_mais"
@@ -517,7 +512,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
             options={[{
               id: 'nao_sabe_renda',
               value: 'true',
-              label: 'D30 - Não sei informar',
+              label: '30 - Não sei informar',
             }]}
             onChange={() => setIncome(!income)}
           />
@@ -527,7 +522,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
           <Input
             icon={FiDollarSign}
-            placeholder="D31 - Renda familiar"
+            placeholder="31 - Renda familiar"
             name="renda_familiar"
             type="number"
             min="1"
@@ -538,65 +533,26 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         <Label><strong></strong></Label>
 
         <Label>
-          D32 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
+          32 - Das faixas de renda abaixo, qual aquela que mais se aproxima da renda de sua família: (ATENÇÃO: LER TODAS AS ALTERNATIVAS E MARCAR APENAS UMA)?
         </Label>
         <Select
           name="faixa_de_renda"
           options={faixa_de_renda}
         />
 
+        <Label>
+          33 - Nos últimos 3 meses, qual é a situação de emprego e renda na sua casa?
+        </Label>
+        <Select
+          name="situacao_de_emprego_e_renda"
+          options={situacao_de_emprego_e_renda}
+          isMulti={true}
+        />
 
-        <CheckBoxContainer>
-          <Label>
-            <span>D33 - Nos últimos 3 meses, qual é a situação de emprego e renda na sua casa?</span>
-          </Label>
-
-          <CheckboxInput
-
-            name="perda_de_emprego"
-            options={[{ id: 'perda_de_emprego', value: 'true', label: 'Houve perda de emprego/trabalho de algum membro da casa' }]}
-          />
-
-          <CheckboxInput
-
-            name="reducao_de_salario"
-            options={[{ id: 'reducao_de_salario', value: 'true', label: 'Houve redução da renda domiciliar (dos moradores da casa)' }]}
-          />
-
-          <CheckboxInput
-
-            name="ajuda_financeira"
-            options={[{ id: 'ajuda_financeira', value: 'true', label: 'Houve necessidade de ajudar financeiramente algum parente ou amigo' }]}
-          />
-
-          <CheckboxInput
-
-            name="divida"
-            options={[{ id: 'divida', value: 'true', label: 'Houve endividamento de moradores' }]}
-          />
-
-          <CheckboxInput
-
-            name="corte_de_gastos"
-            options={[{ id: 'corte_de_gastos', value: 'true', label: 'Precisou fazer corte de gastos com despesas essenciais' }]}
-          />
-
-          <CheckboxInput
-
-            name="corte_de_gastos_nao_essenciais"
-            options={[{ id: 'corte_de_gastos_nao_essenciais', value: 'true', label: 'Precisou fazer corte de gastos em despesas não essenciais' }]}
-          />
-
-          <CheckboxInput
-            name="ns_nr_trabalho"
-            options={[{ id: 'ns_nr_trabalho', value: 'true', label: 'Não sabe ou não quis responder' }]}
-          />
-
-        </CheckBoxContainer>
         <Label><strong>Enfrentamento da INSAN e questões alimentares</strong></Label>
 
         <Label>
-          D34 - Tem crianças menores de 6 anos?
+          34 - Tem crianças menores de 6 anos?
         </Label>
         <Select
           name="menores_6_anos" //TODO:alinhar_com_raul-menores_6_anos
@@ -605,7 +561,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D35 - Se sim, as crianças frequentam a creche?
+          35 - Se sim, as crianças frequentam a creche?
         </Label>
         <Select
           name="frequentam_creche"
@@ -614,7 +570,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D36 - Nos últimos três meses, você ou alguém da sua casa estava registrado(a) no <b>cadastro único do governo</b>?
+          36 - Nos últimos três meses, você ou alguém da sua casa estava registrado(a) no <b>cadastro único do governo</b>?
         </Label>
         <Select
           name="cadastro_unico"
@@ -622,7 +578,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do Programa <b>Bolsa Família</b> que é pago pela Caixa Econômica Federal?
+          37 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do Programa <b>Bolsa Família</b> que é pago pela Caixa Econômica Federal?
         </Label>
         <Select
           name="bolsa_familia"
@@ -630,7 +586,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D38 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
+          38 - Nos últimos três meses, você ou alguém da sua casa recebeu pagamento do programa <b>BPC</b>  (Benefício de Prestação Continuada)?
         </Label>
         <Select
           name="bpc"
@@ -638,7 +594,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D39 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
+          39 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>pensão por morte do(a) cônjuge</b>?
         </Label>
         <Select
           name="pensao"
@@ -646,7 +602,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D40 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
+          40 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>auxílio reclusão</b>?
         </Label>
         <Select
           name="auxilio_reclusao"
@@ -654,7 +610,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D41 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
+          41 - Nos últimos três meses, você ou alguém da sua casa recebeu <b>cesta de alimentos</b>?
         </Label>
         <Select
           name="cesta_de_alimentos"
@@ -662,7 +618,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D42 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares</b> para fazer refeições?
+          42 - Nos últimos três meses, você ou alguém da sua casa <b>frequentou restaurantes populares ou “Bom Prato</b> para fazer refeições?
         </Label>
         <Select
           name="restaurantes_populares"
@@ -670,7 +626,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou o vale-gás</b>?
+          43 - Nos últimos três meses, você ou alguém da sua casa <b>solicitou o vale-gás</b>?
         </Label>
 
         <Select
@@ -681,7 +637,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           }}
         />
 
-        <Label>D44 - Quantas vezes você recebeu o vale-gás?</Label>
+        <Label>44 - Quantas vezes você recebeu o vale-gás?</Label>
 
         <Select
           name="auxilio_vezes"
@@ -690,7 +646,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do seu estado, da prefeitura, de outra instituição, associação, igreja, amigos, parentes ou outros?
+          45 - Nos últimos três meses, você ou alguém da sua casa recebeu ajuda do seu estado, da prefeitura, de outra instituição, associação, igreja, amigos, parentes ou outros?
         </Label>
 
         <Select
@@ -700,7 +656,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D46 - Caso você ou alguém da sua casa tenha recebido ajuda <b>o que recebeu</b>?
+          46 - Caso você ou alguém da sua casa tenha recebido ajuda <b>o que recebeu</b>?
         </Label>
 
         <Select
@@ -710,7 +666,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D47 - Nos últimos três meses, para conseguir alimentos, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
+          47 - Nos últimos três meses, para conseguir alimentos, você ou outra pessoa que mora na sua casa, teve que fazer alguma coisa que causou <b>vergonha, tristeza ou constrangimento</b>?
         </Label>
 
         <Select
@@ -719,42 +675,42 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D48 - Na sua casa você <b>produz algum tipo de alimento</b> vegetal ou animal?
+          48 - Na casa você produz algum tipo de comida (roça/horta) ou cria animais?
         </Label>
 
         <Select
           name="produz_alimento"
-          options={yesOrNoOptions}
+          options={produz_alimento}
           onChange={(selectedOptions: any) => setHomegrown(selectedOptions)}
         />
 
-        <Label>D49 - Este domicílio tem água suficiente para animais (dessedentação)?</Label>
+        <Label>49 - Se tem animais, este domicílio tem água suficiente para matar a sede dos animais?</Label>
         <Select
           name="agua_animais"
           options={yesOrNoOptions}
-          isDisabled={homegrown?.value === 'false' ? true : false}
+          isDisabled={(homegrown?.value === 'sim_animais' || homegrown?.value === 'os_dois') ? false : true}
         />
 
-        <Label>D50 - Este domicílio tem água suficiente para produção de alimentos?</Label>
+        <Label>50 - Se produz alimentos, esse domicílio tem água suficiente para a irrigação?</Label>
         <Select
           name="agua_producao_alimentos"
           options={yesOrNoOptions}
-          isDisabled={homegrown?.value === 'false' ? true : false}
+          isDisabled={(homegrown?.value === 'sim_horta' || homegrown?.value === 'os_dois') ? false : true}
         />
 
         <Label>
-          D51 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
+          51 - Na sua casa você produz algum desses alimentos <b>para venda</b>?
         </Label>
 
         <Select
           name="alimento_para_venda"
           options={yesOrNoOptions}
           onChange={(selectedOptions: any) => setProduce(selectedOptions)}
-          isDisabled={homegrown?.value === 'true' ? false : true}
+          isDisabled={(homegrown?.value === 'sim_horta' || homegrown?.value === 'os_dois') ? false : true}
         />
 
         <Label>
-          D52 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
+          52 - Na sua casa como você divide <b>o alimento que produz para venda</b>?
         </Label>
 
         <Select
@@ -764,17 +720,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D53 - Nos últimos 3 meses, <b>enfrentou dificuldade para comercialização devido à pandemia</b>?
-        </Label>
-
-        <Select
-          name="dificuldade_venda"
-          options={yesOrNoOptions}
-          isDisabled={produce?.value === 'true' ? false : true}
-        />
-
-        <Label>
-          D54 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar por conta da pandemia?
+          53 - Nos últimos 3 meses, você <b>precisou consumir, doar, descartar ou fazer outro uso</b> do alimento que pretendia comercializar?
         </Label>
 
         <Select
@@ -788,7 +734,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
       <Section>
         <Label><strong>Perguntas da Escala de Segurança Alimentar e Nutricional</strong></Label>
         <Label>
-          D55 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
+          54 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO TIVERAM A <b>PREOCUPAÇÃO DE QUE OS ALIMENTOS ACABASSEM</b> ANTES DE PODER COMPRAR OU RECEBER MAIS COMIDA?
         </Label>
         <Select
           name="preocupacao_alimentos"
@@ -796,7 +742,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           onChange={(selectedOption: any) => setPreoAlimentos(selectedOption)}
         />
         <Label>
-          D56 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
+          55 - NOS ÚLTIMOS TRÊS MESES, <b>OS ALIMENTOS ACABARAM</b> ANTES QUE OS MORADORES DO SEU DOMICÍLIO TIVESSEM DINHEIRO PARA COMPRAR MAIS COMIDA?
         </Label>
         <Select
           name="alimentos_acabaram"
@@ -804,7 +750,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           onChange={(selectedOption: any) => setAcabAlimentos(selectedOption)}
         />
         <Label>
-          D57 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO <b>FICARAM SEM DINHEIRO PARA TER UMA ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
+          56 - NOS ÚLTIMOS TRÊS MESES OS MORADORES DO SEU DOMICÍLIO <b>FICARAM SEM DINHEIRO PARA TER UMA ALIMENTAÇÃO SAUDÁVEL E VARIADA</b>?
         </Label>
         <Select
           name="alimentos_saudaveis"
@@ -812,7 +758,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           onChange={(selectedOption: any) => setSaudAlimentos(selectedOption)}
         />
         <Label>
-          D58 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO <b>COMERAM APENAS ALGUNS POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
+          57 - NOS ÚLTIMOS TRÊS MESES, OS MORADORES DO SEU DOMICÍLIO <b>COMERAM APENAS ALGUNS POUCOS TIPOS DE ALIMENTOS</b> QUE AINDA TINHAM PORQUE O DINHEIRO ACABOU?
         </Label>
         <Select
           name="alimentos_poucos_tipos"
@@ -820,7 +766,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={preoAlimentos?.value === 'false' && acabAlimentos?.value === 'false' && saudAlimentos?.value === 'false' ? true : false}
         />
         <Label>
-          D59 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          58 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>DEIXOU DE FAZER ALGUMA REFEIÇÃO</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="refeicoes_adulto"
@@ -828,7 +774,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={preoAlimentos?.value === 'false' && acabAlimentos?.value === 'false' && saudAlimentos?.value === 'false' ? true : false}
         />
         <Label>
-          D60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          59 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>COMEU MENOS DO QUE ACHOU QUE DEVIA</b>, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adulto_comeu_menos"
@@ -836,7 +782,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={preoAlimentos?.value === 'false' && acabAlimentos?.value === 'false' && saudAlimentos?.value === 'false' ? true : false}
         />
         <Label>
-          D61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          60 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS <b>SENTIU FOME</b>, MAS NÃO COMEU, PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adulto_fome"
@@ -844,7 +790,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
           isDisabled={preoAlimentos?.value === 'false' && acabAlimentos?.value === 'false' && saudAlimentos?.value === 'false' ? true : false}
         />
         <Label>
-          D62 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
+          61 - NOS ÚLTIMOS TRÊS MESES, ALGUM MORADOR DE 18 ANOS OU MAIS FEZ <b>APENAS UMA REFEIÇÃO AO DIA OU FICOU UM DIA INTEIRO SEM COMER</b> PORQUE NÃO HAVIA DINHEIRO PARA COMPRAR COMIDA?
         </Label>
         <Select
           name="adulto_uma_refeicao"
@@ -853,14 +799,14 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
         <Label><strong></strong></Label>
         <Label>
-          D63 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
+          62 - Nos últimos 3 meses, na maioria das vezes <b>de que forma você e as pessoas da sua casa</b> estão adquirindo os alimentos?
         </Label>
         <Select
           name="como_adquiriu_comida"
           options={como_adquiriu_comida}
         />
         <Label>
-          D64 - Nos últimos 3 meses, <b>observou alguma mudança nos preços</b> dos alimentos que costuma comprar?
+          63 - Nos últimos 3 meses, <b>observou alguma mudança nos preços</b> dos alimentos que costuma comprar?
         </Label>
         <Select
           name="alteracao_preco_comida"
@@ -869,7 +815,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D65 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
+          64 - A mudança alterou <b>o seu perfil de compra</b> dos alimentos?
         </Label>
         <Select
           name="perfil_de_compra"
@@ -878,7 +824,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D66 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
+          65 - Nos últimos 3 meses, <b>qual foi o tipo de estabelecimento</b> que você ou alguém da sua casa mais frequentou para fazer as compras?
         </Label>
         <Select
           name="mercado"
@@ -886,7 +832,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
         />
 
         <Label>
-          D67 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
+          66 - Nos últimos 3 meses, considera que <b>as despesas/gastos semanais</b> com alimentação mudaram na sua casa?
         </Label>
         <Select
           name="gastos_alimentacao"
@@ -895,7 +841,7 @@ const HouseholdForm: React.FC<HouseholdFormProps> = ({ dispatch, offline, isEdit
 
         <Label><strong>Agora queremos saber mais sobre a sua alimentação</strong></Label>
 
-        <Label>D68 - Ontem você comeu:</Label>
+        <Label>67 - Ontem você comeu:</Label>
         <CheckBoxContainer>
           <CheckboxInput
 

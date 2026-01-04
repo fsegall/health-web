@@ -1,29 +1,31 @@
 export default interface ICreateSaudeDoencaDTO {
   id?: string;
-  condicao_de_saude: string //select
-  morador_com_desabilidade: string //select
-  local_permite_viver_com_saude: string //select
-  morador_exposto_veneno_lavoura: string; //select
-  // depende anterior "sim"
-  doencas_contato_veneno_lavoura?: string //select
-  // depende anterior "sim"
-  motivo_doencas_contato_veneno_lavoura?: string[] //select
+  condicao_de_saude: string
+  morador_com_desabilidade: string[]
+  local_permite_viver_com_saude: string
+  morador_exposto_veneno_lavoura: string[];
 
-  acidentes: string[]; //select
+  doencas_contato_veneno_lavoura?: string
 
-  ocorrencia_de_ameacas: string; //select
-  // dependa da anterior
-  ocorrencia_violencia_fisica: string; //select
-  local_ocorrencia_violencia_fisica?: string[]; //multi-select
+  motivo_doencas_contato_veneno_lavoura?: string[]
+
+  acidentes: string[];
+
+  ocorrencia_de_ameacas: string[];
+
+  ocorrencia_violencia_fisica: string[];
 
   locais_impedido_de_entrar: string[];
-  lista_diagnosticos: string[]; //multi-select
+  lista_diagnosticos: string[];
   lista_diagnosticos_cronico_remedio?: string;
+
+  lista_diagnosticos_doencas_infecciosas: string[];
+  lista_diagnosticos_doencas_infecciosas_remedio?: string;
 
   lista_diagnosticos_outros: string[];
   lista_diagnosticos_outros_remedio?: string;
 
-  //
+
   moradora_entre_13_e_45_anos: string;
   mulheres_e_gestacao?: string[];
 
@@ -40,14 +42,14 @@ export default interface ICreateSaudeDoencaDTO {
   acesso_a_equipe_de_saude: string;
   profissionais_acesso_a_equipe_de_saude?: string;
 
-  morador_internado: string; //select
+  morador_internado: string;
 
   possui_morador_menor_ou_igual_a_5_anos: string;
-  possui_morador_menor_ou_igual_a_5_anos_desnutricao: string; //select
-  possui_morador_crianca_diarreia: string; //select
-  possui_morador_crianca_pneumonia: string; //select
+  possui_morador_menor_ou_igual_a_5_anos_desnutricao: string;
+  possui_morador_crianca_diarreia: string;
+  possui_morador_crianca_pneumonia: string;
 
-  morador_problemas_bebidas_alcoolicas: string; //select
-  fuma_cigarro: string; //select
-  morador_problemas_uso_drogas: string; //select
+  morador_problemas_bebidas_alcoolicas: string;
+  fuma_cigarro: string;
+  morador_problemas_uso_drogas: string;
 }
