@@ -7,7 +7,9 @@ import {
     OfflineButton,
     Container,
     CardSection,
-    SectionTitle
+    SectionTitle,
+    SubHeader,
+    ListTitle,
 } from './styles';
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 import IndigenousCard from './IndigenousCard';
@@ -95,7 +97,9 @@ const OfflineInterviews: React.FC = () => {
     }
 
     return (<Container>
-                <h1>Entrevistas Offline não Submetidas</h1>
+                <SubHeader>
+                    <ListTitle>Entrevistas Offline não Submetidas</ListTitle>
+                </SubHeader>
                 <OfflineButton onClick={handleOfflineInterviews} disabled={loading}>Enviar</OfflineButton>
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
                 {!isObjectEmpty(indigenousInterviewsObject) &&

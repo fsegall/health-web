@@ -5,6 +5,26 @@ export const Container = styled.div`
     text-align: center;
     padding: 30px;
 `;
+
+export const SubHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    margin: auto;
+  }
+  @media (min-width: 768px) {
+    padding: 0 25px;
+  }
+`;
+
+export const ListTitle = styled.h2`
+  padding: 8px 0;
+  color: #59748c;
+  span {
+    color: #ff9000;
+  }
+`;
 export const OfflineButton = styled.button`
     background: #59748c;
     border-radius: 4px;
