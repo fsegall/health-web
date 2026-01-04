@@ -7,7 +7,6 @@ import {
     OfflineButton,
     Container,
     CardSection,
-    SectionTitle,
     SubHeader,
     ListTitle,
 } from './styles';
