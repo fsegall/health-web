@@ -218,7 +218,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
   }
 
   useEffect(() => {
-    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && AlimentacaoNutricaoFormRef.current) {
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'motivo_morador_nao_faz_horta',
         'alimentos_da_horta',
@@ -229,7 +229,11 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
         'lista_animais_de_criacao_alimentacao_ou_venda',
         'alimentos_consumidos_dia_anterior',
       ]);
-      AlimentacaoNutricaoFormRef.current?.setData(normalizedValues);
+      setTimeout(() => {
+        if (AlimentacaoNutricaoFormRef.current) {
+          AlimentacaoNutricaoFormRef.current.setData(normalizedValues);
+        }
+      }, 100);
     }
   }, [isEditForm, initialValues]);
 

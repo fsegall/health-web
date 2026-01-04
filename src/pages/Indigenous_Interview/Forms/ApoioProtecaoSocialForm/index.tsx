@@ -183,11 +183,15 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
   }
 
   useEffect(() => {
-    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && ApoioProtecaoSocialFormRef.current) {
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'recebeu_cesta_alimentos',
       ]);
-      ApoioProtecaoSocialFormRef.current?.setData(normalizedValues);
+      setTimeout(() => {
+        if (ApoioProtecaoSocialFormRef.current) {
+          ApoioProtecaoSocialFormRef.current.setData(normalizedValues);
+        }
+      }, 100);
     }
   }, [isEditForm, initialValues]);
 

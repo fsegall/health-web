@@ -30,14 +30,35 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         return ref.state.value.value;
       },
       setValue: (ref: any, value) => {
-        // Garante que o ref e options estão disponíveis antes de processar
-        if (!ref || !ref.props || !ref.props.options) {
+        // Se value é null ou undefined, limpa o campo (mesmo sem options)
+        if (!value) {
+          if (ref && ref.state) {
+            ref.state.value = rest.isMulti ? [] : null;
+          }
           return;
         }
         
-        // Se value é null ou undefined, limpa o campo
-        if (!value) {
-          ref.state.value = rest.isMulti ? [] : null;
+        // Se options não estão disponíveis, tenta novamente após um pequeno delay
+        if (!ref || !ref.props || !ref.props.options || !ref.props.options.length) {
+          // Retry após as options estarem disponíveis
+          setTimeout(() => {
+            if (ref && ref.props && ref.props.options && ref.props.options.length) {
+              // Re-executa a lógica de setValue
+              if (rest.isMulti && Array.isArray(value)) {
+                const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
+                if (ref.state) ref.state.value = selectedOptions;
+              } else if (rest.isMulti && typeof value === 'string') {
+                const splittedValue = value.split(',');
+                if (splittedValue.length > 0) {
+                  const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
+                  if (ref.state) ref.state.value = selectedOptions;
+                }
+              } else if (!rest.isMulti) {
+                const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
+                if (ref.state) ref.state.value = selectedOption || null;
+              }
+            }
+          }, 50);
           return;
         }
         
@@ -61,11 +82,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         // Para select simples, busca a opção
         if (!rest.isMulti) {
           const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
-          if (selectedOption) {
-            ref.state.value = selectedOption;
-          } else {
-            ref.state.value = null;
-          }
+          ref.state.value = selectedOption || null;
         }
       }
     });

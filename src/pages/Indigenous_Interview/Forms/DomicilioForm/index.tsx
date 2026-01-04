@@ -163,7 +163,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
   }
 
   useEffect(() => {
-    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && DomiciliosFormRef.current) {
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'tipo_moradia',
         'utensilios_casa',
@@ -172,7 +172,11 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         'forma_coleta_esgoto',
         'destino_lixo_da_residencia',
       ]);
-      DomiciliosFormRef.current?.setData(normalizedValues);
+      setTimeout(() => {
+        if (DomiciliosFormRef.current) {
+          DomiciliosFormRef.current.setData(normalizedValues);
+        }
+      }, 100);
     }
   }, [isEditForm, initialValues]);
   return (

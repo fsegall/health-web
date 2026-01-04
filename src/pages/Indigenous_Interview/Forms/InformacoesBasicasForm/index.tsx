@@ -139,12 +139,16 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
 
 
   useEffect(() => {
-    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && InformacoesBasicasFormRef.current) {
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'responsavel_documentos',
       ]);
-      
-      InformacoesBasicasFormRef.current?.setData(normalizedValues);
+      // Usa setTimeout para garantir que os campos estejam registrados
+      setTimeout(() => {
+        if (InformacoesBasicasFormRef.current) {
+          InformacoesBasicasFormRef.current.setData(normalizedValues);
+        }
+      }, 100);
     }
   }, [isEditForm, initialValues]);
 

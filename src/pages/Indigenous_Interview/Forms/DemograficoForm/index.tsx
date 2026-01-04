@@ -154,12 +154,17 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted]);
 
     useEffect(() => {
-        if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+        if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && DemograficoFormRef.current) {
             const normalizedValues = normalizeMultiSelectFields(initialValues, [
                 'povo_etnia',
                 'situacao_no_trabalho',
             ]);
-            DemograficoFormRef.current?.setData(normalizedValues);
+            // Usa setTimeout para garantir que os campos estejam registrados
+            setTimeout(() => {
+                if (DemograficoFormRef.current) {
+                    DemograficoFormRef.current.setData(normalizedValues);
+                }
+            }, 100);
         }
     }, [isEditForm, initialValues]);
     const baseForm = (id: number) => {

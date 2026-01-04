@@ -165,7 +165,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
   }
 
   useEffect(() => {
-    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && SaudeDoencaFormRef.current) {
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'morador_com_desabilidade',
         'morador_exposto_veneno_lavoura',
@@ -182,7 +182,11 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         'cuidadores_para_aldeia_sem_posto_de_saude',
         'profissionais_acesso_a_equipe_de_saude',
       ]);
-      SaudeDoencaFormRef.current?.setData(normalizedValues);
+      setTimeout(() => {
+        if (SaudeDoencaFormRef.current) {
+          SaudeDoencaFormRef.current.setData(normalizedValues);
+        }
+      }, 100);
     }
   }, [isEditForm, initialValues]);
   return (
