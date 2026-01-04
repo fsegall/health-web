@@ -8,7 +8,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import { useHistory } from 'react-router-dom';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
@@ -66,6 +66,14 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         ...data,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'recebeu_cesta_alimentos',
+        ]));
+      }
+      
       const validatedData = await ApoioProtecaoSocialValidation.validate(values, {
         abortEarly: false,
       });

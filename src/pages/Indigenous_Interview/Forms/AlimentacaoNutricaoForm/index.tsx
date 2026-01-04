@@ -5,7 +5,7 @@ import { StyledForm, Label } from '../form-styles';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 
 import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
 import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
@@ -57,6 +57,21 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
           ...data,
           entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         };
+        
+        // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+        if (isEditForm && initialValues) {
+          Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+            'motivo_morador_nao_faz_horta',
+            'alimentos_da_horta',
+            'coleta_castanhas_cocos_frutas',
+            'funcao_cultivo_horta',
+            'origem_semente_plantio',
+            'lista_dificuldades_com_horta',
+            'lista_animais_de_criacao_alimentacao_ou_venda',
+            'alimentos_consumidos_dia_anterior',
+          ]));
+        }
+        
         const validatedData = await AlimentacaoNutricaoValidation.validate(
           values,
           {

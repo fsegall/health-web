@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react';
-import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -55,6 +55,12 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
     }
     try {
       InformacoesBasicasFormRef.current?.setErrors({});
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(data, preserveMultiSelectValues(data, initialValues, ['responsavel_documentos']));
+      }
+      
       const validatedData = await InformacoesBasicasValidation.validate(data, {
         abortEarly: false,
       });

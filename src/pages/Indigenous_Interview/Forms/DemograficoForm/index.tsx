@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles, Scope } from '@unform/core';
 import {
@@ -70,6 +70,14 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         ...data,
         moradores: data?.moradores,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
+      }
+
+        // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'povo_etnia',
+          'situacao_no_trabalho',
+        ]));
       }
 
       const validatedData = await DemograficoValidation.validate(values, {

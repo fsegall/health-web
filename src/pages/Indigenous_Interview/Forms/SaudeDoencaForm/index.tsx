@@ -9,7 +9,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 
 import { saudeDoencaFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
@@ -57,6 +57,27 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         ...data,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'morador_com_desabilidade',
+          'morador_exposto_veneno_lavoura',
+          'motivo_doencas_contato_veneno_lavoura',
+          'acidentes',
+          'ocorrencia_de_ameacas',
+          'ocorrencia_violencia_fisica',
+          'locais_impedido_de_entrar',
+          'lista_diagnosticos',
+          'lista_diagnosticos_doencas_infecciosas',
+          'lista_diagnosticos_outros',
+          'mulheres_e_gestacao',
+          'crianca_ate_6_meses_outros_alimentos',
+          'cuidadores_para_aldeia_sem_posto_de_saude',
+          'profissionais_acesso_a_equipe_de_saude',
+        ]));
+      }
+      
       const validatedData = await SaudeDoencaValidation.validate(values, {
         abortEarly: false,
       });

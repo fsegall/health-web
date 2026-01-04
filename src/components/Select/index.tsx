@@ -18,16 +18,21 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       name: fieldName,
       ref: selectRef.current,
       getValue: (ref: any) => {
+        if (!ref || !ref.state) {
+          return rest.isMulti ? [] : '';
+        }
         if (rest.isMulti) {
-          if (!ref.state.value) {
+          if (!ref.state.value || (Array.isArray(ref.state.value) && ref.state.value.length === 0)) {
             return [];
           }
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
+          // Garante que retorna array de valores mesmo se value for array de objetos
+          return ref.state.value.map((option: OptionTypeBase) => option?.value || option);
         }
         if (!ref.state.value) {
           return '';
         }
-        return ref.state.value.value;
+        // Garante que retorna o valor mesmo se value for objeto
+        return ref.state.value?.value || ref.state.value || '';
       },
       setValue: (ref: any, value) => {
         // Se value é null ou undefined, limpa o campo (mesmo sem options)
@@ -40,23 +45,39 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         
         // Se options não estão disponíveis, tenta novamente após um pequeno delay
         if (!ref || !ref.props || !ref.props.options || !ref.props.options.length) {
-          // Retry após as options estarem disponíveis
-          setTimeout(() => {
+          // Retry após as options estarem disponíveis - tenta várias vezes
+          let retryCount = 0;
+          const maxRetries = 10; // Tenta até 500ms (10 * 50ms)
+          const retryInterval = setInterval(() => {
+            retryCount++;
             if (ref && ref.props && ref.props.options && ref.props.options.length) {
+              clearInterval(retryInterval);
               // Re-executa a lógica de setValue
               if (rest.isMulti && Array.isArray(value)) {
                 const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
-                if (ref.state) ref.state.value = selectedOptions;
+                if (ref.state) {
+                  ref.state.value = selectedOptions;
+                  console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
+                }
               } else if (rest.isMulti && typeof value === 'string') {
-                const splittedValue = value.split(',');
+                const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
                 if (splittedValue.length > 0) {
                   const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
-                  if (ref.state) ref.state.value = selectedOptions;
+                  if (ref.state) {
+                    ref.state.value = selectedOptions;
+                    console.log(`[Select ${fieldName}] Valor setado após retry (string->array):`, selectedOptions);
+                  }
                 }
               } else if (!rest.isMulti) {
                 const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
-                if (ref.state) ref.state.value = selectedOption || null;
+                if (ref.state) {
+                  ref.state.value = selectedOption || null;
+                  console.log(`[Select ${fieldName}] Valor setado após retry (single):`, selectedOption);
+                }
               }
+            } else if (retryCount >= maxRetries) {
+              clearInterval(retryInterval);
+              console.warn(`[Select ${fieldName}] Não foi possível setar valor após ${maxRetries} tentativas. Options não disponíveis.`);
             }
           }, 50);
           return;
@@ -66,15 +87,17 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         if (rest.isMulti && Array.isArray(value)) {
           const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
           ref.state.value = selectedOptions;
+          console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
           return;
         }
         
         // Se é multi-select e value é string, faz split
-        if (rest.isMulti && typeof value === 'string') {
-          const splittedValue = value.split(',');
+        if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
+          const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
           if (splittedValue.length > 0) {
             const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
             ref.state.value = selectedOptions;
+            console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
           }
           return;
         }
@@ -83,6 +106,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         if (!rest.isMulti) {
           const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
           ref.state.value = selectedOption || null;
+          console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
         }
       }
     });
