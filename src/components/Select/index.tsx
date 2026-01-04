@@ -24,11 +24,19 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         const selectedOptions = options.filter((v: any) => valueArray.includes(String(v.value)));
         if (selectedOptions.length > 0) {
           ref.state.value = selectedOptions;
+          // Força atualização do ReactSelect
+          if (ref.setState) {
+            ref.setState({ value: selectedOptions });
+          }
         }
       } else {
         const selectedOption = options.find((v: any) => String(v.value) === String(defaultValue));
         if (selectedOption) {
           ref.state.value = selectedOption;
+          // Força atualização do ReactSelect
+          if (ref.setState) {
+            ref.setState({ value: selectedOption });
+          }
         }
       }
     }
@@ -78,6 +86,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
                 const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
                 if (ref.state) {
                   ref.state.value = selectedOptions;
+                  // Força atualização do ReactSelect
+                  if (ref.setState) {
+                    ref.setState({ value: selectedOptions });
+                  }
                   console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
                 }
               } else if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
@@ -86,6 +98,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
                   const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
                   if (ref.state) {
                     ref.state.value = selectedOptions;
+                    // Força atualização do ReactSelect
+                    if (ref.setState) {
+                      ref.setState({ value: selectedOptions });
+                    }
                     console.log(`[Select ${fieldName}] Valor setado após retry (string->array):`, selectedOptions);
                   }
                 }
@@ -93,6 +109,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
                 const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
                 if (ref.state) {
                   ref.state.value = selectedOption || null;
+                  // Força atualização do ReactSelect
+                  if (ref.setState) {
+                    ref.setState({ value: selectedOption || null });
+                  }
                   console.log(`[Select ${fieldName}] Valor setado após retry (single):`, selectedOption);
                 }
               }
@@ -107,8 +127,14 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         // Se é multi-select e value é array, processa diretamente
         if (rest.isMulti && Array.isArray(value)) {
           const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
-          ref.state.value = selectedOptions;
-          console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
+          if (ref.state) {
+            ref.state.value = selectedOptions;
+            // Força atualização do ReactSelect chamando setState se disponível
+            if (ref.setState) {
+              ref.setState({ value: selectedOptions });
+            }
+            console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
+          }
           return;
         }
         
@@ -117,8 +143,14 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
           const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
           if (splittedValue.length > 0) {
             const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
-            ref.state.value = selectedOptions;
-            console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
+            if (ref.state) {
+              ref.state.value = selectedOptions;
+              // Força atualização do ReactSelect chamando setState se disponível
+              if (ref.setState) {
+                ref.setState({ value: selectedOptions });
+              }
+              console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
+            }
           }
           return;
         }
@@ -126,8 +158,14 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         // Para select simples, busca a opção
         if (!rest.isMulti) {
           const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
-          ref.state.value = selectedOption || null;
-          console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
+          if (ref.state) {
+            ref.state.value = selectedOption || null;
+            // Força atualização do ReactSelect chamando setState se disponível
+            if (ref.setState) {
+              ref.setState({ value: selectedOption || null });
+            }
+            console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
+          }
         }
       }
     });
@@ -141,6 +179,9 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
     }
   };
 
+  // Cria um valor controlado se temos um defaultValue ou initialValue
+  const controlledValue = defaultValue !== undefined ? defaultValue : (initialValue !== undefined ? initialValue : undefined);
+  
   return (
     <ReactSelect
       ref={selectRef}
@@ -148,6 +189,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       isDisabled={isDisabled}
       placeholder="Selecione"
       classNamePrefix="react-select"
+      value={controlledValue}
       {...rest}
       onChange={handleChange}
     />
