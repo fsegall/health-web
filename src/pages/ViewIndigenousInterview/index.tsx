@@ -29,53 +29,6 @@ const ViewIndigenousInterview: React.FC = () => {
   const [interview, setInterview] = useState<any>(null);
   const [canEdit, setCanEdit] = useState(false);
 
-  useEffect(() => {
-    async function loadInterview() {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Tenta buscar da API primeiro (entrevista online)
-        try {
-          const response = await api.get(`/indigenous-interviews/v2/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setInterview(response.data);
-          checkEditPermission(response.data);
-        } catch (apiError) {
-          // Se não encontrou na API, tenta buscar do localStorage (offline)
-          const offlineInterviews: { [key: string]: any } = JSON.parse(
-            localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}'
-          );
-
-          if (offlineInterviews[id]) {
-            setInterview(offlineInterviews[id]);
-            checkEditPermission(offlineInterviews[id]);
-          } else {
-            const error = apiError as any;
-            throw new Error(error?.response?.data?.message || 'Entrevista não encontrada');
-          }
-        }
-      } catch (err) {
-        const error = err as Error;
-        setError(error.message || 'Erro ao carregar entrevista');
-        addToast({
-          type: 'error',
-          title: 'Erro',
-          description: error.message || 'Não foi possível carregar a entrevista',
-        });
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    if (id && token) {
-      loadInterview();
-    }
-  }, [id, token, addToast, checkEditPermission]);
-
   const checkEditPermission = React.useCallback((interviewData: any) => {
     if (!user) {
       setCanEdit(false);
