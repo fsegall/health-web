@@ -9,7 +9,7 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, onChange, ...rest }) => {
   const selectRef = useRef(null);
   const { fieldName, registerField } = useField(name);
 
@@ -43,6 +43,15 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       }
     });
   }, [fieldName, registerField, rest.isMulti]);
+
+  // Garante que o onChange personalizado seja chamado quando o valor mudar
+  const handleChange = (selectedOption: any, actionMeta: any) => {
+    // Chama o onChange customizado se existir
+    if (onChange) {
+      onChange(selectedOption, actionMeta);
+    }
+  };
+
   return (
     <ReactSelect
       ref={selectRef}
@@ -51,6 +60,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       placeholder="Selecione"
       classNamePrefix="react-select"
       {...rest}
+      onChange={handleChange}
     />
   );
 };

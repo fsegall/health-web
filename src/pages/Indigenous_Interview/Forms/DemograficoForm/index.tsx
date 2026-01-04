@@ -250,7 +250,13 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     }
 
   function handleRegularDependencies(element: FormHelperType, value: any) {
-    console.log('[handleRegularDependencies] Campo:', element.props.name, 'Valor:', value);
+    // Evita atualização desnecessária se o valor não mudou
+    const currentValue = formDependencies[element.props.name];
+    if (currentValue === value) {
+      console.log('[handleRegularDependencies] Valor não mudou, ignorando atualização. Campo:', element.props.name, 'Valor:', value);
+      return;
+    }
+    console.log('[handleRegularDependencies] Campo:', element.props.name, 'Valor:', value, 'Valor anterior:', currentValue);
     let currentForm: any = {
       ...formDependencies,
       [element.props.name]: value
@@ -325,14 +331,24 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                         let value = e?.target?.value;
                         // Aplica máscara de data se for o campo data_nascimento
                         if (isDateField && value !== undefined && value !== null) {
-                          value = maskDate(value);
-                          e.target.value = value;
+                          const maskedValue = maskDate(value);
+                          if (maskedValue !== value) {
+                            value = maskedValue;
+                            e.target.value = maskedValue;
+                          }
                         }
-                        if (element?.hasDependencies) {
+                        // Evita loop infinito - só atualiza se o valor mudou
+                        const currentValue = formDependencies?.[index+1]?.[element.props.name];
+                        if (value !== currentValue && element?.hasDependencies) {
+                          console.log('[onChange Input] Campo:', element.props.name, 'Valor:', value);
                           handleDependencies(element, index+1, value);
                         }
                       }}
-                      onMount={(val: any) => element?.hasDependencies && handleDependencies(element, index+1, val)}
+                      onMount={(val: any) => {
+                        // onMount é chamado apenas uma vez na montagem do componente
+                        // Não atualizamos dependências aqui para evitar loops
+                        // As dependências serão atualizadas apenas no onChange
+                      }}
                     />
                   </span>
                   )
@@ -353,19 +369,21 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                   {...element.props}
                   isDisabled={element?.dependencies && handleRegularDisabled(element)}
                   onChange={(e: any) => {
-                    console.log('[onChange] Campo:', element.props.name, 'Evento completo:', e, 'e?.value:', e?.value, 'e tipo:', typeof e, 'hasDependencies:', element?.hasDependencies, 'isMulti:', element?.props?.isMulti);
+                    console.log('[onChange Select] Campo:', element.props.name, 'Evento completo:', e, 'e?.value:', e?.value, 'e tipo:', typeof e, 'hasDependencies:', element?.hasDependencies, 'isMulti:', element?.props?.isMulti);
                     // react-select passa o objeto da opção no onChange: {value: "...", label: "..."}
                     // Para campos não multi, e será um objeto ou null
                     // Para campos multi, e será um array de objetos
                     if (element?.props?.isMulti !== true) {
+                      // e pode ser null quando o usuário limpa a seleção
+                      const value = e === null ? null : (e?.value || e || null);
+                      console.log('[onChange Select] Valor extraído:', value, 'Tipo:', typeof value);
                       if (element?.hasDependencies) {
-                        const value = e?.value || e || null;
-                        console.log('[onChange] Chamando handleRegularDependencies com valor:', value);
+                        console.log('[onChange Select] Chamando handleRegularDependencies com valor:', value);
                         handleRegularDependencies(element, value)
                       }
                     } else {
                       if (element?.hasDependencies) {
-                        console.log('[onChange] Chamando handleArrayDependencies com valor:', e);
+                        console.log('[onChange Select] Chamando handleArrayDependencies com valor:', e);
                         handleArrayDependencies(element, e)
                       }
                     }
