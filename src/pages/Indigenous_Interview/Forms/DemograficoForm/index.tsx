@@ -185,6 +185,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   const [formDependencies, setFormDependencies] = useState<any>({})
 
   function handleDependencies(element: FormHelperType, index: number, value: any) {
+    console.log('[handleDependencies] Morador index:', index, 'Campo:', element.props.name, 'Valor:', value);
     let currentForm: any = {
       ...formDependencies,
       [index]: {
@@ -192,6 +193,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         [element.props.name]: value
       }
     }
+    console.log('[handleDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
@@ -225,45 +227,52 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
       if (!dependencies) {
         return false
       }
+      console.log('[handleRegularDisabled] Campo:', element.props.name, 'Dependencies:', dependencies, 'formDependencies atual:', formDependencies);
       const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
         let isDisabled = true
         const found = formDependencies[obj?.[0]]
-        if (found) {
+        console.log('[handleRegularDisabled] Verificando dependência:', obj?.[0], 'Valor encontrado:', found, 'Valores permitidos:', obj?.[1]);
+        if (found !== undefined && found !== null && found !== '') {
           // Se found é um array (campo multi-select), verifica se algum valor do array está na lista permitida
           if (Array.isArray(found)) {
-            if (obj?.[1]?.find((v: any) => found.includes(String(v)))) {
+            if (found.length > 0 && obj?.[1]?.some((v: any) => found.includes(String(v)))) {
               isDisabled = false
+              console.log('[handleRegularDisabled] Array match encontrado! Campo será habilitado');
             }
           } else {
             // Se found é um valor simples, verifica se está na lista permitida
-            if (obj?.[1]?.find((v: any) => (v === found || String(v) === String(found)))) {
+            if (obj?.[1]?.some((v: any) => String(v) === String(found))) {
               isDisabled = false
+              console.log('[handleRegularDisabled] Match encontrado! Campo será habilitado');
             }
           }
         }
+        console.log('[handleRegularDisabled] Resultado da validação:', isDisabled ? 'desabilitado' : 'habilitado');
         return isDisabled
       })
-      if (allDisabledValidations?.every(v => v === false)) {
-        return false
-      } else {
-        return true
-      }
+      const finalResult = allDisabledValidations?.every(v => v === false) ? false : true
+      console.log('[handleRegularDisabled] Resultado final para', element.props.name, ':', finalResult ? 'desabilitado' : 'habilitado');
+      return finalResult
     }
 
   function handleRegularDependencies(element: FormHelperType, value: any) {
+    console.log('[handleRegularDependencies] Campo:', element.props.name, 'Valor:', value);
     let currentForm: any = {
       ...formDependencies,
       [element.props.name]: value
     }
+    console.log('[handleRegularDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
   function handleArrayDependencies(element: FormHelperType, value: any) {
     const arrayOfOptions = value?.map((v: any) => v?.value)
+    console.log('[handleArrayDependencies] Campo:', element.props.name, 'Valor original:', value, 'Array extraído:', arrayOfOptions);
     let currentForm: any = {
       ...formDependencies,
       [element.props.name]: arrayOfOptions
     }
+    console.log('[handleArrayDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
