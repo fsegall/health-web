@@ -159,7 +159,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 ...initialValues,
                 // Converte situacao_no_trabalho de string para array se necessário
                 situacao_no_trabalho: typeof initialValues.situacao_no_trabalho === 'string'
-                    ? initialValues.situacao_no_trabalho.split(',').filter(v => v.trim() !== '')
+                    ? initialValues.situacao_no_trabalho.split(',').filter((v: string) => v.trim() !== '')
                     : initialValues.situacao_no_trabalho,
             };
             
