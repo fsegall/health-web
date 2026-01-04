@@ -75,9 +75,15 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         abortEarly: false,
       });
 
+      // Converte situacao_no_trabalho de array para string (backend espera string)
+      const situacaoTrabalho = validatedData && Array.isArray(validatedData.situacao_no_trabalho) 
+        ? validatedData.situacao_no_trabalho.join(',') 
+        : validatedData?.situacao_no_trabalho;
+
       const indigenous_demografico = {
         ...values,
         ...validatedData,
+        situacao_no_trabalho: situacaoTrabalho,
       };
 
       if (!offline) {
@@ -115,10 +121,10 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         }
       }
     } catch (error) {
+      console.error('Erro no submit:', error);
       //@ts-ignore
-      const message = error?.data?.message
+      const message = error?.data?.message || error?.response?.data?.message
       if (message) {
-
         addToast({
           type: 'error',
           title: message,
@@ -126,7 +132,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
       if (error instanceof Yup.ValidationError) {
-        console.log(error);
+        console.log('Erro de validação:', error);
         const errors = getValidationErrors(error);
 
         DemograficoFormRef.current?.setErrors(errors);
@@ -135,6 +141,12 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           type: 'error',
           title: error.message,
           description: 'Todos os campos devem estar selecionados',
+        });
+      } else if (!message) {
+        addToast({
+          type: 'error',
+          title: 'Erro ao enviar formulário',
+          description: 'Ocorreu um erro inesperado. Verifique o console para mais detalhes.',
         });
       }
     }

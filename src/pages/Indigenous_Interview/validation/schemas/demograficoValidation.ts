@@ -23,9 +23,9 @@ export const DemograficoValidation = Yup.object().shape({
       then: Yup.string().nullable().required("Você precisa preencher sobre a crença na igreja"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-    situacao_no_trabalho: Yup.string().required('Você precisa preencher sobre a situação atual de trabalho'),
+    situacao_no_trabalho: Yup.array().min(1, 'Você precisa preencher sobre a situação atual de trabalho').required('Você precisa preencher sobre a situação atual de trabalho'),
     remuneracao_trabalho_na_aldeia: Yup.string().nullable().when("situacao_no_trabalho", {
-      is: (val: any) => String(val) === "sim_aldeia",
+      is: (val: any) => Array.isArray(val) && val.includes("sim_aldeia"),
       then: Yup.string().nullable().required("Você precisa preencher sobre a remuneração do trabalho na aldeia"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
@@ -35,7 +35,7 @@ export const DemograficoValidation = Yup.object().shape({
       otherwise: Yup.string().nullable().notRequired(),
     }),
     remuneracao_trabalho_fora_aldeia: Yup.string().nullable().when("situacao_no_trabalho", {
-      is: (val: any) => String(val) === "sim_fora_da_aldeia",
+      is: (val: any) => Array.isArray(val) && val.includes("sim_fora_da_aldeia"),
       then: Yup.string().nullable().required("Você precisa preencher sobre a remuneração do trabalho fora da aldeia"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
@@ -46,7 +46,7 @@ export const DemograficoValidation = Yup.object().shape({
     }),
     funcao_nao_remunerada_aldeia: Yup.string().nullable().required("Você precisa preencher sobre função não remunerada na aldeia"),
     motivo_nao_trabalha: Yup.string().nullable().when("situacao_no_trabalho", {
-      is: (val: any) => String(val) === "nao",
+      is: (val: any) => Array.isArray(val) && val.includes("nao"),
       then: Yup.string().nullable().required("Você precisa preencher sobre a o motivo de não trabalhar"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
