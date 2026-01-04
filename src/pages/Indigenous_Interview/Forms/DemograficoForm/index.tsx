@@ -154,9 +154,16 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
     useEffect(() => {
         if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-            DemograficoFormRef.current?.setData({
-                ...initialValues
-            });
+            // Normaliza campos que podem vir como string separada por vírgulas para arrays
+            const normalizedValues = {
+                ...initialValues,
+                // Converte situacao_no_trabalho de string para array se necessário
+                situacao_no_trabalho: typeof initialValues.situacao_no_trabalho === 'string'
+                    ? initialValues.situacao_no_trabalho.split(',').filter(v => v.trim() !== '')
+                    : initialValues.situacao_no_trabalho,
+            };
+            
+            DemograficoFormRef.current?.setData(normalizedValues);
         }
     }, [isEditForm, initialValues]);
     const baseForm = (id: number) => {
