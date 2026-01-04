@@ -1,5 +1,4 @@
 import {
-  sexoOptions,
   crencasOptions,
   grauEscolaridadeOptions,
   situacaoTrabalhoOptions,
