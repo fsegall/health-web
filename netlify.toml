@@ -1,4 +1,12 @@
+[build]
+command = "yarn build"
+publish = "build"
+
+[build.environment]
+NODE_VERSION = "24"
+NODE_OPTIONS = "--openssl-legacy-provider"
+
 [[redirects]]
-  from = "/*"
-  to = "/"
-  status = 200
+from = "/*"
+to = "/"
+status = 200
