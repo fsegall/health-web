@@ -245,16 +245,25 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
         'lista_animais_de_criacao_alimentacao_ou_venda',
         'alimentos_consumidos_dia_anterior',
       ]);
-      setTimeout(() => {
-        if (AlimentacaoNutricaoFormRef.current) {
-          AlimentacaoNutricaoFormRef.current.setData(normalizedValues);
-        }
-      }, 100);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (AlimentacaoNutricaoFormRef.current) {
+            console.log(`[AlimentacaoNutricaoForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            AlimentacaoNutricaoFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
     }
   }, [isEditForm, initialValues]);
 
   return (
-    <StyledForm ref={AlimentacaoNutricaoFormRef} onSubmit={handleSubmit}>
+    <StyledForm 
+      ref={AlimentacaoNutricaoFormRef} 
+      onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `alimentacao-${JSON.stringify(initialValues)}` : 'alimentacao-new'}
+    >
       {alimentacaoNutricaoFormHelper?.map(
         (s: FormHelperType[], sectionIndex: number) => (
           <section key={sectionIndex}>

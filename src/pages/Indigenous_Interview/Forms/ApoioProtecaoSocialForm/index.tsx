@@ -195,11 +195,16 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'recebeu_cesta_alimentos',
       ]);
-      setTimeout(() => {
-        if (ApoioProtecaoSocialFormRef.current) {
-          ApoioProtecaoSocialFormRef.current.setData(normalizedValues);
-        }
-      }, 100);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (ApoioProtecaoSocialFormRef.current) {
+            console.log(`[ApoioProtecaoSocialForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            ApoioProtecaoSocialFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
     }
   }, [isEditForm, initialValues]);
 
@@ -207,6 +212,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
     <StyledForm
       ref={ApoioProtecaoSocialFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `apoio-${JSON.stringify(initialValues)}` : 'apoio-new'}
     >
         {apoioProtecaoSocialFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>

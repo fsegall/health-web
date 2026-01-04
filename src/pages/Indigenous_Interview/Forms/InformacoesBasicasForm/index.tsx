@@ -149,12 +149,16 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
       const normalizedValues = normalizeMultiSelectFields(initialValues, [
         'responsavel_documentos',
       ]);
-      // Usa setTimeout para garantir que os campos estejam registrados
-      setTimeout(() => {
-        if (InformacoesBasicasFormRef.current) {
-          InformacoesBasicasFormRef.current.setData(normalizedValues);
-        }
-      }, 100);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (InformacoesBasicasFormRef.current) {
+            console.log(`[InformacoesBasicasForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            InformacoesBasicasFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
     }
   }, [isEditForm, initialValues]);
 
@@ -162,6 +166,7 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
     <StyledForm
       ref={InformacoesBasicasFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `informacoes-${JSON.stringify(initialValues)}` : 'informacoes-new'}
     >
         {informacoesBasicasFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>

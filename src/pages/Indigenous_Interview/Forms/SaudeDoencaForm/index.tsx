@@ -203,17 +203,23 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         'cuidadores_para_aldeia_sem_posto_de_saude',
         'profissionais_acesso_a_equipe_de_saude',
       ]);
-      setTimeout(() => {
-        if (SaudeDoencaFormRef.current) {
-          SaudeDoencaFormRef.current.setData(normalizedValues);
-        }
-      }, 100);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (SaudeDoencaFormRef.current) {
+            console.log(`[SaudeDoencaForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            SaudeDoencaFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
     }
   }, [isEditForm, initialValues]);
   return (
     <StyledForm
       ref={SaudeDoencaFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `saude-${JSON.stringify(initialValues)}` : 'saude-new'}
     >
         {saudeDoencaFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>

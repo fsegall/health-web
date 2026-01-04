@@ -185,17 +185,23 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         'forma_coleta_esgoto',
         'destino_lixo_da_residencia',
       ]);
-      setTimeout(() => {
-        if (DomiciliosFormRef.current) {
-          DomiciliosFormRef.current.setData(normalizedValues);
-        }
-      }, 100);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (DomiciliosFormRef.current) {
+            console.log(`[DomicilioForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            DomiciliosFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
     }
   }, [isEditForm, initialValues]);
   return (
     <StyledForm
       ref={DomiciliosFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `domicilio-${JSON.stringify(initialValues)}` : 'domicilio-new'}
     >
         {domicilioFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
