@@ -19,7 +19,16 @@ import {
   ErrorContainer,
   StatusBadge,
   HeaderTitleContainer,
+  MoradoresContainer,
+  MoradorCard,
 } from './styles';
+import {
+  formatDemograficoData,
+  formatDomicilioData,
+  formatSaudeDoencaData,
+  formatAlimentacaoNutricaoData,
+  formatApoioProtecaoSocialData,
+} from './formatData';
 
 const ViewIndigenousInterview: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -219,19 +228,81 @@ const ViewIndigenousInterview: React.FC = () => {
           </Field>
         </Section>
 
-        {demografico && (
-          <Section>
-            <SectionTitle>Demográfico</SectionTitle>
-            <p>Dados demográficos cadastrados</p>
-          </Section>
-        )}
+        {demografico && (() => {
+          const formattedData = formatDemograficoData(demografico);
+          const moradores = formattedData?.Moradores || [];
+          
+          return (
+            <Section>
+              <SectionTitle>Demográfico</SectionTitle>
+              
+              {formattedData && Object.entries(formattedData)
+                .filter(([key]) => key !== 'Moradores')
+                .map(([label, value]) => (
+                  <Field key={label}>
+                    <FieldLabel>{label}:</FieldLabel>
+                    <FieldValue>{value}</FieldValue>
+                  </Field>
+                ))}
+              
+              {moradores.length > 0 && (
+                <div>
+                  <FieldLabel style={{ marginBottom: '15px', display: 'block' }}>
+                    Moradores ({moradores.length}):
+                  </FieldLabel>
+                  <MoradoresContainer>
+                    {moradores.map((morador: any, index: number) => (
+                      <MoradorCard key={morador.id || index}>
+                        <FieldLabel>Morador {index + 1}:</FieldLabel>
+                        <Field>
+                          <FieldLabel>Nome:</FieldLabel>
+                          <FieldValue>{morador.nome || '-'}</FieldValue>
+                        </Field>
+                        <Field>
+                          <FieldLabel>Data de nascimento:</FieldLabel>
+                          <FieldValue>{morador.data_nascimento || '-'}</FieldValue>
+                        </Field>
+                        <Field>
+                          <FieldLabel>Idade:</FieldLabel>
+                          <FieldValue>{morador.idade || '-'}</FieldValue>
+                        </Field>
+                        <Field>
+                          <FieldLabel>Sexo:</FieldLabel>
+                          <FieldValue>
+                            {morador.sexo === 'masculino' ? 'Masculino' : morador.sexo === 'feminino' ? 'Feminino' : morador.sexo || '-'}
+                          </FieldValue>
+                        </Field>
+                        {morador.relacao_com_lider && (
+                          <Field>
+                            <FieldLabel>Relação com líder:</FieldLabel>
+                            <FieldValue>{morador.relacao_com_lider}</FieldValue>
+                          </Field>
+                        )}
+                      </MoradorCard>
+                    ))}
+                  </MoradoresContainer>
+                </div>
+              )}
+            </Section>
+          );
+        })()}
 
-        {domicilio && (
-          <Section>
-            <SectionTitle>Domicílio</SectionTitle>
-            <p>Dados de domicílio cadastrados</p>
-          </Section>
-        )}
+        {domicilio && (() => {
+          const formattedData = formatDomicilioData(domicilio);
+          
+          return (
+            <Section>
+              <SectionTitle>Domicílio</SectionTitle>
+              
+              {formattedData && Object.entries(formattedData).map(([label, value]) => (
+                <Field key={label}>
+                  <FieldLabel>{label}:</FieldLabel>
+                  <FieldValue>{value}</FieldValue>
+                </Field>
+              ))}
+            </Section>
+          );
+        })()}
 
         {saudeDoenca && (
           <Section>

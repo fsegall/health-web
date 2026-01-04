@@ -127,3 +127,27 @@ export const ErrorContainer = styled.div`
   }
 `;
 
+export const MoradoresContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+`;
+
+export const MoradorCard = styled.div`
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+
+  ${FieldLabel} {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #59748c;
+  }
+
+  ${Field} {
+    margin-bottom: 10px;
+  }
+`;
+
