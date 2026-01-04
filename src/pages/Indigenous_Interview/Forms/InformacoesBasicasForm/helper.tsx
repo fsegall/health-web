@@ -1,7 +1,7 @@
 import Input from "../../../../components/Input";
 import Select from "../../../../components/Select";
 import { handleValueLabelOption } from "../../questions/handleValueLabelOption";
-import { aldeiaComunidadeOptions, distritoSanitarioIndigenaOptions, documentoCivilOptions, municipioOptions, tipoDeComunidadeOptions } from "../../questions/SelectorOptions/options";
+import { distritoSanitarioIndigenaOptions, documentoCivilOptions, municipioOptions, tipoDeComunidadeOptions } from "../../questions/SelectorOptions/options";
 
 export interface FormHelperType {
   label: string;
@@ -48,11 +48,11 @@ export const informacoesBasicasFormHelper: FormHelperType[][] = [
     },
     {
       label: 'Qual sua Aldeia/Comunidade?',
-      type: Select,
+      type: Input,
       props: {
           name: 'aldeia_comunidade',
-          isMulti: false,
-          options: handleValueLabelOption(aldeiaComunidadeOptions)
+          type: 'text',
+          placeholder: 'Nome da aldeia ou comunidade'
       }
     },
   ],

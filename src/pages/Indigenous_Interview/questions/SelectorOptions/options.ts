@@ -83,9 +83,41 @@ export const distritoSanitarioIndigenaOptions = {
   'DSEI YANOMAMI': 'DSEI YANOMAMI'
 }
 
-export const municipioOptions = {} // TODO: Falta receber a listagem
-
-export const aldeiaComunidadeOptions = {} // TODO: Falta receber a listagem
+export const municipioOptions = {
+  'Maceió': 'Maceió',
+  'Altamira': 'Altamira',
+  'Cruzeiro Do Sul': 'Cruzeiro Do Sul',
+  'São Gabriel da Cachoeira': 'São Gabriel da Cachoeira',
+  'Rio Branco': 'Rio Branco',
+  'Tabatinga': 'Tabatinga',
+  'Macapá': 'Macapá',
+  'São Félix do Araguaia': 'São Félix do Araguaia',
+  'Salvador': 'Salvador',
+  'Fortaleza': 'Fortaleza',
+  'Cuiabá': 'Cuiabá',
+  'Belém': 'Belém',
+  'Florianópolis': 'Florianópolis',
+  'Colider': 'Colider',
+  'Redenção': 'Redenção',
+  'Boa Vista': 'Boa Vista',
+  'Curitiba': 'Curitiba',
+  'Manaus': 'Manaus',
+  'São Luís': 'São Luís',
+  'Campo Grande': 'Campo Grande',
+  'Lábrea': 'Lábrea',
+  'Tefé': 'Tefé',
+  'Governador Valadares': 'Governador Valadares',
+  'Parintins': 'Parintins',
+  'Recife': 'Recife',
+  'Porto Velho': 'Porto Velho',
+  'João Pessoa': 'João Pessoa',
+  'Itaituba': 'Itaituba',
+  'Palmas': 'Palmas',
+  'Atalaia do Norte': 'Atalaia do Norte',
+  'Cacoal': 'Cacoal',
+  'Barra do Garças': 'Barra do Garças',
+  'Canarana': 'Canarana',
+}
 
 export const tipoDeComunidadeOptions = {
   terra_indigena_homologada:
