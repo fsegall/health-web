@@ -88,11 +88,10 @@ const ViewIndigenousInterview: React.FC = () => {
     }
 
     // Para entrevistas online (da API)
-    // INTERVIEWER só pode editar suas próprias entrevistas
+    // INTERVIEWER NÃO pode editar entrevistas já submetidas (mesmo sendo dele)
+    // Depois de submetido, precisa fazer nova entrevista ou pedir para o coordenador
     if (user.role === Roles.INTERVIEWER) {
-      const interviewerId = interviewData?.entrevistador_id || 
-                           interviewData?.indigenous_informacoes_basicas?.entrevistador_id;
-      setCanEdit(interviewerId === user.id);
+      setCanEdit(false);
       return;
     }
 
