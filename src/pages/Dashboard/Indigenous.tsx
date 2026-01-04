@@ -4,7 +4,6 @@ import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { Container, FilterContainer, FilterSection, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
 import Pagination from '../../templates/PaginatedListTemplate/Pagination';
-import useFetch from '../../hooks/useFetch';
 import FilterSelect from '../../components/FilterSelect';
 
 interface IndigenousBasicInterviewResponse {
@@ -31,22 +30,8 @@ interface IndigenousInterviewData {
 
 const IndigenousDashboardSection: React.FC = () => {
   const { user, token } = useAuth();
-  const { data: interviewersData } = useFetch<any[]>(
-    process.env.REACT_APP_API_URL + '/users',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
-  const { data: projectsData } = useFetch<any[]>(
-    process.env.REACT_APP_API_URL + '/projects',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
+  const [interviewersData, setInterviewersData] = useState<any[]>([]);
+  const [projectsData, setProjectsData] = useState<any[]>([]);
   const [interviewerId, setInterviewerId] = useState('');
   const [projectId, setProjectId] = useState('');
   const interviewers = interviewersData?.map(i => ({
@@ -68,6 +53,33 @@ const IndigenousDashboardSection: React.FC = () => {
     },
     totalCount: 0
   });
+
+  // Fetch users and projects for filters
+  useEffect(() => {
+    async function fetchUsersAndProjects() {
+      try {
+        const [usersResponse, projectsResponse] = await Promise.all([
+          api.get('/users', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          api.get('/projects', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
+        setInterviewersData(usersResponse.data);
+        setProjectsData(projectsResponse.data);
+      } catch (error) {
+        console.error('Error fetching users or projects:', error);
+      }
+    }
+    if (token) {
+      fetchUsersAndProjects();
+    }
+  }, [token]);
 
   useEffect(() => {
     async function fetchAllInterviews() {
