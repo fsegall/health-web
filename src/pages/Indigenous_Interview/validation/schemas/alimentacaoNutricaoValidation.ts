@@ -8,18 +8,18 @@ export const AlimentacaoNutricaoValidation = Yup.object().shape({
     .required(
     'Você precisa preencher sobre preocupações em conseguir comida',
   ),
-  comeu_sempre_comida_da_cultura: Yup.string()
-    .required('Você precisa preencher se comeu alimentos da cultura'),
-  comeram_sempre_comida_saudavel: Yup.string()
+  deixaram_de_comer_comida_da_cultura: Yup.string()
+    .required('Você precisa preencher se deixaram de comer alimentos da cultura'),
+  deixaram_de_comer_comida_saudavel: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {
       is: (val: any) => String(val) === 'nao' || String(val) === 'sim',
       then: Yup.string()
         .nullable()
-        .required('Você precisa preencher se comeu alimentos saudáveis'),
+        .required('Você precisa preencher se deixaram de comer alimentos saudáveis'),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-  teve_comida_todos_os_dias: Yup.string()
+  faltou_comida_algum_dia: Yup.string()
     .nullable()
     .when('possui_moradores_menores_de_16', {
       is: (val: any) => String(val) === 'nao' || String(val) === 'sim',
