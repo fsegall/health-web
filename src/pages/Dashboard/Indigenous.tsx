@@ -30,6 +30,7 @@ interface IndigenousInterviewData {
 
 const IndigenousDashboardSection: React.FC = () => {
   const { user, token } = useAuth();
+  const history = useHistory();
   const [interviewersData, setInterviewersData] = useState<any[]>([]);
   const [projectsData, setProjectsData] = useState<any[]>([]);
   const [interviewerId, setInterviewerId] = useState('');
@@ -152,7 +153,12 @@ const IndigenousDashboardSection: React.FC = () => {
         {loading ? "..." :
         interviews?.indigenous_interviews?.length === 0 ? <p>Nenhuma entrevista cadastrada</p> : (
           interviews?.indigenous_interviews?.map((i: IndigenousBasicInterviewResponse, index: number) => (
-            <IndigenousCard key={index} isInterviewer={user?.id === i?.entrevistador_id}>
+            <IndigenousCard 
+              key={index} 
+              isInterviewer={user?.id === i?.entrevistador_id}
+              onClick={() => history.push(`/view-indigenous-interview/${i.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <p><strong>ID:</strong> {i?.id}</p>
               <p><strong>Municipio:</strong> {i?.municipio}</p>
               <p><strong>Aldeia:</strong> {i?.aldeia_comunidade}</p>

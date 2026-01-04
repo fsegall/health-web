@@ -14,7 +14,7 @@ const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
   const history = useHistory()
   const isIncomplete = !data?.indigenous_apoio_protecao_social
   return (
-    <Card onClick={() => history.push(`indigenous-interview/${id}`)}>
+    <Card onClick={() => history.push(`/view-indigenous-interview/${id}`)}>
       <i>#{index} {isIncomplete && ' - Entrevista Incompleta'}</i>
       <p><strong>ID:</strong> {id?.toString()}</p>
       <p><strong>Projeto:</strong> {data?.indigenous_informacoes_basicas?.projeto_numero?.toString()}</p>
@@ -22,7 +22,7 @@ const IndigenousCard = ({ data, index, id }: IndigenousCardProps) => {
       <p><strong>Município:</strong> {data?.indigenous_informacoes_basicas?.municipio}</p>
       <p><strong>Aldeia:</strong> {data?.indigenous_informacoes_basicas?.aldeia_comunidade}</p>
       <p><strong>Data:</strong> {new Date(data?.indigenous_informacoes_basicas?.data_entrevista).toLocaleDateString('pt-BR')}</p>
-      <p style={{ marginTop: '5px', textAlign: 'end' }}><FiEdit /> Editar</p>
+      <p style={{ marginTop: '5px', textAlign: 'end' }}>Visualizar</p>
     </Card>
   )
 }

@@ -10,6 +10,7 @@ import Interviewers from '../pages/Interviewers';
 import ForgotPasword from '../pages/ForgotPassword';
 import ResetPasword from '../pages/ResetPassword';
 import IndigenousInterview from '../pages/Indigenous_Interview';
+import ViewIndigenousInterview from '../pages/ViewIndigenousInterview';
 import IndigenousDashboardSection from '../pages/Dashboard/Indigenous';
 import { Actions } from '../authorization/constants';
 
@@ -103,6 +104,15 @@ export const routesHandler = [
     displayOnMenu: false,
     action: Actions.VIEW_INTERVIEW,
     name: 'Formulário de Pesquisa Indígena'
+  },
+  {
+    path: '/view-indigenous-interview/:id',
+    exact: false,
+    component: ViewIndigenousInterview,
+    isPrivate: true,
+    displayOnMenu: false,
+    action: Actions.VIEW_INTERVIEW,
+    name: 'Visualizar Entrevista Indígena'
   },
   {
     path: '/interview/:id',
