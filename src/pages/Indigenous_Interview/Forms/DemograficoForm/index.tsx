@@ -415,7 +415,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
               </span>
             ))}
             {extraDemograficoHelper.length === sectionIndex + 1 && (
-              <Button type="submit">Enviar</Button>
+              <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
             )}
           </section>
         ))}
