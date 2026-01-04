@@ -388,7 +388,7 @@ const IndigenousInterview: React.FC = () => {
               isEditForm={id ? true : false}
               offline={isOffline}
               initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show && !formState.formsSubmitted.indigenous_saude_doenca.show}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show && (!formState.formsSubmitted.indigenous_saude_doenca.show || (id && initialValues && !initialValues?.indigenous_saude_doenca))}
             />
           )
         ) : <SubmittedContainer>Módulo alimentação e nutrição já cadastrado</SubmittedContainer>}
