@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
 
 export const DemograficoValidation = Yup.object().shape({
-    total_moradores: Yup.number().nullable(),
+    total_moradores: Yup.number()
+    .test('validate-moradores', 'Você deve gerar a grade com o número correto de moradores', function(value){
+      return this.parent.moradores && Array.isArray(this.parent.moradores) && this.parent.moradores.length === value
+    }),
     entrevista_indigena_id: Yup.string().nullable().notRequired(),
 
     morador_nao_indigena: Yup.string().required('Você precisa preencher sobre a existência de morador não indígena'),
