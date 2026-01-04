@@ -183,6 +183,8 @@ const IndigenousInterview: React.FC = () => {
 
 
     useEffect(() => {
+      const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+      
       if (!id) {
         const indigenous_informacoes_basicas_id = localStorage.getItem('@Safety:indigenous_informacoes_basicas');
         const demografico = localStorage.getItem('@Safety:indigenous_demografico');
@@ -191,9 +193,7 @@ const IndigenousInterview: React.FC = () => {
         const alimentacao_nutricao = localStorage.getItem('@Safety:indigenous_alimentacao_nutricao');
         const apoio_protecao_social = localStorage.getItem('@Safety:indigenous_apoio_protecao_social');
 
-        const offline_id = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id')!);
-
-        const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+        const offline_id = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
 
 
         if (indigenous_informacoes_basicas_id) {
