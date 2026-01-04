@@ -104,7 +104,7 @@ const OfflineInterviews: React.FC = () => {
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
                 {!isObjectEmpty(indigenousInterviewsObject) &&
                   <>
-                    <SectionTitle>Entrevistas Indígenas:</SectionTitle>
+                    <ListTitle>Entrevistas Indígenas:</ListTitle>
                     <CardSection>
                       {handleData(indigenousInterviewsObject)?.map(([id, ind]: [string, any], index) => (
                         <IndigenousCard key={index} data={ind} index={index+1} id={id} />
@@ -114,7 +114,7 @@ const OfflineInterviews: React.FC = () => {
                 }
                 {!isObjectEmpty(interviewsObject) &&
                   <>
-                    <SectionTitle>Entrevistas Padrões:</SectionTitle>
+                    <ListTitle>Entrevistas Padrões:</ListTitle>
                     <CardSection>
                       {handleData(interviewsObject)?.map(([id, ind]: [string, any], index) => (
                         <InterviewCard key={index} data={ind} index={index+1} id={id} />
