@@ -12,6 +12,7 @@ interface Props extends SelectProps<OptionTypeBase> {
 const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, onChange, ...rest }) => {
   const selectRef = useRef(null);
   const { fieldName, registerField, defaultValue } = useField(name);
+  const [internalValue, setInternalValue] = React.useState<any>(null);
 
   // Efeito para aplicar defaultValue quando o componente monta
   useEffect(() => {
@@ -24,19 +25,13 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         const selectedOptions = options.filter((v: any) => valueArray.includes(String(v.value)));
         if (selectedOptions.length > 0) {
           ref.state.value = selectedOptions;
-          // Força atualização do ReactSelect
-          if (ref.setState) {
-            ref.setState({ value: selectedOptions });
-          }
+          setInternalValue(selectedOptions);
         }
       } else {
         const selectedOption = options.find((v: any) => String(v.value) === String(defaultValue));
         if (selectedOption) {
           ref.state.value = selectedOption;
-          // Força atualização do ReactSelect
-          if (ref.setState) {
-            ref.setState({ value: selectedOption });
-          }
+          setInternalValue(selectedOption);
         }
       }
     }
@@ -69,6 +64,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
           if (ref && ref.state) {
             ref.state.value = rest.isMulti ? [] : null;
           }
+          setInternalValue(rest.isMulti ? [] : null);
           return;
         }
         
@@ -86,35 +82,29 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
                 const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
                 if (ref.state) {
                   ref.state.value = selectedOptions;
-                  // Força atualização do ReactSelect
-                  if (ref.setState) {
-                    ref.setState({ value: selectedOptions });
-                  }
-                  console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
                 }
+                // Atualiza o estado interno para forçar re-render
+                setInternalValue(selectedOptions);
+                console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
               } else if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
                 const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
                 if (splittedValue.length > 0) {
                   const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
                   if (ref.state) {
                     ref.state.value = selectedOptions;
-                    // Força atualização do ReactSelect
-                    if (ref.setState) {
-                      ref.setState({ value: selectedOptions });
-                    }
-                    console.log(`[Select ${fieldName}] Valor setado após retry (string->array):`, selectedOptions);
                   }
+                  // Atualiza o estado interno para forçar re-render
+                  setInternalValue(selectedOptions);
+                  console.log(`[Select ${fieldName}] Valor setado após retry (string->array):`, selectedOptions);
                 }
               } else if (!rest.isMulti) {
                 const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
                 if (ref.state) {
                   ref.state.value = selectedOption || null;
-                  // Força atualização do ReactSelect
-                  if (ref.setState) {
-                    ref.setState({ value: selectedOption || null });
-                  }
-                  console.log(`[Select ${fieldName}] Valor setado após retry (single):`, selectedOption);
                 }
+                // Atualiza o estado interno para forçar re-render
+                setInternalValue(selectedOption || null);
+                console.log(`[Select ${fieldName}] Valor setado após retry (single):`, selectedOption);
               }
             } else if (retryCount >= maxRetries) {
               clearInterval(retryInterval);
@@ -129,12 +119,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
           const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
           if (ref.state) {
             ref.state.value = selectedOptions;
-            // Força atualização do ReactSelect chamando setState se disponível
-            if (ref.setState) {
-              ref.setState({ value: selectedOptions });
-            }
-            console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
           }
+          // Atualiza o estado interno para forçar re-render
+          setInternalValue(selectedOptions);
+          console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
           return;
         }
         
@@ -145,12 +133,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
             const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
             if (ref.state) {
               ref.state.value = selectedOptions;
-              // Força atualização do ReactSelect chamando setState se disponível
-              if (ref.setState) {
-                ref.setState({ value: selectedOptions });
-              }
-              console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
             }
+            // Atualiza o estado interno para forçar re-render
+            setInternalValue(selectedOptions);
+            console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
           }
           return;
         }
@@ -160,12 +146,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
           const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
           if (ref.state) {
             ref.state.value = selectedOption || null;
-            // Força atualização do ReactSelect chamando setState se disponível
-            if (ref.setState) {
-              ref.setState({ value: selectedOption || null });
-            }
-            console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
           }
+          // Atualiza o estado interno para forçar re-render
+          setInternalValue(selectedOption || null);
+          console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
         }
       }
     });
@@ -173,14 +157,16 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
 
   // Garante que o onChange personalizado seja chamado quando o valor mudar
   const handleChange = (selectedOption: any, actionMeta: any) => {
+    // Atualiza o estado interno quando o usuário muda o valor
+    setInternalValue(selectedOption);
     // Chama o onChange customizado se existir
     if (onChange) {
       onChange(selectedOption, actionMeta);
     }
   };
 
-  // Cria um valor controlado se temos um defaultValue ou initialValue
-  const controlledValue = defaultValue !== undefined ? defaultValue : (initialValue !== undefined ? initialValue : undefined);
+  // Usa o valor interno se disponível, caso contrário usa o valor do ref
+  const displayValue = internalValue !== null ? internalValue : (selectRef.current ? (selectRef.current as any).state?.value : undefined);
   
   return (
     <ReactSelect
@@ -189,7 +175,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       isDisabled={isDisabled}
       placeholder="Selecione"
       classNamePrefix="react-select"
-      value={controlledValue}
+      value={displayValue}
       {...rest}
       onChange={handleChange}
     />
