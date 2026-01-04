@@ -210,12 +210,23 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
   function handleRegularDisabled(element: FormHelperType): boolean {
       const dependencies: { [key: string]: string[] } | any = element?.dependencies
+      if (!dependencies) {
+        return false
+      }
       const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
         let isDisabled = true
         const found = formDependencies[obj?.[0]]
-        if (found) {
-          if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
-            isDisabled = false
+        if (found !== undefined && found !== null && found !== '') {
+          // Se found é um array (campo multi-select), verifica se algum valor do array está na lista permitida
+          if (Array.isArray(found)) {
+            if (found.length > 0 && obj?.[1]?.some((v: any) => found.includes(String(v)))) {
+              isDisabled = false
+            }
+          } else {
+            // Se found é um valor simples, verifica se está na lista permitida
+            if (obj?.[1]?.some((v: any) => String(v) === String(found))) {
+              isDisabled = false
+            }
           }
         }
         return isDisabled
