@@ -302,33 +302,45 @@ const IndigenousInterview: React.FC = () => {
         </Header>
         <SectionTitle id="indigenous_informacoes_basicas">Informações Básicas</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_informacoes_basicas.show) ? (
-          <InformacoesBasicasForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            offlineId={id}
-            initialValues={initialValues ? initialValues?.indigenous_informacoes_basicas : {}}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <InformacoesBasicasForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              offlineId={id}
+              initialValues={initialValues ? initialValues?.indigenous_informacoes_basicas : {}}
+            />
+          )
         ) : <SubmittedContainer>Módulo informações básicas já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_demografico">Demográfico</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_demografico.show) ? (
-          <DemograficoForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            initialValues={initialValues ? initialValues?.indigenous_demografico : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_informacoes_basicas.show}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <DemograficoForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              initialValues={initialValues ? initialValues?.indigenous_demografico : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_informacoes_basicas.show}
+            />
+          )
         ) : <SubmittedContainer>Módulo demográfico já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_domicilio">Domicílio</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_domicilio.show) ? (
-          <DomiciliosForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            initialValues={initialValues ? initialValues?.indigenous_domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_demografico.show}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <DomiciliosForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              initialValues={initialValues ? initialValues?.indigenous_domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_demografico.show}
+            />
+          )
         ) : <SubmittedContainer>Módulo domicílio já cadastrado</SubmittedContainer>}
         <SectionTitleGroup>
           <SectionTitle id="indigenous_saude_doenca">Saúde e Doença</SectionTitle>
@@ -345,13 +357,17 @@ const IndigenousInterview: React.FC = () => {
           )}
         </SectionTitleGroup>
         {(id || formState.formsSubmitted.indigenous_saude_doenca.show) ? (
-          <SaudeDoencaForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <SaudeDoencaForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
+            />
+          )
         ) : formState.formsSubmitted.indigenous_saude_doenca.id ? (
           <SubmittedContainer>Módulo saúde e doença já cadastrado</SubmittedContainer>
         ) : (
@@ -359,24 +375,32 @@ const IndigenousInterview: React.FC = () => {
         )}
         <SectionTitle id="indigenous_alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_alimentacao_nutricao.show) ? (
-          <AlimentacaoNutricaoForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show && !formState.formsSubmitted.indigenous_saude_doenca.show}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <AlimentacaoNutricaoForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show && !formState.formsSubmitted.indigenous_saude_doenca.show}
+            />
+          )
         ) : <SubmittedContainer>Módulo alimentação e nutrição já cadastrado</SubmittedContainer>}
         <SectionTitle id="indigenous_apoio_protecao_social">Apoio e Proteção Social</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_apoio_protecao_social.show) ? (
-          <ApoioProtecaoSocialForm
-            dispatch={dispatch}
-            isEditForm={id ? true : false}
-            offline={isOffline}
-            initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-            hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
-            resetForms={resetForms}
-          />
+          (id && !initialValues) ? (
+            <SubmittedContainer>Carregando dados...</SubmittedContainer>
+          ) : (
+            <ApoioProtecaoSocialForm
+              dispatch={dispatch}
+              isEditForm={id ? true : false}
+              offline={isOffline}
+              initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
+              resetForms={resetForms}
+            />
+          )
         ) : <SubmittedContainer>Módulo apoio social já cadastrado</SubmittedContainer>}
         </Container>
     )

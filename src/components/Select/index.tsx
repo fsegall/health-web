@@ -30,6 +30,11 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         return ref.state.value.value;
       },
       setValue: (ref: any, value) => {
+        // Garante que o ref e options estão disponíveis antes de processar
+        if (!ref || !ref.props || !ref.props.options) {
+          return;
+        }
+        
         // Se value é null ou undefined, limpa o campo
         if (!value) {
           ref.state.value = rest.isMulti ? [] : null;
@@ -64,7 +69,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         }
       }
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, rest.isMulti, options]);
 
   // Garante que o onChange personalizado seja chamado quando o valor mudar
   const handleChange = (selectedOption: any, actionMeta: any) => {
