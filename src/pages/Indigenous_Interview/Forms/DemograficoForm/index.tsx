@@ -167,12 +167,16 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 'povo_etnia',
                 'situacao_no_trabalho',
             ]);
-            // Usa setTimeout para garantir que os campos estejam registrados
-            setTimeout(() => {
-                if (DemograficoFormRef.current) {
-                    DemograficoFormRef.current.setData(normalizedValues);
-                }
-            }, 100);
+            // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+            const attempts = [100, 300, 500, 1000];
+            attempts.forEach((delay, index) => {
+                setTimeout(() => {
+                    if (DemograficoFormRef.current) {
+                        console.log(`[DemograficoForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+                        DemograficoFormRef.current.setData(normalizedValues);
+                    }
+                }, delay);
+            });
         }
     }, [isEditForm, initialValues]);
     const baseForm = (id: number) => {
@@ -319,6 +323,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     <StyledForm
       ref={DemograficoFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `demografico-${JSON.stringify(initialValues)}` : 'demografico-new'}
     >
       <section>
         <Label>Quantas pessoas são moradoras permanentes desta casa? (excluir pessoas que estão apenas de passagem ou visitando, parentes ou não)</Label>

@@ -66,9 +66,9 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         
         // Se options não estão disponíveis, tenta novamente após um pequeno delay
         if (!ref || !ref.props || !ref.props.options || !ref.props.options.length) {
-          // Retry após as options estarem disponíveis - tenta várias vezes
+          // Retry após as options estarem disponíveis - tenta várias vezes com delays maiores
           let retryCount = 0;
-          const maxRetries = 10; // Tenta até 500ms (10 * 50ms)
+          const maxRetries = 20; // Tenta até 2 segundos (20 * 100ms)
           const retryInterval = setInterval(() => {
             retryCount++;
             if (ref && ref.props && ref.props.options && ref.props.options.length) {
@@ -80,7 +80,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
                   ref.state.value = selectedOptions;
                   console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
                 }
-              } else if (rest.isMulti && typeof value === 'string') {
+              } else if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
                 const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
                 if (splittedValue.length > 0) {
                   const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
@@ -98,9 +98,9 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
               }
             } else if (retryCount >= maxRetries) {
               clearInterval(retryInterval);
-              console.warn(`[Select ${fieldName}] Não foi possível setar valor após ${maxRetries} tentativas. Options não disponíveis.`);
+              console.warn(`[Select ${fieldName}] Não foi possível setar valor após ${maxRetries} tentativas (${maxRetries * 100}ms). Options não disponíveis. Valor que deveria ser setado:`, value);
             }
-          }, 50);
+          }, 100); // Aumentado para 100ms por tentativa
           return;
         }
         
