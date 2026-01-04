@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
+import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -163,9 +164,15 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
 
   useEffect(() => {
     if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-      DomiciliosFormRef.current?.setData({
-        ...initialValues
-      });
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'tipo_moradia',
+        'utensilios_casa',
+        'utensilios_de_trabalho',
+        'veiculos',
+        'forma_coleta_esgoto',
+        'destino_lixo_da_residencia',
+      ]);
+      DomiciliosFormRef.current?.setData(normalizedValues);
     }
   }, [isEditForm, initialValues]);
   return (

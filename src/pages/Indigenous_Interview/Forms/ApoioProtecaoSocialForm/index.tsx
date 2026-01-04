@@ -8,6 +8,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
 import { useHistory } from 'react-router-dom';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
@@ -183,9 +184,10 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
 
   useEffect(() => {
     if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-      ApoioProtecaoSocialFormRef.current?.setData({
-        ...initialValues
-      });
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'recebeu_cesta_alimentos',
+      ]);
+      ApoioProtecaoSocialFormRef.current?.setData(normalizedValues);
     }
   }, [isEditForm, initialValues]);
 

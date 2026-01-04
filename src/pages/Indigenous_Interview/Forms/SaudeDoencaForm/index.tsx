@@ -9,6 +9,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
 
 import { saudeDoencaFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
@@ -165,9 +166,23 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
 
   useEffect(() => {
     if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-      SaudeDoencaFormRef.current?.setData({
-        ...initialValues
-      });
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'morador_com_desabilidade',
+        'morador_exposto_veneno_lavoura',
+        'motivo_doencas_contato_veneno_lavoura',
+        'acidentes',
+        'ocorrencia_de_ameacas',
+        'ocorrencia_violencia_fisica',
+        'locais_impedido_de_entrar',
+        'lista_diagnosticos',
+        'lista_diagnosticos_doencas_infecciosas',
+        'lista_diagnosticos_outros',
+        'mulheres_e_gestacao',
+        'crianca_ate_6_meses_outros_alimentos',
+        'cuidadores_para_aldeia_sem_posto_de_saude',
+        'profissionais_acesso_a_equipe_de_saude',
+      ]);
+      SaudeDoencaFormRef.current?.setData(normalizedValues);
     }
   }, [isEditForm, initialValues]);
   return (

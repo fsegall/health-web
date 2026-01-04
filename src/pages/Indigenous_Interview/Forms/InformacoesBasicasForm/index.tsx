@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react';
+import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -139,14 +140,9 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
 
   useEffect(() => {
     if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-      // Normaliza campos multi-select que podem vir como string separada por vírgulas
-      const normalizedValues = {
-        ...initialValues,
-        // responsavel_documentos pode vir como string do localStorage
-        responsavel_documentos: typeof initialValues.responsavel_documentos === 'string'
-          ? initialValues.responsavel_documentos.split(',').filter(v => v.trim() !== '')
-          : initialValues.responsavel_documentos,
-      };
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'responsavel_documentos',
+      ]);
       
       InformacoesBasicasFormRef.current?.setData(normalizedValues);
     }

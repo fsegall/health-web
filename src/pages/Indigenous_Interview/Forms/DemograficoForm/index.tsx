@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
+import { normalizeMultiSelectFields } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles, Scope } from '@unform/core';
 import {
@@ -154,15 +155,10 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
     useEffect(() => {
         if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
-            // Normaliza campos que podem vir como string separada por vírgulas para arrays
-            const normalizedValues = {
-                ...initialValues,
-                // Converte situacao_no_trabalho de string para array se necessário
-                situacao_no_trabalho: typeof initialValues.situacao_no_trabalho === 'string'
-                    ? initialValues.situacao_no_trabalho.split(',').filter((v: string) => v.trim() !== '')
-                    : initialValues.situacao_no_trabalho,
-            };
-            
+            const normalizedValues = normalizeMultiSelectFields(initialValues, [
+                'povo_etnia',
+                'situacao_no_trabalho',
+            ]);
             DemograficoFormRef.current?.setData(normalizedValues);
         }
     }, [isEditForm, initialValues]);
