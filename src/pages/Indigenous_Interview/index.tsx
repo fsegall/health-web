@@ -342,36 +342,41 @@ const IndigenousInterview: React.FC = () => {
             />
           )
         ) : <SubmittedContainer>Módulo domicílio já cadastrado</SubmittedContainer>}
-        <SectionTitleGroup>
-          <SectionTitle id="indigenous_saude_doenca">Saúde e Doença</SectionTitle>
-          {!id && !formState.formsSubmitted.indigenous_saude_doenca.id && (
-            <Switch
-              onColor="#c2024b"
-              offColor="#dedede"
-              onChange={() => {
-                const saudeDoencaShow = formState.formsSubmitted.indigenous_saude_doenca.show;
-                dispatch({ type: 'TOGGLE_SAUDE_DOENCA', payload: { id: null, show: !saudeDoencaShow } });
-              }}
-              checked={formState.formsSubmitted.indigenous_saude_doenca.show}
-            />
-          )}
-        </SectionTitleGroup>
-        {(id || formState.formsSubmitted.indigenous_saude_doenca.show) ? (
-          (id && !initialValues) ? (
-            <SubmittedContainer>Carregando dados...</SubmittedContainer>
-          ) : (
-            <SaudeDoencaForm
-              dispatch={dispatch}
-              isEditForm={id ? true : false}
-              offline={isOffline}
-              initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
-            />
-          )
-        ) : formState.formsSubmitted.indigenous_saude_doenca.id ? (
-          <SubmittedContainer>Módulo saúde e doença já cadastrado</SubmittedContainer>
-        ) : (
-          <SubmittedContainer>Módulo saúde e doença desabilitado</SubmittedContainer>
+        {/* Só mostra o módulo Saúde e Doença se ele existir nos dados ou se não estiver editando */}
+        {(!id || (id && initialValues && initialValues?.indigenous_saude_doenca)) && (
+          <>
+            <SectionTitleGroup>
+              <SectionTitle id="indigenous_saude_doenca">Saúde e Doença</SectionTitle>
+              {!id && !formState.formsSubmitted.indigenous_saude_doenca.id && (
+                <Switch
+                  onColor="#c2024b"
+                  offColor="#dedede"
+                  onChange={() => {
+                    const saudeDoencaShow = formState.formsSubmitted.indigenous_saude_doenca.show;
+                    dispatch({ type: 'TOGGLE_SAUDE_DOENCA', payload: { id: null, show: !saudeDoencaShow } });
+                  }}
+                  checked={formState.formsSubmitted.indigenous_saude_doenca.show}
+                />
+              )}
+            </SectionTitleGroup>
+            {(id || formState.formsSubmitted.indigenous_saude_doenca.show) ? (
+              (id && !initialValues) ? (
+                <SubmittedContainer>Carregando dados...</SubmittedContainer>
+              ) : (
+                <SaudeDoencaForm
+                  dispatch={dispatch}
+                  isEditForm={id ? true : false}
+                  offline={isOffline}
+                  initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
+                  hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
+                />
+              )
+            ) : formState.formsSubmitted.indigenous_saude_doenca.id ? (
+              <SubmittedContainer>Módulo saúde e doença já cadastrado</SubmittedContainer>
+            ) : (
+              <SubmittedContainer>Módulo saúde e doença desabilitado</SubmittedContainer>
+            )}
+          </>
         )}
         <SectionTitle id="indigenous_alimentacao_nutricao">Alimentação e Nutrição</SectionTitle>
         {(id || formState.formsSubmitted.indigenous_alimentacao_nutricao.show) ? (
