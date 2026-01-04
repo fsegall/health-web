@@ -1,5 +1,4 @@
 import React from 'react'
-import { FiEdit } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 import { Card } from './styles'

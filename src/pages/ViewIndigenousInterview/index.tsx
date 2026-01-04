@@ -15,7 +15,6 @@ import {
   Field,
   FieldLabel,
   FieldValue,
-  ButtonContainer,
   LoadingContainer,
   ErrorContainer,
 } from './styles';
@@ -65,7 +64,7 @@ const ViewIndigenousInterview: React.FC = () => {
         addToast({
           type: 'error',
           title: 'Erro',
-          description: err.message || 'Não foi possível carregar a entrevista',
+          description: error.message || 'Não foi possível carregar a entrevista',
         });
       } finally {
         setLoading(false);
@@ -75,9 +74,9 @@ const ViewIndigenousInterview: React.FC = () => {
     if (id && token) {
       loadInterview();
     }
-  }, [id, token, addToast]);
+  }, [id, token, addToast, checkEditPermission]);
 
-  const checkEditPermission = (interviewData: any) => {
+  const checkEditPermission = React.useCallback((interviewData: any) => {
     if (!user) {
       setCanEdit(false);
       return;
@@ -118,7 +117,7 @@ const ViewIndigenousInterview: React.FC = () => {
     }
 
     setCanEdit(false);
-  };
+  }, [user, token]);
 
   const handleEdit = () => {
     history.push(`/indigenous-interview/${id}`);
