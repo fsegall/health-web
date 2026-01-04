@@ -15,8 +15,15 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
   const [internalValue, setInternalValue] = React.useState<any>(null);
 
   // Efeito para aplicar defaultValue quando o componente monta
+  // Só aplica se defaultValue realmente existe (não é null, undefined ou string vazia)
   useEffect(() => {
-    if (defaultValue && selectRef.current && options && options.length > 0) {
+    // Verifica se defaultValue existe e não é vazio
+    const hasDefaultValue = defaultValue !== null && 
+                            defaultValue !== undefined && 
+                            defaultValue !== '' &&
+                            !(Array.isArray(defaultValue) && defaultValue.length === 0);
+    
+    if (hasDefaultValue && selectRef.current && options && options.length > 0) {
       const ref: any = selectRef.current;
       if (!ref.state) return;
       
@@ -34,6 +41,9 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
           setInternalValue(selectedOption);
         }
       }
+    } else if (!hasDefaultValue) {
+      // Se não há defaultValue, garante que o estado interno está vazio
+      setInternalValue(null);
     }
   }, [defaultValue, options, rest.isMulti]);
 
@@ -59,12 +69,19 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         return ref.state.value?.value || ref.state.value || '';
       },
       setValue: (ref: any, value) => {
-        // Se value é null ou undefined, limpa o campo (mesmo sem options)
-        if (!value) {
+        // Se value é null, undefined ou string vazia, limpa o campo
+        // Mas só seta o internalValue se realmente foi passado um valor vazio explícito
+        // Isso permite que campos novos comecem sem valor
+        if (value === null || value === undefined || value === '' || 
+            (Array.isArray(value) && value.length === 0)) {
           if (ref && ref.state) {
             ref.state.value = rest.isMulti ? [] : null;
           }
-          setInternalValue(rest.isMulti ? [] : null);
+          // Só atualiza internalValue se estamos realmente limpando um valor existente
+          // Se internalValue já é null/undefined, não precisa atualizar (evita re-renders desnecessários)
+          if (internalValue !== null && internalValue !== undefined) {
+            setInternalValue(rest.isMulti ? [] : null);
+          }
           return;
         }
         
@@ -165,8 +182,10 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
     }
   };
 
-  // Usa o valor interno se disponível, caso contrário usa o valor do ref
-  const displayValue = internalValue !== null ? internalValue : (selectRef.current ? (selectRef.current as any).state?.value : undefined);
+  // Usa o valor interno se disponível (pode ser null para campos vazios)
+  // Se internalValue é null, não passa a prop value para deixar o ReactSelect não-controlado inicialmente
+  // Isso permite que o usuário preencha campos vazios normalmente
+  const displayValue = internalValue !== null ? internalValue : undefined;
   
   return (
     <ReactSelect
@@ -175,7 +194,7 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       isDisabled={isDisabled}
       placeholder="Selecione"
       classNamePrefix="react-select"
-      value={displayValue}
+      {...(displayValue !== undefined ? { value: displayValue } : {})}
       {...rest}
       onChange={handleChange}
     />
