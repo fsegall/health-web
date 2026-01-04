@@ -11,7 +11,28 @@ interface Props extends SelectProps<OptionTypeBase> {
 
 const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, onChange, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
+
+  // Efeito para aplicar defaultValue quando o componente monta
+  useEffect(() => {
+    if (defaultValue && selectRef.current && options && options.length > 0) {
+      const ref: any = selectRef.current;
+      if (!ref.state) return;
+      
+      if (rest.isMulti) {
+        const valueArray = Array.isArray(defaultValue) ? defaultValue : (typeof defaultValue === 'string' ? defaultValue.split(',') : []);
+        const selectedOptions = options.filter((v: any) => valueArray.includes(String(v.value)));
+        if (selectedOptions.length > 0) {
+          ref.state.value = selectedOptions;
+        }
+      } else {
+        const selectedOption = options.find((v: any) => String(v.value) === String(defaultValue));
+        if (selectedOption) {
+          ref.state.value = selectedOption;
+        }
+      }
+    }
+  }, [defaultValue, options, rest.isMulti]);
 
   useEffect(() => {
     registerField({
