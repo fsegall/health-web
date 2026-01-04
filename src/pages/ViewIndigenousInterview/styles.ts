@@ -15,11 +15,29 @@ export const Header = styled.div`
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 10px;
 
   button {
     display: flex;
     align-items: center;
     gap: 8px;
+    height: auto;
+    width: auto;
+    padding: 10px 16px;
+    margin-top: 0;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      width: 100%;
+      justify-content: center;
+    }
   }
 `;
 
@@ -29,11 +47,22 @@ export const HeaderTitleContainer = styled.div`
   align-items: center;
   gap: 10px;
   flex: 1;
+  min-width: 0;
 
   h1 {
     color: #59748c;
     font-size: 24px;
     margin: 0;
+    text-align: center;
+    
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    order: -1;
   }
 `;
 
@@ -41,13 +70,20 @@ export const StatusBadge = styled.span<{ isOffline: boolean }>`
   display: inline-block;
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background-color: ${props => props.isOffline ? '#ff9800' : '#4caf50'};
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  line-height: 1.3;
+  
+  @media (max-width: 768px) {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
 `;
 
 export const Content = styled.div`
