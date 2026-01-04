@@ -8,7 +8,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
+import { maskDate } from '../../../../utils/maskDate';
 
 import { FormHelperType, extraDemograficoHelper, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
@@ -287,6 +287,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => {
+                const isDateField = element.props.name === 'data_nascimento';
                 return (
                   <span key={`${elementIndex}:${element.label}`}>
                     {incrementCounterUpToLength(quadroDemograficoHelper.length)}
@@ -294,7 +295,17 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                     <element.type
                       {...element.props}
                       isDisabled={element?.dependencies && handleDisabled(element, index+1)}
-                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target?.value)}
+                      onChange={(e: any) => {
+                        let value = e?.target?.value;
+                        // Aplica máscara de data se for o campo data_nascimento
+                        if (isDateField && value !== undefined && value !== null) {
+                          value = maskDate(value);
+                          e.target.value = value;
+                        }
+                        if (element?.hasDependencies) {
+                          handleDependencies(element, index+1, value);
+                        }
+                      }}
                       onMount={(val: any) => element?.hasDependencies && handleDependencies(element, index+1, val)}
                     />
                   </span>

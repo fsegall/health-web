@@ -15,6 +15,7 @@ export interface FormHelperType {
       isMulti?: boolean;
       options?: Array<any>;
       type?: 'text' | 'textarea' | 'number';
+      maxLength?: number;
     },
     hasDependencies?: boolean;
     dependencies?: { [key: string]: string[]; };
@@ -184,8 +185,9 @@ export const quadroDemograficoHelper: FormHelperType[] = [
     type: Input,
     props: {
       name: 'data_nascimento',
-      placeholder: 'Digite a data de nascimento do morador',
+      placeholder: 'DD/MM/AAAA',
       type: 'text',
+      maxLength: 10,
     },
     hasDependencies: true
   },
