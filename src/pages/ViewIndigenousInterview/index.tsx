@@ -17,6 +17,8 @@ import {
   FieldValue,
   LoadingContainer,
   ErrorContainer,
+  StatusBadge,
+  HeaderTitleContainer,
 } from './styles';
 
 const ViewIndigenousInterview: React.FC = () => {
@@ -28,6 +30,7 @@ const ViewIndigenousInterview: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [interview, setInterview] = useState<any>(null);
   const [canEdit, setCanEdit] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   const checkEditPermission = React.useCallback((interviewData: any) => {
     if (!user) {
@@ -85,6 +88,7 @@ const ViewIndigenousInterview: React.FC = () => {
             },
           });
           setInterview(response.data);
+          setIsOffline(false);
           checkEditPermission(response.data);
         } catch (apiError) {
           // Se não encontrou na API, tenta buscar do localStorage (offline)
@@ -94,6 +98,7 @@ const ViewIndigenousInterview: React.FC = () => {
 
           if (offlineInterviews[id]) {
             setInterview(offlineInterviews[id]);
+            setIsOffline(true);
             checkEditPermission(offlineInterviews[id]);
           } else {
             const error = apiError as any;
@@ -158,7 +163,12 @@ const ViewIndigenousInterview: React.FC = () => {
         <Button onClick={() => history.push('/indigenous-dashboard')}>
           <FiArrowLeft /> Voltar
         </Button>
-        <h1>Visualizar Entrevista Indígena</h1>
+        <HeaderTitleContainer>
+          <h1>Visualizar Entrevista Indígena</h1>
+          <StatusBadge isOffline={isOffline}>
+            {isOffline ? 'Offline - Apenas no dispositivo' : 'Online - Entrevista salva no banco'}
+          </StatusBadge>
+        </HeaderTitleContainer>
         {canEdit && (
           <Button onClick={handleEdit}>
             <FiEdit /> Editar

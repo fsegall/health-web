@@ -16,17 +16,38 @@ export const Header = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  h1 {
-    color: #59748c;
-    font-size: 24px;
-    margin: 0;
-  }
-
   button {
     display: flex;
     align-items: center;
     gap: 8px;
   }
+`;
+
+export const HeaderTitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+
+  h1 {
+    color: #59748c;
+    font-size: 24px;
+    margin: 0;
+  }
+`;
+
+export const StatusBadge = styled.span<{ isOffline: boolean }>`
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: ${props => props.isOffline ? '#ff9800' : '#4caf50'};
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const Content = styled.div`
