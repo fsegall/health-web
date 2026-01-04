@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { FormHandles, Scope } from '@unform/core';
 import {
@@ -152,11 +152,13 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     }
   }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted]);
 
-    if (isEditForm) {
-        DemograficoFormRef.current?.setData({
-            //TODO: FAZER EDIT FORM
-        })
-    }
+    useEffect(() => {
+        if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+            DemograficoFormRef.current?.setData({
+                ...initialValues
+            });
+        }
+    }, [isEditForm, initialValues]);
     const baseForm = (id: number) => {
         return {
             id: id,

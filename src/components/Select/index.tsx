@@ -30,14 +30,36 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
         return ref.state.value.value;
       },
       setValue: (ref: any, value) => {
-        const selectedOption = ref.props.options.find((v: any) => v.value === value)
-        if (selectedOption) {
-          ref.state.value = selectedOption
-        } else {
-          const splittedValue = value?.split(',')
-          if (splittedValue?.length > 0) {
-            const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(v.value))
-            ref.state.value = selectedOptions
+        // Se value é null ou undefined, limpa o campo
+        if (!value) {
+          ref.state.value = rest.isMulti ? [] : null;
+          return;
+        }
+        
+        // Se é multi-select e value é array, processa diretamente
+        if (rest.isMulti && Array.isArray(value)) {
+          const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
+          ref.state.value = selectedOptions;
+          return;
+        }
+        
+        // Se é multi-select e value é string, faz split
+        if (rest.isMulti && typeof value === 'string') {
+          const splittedValue = value.split(',');
+          if (splittedValue.length > 0) {
+            const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
+            ref.state.value = selectedOptions;
+          }
+          return;
+        }
+        
+        // Para select simples, busca a opção
+        if (!rest.isMulti) {
+          const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
+          if (selectedOption) {
+            ref.state.value = selectedOption;
+          } else {
+            ref.state.value = null;
           }
         }
       }

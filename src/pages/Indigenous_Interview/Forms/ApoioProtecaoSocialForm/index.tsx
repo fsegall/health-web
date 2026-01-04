@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -181,11 +181,13 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
     }
   }
 
-  if (isEditForm) {
-    ApoioProtecaoSocialFormRef.current?.setData({
-        //TODO: FAZER EDIT FORM
-    })
-  }
+  useEffect(() => {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0) {
+      ApoioProtecaoSocialFormRef.current?.setData({
+        ...initialValues
+      });
+    }
+  }, [isEditForm, initialValues]);
 
   return (
     <StyledForm
