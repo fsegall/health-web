@@ -45,7 +45,7 @@ const ViewIndigenousInterview: React.FC = () => {
           });
           setInterview(response.data);
           checkEditPermission(response.data);
-        } catch (apiError: any) {
+        } catch (apiError) {
           // Se não encontrou na API, tenta buscar do localStorage (offline)
           const offlineInterviews: { [key: string]: any } = JSON.parse(
             localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}'
@@ -55,11 +55,13 @@ const ViewIndigenousInterview: React.FC = () => {
             setInterview(offlineInterviews[id]);
             checkEditPermission(offlineInterviews[id]);
           } else {
-            throw new Error(apiError?.response?.data?.message || 'Entrevista não encontrada');
+            const error = apiError as any;
+            throw new Error(error?.response?.data?.message || 'Entrevista não encontrada');
           }
         }
-      } catch (err: any) {
-        setError(err.message || 'Erro ao carregar entrevista');
+      } catch (err) {
+        const error = err as Error;
+        setError(error.message || 'Erro ao carregar entrevista');
         addToast({
           type: 'error',
           title: 'Erro',
