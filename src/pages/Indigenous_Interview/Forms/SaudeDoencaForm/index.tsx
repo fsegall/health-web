@@ -89,7 +89,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
 
-          dispatch({ type: 'SAUDE_DOENCA', payload: { id: uniqueId } })
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: uniqueId, show: false } })
 
           addToast({
             type: 'success',
