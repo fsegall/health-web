@@ -41,7 +41,6 @@ import {
   criacaoAnimaisComerOuVender,
   alimentosConsumidosOntem,
   renda30dOptions,
-  motivacaoNaoProduzirHorta,
 } from '../Indigenous_Interview/questions/SelectorOptions/options';
 
 // Função auxiliar para obter label de um valor
