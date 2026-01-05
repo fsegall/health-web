@@ -152,44 +152,12 @@ const IndigenousInterview: React.FC = () => {
 
     // Função para transformar dados da API no formato esperado pelos formulários
     const transformApiDataToFormFormat = (apiData: any) => {
-      // Normaliza responsavel_documentos - campo é varchar no banco, pode vir como string JSON ou string simples
-      // No banco pode estar salvo como: "[\"certidao_de_nascimento\"]" ou "{\"certidao_de_nascimento\"}"
-      let responsavel_documentos = [];
-      if (apiData?.responsavel_documentos !== null && apiData?.responsavel_documentos !== undefined && apiData?.responsavel_documentos !== '') {
-        if (Array.isArray(apiData.responsavel_documentos)) {
-          responsavel_documentos = apiData.responsavel_documentos;
-        } else if (typeof apiData.responsavel_documentos === 'string') {
-          const trimmed = apiData.responsavel_documentos.trim();
-          // Tenta fazer parse se parecer JSON (começa com [ ou {)
-          if (trimmed.startsWith('[') || trimmed.startsWith('{')) {
-            try {
-              const parsed = JSON.parse(apiData.responsavel_documentos);
-              if (Array.isArray(parsed)) {
-                responsavel_documentos = parsed;
-              } else if (typeof parsed === 'object' && parsed !== null) {
-                // Se for objeto JSON (como {"certidao_de_nascimento": true}), extrai as chaves como array
-                responsavel_documentos = Object.keys(parsed);
-              } else {
-                responsavel_documentos = [parsed];
-              }
-            } catch (e) {
-              // Se não for JSON válido, trata como string simples
-              responsavel_documentos = [apiData.responsavel_documentos];
-            }
-          } else {
-            // Se for string simples (não JSON), trata como valor único
-            responsavel_documentos = [apiData.responsavel_documentos];
-          }
-        } else {
-          responsavel_documentos = [apiData.responsavel_documentos];
-        }
-      }
-
       // Os dados básicos da entrevista vêm diretamente no objeto principal da API
+      // responsavel_documentos agora é array nativo no banco
       const basicInfo = {
         ...apiData,
         entrevista_indigena_id: apiData?.id,
-        responsavel_documentos,
+        responsavel_documentos: apiData?.responsavel_documentos || [],
       };
 
       return {
@@ -227,9 +195,7 @@ const IndigenousInterview: React.FC = () => {
 
           if (response?.data) {
             setIsOffline(false);
-            console.log('[DEBUG] responsavel_documentos da API:', response.data.responsavel_documentos, typeof response.data.responsavel_documentos);
             const transformedData = transformApiDataToFormFormat(response.data);
-            console.log('[DEBUG] responsavel_documentos transformado:', transformedData.indigenous_informacoes_basicas.responsavel_documentos);
             setInitialValues(transformedData);
           }
         } catch (error) {
