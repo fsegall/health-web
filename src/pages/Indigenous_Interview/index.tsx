@@ -152,31 +152,32 @@ const IndigenousInterview: React.FC = () => {
 
     // Função para transformar dados da API no formato esperado pelos formulários
     const transformApiDataToFormFormat = (apiData: any) => {
-      // Normaliza responsavel_documentos - pode vir como array, string JSON, ou string simples
+      // Normaliza responsavel_documentos - campo é varchar no banco, pode vir como string JSON ou string simples
+      // No banco pode estar salvo como: "[\"certidao_de_nascimento\"]" ou "{\"certidao_de_nascimento\"}"
       let responsavel_documentos = [];
-      if (apiData?.responsavel_documentos !== null && apiData?.responsavel_documentos !== undefined) {
+      if (apiData?.responsavel_documentos !== null && apiData?.responsavel_documentos !== undefined && apiData?.responsavel_documentos !== '') {
         if (Array.isArray(apiData.responsavel_documentos)) {
           responsavel_documentos = apiData.responsavel_documentos;
         } else if (typeof apiData.responsavel_documentos === 'string') {
-          // Tenta fazer parse se for JSON string
           const trimmed = apiData.responsavel_documentos.trim();
+          // Tenta fazer parse se parecer JSON (começa com [ ou {)
           if (trimmed.startsWith('[') || trimmed.startsWith('{')) {
             try {
               const parsed = JSON.parse(apiData.responsavel_documentos);
               if (Array.isArray(parsed)) {
                 responsavel_documentos = parsed;
               } else if (typeof parsed === 'object' && parsed !== null) {
-                // Se for objeto JSON (como {"certidao_de_nascimento"}), extrai as chaves como array
+                // Se for objeto JSON (como {"certidao_de_nascimento": true}), extrai as chaves como array
                 responsavel_documentos = Object.keys(parsed);
               } else {
                 responsavel_documentos = [parsed];
               }
             } catch (e) {
-              // Se não for JSON válido, trata como valor único
+              // Se não for JSON válido, trata como string simples
               responsavel_documentos = [apiData.responsavel_documentos];
             }
           } else {
-            // Se for string simples, trata como valor único
+            // Se for string simples (não JSON), trata como valor único
             responsavel_documentos = [apiData.responsavel_documentos];
           }
         } else {
