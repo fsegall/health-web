@@ -152,18 +152,33 @@ const IndigenousInterview: React.FC = () => {
 
     // Função para transformar dados da API no formato esperado pelos formulários
     const transformApiDataToFormFormat = (apiData: any) => {
+      // Normaliza responsavel_documentos - pode vir como array, string JSON, ou string simples
+      let responsavel_documentos = [];
+      if (apiData?.responsavel_documentos) {
+        if (Array.isArray(apiData.responsavel_documentos)) {
+          responsavel_documentos = apiData.responsavel_documentos;
+        } else if (typeof apiData.responsavel_documentos === 'string') {
+          try {
+            // Tenta fazer parse se for JSON string
+            responsavel_documentos = JSON.parse(apiData.responsavel_documentos);
+            // Se não for array após parse, transforma em array
+            if (!Array.isArray(responsavel_documentos)) {
+              responsavel_documentos = [responsavel_documentos];
+            }
+          } catch (e) {
+            // Se não for JSON válido, trata como valor único
+            responsavel_documentos = [apiData.responsavel_documentos];
+          }
+        } else {
+          responsavel_documentos = [apiData.responsavel_documentos];
+        }
+      }
+
       // Os dados básicos da entrevista vêm diretamente no objeto principal da API
       const basicInfo = {
         ...apiData,
         entrevista_indigena_id: apiData?.id,
-        // Garante que responsavel_documentos seja um array se vier como string
-        responsavel_documentos: Array.isArray(apiData?.responsavel_documentos)
-          ? apiData.responsavel_documentos
-          : apiData?.responsavel_documentos
-          ? (typeof apiData.responsavel_documentos === 'string' 
-              ? JSON.parse(apiData.responsavel_documentos)
-              : [apiData.responsavel_documentos])
-          : [],
+        responsavel_documentos,
       };
 
       return {
