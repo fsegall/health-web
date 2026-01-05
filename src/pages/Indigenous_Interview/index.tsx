@@ -432,6 +432,7 @@ const IndigenousInterview: React.FC = () => {
               dispatch={dispatch}
               isEditForm={id ? true : false}
               offline={isOffline}
+              offlineId={id}
               initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
               hasPreviousStepCompleted={id ? true : (!formState.formsSubmitted.indigenous_domicilio.show && (!formState.formsSubmitted.indigenous_saude_doenca.show || (id && initialValues && !initialValues?.indigenous_saude_doenca)))}
             />
