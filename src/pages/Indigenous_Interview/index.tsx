@@ -148,6 +148,7 @@ const IndigenousInterview: React.FC = () => {
     const [initialValues, setInitialValues] = useState<any>(null)
     const [formState, dispatch] = useReducer(reducer, initialState);
     const [isOffline, setIsOffline] = useState(false);
+    const [isOnlineInterview, setIsOnlineInterview] = useState(false); // Flag para identificar se é entrevista online (do banco)
     const { token } = useAuth();
 
     // Função para transformar dados da API no formato esperado pelos formulários
@@ -187,6 +188,7 @@ const IndigenousInterview: React.FC = () => {
 
         if (offlineResponse) {
           setIsOffline(true);
+          setIsOnlineInterview(false); // Entrevista offline, permite reiniciar
           setInitialValues(offlineResponse);
           return;
         }
@@ -201,6 +203,7 @@ const IndigenousInterview: React.FC = () => {
 
           if (response?.data) {
             setIsOffline(false);
+            setIsOnlineInterview(true); // Entrevista online do banco, não permite reiniciar
             const transformedData = transformApiDataToFormFormat(response.data);
             setInitialValues(transformedData);
           }
@@ -341,8 +344,9 @@ const IndigenousInterview: React.FC = () => {
             PenSSAN <span>|</span> Entrevista Indígena
             </div>
             <ButtonsContainer>
-            {/* Não mostra os controles quando está editando (quando há id na URL) */}
-            {!id && (
+            {/* Não mostra os controles apenas quando está editando uma entrevista online (do banco) */}
+            {/* Entrevistas offline (localStorage) ainda permitem reiniciar mesmo quando editando */}
+            {!isOnlineInterview && (
                 <>
                 <OfflineLabel offline={isOffline}>{isOffline ? 'Offline' : 'Online'}</OfflineLabel>
                 <Switch onColor="#c2024b" offColor="#dedede" onChange={() => setIsOffline(!isOffline)!} checked={isOffline} />
