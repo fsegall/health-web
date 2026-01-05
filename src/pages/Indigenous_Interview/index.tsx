@@ -20,6 +20,8 @@ import AlimentacaoNutricaoForm from './Forms/AlimentacaoNutricaoForm';
 import ApoioProtecaoSocialForm from './Forms/ApoioProtecaoSocialForm';
 import ICreateIndigenousOfflineInterviewDTO from './dtos/ICreateIndigenousOfflineInterviewDTO';
 import ICreateOfflineInterviewDTO from '../Interview/dtos/ICreateOfflineInterviewDTO';
+import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 interface StateFormat {
   formsSubmitted: {
@@ -145,25 +147,73 @@ const IndigenousInterview: React.FC = () => {
 
     const [initialValues, setInitialValues] = useState<any>(null)
     const [formState, dispatch] = useReducer(reducer, initialState);
-    const [isOffline, setIsOffline] = useState(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') ? true : false);
+    const [isOffline, setIsOffline] = useState(false);
+    const { token } = useAuth();
 
+    // Função para transformar dados da API no formato esperado pelos formulários
+    const transformApiDataToFormFormat = (apiData: any) => {
+      // Os dados básicos da entrevista vêm diretamente no objeto principal da API
+      const basicInfo = {
+        ...apiData,
+        entrevista_indigena_id: apiData?.id,
+        // Garante que responsavel_documentos seja um array se vier como string
+        responsavel_documentos: Array.isArray(apiData?.responsavel_documentos)
+          ? apiData.responsavel_documentos
+          : apiData?.responsavel_documentos
+          ? (typeof apiData.responsavel_documentos === 'string' 
+              ? JSON.parse(apiData.responsavel_documentos)
+              : [apiData.responsavel_documentos])
+          : [],
+      };
+
+      return {
+        indigenous_informacoes_basicas: basicInfo,
+        indigenous_demografico: apiData?.entrevista_indigena_demografico,
+        indigenous_domicilio: apiData?.entrevista_indigena_domicilio,
+        indigenous_saude_doenca: apiData?.entrevista_indigena_saude_doenca,
+        indigenous_alimentacao_nutricao: apiData?.entrevista_indigena_alimentacao_nutricao,
+        indigenous_apoio_protecao_social: apiData?.entrevista_indigena_apoio_financeiro,
+      };
+    };
 
     useEffect(() => {
-      function handleInitialData(id: string) {
-        const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
+      async function handleInitialData(id: string) {
+        // Primeiro tenta buscar no localStorage (offline)
+        const offlineData: { [key: string]: ICreateOfflineInterviewDTO } = JSON.parse(
+          localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}'
+        );
 
-        const response = offlineData[id]
+        const offlineResponse = offlineData[id];
 
-        if (response) {
-          setIsOffline(true)
-          setInitialValues(response)
+        if (offlineResponse) {
+          setIsOffline(true);
+          setInitialValues(offlineResponse);
+          return;
+        }
+
+        // Se não encontrou no localStorage, busca na API (online)
+        try {
+          const response = await api.get(`/indigenous-interviews/v2/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response?.data) {
+            setIsOffline(false);
+            const transformedData = transformApiDataToFormFormat(response.data);
+            setInitialValues(transformedData);
+          }
+        } catch (error) {
+          console.error('Erro ao carregar entrevista da API:', error);
+          // Se der erro, deixa initialValues como null (vai mostrar estado de carregamento)
         }
       }
 
-      if (id !== undefined) {
-        handleInitialData(id)
+      if (id && token) {
+        handleInitialData(id);
       }
-    }, [id])
+    }, [id, token])
 
     const resetForms = useCallback(
         () => {
