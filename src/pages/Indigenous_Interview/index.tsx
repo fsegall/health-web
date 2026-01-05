@@ -369,7 +369,7 @@ const IndigenousInterview: React.FC = () => {
               isEditForm={id ? true : false}
               offline={isOffline}
               initialValues={initialValues ? initialValues?.indigenous_demografico : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_informacoes_basicas.show}
+              hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_informacoes_basicas.show}
             />
           )
         ) : <SubmittedContainer>Módulo demográfico já cadastrado</SubmittedContainer>}
@@ -383,7 +383,7 @@ const IndigenousInterview: React.FC = () => {
               isEditForm={id ? true : false}
               offline={isOffline}
               initialValues={initialValues ? initialValues?.indigenous_domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_demografico.show}
+              hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_demografico.show}
             />
           )
         ) : <SubmittedContainer>Módulo domicílio já cadastrado</SubmittedContainer>}
@@ -413,7 +413,7 @@ const IndigenousInterview: React.FC = () => {
                   isEditForm={id ? true : false}
                   offline={isOffline}
                   initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-                  hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show}
+                  hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_domicilio.show}
                 />
               )
             ) : formState.formsSubmitted.indigenous_saude_doenca.id ? (
@@ -433,7 +433,7 @@ const IndigenousInterview: React.FC = () => {
               isEditForm={id ? true : false}
               offline={isOffline}
               initialValues={initialValues ? initialValues?.indigenous_alimentacao_nutricao : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_domicilio.show && (!formState.formsSubmitted.indigenous_saude_doenca.show || (id && initialValues && !initialValues?.indigenous_saude_doenca))}
+              hasPreviousStepCompleted={id ? true : (!formState.formsSubmitted.indigenous_domicilio.show && (!formState.formsSubmitted.indigenous_saude_doenca.show || (id && initialValues && !initialValues?.indigenous_saude_doenca)))}
             />
           )
         ) : <SubmittedContainer>Módulo alimentação e nutrição já cadastrado</SubmittedContainer>}
@@ -447,7 +447,7 @@ const IndigenousInterview: React.FC = () => {
               isEditForm={id ? true : false}
               offline={isOffline}
               initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
-              hasPreviousStepCompleted={!formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
+              hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
               resetForms={resetForms}
             />
           )
