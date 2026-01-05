@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -9,6 +9,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 
 import { saudeDoencaFormHelper, FormHelperType } from './helper';
 import { SaudeDoencaValidation } from '../../validation/schemas/saudeDoencaValidation';
@@ -25,9 +26,10 @@ interface SaudeDoencaFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean;
+  offlineId?: string | null;
 }
 
-const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false, offlineId = null }) => {
 
   const { token } = useAuth();
 
@@ -56,6 +58,27 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         ...data,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'morador_com_desabilidade',
+          'morador_exposto_veneno_lavoura',
+          'motivo_doencas_contato_veneno_lavoura',
+          'acidentes',
+          'ocorrencia_de_ameacas',
+          'ocorrencia_violencia_fisica',
+          'locais_impedido_de_entrar',
+          'lista_diagnosticos',
+          'lista_diagnosticos_doencas_infecciosas',
+          'lista_diagnosticos_outros',
+          'mulheres_e_gestacao',
+          'crianca_ate_6_meses_outros_alimentos',
+          'cuidadores_para_aldeia_sem_posto_de_saude',
+          'profissionais_acesso_a_equipe_de_saude',
+        ]));
+      }
+      
       const validatedData = await SaudeDoencaValidation.validate(values, {
         abortEarly: false,
       });
@@ -80,7 +103,18 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo alimentação e nutrição',
         });
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -89,7 +123,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         if (addData) {
           localStorage.setItem(`@Safety:indigenous-offline-interviews`, JSON.stringify(addData));
 
-          dispatch({ type: 'SAUDE_DOENCA', payload: { id: uniqueId } })
+          dispatch({ type: 'SAUDE_DOENCA', payload: { id: uniqueId, show: false } })
 
           addToast({
             type: 'success',
@@ -123,7 +157,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm, offlineId]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 
@@ -163,15 +197,41 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
     }
   }
 
-  if (isEditForm) {
-    SaudeDoencaFormRef.current?.setData({
-        //TODO: FAZER EDIT FORM
-    })
-  }
+  useEffect(() => {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && SaudeDoencaFormRef.current) {
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'morador_com_desabilidade',
+        'morador_exposto_veneno_lavoura',
+        'motivo_doencas_contato_veneno_lavoura',
+        'acidentes',
+        'ocorrencia_de_ameacas',
+        'ocorrencia_violencia_fisica',
+        'locais_impedido_de_entrar',
+        'lista_diagnosticos',
+        'lista_diagnosticos_doencas_infecciosas',
+        'lista_diagnosticos_outros',
+        'mulheres_e_gestacao',
+        'crianca_ate_6_meses_outros_alimentos',
+        'cuidadores_para_aldeia_sem_posto_de_saude',
+        'profissionais_acesso_a_equipe_de_saude',
+      ]);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (SaudeDoencaFormRef.current) {
+            console.log(`[SaudeDoencaForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            SaudeDoencaFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
+    }
+  }, [isEditForm, initialValues]);
   return (
     <StyledForm
       ref={SaudeDoencaFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `saude-${JSON.stringify(initialValues)}` : 'saude-new'}
     >
         {saudeDoencaFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
@@ -193,7 +253,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
                     </span>
                 ))}
                 {saudeDoencaFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}

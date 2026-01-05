@@ -7,7 +7,8 @@ import {
     OfflineButton,
     Container,
     CardSection,
-    SectionTitle
+    SubHeader,
+    ListTitle,
 } from './styles';
 import ICreateIndigenousOfflineInterviewDTO from '../Indigenous_Interview/dtos/ICreateIndigenousOfflineInterviewDTO';
 import IndigenousCard from './IndigenousCard';
@@ -95,12 +96,14 @@ const OfflineInterviews: React.FC = () => {
     }
 
     return (<Container>
-                <h1>Logs de Entrevistas Offline</h1>
+                <SubHeader>
+                    <ListTitle>Entrevistas Offline não Submetidas</ListTitle>
+                </SubHeader>
                 <OfflineButton onClick={handleOfflineInterviews} disabled={loading}>Enviar</OfflineButton>
                 <OfflineButton onClick={handleIndigenousOfflineInterviews} disabled={loading}>Enviar Entrevistas Indígenas</OfflineButton>
                 {!isObjectEmpty(indigenousInterviewsObject) &&
                   <>
-                    <SectionTitle>Entrevistas Indígenas:</SectionTitle>
+                    <ListTitle>Entrevistas Indígenas:</ListTitle>
                     <CardSection>
                       {handleData(indigenousInterviewsObject)?.map(([id, ind]: [string, any], index) => (
                         <IndigenousCard key={index} data={ind} index={index+1} id={id} />
@@ -110,7 +113,7 @@ const OfflineInterviews: React.FC = () => {
                 }
                 {!isObjectEmpty(interviewsObject) &&
                   <>
-                    <SectionTitle>Entrevistas Padrões:</SectionTitle>
+                    <ListTitle>Entrevistas Padrões:</ListTitle>
                     <CardSection>
                       {handleData(interviewsObject)?.map(([id, ind]: [string, any], index) => (
                         <InterviewCard key={index} data={ind} index={index+1} id={id} />

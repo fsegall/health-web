@@ -60,6 +60,14 @@ export const SectionTitle = styled.h2`
   align-items: center;
 `;
 
+export const SectionTitleGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
 export const ResponsiveMenu = styled.div`
   display: none;
   z-index: 999;

@@ -19,10 +19,10 @@ export const ApoioProtecaoSocialValidation = Yup.object().shape({
     then: Yup.string().nullable().required("Você precisa informar a renda"),
     otherwise: Yup.string().nullable().notRequired(),
   }),
-  recebeu_cesta_alimentos: Yup.string().nullable().when("cesta_alimentos", {
+  recebeu_cesta_alimentos: Yup.array().nullable().when("cesta_alimentos", {
       is: (val: any) => String(val) === "sim",
-      then: Yup.string().nullable().required("Você precisa preencher sobre a cesta de alimentos"),
-      otherwise: Yup.string().nullable().notRequired(),
+      then: Yup.array().nullable().required("Você precisa preencher sobre a cesta de alimentos"),
+      otherwise: Yup.array().nullable().notRequired(),
   }),
   motivo_nao_recebe_cesta_alimentos: Yup.string().nullable().when("cesta_alimentos", {
       is: (val: any) => String(val) !== "sim",

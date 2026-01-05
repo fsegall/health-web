@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import hasPermission, { Actions, Roles } from '../../authorization/constants';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 import { Container, FilterContainer, FilterSection, IndigenousCard, IndigenousSection, ListTitle, SubHeader } from './styles';
 import Pagination from '../../templates/PaginatedListTemplate/Pagination';
-import useFetch from '../../hooks/useFetch';
 import FilterSelect from '../../components/FilterSelect';
 
 interface IndigenousBasicInterviewResponse {
@@ -31,22 +31,9 @@ interface IndigenousInterviewData {
 
 const IndigenousDashboardSection: React.FC = () => {
   const { user, token } = useAuth();
-  const { data: interviewersData } = useFetch<any[]>(
-    process.env.REACT_APP_API_URL + '/users',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
-  const { data: projectsData } = useFetch<any[]>(
-    process.env.REACT_APP_API_URL + '/projects',
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  )
+  const history = useHistory();
+  const [interviewersData, setInterviewersData] = useState<any[]>([]);
+  const [projectsData, setProjectsData] = useState<any[]>([]);
   const [interviewerId, setInterviewerId] = useState('');
   const [projectId, setProjectId] = useState('');
   const interviewers = interviewersData?.map(i => ({
@@ -68,6 +55,33 @@ const IndigenousDashboardSection: React.FC = () => {
     },
     totalCount: 0
   });
+
+  // Fetch users and projects for filters
+  useEffect(() => {
+    async function fetchUsersAndProjects() {
+      try {
+        const [usersResponse, projectsResponse] = await Promise.all([
+          api.get('/users', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+          api.get('/projects', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }),
+        ]);
+        setInterviewersData(usersResponse.data);
+        setProjectsData(projectsResponse.data);
+      } catch (error) {
+        console.error('Error fetching users or projects:', error);
+      }
+    }
+    if (token) {
+      fetchUsersAndProjects();
+    }
+  }, [token]);
 
   useEffect(() => {
     async function fetchAllInterviews() {
@@ -140,7 +154,12 @@ const IndigenousDashboardSection: React.FC = () => {
         {loading ? "..." :
         interviews?.indigenous_interviews?.length === 0 ? <p>Nenhuma entrevista cadastrada</p> : (
           interviews?.indigenous_interviews?.map((i: IndigenousBasicInterviewResponse, index: number) => (
-            <IndigenousCard key={index} isInterviewer={user?.id === i?.entrevistador_id}>
+            <IndigenousCard 
+              key={index} 
+              isInterviewer={user?.id === i?.entrevistador_id}
+              onClick={() => history.push(`/view-indigenous-interview/${i.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <p><strong>ID:</strong> {i?.id}</p>
               <p><strong>Municipio:</strong> {i?.municipio}</p>
               <p><strong>Aldeia:</strong> {i?.aldeia_comunidade}</p>

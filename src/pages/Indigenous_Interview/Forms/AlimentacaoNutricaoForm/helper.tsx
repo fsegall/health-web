@@ -42,20 +42,20 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'EB2. No mês passado, vocês desta casa, comeram sempre comida da sua cultura?',
+        'EB2. (ADULTO) No mês passado teve dia ou dias que vocês deixaram de comer comida tradicional (da sua cultura), porque não tinha?',
       type: Select,
       props: {
-        name: 'comeu_sempre_comida_da_cultura',
+        name: 'deixaram_de_comer_comida_da_cultura',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
     },
     {
       label:
-        'EB3. No mês passado, vocês nesta casa, comeram sempre comida saudável (que faz bem para saúde)?',
+        'EB3. No mês passado, vocês nesta casa, deixaram de comer comida que faz bem para saúde, porque não tinha?',
       type: Select,
       props: {
-        name: 'comeram_sempre_comida_saudavel',
+        name: 'deixaram_de_comer_comida_saudavel',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },
@@ -65,10 +65,10 @@ export const alimentacaoNutricaoFormHelper: FormHelperType[][] = [
     },
     {
       label:
-        'EB4. No mês passado, na sua casa, teve comida todos os dias?',
+        'EB4. No mês passado, na sua casa, faltou comida algum dia ou alguns dias?',
       type: Select,
       props: {
-        name: 'teve_comida_todos_os_dias',
+        name: 'faltou_comida_algum_dia',
         isMulti: false,
         options: handleValueLabelOption(options?.yesOrNoOptions),
       },

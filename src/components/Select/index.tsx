@@ -9,40 +9,186 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, ...rest }) => {
+const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = false, onChange, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
+  const [internalValue, setInternalValue] = React.useState<any>(null);
+
+  // Efeito para aplicar defaultValue quando o componente monta
+  // Só aplica se defaultValue realmente existe (não é null, undefined ou string vazia)
+  useEffect(() => {
+    // Verifica se defaultValue existe e não é vazio
+    const hasDefaultValue = defaultValue !== null && 
+                            defaultValue !== undefined && 
+                            defaultValue !== '' &&
+                            !(Array.isArray(defaultValue) && defaultValue.length === 0);
+    
+    if (hasDefaultValue && selectRef.current && options && options.length > 0) {
+      const ref: any = selectRef.current;
+      if (!ref.state) return;
+      
+      if (rest.isMulti) {
+        const valueArray = Array.isArray(defaultValue) ? defaultValue : (typeof defaultValue === 'string' ? defaultValue.split(',') : []);
+        const selectedOptions = options.filter((v: any) => valueArray.includes(String(v.value)));
+        if (selectedOptions.length > 0) {
+          ref.state.value = selectedOptions;
+          setInternalValue(selectedOptions);
+        }
+      } else {
+        const selectedOption = options.find((v: any) => String(v.value) === String(defaultValue));
+        if (selectedOption) {
+          ref.state.value = selectedOption;
+          setInternalValue(selectedOption);
+        }
+      }
+    } else if (!hasDefaultValue) {
+      // Se não há defaultValue, garante que o estado interno está vazio
+      setInternalValue(null);
+    }
+  }, [defaultValue, options, rest.isMulti]);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
       getValue: (ref: any) => {
+        if (!ref || !ref.state) {
+          return rest.isMulti ? [] : '';
+        }
         if (rest.isMulti) {
-          if (!ref.state.value) {
+          if (!ref.state.value || (Array.isArray(ref.state.value) && ref.state.value.length === 0)) {
             return [];
           }
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
+          // Garante que retorna array de valores mesmo se value for array de objetos
+          return ref.state.value.map((option: OptionTypeBase) => option?.value || option);
         }
         if (!ref.state.value) {
           return '';
         }
-        return ref.state.value.value;
+        // Garante que retorna o valor mesmo se value for objeto
+        return ref.state.value?.value || ref.state.value || '';
       },
       setValue: (ref: any, value) => {
-        const selectedOption = ref.props.options.find((v: any) => v.value === value)
-        if (selectedOption) {
-          ref.state.value = selectedOption
-        } else {
-          const splittedValue = value?.split(',')
-          if (splittedValue?.length > 0) {
-            const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(v.value))
-            ref.state.value = selectedOptions
+        // Se value é null, undefined ou string vazia, limpa o campo
+        // Mas só seta o internalValue se realmente foi passado um valor vazio explícito
+        // Isso permite que campos novos comecem sem valor
+        if (value === null || value === undefined || value === '' || 
+            (Array.isArray(value) && value.length === 0)) {
+          if (ref && ref.state) {
+            ref.state.value = rest.isMulti ? [] : null;
           }
+          // Só atualiza internalValue se estamos realmente limpando um valor existente
+          // Verifica o estado atual do ref para evitar re-renders desnecessários
+          const currentValue = ref?.state?.value;
+          if (currentValue !== null && currentValue !== undefined && 
+              !(Array.isArray(currentValue) && currentValue.length === 0)) {
+            setInternalValue(rest.isMulti ? [] : null);
+          }
+          return;
+        }
+        
+        // Se options não estão disponíveis, tenta novamente após um pequeno delay
+        if (!ref || !ref.props || !ref.props.options || !ref.props.options.length) {
+          // Retry após as options estarem disponíveis - tenta várias vezes com delays maiores
+          let retryCount = 0;
+          const maxRetries = 20; // Tenta até 2 segundos (20 * 100ms)
+          const retryInterval = setInterval(() => {
+            retryCount++;
+            if (ref && ref.props && ref.props.options && ref.props.options.length) {
+              clearInterval(retryInterval);
+              // Re-executa a lógica de setValue
+              if (rest.isMulti && Array.isArray(value)) {
+                const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
+                if (ref.state) {
+                  ref.state.value = selectedOptions;
+                }
+                // Atualiza o estado interno para forçar re-render
+                setInternalValue(selectedOptions);
+                console.log(`[Select ${fieldName}] Valor setado após retry (array):`, selectedOptions);
+              } else if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
+                const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
+                if (splittedValue.length > 0) {
+                  const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
+                  if (ref.state) {
+                    ref.state.value = selectedOptions;
+                  }
+                  // Atualiza o estado interno para forçar re-render
+                  setInternalValue(selectedOptions);
+                  console.log(`[Select ${fieldName}] Valor setado após retry (string->array):`, selectedOptions);
+                }
+              } else if (!rest.isMulti) {
+                const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
+                if (ref.state) {
+                  ref.state.value = selectedOption || null;
+                }
+                // Atualiza o estado interno para forçar re-render
+                setInternalValue(selectedOption || null);
+                console.log(`[Select ${fieldName}] Valor setado após retry (single):`, selectedOption);
+              }
+            } else if (retryCount >= maxRetries) {
+              clearInterval(retryInterval);
+              console.warn(`[Select ${fieldName}] Não foi possível setar valor após ${maxRetries} tentativas (${maxRetries * 100}ms). Options não disponíveis. Valor que deveria ser setado:`, value);
+            }
+          }, 100); // Aumentado para 100ms por tentativa
+          return;
+        }
+        
+        // Se é multi-select e value é array, processa diretamente
+        if (rest.isMulti && Array.isArray(value)) {
+          const selectedOptions = ref.props.options.filter((v: any) => value.includes(v.value));
+          if (ref.state) {
+            ref.state.value = selectedOptions;
+          }
+          // Atualiza o estado interno para forçar re-render
+          setInternalValue(selectedOptions);
+          console.log(`[Select ${fieldName}] Valor setado (array):`, selectedOptions, 'de', value);
+          return;
+        }
+        
+        // Se é multi-select e value é string, faz split
+        if (rest.isMulti && typeof value === 'string' && value.trim() !== '') {
+          const splittedValue = value.split(',').filter((v: string) => v.trim() !== '');
+          if (splittedValue.length > 0) {
+            const selectedOptions = ref.props.options.filter((v: any) => splittedValue.includes(String(v.value)));
+            if (ref.state) {
+              ref.state.value = selectedOptions;
+            }
+            // Atualiza o estado interno para forçar re-render
+            setInternalValue(selectedOptions);
+            console.log(`[Select ${fieldName}] Valor setado (string->array):`, selectedOptions, 'de', value);
+          }
+          return;
+        }
+        
+        // Para select simples, busca a opção
+        if (!rest.isMulti) {
+          const selectedOption = ref.props.options.find((v: any) => String(v.value) === String(value));
+          if (ref.state) {
+            ref.state.value = selectedOption || null;
+          }
+          // Atualiza o estado interno para forçar re-render
+          setInternalValue(selectedOption || null);
+          console.log(`[Select ${fieldName}] Valor setado (single):`, selectedOption, 'de', value);
         }
       }
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, rest.isMulti, options]);
+
+  // Garante que o onChange personalizado seja chamado quando o valor mudar
+  const handleChange = (selectedOption: any, actionMeta: any) => {
+    // Atualiza o estado interno quando o usuário muda o valor
+    setInternalValue(selectedOption);
+    // Chama o onChange customizado se existir
+    if (onChange) {
+      onChange(selectedOption, actionMeta);
+    }
+  };
+
+  // Usa o valor interno se disponível (pode ser null para campos vazios)
+  // Se internalValue é null, não passa a prop value para deixar o ReactSelect não-controlado inicialmente
+  // Isso permite que o usuário preencha campos vazios normalmente
+  const displayValue = internalValue !== null ? internalValue : undefined;
+  
   return (
     <ReactSelect
       ref={selectRef}
@@ -50,7 +196,9 @@ const Select: React.FC<Props> = ({ name, options, initialValue, isDisabled = fal
       isDisabled={isDisabled}
       placeholder="Selecione"
       classNamePrefix="react-select"
+      {...(displayValue !== undefined ? { value: displayValue } : {})}
       {...rest}
+      onChange={handleChange}
     />
   );
 };

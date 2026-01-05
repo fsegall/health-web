@@ -1,4 +1,5 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -54,6 +55,12 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
     }
     try {
       InformacoesBasicasFormRef.current?.setErrors({});
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(data, preserveMultiSelectValues(data, initialValues, ['responsavel_documentos']));
+      }
+      
       const validatedData = await InformacoesBasicasValidation.validate(data, {
         abortEarly: false,
       });
@@ -134,20 +141,32 @@ const InformacoesBasicasForm: React.FC<InformacoesBasicasFormProps> = ({ dispatc
         });
       }
     }
-  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId]);
+  }, [addToast, user, offline, dispatch, token, history, isEditForm, offlineId, initialValues]);
 
 
-  if (isEditForm) {
-    console.log('não era')
-    InformacoesBasicasFormRef.current?.setData({
-      ...initialValues
-    })
-  }
+  useEffect(() => {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && InformacoesBasicasFormRef.current) {
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'responsavel_documentos',
+      ]);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (InformacoesBasicasFormRef.current) {
+            console.log(`[InformacoesBasicasForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            InformacoesBasicasFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
+    }
+  }, [isEditForm, initialValues]);
 
   return (
     <StyledForm
       ref={InformacoesBasicasFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `informacoes-${JSON.stringify(initialValues)}` : 'informacoes-new'}
     >
         {informacoesBasicasFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>

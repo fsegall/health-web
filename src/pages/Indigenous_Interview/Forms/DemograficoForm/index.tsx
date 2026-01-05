@@ -1,4 +1,5 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import * as Yup from 'yup';
 import { FormHandles, Scope } from '@unform/core';
 import {
@@ -8,7 +9,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
-
+import { maskDate } from '../../../../utils/maskDate';
 
 import { FormHelperType, extraDemograficoHelper, quadroDemograficoHelper } from './helper';
 import { DemograficoValidation } from '../../validation/schemas/demograficoValidation';
@@ -26,9 +27,10 @@ interface DemograficoFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted?: boolean
+  offlineId?: string | null;
 }
 
-const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false, hasPreviousStepCompleted = false, offlineId = null }) => {
 
   const { token } = useAuth();
 
@@ -71,6 +73,14 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
 
+        // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'povo_etnia',
+          'situacao_no_trabalho',
+        ]));
+      }
+
       const validatedData = await DemograficoValidation.validate(values, {
         abortEarly: false,
       });
@@ -94,7 +104,18 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo domicílio',
         });
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -115,10 +136,10 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         }
       }
     } catch (error) {
+      console.error('Erro no submit:', error);
       //@ts-ignore
-      const message = error?.data?.message
+      const message = error?.data?.message || error?.response?.data?.message
       if (message) {
-
         addToast({
           type: 'error',
           title: message,
@@ -126,7 +147,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
       if (error instanceof Yup.ValidationError) {
-        console.log(error);
+        console.log('Erro de validação:', error);
         const errors = getValidationErrors(error);
 
         DemograficoFormRef.current?.setErrors(errors);
@@ -136,15 +157,34 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           title: error.message,
           description: 'Todos os campos devem estar selecionados',
         });
+      } else if (!message) {
+        addToast({
+          type: 'error',
+          title: 'Erro ao enviar formulário',
+          description: 'Ocorreu um erro inesperado. Verifique o console para mais detalhes.',
+        });
       }
     }
-  }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted]);
+  }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted, isEditForm, offlineId]);
 
-    if (isEditForm) {
-        DemograficoFormRef.current?.setData({
-            //TODO: FAZER EDIT FORM
-        })
-    }
+    useEffect(() => {
+        if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && DemograficoFormRef.current) {
+            const normalizedValues = normalizeMultiSelectFields(initialValues, [
+                'povo_etnia',
+                'situacao_no_trabalho',
+            ]);
+            // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+            const attempts = [100, 300, 500, 1000];
+            attempts.forEach((delay, index) => {
+                setTimeout(() => {
+                    if (DemograficoFormRef.current) {
+                        console.log(`[DemograficoForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+                        DemograficoFormRef.current.setData(normalizedValues);
+                    }
+                }, delay);
+            });
+        }
+    }, [isEditForm, initialValues]);
     const baseForm = (id: number) => {
         return {
             id: id,
@@ -173,6 +213,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
   const [formDependencies, setFormDependencies] = useState<any>({})
 
   function handleDependencies(element: FormHelperType, index: number, value: any) {
+    console.log('[handleDependencies] Morador index:', index, 'Campo:', element.props.name, 'Valor:', value);
     let currentForm: any = {
       ...formDependencies,
       [index]: {
@@ -180,6 +221,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         [element.props.name]: value
       }
     }
+    console.log('[handleDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
@@ -210,37 +252,55 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
 
   function handleRegularDisabled(element: FormHelperType): boolean {
       const dependencies: { [key: string]: string[] } | any = element?.dependencies
+      if (!dependencies) {
+        return false
+      }
       const allDisabledValidations = Object.entries(dependencies)?.map((obj: any) => {
         let isDisabled = true
         const found = formDependencies[obj?.[0]]
-        if (found) {
-          if (obj?.[1]?.find((v: any) => (v === found || found?.includes(v)))) {
-            isDisabled = false
+        if (found !== undefined && found !== null && found !== '') {
+          // Se found é um array (campo multi-select), verifica se algum valor do array está na lista permitida
+          if (Array.isArray(found)) {
+            if (found.length > 0 && obj?.[1]?.some((v: any) => found.includes(String(v)))) {
+              isDisabled = false
+            }
+          } else {
+            // Se found é um valor simples, verifica se está na lista permitida
+            if (obj?.[1]?.some((v: any) => String(v) === String(found))) {
+              isDisabled = false
+            }
           }
         }
         return isDisabled
       })
-      if (allDisabledValidations?.every(v => v === false)) {
-        return false
-      } else {
-        return true
-      }
+      const finalResult = allDisabledValidations?.every(v => v === false) ? false : true
+      return finalResult
     }
 
   function handleRegularDependencies(element: FormHelperType, value: any) {
+    // Evita atualização desnecessária se o valor não mudou
+    const currentValue = formDependencies[element.props.name];
+    if (currentValue === value) {
+      console.log('[handleRegularDependencies] Valor não mudou, ignorando atualização. Campo:', element.props.name, 'Valor:', value);
+      return;
+    }
+    console.log('[handleRegularDependencies] Campo:', element.props.name, 'Valor:', value, 'Valor anterior:', currentValue);
     let currentForm: any = {
       ...formDependencies,
       [element.props.name]: value
     }
+    console.log('[handleRegularDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
   function handleArrayDependencies(element: FormHelperType, value: any) {
     const arrayOfOptions = value?.map((v: any) => v?.value)
+    console.log('[handleArrayDependencies] Campo:', element.props.name, 'Valor original:', value, 'Array extraído:', arrayOfOptions);
     let currentForm: any = {
       ...formDependencies,
       [element.props.name]: arrayOfOptions
     }
+    console.log('[handleArrayDependencies] formDependencies atualizado:', currentForm);
     setFormDependencies(currentForm)
   }
 
@@ -269,6 +329,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
     <StyledForm
       ref={DemograficoFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `demografico-${JSON.stringify(initialValues)}` : 'demografico-new'}
     >
       <section>
         <Label>Quantas pessoas são moradoras permanentes desta casa? (excluir pessoas que estão apenas de passagem ou visitando, parentes ou não)</Label>
@@ -287,6 +348,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                 <Input name="id" value={index+1} type="number" />
               </span>
               {quadroDemograficoHelper?.map((element: FormHelperType, elementIndex: number) => {
+                const isDateField = element.props.name === 'data_nascimento';
                 return (
                   <span key={`${elementIndex}:${element.label}`}>
                     {incrementCounterUpToLength(quadroDemograficoHelper.length)}
@@ -294,8 +356,28 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                     <element.type
                       {...element.props}
                       isDisabled={element?.dependencies && handleDisabled(element, index+1)}
-                      onChange={(e: any) => element?.hasDependencies && handleDependencies(element, index+1, e?.target?.value)}
-                      onMount={(val: any) => element?.hasDependencies && handleDependencies(element, index+1, val)}
+                      onChange={(e: any) => {
+                        let value = e?.target?.value;
+                        // Aplica máscara de data se for o campo data_nascimento
+                        if (isDateField && value !== undefined && value !== null) {
+                          const maskedValue = maskDate(value);
+                          if (maskedValue !== value) {
+                            value = maskedValue;
+                            e.target.value = maskedValue;
+                          }
+                        }
+                        // Evita loop infinito - só atualiza se o valor mudou
+                        const currentValue = formDependencies?.[index+1]?.[element.props.name];
+                        if (value !== currentValue && element?.hasDependencies) {
+                          console.log('[onChange Input] Campo:', element.props.name, 'Valor:', value);
+                          handleDependencies(element, index+1, value);
+                        }
+                      }}
+                      onMount={(val: any) => {
+                        // onMount é chamado apenas uma vez na montagem do componente
+                        // Não atualizamos dependências aqui para evitar loops
+                        // As dependências serão atualizadas apenas no onChange
+                      }}
                     />
                   </span>
                   )
@@ -316,17 +398,30 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
                   {...element.props}
                   isDisabled={element?.dependencies && handleRegularDisabled(element)}
                   onChange={(e: any) => {
+                    console.log('[onChange Select] Campo:', element.props.name, 'Evento completo:', e, 'e?.value:', e?.value, 'e tipo:', typeof e, 'hasDependencies:', element?.hasDependencies, 'isMulti:', element?.props?.isMulti);
+                    // react-select passa o objeto da opção no onChange: {value: "...", label: "..."}
+                    // Para campos não multi, e será um objeto ou null
+                    // Para campos multi, e será um array de objetos
                     if (element?.props?.isMulti !== true) {
-                      element?.hasDependencies && handleRegularDependencies(element, e?.value)
+                      // e pode ser null quando o usuário limpa a seleção
+                      const value = e === null ? null : (e?.value || e || null);
+                      console.log('[onChange Select] Valor extraído:', value, 'Tipo:', typeof value);
+                      if (element?.hasDependencies) {
+                        console.log('[onChange Select] Chamando handleRegularDependencies com valor:', value);
+                        handleRegularDependencies(element, value)
+                      }
                     } else {
-                      element?.hasDependencies && handleArrayDependencies(element, e)
+                      if (element?.hasDependencies) {
+                        console.log('[onChange Select] Chamando handleArrayDependencies com valor:', e);
+                        handleArrayDependencies(element, e)
+                      }
                     }
                   }}
                 />
               </span>
             ))}
             {extraDemograficoHelper.length === sectionIndex + 1 && (
-              <Button type="submit">Enviar</Button>
+              <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
             )}
           </section>
         ))}

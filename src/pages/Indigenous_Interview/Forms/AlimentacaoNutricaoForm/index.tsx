@@ -1,10 +1,11 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { StyledForm, Label } from '../form-styles';
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 
 import ICreateAlimentacaoNutricaoDTO from '../../dtos/ICreateAlimentacaoNutricaoDTO';
 import { alimentacaoNutricaoFormHelper, FormHelperType } from './helper';
@@ -19,6 +20,7 @@ interface AlimentacaoNutricaoFormProps {
   initialValues?: any;
   isEditForm?: boolean;
   hasPreviousStepCompleted: boolean;
+  offlineId?: string | null;
 }
 
 const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
@@ -27,6 +29,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
   initialValues = {},
   isEditForm = false,
   hasPreviousStepCompleted = false,
+  offlineId = null,
 }) => {
   const { token } = useAuth();
 
@@ -42,6 +45,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
 
   const handleSubmit = useCallback(
     async (data: ICreateAlimentacaoNutricaoDTO) => {
+      console.log('[AlimentacaoNutricaoForm] handleSubmit chamado', { isEditForm, offline, hasPreviousStepCompleted });
       if (!hasPreviousStepCompleted) {
         addToast({
           type: 'error',
@@ -56,12 +60,33 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
           ...data,
           entrevista_indigena_id: initialValues?.entrevista_indigena_id,
         };
+        
+        console.log('[AlimentacaoNutricaoForm] Valores antes de preserveMultiSelectValues', values);
+        
+        // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+        if (isEditForm && initialValues) {
+          const preserved = preserveMultiSelectValues(values, initialValues, [
+            'motivo_morador_nao_faz_horta',
+            'alimentos_da_horta',
+            'coleta_castanhas_cocos_frutas',
+            'funcao_cultivo_horta',
+            'origem_semente_plantio',
+            'lista_dificuldades_com_horta',
+            'lista_animais_de_criacao_alimentacao_ou_venda',
+            'alimentos_consumidos_dia_anterior',
+          ]);
+          Object.assign(values, preserved);
+          console.log('[AlimentacaoNutricaoForm] Valores após preserveMultiSelectValues', values);
+        }
+        
+        console.log('[AlimentacaoNutricaoForm] Iniciando validação Yup');
         const validatedData = await AlimentacaoNutricaoValidation.validate(
           values,
           {
             abortEarly: false,
           },
         );
+        console.log('[AlimentacaoNutricaoForm] Validação Yup passou', validatedData);
 
         const indigenous_alimentacao_nutricao = {
           ...values,
@@ -94,11 +119,26 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
               'Você já pode prosseguir para o módulo apoio e proteção social',
           });
         } else {
-          const uniqueId = JSON.parse(
-            localStorage.getItem(
-              '@Safety:current-indigenous-offline-interview-id',
-            ) || '',
-          );
+          console.log('[AlimentacaoNutricaoForm] Modo offline - buscando uniqueId');
+          // Quando está editando (isEditForm), usa o offlineId (id da URL)
+          // Quando está criando novo, busca do localStorage
+          let uniqueId: string | null = null;
+          if (isEditForm && offlineId) {
+            uniqueId = offlineId;
+            console.log('[AlimentacaoNutricaoForm] Editando - usando offlineId como uniqueId', uniqueId);
+          } else {
+            uniqueId = JSON.parse(
+              localStorage.getItem(
+                '@Safety:current-indigenous-offline-interview-id',
+              ) || 'null',
+            );
+            console.log('[AlimentacaoNutricaoForm] Criando novo - uniqueId do localStorage', uniqueId);
+          }
+          
+          if (!uniqueId) {
+            console.error('[AlimentacaoNutricaoForm] uniqueId não encontrado');
+            throw new Error('ID da entrevista não encontrado');
+          }
 
           const offlineInterviews: {
             [key: string]: ICreateIndigenousOfflineInterviewDTO;
@@ -106,6 +146,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
             localStorage.getItem('@Safety:indigenous-offline-interviews') ||
               '{}',
           );
+          console.log('[AlimentacaoNutricaoForm] offlineInterviews carregados', Object.keys(offlineInterviews));
 
           const addData = offlineInterviews.hasOwnProperty(uniqueId)
             ? {
@@ -117,11 +158,14 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
               }
             : false;
 
+          console.log('[AlimentacaoNutricaoForm] addData', addData ? 'válido' : 'false');
+
           if (addData) {
             localStorage.setItem(
               `@Safety:indigenous-offline-interviews`,
               JSON.stringify(addData),
             );
+            console.log('[AlimentacaoNutricaoForm] Dados salvos no localStorage');
 
             dispatch({
               type: 'ALIMENTACAO_NUTRICAO',
@@ -135,16 +179,20 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
               description:
                 'Você já pode prosseguir para o módulo apoio e proteção social',
             });
+            console.log('[AlimentacaoNutricaoForm] Toast de sucesso exibido');
           } else {
+            console.error('[AlimentacaoNutricaoForm] addData é false - uniqueId não encontrado');
             throw new Error(
               'Você precisa adicionar adicionar o módulo anterior antes no modo offline',
             );
           }
         }
       } catch (error) {
+        console.error('[AlimentacaoNutricaoForm] Erro no handleSubmit', error);
         //@ts-ignore
         const message = error?.data?.message;
         if (message) {
+          console.error('[AlimentacaoNutricaoForm] Erro da API', message);
           addToast({
             type: 'error',
             title: message,
@@ -152,7 +200,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
           });
         }
         if (error instanceof Yup.ValidationError) {
-          console.log(error);
+          console.error('[AlimentacaoNutricaoForm] Erro de validação Yup', error);
           const errors = getValidationErrors(error);
 
           AlimentacaoNutricaoFormRef.current?.setErrors(errors);
@@ -172,6 +220,8 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
       initialValues,
       token,
       hasPreviousStepCompleted,
+      isEditForm,
+      offlineId,
     ],
   );
 
@@ -216,14 +266,37 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
     setFormDependencies(currentForm);
   }
 
-  if (isEditForm) {
-    AlimentacaoNutricaoFormRef.current?.setData({
-      //TODO: FAZER EDIT FORM
-    });
-  }
+  useEffect(() => {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && AlimentacaoNutricaoFormRef.current) {
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'motivo_morador_nao_faz_horta',
+        'alimentos_da_horta',
+        'coleta_castanhas_cocos_frutas',
+        'funcao_cultivo_horta',
+        'origem_semente_plantio',
+        'lista_dificuldades_com_horta',
+        'lista_animais_de_criacao_alimentacao_ou_venda',
+        'alimentos_consumidos_dia_anterior',
+      ]);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (AlimentacaoNutricaoFormRef.current) {
+            console.log(`[AlimentacaoNutricaoForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            AlimentacaoNutricaoFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
+    }
+  }, [isEditForm, initialValues]);
 
   return (
-    <StyledForm ref={AlimentacaoNutricaoFormRef} onSubmit={handleSubmit}>
+    <StyledForm 
+      ref={AlimentacaoNutricaoFormRef} 
+      onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `alimentacao-${JSON.stringify(initialValues)}` : 'alimentacao-new'}
+    >
       {alimentacaoNutricaoFormHelper?.map(
         (s: FormHelperType[], sectionIndex: number) => (
           <section key={sectionIndex}>
@@ -247,7 +320,7 @@ const AlimentacaoNutricaoForm: React.FC<AlimentacaoNutricaoFormProps> = ({
               </span>
             ))}
             {alimentacaoNutricaoFormHelper?.length === sectionIndex + 1 &&
-              !isEditForm && <Button type='submit'>Enviar</Button>}
+              <Button type='submit'>{isEditForm ? 'Salvar' : 'Enviar'}</Button>}
           </section>
         ),
       )}

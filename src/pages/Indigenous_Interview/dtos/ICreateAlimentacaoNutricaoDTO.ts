@@ -4,9 +4,9 @@ export default interface ICreateAlimentacaoNutricaoDTO {
 
   possui_moradores_menores_de_16?: string;
   preocupação_nao_conseguir_comida?: string;
-  comeu_sempre_comida_da_cultura?: string;
-  comeram_sempre_comida_saudavel?: string;
-  teve_comida_todos_os_dias?: string;
+  deixaram_de_comer_comida_da_cultura?: string;
+  deixaram_de_comer_comida_saudavel?: string;
+  faltou_comida_algum_dia?: string;
   dia_todo_sem_comer?: string;
   comeu_menos_para_deixar_comida_crianca?: string;
   crianca_comeu_menos?: string;

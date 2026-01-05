@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import {
@@ -8,6 +8,7 @@ import {
 import Button from '../../../../components/Button';
 import { useToast } from '../../../../hooks/toast';
 import getValidationErrors from '../../../../utils/getValidationErrors';
+import { normalizeMultiSelectFields, preserveMultiSelectValues } from '../../../../utils/normalizeMultiSelectFields';
 import { useHistory } from 'react-router-dom';
 import { apoioProtecaoSocialFormHelper, FormHelperType } from './helper';
 import ICreateApoioProtecaoSocialDTO from '../../dtos/ICreateApoioProtecaoSocialDTO';
@@ -25,6 +26,7 @@ interface ApoioProtecaoSocialFormProps {
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean
   resetForms(): void
+  offlineId?: string | null;
 }
 
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
@@ -33,7 +35,8 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
   initialValues = {},
   isEditForm = false,
   hasPreviousStepCompleted = false,
-  resetForms
+  resetForms,
+  offlineId = null
 }) => {
 
   const { token } = useAuth();
@@ -65,6 +68,14 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         ...data,
         entrevista_indigena_id: initialValues?.entrevista_indigena_id,
       }
+      
+      // Preserva valores existentes de campos multi-select se estiverem vazios mas existem em initialValues
+      if (isEditForm && initialValues) {
+        Object.assign(values, preserveMultiSelectValues(values, initialValues, [
+          'recebeu_cesta_alimentos',
+        ]));
+      }
+      
       const validatedData = await ApoioProtecaoSocialValidation.validate(values, {
         abortEarly: false,
       });
@@ -104,7 +115,18 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         });
         history.push('/dashboard');
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -149,7 +171,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms]);
+  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms, isEditForm, offlineId]);
 
 
   const [formDependencies, setFormDependencies] = useState<any>({})
@@ -181,16 +203,29 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
     }
   }
 
-  if (isEditForm) {
-    ApoioProtecaoSocialFormRef.current?.setData({
-        //TODO: FAZER EDIT FORM
-    })
-  }
+  useEffect(() => {
+    if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && ApoioProtecaoSocialFormRef.current) {
+      const normalizedValues = normalizeMultiSelectFields(initialValues, [
+        'recebeu_cesta_alimentos',
+      ]);
+      // Tenta múltiplas vezes com delays crescentes para garantir que os campos estejam registrados
+      const attempts = [100, 300, 500, 1000];
+      attempts.forEach((delay, index) => {
+        setTimeout(() => {
+          if (ApoioProtecaoSocialFormRef.current) {
+            console.log(`[ApoioProtecaoSocialForm] Tentativa ${index + 1} de setData após ${delay}ms`);
+            ApoioProtecaoSocialFormRef.current.setData(normalizedValues);
+          }
+        }, delay);
+      });
+    }
+  }, [isEditForm, initialValues]);
 
   return (
     <StyledForm
       ref={ApoioProtecaoSocialFormRef}
       onSubmit={handleSubmit}
+      key={isEditForm && initialValues ? `apoio-${JSON.stringify(initialValues)}` : 'apoio-new'}
     >
         {apoioProtecaoSocialFormHelper?.map((s: FormHelperType[], sectionIndex: number) => (
             <section key={sectionIndex}>
@@ -206,7 +241,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
                     </span>
                 ))}
                 {apoioProtecaoSocialFormHelper?.length === sectionIndex+1 && (
-                    !isEditForm && <Button type="submit">Enviar</Button>
+                    <Button type="submit">{isEditForm ? 'Salvar' : 'Enviar'}</Button>
                 )}
             </section>
         ))}
