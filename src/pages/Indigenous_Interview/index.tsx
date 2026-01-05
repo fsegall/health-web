@@ -227,7 +227,9 @@ const IndigenousInterview: React.FC = () => {
 
           if (response?.data) {
             setIsOffline(false);
+            console.log('[DEBUG] responsavel_documentos da API:', response.data.responsavel_documentos, typeof response.data.responsavel_documentos);
             const transformedData = transformApiDataToFormFormat(response.data);
+            console.log('[DEBUG] responsavel_documentos transformado:', transformedData.indigenous_informacoes_basicas.responsavel_documentos);
             setInitialValues(transformedData);
           }
         } catch (error) {
