@@ -26,9 +26,10 @@ interface SaudeDoencaFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean;
+  offlineId?: string | null;
 }
 
-const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false, offlineId = null }) => {
 
   const { token } = useAuth();
 
@@ -102,7 +103,18 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo alimentação e nutrição',
         });
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -145,7 +157,7 @@ const SaudeDoencaForm: React.FC<SaudeDoencaFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm, offlineId]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

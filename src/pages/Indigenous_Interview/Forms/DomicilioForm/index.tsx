@@ -25,9 +25,10 @@ interface DomiciliosFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean;
+  offlineId?: string | null;
 }
 
-const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, initialValues = {}, isEditForm = false, hasPreviousStepCompleted = false, offlineId = null }) => {
 
   const { token } = useAuth();
 
@@ -93,7 +94,18 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
           description: 'Você já pode prosseguir para o módulo doença e saúde',
         });
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -136,7 +148,7 @@ const DomiciliosForm: React.FC<DomiciliosFormProps> = ({ dispatch, offline, init
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm]);
+  }, [addToast, offline, dispatch, initialValues, token, hasPreviousStepCompleted, isEditForm, offlineId]);
 
   const [formDependencies, setFormDependencies] = useState<any>({})
 

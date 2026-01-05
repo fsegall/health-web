@@ -26,6 +26,7 @@ interface ApoioProtecaoSocialFormProps {
   isEditForm?: boolean
   hasPreviousStepCompleted: boolean
   resetForms(): void
+  offlineId?: string | null;
 }
 
 const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
@@ -34,7 +35,8 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
   initialValues = {},
   isEditForm = false,
   hasPreviousStepCompleted = false,
-  resetForms
+  resetForms,
+  offlineId = null
 }) => {
 
   const { token } = useAuth();
@@ -113,7 +115,18 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         });
         history.push('/dashboard');
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -158,7 +171,7 @@ const ApoioProtecaoSocialForm: React.FC<ApoioProtecaoSocialFormProps> = ({
         });
       }
     }
-  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms, isEditForm]);
+  }, [addToast, offline, dispatch, initialValues, history, token, hasPreviousStepCompleted, resetForms, isEditForm, offlineId]);
 
 
   const [formDependencies, setFormDependencies] = useState<any>({})

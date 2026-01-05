@@ -382,6 +382,7 @@ const IndigenousInterview: React.FC = () => {
               dispatch={dispatch}
               isEditForm={id ? true : false}
               offline={isOffline}
+              offlineId={id}
               initialValues={initialValues ? initialValues?.indigenous_domicilio : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
               hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_demografico.show}
             />
@@ -412,6 +413,7 @@ const IndigenousInterview: React.FC = () => {
                   dispatch={dispatch}
                   isEditForm={id ? true : false}
                   offline={isOffline}
+                  offlineId={id}
                   initialValues={initialValues ? initialValues?.indigenous_saude_doenca : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
                   hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_domicilio.show}
                 />
@@ -447,6 +449,7 @@ const IndigenousInterview: React.FC = () => {
               dispatch={dispatch}
               isEditForm={id ? true : false}
               offline={isOffline}
+              offlineId={id}
               initialValues={initialValues ? initialValues?.indigenous_apoio_protecao_social : { entrevista_indigena_id: formState?.formsSubmitted?.indigenous_informacoes_basicas?.id }}
               hasPreviousStepCompleted={id ? true : !formState.formsSubmitted.indigenous_alimentacao_nutricao.show}
               resetForms={resetForms}

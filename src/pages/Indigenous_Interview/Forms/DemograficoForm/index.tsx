@@ -27,9 +27,10 @@ interface DemograficoFormProps {
   initialValues?: any
   isEditForm?: boolean
   hasPreviousStepCompleted?: boolean
+  offlineId?: string | null;
 }
 
-const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false, hasPreviousStepCompleted = false }) => {
+const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, initialValues, isEditForm = false, hasPreviousStepCompleted = false, offlineId = null }) => {
 
   const { token } = useAuth();
 
@@ -103,7 +104,18 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
           description: 'Você já pode prosseguir para o módulo domicílio',
         });
       } else {
-        const uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || "");
+        // Quando está editando (isEditForm), usa o offlineId (id da URL)
+        // Quando está criando novo, busca do localStorage
+        let uniqueId: string | null = null;
+        if (isEditForm && offlineId) {
+          uniqueId = offlineId;
+        } else {
+          uniqueId = JSON.parse(localStorage.getItem('@Safety:current-indigenous-offline-interview-id') || 'null');
+        }
+        
+        if (!uniqueId) {
+          throw new Error('ID da entrevista não encontrado');
+        }
 
         const offlineInterviews: { [key: string]: ICreateIndigenousOfflineInterviewDTO } = JSON.parse(localStorage.getItem('@Safety:indigenous-offline-interviews') || '{}');
 
@@ -153,7 +165,7 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         });
       }
     }
-  }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted, isEditForm]);
+  }, [addToast, offline, initialValues, token, dispatch, hasPreviousStepCompleted, isEditForm, offlineId]);
 
     useEffect(() => {
         if (isEditForm && initialValues && Object.keys(initialValues).length > 0 && DemograficoFormRef.current) {
