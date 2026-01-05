@@ -162,10 +162,14 @@ const IndigenousInterview: React.FC = () => {
           const trimmed = apiData.responsavel_documentos.trim();
           if (trimmed.startsWith('[') || trimmed.startsWith('{')) {
             try {
-              responsavel_documentos = JSON.parse(apiData.responsavel_documentos);
-              // Se não for array após parse, transforma em array
-              if (!Array.isArray(responsavel_documentos)) {
-                responsavel_documentos = [responsavel_documentos];
+              const parsed = JSON.parse(apiData.responsavel_documentos);
+              if (Array.isArray(parsed)) {
+                responsavel_documentos = parsed;
+              } else if (typeof parsed === 'object' && parsed !== null) {
+                // Se for objeto JSON (como {"certidao_de_nascimento"}), extrai as chaves como array
+                responsavel_documentos = Object.keys(parsed);
+              } else {
+                responsavel_documentos = [parsed];
               }
             } catch (e) {
               // Se não for JSON válido, trata como valor único
