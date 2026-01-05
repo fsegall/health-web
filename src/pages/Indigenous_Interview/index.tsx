@@ -341,7 +341,9 @@ const IndigenousInterview: React.FC = () => {
             PenSSAN <span>|</span> Entrevista Indígena
             </div>
             <ButtonsContainer>
-            {!initialValues?.project_name && (
+            {/* Mostra os controles apenas quando não está editando uma entrevista online (do banco) */}
+            {/* Quando id existe e isOffline é false, significa que é uma entrevista online sendo editada */}
+            {!(id && !isOffline) && (
                 <>
                 <OfflineLabel offline={isOffline}>{isOffline ? 'Offline' : 'Online'}</OfflineLabel>
                 <Switch onColor="#c2024b" offColor="#dedede" onChange={() => setIsOffline(!isOffline)!} checked={isOffline} />
