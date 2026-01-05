@@ -84,15 +84,9 @@ const DemograficoForm: React.FC<DemograficoFormProps> = ({ dispatch, offline, in
         abortEarly: false,
       });
 
-      // Converte situacao_no_trabalho de array para string (backend espera string)
-      const situacaoTrabalho = validatedData && Array.isArray(validatedData.situacao_no_trabalho) 
-        ? validatedData.situacao_no_trabalho.join(',') 
-        : validatedData?.situacao_no_trabalho;
-
       const indigenous_demografico = {
         ...values,
         ...validatedData,
-        situacao_no_trabalho: situacaoTrabalho,
       };
 
       if (!offline) {

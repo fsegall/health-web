@@ -63,10 +63,10 @@ export const SaudeDoencaValidation = Yup.object().shape({
       then: Yup.string().nullable().required("Você precisa preencher sobre leite materno para crianças até 6 meses"),
       otherwise: Yup.string().nullable().notRequired(),
     }),
-    crianca_ate_6_meses_outros_alimentos: Yup.string().nullable().when("crianca_ate_6_meses", {
+    crianca_ate_6_meses_outros_alimentos: Yup.array().nullable().when("crianca_ate_6_meses", {
       is: (val: any) => String(val) === "sim",
-      then: Yup.string().nullable().required("Você precisa preencher sobre outros alimentos para crianças até 6 meses"),
-      otherwise: Yup.string().nullable().notRequired(),
+      then: Yup.array().nullable().required("Você precisa preencher sobre outros alimentos para crianças até 6 meses"),
+      otherwise: Yup.array().nullable().notRequired(),
     }),
     crianca_entre_6_meses_e_2_anos: Yup.string().required('Você precisa preencher sobre crianças entre 6 meses e 2 anos'),
     crianca_entre_6_meses_e_2_anos_leite_do_peito: Yup.string().nullable().when("crianca_entre_6_meses_e_2_anos", {
@@ -75,20 +75,20 @@ export const SaudeDoencaValidation = Yup.object().shape({
       otherwise: Yup.string().nullable().notRequired(),
     }),
     aldeia_possui_posto_de_saude: Yup.string().required('Você precisa preencher sobre a presença de posto de saúde na aldeia'),
-    cuidadores_para_aldeia_sem_posto_de_saude: Yup.string().nullable().when("aldeia_possui_posto_de_saude", {
+    cuidadores_para_aldeia_sem_posto_de_saude: Yup.array().nullable().when("aldeia_possui_posto_de_saude", {
       is: (val: any) => [
         "false", "ns-nr"
       ].find(v => v === String(val)),
-      then: Yup.string().nullable().required("Você precisa preencher sobre quem realiza os cuidados na aldeia"),
-      otherwise: Yup.string().nullable().notRequired(),
+      then: Yup.array().nullable().required("Você precisa preencher sobre quem realiza os cuidados na aldeia"),
+      otherwise: Yup.array().nullable().notRequired(),
     }),
     acesso_a_equipe_de_saude: Yup.string().required('Você precisa preencher sobre o acesso a equipe de saúde'),
-    profissionais_acesso_a_equipe_de_saude: Yup.string().nullable().when("acesso_a_equipe_de_saude", {
+    profissionais_acesso_a_equipe_de_saude: Yup.array().nullable().when("acesso_a_equipe_de_saude", {
       is: (val: any) => [
         "todos_os_dias", "uma_vez_por_semana", "uma_vez_por_mes", "raramente"
       ].find(v => v === String(val)),
-      then: Yup.string().nullable().required("Você precisa preencher sobre os profissionais da equipe de saúde"),
-      otherwise: Yup.string().nullable().notRequired(),
+      then: Yup.array().nullable().required("Você precisa preencher sobre os profissionais da equipe de saúde"),
+      otherwise: Yup.array().nullable().notRequired(),
     }),
     morador_internado: Yup.string().required('Você precisa preencher se houve algum morador internado'),
     possui_morador_menor_ou_igual_a_5_anos: Yup.string().required('Você precisa preencher se possui criança menor ou igual a 5 anos'),
