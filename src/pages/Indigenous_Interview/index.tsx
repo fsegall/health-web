@@ -154,19 +154,25 @@ const IndigenousInterview: React.FC = () => {
     const transformApiDataToFormFormat = (apiData: any) => {
       // Normaliza responsavel_documentos - pode vir como array, string JSON, ou string simples
       let responsavel_documentos = [];
-      if (apiData?.responsavel_documentos) {
+      if (apiData?.responsavel_documentos !== null && apiData?.responsavel_documentos !== undefined) {
         if (Array.isArray(apiData.responsavel_documentos)) {
           responsavel_documentos = apiData.responsavel_documentos;
         } else if (typeof apiData.responsavel_documentos === 'string') {
-          try {
-            // Tenta fazer parse se for JSON string
-            responsavel_documentos = JSON.parse(apiData.responsavel_documentos);
-            // Se não for array após parse, transforma em array
-            if (!Array.isArray(responsavel_documentos)) {
-              responsavel_documentos = [responsavel_documentos];
+          // Tenta fazer parse se for JSON string
+          const trimmed = apiData.responsavel_documentos.trim();
+          if (trimmed.startsWith('[') || trimmed.startsWith('{')) {
+            try {
+              responsavel_documentos = JSON.parse(apiData.responsavel_documentos);
+              // Se não for array após parse, transforma em array
+              if (!Array.isArray(responsavel_documentos)) {
+                responsavel_documentos = [responsavel_documentos];
+              }
+            } catch (e) {
+              // Se não for JSON válido, trata como valor único
+              responsavel_documentos = [apiData.responsavel_documentos];
             }
-          } catch (e) {
-            // Se não for JSON válido, trata como valor único
+          } else {
+            // Se for string simples, trata como valor único
             responsavel_documentos = [apiData.responsavel_documentos];
           }
         } else {
