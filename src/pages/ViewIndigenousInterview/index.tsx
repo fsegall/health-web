@@ -129,8 +129,9 @@ const ViewIndigenousInterview: React.FC = () => {
             },
           });
           setInterview(response.data);
-          setIsOffline(false);
-          checkEditPermission(response.data, false);
+          // Usa o campo is_offline da API se disponível, caso contrário assume false (online)
+          setIsOffline(response.data?.is_offline === true);
+          checkEditPermission(response.data, response.data?.is_offline === true);
         } catch (apiError) {
           // Se não encontrou na API, tenta buscar do localStorage (offline)
           const offlineInterviews: { [key: string]: any } = JSON.parse(
